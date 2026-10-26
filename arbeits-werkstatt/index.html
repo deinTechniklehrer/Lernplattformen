@@ -1,0 +1,1128 @@
+<!doctype html><html><head><script>/* Lernplattformen auf GitHub Pages: Speichern ohne claude.ai */
+(function(){if(window.claude)return;var T={pdf:'application/pdf',txt:'text/plain;charset=utf-8',png:'image/png',jpg:'image/jpeg',jpeg:'image/jpeg',json:'application/json',csv:'text/csv;charset=utf-8',html:'text/html;charset=utf-8',docx:'application/vnd.openxmlformats-officedocument.wordprocessingml.document',xlsx:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',ino:'text/plain;charset=utf-8'};
+var dl={save:function(o){return new Promise(function(res,rej){try{var n=(o&&o.filename)||'datei',x=(n.split('.').pop()||'').toLowerCase(),d=o.data,b=d instanceof Blob?d:new Blob([d],{type:T[x]||'application/octet-stream'});var u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=n;a.rel='noopener';document.body.appendChild(a);a.click();setTimeout(function(){a.remove();URL.revokeObjectURL(u);},4000);res();}catch(e){rej({code:'failed',message:String(e)});}});}};
+window.claude={use:function(n){return Promise.resolve(n==='downloads'?dl:null);}};})();</script><meta property="og:type" content="website"><meta property="og:title" content="Arbeits-Werkstatt"><meta property="og:description" content="Arbeit und Arbeitsteilung: warum Menschen arbeiten, Formen von Arbeit und wie Arbeitsteilung funktioniert. Wirtschaft, Klasse 8."><meta property="og:url" content="https://beyrodthome.github.io/Lernplattformen/arbeits-werkstatt/"><meta property="og:image" content="https://beyrodthome.github.io/Lernplattformen/vorschau/Vorschau_Arbeits-Werkstatt.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="description" content="Arbeit und Arbeitsteilung: warum Menschen arbeiten, Formen von Arbeit und wie Arbeitsteilung funktioniert. Wirtschaft, Klasse 8."><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Arbeits-Werkstatt</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap">
+<style>
+:root{
+  --bg:#F3F6F2; --surface:#FFFFFF; --surface-2:#E9EFEA; --ink:#18221E; --muted:#56645D; --line:#D3DDD6;
+  --on-accent:#FFFFFF;
+  --existenz:#1F7A5C; --existenz-soft:#E1F0E9; --existenz-ink:#165C45;
+  --kultur:#2A6FB0;   --kultur-soft:#E2ECF7;   --kultur-ink:#1D568E;
+  --luxus:#B8841A;    --luxus-soft:#F6ECD6;    --luxus-ink:#7A5308;
+  --entdecken:#2A7F9E; --entdecken-soft:#DFEFF5; --entdecken-ink:#1B6380;
+  --sichern:#744690;  --sichern-soft:#EEE5F4;  --sichern-ink:#5B3175;
+  --bad:#B4483C; --bad-soft:#F6E1DE; --bad-ink:#8E3228;
+  --shadow:0 10px 30px rgb(24 34 30 / .14);
+  --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#101613; --surface:#18201C; --surface-2:#212B26; --ink:#E5ECE8; --muted:#9AA9A1; --line:#2F3B35;
+    --on-accent:#0F1512;
+    --existenz:#53BB91; --existenz-soft:#1A3128; --existenz-ink:#7FD3B0;
+    --kultur:#6FA8E2;   --kultur-soft:#1A2937;   --kultur-ink:#9CC4EE;
+    --luxus:#E2B458;    --luxus-soft:#372C15;    --luxus-ink:#EDCB86;
+    --entdecken:#5FB4D2; --entdecken-soft:#172F38; --entdecken-ink:#8FCDE3;
+    --sichern:#B690D0;  --sichern-soft:#2A2134;  --sichern-ink:#CFB2E2;
+    --bad:#E27E71; --bad-soft:#3A201C; --bad-ink:#F0A79D;
+    --shadow:0 10px 30px rgb(0 0 0 / .45);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#101613; --surface:#18201C; --surface-2:#212B26; --ink:#E5ECE8; --muted:#9AA9A1; --line:#2F3B35;
+  --on-accent:#0F1512;
+  --existenz:#53BB91; --existenz-soft:#1A3128; --existenz-ink:#7FD3B0;
+  --kultur:#6FA8E2;   --kultur-soft:#1A2937;   --kultur-ink:#9CC4EE;
+  --luxus:#E2B458;    --luxus-soft:#372C15;    --luxus-ink:#EDCB86;
+  --entdecken:#5FB4D2; --entdecken-soft:#172F38; --entdecken-ink:#8FCDE3;
+  --sichern:#B690D0;  --sichern-soft:#2A2134;  --sichern-ink:#CFB2E2;
+  --bad:#E27E71; --bad-soft:#3A201C; --bad-ink:#F0A79D;
+  --shadow:0 10px 30px rgb(0 0 0 / .45);
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55}
+.app{max-width:980px;margin:0 auto;padding-inline:16px;padding-block:20px 110px}
+h1,h2,h3,h4{font-family:var(--display);text-wrap:balance;line-height:1.15}
+.i{width:22px;height:22px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+:focus-visible{outline:3px solid var(--kultur);outline-offset:2px}
+
+/* Kopf */
+.top{display:grid;grid-template-columns:1fr minmax(170px,240px);gap:10px 24px;align-items:center}
+.brand{display:flex;gap:14px;align-items:center}
+.logo{width:48px;height:48px;flex:none}
+.brand h1{margin:0;font-weight:800;font-size:clamp(25px,4.2vw,34px);letter-spacing:-.015em}
+.brand p{margin:0;color:var(--muted);font-size:14px}
+.meter{display:grid;gap:6px}
+.meter-row{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.bar{height:10px;border-radius:99px;background:var(--surface-2);overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--existenz),var(--kultur) 55%,var(--luxus));transition:width .5s ease}
+.ki-pill{grid-column:1/-1;justify-self:start;display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;padding:5px 12px 5px 9px;border-radius:99px;background:var(--surface-2);color:var(--muted)}
+.ki-pill .i{width:16px;height:16px}
+.ki-pill.on{background:var(--sichern-soft);color:var(--sichern-ink)}
+@media (max-width:620px){.top{grid-template-columns:1fr}}
+
+/* Stationen-Navigation */
+.stations{display:flex;gap:8px;margin:18px 0 20px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
+.st-btn{flex:1 0 auto;display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-size:15px;font-weight:700;cursor:pointer;min-height:48px}
+.st-btn .n{display:grid;place-items:center;width:24px;height:24px;border-radius:8px;background:var(--c-soft);color:var(--c-ink);font-size:13px;font-variant-numeric:tabular-nums}
+.st-btn[aria-current="step"]{background:var(--c);border-color:var(--c);color:var(--on-accent)}
+.st-btn[aria-current="step"] .n{background:rgb(255 255 255 / .22);color:inherit}
+.st-btn .ok{display:none;width:18px;height:18px;color:var(--existenz)}
+.st-btn.done .ok{display:block}
+.st-btn[aria-current="step"].done .ok{color:inherit}
+
+/* Farbräume */
+.c-entdecken{--c:var(--entdecken);--c-soft:var(--entdecken-soft);--c-ink:var(--entdecken-ink)}
+.c-verstehen,.c-existenz{--c:var(--existenz);--c-soft:var(--existenz-soft);--c-ink:var(--existenz-ink)}
+.c-ordnen,.c-kultur{--c:var(--kultur);--c-soft:var(--kultur-soft);--c-ink:var(--kultur-ink)}
+.c-bewerten,.c-luxus{--c:var(--luxus);--c-soft:var(--luxus-soft);--c-ink:var(--luxus-ink)}
+.c-sichern{--c:var(--sichern);--c-soft:var(--sichern-soft);--c-ink:var(--sichern-ink)}
+
+/* Station */
+.station{display:grid;gap:16px}
+.st-head{display:flex;gap:16px;align-items:center;padding:20px 22px;border-radius:18px;background:var(--c);color:var(--on-accent)}
+.st-icon{width:58px;height:58px;flex:none;border-radius:16px;background:rgb(255 255 255 / .2);display:grid;place-items:center}
+.st-icon .i{width:32px;height:32px}
+.eyebrow{margin:0;text-transform:uppercase;letter-spacing:.09em;font-size:12px;font-weight:700;opacity:.92}
+.st-head h2{margin:2px 0 4px;font-size:clamp(23px,3.6vw,31px);font-weight:800}
+.goal{margin:0;font-size:15px}
+.lead{margin:0;max-width:65ch}
+
+.task{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;display:grid;gap:12px}
+.task>header{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.num{width:34px;height:34px;flex:none;border-radius:10px;background:var(--c);color:var(--on-accent);display:grid;place-items:center;font-family:var(--display);font-weight:800;font-variant-numeric:tabular-nums}
+.task h3{margin:0;font-size:19px;flex:1;min-width:12ch}
+.op{font:inherit;font-size:13px;font-weight:700;padding:5px 11px;border-radius:99px;border:0;background:var(--c-soft);color:var(--c-ink);cursor:pointer}
+.q{margin:0;max-width:68ch}
+.hint{margin:0;font-size:14px;color:var(--muted)}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+
+.btn{font:inherit;font-size:16px;font-weight:700;display:inline-flex;align-items:center;gap:8px;padding:10px 16px;min-height:46px;border-radius:12px;border:0;background:var(--ink);color:var(--bg);cursor:pointer}
+.btn.soft{background:var(--surface-2);color:var(--ink)}
+.btn.accent{background:var(--c);color:var(--on-accent)}
+.btn.ki{background:var(--sichern);color:var(--on-accent)}
+.btn:disabled{opacity:.55;cursor:default}
+.btn .i{width:19px;height:19px}
+
+textarea,input[type=text],input[type=number],select{font:inherit;font-size:16px;width:100%;padding:12px 14px;border-radius:12px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink)}
+textarea{min-height:112px;resize:vertical;line-height:1.5}
+select{appearance:auto;min-height:46px}
+
+/* Karten sortieren */
+.tray{display:grid;grid-template-columns:repeat(auto-fill,minmax(172px,1fr));gap:8px;padding:12px;border:2px dashed var(--line);border-radius:14px;min-height:70px}
+.tray.empty::after{content:"Alle Karten sind einsortiert. Tippe eine Karte an, um sie zu verschieben.";grid-column:1/-1;color:var(--muted);font-size:14px}
+.nc{display:flex;align-items:center;gap:9px;padding:9px 11px;min-height:50px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-size:15px;line-height:1.25;text-align:left;cursor:pointer;touch-action:manipulation;position:relative}
+.nc .e{font-size:24px;line-height:1}
+.nc[aria-pressed="true"]{outline:3px solid var(--c);outline-offset:2px;box-shadow:var(--shadow)}
+.nc .st{margin-left:auto;font-size:13px;font-weight:800;width:22px;height:22px;border-radius:99px;display:none;place-items:center;flex:none}
+.nc.s-ok{border-color:var(--existenz)} .nc.s-ok .st{display:grid;background:var(--existenz);color:var(--on-accent)}
+.nc.s-alt{border-color:var(--luxus);border-style:dashed} .nc.s-alt .st{display:grid;background:var(--luxus);color:var(--on-accent)}
+.nc.s-bad{border-color:var(--bad)} .nc.s-bad .st{display:grid;background:var(--bad);color:var(--on-accent)}
+.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media (max-width:680px){.cols{grid-template-columns:1fr}}
+.col{border-radius:14px;background:var(--c-soft);border:2px solid transparent;padding:10px;display:grid;gap:8px;align-content:start;min-height:150px;cursor:pointer;font:inherit;color:var(--ink);text-align:left}
+.col.armed{border-color:var(--c);border-style:dashed}
+.col.over{border-color:var(--c);border-style:solid}
+.col h4{margin:0;padding:9px 11px;border-radius:10px;background:var(--c);color:var(--on-accent);font-size:16px;display:flex;justify-content:space-between;gap:8px}
+.col h4 small{font-family:var(--body);font-weight:700;font-variant-numeric:tabular-nums;opacity:.9}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:14px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.dot{width:12px;height:12px;border-radius:99px;display:inline-block}
+
+/* Offene Aufgaben */
+.open{display:grid;gap:10px}
+.open-foot{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.qc{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.qc b{font-size:13px;color:var(--muted);margin-right:2px}
+.qc span{font-size:13px;padding:4px 10px;border-radius:99px;background:var(--surface-2);color:var(--muted)}
+.qc span.on{background:var(--existenz-soft);color:var(--existenz-ink)}
+.qc span.on::before{content:"✓ "}
+.fb{border-radius:14px;padding:14px 16px;background:var(--surface-2);display:grid;gap:6px}
+.fb p{margin:0;max-width:68ch}
+.fb .lvl{display:flex;align-items:center;gap:8px;font-weight:800;font-family:var(--display);font-size:17px}
+.fb .lvl .i{width:18px;height:18px}
+.fb.stark{background:var(--existenz-soft)} .fb.stark .lvl{color:var(--existenz-ink)}
+.fb.solide{background:var(--kultur-soft)} .fb.solide .lvl{color:var(--kultur-ink)}
+.fb.ausbaufaehig{background:var(--luxus-soft)} .fb.ausbaufaehig .lvl{color:var(--luxus-ink)}
+.fb.fehlt,.fb.err{background:var(--bad-soft)} .fb.fehlt .lvl,.fb.err .lvl{color:var(--bad-ink)}
+.fb .stale{font-size:13px;color:var(--muted)}
+.fb.wait .lvl{color:var(--muted)}
+.fb.ok{background:var(--existenz-soft)} .fb.ok .lvl{color:var(--existenz-ink)}
+.fb.mid{background:var(--luxus-soft)} .fb.mid .lvl{color:var(--luxus-ink)}
+.dots::after{content:"";animation:dots 1.4s steps(4) infinite}
+@keyframes dots{0%{content:""}25%{content:"."}50%{content:".."}75%{content:"..."}}
+@media (prefers-reduced-motion:reduce){.dots::after{animation:none;content:" …"}.bar i{transition:none}}
+
+/* Infotext */
+.info{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px 22px;display:grid;gap:12px}
+.info p{margin:0;max-width:66ch}
+.info h3{margin:0;font-size:21px}
+.term{font:inherit;background:none;border:0;padding:0 1px;color:var(--c-ink);font-weight:700;text-decoration:underline dotted 2px;text-underline-offset:4px;cursor:pointer}
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media (max-width:680px){.tiers{grid-template-columns:1fr}}
+.tier{border-radius:14px;padding:14px;background:var(--c-soft);border:0;text-align:left;font:inherit;color:var(--ink);cursor:pointer;display:grid;gap:4px;align-content:start;min-height:112px}
+.tier b{font-family:var(--display);font-size:18px;color:var(--c-ink)}
+.tier .tag{font-size:13px;font-weight:700;color:var(--c-ink)}
+.tier .more{display:none;font-size:15px}
+.tier[aria-expanded="true"] .more{display:block}
+.tier .tap{font-size:13px;color:var(--muted)}
+.tier[aria-expanded="true"] .tap{display:none}
+.flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:8px;align-items:stretch}
+.fstep{border-radius:14px;padding:12px 14px;background:var(--surface-2);display:grid;gap:2px;align-content:start}
+.fstep b{font-family:var(--display);font-size:18px}
+.fstep small{font-size:14px;color:var(--muted)}
+.farr{display:grid;place-items:center;font-size:13px;font-weight:700;color:var(--muted);text-align:center;max-width:110px}
+@media (max-width:680px){.flow{grid-template-columns:1fr}.farr{max-width:none}}
+
+/* Materiell / immateriell */
+.mi{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:8px}
+.mi-row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 8px 8px 12px;border-radius:12px;background:var(--surface-2);border:1.5px solid transparent}
+.mi-row.s-ok{border-color:var(--existenz)} .mi-row.s-bad{border-color:var(--bad)}
+.seg{display:inline-flex;border-radius:10px;overflow:hidden;border:1.5px solid var(--line);flex:none}
+.seg button{font:inherit;font-size:14px;font-weight:700;padding:7px 10px;border:0;background:var(--surface);color:var(--muted);cursor:pointer;min-height:38px}
+.seg button[aria-pressed="true"]{background:var(--c);color:var(--on-accent)}
+
+/* Lückentext */
+.cloze{line-height:2.4;max-width:70ch;margin:0}
+.cloze select{width:auto;display:inline-block;padding:6px 10px;min-height:40px;font-weight:700;margin:0 2px}
+.cloze select.s-ok{border-color:var(--existenz);background:var(--existenz-soft)}
+.cloze select.s-bad{border-color:var(--bad);background:var(--bad-soft)}
+
+/* Pyramide */
+.pyr-wrap{display:grid;grid-template-columns:minmax(220px,300px) 1fr;gap:18px;align-items:center}
+@media (max-width:680px){.pyr-wrap{grid-template-columns:1fr}}
+.pyr{width:100%;max-width:300px;height:auto;justify-self:center}
+.pyr polygon{cursor:pointer;stroke:var(--surface);stroke-width:4}
+.pyr .p-l{fill:var(--luxus)} .pyr .p-k{fill:var(--kultur)} .pyr .p-e{fill:var(--existenz)}
+.pyr text{fill:var(--on-accent);font-family:var(--display);font-weight:800;font-size:15px;text-anchor:middle;pointer-events:none}
+.pyr text.s{font-family:var(--body);font-weight:700;font-size:11px}
+.pyr-in{display:grid;gap:10px}
+.pyr-row{border-radius:14px;padding:10px 12px;background:var(--c-soft);display:grid;gap:8px}
+.pyr-row h4{margin:0;font-size:16px;color:var(--c-ink)}
+.pyr-row .two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media (max-width:420px){.pyr-row .two{grid-template-columns:1fr}}
+
+/* Fallbeispiel */
+.story{border-radius:16px;padding:18px 20px;background:var(--luxus-soft);display:grid;gap:12px}
+.story h3{margin:0;font-size:20px;color:var(--luxus-ink)}
+.story p{margin:0;max-width:68ch}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.price{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:12px;background:var(--surface);font-weight:700;font-size:15px}
+.price .e{font-size:20px}
+.price.wallet{background:var(--ink);color:var(--bg)}
+.budget{position:relative;height:46px;border-radius:12px;background:var(--surface-2);display:flex;overflow:visible;margin-top:24px}
+.bseg{height:100%;display:grid;place-items:center;color:var(--on-accent);font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;padding-inline:4px}
+.bseg:first-child{border-radius:12px 0 0 12px}.bseg:last-child{border-radius:0 12px 12px 0}
+.bseg.cut{background-image:repeating-linear-gradient(45deg,rgb(255 255 255 / .35) 0 6px,transparent 6px 12px)}
+.bmark{position:absolute;top:-24px;bottom:-6px;border-left:3px solid var(--ink);padding-left:6px;font-size:13px;font-weight:800;white-space:nowrap}
+.jt{display:grid;gap:8px}
+.jt-row{display:grid;grid-template-columns:1fr minmax(160px,220px);gap:10px;align-items:center;padding:8px 8px 8px 12px;border-radius:12px;background:var(--surface-2);border:1.5px solid transparent}
+.jt-row.s-ok{border-color:var(--existenz)} .jt-row.s-alt{border-color:var(--luxus);border-style:dashed} .jt-row.s-bad{border-color:var(--bad)}
+@media (max-width:480px){.jt-row{grid-template-columns:1fr}}
+.gap-in{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.gap-in input{width:120px}
+
+/* Rangfolge */
+.rank{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.rank li{display:flex;align-items:center;gap:10px;padding:10px 10px 10px 12px;border-radius:12px;background:var(--surface-2)}
+.rank .pos{width:30px;height:30px;border-radius:9px;background:var(--c);color:var(--on-accent);display:grid;place-items:center;font-weight:800;flex:none;font-variant-numeric:tabular-nums}
+.rank .e{font-size:22px}
+.rank .lbl{flex:1;font-weight:700;line-height:1.25}
+.rank .lbl small{display:block;font-weight:400;color:var(--muted);font-size:14px}
+.mv{font:inherit;width:42px;height:42px;border-radius:10px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;display:grid;place-items:center}
+.mv:disabled{opacity:.35;cursor:default}
+.think{border-radius:14px;padding:12px 14px;border:1.5px dashed var(--luxus);display:flex;gap:10px;align-items:flex-start}
+.think p{margin:0}
+.think .i{color:var(--luxus-ink);margin-top:2px}
+.scale{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+@media (max-width:560px){.scale{grid-template-columns:1fr}}
+.scale label{display:grid;place-items:center;text-align:center;gap:4px;padding:10px 6px;border-radius:12px;background:var(--surface-2);border:1.5px solid transparent;cursor:pointer;font-size:14px;font-weight:700;min-height:56px}
+.scale input{position:absolute;opacity:0;pointer-events:none}
+.scale label:has(input:checked){background:var(--c);color:var(--on-accent)}
+.scale label:has(input:focus-visible){outline:3px solid var(--kultur);outline-offset:2px}
+.bonus{border-radius:16px;padding:18px;border:2px solid var(--luxus);background:var(--surface);display:grid;gap:12px}
+.bonus h3{margin:0;font-size:19px;display:flex;gap:8px;align-items:center}
+.bonus .star{color:var(--luxus)}
+
+/* Sichern */
+.trio{display:grid;gap:10px}
+.trio-row{display:grid;grid-template-columns:52px 1fr;gap:12px;align-items:start}
+.big{width:52px;height:52px;border-radius:14px;background:var(--c);color:var(--on-accent);display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:26px}
+.trio-row .fields{display:grid;gap:8px}
+.trio-row .three{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+@media (max-width:560px){.trio-row .three{grid-template-columns:1fr}}
+.trio-row input.s-ok{border-color:var(--existenz);background:var(--existenz-soft)}
+.trio-row input.s-bad{border-color:var(--luxus)}
+.over-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px}
+.ov{border-radius:12px;padding:12px;background:var(--c-soft);display:grid;gap:4px}
+.ov b{font-family:var(--display);color:var(--c-ink)}
+.ov span{font-size:14px;color:var(--ink);font-variant-numeric:tabular-nums}
+.code{font-family:ui-monospace,Consolas,monospace;font-size:13px;min-height:90px;word-break:break-all}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:720px){.split{grid-template-columns:1fr}}
+.half{border-radius:14px;background:var(--c-soft);padding:14px;display:grid;gap:10px;align-content:start;min-width:0}
+.half h4{margin:0;font-size:17px;color:var(--c-ink)}
+
+/* Popover */
+.pop{position:absolute;z-index:60;width:min(340px,calc(100vw - 32px));background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px 16px;box-shadow:var(--shadow);display:grid;gap:6px}
+.pop h4{margin:0;font-size:18px;padding-right:34px}
+.pop p{margin:0;font-size:15px}
+.pop .x{position:absolute;top:8px;right:8px;width:34px;height:34px;border-radius:9px;border:0;background:var(--surface-2);color:var(--ink);font:inherit;font-size:18px;cursor:pointer}
+@media (max-width:560px){.pop{position:fixed;left:12px!important;right:12px;top:auto!important;bottom:calc(84px + env(safe-area-inset-bottom,0px));width:auto}}
+
+/* Blättern */
+.pager{position:fixed;left:0;right:0;bottom:0;z-index:40;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line)}
+.pager-in{max-width:980px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.pager-in .where{font-size:14px;color:var(--muted);text-align:center;font-variant-numeric:tabular-nums}
+
+/* Einkommens-Werkstatt: Ergänzungen */
+:root{--s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a;--s4:#eda100;--s5:#e87ba4;--s6:#008300;--free:#D3DDD6}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--s5:#d55181;--s6:#008300;--free:#2F3B35}}
+:root[data-theme="dark"]{--s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--s5:#d55181;--s6:#008300;--free:#2F3B35}
+.srcs{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media (max-width:620px){.srcs{grid-template-columns:1fr}}
+.srcs .tier .e{font-size:26px;line-height:1}
+.srcs .tier b{font-size:17px}
+.mi-row{flex-wrap:wrap}
+#srcSort{grid-template-columns:repeat(auto-fill,minmax(290px,1fr))}
+#srcSort .mi-row{flex-direction:column;align-items:stretch;gap:6px}
+.seg4{display:grid;grid-template-columns:repeat(4,1fr)}
+.seg4 button{padding:7px 4px;font-size:13.5px}
+.rule{border-radius:12px;padding:12px 14px;background:var(--surface-2);display:grid;gap:4px}
+.rule p{margin:0}
+.src{font-size:13px;color:var(--muted)}
+p.src{margin:0}
+.law blockquote{margin:0;padding:10px 14px;border-left:4px solid var(--sichern);background:var(--sichern-soft);border-radius:0 12px 12px 0;font-style:italic;max-width:68ch}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;max-width:420px}
+table.tg{border-collapse:collapse;width:100%;font-size:15px;font-variant-numeric:tabular-nums}
+.tg th,.tg td{padding:8px 12px;text-align:left;border-bottom:1px solid var(--line)}
+.tg th{background:var(--surface-2);font-size:13px;color:var(--muted)}
+.tg tr:last-child td{border-bottom:0}
+.tg tbody tr:nth-child(3){background:var(--c-soft);font-weight:700}
+.cases{display:grid;gap:8px}
+.case{display:grid;grid-template-columns:1fr auto;gap:6px 12px;align-items:center;padding:10px 10px 10px 14px;border-radius:12px;background:var(--surface-2);border:1.5px solid transparent}
+.case p{margin:0}
+.case .why{grid-column:1/-1;font-size:14px;color:var(--muted)}
+.case.s-ok{border-color:var(--existenz)} .case.s-bad{border-color:var(--bad)}
+@media (max-width:520px){.case{grid-template-columns:1fr}}
+.pe{font-size:20px}
+.eur{display:inline-flex;align-items:center;gap:6px}
+.eur input{width:96px}
+.jt-row .eur{justify-self:start}
+.jt-row .eur input{width:110px}
+.plan{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;align-items:start}
+@media (max-width:760px){.plan{grid-template-columns:1fr}}
+.plan-col{display:grid;gap:10px;min-width:0}
+.plan h4{margin:6px 0 0;font-size:16px;color:var(--c-ink)}
+.money{display:grid;gap:6px}
+.mrow{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 6px 6px 12px;border-radius:12px;background:var(--surface-2)}
+.ml{display:inline-flex;align-items:center;gap:8px;font-size:15px}
+.mctl{display:inline-flex;align-items:center;gap:6px}
+.mctl .mv{width:38px;height:38px;font-size:18px;font-weight:800}
+.mctl input{width:72px;text-align:right;padding:8px 10px}
+.sw{display:inline-block;width:12px;height:12px;border-radius:4px;flex:none}
+.sw.free{background:var(--free)}
+.goalrow{display:flex;gap:8px;flex-wrap:wrap}
+.goalrow input[type=text]{flex:1;min-width:150px}
+.pstat{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-radius:14px;background:var(--surface-2)}
+.pstat b{display:block;font-family:var(--display);font-size:17px}
+.pstat span{font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
+.pstat .pico{display:grid;place-items:center;width:32px;height:32px;border-radius:10px;flex:none}
+.pstat.ok{background:var(--existenz-soft)} .pstat.ok .pico{background:var(--existenz);color:var(--on-accent)}
+.pstat.mid{background:var(--luxus-soft)} .pstat.mid .pico{background:var(--luxus);color:var(--on-accent)}
+.pstat.bad{background:var(--bad-soft)} .pstat.bad .pico{background:var(--bad);color:var(--on-accent)}
+.stack{display:flex;gap:2px;height:30px;border-radius:8px;overflow:hidden;background:var(--surface)}
+.seg-b{height:100%;min-width:3px}
+.seg-b:first-child{border-radius:4px 0 0 4px}.seg-b:last-child{border-radius:0 4px 4px 0}
+.seg-b.free{background:var(--free)}
+table.legend-t{border-collapse:collapse;width:100%;font-size:15px;font-variant-numeric:tabular-nums}
+.legend-t td{padding:5px 4px;border-bottom:1px solid var(--line)}
+.legend-t td:first-child{display:flex;align-items:center;gap:8px}
+.legend-t td.v,.legend-t td.p{text-align:right;white-space:nowrap}
+.legend-t td.p{color:var(--muted);width:56px}
+.quiz{display:grid;gap:10px}
+.qz{border:1.5px solid var(--line);border-radius:12px;padding:10px 14px 12px;margin:0;display:grid;gap:6px}
+.qz legend{font-weight:700;padding:0 4px}
+.qz label{display:flex;gap:10px;align-items:center;padding:6px 8px;border-radius:9px;cursor:pointer}
+.qz label:has(input:checked){background:var(--c-soft)}
+.qz input{width:18px;height:18px;accent-color:var(--c)}
+.qz.s-ok{border-color:var(--existenz)} .qz.s-bad{border-color:var(--bad)}
+.fbox{border-radius:12px;border:1.5px dashed var(--sichern);background:var(--surface)}
+.fbox.has{border-style:solid;background:var(--sichern-soft)}
+.fbox>summary{cursor:pointer;padding:10px 14px;font-weight:700;color:var(--sichern-ink);list-style:none;display:flex;align-items:center;gap:8px}
+.fbox>summary::-webkit-details-marker{display:none}
+.fbox>summary::before{content:"";width:8px;height:8px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s}
+.fbox[open]>summary::before{transform:rotate(45deg)}
+.fbox-in{padding:0 14px 14px;display:grid;gap:10px}
+.fbl{font-size:14px;font-weight:700;color:var(--muted)}
+.fbin{min-height:80px}
+a.btn{text-decoration:none}
+.resume{background:var(--surface)}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:720px){.split{grid-template-columns:1fr}}
+.half{border-radius:14px;background:var(--c-soft);padding:14px;display:grid;gap:10px;align-content:start;min-width:0}
+.half h4{margin:0;font-size:17px;color:var(--c-ink)}
+.howto{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+@media (max-width:680px){.howto{grid-template-columns:1fr}}
+.howto div{border-radius:12px;padding:10px 12px;background:var(--sichern-soft);font-size:15px}
+.howto b{display:block;color:var(--sichern-ink);font-family:var(--display)}
+
+/* Arbeits-Werkstatt: Ergänzungen */
+.srcs.five{grid-template-columns:repeat(3,1fr)}
+.srcs.three{grid-template-columns:repeat(3,1fr)}
+@media (max-width:760px){.srcs.five{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:620px){.srcs.five,.srcs.three{grid-template-columns:1fr}}
+.timeline{list-style:none;margin:0;padding:0 0 0 18px;display:grid;gap:10px;position:relative}
+.timeline::before{content:"";position:absolute;left:5px;top:10px;bottom:10px;width:3px;border-radius:2px;background:var(--line)}
+.timeline li{position:relative}
+.timeline li::before{content:"";position:absolute;left:-19px;top:18px;width:11px;height:11px;border-radius:50%;background:var(--c,var(--muted));border:2px solid var(--bg)}
+.timeline li:has(.c-existenz)::before{background:var(--existenz)}
+.timeline li:has(.c-kultur)::before{background:var(--kultur)}
+.timeline li:has(.c-luxus)::before{background:var(--luxus)}
+.timeline li:has(.c-sichern)::before{background:var(--sichern)}
+.timeline li:has(.c-entdecken)::before{background:var(--entdecken)}
+.timeline .tier{width:100%;min-height:0}
+.timeline .when{font-size:13px;font-weight:700;color:var(--c-ink);text-transform:uppercase;letter-spacing:.04em}
+.chores{display:grid;gap:6px}
+.chore{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) auto;gap:8px;align-items:center;padding:6px 8px 6px 12px;border-radius:12px;background:var(--surface-2)}
+.chore .cl{font-weight:700;line-height:1.2}
+.chore .cl small{display:block;font-weight:400;font-size:13px;color:var(--muted)}
+.chore select{min-height:40px;padding:6px 10px}
+.chore input[type=text]{padding:8px 10px}
+.chore .eur input{width:80px;padding:8px 10px;text-align:right}
+.chore .eur span{font-size:13px;color:var(--muted);white-space:nowrap}
+@media (max-width:620px){.chore{grid-template-columns:minmax(0,1fr) auto}.chore>:first-child{grid-column:1/-1}.chore .eur input{width:66px}.chore .eur span{font-size:12px}}
+.whobars{display:grid;gap:8px;padding:12px 14px;border-radius:14px;background:var(--surface-2)}
+.whobars h4{margin:0 0 2px;font-size:16px;color:var(--c-ink)}
+.whobars .hint{margin:0}
+.wb{display:grid;grid-template-columns:118px minmax(0,1fr) 64px;gap:10px;align-items:center}
+.wl{font-size:14px;font-weight:700}
+.wt{height:20px;border-radius:6px;background:var(--surface);overflow:hidden}
+.wt i{display:block;height:100%;background:var(--s1);border-radius:0 6px 6px 0;min-width:2px;transition:width .25s}
+.wv{font-size:14px;text-align:right;font-variant-numeric:tabular-nums}
+@media (max-width:420px){.wb{grid-template-columns:90px minmax(0,1fr) 56px}}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chipbtn{font:inherit;font-size:15px;font-weight:700;padding:8px 14px;border-radius:999px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;min-height:40px}
+.chipbtn[aria-pressed="true"]{background:var(--c);border-color:var(--c);color:var(--on-accent)}
+.chipbtn.s-ok{box-shadow:0 0 0 3px var(--existenz)}
+.chipbtn.s-bad{box-shadow:0 0 0 3px var(--bad)}
+.rank li{border:1.5px solid transparent}
+.rank li.s-ok{border-color:var(--existenz)} .rank li.s-bad{border-color:var(--bad)}
+select.s-ok{border-color:var(--existenz);background:var(--existenz-soft)}
+select.s-bad{border-color:var(--bad);background:var(--bad-soft)}
+#setzer{width:auto;min-width:200px;max-width:100%}
+#forms .seg{display:grid;grid-template-columns:1fr;width:100%}
+#forms .seg button{text-align:left;padding:7px 12px}
+</style>
+<div class="app">
+  <header class="top">
+    <div class="brand">
+      <svg class="logo" viewBox="0 0 48 48" aria-hidden="true">
+        <circle cx="16" cy="18" r="9" fill="var(--kultur)"/><circle cx="32" cy="18" r="9" fill="var(--luxus)"/><circle cx="24" cy="31" r="9" fill="var(--existenz)"/>
+        <circle cx="24" cy="23" r="4" fill="var(--bg)"/>
+      </svg>
+      <div>
+        <h1>Arbeits-Werkstatt</h1>
+        <p>Wirtschaft · Klasse 8 · Arbeit und Arbeitsteilung</p>
+      </div>
+    </div>
+    <div class="meter" aria-label="Fortschritt">
+      <div class="meter-row"><span>Dein Fortschritt</span><span id="progTxt">0 %</span></div>
+      <div class="bar"><i id="progBar"></i></div>
+    </div>
+    <span class="ki-pill on"><svg class="i" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg><span>Automatische Checks · KI-Feedback über fobizz</span></span>
+  </header>
+
+  <nav class="stations" id="nav" aria-label="Stationen"></nav>
+
+  <main id="main">
+
+    <!-- STATION 1 -->
+    <section class="station c-entdecken" data-st="0" aria-labelledby="h-s1">
+      <div class="st-head">
+        <div class="st-icon"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18"/></svg></div>
+        <div><p class="eyebrow">Station 1 · Bedeutung</p><h2 id="h-s1">Warum arbeiten Menschen?</h2><p class="goal">Du übst: die Bedeutung von Arbeit beschreiben</p></div>
+      </div>
+      <details class="fbox resume">
+        <summary>Schon angefangen? Mit deinem Sicherungscode weiterarbeiten</summary>
+        <div class="fbox-in">
+          <label class="fbl" for="loadBox1">Sicherungscode einfügen</label>
+          <textarea id="loadBox1" class="code" placeholder="AWK…"></textarea>
+          <div class="row"><button class="btn accent" id="loadBtn1" type="button">Code laden</button></div>
+          <p class="hint" id="loadNote1" hidden aria-live="polite"></p>
+        </div>
+      </details>
+      <div class="info">
+        <h3>Mehr als nur Geld</h3>
+        <p>Mit <button class="term" data-term="erwerbsarbeit" type="button">Erwerbsarbeit</button> verdienen Menschen das Geld, das sie für ihre Bedürfnisse brauchen. Für die meisten ist der Beruf die wichtigste Einkommensquelle – das kennst du aus der Einkommens-Werkstatt. Doch ein Beruf bedeutet noch mehr. Tippe auf die Karten.</p>
+        <div class="srcs five">
+          <button class="tier c-existenz" type="button" aria-expanded="false"><span class="e" aria-hidden="true">💶</span><b>Einkommen</b><span class="tap">Tippen für mehr</span><span class="more">Mit dem Lohn oder Gehalt bezahlen Menschen Miete, Essen und Freizeit und können für später vorsorgen.</span></button>
+          <button class="tier c-luxus" type="button" aria-expanded="false"><span class="e" aria-hidden="true">🏅</span><b>Anerkennung</b><span class="tap">Tippen für mehr</span><span class="more">Wer gute Arbeit leistet, wird gelobt und geschätzt. Viele Berufe haben auch ein bestimmtes Ansehen in der Gesellschaft.</span></button>
+          <button class="tier c-kultur" type="button" aria-expanded="false"><span class="e" aria-hidden="true">🤝</span><b>Gemeinschaft</b><span class="tap">Tippen für mehr</span><span class="more">Bei der Arbeit treffen Menschen Kolleg*innen, arbeiten im Team und knüpfen Kontakte.</span></button>
+          <button class="tier c-sichern" type="button" aria-expanded="false"><span class="e" aria-hidden="true">🌱</span><b>Persönlichkeit</b><span class="tap">Tippen für mehr</span><span class="more">Im Beruf lernen Menschen dazu, übernehmen Verantwortung und können zeigen, was sie können.</span></button>
+          <button class="tier c-entdecken" type="button" aria-expanded="false"><span class="e" aria-hidden="true">🗓️</span><b>Tagesstruktur</b><span class="tap">Tippen für mehr</span><span class="more">Arbeit gibt dem Tag einen festen Rhythmus. Sie beeinflusst auch Familienleben und Freizeit.</span></button>
+        </div>
+        <p>Nicht jede Arbeit wird bezahlt: Hausarbeit, die Pflege von Angehörigen oder ein <button class="term" data-term="ehrenamt" type="button">Ehrenamt</button> sind ebenfalls Arbeit – nur ohne Lohn.</p>
+      </div>
+
+      <article class="task">
+        <header><span class="num">1</span><h3>Was bedeutet Arbeit für sie?</h3><button class="op" data-op="beschreiben" type="button">beschreiben</button></header>
+        <p class="q">Ordne jede Aussage der passenden Bedeutung von Arbeit zu.</p>
+        <div class="jt" id="quotes"></div>
+        <div class="row"><button class="btn accent" id="chk-a1" type="button">Prüfen</button></div>
+        <div class="fb" id="fb-a1" hidden aria-live="polite"></div>
+      </article>
+
+      <article class="task">
+        <header><span class="num">2</span><h3>Bezahlt oder unbezahlt?</h3><button class="op" data-op="(be)nennen" type="button">(be)nennen</button></header>
+        <p class="q">Ist das Erwerbsarbeit (bezahlt) oder unbezahlte Arbeit?</p>
+        <div class="mi" id="paid"></div>
+        <div class="row"><button class="btn accent" id="chk-a2" type="button">Prüfen</button></div>
+        <div class="fb" id="fb-a2" hidden aria-live="polite"></div>
+      </article>
+
+      <div class="info">
+        <h3>So holst du dir KI-Feedback mit fobizz</h3>
+        <div class="howto">
+          <div><b>1 · Antwort schreiben</b>Schreib deine Antwort in das Feld der Aufgabe.</div>
+          <div><b>2 · Kopieren und öffnen</b>Tippe auf „KI-Feedback mit fobizz“, dann auf „Für fobizz kopieren“ und „fobizz öffnen“. Melde dich mit deinem Zugangscode an.</div>
+          <div><b>3 · Einfügen</b>Füge den Text im Chat ein. Die Rückmeldung kannst du hier zurückkopieren – dann steht sie in deinem PDF.</div>
+        </div>
+      </div>
+
+      <article class="task">
+        <header><span class="num">3</span><h3>Bedeutung von Arbeit</h3><button class="op" data-op="beschreiben" type="button">beschreiben</button></header>
+        <p class="q">Beschreibe, welche Bedeutung Arbeit für Menschen hat – als Einkommensquelle und für die Persönlichkeit. Nenne mindestens drei Aspekte.</p>
+        <div data-open="a3"></div>
+      </article>
+    </section>
+
+    <!-- STATION 2 -->
+    <section class="station c-kultur" data-st="1" aria-labelledby="h-s2" hidden>
+      <div class="st-head">
+        <div class="st-icon"><svg class="i" viewBox="0 0 24 24"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg></div>
+        <div><p class="eyebrow">Station 2 · Familie</p><h2 id="h-s2">Arbeitsteilung im Haushalt</h2><p class="goal">Du übst: die Arbeitsteilung in der Familie beschreiben und beurteilen</p></div>
+      </div>
+      <div class="info">
+        <h3>Hausarbeit ist Arbeit</h3>
+        <p>Kochen, waschen, einkaufen, putzen: Die Arbeit im Haushalt wird nicht bezahlt und wird deshalb oft unterschätzt. Dabei hängt das Wohlbefinden der ganzen Familie davon ab. Wenn alle Erwachsenen berufstätig sind, ist es besonders wichtig, die Hausarbeit sinnvoll aufzuteilen.</p>
+        <div class="rule"><b>Wie ist es in Deutschland?</b><p>Frauen leisten pro Woche knapp 30 Stunden unbezahlte Arbeit, Männer knapp 21 Stunden – das sind rund 9 Stunden Unterschied. <span class="src">Quelle: Statistisches Bundesamt, Zeitverwendungserhebung 2022 (Pressemitteilung vom 28.02.2024)</span></p></div>
+      </div>
+
+      <article class="task">
+        <header><span class="num">4</span><h3>Haushalts-Check</h3><button class="op" data-op="beschreiben" type="button">beschreiben</button></header>
+        <p class="q">Wer erledigt bei euch welche Arbeit? Wähle jeweils aus und passe die Minuten pro Woche an. Du kannst auch eine ausgedachte Familie nehmen.</p>
+        <p class="hint">Nutze keine Namen: Für die Erwachsenen reichen „Person A“ und „Person B“.</p>
+        <div class="chores" id="chores"></div>
+        <div class="whobars" id="whobars" aria-live="polite"></div>
+      </article>
+
+      <article class="task">
+        <header><span class="num">5</span><h3>Ist das gerecht?</h3><button class="op" data-op="beurteilen" type="button">beurteilen</button></header>
+        <p class="q">Beurteile, ob die Hausarbeit in deinem (oder einem ausgedachten) Haushalt gerecht aufgeteilt ist. Was könnte man verändern?</p>
+        <div data-open="a5"></div>
+      </article>
+    </section>
+
+    <!-- STATION 3 -->
+    <section class="station c-sichern" data-st="2" aria-labelledby="h-s3" hidden>
+      <div class="st-head">
+        <div class="st-icon"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3 2"/></svg></div>
+        <div><p class="eyebrow">Station 3 · Geschichte</p><h2 id="h-s3">Wie Berufe entstanden sind</h2><p class="goal">Du übst: die Entstehung von Berufen beschreiben</p></div>
+      </div>
+      <div class="info">
+        <h3>Eine Zeitreise in fünf Schritten</h3>
+        <p>Viele Berufe, die es heute gibt, haben eine lange Geschichte. Ihre Entstehung hängt eng mit der <button class="term" data-term="arbeitsteilung" type="button">Arbeitsteilung</button> und mit neuen Techniken zusammen. Tippe auf eine Epoche.</p>
+        <ol class="timeline">
+          <li><button class="tier c-existenz" type="button" aria-expanded="false"><span class="when">Frühzeit</span><b>Geschlossene Hauswirtschaft</b><span class="tap">Tippen für mehr</span><span class="more">Familien versorgen sich fast vollständig selbst: Sie bauen an, halten Tiere, nähen Kleidung. Mit der Zeit merkt man, dass manche Menschen bestimmte Tätigkeiten besser können – erste Formen der Arbeitsteilung entstehen.</span></button></li>
+          <li><button class="tier c-kultur" type="button" aria-expanded="false"><span class="when">Mittelalter</span><b>Handwerk in den Städten</b><span class="tap">Tippen für mehr</span><span class="more">In den wachsenden Städten spezialisieren sich Handwerker*innen. Aus einem Grundberuf werden viele: Aus dem Schmied werden z. B. Hufschmied, Nagelschmied und Wagenschmied.</span></button></li>
+          <li><button class="tier c-luxus" type="button" aria-expanded="false"><span class="when">ab dem 18. Jahrhundert</span><b>Industrialisierung</b><span class="tap">Tippen für mehr</span><span class="more">Die Dampfmaschine treibt Maschinen in Fabriken an. Vieles, was früher von Hand hergestellt wurde, übernehmen jetzt Maschinen. Neue Berufe entstehen, alte verschwinden.</span></button></li>
+          <li><button class="tier c-sichern" type="button" aria-expanded="false"><span class="when">ab Anfang des 20. Jahrhunderts</span><b>Fließband</b><span class="tap">Tippen für mehr</span><span class="more">In der Autofabrik von Henry Ford läuft ab 1913 ein Fließband. Jede Person erledigt nur noch wenige Handgriffe, ein Auto ist viel schneller fertig.</span></button></li>
+          <li><button class="tier c-entdecken" type="button" aria-expanded="false"><span class="when">heute</span><b>Digitalisierung</b><span class="tap">Tippen für mehr</span><span class="more">Computer, Internet und Roboter verändern fast alle Berufe. Neue Berufe entstehen, z. B. Fachinformatiker*in oder Mechatroniker*in. Aus dem Schriftsetzer in der Druckerei wurde der Beruf Mediengestalter*in.</span></button></li>
+        </ol>
+      </div>
+
+      <article class="task">
+        <header><span class="num">6</span><h3>Bring die Zeitreise in die richtige Reihenfolge</h3><button class="op" data-op="ordnen" type="button">ordnen</button></header>
+        <p class="q">Was kam zuerst? Sortiere mit den Pfeilen – oben steht das Älteste.</p>
+        <ol class="rank" id="order"></ol>
+        <div class="row"><button class="btn accent" id="chk-a6" type="button">Prüfen</button></div>
+        <div class="fb" id="fb-a6" hidden aria-live="polite"></div>
+      </article>
+
+      <article class="task">
+        <header><span class="num">7</span><h3>Berufe spalten sich auf</h3><button class="op" data-op="(be)nennen" type="button">(be)nennen</button></header>
+        <p class="q">a) Welche Berufe sind aus dem Schmied entstanden? Tippe alle passenden an.</p>
+        <div class="chips" id="smith"></div>
+        <p class="q">b) Welcher heutige Beruf hat die Aufgaben des Schriftsetzers übernommen?</p>
+        <div class="jt"><div class="jt-row"><span>Heutiger Beruf</span><select id="setzer" aria-label="Heutiger Beruf"><option value="">— wählen —</option><option value="0">Buchhändler*in</option><option value="1">Mediengestalter*in</option><option value="2">Fachinformatiker*in</option></select></div></div>
+        <div class="row"><button class="btn accent" id="chk-a7" type="button">Prüfen</button></div>
+        <div class="fb" id="fb-a7" hidden aria-live="polite"></div>
+      </article>
+
+      <article class="task">
+        <header><span class="num">8</span><h3>Mein Wunschberuf früher und heute</h3><button class="op" data-op="beschreiben" type="button">beschreiben</button></header>
+        <p class="q">Wähle einen Beruf, der dich interessiert. Gab es ihn schon früher? Wie hat er sich verändert – zum Beispiel durch neue Techniken?</p>
+        <div data-open="a8"></div>
+      </article>
+    </section>
+
+    <!-- STATION 4 -->
+    <section class="station c-existenz" data-st="3" aria-labelledby="h-s4" hidden>
+      <div class="st-head">
+        <div class="st-icon"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg></div>
+        <div><p class="eyebrow">Station 4 · Heute</p><h2 id="h-s4">Arbeitsteilung und Spezialisierung</h2><p class="goal">Du übst: die Notwendigkeit von Arbeitsteilung erklären</p></div>
+      </div>
+      <div class="info">
+        <h3>Das Stecknadel-Beispiel</h3>
+        <p>Der Ökonom Adam Smith beschrieb 1776 eine Werkstatt für Stecknadeln: Zehn Arbeiter, von denen jeder nur wenige Arbeitsschritte erledigte, stellten zusammen über <b>48.000 Nadeln am Tag</b> her. Ein Einzelner, der alle Schritte allein machen müsste, schaffe dagegen höchstens <b>20 Nadeln</b>. <span class="src">Quelle: Adam Smith, „Der Wohlstand der Nationen“ (1776)</span></p>
+      </div>
+      <article class="task">
+        <header><span class="num">9</span><h3>Rechne nach</h3><button class="op" data-op="untersuchen" type="button">untersuchen</button></header>
+        <div class="jt">
+          <div class="jt-row"><span>a) Nadeln pro Arbeiter und Tag in der Werkstatt</span><span class="eur"><input type="number" id="a9a" inputmode="numeric" aria-label="Nadeln pro Arbeiter"><span>Stück</span></span></div>
+          <div class="jt-row"><span>b) So viel Mal mehr als allein (20 Nadeln)</span><span class="eur"><input type="number" id="a9b" inputmode="numeric" aria-label="Wie viel Mal mehr"><span>-mal</span></span></div>
+        </div>
+        <div class="row"><button class="btn accent" id="chk-a9" type="button">Prüfen</button></div>
+        <div class="fb" id="fb-a9" hidden aria-live="polite"></div>
+      </article>
+
+      <div class="info">
+        <h3>Drei Formen der Arbeitsteilung</h3>
+        <div class="srcs three">
+          <button class="tier c-kultur" type="button" aria-expanded="false"><span class="e" aria-hidden="true">🏭</span><b>Innerbetrieblich</b><span class="tap">Tippen für mehr</span><span class="more">Innerhalb eines Betriebs teilen sich Menschen und Abteilungen die Arbeit: Einkauf, Produktion, Verkauf – oder einzelne Arbeitsschritte am Band.</span></button>
+          <button class="tier c-luxus" type="button" aria-expanded="false"><span class="e" aria-hidden="true">🚚</span><b>Zwischenbetrieblich</b><span class="tap">Tippen für mehr</span><span class="more">Betriebe spezialisieren sich und arbeiten zusammen: Zulieferer stellen Einzelteile her, ein anderer Betrieb baut daraus das fertige Produkt.</span></button>
+          <button class="tier c-entdecken" type="button" aria-expanded="false"><span class="e" aria-hidden="true">🌍</span><b>International</b><span class="tap">Tippen für mehr</span><span class="more">Länder spezialisieren sich auf bestimmte Güter und handeln miteinander. Dabei spielen Lohnkosten, Rohstoffe, Klima und gut ausgebildete Fachkräfte eine Rolle.</span></button>
+        </div>
+      </div>
+
+      <article class="task">
+        <header><span class="num">10</span><h3>Welche Form ist das?</h3><button class="op" data-op="ordnen" type="button">ordnen</button></header>
+        <p class="q">Ordne jedes Beispiel einer Form der Arbeitsteilung zu.</p>
+        <div class="mi" id="forms"></div>
+        <div class="row"><button class="btn accent" id="chk-a10" type="button">Prüfen</button></div>
+        <div class="fb" id="fb-a10" hidden aria-live="polite"></div>
+      </article>
+
+      <article class="task">
+        <header><span class="num">11</span><h3>Vorteil oder Nachteil?</h3><button class="op" data-op="untersuchen" type="button">untersuchen</button></header>
+        <p class="q">Ist das ein Vorteil oder ein Nachteil der Arbeitsteilung?</p>
+        <div class="mi" id="pros"></div>
+        <div class="row"><button class="btn accent" id="chk-a11" type="button">Prüfen</button></div>
+        <div class="fb" id="fb-a11" hidden aria-live="polite"></div>
+      </article>
+
+      <article class="task">
+        <header><span class="num">12</span><h3>Warum Arbeitsteilung?</h3><button class="op" data-op="erklären" type="button">erklären</button></header>
+        <p class="q">Erkläre, warum Arbeitsteilung und Spezialisierung notwendig sind. Nutze ein Beispiel – etwa die Stecknadeln oder ein Produkt aus deinem Alltag.</p>
+        <div data-open="a12"></div>
+      </article>
+    </section>
+
+    <!-- STATION 5 -->
+    <section class="station c-luxus" data-st="4" aria-labelledby="h-s5" hidden>
+      <div class="st-head">
+        <div class="st-icon"><svg class="i" viewBox="0 0 24 24"><path d="M12 3v18M6 21h12M5 7h14"/><path d="M5 7 2.5 13a2.6 2.6 0 0 0 5 0zM19 7l-2.5 6a2.6 2.6 0 0 0 5 0z"/></svg></div>
+        <div><p class="eyebrow">Station 5 · Bewerten</p><h2 id="h-s5">Arbeit und Arbeitsteilung bewerten</h2><p class="goal">Du übst: die Bedeutung von Arbeit und Arbeitsteilung bewerten</p></div>
+      </div>
+
+      <article class="task">
+        <header><span class="num">13</span><h3>Geht es uns allen besser?</h3><button class="op" data-op="bewerten" type="button">bewerten</button></header>
+        <p class="q">„Durch Arbeitsteilung geht es uns allen besser.“ Wie siehst du das?</p>
+        <div class="scale" role="radiogroup" aria-label="Deine Position">
+          <label><input type="radio" name="pos" id="pos-1" value="1">stimme voll zu</label>
+          <label><input type="radio" name="pos" id="pos-2" value="2">stimme eher zu</label>
+          <label><input type="radio" name="pos" id="pos-3" value="3">teils, teils</label>
+          <label><input type="radio" name="pos" id="pos-4" value="4">stimme eher nicht zu</label>
+          <label><input type="radio" name="pos" id="pos-5" value="5">stimme gar nicht zu</label>
+        </div>
+        <p class="q">Nenne ein Argument dafür, eines dagegen und dein begründetes Urteil. Denk dabei auch an die Arbeit im Haushalt und an Menschen in anderen Ländern.</p>
+        <div data-open="a13"></div>
+      </article>
+
+      <article class="task">
+        <header><span class="num">14</span><h3>Kurz-Check</h3></header>
+        <div class="quiz" id="quiz"></div>
+        <div class="row"><button class="btn accent" id="chk-a14" type="button">Prüfen</button></div>
+        <div class="fb" id="fb-a14" hidden aria-live="polite"></div>
+      </article>
+
+      <article class="task">
+        <header><span class="num">∑</span><h3>Dein Überblick</h3></header>
+        <div class="over-grid" id="overview"></div>
+      </article>
+
+      <article class="task">
+        <header><span class="num">↗</span><h3>Speichern, abgeben, weiterarbeiten</h3></header>
+        <label for="abgName"><b>Dein Name oder Kürzel</b></label>
+        <input type="text" id="abgName" placeholder="z. B. Lea M." autocomplete="off">
+        <p class="hint">Speichere alle Antworten, Prüfergebnisse und dein fobizz-Feedback als PDF, oder kopiere sie als Text, z. B. für IServ.</p>
+        <div class="row"><button class="btn accent" id="pdfBtn" type="button"><svg class="i" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>PDF speichern</button><button class="btn soft" id="txtBtn" type="button">Als Text kopieren</button></div>
+        <p class="hint" id="pdfNote" hidden aria-live="polite"></p>
+        <label class="sr" for="txtOut">Deine Ergebnisse als Text</label>
+        <textarea id="txtOut" class="code" readonly hidden></textarea>
+        <div class="split">
+          <div class="half">
+            <h4>Sicherungscode erstellen</h4>
+            <p class="hint">Im Code steckt dein ganzer Stand. Schick ihn über IServ an deine Lehrkraft (Abgabe) oder an dich selbst, um später oder auf einem anderen Gerät weiterzuarbeiten.</p>
+            <div class="row"><button class="btn accent" id="mkCode" type="button">Code erstellen</button><button class="btn soft" id="cpCode" type="button" hidden>Code kopieren</button></div>
+            <label class="sr" for="codeOut">Sicherungscode</label>
+            <textarea id="codeOut" class="code" readonly hidden></textarea>
+            <p class="hint" id="codeNote" hidden aria-live="polite"></p>
+          </div>
+          <div class="half">
+            <h4>Mit Code weiterarbeiten</h4>
+            <p class="hint">Füge einen Sicherungscode ein. Dein aktueller Stand auf diesem Gerät wird dabei ersetzt.</p>
+            <label class="sr" for="loadBox5">Sicherungscode einfügen</label>
+            <textarea id="loadBox5" class="code" placeholder="AWK…"></textarea>
+            <div class="row"><button class="btn soft" id="loadBtn5" type="button">Code laden</button></div>
+            <p class="hint" id="loadNote5" hidden aria-live="polite"></p>
+          </div>
+        </div>
+        <div class="row" style="margin-top:6px"><button class="btn soft" id="reset" type="button">Alles löschen und neu beginnen</button></div>
+      </article>
+    </section>
+  </main>
+</div>
+
+<div class="pop" id="pop" role="dialog" aria-modal="false" aria-labelledby="popH" hidden>
+  <button class="x" id="popX" type="button" aria-label="Schließen">×</button>
+  <h4 id="popH"></h4>
+  <p id="popP"></p>
+</div>
+
+<footer class="pager">
+  <div class="pager-in">
+    <button class="btn soft" id="prev" type="button"><svg class="i" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>Zurück</button>
+    <span class="where" id="where">Station 1 von 5</span>
+    <button class="btn" id="next" type="button">Weiter<svg class="i" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+(function(){
+"use strict";
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const CHECK='<svg class="i" viewBox="0 0 24 24"><path d="m5 12 4 4 10-10"/></svg>';
+const FOBIZZ_URL='https://go.fobizz.com';
+const TITLE='Arbeits-Werkstatt';
+function el(tag,attrs,...kids){const n=document.createElement(tag);for(const k in attrs||{}){if(k==='class')n.className=attrs[k];else if(k==='html')n.innerHTML=attrs[k];else n.setAttribute(k,attrs[k]);}for(const c of kids){if(c==null)continue;n.append(c.nodeType?c:document.createTextNode(c));}return n;}
+function norm(s){return String(s||'').toLowerCase().replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/ß/g,'ss').replace(/[^a-z]/g,'');}
+function num(v){const n=parseFloat(String(v==null?'':v).replace(/\s|\./g,'').replace(',','.'));return isNaN(n)?null:n;}
+function shuffleSeeded(arr,seed){const a=arr.slice();let s=seed;for(let i=a.length-1;i>0;i--){s=(s*9301+49297)%233280;const j=Math.floor(s/233280*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+/* ---------- Inhalte ---------- */
+const STATIONS=[{k:'entdecken',label:'Bedeutung'},{k:'kultur',label:'Familie'},{k:'sichern',label:'Geschichte'},{k:'existenz',label:'Heute'},{k:'luxus',label:'Bewerten'}];
+const FUNCS=['Einkommen','Anerkennung','Gemeinschaft','Persönlichkeit','Tagesstruktur'];
+const QUOTES=[
+  {id:'q1',t:'„Von meinem Gehalt bezahle ich Miete und Essen.“',ok:['Einkommen'],alt:[]},
+  {id:'q2',t:'„Meine Kundinnen loben meine Arbeit. Das macht mich stolz.“',ok:['Anerkennung'],alt:[]},
+  {id:'q3',t:'„In der Pause quatsche ich gern mit meinen Kolleg*innen.“',ok:['Gemeinschaft'],alt:[]},
+  {id:'q4',t:'„In der Ausbildung habe ich gelernt, Verantwortung zu übernehmen.“',ok:['Persönlichkeit'],alt:[]},
+  {id:'q5',t:'„Ohne Job würde mir ein fester Tagesablauf fehlen.“',ok:['Tagesstruktur'],alt:[]},
+  {id:'q6',t:'„Ich spare für meinen Führerschein.“',ok:['Einkommen'],alt:[]},
+  {id:'q7',t:'„Im Team lösen wir Probleme gemeinsam.“',ok:['Gemeinschaft'],alt:['Persönlichkeit']},
+  {id:'q8',t:'„Beim Programmieren kann ich zeigen, was ich kann.“',ok:['Persönlichkeit'],alt:['Anerkennung']}
+];
+const PAID=[
+  {id:'p1',l:'Ein Pfleger versorgt Patient*innen im Krankenhaus',a:'b'},{id:'p2',l:'Eine Enkelin pflegt ihre Oma zu Hause',a:'u'},
+  {id:'p3',l:'Eine Trainerin leitet ehrenamtlich die Fußball-AG',a:'u'},{id:'p4',l:'Ein Koch arbeitet im Restaurant',a:'b'},
+  {id:'p5',l:'Ein Vater wäscht die Wäsche der Familie',a:'u'},{id:'p6',l:'Eine Reinigungskraft putzt ein Büro',a:'b'},
+  {id:'p7',l:'Ein Mitglied der Freiwilligen Feuerwehr löscht einen Brand',a:'u'},{id:'p8',l:'Ein Schüler gibt Nachhilfe gegen Geld',a:'b'}
+];
+const WHO=[['','— wer? —'],['ich','Ich'],['a','Person A'],['b','Person B'],['ges','Geschwister'],['alle','Alle gemeinsam'],['keiner','Niemand fest']];
+const WHO_L={ich:'Ich',a:'Person A',b:'Person B',ges:'Geschwister',alle:'Alle gemeinsam',keiner:'Niemand fest'};
+const CHORES=[
+  {id:'kochen',l:'Kochen',f:'täglich',m:420},{id:'spuelen',l:'Spülen, Spülmaschine',f:'täglich',m:105},{id:'aufr',l:'Aufräumen',f:'täglich',m:140},{id:'muell',l:'Müll rausbringen',f:'täglich',m:35},
+  {id:'waesche',l:'Wäsche waschen und aufhängen',f:'wöchentlich',m:120},{id:'einkauf',l:'Einkaufen',f:'wöchentlich',m:90},{id:'saugen',l:'Staubsaugen und wischen',f:'wöchentlich',m:60},{id:'bad',l:'Bad putzen',f:'wöchentlich',m:45},
+  {id:'fenster',l:'Fenster putzen',f:'monatlich',m:15},{id:'papier',l:'Rechnungen und Papierkram',f:'monatlich',m:30},{id:'kuehl',l:'Kühlschrank sauber machen',f:'monatlich',m:10}
+];
+const EVENTS=[
+  {id:'e1',l:'Familien stellen fast alles selbst her.'},{id:'e2',l:'Handwerker*innen spezialisieren sich in den Städten.'},
+  {id:'e3',l:'Die Dampfmaschine treibt Fabriken an.'},{id:'e4',l:'Das Fließband kommt in die Autofabriken.'},{id:'e5',l:'Computer und Internet schaffen neue Berufe.'}
+];
+const SMITH=[{id:'huf',l:'Hufschmied',a:true},{id:'nagel',l:'Nagelschmied',a:true},{id:'baecker',l:'Bäcker',a:false},{id:'wagen',l:'Wagenschmied',a:true},{id:'weber',l:'Weber',a:false},{id:'schneider',l:'Schneider',a:false}];
+const FORMS=[['inner','innerbetrieblich'],['zwischen','zwischenbetrieblich'],['inter','international']];
+const FORMX=[
+  {id:'f1',l:'In der Bäckerei backt einer, eine andere verkauft.',a:'inner'},{id:'f2',l:'Ein Fahrradhersteller kauft die Bremsen bei einem Zulieferer.',a:'zwischen'},
+  {id:'f3',l:'Ein E-Bike-Akku wird in China hergestellt und in Deutschland eingebaut.',a:'inter'},{id:'f4',l:'Im Autowerk montiert ein Team die Türen, ein anderes die Sitze.',a:'inner'},
+  {id:'f5',l:'Eine Tischlerei lässt ihre Website von einer Agentur erstellen.',a:'zwischen'},{id:'f6',l:'Deutschland exportiert Maschinen und importiert Kaffee.',a:'inter'},
+  {id:'f7',l:'Im Krankenhaus arbeiten Ärztinnen, Pfleger und Reinigungskräfte.',a:'inner'},{id:'f8',l:'Ein Supermarkt bekommt sein Brot von einer Großbäckerei.',a:'zwischen'}
+];
+const PROS=[
+  {id:'v1',l:'Durch Übung wird man schneller und besser.',a:'v'},{id:'v2',l:'In kürzerer Zeit kann mehr hergestellt werden.',a:'v'},
+  {id:'v3',l:'Immer gleiche Handgriffe können eintönig sein.',a:'n'},{id:'v4',l:'Fällt ein Zulieferer aus, steht die Produktion still.',a:'n'},
+  {id:'v5',l:'Produkte werden günstiger.',a:'v'},{id:'v6',l:'Lange Transportwege belasten die Umwelt.',a:'n'},
+  {id:'v7',l:'Jede Person kann sich auf das konzentrieren, was sie gut kann.',a:'v'},{id:'v8',l:'Viele kennen nur noch einen kleinen Teil des fertigen Produkts.',a:'n'}
+];
+const QUIZ=[
+  {q:'Erwerbsarbeit ist …',o:['Arbeit, für die man bezahlt wird','jede Arbeit im Haushalt','ein Ehrenamt'],a:0},
+  {q:'Arbeit ist für viele Menschen wichtig, weil sie …',o:['nur Geld bringt','Einkommen bringt und die Persönlichkeit stärkt','vor allem anstrengend ist'],a:1},
+  {q:'Was bedeutet „geschlossene Hauswirtschaft“?',o:['Ein Geschäft ist geschlossen','Familien versorgen sich selbst mit fast allem','Hausarbeit wird bezahlt'],a:1},
+  {q:'Ein Zulieferer stellt Sitze für ein Autowerk her. Das ist …',o:['innerbetriebliche Arbeitsteilung','zwischenbetriebliche Arbeitsteilung','geschlossene Hauswirtschaft'],a:1},
+  {q:'Ein Vorteil der Spezialisierung ist …',o:['eintönige Arbeit','höhere Produktivität','Abhängigkeit von anderen'],a:1},
+  {q:'Welche Erfindung veränderte die Arbeit im 18. Jahrhundert stark?',o:['die Dampfmaschine','das Smartphone','das Fließband'],a:0}
+];
+const TERMS={
+  erwerbsarbeit:['Erwerbsarbeit','Arbeit, für die man bezahlt wird – zum Beispiel als Angestellte*r, Arbeiter*in, Beamt*in oder Selbstständige*r.'],
+  ehrenamt:['Ehrenamt','Eine freiwillige Tätigkeit ohne Bezahlung, zum Beispiel als Trainer*in im Sportverein oder in der Freiwilligen Feuerwehr.'],
+  arbeitsteilung:['Arbeitsteilung','Eine Arbeit wird in Teile zerlegt, die von verschiedenen Menschen, Betrieben oder Ländern erledigt werden. Wer sich auf eine Aufgabe konzentriert, spezialisiert sich.']
+};
+const OPS={
+  '(be)nennen':['(be)nennen','Begriffe oder Fakten angeben – ohne lange Erklärung.'],
+  'beschreiben':['beschreiben','Mit Fachbegriffen sagen, was zu sehen ist oder wie etwas ist.'],
+  'beurteilen':['beurteilen','Etwas begründet einschätzen – mit Argumenten, nicht nur aus dem Bauch heraus.'],
+  'ordnen':['ordnen','Dinge in eine sinnvolle Gruppe oder Reihenfolge bringen.'],
+  'untersuchen':['untersuchen','Genau hinschauen, rechnen und ein Ergebnis formulieren.'],
+  'erklären':['erklären','Zeigen, wie etwas zusammenhängt – am besten mit einem Beispiel.'],
+  'bewerten':['bewerten','Deine eigene Meinung sagen und sie mit Argumenten und deinen Werten begründen.']
+};
+const OPEN={
+  a3:{nr:3,op:'beschreiben',q:'Beschreibe, welche Bedeutung Arbeit für Menschen hat – als Einkommensquelle und für die Persönlichkeit. Nenne mindestens drei Aspekte.',ph:'Arbeit ist wichtig, weil … Außerdem …',min:70,chk:['any:Einkommen|Geld|Gehalt|Lohn:Einkommen genannt','any:Anerkennung|Kontakt|Kolleg|Persönlich|Verantwortung|Struktur|Selbst:Mehr als Geld genannt']},
+  a5:{nr:5,op:'beurteilen',q:'Beurteile, ob die Hausarbeit in deinem (oder einem ausgedachten) Haushalt gerecht aufgeteilt ist. Was könnte man verändern?',ph:'Ich finde die Aufteilung …, weil … Man könnte …',min:70,chk:['because','any:gerecht|ungerecht|fair:Urteil zur Gerechtigkeit','any:könnte|sollte|Vorschlag|ändern|tauschen:Vorschlag gemacht']},
+  a8:{nr:8,op:'beschreiben',q:'Wähle einen Beruf, der dich interessiert. Gab es ihn schon früher? Wie hat er sich verändert – zum Beispiel durch neue Techniken?',ph:'Mein Wunschberuf ist … Früher … Heute …',min:60,chk:['any:früher|damals|vor:Blick in die Vergangenheit','any:heute|jetzt|Computer|Maschine|digital|Technik:Veränderung genannt']},
+  a12:{nr:12,op:'erklären',q:'Erkläre, warum Arbeitsteilung und Spezialisierung notwendig sind. Nutze ein Beispiel.',ph:'Arbeitsteilung ist notwendig, weil … Zum Beispiel …',min:70,chk:['because','example']},
+  a13:{nr:13,op:'bewerten',q:'„Durch Arbeitsteilung geht es uns allen besser.“ Nenne ein Argument dafür, eines dagegen und dein begründetes Urteil.',ph:'Dafür spricht … Dagegen spricht … Ich finde …, weil …',min:100,chk:['because','opinion','procon']}
+};
+const QC={
+  because:[/\b(weil|denn|da\s|deshalb|daher|darum|deswegen)/i,'Du begründest („weil …“)'],
+  example:[/(zum beispiel|z\.\s?b\.|beispiel|etwa|wie bei)/i,'Mit Beispiel'],
+  opinion:[/(ich finde|meiner meinung|ich denke|ich meine|für mich|ich glaube|ich würde)/i,'Deine Meinung wird deutlich'],
+  procon:[/(dafür|dagegen|einerseits|andererseits|jedoch|allerdings|aber)/i,'Du wägst ab']
+};
+const POSL={'1':'stimme voll zu','2':'stimme eher zu','3':'teils, teils','4':'stimme eher nicht zu','5':'stimme gar nicht zu'};
+
+/* ---------- Zustand ---------- */
+const KEY='arbeits-werkstatt-v1';
+const blank=()=>({st:0,quotes:{},paid:{},chores:Object.fromEntries(CHORES.map(c=>[c.id,{w:'',m:c.m}])),own:{l:'',w:'',m:0},choresTouched:false,order:shuffleSeeded(EVENTS.map(e=>e.id),7),smith:{},setzer:'',a9a:'',a9b:'',forms:{},pros:{},pos:'',quiz:{},ans:{},fb:{},chk:{},name:''});
+let S=blank();
+try{const raw=localStorage.getItem(KEY); if(raw){S=Object.assign(blank(),JSON.parse(raw));}}catch(e){}
+let saveT=null;
+function save(){clearTimeout(saveT);saveT=setTimeout(()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}},300);progress();}
+let dl=null;
+(async()=>{ try{ dl=(window.claude&&typeof window.claude.use==='function')?await window.claude.use('downloads'):null; }catch(e){dl=null;} })();
+function showFb(fbEl,cls,head,body){fbEl.hidden=false;fbEl.className='fb '+cls;const h=el('p',{class:'lvl',html:cls==='ok'?CHECK:''});h.append(head);fbEl.replaceChildren(h,...(body?[el('p',{},body)]:[]));}
+
+/* ---------- Offene Aufgaben mit fobizz ---------- */
+function quickChecks(t,text){
+  const out=[{on:text.trim().length>=t.min,l:'Ausführlich genug'}];
+  for(const c of t.chk||[]){
+    if(c.startsWith('any:')){const parts=c.slice(4).split(':');const ws=parts[0].split('|');out.push({on:ws.some(w=>norm(text).includes(norm(w))),l:parts[1]});}
+    else out.push({on:QC[c][0].test(text),l:QC[c][1]});
+  }
+  return out;
+}
+function paintQC(box,list){box.replaceChildren(el('b',{},'Schnell-Check:'),...list.map(x=>el('span',{class:x.on?'on':''},x.l)));}
+function choreSummary(){
+  const h=hoursByWho(); return 'Mein Haushalts-Check (Stunden pro Woche): '+Object.entries(h).filter(([k,v])=>v>0).map(([k,v])=>`${WHO_L[k]} ${v.toLocaleString('de-DE',{maximumFractionDigits:1})} h`).join(', ')+'.';
+}
+function fobizzText(id){
+  const t=OPEN[id];
+  let ctx=''; if(id==='a5') ctx='\n'+choreSummary(); if(id==='a13') ctx='\nMeine Position: '+(POSL[S.pos]||'keine Angabe');
+  return `${TITLE} · Aufgabe ${t.nr}\nAufgabe: ${t.q}${ctx}\nMeine Antwort:\n${(S.ans[id]||'').trim()}`;
+}
+async function copyTo(text,note,ta,msg){
+  try{await navigator.clipboard.writeText(text);ta.hidden=true;note.hidden=false;note.textContent=msg||'Kopiert! Öffne fobizz und füge den Text im Chat ein.';}
+  catch(e){ta.hidden=false;ta.value=text;ta.focus();ta.select();note.hidden=false;note.textContent='Der Text ist markiert. Kopiere ihn (Strg+C, am iPad: gedrückt halten → Kopieren).';}
+}
+function mountOpen(){
+  $$('[data-open]').forEach(host=>{
+    const id=host.dataset.open, t=OPEN[id];
+    const ta=el('textarea',{id:'ta-'+id,placeholder:t.ph,'aria-label':'Deine Antwort'}); ta.value=S.ans[id]||'';
+    const qc=el('div',{class:'qc'});
+    const cp=el('button',{class:'btn ki',type:'button',html:'<svg class="i" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"/></svg>Für fobizz kopieren'});
+    const go=el('a',{class:'btn soft',href:FOBIZZ_URL,target:'_blank',rel:'noopener',html:'fobizz öffnen <svg class="i" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>'});
+    const note=el('p',{class:'hint',hidden:'','aria-live':'polite'});
+    const cta=el('textarea',{class:'code',readonly:'',hidden:'','aria-label':'Text für fobizz'});
+    const fbTa=el('textarea',{id:'fbin-'+id,class:'fbin',placeholder:'Füge hier die Rückmeldung der KI ein …'}); fbTa.value=S.fb[id]||'';
+    const det=el('details',{class:'fbox'+(S.fb[id]?' has':'')},el('summary',{},'KI-Feedback mit fobizz'),el('div',{class:'fbox-in'},el('div',{class:'row'},cp,go),note,cta,el('label',{for:'fbin-'+id,class:'fbl'},'Feedback von fobizz hier einfügen (optional – kommt mit ins PDF)'),fbTa));
+    if(S.fb[id]) det.open=true;
+    host.replaceWith(el('div',{class:'open'},ta,el('div',{class:'open-foot'},qc),det));
+    const upd=()=>paintQC(qc,quickChecks(t,ta.value));
+    ta.addEventListener('input',()=>{S.ans[id]=ta.value;save();upd();});
+    fbTa.addEventListener('input',()=>{S.fb[id]=fbTa.value;det.classList.toggle('has',!!fbTa.value.trim());save();});
+    cp.addEventListener('click',()=>{ if((S.ans[id]||'').trim().length<10){note.hidden=false;note.textContent='Schreib zuerst deine Antwort – mindestens einen ganzen Satz.';return;} copyTo(fobizzText(id),note,cta); });
+    upd();
+  });
+}
+
+/* ---------- generische Prüfer ---------- */
+function segList(boxSel,items,key,opts,chkKey,fbSel){
+  const box=$(boxSel); box.replaceChildren(); const d=S.chk[chkKey]&&S.chk[chkKey].detail||{};
+  items.forEach(it=>{
+    const seg=el('div',{class:'seg'+(opts.length>2?' seg4':''),role:'group','aria-label':it.l});
+    opts.forEach(([v,l])=>{const b=el('button',{type:'button','aria-pressed':S[key][it.id]===v?'true':'false'},l);b.onclick=()=>{S[key][it.id]=v;delete S.chk[chkKey];$(fbSel).hidden=true;save();segList(boxSel,items,key,opts,chkKey,fbSel);};seg.append(b);});
+    box.append(el('div',{class:'mi-row'+(d[it.id]?' s-'+d[it.id]:'')},el('span',{},it.l),seg));
+  });
+}
+function segCheck(items,key,chkKey,fbSel,okTxt,hint,rerender){
+  let sc=0; const d={}; items.forEach(it=>{const v=S[key][it.id]; if(!v) return; const ok=v===it.a; if(ok)sc++; d[it.id]=ok?'ok':'bad';});
+  S.chk[chkKey]={score:sc,max:items.length,detail:d}; save(); rerender();
+  const miss=items.length-Object.values(S[key]).filter(Boolean).length;
+  if(miss>0) showFb($(fbSel),'mid',`${sc} von ${items.length} richtig`,`Noch ${miss} offen.`);
+  else if(sc===items.length) showFb($(fbSel),'ok','Alles richtig!',okTxt);
+  else showFb($(fbSel),'mid',`${sc} von ${items.length} richtig`,hint);
+}
+/* Station 1 */
+function renderQuotes(){
+  const box=$('#quotes'); box.replaceChildren(); const d=S.chk.a1&&S.chk.a1.detail||{};
+  QUOTES.forEach(q=>{const s=el('select',{id:'qt-'+q.id,'aria-label':'Bedeutung für '+q.t}); s.append(el('option',{value:''},'— wählen —')); FUNCS.forEach(f=>{const o=el('option',{value:f},f); if(S.quotes[q.id]===f)o.selected=true; s.append(o);});
+    s.onchange=()=>{S.quotes[q.id]=s.value;delete S.chk.a1;$('#fb-a1').hidden=true;save();renderQuotes();};
+    box.append(el('div',{class:'jt-row'+(d[q.id]?' s-'+d[q.id]:'')},el('span',{},q.t),s));});
+}
+function checkQuotes(){
+  let sc=0,alt=0; const d={}; QUOTES.forEach(q=>{const v=S.quotes[q.id]; if(!v) return; if(q.ok.includes(v)){sc++;d[q.id]='ok';} else if(q.alt.includes(v)){sc++;alt++;d[q.id]='alt';} else d[q.id]='bad';});
+  S.chk.a1={score:sc,max:QUOTES.length,detail:d}; save(); renderQuotes();
+  const miss=QUOTES.length-Object.values(S.quotes).filter(Boolean).length;
+  if(miss) showFb($('#fb-a1'),'mid',`${sc} von ${QUOTES.length} passen`,`Noch ${miss} offen.`);
+  else if(sc===QUOTES.length) showFb($('#fb-a1'),'ok','Alles passt!',alt?'Gestrichelt markierte Aussagen passen zu mehr als einer Bedeutung – auch gut.':'Du erkennst, dass Arbeit viel mehr ist als Geld.');
+  else showFb($('#fb-a1'),'mid',`${sc} von ${QUOTES.length} passen`,'Tippe oben noch einmal auf die fünf Karten.');
+}
+/* Station 2: Haushalts-Check */
+function hoursByWho(){
+  const h={ich:0,a:0,b:0,ges:0,alle:0,keiner:0};
+  CHORES.forEach(c=>{const x=S.chores[c.id]; if(x&&x.w) h[x.w]+=(+x.m||0)/60;});
+  if(S.own.l&&S.own.w) h[S.own.w]+=(+S.own.m||0)/60;
+  for(const k in h) h[k]=Math.round(h[k]*10)/10; return h;
+}
+function choreRow(c,isOwn){
+  const st=isOwn?S.own:S.chores[c.id];
+  const sel=el('select',{'aria-label':'Wer erledigt '+(c.l||'eigene Aufgabe')}); WHO.forEach(([v,l])=>{const o=el('option',{value:v},l); if(st.w===v)o.selected=true; sel.append(o);});
+  const min=el('input',{type:'number',min:'0',step:'5',inputmode:'numeric','aria-label':'Minuten pro Woche für '+(c.l||'eigene Aufgabe')}); min.value=st.m;
+  sel.onchange=()=>{st.w=sel.value;S.choresTouched=true;save();renderBars();};
+  min.oninput=()=>{st.m=Math.max(0,+min.value||0);S.choresTouched=true;save();renderBars();};
+  let label;
+  if(isOwn){label=el('input',{type:'text',placeholder:'Eigene Aufgabe, z. B. Haustier versorgen','aria-label':'Eigene Aufgabe'}); label.value=S.own.l; label.oninput=()=>{S.own.l=label.value;save();renderBars();};}
+  else label=el('span',{class:'cl'},c.l,el('small',{},c.f));
+  return el('div',{class:'chore'},label,sel,el('span',{class:'eur'},min,el('span',{},'Min./Woche')));
+}
+function renderChores(){const box=$('#chores');box.replaceChildren();CHORES.forEach(c=>box.append(choreRow(c,false)));box.append(choreRow({l:''},true));renderBars();}
+function renderBars(){
+  const h=hoursByWho(), box=$('#whobars'); const keys=['ich','a','b','ges','alle'];
+  const max=Math.max(1,...keys.map(k=>h[k])); const total=keys.reduce((a,k)=>a+h[k],0);
+  if(!total){box.replaceChildren(el('p',{class:'hint'},'Wähle oben aus, wer welche Arbeit macht. Dann siehst du hier, wie viele Stunden pro Woche auf wen entfallen.'));return;}
+  box.replaceChildren(el('h4',{},'Stunden Hausarbeit pro Woche'),...keys.map(k=>el('div',{class:'wb',title:`${WHO_L[k]}: ${h[k].toLocaleString('de-DE')} Stunden`},el('span',{class:'wl'},WHO_L[k]),el('span',{class:'wt'},el('i',{style:`width:${h[k]/max*100}%`})),el('span',{class:'wv'},h[k].toLocaleString('de-DE',{maximumFractionDigits:1})+' h'))),
+    ...(h.keiner?[el('p',{class:'hint'},`Ohne feste Zuständigkeit: ${h.keiner.toLocaleString('de-DE')} h`)]:[]));
+}
+/* Station 3 */
+function renderOrder(){
+  const ol=$('#order'); ol.replaceChildren(); const d=S.chk.a6&&S.chk.a6.detail||{};
+  S.order.forEach((id,i)=>{const e=EVENTS.find(x=>x.id===id);
+    const up=el('button',{class:'mv',type:'button','aria-label':e.l+' nach oben',html:'<svg class="i" viewBox="0 0 24 24"><path d="M6 15l6-6 6 6"/></svg>'}), dn=el('button',{class:'mv',type:'button','aria-label':e.l+' nach unten',html:'<svg class="i" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>'});
+    up.disabled=i===0; dn.disabled=i===S.order.length-1;
+    up.onclick=()=>{[S.order[i-1],S.order[i]]=[S.order[i],S.order[i-1]];delete S.chk.a6;$('#fb-a6').hidden=true;save();renderOrder();};
+    dn.onclick=()=>{[S.order[i+1],S.order[i]]=[S.order[i],S.order[i+1]];delete S.chk.a6;$('#fb-a6').hidden=true;save();renderOrder();};
+    ol.append(el('li',{class:d[id]?'s-'+d[id]:''},el('span',{class:'pos'},String(i+1)),el('span',{class:'lbl'},e.l),up,dn));});
+}
+function checkOrder(){
+  let sc=0; const d={}; S.order.forEach((id,i)=>{const ok=id===EVENTS[i].id; if(ok)sc++; d[id]=ok?'ok':'bad';});
+  S.chk.a6={score:sc,max:EVENTS.length,detail:d}; save(); renderOrder();
+  if(sc===EVENTS.length) showFb($('#fb-a6'),'ok','Richtige Reihenfolge!','Von der Selbstversorgung bis zur Digitalisierung: Mit jeder Stufe wurde die Arbeit stärker geteilt.');
+  else showFb($('#fb-a6'),'mid',`${sc} von ${EVENTS.length} an der richtigen Stelle`,'Tipp: Schau dir die Zeitangaben in den Epochen-Karten oben an.');
+}
+function renderSmith(){
+  const box=$('#smith'); box.replaceChildren(); const d=S.chk.a7&&S.chk.a7.detail||{};
+  SMITH.forEach(s=>{const b=el('button',{type:'button',class:'chipbtn'+(d[s.id]?' s-'+d[s.id]:''),'aria-pressed':S.smith[s.id]?'true':'false'},s.l); b.onclick=()=>{S.smith[s.id]=!S.smith[s.id];delete S.chk.a7;$('#fb-a7').hidden=true;save();renderSmith();}; box.append(b);});
+}
+function checkSmith(){
+  let sc=0; const d={}; SMITH.forEach(s=>{const ok=!!S.smith[s.id]===s.a; if(ok)sc++; if(S.smith[s.id]||s.a) d[s.id]=ok?'ok':'bad';});
+  const setOk=S.setzer==='1'; if(setOk) sc++;
+  S.chk.a7={score:sc,max:SMITH.length+1,detail:d}; save(); renderSmith();
+  $('#setzer').className=S.setzer?(setOk?'s-ok':'s-bad'):'';
+  if(sc===SMITH.length+1) showFb($('#fb-a7'),'ok','Alles richtig!','Aus einem Grundberuf werden durch Spezialisierung viele Berufe – und alte Berufe verändern sich.');
+  else showFb($('#fb-a7'),'mid',`${sc} von ${SMITH.length+1} richtig`,'Grün = richtig gewählt, rot = falsch gewählt oder vergessen.');
+}
+/* Station 4 */
+function checkA9(){
+  const a=num($('#a9a').value), b=num($('#a9b').value); S.a9a=$('#a9a').value; S.a9b=$('#a9b').value;
+  const oa=a===4800, ob=b===240; S.chk.a9={score:(oa?1:0)+(ob?1:0),max:2}; save();
+  if(oa&&ob) showFb($('#fb-a9'),'ok','Beides richtig!','48.000 : 10 = 4.800 Nadeln pro Person. 4.800 : 20 = 240 – durch Arbeitsteilung schafft jede Person 240-mal so viel.');
+  else showFb($('#fb-a9'),'mid',`${(oa?1:0)+(ob?1:0)} von 2 richtig`,!oa?'a) Teile die Nadeln der Werkstatt durch die Zahl der Arbeiter.':'b) Teile dein Ergebnis aus a) durch 20.');
+}
+/* Quiz */
+function renderQuiz(){
+  const box=$('#quiz'); box.replaceChildren(); const d=S.chk.a14&&S.chk.a14.detail||{};
+  QUIZ.forEach((q,i)=>{const fs=el('fieldset',{class:'qz'+(d[i]?' s-'+d[i]:'')},el('legend',{},`${i+1}. ${q.q}`));
+    q.o.forEach((o,j)=>{const id=`qz-${i}-${j}`;const r=el('input',{type:'radio',name:'qz'+i,id,value:String(j)}); if(S.quiz[i]===String(j)) r.checked=true; r.onchange=()=>{S.quiz[i]=r.value;delete S.chk.a14;$('#fb-a14').hidden=true;save();}; fs.append(el('label',{for:id},r,el('span',{},o)));});
+    box.append(fs);});
+}
+function checkQuiz(){
+  let sc=0; const d={}; QUIZ.forEach((q,i)=>{const v=S.quiz[i]; if(v==null) return; const ok=+v===q.a; if(ok)sc++; d[i]=ok?'ok':'bad';});
+  S.chk.a14={score:sc,max:QUIZ.length,detail:d}; save(); renderQuiz();
+  if(sc===QUIZ.length) showFb($('#fb-a14'),'ok','Alles richtig!','Du hast die Arbeits-Werkstatt gemeistert.');
+  else showFb($('#fb-a14'),'mid',`${sc} von ${QUIZ.length} richtig`,'Rot markierte Fragen: Schau in den Stationen nach.');
+}
+
+/* ---------- Überblick ---------- */
+const answered=id=>(S.ans[id]||'').trim().length>=15;
+function renderOverview(){
+  const box=$('#overview'); box.replaceChildren(); const a=id=>S.chk[id]?`${S.chk[id].score}/${S.chk[id].max}`:'–'; const o=ids=>ids.filter(answered).length+'/'+ids.length;
+  [['entdecken','Station 1',[`Aussagen: ${a('a1')}`,`Bezahlt/unbezahlt: ${a('a2')}`,`Antworten: ${o(['a3'])}`]],
+   ['kultur','Station 2',[`Haushalts-Check: ${S.choresTouched?'ausgefüllt':'–'}`,`Antworten: ${o(['a5'])}`]],
+   ['sichern','Station 3',[`Reihenfolge: ${a('a6')}`,`Berufe: ${a('a7')}`,`Antworten: ${o(['a8'])}`]],
+   ['existenz','Station 4',[`Rechnung: ${a('a9')}`,`Formen: ${a('a10')}`,`Vor-/Nachteile: ${a('a11')}`,`Antworten: ${o(['a12'])}`]],
+   ['luxus','Station 5',[`Antworten: ${o(['a13'])}`,`Kurz-Check: ${a('a14')}`]],
+   ['sichern','fobizz',[`${Object.keys(OPEN).filter(id=>(S.fb[id]||'').trim()).length} von ${Object.keys(OPEN).length} Antworten mit KI-Feedback`]]
+  ].forEach(([c,t,ls])=>box.append(el('div',{class:'ov c-'+c},el('b',{},t),...ls.map(l=>el('span',{},l)))));
+}
+
+/* ---------- Export ---------- */
+const sc=id=>S.chk[id]?` – ${S.chk[id].score} von ${S.chk[id].max} richtig`:' – noch nicht geprüft';
+function mk(det,k){return det&&det[k]?(det[k]==='ok'?' (richtig)':det[k]==='alt'?' (vertretbar)':' (falsch)'):'';}
+function qItem(id){const t=OPEN[id];return {t:'q',q:`Aufgabe ${t.nr}: ${t.q}`,a:(S.ans[id]||'').trim(),ki:(S.fb[id]||'').trim()?'KI-Feedback (fobizz): '+S.fb[id].trim():null};}
+function buildReport(){
+  const C=k=>S.chk[k]&&S.chk[k].detail; const h=hoursByWho();
+  const chores=CHORES.map(c=>`${c.l} (${c.f}): ${WHO_L[S.chores[c.id].w]||'–'}, ${S.chores[c.id].m} Min./Woche`); if(S.own.l) chores.push(`${S.own.l}: ${WHO_L[S.own.w]||'–'}, ${S.own.m} Min./Woche`);
+  return [
+    {title:'Station 1 · Warum arbeiten Menschen?',rgb:[42,127,158],items:[
+      {t:'list',label:'Aufgabe 1 – Bedeutung von Arbeit'+sc('a1'),lines:QUOTES.map(q=>`${q.t} → ${S.quotes[q.id]||'–'}${mk(C('a1'),q.id)}`)},
+      {t:'list',label:'Aufgabe 2 – Bezahlt oder unbezahlt?'+sc('a2'),lines:PAID.map(p=>`${p.l}: ${S.paid[p.id]==='b'?'bezahlt':S.paid[p.id]==='u'?'unbezahlt':'–'}${mk(C('a2'),p.id)}`)},qItem('a3')]},
+    {title:'Station 2 · Arbeitsteilung im Haushalt',rgb:[42,111,176],items:[
+      {t:'list',label:'Aufgabe 4 – Haushalts-Check',lines:[...chores,'Stunden pro Woche: '+Object.entries(h).filter(([k,v])=>v>0).map(([k,v])=>`${WHO_L[k]} ${v.toLocaleString('de-DE')} h`).join(', ')]},qItem('a5')]},
+    {title:'Station 3 · Wie Berufe entstanden sind',rgb:[116,70,144],items:[
+      {t:'list',label:'Aufgabe 6 – Reihenfolge'+sc('a6'),lines:S.order.map((id,i)=>`${i+1}. ${EVENTS.find(e=>e.id===id).l}${mk(C('a6'),id)}`)},
+      {t:'list',label:'Aufgabe 7 – Berufe spalten sich auf'+sc('a7'),lines:[`Aus dem Schmied entstanden: ${SMITH.filter(s=>S.smith[s.id]).map(s=>s.l).join(', ')||'–'}`,`Heutiger Beruf statt Schriftsetzer: ${S.setzer?['Buchhändler*in','Mediengestalter*in Digital und Print','Fachinformatiker*in'][+S.setzer]:'–'}`]},qItem('a8')]},
+    {title:'Station 4 · Arbeitsteilung und Spezialisierung',rgb:[31,122,92],items:[
+      {t:'list',label:'Aufgabe 9 – Stecknadel-Rechnung'+sc('a9'),lines:[`Nadeln pro Arbeiter: ${S.a9a||'–'}`,`So viel Mal mehr: ${S.a9b||'–'}`]},
+      {t:'list',label:'Aufgabe 10 – Formen der Arbeitsteilung'+sc('a10'),lines:FORMX.map(f=>`${f.l} → ${(FORMS.find(x=>x[0]===S.forms[f.id])||[,'–'])[1]}${mk(C('a10'),f.id)}`)},
+      {t:'list',label:'Aufgabe 11 – Vorteil oder Nachteil'+sc('a11'),lines:PROS.map(p=>`${p.l} → ${S.pros[p.id]==='v'?'Vorteil':S.pros[p.id]==='n'?'Nachteil':'–'}${mk(C('a11'),p.id)}`)},qItem('a12')]},
+    {title:'Station 5 · Bewerten',rgb:[184,132,26],items:[
+      {t:'list',label:'Aufgabe 13 – Meine Position',lines:[POSL[S.pos]||'–']},qItem('a13'),
+      {t:'list',label:'Aufgabe 14 – Kurz-Check'+sc('a14'),lines:QUIZ.map((q,i)=>`${i+1}. ${q.q} ${S.quiz[i]!=null?q.o[+S.quiz[i]]:'–'}${mk(C('a14'),i)}`)}]}
+  ];
+}
+function nowDE(){const d=new Date();return d.toLocaleDateString('de-DE',{day:'2-digit',month:'2-digit',year:'numeric'})+', '+d.toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit'})+' Uhr';}
+function reportText(){
+  const name=$('#abgName').value.trim();
+  const out=[TITLE.toUpperCase()+' – MEINE ERGEBNISSE','Wirtschaft · Klasse 8 · Arbeit und Arbeitsteilung',`Name: ${name||'–'} · Stand: ${nowDE()} · Fortschritt: ${$('#progTxt').textContent}`,''];
+  buildReport().forEach(sec=>{out.push('','== '+sec.title.toUpperCase()+' ==');sec.items.forEach(it=>{if(it.t==='q'){out.push('',it.q,it.a||'(keine Antwort)');if(it.ki)out.push(it.ki);}else{out.push('',it.label);it.lines.forEach(l=>out.push('  '+l));}});});
+  return out.join('\n');
+}
+const CP1252='€‚ƒ„…†‡ˆ‰Š‹ŒŽ‘’“”•–—˜™š›œžŸ';
+function pdfClean(t){return String(t||'').replace(/\r/g,'').replace(/→/g,'->').replace(/−/g,'-').replace(/[   ]/g,' ').split('').filter(ch=>{const c=ch.charCodeAt(0);return c===10||(c>=32&&c<=126)||(c>=160&&c<=255)||CP1252.includes(ch);}).join('');}
+function makePdfBlob(){
+  const { jsPDF }=window.jspdf; const doc=new jsPDF({unit:'mm',format:'a4'});
+  const W=210,M=16,CW=W-2*M,BOTTOM=282; let y=16; const INK=[24,34,30],MUTED=[86,100,93],PURPLE=[91,49,117];
+  const ensure=h=>{if(y+h>BOTTOM){doc.addPage();y=18;}};
+  function write(str,o={}){const size=o.size||10.5;doc.setFont('helvetica',o.style||'normal');doc.setFontSize(size);doc.setTextColor(...(o.color||INK));const lh=size*0.3528*1.38,ind=o.indent||0;pdfClean(str).split('\n').forEach(par=>{doc.splitTextToSize(par||' ',CW-ind).forEach(ln=>{ensure(lh);doc.text(ln,M+ind,y+lh*0.78);y+=lh;});});y+=(o.after!=null?o.after:1.2);}
+  [[42,111,176,M+4,y+4],[184,132,26,M+10,y+4],[31,122,92,M+7,y+9]].forEach(([r,g,b,x,yy])=>{doc.setFillColor(r,g,b);doc.circle(x,yy,3.6,'F');});
+  doc.setFont('helvetica','bold');doc.setFontSize(20);doc.setTextColor(...INK);doc.text(TITLE,M+18,y+6);
+  doc.setFont('helvetica','normal');doc.setFontSize(10);doc.setTextColor(...MUTED);doc.text(pdfClean('Meine Ergebnisse · Wirtschaft · Klasse 8 · Arbeit und Arbeitsteilung'),M+18,y+11.5);y+=18;
+  const name=$('#abgName').value.trim();
+  doc.setFillColor(233,239,234);doc.roundedRect(M,y,CW,10,2,2,'F');doc.setFont('helvetica','bold');doc.setFontSize(10.5);doc.setTextColor(...INK);doc.text(pdfClean(`Name: ${name||'–'}`),M+4,y+6.5);
+  doc.setFont('helvetica','normal');doc.text(pdfClean(`Stand: ${nowDE()}   ·   Fortschritt: ${$('#progTxt').textContent}`),M+CW-4,y+6.5,{align:'right'});y+=16;
+  buildReport().forEach(sec=>{ensure(24);doc.setFillColor(...sec.rgb);doc.roundedRect(M,y,CW,9,2,2,'F');doc.setFont('helvetica','bold');doc.setFontSize(12);doc.setTextColor(255,255,255);doc.text(pdfClean(sec.title),M+4,y+6.2);y+=13;
+    sec.items.forEach(it=>{ensure(14);
+      if(it.t==='q'){write(it.q,{size:9.5,style:'bold',color:MUTED,after:0.8});write(it.a||'(keine Antwort)',{style:it.a?'normal':'italic',color:it.a?INK:MUTED,after:it.ki?1:3});}
+      else{write(it.label,{size:9.5,style:'bold',color:MUTED,after:0.8});it.lines.forEach((l,i)=>write(l,{indent:3,after:i===it.lines.length-1?3:0.4}));}
+      if(it.ki){doc.setDrawColor(...PURPLE);doc.setLineWidth(0.6);const y0=y;write(it.ki,{size:9.5,style:'italic',color:PURPLE,indent:3,after:0});doc.line(M+0.5,y0,M+0.5,y);y+=3;}});y+=2;});
+  const n=doc.getNumberOfPages();for(let i=1;i<=n;i++){doc.setPage(i);doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(...MUTED);doc.text(pdfClean(`${TITLE} · ${name||'Ergebnisse'} · Seite ${i} von ${n}`),W/2,291,{align:'center'});}
+  return doc.output('blob');
+}
+async function savePdf(){
+  const note=$('#pdfNote'),btn=$('#pdfBtn'); note.hidden=false; S.name=$('#abgName').value.trim(); save();
+  if(!window.jspdf){note.textContent='Das PDF-Werkzeug konnte nicht geladen werden. Nutze „Als Text kopieren“.';return;}
+  if(!dl){note.textContent='PDF-Speichern ist in dieser Ansicht nicht verfügbar. Nutze „Als Text kopieren“.';return;}
+  btn.disabled=true; note.textContent='PDF wird erstellt …';
+  try{const blob=makePdfBlob(); note.textContent='Bestätige das Speichern im Fenster.'; await dl.save({filename:'Arbeits-Werkstatt_'+(norm(S.name)||'Ergebnisse')+'.pdf',data:blob}); note.textContent='PDF gespeichert.';}
+  catch(e){const c=e&&e.code; note.textContent=c==='declined'?'Speichern abgebrochen.':c==='rate_limited'?'Es ist schon ein Speichern-Fenster offen. Schließ es und versuch es noch einmal.':'Das PDF konnte nicht gespeichert werden. Nutze „Als Text kopieren“.';}
+  finally{btn.disabled=false;}
+}
+function copyText(){S.name=$('#abgName').value.trim();save();copyTo(reportText(),$('#pdfNote'),$('#txtOut'),'Kopiert! Füge den Text z. B. in IServ, Pages oder Word ein.');}
+
+/* ---------- Sicherungscode ---------- */
+function b64urlFromBytes(bytes){let bin='';for(let i=0;i<bytes.length;i+=0x8000)bin+=String.fromCharCode.apply(null,bytes.subarray(i,i+0x8000));return btoa(bin).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');}
+function bytesFromB64url(t){t=t.replace(/-/g,'+').replace(/_/g,'/');while(t.length%4)t+='=';const bin=atob(t);const b=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)b[i]=bin.charCodeAt(i);return b;}
+async function makeSaveCode(){
+  const raw=new TextEncoder().encode(JSON.stringify({v:1,d:new Date().toISOString(),s:Object.assign({},S,{name:$('#abgName').value.trim()||S.name||''})}));
+  if(typeof CompressionStream==='function'){try{const cs=new Blob([raw]).stream().pipeThrough(new CompressionStream('deflate-raw'));return 'AWK2.'+b64urlFromBytes(new Uint8Array(await new Response(cs).arrayBuffer()));}catch(e){}}
+  return 'AWK1.'+b64urlFromBytes(raw);
+}
+async function readSaveCode(text){
+  const m=String(text||'').replace(/\s+/g,'').match(/AWK([12])\.([A-Za-z0-9_-]+)/); if(!m) throw new Error('nocode');
+  let bytes=bytesFromB64url(m[2]);
+  if(m[1]==='2'){if(typeof DecompressionStream!=='function') throw new Error('nodecomp'); const ds=new Blob([bytes]).stream().pipeThrough(new DecompressionStream('deflate-raw')); bytes=new Uint8Array(await new Response(ds).arrayBuffer());}
+  const o=JSON.parse(new TextDecoder().decode(bytes)); if(!o||o.v!==1||!o.s) throw new Error('bad'); return o;
+}
+async function onMakeCode(){
+  S.name=$('#abgName').value.trim(); save(); const note=$('#codeNote'),ta=$('#codeOut'); note.hidden=false; note.textContent='Code wird erstellt …';
+  try{const c=await makeSaveCode(); ta.value=c; ta.hidden=false; $('#cpCode').hidden=false; note.textContent=S.name?`Code für ${S.name} erstellt. Kopiere ihn vollständig.`:'Code erstellt. Tipp: Trag oben deinen Namen oder dein Kürzel ein, dann weiß deine Lehrkraft, von wem der Code ist.';}
+  catch(e){note.textContent='Der Code konnte nicht erstellt werden. Nutze „Als Text kopieren“.';}
+}
+const loadArmed={};
+async function onLoad(n){
+  const box=$('#loadBox'+n),note=$('#loadNote'+n),btn=$('#loadBtn'+n); note.hidden=false; let o;
+  try{o=await readSaveCode(box.value);}catch(e){note.textContent=e.message==='nocode'?'Kein Sicherungscode gefunden. Er beginnt mit „AWK“.':e.message==='nodecomp'?'Dieser Browser kann den Code nicht entpacken. Öffne die Seite in einem aktuellen Browser.':'Der Code ist unvollständig oder beschädigt. Kopiere ihn noch einmal ganz.';return;}
+  if(!loadArmed[n]){loadArmed[n]=true;btn.textContent='Ja, Stand ersetzen';note.textContent=`Gefunden: Stand von ${o.s.name||'ohne Namen'} vom ${new Date(o.d).toLocaleString('de-DE',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})} Uhr. Dein aktueller Stand auf diesem Gerät wird ersetzt. Tippe noch einmal zum Bestätigen.`;setTimeout(()=>{loadArmed[n]=false;if(btn.isConnected)btn.textContent='Code laden';},8000);return;}
+  try{localStorage.setItem(KEY,JSON.stringify(Object.assign(blank(),o.s)));}catch(e){note.textContent='Speichern auf diesem Gerät ist nicht möglich (z. B. privates Fenster).';return;}
+  location.reload();
+}
+
+/* ---------- Popover ---------- */
+const pop=$('#pop'); let popFrom=null;
+function openPop(btn,h,p){$('#popH').textContent=h;$('#popP').textContent=p;pop.hidden=false;popFrom=btn;const r=btn.getBoundingClientRect(),w=pop.offsetWidth;let left=r.left+window.scrollX;left=Math.min(left,window.scrollX+document.documentElement.clientWidth-w-16);left=Math.max(16+window.scrollX,left);pop.style.left=left+'px';pop.style.top=(r.bottom+window.scrollY+8)+'px';$('#popX').focus({preventScroll:true});}
+function closePop(){if(pop.hidden)return;pop.hidden=true;if(popFrom)popFrom.focus({preventScroll:true});popFrom=null;}
+document.addEventListener('click',e=>{const t=e.target.closest('.term');if(t){const d=TERMS[t.dataset.term];openPop(t,d[0],d[1]);e.stopPropagation();return;}const o=e.target.closest('.op');if(o){const d=OPS[o.dataset.op];openPop(o,'Operator: '+d[0],d[1]);e.stopPropagation();return;}if(!pop.contains(e.target))closePop();});
+$('#popX').addEventListener('click',closePop); document.addEventListener('keydown',e=>{if(e.key==='Escape')closePop();});
+
+/* ---------- Navigation & Fortschritt ---------- */
+function stationDone(i){
+  if(i===0) return !!(S.chk.a1&&S.chk.a2)&&answered('a3');
+  if(i===1) return S.choresTouched&&answered('a5');
+  if(i===2) return !!(S.chk.a6&&S.chk.a7)&&answered('a8');
+  if(i===3) return !!(S.chk.a9&&S.chk.a10&&S.chk.a11)&&answered('a12');
+  if(i===4) return answered('a13')&&!!S.pos&&!!S.chk.a14;
+}
+function progress(){
+  const steps=[!!S.chk.a1,!!S.chk.a2,answered('a3'),S.choresTouched,answered('a5'),!!S.chk.a6,!!S.chk.a7,answered('a8'),!!S.chk.a9,!!S.chk.a10,!!S.chk.a11,answered('a12'),answered('a13')&&!!S.pos,!!S.chk.a14];
+  const p=Math.round(steps.filter(Boolean).length/steps.length*100); $('#progTxt').textContent=p+' %'; $('#progBar').style.width=p+'%';
+  $$('.st-btn').forEach((b,i)=>b.classList.toggle('done',!!stationDone(i)));
+  if(S.st===4&&$('#overview')) renderOverview();
+}
+function buildNav(){const nav=$('#nav');STATIONS.forEach((s,i)=>{const b=el('button',{class:'st-btn c-'+s.k,type:'button'},el('span',{class:'n'},String(i+1)),s.label);b.insertAdjacentHTML('beforeend','<svg class="i ok" viewBox="0 0 24 24" aria-label="erledigt"><path d="m5 12 4 4 10-10"/></svg>');b.onclick=()=>go(i);nav.append(b);});}
+function go(i,scroll=true){
+  S.st=Math.max(0,Math.min(4,i)); save();
+  $$('.station').forEach(s=>s.hidden=+s.dataset.st!==S.st);
+  $$('.st-btn').forEach((b,j)=>{if(j===S.st)b.setAttribute('aria-current','step');else b.removeAttribute('aria-current');});
+  $('#where').textContent=`Station ${S.st+1} von 5`; $('#prev').disabled=S.st===0; $('#next').hidden=S.st===4; closePop();
+  $$('.st-btn')[S.st].scrollIntoView({block:'nearest',inline:'center'}); if(scroll) window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ---------- Start ---------- */
+const rPaid=()=>segList('#paid',PAID,'paid',[['b','bezahlt'],['u','unbezahlt']],'a2','#fb-a2');
+const rForms=()=>segList('#forms',FORMX,'forms',FORMS,'a10','#fb-a10');
+const rPros=()=>segList('#pros',PROS,'pros',[['v','Vorteil'],['n','Nachteil']],'a11','#fb-a11');
+buildNav(); mountOpen(); renderQuotes(); rPaid(); renderChores(); renderOrder(); renderSmith(); rForms(); rPros(); renderQuiz();
+$$('.tier').forEach(t=>t.addEventListener('click',()=>t.setAttribute('aria-expanded',t.getAttribute('aria-expanded')==='true'?'false':'true')));
+$('#chk-a1').onclick=checkQuotes;
+$('#chk-a2').onclick=()=>segCheck(PAID,'paid','a2','#fb-a2','Auch unbezahlte Arbeit wie Pflege, Hausarbeit oder Ehrenamt ist wichtig für die Gesellschaft.','Frag dich: Bekommt die Person für genau diese Tätigkeit Geld?',rPaid);
+$('#chk-a10').onclick=()=>segCheck(FORMX,'forms','a10','#fb-a10','Du unterscheidest die drei Formen der Arbeitsteilung sicher.','Tippe oben auf die drei Karten: innerhalb eines Betriebs, zwischen Betrieben oder zwischen Ländern?',rForms);
+$('#chk-a11').onclick=()=>segCheck(PROS,'pros','a11','#fb-a11','Arbeitsteilung hat Vorteile – aber auch Nachteile für Menschen und Umwelt.','Überlege, für wen die Aussage gut oder schlecht ist.',rPros);
+$('#chk-a6').onclick=checkOrder; $('#chk-a7').onclick=checkSmith; $('#chk-a9').onclick=checkA9; $('#chk-a14').onclick=checkQuiz;
+$('#setzer').value=S.setzer; $('#setzer').onchange=e=>{S.setzer=e.target.value;delete S.chk.a7;$('#fb-a7').hidden=true;e.target.className='';save();};
+$('#a9a').value=S.a9a; $('#a9b').value=S.a9b; $('#a9a').oninput=e=>{S.a9a=e.target.value;save();}; $('#a9b').oninput=e=>{S.a9b=e.target.value;save();};
+$$('input[name="pos"]').forEach(r=>{if(r.value===S.pos)r.checked=true;r.addEventListener('change',()=>{S.pos=r.value;save();});});
+$('#abgName').value=S.name||''; $('#pdfBtn').onclick=savePdf; $('#txtBtn').onclick=copyText;
+$('#mkCode').onclick=onMakeCode; $('#cpCode').onclick=()=>copyTo($('#codeOut').value,$('#codeNote'),$('#codeOut'),'Kopiert! Füge den Code in deine IServ-Nachricht ein.');
+$('#loadBtn1').onclick=()=>onLoad(1); $('#loadBtn5').onclick=()=>onLoad(5);
+let resetArmed=false;
+$('#reset').onclick=()=>{const b=$('#reset');if(!resetArmed){resetArmed=true;b.textContent='Wirklich alles löschen? Nochmal tippen';b.style.background='var(--bad)';b.style.color='var(--on-accent)';setTimeout(()=>{resetArmed=false;b.textContent='Alles löschen und neu beginnen';b.style.background='';b.style.color='';},4000);return;}try{localStorage.removeItem(KEY);}catch(e){}location.reload();};
+$('#prev').onclick=()=>go(S.st-1); $('#next').onclick=()=>go(S.st+1);
+if(S.chk.a1)checkQuotes(); if(S.chk.a6)checkOrder(); if(S.chk.a7)checkSmith(); if(S.chk.a9)checkA9(); if(S.chk.a14)checkQuiz();
+if(S.chk.a2)segCheck(PAID,'paid','a2','#fb-a2','','',rPaid); if(S.chk.a10)segCheck(FORMX,'forms','a10','#fb-a10','','',rForms); if(S.chk.a11)segCheck(PROS,'pros','a11','#fb-a11','','',rPros);
+go(S.st||0,false); progress();
+})();
+
+</script>
+
+</body></html>

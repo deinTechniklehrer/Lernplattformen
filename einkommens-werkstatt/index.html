@@ -1,0 +1,1109 @@
+<!doctype html><html><head><script>/* Lernplattformen auf GitHub Pages: Speichern ohne claude.ai */
+(function(){if(window.claude)return;var T={pdf:'application/pdf',txt:'text/plain;charset=utf-8',png:'image/png',jpg:'image/jpeg',jpeg:'image/jpeg',json:'application/json',csv:'text/csv;charset=utf-8',html:'text/html;charset=utf-8',docx:'application/vnd.openxmlformats-officedocument.wordprocessingml.document',xlsx:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',ino:'text/plain;charset=utf-8'};
+var dl={save:function(o){return new Promise(function(res,rej){try{var n=(o&&o.filename)||'datei',x=(n.split('.').pop()||'').toLowerCase(),d=o.data,b=d instanceof Blob?d:new Blob([d],{type:T[x]||'application/octet-stream'});var u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=n;a.rel='noopener';document.body.appendChild(a);a.click();setTimeout(function(){a.remove();URL.revokeObjectURL(u);},4000);res();}catch(e){rej({code:'failed',message:String(e)});}});}};
+window.claude={use:function(n){return Promise.resolve(n==='downloads'?dl:null);}};})();</script><meta property="og:type" content="website"><meta property="og:title" content="Einkommens-Werkstatt"><meta property="og:description" content="Woher kommt das Geld? Die vier Einkommensquellen kennenlernen, brutto und netto verstehen. Wirtschaft, Klasse 8."><meta property="og:url" content="https://beyrodthome.github.io/Lernplattformen/einkommens-werkstatt/"><meta property="og:image" content="https://beyrodthome.github.io/Lernplattformen/vorschau/Vorschau_Einkommens-Werkstatt.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="description" content="Woher kommt das Geld? Die vier Einkommensquellen kennenlernen, brutto und netto verstehen. Wirtschaft, Klasse 8."><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Einkommens-Werkstatt</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap">
+<style>
+:root{
+  --bg:#F3F6F2; --surface:#FFFFFF; --surface-2:#E9EFEA; --ink:#18221E; --muted:#56645D; --line:#D3DDD6;
+  --on-accent:#FFFFFF;
+  --existenz:#1F7A5C; --existenz-soft:#E1F0E9; --existenz-ink:#165C45;
+  --kultur:#2A6FB0;   --kultur-soft:#E2ECF7;   --kultur-ink:#1D568E;
+  --luxus:#B8841A;    --luxus-soft:#F6ECD6;    --luxus-ink:#7A5308;
+  --entdecken:#2A7F9E; --entdecken-soft:#DFEFF5; --entdecken-ink:#1B6380;
+  --sichern:#744690;  --sichern-soft:#EEE5F4;  --sichern-ink:#5B3175;
+  --bad:#B4483C; --bad-soft:#F6E1DE; --bad-ink:#8E3228;
+  --shadow:0 10px 30px rgb(24 34 30 / .14);
+  --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#101613; --surface:#18201C; --surface-2:#212B26; --ink:#E5ECE8; --muted:#9AA9A1; --line:#2F3B35;
+    --on-accent:#0F1512;
+    --existenz:#53BB91; --existenz-soft:#1A3128; --existenz-ink:#7FD3B0;
+    --kultur:#6FA8E2;   --kultur-soft:#1A2937;   --kultur-ink:#9CC4EE;
+    --luxus:#E2B458;    --luxus-soft:#372C15;    --luxus-ink:#EDCB86;
+    --entdecken:#5FB4D2; --entdecken-soft:#172F38; --entdecken-ink:#8FCDE3;
+    --sichern:#B690D0;  --sichern-soft:#2A2134;  --sichern-ink:#CFB2E2;
+    --bad:#E27E71; --bad-soft:#3A201C; --bad-ink:#F0A79D;
+    --shadow:0 10px 30px rgb(0 0 0 / .45);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#101613; --surface:#18201C; --surface-2:#212B26; --ink:#E5ECE8; --muted:#9AA9A1; --line:#2F3B35;
+  --on-accent:#0F1512;
+  --existenz:#53BB91; --existenz-soft:#1A3128; --existenz-ink:#7FD3B0;
+  --kultur:#6FA8E2;   --kultur-soft:#1A2937;   --kultur-ink:#9CC4EE;
+  --luxus:#E2B458;    --luxus-soft:#372C15;    --luxus-ink:#EDCB86;
+  --entdecken:#5FB4D2; --entdecken-soft:#172F38; --entdecken-ink:#8FCDE3;
+  --sichern:#B690D0;  --sichern-soft:#2A2134;  --sichern-ink:#CFB2E2;
+  --bad:#E27E71; --bad-soft:#3A201C; --bad-ink:#F0A79D;
+  --shadow:0 10px 30px rgb(0 0 0 / .45);
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55}
+.app{max-width:980px;margin:0 auto;padding-inline:16px;padding-block:20px 110px}
+h1,h2,h3,h4{font-family:var(--display);text-wrap:balance;line-height:1.15}
+.i{width:22px;height:22px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+:focus-visible{outline:3px solid var(--kultur);outline-offset:2px}
+
+/* Kopf */
+.top{display:grid;grid-template-columns:1fr minmax(170px,240px);gap:10px 24px;align-items:center}
+.brand{display:flex;gap:14px;align-items:center}
+.logo{width:48px;height:48px;flex:none}
+.brand h1{margin:0;font-weight:800;font-size:clamp(25px,4.2vw,34px);letter-spacing:-.015em}
+.brand p{margin:0;color:var(--muted);font-size:14px}
+.meter{display:grid;gap:6px}
+.meter-row{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.bar{height:10px;border-radius:99px;background:var(--surface-2);overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--existenz),var(--kultur) 55%,var(--luxus));transition:width .5s ease}
+.ki-pill{grid-column:1/-1;justify-self:start;display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;padding:5px 12px 5px 9px;border-radius:99px;background:var(--surface-2);color:var(--muted)}
+.ki-pill .i{width:16px;height:16px}
+.ki-pill.on{background:var(--sichern-soft);color:var(--sichern-ink)}
+@media (max-width:620px){.top{grid-template-columns:1fr}}
+
+/* Stationen-Navigation */
+.stations{display:flex;gap:8px;margin:18px 0 20px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
+.st-btn{flex:1 0 auto;display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-size:15px;font-weight:700;cursor:pointer;min-height:48px}
+.st-btn .n{display:grid;place-items:center;width:24px;height:24px;border-radius:8px;background:var(--c-soft);color:var(--c-ink);font-size:13px;font-variant-numeric:tabular-nums}
+.st-btn[aria-current="step"]{background:var(--c);border-color:var(--c);color:var(--on-accent)}
+.st-btn[aria-current="step"] .n{background:rgb(255 255 255 / .22);color:inherit}
+.st-btn .ok{display:none;width:18px;height:18px;color:var(--existenz)}
+.st-btn.done .ok{display:block}
+.st-btn[aria-current="step"].done .ok{color:inherit}
+
+/* Farbräume */
+.c-entdecken{--c:var(--entdecken);--c-soft:var(--entdecken-soft);--c-ink:var(--entdecken-ink)}
+.c-verstehen,.c-existenz{--c:var(--existenz);--c-soft:var(--existenz-soft);--c-ink:var(--existenz-ink)}
+.c-ordnen,.c-kultur{--c:var(--kultur);--c-soft:var(--kultur-soft);--c-ink:var(--kultur-ink)}
+.c-bewerten,.c-luxus{--c:var(--luxus);--c-soft:var(--luxus-soft);--c-ink:var(--luxus-ink)}
+.c-sichern{--c:var(--sichern);--c-soft:var(--sichern-soft);--c-ink:var(--sichern-ink)}
+
+/* Station */
+.station{display:grid;gap:16px}
+.st-head{display:flex;gap:16px;align-items:center;padding:20px 22px;border-radius:18px;background:var(--c);color:var(--on-accent)}
+.st-icon{width:58px;height:58px;flex:none;border-radius:16px;background:rgb(255 255 255 / .2);display:grid;place-items:center}
+.st-icon .i{width:32px;height:32px}
+.eyebrow{margin:0;text-transform:uppercase;letter-spacing:.09em;font-size:12px;font-weight:700;opacity:.92}
+.st-head h2{margin:2px 0 4px;font-size:clamp(23px,3.6vw,31px);font-weight:800}
+.goal{margin:0;font-size:15px}
+.lead{margin:0;max-width:65ch}
+
+.task{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;display:grid;gap:12px}
+.task>header{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.num{width:34px;height:34px;flex:none;border-radius:10px;background:var(--c);color:var(--on-accent);display:grid;place-items:center;font-family:var(--display);font-weight:800;font-variant-numeric:tabular-nums}
+.task h3{margin:0;font-size:19px;flex:1;min-width:12ch}
+.op{font:inherit;font-size:13px;font-weight:700;padding:5px 11px;border-radius:99px;border:0;background:var(--c-soft);color:var(--c-ink);cursor:pointer}
+.q{margin:0;max-width:68ch}
+.hint{margin:0;font-size:14px;color:var(--muted)}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+
+.btn{font:inherit;font-size:16px;font-weight:700;display:inline-flex;align-items:center;gap:8px;padding:10px 16px;min-height:46px;border-radius:12px;border:0;background:var(--ink);color:var(--bg);cursor:pointer}
+.btn.soft{background:var(--surface-2);color:var(--ink)}
+.btn.accent{background:var(--c);color:var(--on-accent)}
+.btn.ki{background:var(--sichern);color:var(--on-accent)}
+.btn:disabled{opacity:.55;cursor:default}
+.btn .i{width:19px;height:19px}
+
+textarea,input[type=text],input[type=number],select{font:inherit;font-size:16px;width:100%;padding:12px 14px;border-radius:12px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink)}
+textarea{min-height:112px;resize:vertical;line-height:1.5}
+select{appearance:auto;min-height:46px}
+
+/* Karten sortieren */
+.tray{display:grid;grid-template-columns:repeat(auto-fill,minmax(172px,1fr));gap:8px;padding:12px;border:2px dashed var(--line);border-radius:14px;min-height:70px}
+.tray.empty::after{content:"Alle Karten sind einsortiert. Tippe eine Karte an, um sie zu verschieben.";grid-column:1/-1;color:var(--muted);font-size:14px}
+.nc{display:flex;align-items:center;gap:9px;padding:9px 11px;min-height:50px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-size:15px;line-height:1.25;text-align:left;cursor:pointer;touch-action:manipulation;position:relative}
+.nc .e{font-size:24px;line-height:1}
+.nc[aria-pressed="true"]{outline:3px solid var(--c);outline-offset:2px;box-shadow:var(--shadow)}
+.nc .st{margin-left:auto;font-size:13px;font-weight:800;width:22px;height:22px;border-radius:99px;display:none;place-items:center;flex:none}
+.nc.s-ok{border-color:var(--existenz)} .nc.s-ok .st{display:grid;background:var(--existenz);color:var(--on-accent)}
+.nc.s-alt{border-color:var(--luxus);border-style:dashed} .nc.s-alt .st{display:grid;background:var(--luxus);color:var(--on-accent)}
+.nc.s-bad{border-color:var(--bad)} .nc.s-bad .st{display:grid;background:var(--bad);color:var(--on-accent)}
+.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media (max-width:680px){.cols{grid-template-columns:1fr}}
+.col{border-radius:14px;background:var(--c-soft);border:2px solid transparent;padding:10px;display:grid;gap:8px;align-content:start;min-height:150px;cursor:pointer;font:inherit;color:var(--ink);text-align:left}
+.col.armed{border-color:var(--c);border-style:dashed}
+.col.over{border-color:var(--c);border-style:solid}
+.col h4{margin:0;padding:9px 11px;border-radius:10px;background:var(--c);color:var(--on-accent);font-size:16px;display:flex;justify-content:space-between;gap:8px}
+.col h4 small{font-family:var(--body);font-weight:700;font-variant-numeric:tabular-nums;opacity:.9}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:14px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.dot{width:12px;height:12px;border-radius:99px;display:inline-block}
+
+/* Offene Aufgaben */
+.open{display:grid;gap:10px}
+.open-foot{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.qc{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.qc b{font-size:13px;color:var(--muted);margin-right:2px}
+.qc span{font-size:13px;padding:4px 10px;border-radius:99px;background:var(--surface-2);color:var(--muted)}
+.qc span.on{background:var(--existenz-soft);color:var(--existenz-ink)}
+.qc span.on::before{content:"✓ "}
+.fb{border-radius:14px;padding:14px 16px;background:var(--surface-2);display:grid;gap:6px}
+.fb p{margin:0;max-width:68ch}
+.fb .lvl{display:flex;align-items:center;gap:8px;font-weight:800;font-family:var(--display);font-size:17px}
+.fb .lvl .i{width:18px;height:18px}
+.fb.stark{background:var(--existenz-soft)} .fb.stark .lvl{color:var(--existenz-ink)}
+.fb.solide{background:var(--kultur-soft)} .fb.solide .lvl{color:var(--kultur-ink)}
+.fb.ausbaufaehig{background:var(--luxus-soft)} .fb.ausbaufaehig .lvl{color:var(--luxus-ink)}
+.fb.fehlt,.fb.err{background:var(--bad-soft)} .fb.fehlt .lvl,.fb.err .lvl{color:var(--bad-ink)}
+.fb .stale{font-size:13px;color:var(--muted)}
+.fb.wait .lvl{color:var(--muted)}
+.fb.ok{background:var(--existenz-soft)} .fb.ok .lvl{color:var(--existenz-ink)}
+.fb.mid{background:var(--luxus-soft)} .fb.mid .lvl{color:var(--luxus-ink)}
+.dots::after{content:"";animation:dots 1.4s steps(4) infinite}
+@keyframes dots{0%{content:""}25%{content:"."}50%{content:".."}75%{content:"..."}}
+@media (prefers-reduced-motion:reduce){.dots::after{animation:none;content:" …"}.bar i{transition:none}}
+
+/* Infotext */
+.info{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px 22px;display:grid;gap:12px}
+.info p{margin:0;max-width:66ch}
+.info h3{margin:0;font-size:21px}
+.term{font:inherit;background:none;border:0;padding:0 1px;color:var(--c-ink);font-weight:700;text-decoration:underline dotted 2px;text-underline-offset:4px;cursor:pointer}
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media (max-width:680px){.tiers{grid-template-columns:1fr}}
+.tier{border-radius:14px;padding:14px;background:var(--c-soft);border:0;text-align:left;font:inherit;color:var(--ink);cursor:pointer;display:grid;gap:4px;align-content:start;min-height:112px}
+.tier b{font-family:var(--display);font-size:18px;color:var(--c-ink)}
+.tier .tag{font-size:13px;font-weight:700;color:var(--c-ink)}
+.tier .more{display:none;font-size:15px}
+.tier[aria-expanded="true"] .more{display:block}
+.tier .tap{font-size:13px;color:var(--muted)}
+.tier[aria-expanded="true"] .tap{display:none}
+.flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:8px;align-items:stretch}
+.fstep{border-radius:14px;padding:12px 14px;background:var(--surface-2);display:grid;gap:2px;align-content:start}
+.fstep b{font-family:var(--display);font-size:18px}
+.fstep small{font-size:14px;color:var(--muted)}
+.farr{display:grid;place-items:center;font-size:13px;font-weight:700;color:var(--muted);text-align:center;max-width:110px}
+@media (max-width:680px){.flow{grid-template-columns:1fr}.farr{max-width:none}}
+
+/* Materiell / immateriell */
+.mi{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:8px}
+.mi-row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 8px 8px 12px;border-radius:12px;background:var(--surface-2);border:1.5px solid transparent}
+.mi-row.s-ok{border-color:var(--existenz)} .mi-row.s-bad{border-color:var(--bad)}
+.seg{display:inline-flex;border-radius:10px;overflow:hidden;border:1.5px solid var(--line);flex:none}
+.seg button{font:inherit;font-size:14px;font-weight:700;padding:7px 10px;border:0;background:var(--surface);color:var(--muted);cursor:pointer;min-height:38px}
+.seg button[aria-pressed="true"]{background:var(--c);color:var(--on-accent)}
+
+/* Lückentext */
+.cloze{line-height:2.4;max-width:70ch;margin:0}
+.cloze select{width:auto;display:inline-block;padding:6px 10px;min-height:40px;font-weight:700;margin:0 2px}
+.cloze select.s-ok{border-color:var(--existenz);background:var(--existenz-soft)}
+.cloze select.s-bad{border-color:var(--bad);background:var(--bad-soft)}
+
+/* Pyramide */
+.pyr-wrap{display:grid;grid-template-columns:minmax(220px,300px) 1fr;gap:18px;align-items:center}
+@media (max-width:680px){.pyr-wrap{grid-template-columns:1fr}}
+.pyr{width:100%;max-width:300px;height:auto;justify-self:center}
+.pyr polygon{cursor:pointer;stroke:var(--surface);stroke-width:4}
+.pyr .p-l{fill:var(--luxus)} .pyr .p-k{fill:var(--kultur)} .pyr .p-e{fill:var(--existenz)}
+.pyr text{fill:var(--on-accent);font-family:var(--display);font-weight:800;font-size:15px;text-anchor:middle;pointer-events:none}
+.pyr text.s{font-family:var(--body);font-weight:700;font-size:11px}
+.pyr-in{display:grid;gap:10px}
+.pyr-row{border-radius:14px;padding:10px 12px;background:var(--c-soft);display:grid;gap:8px}
+.pyr-row h4{margin:0;font-size:16px;color:var(--c-ink)}
+.pyr-row .two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media (max-width:420px){.pyr-row .two{grid-template-columns:1fr}}
+
+/* Fallbeispiel */
+.story{border-radius:16px;padding:18px 20px;background:var(--luxus-soft);display:grid;gap:12px}
+.story h3{margin:0;font-size:20px;color:var(--luxus-ink)}
+.story p{margin:0;max-width:68ch}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.price{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:12px;background:var(--surface);font-weight:700;font-size:15px}
+.price .e{font-size:20px}
+.price.wallet{background:var(--ink);color:var(--bg)}
+.budget{position:relative;height:46px;border-radius:12px;background:var(--surface-2);display:flex;overflow:visible;margin-top:24px}
+.bseg{height:100%;display:grid;place-items:center;color:var(--on-accent);font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;padding-inline:4px}
+.bseg:first-child{border-radius:12px 0 0 12px}.bseg:last-child{border-radius:0 12px 12px 0}
+.bseg.cut{background-image:repeating-linear-gradient(45deg,rgb(255 255 255 / .35) 0 6px,transparent 6px 12px)}
+.bmark{position:absolute;top:-24px;bottom:-6px;border-left:3px solid var(--ink);padding-left:6px;font-size:13px;font-weight:800;white-space:nowrap}
+.jt{display:grid;gap:8px}
+.jt-row{display:grid;grid-template-columns:1fr minmax(160px,220px);gap:10px;align-items:center;padding:8px 8px 8px 12px;border-radius:12px;background:var(--surface-2);border:1.5px solid transparent}
+.jt-row.s-ok{border-color:var(--existenz)} .jt-row.s-alt{border-color:var(--luxus);border-style:dashed} .jt-row.s-bad{border-color:var(--bad)}
+@media (max-width:480px){.jt-row{grid-template-columns:1fr}}
+.gap-in{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.gap-in input{width:120px}
+
+/* Rangfolge */
+.rank{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.rank li{display:flex;align-items:center;gap:10px;padding:10px 10px 10px 12px;border-radius:12px;background:var(--surface-2)}
+.rank .pos{width:30px;height:30px;border-radius:9px;background:var(--c);color:var(--on-accent);display:grid;place-items:center;font-weight:800;flex:none;font-variant-numeric:tabular-nums}
+.rank .e{font-size:22px}
+.rank .lbl{flex:1;font-weight:700;line-height:1.25}
+.rank .lbl small{display:block;font-weight:400;color:var(--muted);font-size:14px}
+.mv{font:inherit;width:42px;height:42px;border-radius:10px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;display:grid;place-items:center}
+.mv:disabled{opacity:.35;cursor:default}
+.think{border-radius:14px;padding:12px 14px;border:1.5px dashed var(--luxus);display:flex;gap:10px;align-items:flex-start}
+.think p{margin:0}
+.think .i{color:var(--luxus-ink);margin-top:2px}
+.scale{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+@media (max-width:560px){.scale{grid-template-columns:1fr}}
+.scale label{display:grid;place-items:center;text-align:center;gap:4px;padding:10px 6px;border-radius:12px;background:var(--surface-2);border:1.5px solid transparent;cursor:pointer;font-size:14px;font-weight:700;min-height:56px}
+.scale input{position:absolute;opacity:0;pointer-events:none}
+.scale label:has(input:checked){background:var(--c);color:var(--on-accent)}
+.scale label:has(input:focus-visible){outline:3px solid var(--kultur);outline-offset:2px}
+.bonus{border-radius:16px;padding:18px;border:2px solid var(--luxus);background:var(--surface);display:grid;gap:12px}
+.bonus h3{margin:0;font-size:19px;display:flex;gap:8px;align-items:center}
+.bonus .star{color:var(--luxus)}
+
+/* Sichern */
+.trio{display:grid;gap:10px}
+.trio-row{display:grid;grid-template-columns:52px 1fr;gap:12px;align-items:start}
+.big{width:52px;height:52px;border-radius:14px;background:var(--c);color:var(--on-accent);display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:26px}
+.trio-row .fields{display:grid;gap:8px}
+.trio-row .three{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+@media (max-width:560px){.trio-row .three{grid-template-columns:1fr}}
+.trio-row input.s-ok{border-color:var(--existenz);background:var(--existenz-soft)}
+.trio-row input.s-bad{border-color:var(--luxus)}
+.over-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px}
+.ov{border-radius:12px;padding:12px;background:var(--c-soft);display:grid;gap:4px}
+.ov b{font-family:var(--display);color:var(--c-ink)}
+.ov span{font-size:14px;color:var(--ink);font-variant-numeric:tabular-nums}
+.code{font-family:ui-monospace,Consolas,monospace;font-size:13px;min-height:90px;word-break:break-all}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:720px){.split{grid-template-columns:1fr}}
+.half{border-radius:14px;background:var(--c-soft);padding:14px;display:grid;gap:10px;align-content:start;min-width:0}
+.half h4{margin:0;font-size:17px;color:var(--c-ink)}
+
+/* Popover */
+.pop{position:absolute;z-index:60;width:min(340px,calc(100vw - 32px));background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px 16px;box-shadow:var(--shadow);display:grid;gap:6px}
+.pop h4{margin:0;font-size:18px;padding-right:34px}
+.pop p{margin:0;font-size:15px}
+.pop .x{position:absolute;top:8px;right:8px;width:34px;height:34px;border-radius:9px;border:0;background:var(--surface-2);color:var(--ink);font:inherit;font-size:18px;cursor:pointer}
+@media (max-width:560px){.pop{position:fixed;left:12px!important;right:12px;top:auto!important;bottom:calc(84px + env(safe-area-inset-bottom,0px));width:auto}}
+
+/* Blättern */
+.pager{position:fixed;left:0;right:0;bottom:0;z-index:40;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line)}
+.pager-in{max-width:980px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.pager-in .where{font-size:14px;color:var(--muted);text-align:center;font-variant-numeric:tabular-nums}
+
+/* Einkommens-Werkstatt: Ergänzungen */
+:root{--s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a;--s4:#eda100;--s5:#e87ba4;--s6:#008300;--free:#D3DDD6}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--s5:#d55181;--s6:#008300;--free:#2F3B35}}
+:root[data-theme="dark"]{--s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--s5:#d55181;--s6:#008300;--free:#2F3B35}
+.srcs{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media (max-width:620px){.srcs{grid-template-columns:1fr}}
+.srcs .tier .e{font-size:26px;line-height:1}
+.srcs .tier b{font-size:17px}
+.mi-row{flex-wrap:wrap}
+#srcSort{grid-template-columns:repeat(auto-fill,minmax(290px,1fr))}
+#srcSort .mi-row{flex-direction:column;align-items:stretch;gap:6px}
+.seg4{display:grid;grid-template-columns:repeat(4,1fr)}
+.seg4 button{padding:7px 4px;font-size:13.5px}
+.rule{border-radius:12px;padding:12px 14px;background:var(--surface-2);display:grid;gap:4px}
+.rule p{margin:0}
+.src{font-size:13px;color:var(--muted)}
+p.src{margin:0}
+.law blockquote{margin:0;padding:10px 14px;border-left:4px solid var(--sichern);background:var(--sichern-soft);border-radius:0 12px 12px 0;font-style:italic;max-width:68ch}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;max-width:420px}
+table.tg{border-collapse:collapse;width:100%;font-size:15px;font-variant-numeric:tabular-nums}
+.tg th,.tg td{padding:8px 12px;text-align:left;border-bottom:1px solid var(--line)}
+.tg th{background:var(--surface-2);font-size:13px;color:var(--muted)}
+.tg tr:last-child td{border-bottom:0}
+.tg tbody tr:nth-child(3){background:var(--c-soft);font-weight:700}
+.cases{display:grid;gap:8px}
+.case{display:grid;grid-template-columns:1fr auto;gap:6px 12px;align-items:center;padding:10px 10px 10px 14px;border-radius:12px;background:var(--surface-2);border:1.5px solid transparent}
+.case p{margin:0}
+.case .why{grid-column:1/-1;font-size:14px;color:var(--muted)}
+.case.s-ok{border-color:var(--existenz)} .case.s-bad{border-color:var(--bad)}
+@media (max-width:520px){.case{grid-template-columns:1fr}}
+.pe{font-size:20px}
+.eur{display:inline-flex;align-items:center;gap:6px}
+.eur input{width:96px}
+.jt-row .eur{justify-self:start}
+.jt-row .eur input{width:110px}
+.plan{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;align-items:start}
+@media (max-width:760px){.plan{grid-template-columns:1fr}}
+.plan-col{display:grid;gap:10px;min-width:0}
+.plan h4{margin:6px 0 0;font-size:16px;color:var(--c-ink)}
+.money{display:grid;gap:6px}
+.mrow{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 6px 6px 12px;border-radius:12px;background:var(--surface-2)}
+.ml{display:inline-flex;align-items:center;gap:8px;font-size:15px}
+.mctl{display:inline-flex;align-items:center;gap:6px}
+.mctl .mv{width:38px;height:38px;font-size:18px;font-weight:800}
+.mctl input{width:72px;text-align:right;padding:8px 10px}
+.sw{display:inline-block;width:12px;height:12px;border-radius:4px;flex:none}
+.sw.free{background:var(--free)}
+.goalrow{display:flex;gap:8px;flex-wrap:wrap}
+.goalrow input[type=text]{flex:1;min-width:150px}
+.pstat{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-radius:14px;background:var(--surface-2)}
+.pstat b{display:block;font-family:var(--display);font-size:17px}
+.pstat span{font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
+.pstat .pico{display:grid;place-items:center;width:32px;height:32px;border-radius:10px;flex:none}
+.pstat.ok{background:var(--existenz-soft)} .pstat.ok .pico{background:var(--existenz);color:var(--on-accent)}
+.pstat.mid{background:var(--luxus-soft)} .pstat.mid .pico{background:var(--luxus);color:var(--on-accent)}
+.pstat.bad{background:var(--bad-soft)} .pstat.bad .pico{background:var(--bad);color:var(--on-accent)}
+.stack{display:flex;gap:2px;height:30px;border-radius:8px;overflow:hidden;background:var(--surface)}
+.seg-b{height:100%;min-width:3px}
+.seg-b:first-child{border-radius:4px 0 0 4px}.seg-b:last-child{border-radius:0 4px 4px 0}
+.seg-b.free{background:var(--free)}
+table.legend-t{border-collapse:collapse;width:100%;font-size:15px;font-variant-numeric:tabular-nums}
+.legend-t td{padding:5px 4px;border-bottom:1px solid var(--line)}
+.legend-t td:first-child{display:flex;align-items:center;gap:8px}
+.legend-t td.v,.legend-t td.p{text-align:right;white-space:nowrap}
+.legend-t td.p{color:var(--muted);width:56px}
+.quiz{display:grid;gap:10px}
+.qz{border:1.5px solid var(--line);border-radius:12px;padding:10px 14px 12px;margin:0;display:grid;gap:6px}
+.qz legend{font-weight:700;padding:0 4px}
+.qz label{display:flex;gap:10px;align-items:center;padding:6px 8px;border-radius:9px;cursor:pointer}
+.qz label:has(input:checked){background:var(--c-soft)}
+.qz input{width:18px;height:18px;accent-color:var(--c)}
+.qz.s-ok{border-color:var(--existenz)} .qz.s-bad{border-color:var(--bad)}
+.fbox{border-radius:12px;border:1.5px dashed var(--sichern);background:var(--surface)}
+.fbox.has{border-style:solid;background:var(--sichern-soft)}
+.fbox>summary{cursor:pointer;padding:10px 14px;font-weight:700;color:var(--sichern-ink);list-style:none;display:flex;align-items:center;gap:8px}
+.fbox>summary::-webkit-details-marker{display:none}
+.fbox>summary::before{content:"";width:8px;height:8px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s}
+.fbox[open]>summary::before{transform:rotate(45deg)}
+.fbox-in{padding:0 14px 14px;display:grid;gap:10px}
+.fbl{font-size:14px;font-weight:700;color:var(--muted)}
+.fbin{min-height:80px}
+a.btn{text-decoration:none}
+.resume{background:var(--surface)}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:720px){.split{grid-template-columns:1fr}}
+.half{border-radius:14px;background:var(--c-soft);padding:14px;display:grid;gap:10px;align-content:start;min-width:0}
+.half h4{margin:0;font-size:17px;color:var(--c-ink)}
+.howto{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+@media (max-width:680px){.howto{grid-template-columns:1fr}}
+.howto div{border-radius:12px;padding:10px 12px;background:var(--sichern-soft);font-size:15px}
+.howto b{display:block;color:var(--sichern-ink);font-family:var(--display)}
+</style>
+
+<div class="app">
+  <header class="top">
+    <div class="brand">
+      <svg class="logo" viewBox="0 0 48 48" aria-hidden="true">
+        <ellipse cx="24" cy="36" rx="17" ry="6" fill="var(--existenz)"/>
+        <rect x="7" y="28" width="34" height="8" fill="var(--existenz)"/>
+        <ellipse cx="24" cy="28" rx="17" ry="6" fill="var(--kultur)"/>
+        <rect x="7" y="20" width="34" height="8" fill="var(--kultur)"/>
+        <ellipse cx="24" cy="20" rx="17" ry="6" fill="var(--luxus)"/>
+        <text x="24" y="24" text-anchor="middle" font-size="11" font-weight="800" fill="var(--on-accent)" font-family="Bricolage Grotesque, sans-serif">€</text>
+      </svg>
+      <div>
+        <h1>Einkommens-Werkstatt</h1>
+        <p>Wirtschaft · Klasse 8 · Woher kommt das Geld?</p>
+      </div>
+    </div>
+    <div class="meter" aria-label="Fortschritt">
+      <div class="meter-row"><span>Dein Fortschritt</span><span id="progTxt">0 %</span></div>
+      <div class="bar"><i id="progBar"></i></div>
+    </div>
+    <span class="ki-pill on"><svg class="i" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg><span>Automatische Checks · KI-Feedback über fobizz</span></span>
+  </header>
+
+  <nav class="stations" id="nav" aria-label="Stationen"></nav>
+
+  <main id="main">
+
+    <!-- STATION 1 -->
+    <section class="station c-entdecken" data-st="0" aria-labelledby="h-s1">
+      <div class="st-head">
+        <div class="st-icon"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M15 8.6a4 4 0 1 0 0 6.8M7.5 11h6M7.5 13.4h6"/></svg></div>
+        <div><p class="eyebrow">Station 1 · Kennenlernen</p><h2 id="h-s1">Die vier Einkommensquellen</h2><p class="goal">Du übst: Einkommensquellen benennen</p></div>
+      </div>
+      <details class="fbox resume">
+        <summary>Schon angefangen? Mit deinem Sicherungscode weiterarbeiten</summary>
+        <div class="fbox-in">
+          <label class="fbl" for="loadBox1">Sicherungscode einfügen</label>
+          <textarea id="loadBox1" class="code" placeholder="EKW…"></textarea>
+          <div class="row"><button class="btn accent" id="loadBtn1" type="button">Code laden</button></div>
+          <p class="hint" id="loadNote1" hidden aria-live="polite"></p>
+        </div>
+      </details>
+      <div class="info">
+        <h3>Woher kommt das Geld?</h3>
+        <p>Menschen brauchen <button class="term" data-term="einkommen" type="button">Einkommen</button>, um ihre Bedürfnisse zu erfüllen – das kennst du aus der Bedürfnis-Werkstatt. Doch woher kommt dieses Geld? Man unterscheidet vier Einkommensquellen. Tippe auf eine Karte.</p>
+        <div class="srcs">
+          <button class="tier c-kultur" type="button" aria-expanded="false"><span class="e" aria-hidden="true">💼</span><b>Nichtselbstständige Arbeit</b><span class="tag">angestellt arbeiten</span><span class="tap">Tippen für mehr</span><span class="more">Wer bei einem Arbeitgeber arbeitet, bekommt regelmäßig Geld: Arbeiter*innen erhalten <b>Lohn</b>, Angestellte <b>Gehalt</b>, Beamt*innen <b>Besoldung</b>. Für die meisten Menschen ist das die wichtigste Einkommensquelle.</span></button>
+          <button class="tier c-luxus" type="button" aria-expanded="false"><span class="e" aria-hidden="true">🥨</span><b>Unternehmerische Tätigkeit</b><span class="tag">selbstständig arbeiten</span><span class="tap">Tippen für mehr</span><span class="more">Wer ein eigenes Unternehmen führt, z. B. eine Bäckerei oder einen Friseursalon, erzielt einen <b>Gewinn</b>. Freiberufler*innen wie Anwält*innen erhalten für ihre Arbeit ein <b>Honorar</b>.</span></button>
+          <button class="tier c-existenz" type="button" aria-expanded="false"><span class="e" aria-hidden="true">🏦</span><b>Vermögen und Besitz</b><span class="tag">Geld arbeiten lassen</span><span class="tap">Tippen für mehr</span><span class="more">Wer Geld angelegt hat oder etwas besitzt, bekommt Einkommen daraus: <b>Zinsen</b> für ein Sparguthaben, <b>Dividenden</b> für Aktien, <b>Mieteinnahmen</b> für eine vermietete Wohnung.</span></button>
+          <button class="tier c-sichern" type="button" aria-expanded="false"><span class="e" aria-hidden="true">🏛️</span><b>Staatliche Unterstützung</b><span class="tag">Transfereinkommen</span><span class="tap">Tippen für mehr</span><span class="more">Der Staat zahlt Menschen Geld, das er über Steuern und Sozialbeiträge einnimmt: z. B. <b>Rente</b>, <b>Kindergeld</b>, <b>Arbeitslosengeld</b>, <b>Wohngeld</b> oder <b>BAföG</b>.</span></button>
+        </div>
+      </div>
+
+      <article class="task">
+        <header><span class="num">1</span><h3>Welche Quelle?</h3><button class="op" data-op="(be)nennen" type="button">(be)nennen</button></header>
+        <p class="q">Ordne jede Einkommensart ihrer Einkommensquelle zu.</p>
+        <div class="mi" id="srcSort"></div>
+        <div class="row"><button class="btn accent" id="chk-e1" type="button">Prüfen</button></div>
+        <div class="fb" id="fb-e1" hidden aria-live="polite"></div>
+      </article>
+    </section>
+
+    <!-- STATION 2 -->
+    <section class="station c-kultur" data-st="1" aria-labelledby="h-s2" hidden>
+      <div class="st-head">
+        <div class="st-icon"><svg class="i" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 19a5.5 5.5 0 0 1 11 0"/><path d="M16 7h5M16 11h5M17 15h4"/></svg></div>
+        <div><p class="eyebrow">Station 2 · Zuordnen</p><h2 id="h-s2">Wer bekommt was?</h2><p class="goal">Du übst: Einkommensarten richtig benennen</p></div>
+      </div>
+      <article class="task">
+        <header><span class="num">2</span><h3>Personen und ihr Einkommen</h3><button class="op" data-op="(be)nennen" type="button">(be)nennen</button></header>
+        <p class="q">Welches Einkommen erhält diese Person? Wähle jeweils die passende Einkommensart.</p>
+        <div class="jt" id="people"></div>
+        <div class="row"><button class="btn accent" id="chk-e2" type="button">Prüfen</button></div>
+        <div class="fb" id="fb-e2" hidden aria-live="polite"></div>
+      </article>
+      <div class="info">
+        <h3>So holst du dir KI-Feedback mit fobizz</h3>
+        <div class="howto">
+          <div><b>1 · Antwort schreiben</b>Schreib deine Antwort in das Feld der Aufgabe.</div>
+          <div><b>2 · Kopieren und öffnen</b>Tippe auf „KI-Feedback mit fobizz“, dann auf „Für fobizz kopieren“ und „fobizz öffnen“. Melde dich mit deinem Zugangscode an.</div>
+          <div><b>3 · Einfügen</b>Füge den Text im Chat ein. Die Rückmeldung kannst du hier zurückkopieren – dann steht sie in deinem PDF.</div>
+        </div>
+      </div>
+      <article class="task">
+        <header><span class="num">3</span><h3>Einkommen in deinem Umfeld</h3><button class="op" data-op="(be)nennen" type="button">(be)nennen</button></header>
+        <p class="q">Welche Einkommensquellen kennst du aus deinem Umfeld – Familie, Nachbarschaft, Bekannte? Nenne mindestens drei Beispiele und ordne sie einer Einkommensquelle zu.</p>
+        <p class="hint">Beträge oder private Details musst du nicht nennen.</p>
+        <div data-open="e3"></div>
+      </article>
+    </section>
+
+    <!-- STATION 3 -->
+    <section class="station c-sichern" data-st="2" aria-labelledby="h-s3" hidden>
+      <div class="st-head">
+        <div class="st-icon"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="13" rx="2.5"/><path d="M16 12.5h2M3 10h18"/></svg></div>
+        <div><p class="eyebrow">Station 3 · Untersuchen</p><h2 id="h-s3">Einkommen von Jugendlichen</h2><p class="goal">Du übst: den Taschengeldparagrafen erklären</p></div>
+      </div>
+      <div class="info">
+        <h3>Auch du hast ein Einkommen</h3>
+        <p>Kinder und Jugendliche bekommen <button class="term" data-term="taschengeld" type="button">Taschengeld</button>, Geldgeschenke zum Geburtstag oder zu Feiertagen, manchmal Zinsen auf ihr Sparguthaben. Viele verdienen sich mit einem Nebenjob etwas dazu, und in der Ausbildung gibt es eine Ausbildungsvergütung.</p>
+        <div class="rule"><b>Nebenjobs ab 13 Jahren</b><p>Mit Einverständnis der Eltern sind leichte Tätigkeiten erlaubt – höchstens 2 Stunden am Tag, nicht vor oder während des Unterrichts und nicht zwischen 18 und 8 Uhr. <span class="src">Quelle: Jugendarbeitsschutzgesetz, § 5</span></p></div>
+      </div>
+
+      <article class="task">
+        <header><span class="num">4</span><h3>Nebenjobs</h3><button class="op" data-op="(be)nennen" type="button">(be)nennen</button></header>
+        <p class="q">Nenne drei Nebenjobs, mit denen Jugendliche ab 13 Jahren Geld verdienen dürfen.</p>
+        <div data-open="e4"></div>
+      </article>
+
+      <article class="task">
+        <header><span class="num">5</span><h3>Wie viel Taschengeld?</h3><button class="op" data-op="begründen" type="button">begründen</button></header>
+        <p class="q">Das Deutsche Jugendinstitut (DJI) empfiehlt Eltern, wie viel Taschengeld sie ihren Kindern geben können. Ein Ausschnitt:</p>
+        <div class="tablewrap"><table class="tg">
+          <thead><tr><th>Alter</th><th>Empfehlung pro Monat</th></tr></thead>
+          <tbody><tr><td>12 Jahre</td><td>25,00 – 27,50 €</td></tr><tr><td>13 Jahre</td><td>27,50 – 30,00 €</td></tr><tr><td>14 Jahre</td><td>30,00 – 40,00 €</td></tr><tr><td>15 Jahre</td><td>40,00 – 50,00 €</td></tr><tr><td>16 Jahre</td><td>50,00 – 60,00 €</td></tr></tbody>
+        </table></div>
+        <p class="src">Quelle: Deutsches Jugendinstitut, Taschengeldempfehlung (Stand 2024)</p>
+        <p class="q">a) Um wie viel Euro liegt die höchste Empfehlung für 15-Jährige über der höchsten Empfehlung für 13-Jährige?</p>
+        <div class="gap-in"><label class="sr" for="e5a">Differenz in Euro</label><input type="number" id="e5a" inputmode="decimal" placeholder="0"><span>€</span><button class="btn accent" id="chk-e5a" type="button">Prüfen</button></div>
+        <div class="fb" id="fb-e5a" hidden aria-live="polite"></div>
+        <p class="q">b) Begründe, warum Schüler*innen im gleichen Alter unterschiedlich viel Taschengeld bekommen können.</p>
+        <p class="hint"><b>Starthilfe:</b> Denk daran, dass das Taschengeld in der Regel aus dem Einkommen der Eltern bezahlt wird.</p>
+        <div data-open="e5b"></div>
+      </article>
+
+      <div class="info law">
+        <h3>Der Taschengeldparagraf (§ 110 BGB)</h3>
+        <blockquote>„Ein von dem Minderjährigen ohne Zustimmung des gesetzlichen Vertreters geschlossener Vertrag gilt als von Anfang an wirksam, wenn der Minderjährige die vertragsmäßige Leistung mit Mitteln bewirkt, die ihm zu diesem Zweck oder zu freier Verfügung von dem Vertreter oder mit dessen Zustimmung von einem Dritten überlassen worden sind.“</blockquote>
+        <p><b>In einfachen Worten:</b> Zwischen 7 und 17 Jahren brauchst du für Käufe eigentlich die Zustimmung deiner Eltern. Bezahlst du aber <b>sofort und vollständig</b> mit Geld, das dir deine Eltern <b>zur freien Verfügung</b> gegeben haben – zum Beispiel mit deinem Taschengeld –, ist der Kauf auch ohne ihre Zustimmung gültig. Das gilt auch für Geld, das du von anderen für einen bestimmten Zweck bekommen hast, wenn deine Eltern einverstanden sind. <b>Ratenkäufe und Abos</b> mit monatlichen Zahlungen fallen nicht darunter.</p>
+      </div>
+
+      <article class="task">
+        <header><span class="num">6</span><h3>Fall-Check: Ist der Kauf gültig?</h3><button class="op" data-op="erklären" type="button">erklären</button></header>
+        <p class="q">Entscheide bei jedem Fall, ob der Kauf ohne Zustimmung der Eltern gültig ist.</p>
+        <div class="cases" id="cases"></div>
+        <div class="row"><button class="btn accent" id="chk-e6" type="button">Prüfen</button></div>
+        <div class="fb" id="fb-e6" hidden aria-live="polite"></div>
+      </article>
+
+      <article class="task">
+        <header><span class="num">7</span><h3>Was bringt der Paragraf?</h3><button class="op" data-op="erklären" type="button">erklären</button></header>
+        <p class="q">Erkläre mit eigenen Worten, welche Bedeutung der Taschengeldparagraf für Jugendliche hat. Nutze ein Beispiel.</p>
+        <div data-open="e7"></div>
+      </article>
+    </section>
+
+    <!-- STATION 4 -->
+    <section class="station c-existenz" data-st="3" aria-labelledby="h-s4" hidden>
+      <div class="st-head">
+        <div class="st-icon"><svg class="i" viewBox="0 0 24 24"><path d="M4 20V4M4 20h16"/><path d="M8 16v-4M12 16V8M16 16v-6"/></svg></div>
+        <div><p class="eyebrow">Station 4 · Analysieren</p><h2 id="h-s4">Wofür Jugendliche Geld ausgeben</h2><p class="goal">Du übst: eine Grafik zu Konsum und Sparen untersuchen</p></div>
+      </div>
+      <div class="think"><svg class="i" viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/></svg><p>Schlage im Buch <b>Seite 21</b> die Grafik „Konsumfreudige Jugend“ auf. Du analysierst sie in drei Schritten.</p></div>
+
+      <article class="task">
+        <header><span class="num">8</span><h3>Schritt 1: Beschreiben</h3><button class="op" data-op="beschreiben" type="button">beschreiben</button></header>
+        <p class="q">Worum geht es in der Grafik? Wähle jeweils aus.</p>
+        <div class="jt" id="g1"></div>
+        <div class="row"><button class="btn accent" id="chk-e8" type="button">Prüfen</button></div>
+        <div class="fb" id="fb-e8" hidden aria-live="polite"></div>
+      </article>
+
+      <article class="task">
+        <header><span class="num">9</span><h3>Schritt 2: Untersuchen</h3><button class="op" data-op="untersuchen" type="button">untersuchen</button></header>
+        <p class="q">Lies die Werte ab und rechne. Alle Angaben in Milliarden Euro.</p>
+        <div class="jt" id="g2"></div>
+        <div class="row"><button class="btn accent" id="chk-e9" type="button">Prüfen</button></div>
+        <div class="fb" id="fb-e9" hidden aria-live="polite"></div>
+      </article>
+
+      <article class="task">
+        <header><span class="num">10</span><h3>Schritt 3: Deuten</h3><button class="op" data-op="untersuchen" type="button">untersuchen</button></header>
+        <p class="q">Formuliere zwei Kernaussagen der Grafik: eine zum Konsum und eine zum Sparen.</p>
+        <p class="hint"><b>Kritisch hinsehen:</b> Die Befragung ist von 2021 und umfasst 6- bis 19-Jährige – auch Azubis mit eigenem Gehalt. Was bedeutet das für deine Aussagen?</p>
+        <div data-open="e10"></div>
+      </article>
+    </section>
+
+    <!-- STATION 5 -->
+    <section class="station c-luxus" data-st="4" aria-labelledby="h-s5" hidden>
+      <div class="st-head">
+        <div class="st-icon"><svg class="i" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></div>
+        <div><p class="eyebrow">Station 5 · Planen</p><h2 id="h-s5">Mein Taschengeld-Plan</h2><p class="goal">Du übst: einen Haushaltsplan entwickeln und begründen</p></div>
+      </div>
+
+      <article class="task">
+        <header><span class="num">11</span><h3>Plane einen Monat</h3><button class="op" data-op="entwickeln" type="button">entwickeln</button></header>
+        <p class="q">Trage ein, wie viel Geld du im Monat bekommst, und verteile es. Du kannst echte oder ausgedachte Zahlen nehmen.</p>
+        <div class="plan">
+          <div class="plan-col">
+            <h4>Einnahmen pro Monat</h4>
+            <div class="money" id="inc"></div>
+            <h4>Ausgaben und Sparen</h4>
+            <div class="money" id="exp"></div>
+            <h4>Mein Sparziel</h4>
+            <div class="goalrow"><label for="goalName" class="sr">Sparziel</label><input type="text" id="goalName" placeholder="z. B. Kopfhörer"><label for="goalAmt" class="sr">Betrag</label><span class="eur"><input type="number" id="goalAmt" inputmode="numeric" min="0" step="5"><span>€</span></span></div>
+          </div>
+          <div class="plan-col">
+            <div class="pstat" id="pstat" aria-live="polite"></div>
+            <div class="stack" id="stack" role="img"></div>
+            <table class="legend-t" id="legendT"></table>
+            <p class="hint" id="goalTxt"></p>
+          </div>
+        </div>
+      </article>
+
+      <article class="task">
+        <header><span class="num">12</span><h3>Begründe deinen Plan</h3><button class="op" data-op="begründen" type="button">begründen</button></header>
+        <p class="q">Warum verteilst du dein Geld so? Was ist dir wichtig, und worauf verzichtest du dafür?</p>
+        <div data-open="e12"></div>
+      </article>
+
+      <article class="task">
+        <header><span class="num">13</span><h3>Kurz-Check</h3></header>
+        <div class="quiz" id="quiz"></div>
+        <div class="row"><button class="btn accent" id="chk-e13" type="button">Prüfen</button></div>
+        <div class="fb" id="fb-e13" hidden aria-live="polite"></div>
+      </article>
+
+      <article class="task">
+        <header><span class="num">∑</span><h3>Dein Überblick</h3></header>
+        <div class="over-grid" id="overview"></div>
+      </article>
+
+      <article class="task">
+        <header><span class="num">↗</span><h3>Speichern, abgeben, weiterarbeiten</h3></header>
+        <label for="abgName"><b>Dein Name oder Kürzel</b></label>
+        <input type="text" id="abgName" placeholder="z. B. Lea M." autocomplete="off">
+        <p class="hint">Speichere alle Antworten, Prüfergebnisse und dein fobizz-Feedback als PDF, oder kopiere sie als Text, z. B. für IServ.</p>
+        <div class="row"><button class="btn accent" id="pdfBtn" type="button"><svg class="i" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>PDF speichern</button><button class="btn soft" id="txtBtn" type="button">Als Text kopieren</button></div>
+        <p class="hint" id="pdfNote" hidden aria-live="polite"></p>
+        <label class="sr" for="txtOut">Deine Ergebnisse als Text</label>
+        <textarea id="txtOut" class="code" readonly hidden></textarea>
+        <div class="split">
+          <div class="half">
+            <h4>Sicherungscode erstellen</h4>
+            <p class="hint">Im Code steckt dein ganzer Stand. Schick ihn über IServ an deine Lehrkraft (Abgabe) oder an dich selbst, um später oder auf einem anderen Gerät weiterzuarbeiten.</p>
+            <div class="row"><button class="btn accent" id="mkCode" type="button">Code erstellen</button><button class="btn soft" id="cpCode" type="button" hidden>Code kopieren</button></div>
+            <label class="sr" for="codeOut">Sicherungscode</label>
+            <textarea id="codeOut" class="code" readonly hidden></textarea>
+            <p class="hint" id="codeNote" hidden aria-live="polite"></p>
+          </div>
+          <div class="half">
+            <h4>Mit Code weiterarbeiten</h4>
+            <p class="hint">Füge einen Sicherungscode ein. Dein aktueller Stand auf diesem Gerät wird dabei ersetzt.</p>
+            <label class="sr" for="loadBox5">Sicherungscode einfügen</label>
+            <textarea id="loadBox5" class="code" placeholder="EKW…"></textarea>
+            <div class="row"><button class="btn soft" id="loadBtn5" type="button">Code laden</button></div>
+            <p class="hint" id="loadNote5" hidden aria-live="polite"></p>
+          </div>
+        </div>
+        <div class="row" style="margin-top:6px"><button class="btn soft" id="reset" type="button">Alles löschen und neu beginnen</button></div>
+      </article>
+    </section>
+  </main>
+</div>
+
+<div class="pop" id="pop" role="dialog" aria-modal="false" aria-labelledby="popH" hidden>
+  <button class="x" id="popX" type="button" aria-label="Schließen">×</button>
+  <h4 id="popH"></h4>
+  <p id="popP"></p>
+</div>
+
+<footer class="pager">
+  <div class="pager-in">
+    <button class="btn soft" id="prev" type="button"><svg class="i" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>Zurück</button>
+    <span class="where" id="where">Station 1 von 5</span>
+    <button class="btn" id="next" type="button">Weiter<svg class="i" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+(function(){
+"use strict";
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const CHECK='<svg class="i" viewBox="0 0 24 24"><path d="m5 12 4 4 10-10"/></svg>';
+const FOBIZZ_URL='https://go.fobizz.com';
+function el(tag,attrs,...kids){const n=document.createElement(tag);for(const k in attrs||{}){if(k==='class')n.className=attrs[k];else if(k==='html')n.innerHTML=attrs[k];else n.setAttribute(k,attrs[k]);}for(const c of kids){if(c==null)continue;n.append(c.nodeType?c:document.createTextNode(c));}return n;}
+function norm(s){return String(s||'').toLowerCase().replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/ß/g,'ss').replace(/[^a-z]/g,'');}
+function num(v){const n=parseFloat(String(v==null?'':v).replace(/\s|€/g,'').replace(',','.'));return isNaN(n)?null:n;}
+function eur(n){return (Math.round(n*100)/100).toLocaleString('de-DE',{minimumFractionDigits:n%1?2:0,maximumFractionDigits:2})+' €';}
+
+/* ---------- Inhalte ---------- */
+const STATIONS=[{k:'entdecken',label:'Kennenlernen'},{k:'kultur',label:'Zuordnen'},{k:'sichern',label:'Untersuchen'},{k:'existenz',label:'Analysieren'},{k:'luxus',label:'Planen'}];
+const QUELLEN=[['arbeit','Arbeit'],['unt','Unternehmen'],['verm','Vermögen'],['staat','Staat']];
+const QNAME={arbeit:'nichtselbstständige Arbeit',unt:'unternehmerische Tätigkeit',verm:'Vermögen und Besitz',staat:'staatliche Unterstützung'};
+const SRC=[
+  {id:'lohn',l:'Lohn',a:'arbeit'},{id:'gehalt',l:'Gehalt',a:'arbeit'},{id:'besold',l:'Besoldung',a:'arbeit'},
+  {id:'gewinn',l:'Gewinn eines Friseursalons',a:'unt'},{id:'honorar',l:'Honorar einer Anwältin',a:'unt'},
+  {id:'zinsen',l:'Zinsen',a:'verm'},{id:'divi',l:'Dividende',a:'verm'},{id:'miete',l:'Mieteinnahmen',a:'verm'},
+  {id:'kindergeld',l:'Kindergeld',a:'staat'},{id:'alg',l:'Arbeitslosengeld',a:'staat'}
+];
+const ARTEN=['Lohn','Gehalt','Besoldung','Gewinn','Honorar','Gage','Rente','Pension','Arbeitslosengeld','Mieteinnahmen','Dividende'];
+const PEOPLE=[
+  {id:'kaya',e:'👩‍🏫',l:'Frau Kaya, verbeamtete Lehrerin',a:'Besoldung'},
+  {id:'jansen',e:'👨‍💼',l:'Herr Jansen, Angestellter in einer Bank',a:'Gehalt'},
+  {id:'petro',e:'👷‍♀️',l:'Frau Petrović, Arbeiterin in einer Fahrradfabrik',a:'Lohn'},
+  {id:'lange',e:'👩‍🍳',l:'Frau Lange, Inhaberin einer Bäckerei',a:'Gewinn'},
+  {id:'oez',e:'⚖️',l:'Frau Öztürk, Rechtsanwältin mit eigener Kanzlei',a:'Honorar'},
+  {id:'brandt',e:'🎭',l:'Herr Brandt, Schauspieler',a:'Gage'},
+  {id:'wolff',e:'👴',l:'Herr Wolff, früher Angestellter, heute im Ruhestand',a:'Rente'},
+  {id:'schulz',e:'👮‍♀️',l:'Frau Schulz, Polizeibeamtin im Ruhestand',a:'Pension'},
+  {id:'neu',e:'🔎',l:'Herr Neumann, sucht nach einer Kündigung eine neue Stelle',a:'Arbeitslosengeld'},
+  {id:'berger',e:'🏠',l:'Frau Berger, vermietet eine Wohnung',a:'Mieteinnahmen'},
+  {id:'kim',e:'📈',l:'Herr Kim, besitzt Aktien eines Unternehmens',a:'Dividende'}
+];
+const CASES=[
+  {id:'c1',t:'Emma (13) kauft von ihrem Taschengeld eine Zeitschrift für 4,50 € und bezahlt bar.',a:true,why:'Gültig: Sie bezahlt sofort und vollständig mit Taschengeld, das sie zur freien Verfügung hat.'},
+  {id:'c2',t:'Jonas (14) kauft heimlich ein Smartphone für 600 € auf Raten: 12 Monate lang 50 €.',a:false,why:'Nicht gültig: Bei einem Ratenkauf bezahlt er nicht sofort, sondern mit Geld, das er noch gar nicht hat.'},
+  {id:'c3',t:'Aylin (12) hat Taschengeld angespart und kauft sich davon Kopfhörer für 35 €.',a:true,why:'In der Regel gültig: Auch angespartes Taschengeld steht ihr zur freien Verfügung, und sie bezahlt sofort.'},
+  {id:'c4',t:'Finn (15) schließt im Internet ein Streaming-Abo für 12,99 € im Monat ab.',a:false,why:'Nicht gültig: Ein Abo verpflichtet ihn zu Zahlungen in der Zukunft. Dafür brauchen die Eltern zuzustimmen.'},
+  {id:'c5',t:'Lina (16) bekommt von ihrer Oma 300 € für ein Fahrrad. Ihre Eltern sind einverstanden. Lina kauft das Fahrrad.',a:true,why:'Gültig: Das Geld wurde ihr mit Zustimmung der Eltern genau für diesen Zweck überlassen.'}
+];
+const G1=[
+  {id:'thema',l:'Thema',o:['Einnahmen und Ausgaben von Kindern und Jugendlichen','Taschengeld in den Bundesländern','Sparen von Erwachsenen'],a:0},
+  {id:'alter',l:'Befragte Altersgruppe',o:['10 bis 14 Jahre','6 bis 19 Jahre','14 bis 25 Jahre'],a:1},
+  {id:'jahr',l:'Jahr der Befragung',o:['2019','2021','2024'],a:1},
+  {id:'einheit',l:'Einheit der Zahlen',o:['Millionen Euro','Euro pro Person','Milliarden Euro'],a:2},
+  {id:'form',l:'Darstellungsform',o:['Kreisdiagramm','Balkendiagramm','Liniendiagramm'],a:1}
+];
+const G2=[
+  {id:'ein',l:'Einnahmen insgesamt',t:'num',a:19.7},
+  {id:'aus',l:'Ausgaben insgesamt',t:'num',a:14.6},
+  {id:'dif',l:'Differenz: nicht ausgegeben (z. B. gespart)',t:'num',a:5.1},
+  {id:'topE',l:'Größte Einnahmequelle',t:'sel',o:['regelmäßiges Taschengeld','regelmäßiges Nettogehalt','Jobs, Nebentätigkeiten','Geldgeschenke'],a:1},
+  {id:'topA',l:'Größter Ausgabeposten',t:'sel',o:['Hobbys','Handygebühren','Kleidung, Mode','Süßigkeiten, Eis'],a:2}
+];
+const QUIZ=[
+  {q:'Ein Gehalt ist Einkommen aus …',o:['Vermögen','nichtselbstständiger Arbeit','staatlicher Unterstützung'],a:1},
+  {q:'Frau Lange führt eine Bäckerei. Ihr Einkommen ist ein …',o:['Gewinn','Lohn','Zins'],a:0},
+  {q:'Zinsen für ein Sparguthaben sind Einkommen aus …',o:['unternehmerischer Tätigkeit','Vermögen und Besitz','nichtselbstständiger Arbeit'],a:1},
+  {q:'Kindergeld ist …',o:['ein Transfereinkommen vom Staat','ein Lohn der Eltern','eine Dividende'],a:0},
+  {q:'Nach dem Taschengeldparagrafen ist ein Kauf gültig, wenn …',o:['du ihn in Raten bezahlst','du sofort mit Geld bezahlst, das du zur freien Verfügung hast','du mindestens 14 Jahre alt bist'],a:1},
+  {q:'Ein Haushaltsplan …',o:['stellt Einnahmen und Ausgaben gegenüber','zeigt nur, was man sparen will','ist nur für Erwachsene sinnvoll'],a:0}
+];
+const INC=[{id:'tg',l:'Taschengeld',d:35},{id:'job',l:'Nebenjob',d:0},{id:'sonst',l:'Geldgeschenke, Sonstiges',d:0}];
+const EXP=[{id:'handy',l:'Handy und Apps',d:5,c:'--s1'},{id:'essen',l:'Essen und Snacks',d:10,c:'--s2'},{id:'spar',l:'Sparen',d:10,c:'--s3'},{id:'frei',l:'Freizeit',d:10,c:'--s4'},{id:'kleid',l:'Kleidung',d:0,c:'--s5'},{id:'gesch',l:'Geschenke',d:0,c:'--s6'}];
+const TERMS={
+  einkommen:['Einkommen','Geld, das ein Mensch regelmäßig oder einmalig bekommt – zum Beispiel für seine Arbeit, aus Vermögen oder vom Staat.'],
+  taschengeld:['Taschengeld','Geld, das Eltern ihren Kindern regelmäßig geben, damit sie lernen, selbst damit umzugehen. Es gibt keinen gesetzlichen Anspruch darauf.']
+};
+const OPS={
+  '(be)nennen':['(be)nennen','Begriffe oder Fakten angeben – ohne lange Erklärung.','Ökonomische Fakten, Merkmale, Begriffe ohne Erläuterungen angeben.'],
+  'beschreiben':['beschreiben','Mit Fachbegriffen sagen, was zu sehen ist oder wie etwas ist.','Aspekte eines ökonomischen Sachverhaltes unter Verwendung der Fachbegriffe in einfacher Form aufzeigen.'],
+  'erklären':['erklären','Zeigen, wie etwas zusammenhängt – am besten mit einem Beispiel.','Ökonomische Sachverhalte durch Wissen und Einsichten in einen Zusammenhang einordnen und deuten.'],
+  'untersuchen':['untersuchen','Genau hinschauen, rechnen und ein Ergebnis formulieren.','Ökonomische Sachverhalte genau betrachten und ein Ergebnis formulieren.'],
+  'begründen':['begründen','Deine Aussage mit Argumenten stützen: „…, weil …“.','Ökonomische Aussagen, Thesen oder Sachverhalte durch Argumente schlüssig belegen.'],
+  'entwickeln':['entwickeln','Eine eigene Lösung ausdenken und begründen.','Ein Lösungskonzept zu einer Problemstellung aufzeigen und begründen.']
+};
+const OPEN={
+  e3:{nr:3,op:'(be)nennen',q:'Welche Einkommensquellen kennst du aus deinem Umfeld (Familie, Nachbarschaft, Bekannte)? Nenne mindestens drei Beispiele und ordne sie einer Einkommensquelle zu.',ph:'z. B. Meine Nachbarin bekommt Rente – das ist staatliche Unterstützung.',min:40,chk:['any:Arbeit|Unternehm|Vermögen|Staat|Transfer']},
+  e4:{nr:4,op:'(be)nennen',q:'Nenne drei Nebenjobs, mit denen Jugendliche ab 13 Jahren Geld verdienen dürfen.',ph:'1. …\n2. …\n3. …',min:20,chk:[]},
+  e5b:{nr:'5b',op:'begründen',q:'Begründe, warum Schüler*innen im gleichen Alter unterschiedlich viel Taschengeld bekommen können.',ph:'Das Taschengeld kann unterschiedlich sein, weil …',min:60,chk:['because','any:Einkommen|Eltern|verdien']},
+  e7:{nr:7,op:'erklären',q:'Erkläre mit eigenen Worten, welche Bedeutung der Taschengeldparagraf (§ 110 BGB) für Jugendliche hat. Nutze ein Beispiel.',ph:'Der Taschengeldparagraf bedeutet, dass … Zum Beispiel …',min:70,chk:['example','any:Taschengeld|freie Verfügung|freien Verfügung']},
+  e10:{nr:10,op:'untersuchen',q:'Formuliere zwei Kernaussagen der Grafik „Konsumfreudige Jugend“ (Buch S. 21): eine zum Konsum und eine zum Sparen.',ph:'1. Jugendliche geben am meisten Geld für … aus.\n2. …',min:70,chk:['numbers','any:Konsum|ausgeben|Ausgaben','any:spar|übrig|Differenz']},
+  e12:{nr:12,op:'begründen',q:'Begründe deinen Taschengeld-Plan: Warum verteilst du dein Geld so? Was ist dir wichtig, und worauf verzichtest du dafür?',ph:'Ich spare … €, weil … Dafür verzichte ich auf …',min:70,chk:['because','any:spar|verzicht']}
+};
+const QC={
+  because:[/\b(weil|denn|da\s|deshalb|daher|darum|deswegen)/i,'Du begründest („weil …“)'],
+  example:[/(zum beispiel|z\.\s?b\.|beispiel|etwa wenn|wenn ich)/i,'Mit Beispiel'],
+  numbers:[/\d/,'Mit Zahlen aus der Grafik']
+};
+
+/* ---------- Zustand ---------- */
+const KEY='einkommens-werkstatt-v1';
+const blank=()=>({st:0,src:{},ppl:{},e5a:'',cases:{},g1:{},g2:{},inc:Object.fromEntries(INC.map(x=>[x.id,x.d])),exp:Object.fromEntries(EXP.map(x=>[x.id,x.d])),goalName:'Kopfhörer',goalAmt:120,planTouched:false,quiz:{},ans:{},fb:{},chk:{},name:''});
+let S=blank();
+try{const raw=localStorage.getItem(KEY); if(raw){const o=JSON.parse(raw); S=Object.assign(blank(),o);}}catch(e){}
+let saveT=null;
+function save(){clearTimeout(saveT);saveT=setTimeout(()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}},300);progress();}
+let dl=null;
+(async()=>{ try{ dl = (window.claude&&typeof window.claude.use==='function') ? await window.claude.use('downloads') : null; }catch(e){ dl=null; } })();
+
+function showFb(fbEl,cls,head,body){fbEl.hidden=false;fbEl.className='fb '+cls;const h=el('p',{class:'lvl',html:cls==='ok'?CHECK:''});h.append(head);fbEl.replaceChildren(h,...(body?[el('p',{},body)]:[]));}
+
+/* ---------- Offene Aufgaben mit fobizz ---------- */
+function quickChecks(t,text){
+  const out=[{on:text.trim().length>=t.min,l:'Ausführlich genug'}];
+  for(const c of t.chk||[]){
+    if(c.startsWith('any:')){const ws=c.slice(4).split('|');out.push({on:ws.some(w=>norm(text).includes(norm(w))),l:c.includes('Arbeit')?'Einkommensquelle genannt':c.includes('Einkommen')?'Einkommen der Eltern bedacht':c.includes('Taschengeld')?'Fachbegriff genutzt':c.includes('Konsum')?'Aussage zum Konsum':c.includes('spar|übrig')?'Aussage zum Sparen':'Verzicht oder Sparen genannt'});}
+    else out.push({on:QC[c][0].test(text),l:QC[c][1]});
+  }
+  return out;
+}
+function paintQC(box,list){box.replaceChildren(el('b',{},'Schnell-Check:'),...list.map(x=>el('span',{class:x.on?'on':''},x.l)));}
+function planSummary(){
+  const inc=INC.reduce((a,x)=>a+(+S.inc[x.id]||0),0), out=EXP.reduce((a,x)=>a+(+S.exp[x.id]||0),0);
+  return `Mein Plan: Einnahmen ${eur(inc)} (${INC.filter(x=>+S.inc[x.id]).map(x=>x.l+' '+eur(+S.inc[x.id])).join(', ')||'keine'}). Verteilung: ${EXP.map(x=>x.l+' '+eur(+S.exp[x.id]||0)).join(', ')}. Rest: ${eur(inc-out)}. Sparziel: ${S.goalName||'–'} für ${eur(+S.goalAmt||0)}.`;
+}
+function fobizzText(id){
+  const t=OPEN[id];
+  return `Einkommens-Werkstatt · Aufgabe ${t.nr}\nAufgabe: ${t.q}${id==='e12'?'\n'+planSummary():''}\nMeine Antwort:\n${(S.ans[id]||'').trim()}`;
+}
+async function copyTo(text,note,ta){
+  try{await navigator.clipboard.writeText(text);ta.hidden=true;note.hidden=false;note.textContent='Kopiert! Öffne fobizz und füge den Text im Chat ein.';}
+  catch(e){ta.hidden=false;ta.value=text;ta.focus();ta.select();note.hidden=false;note.textContent='Der Text ist markiert. Kopiere ihn (Strg+C, am iPad: gedrückt halten → Kopieren) und füge ihn bei fobizz ein.';}
+}
+async function copyTo2(text,note,ta){try{await navigator.clipboard.writeText(text);note.hidden=false;note.textContent='Kopiert! Füge den Code in deine IServ-Nachricht ein.';}catch(e){ta.hidden=false;ta.focus();ta.select();note.hidden=false;note.textContent='Der Code ist markiert. Kopiere ihn (Strg+C, am iPad: gedrückt halten → Kopieren).';}}
+function mountOpen(){
+  $$('[data-open]').forEach(host=>{
+    const id=host.dataset.open, t=OPEN[id];
+    const ta=el('textarea',{id:'ta-'+id,placeholder:t.ph||'Schreib hier deine Antwort …','aria-label':'Deine Antwort'}); ta.value=S.ans[id]||'';
+    const qc=el('div',{class:'qc',id:'qc-'+id});
+    const cp=el('button',{class:'btn ki',type:'button',html:'<svg class="i" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h3"/></svg>Für fobizz kopieren'});
+    const go=el('a',{class:'btn soft',href:FOBIZZ_URL,target:'_blank',rel:'noopener',html:'fobizz öffnen <svg class="i" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>'});
+    const note=el('p',{class:'hint',hidden:'','aria-live':'polite'});
+    const cta=el('textarea',{class:'code',readonly:'',hidden:'','aria-label':'Text für fobizz'});
+    const fbLbl=el('label',{for:'fb-'+id,class:'fbl'},'Feedback von fobizz hier einfügen (optional – kommt mit ins PDF)');
+    const fbTa=el('textarea',{id:'fb-'+id,class:'fbin',placeholder:'Füge hier die Rückmeldung der KI ein …'}); fbTa.value=S.fb[id]||'';
+    const det=el('details',{class:'fbox'+(S.fb[id]?' has':'')},el('summary',{},'KI-Feedback mit fobizz'),el('div',{class:'fbox-in'},el('div',{class:'row'},cp,go),note,cta,fbLbl,fbTa));
+    if(S.fb[id]) det.open=true;
+    host.replaceWith(el('div',{class:'open'},ta,el('div',{class:'open-foot'},qc),det));
+    const upd=()=>paintQC(qc,quickChecks(t,ta.value));
+    ta.addEventListener('input',()=>{S.ans[id]=ta.value;save();upd();});
+    fbTa.addEventListener('input',()=>{S.fb[id]=fbTa.value;det.classList.toggle('has',!!fbTa.value.trim());save();});
+    cp.addEventListener('click',()=>{ if((S.ans[id]||'').trim().length<10){note.hidden=false;note.textContent='Schreib zuerst deine Antwort – mindestens einen ganzen Satz.';return;} copyTo(fobizzText(id),note,cta); });
+    upd();
+  });
+}
+
+/* ---------- Station 1 ---------- */
+function renderSrc(){
+  const box=$('#srcSort'); box.replaceChildren(); const d=S.chk.e1&&S.chk.e1.detail||{};
+  SRC.forEach(it=>{
+    const seg=el('div',{class:'seg seg4',role:'group','aria-label':it.l});
+    QUELLEN.forEach(([v,l])=>{const b=el('button',{type:'button','aria-pressed':S.src[it.id]===v?'true':'false'},l); b.onclick=()=>{S.src[it.id]=v;delete S.chk.e1;$('#fb-e1').hidden=true;save();renderSrc();}; seg.append(b);});
+    box.append(el('div',{class:'mi-row'+(d[it.id]?' s-'+d[it.id]:'')},el('span',{},it.l),seg));
+  });
+}
+function checkSrc(){
+  let sc=0; const d={}; SRC.forEach(it=>{ if(S.src[it.id]===it.a){sc++;d[it.id]='ok';} else if(S.src[it.id]) d[it.id]='bad'; });
+  S.chk.e1={score:sc,max:SRC.length,detail:d}; save(); renderSrc();
+  const miss=SRC.length-Object.keys(S.src).length, fb=$('#fb-e1');
+  if(miss) showFb(fb,'mid',`${sc} von ${SRC.length} richtig`,`Noch ${miss} offen. Ordne alle Einkommensarten zu.`);
+  else if(sc===SRC.length) showFb(fb,'ok','Alles richtig!','Du kennst die vier Einkommensquellen.');
+  else showFb(fb,'mid',`${sc} von ${SRC.length} richtig`,'Rot markiert: Tippe oben noch einmal auf die Karten der Einkommensquellen.');
+}
+/* ---------- Station 2 ---------- */
+function renderPeople(){
+  const box=$('#people'); box.replaceChildren(); const d=S.chk.e2&&S.chk.e2.detail||{};
+  PEOPLE.forEach(p=>{
+    const s=el('select',{id:'pp-'+p.id,'aria-label':'Einkommen von '+p.l}); s.append(el('option',{value:''},'— wählen —'));
+    ARTEN.forEach(a=>{const o=el('option',{value:a},a); if(S.ppl[p.id]===a) o.selected=true; s.append(o);});
+    s.onchange=()=>{S.ppl[p.id]=s.value;delete S.chk.e2;$('#fb-e2').hidden=true;save();renderPeople();};
+    box.append(el('div',{class:'jt-row'+(d[p.id]?' s-'+d[p.id]:'')},el('span',{},el('span',{class:'pe','aria-hidden':'true'},p.e),' '+p.l),s));
+  });
+}
+function checkPeople(){
+  let sc=0; const d={}; PEOPLE.forEach(p=>{ if(S.ppl[p.id]===p.a){sc++;d[p.id]='ok';} else if(S.ppl[p.id]) d[p.id]='bad'; });
+  S.chk.e2={score:sc,max:PEOPLE.length,detail:d}; save(); renderPeople();
+  const fb=$('#fb-e2'), miss=PEOPLE.length-Object.values(S.ppl).filter(Boolean).length;
+  if(miss) showFb(fb,'mid',`${sc} von ${PEOPLE.length} richtig`,`Noch ${miss} Personen ohne Auswahl.`);
+  else if(sc===PEOPLE.length) showFb(fb,'ok','Alles richtig!','Stark – auch Pension und Besoldung sitzen.');
+  else showFb(fb,'mid',`${sc} von ${PEOPLE.length} richtig`,'Tipp: Beamt*innen bekommen Besoldung, im Ruhestand eine Pension. Angestellte bekommen später eine Rente.');
+}
+/* ---------- Station 3 ---------- */
+function checkE5a(){
+  const v=num($('#e5a').value); S.e5a=$('#e5a').value; const ok=v===20;
+  S.chk.e5a={score:ok?1:0,max:1}; save();
+  if(ok) showFb($('#fb-e5a'),'ok','Richtig: 20 €','50 € − 30 € = 20 €. Mit dem Alter steigt die Empfehlung, weil Jugendliche mehr selbst bezahlen sollen.');
+  else showFb($('#fb-e5a'),'mid','Noch nicht richtig','Nimm jeweils den höheren Wert: bei 15 Jahren und bei 13 Jahren. Zieh dann ab.');
+}
+function renderCases(){
+  const box=$('#cases'); box.replaceChildren(); const d=S.chk.e6&&S.chk.e6.detail||{};
+  CASES.forEach(c=>{
+    const seg=el('div',{class:'seg',role:'group','aria-label':'Entscheidung'});
+    [['y','gültig'],['n','nicht gültig']].forEach(([v,l])=>{const b=el('button',{type:'button','aria-pressed':S.cases[c.id]===v?'true':'false'},l); b.onclick=()=>{S.cases[c.id]=v;delete S.chk.e6;$('#fb-e6').hidden=true;save();renderCases();}; seg.append(b);});
+    const row=el('div',{class:'case'+(d[c.id]?' s-'+d[c.id]:'')},el('p',{},c.t),seg);
+    if(d[c.id]) row.append(el('p',{class:'why'},c.why));
+    box.append(row);
+  });
+}
+function checkCases(){
+  let sc=0; const d={}; CASES.forEach(c=>{const v=S.cases[c.id]; if(!v) return; const ok=(v==='y')===c.a; if(ok)sc++; d[c.id]=ok?'ok':'bad';});
+  S.chk.e6={score:sc,max:CASES.length,detail:d}; save(); renderCases();
+  const miss=CASES.length-Object.keys(S.cases).length, fb=$('#fb-e6');
+  if(miss) showFb(fb,'mid',`${sc} von ${CASES.length} richtig`,`Noch ${miss} ${miss===1?'Fall':'Fälle'} offen.`);
+  else if(sc===CASES.length) showFb(fb,'ok','Alles richtig!','Merke: sofort und vollständig mit eigenem Geld bezahlen – dann gilt der Kauf.');
+  else showFb(fb,'mid',`${sc} von ${CASES.length} richtig`,'Lies die Begründungen unter den Fällen. Achte auf Raten und Abos.');
+}
+/* ---------- Station 4 ---------- */
+function renderG1(){
+  const box=$('#g1'); box.replaceChildren(); const d=S.chk.e8&&S.chk.e8.detail||{};
+  G1.forEach(g=>{const s=el('select',{id:'g1-'+g.id,'aria-label':g.l}); s.append(el('option',{value:''},'— wählen —'));
+    g.o.forEach((o,i)=>{const op=el('option',{value:String(i)},o); if(S.g1[g.id]===String(i)) op.selected=true; s.append(op);});
+    s.onchange=()=>{S.g1[g.id]=s.value;delete S.chk.e8;$('#fb-e8').hidden=true;save();renderG1();};
+    box.append(el('div',{class:'jt-row'+(d[g.id]?' s-'+d[g.id]:'')},el('span',{},g.l),s));});
+}
+function checkG1(){
+  let sc=0; const d={}; G1.forEach(g=>{const v=S.g1[g.id]; if(v==null||v==='') return; const ok=+v===g.a; if(ok)sc++; d[g.id]=ok?'ok':'bad';});
+  S.chk.e8={score:sc,max:G1.length,detail:d}; save(); renderG1();
+  if(sc===G1.length) showFb($('#fb-e8'),'ok','Gut beschrieben!','So beginnt jede Grafikanalyse: Thema, Quelle, Zeit, Einheit, Darstellungsform.');
+  else showFb($('#fb-e8'),'mid',`${sc} von ${G1.length} richtig`,'Schau genau auf Überschrift, Unterzeile und die kleine Schrift unten in der Grafik.');
+}
+function renderG2(){
+  const box=$('#g2'); box.replaceChildren(); const d=S.chk.e9&&S.chk.e9.detail||{};
+  G2.forEach(g=>{
+    let ctl;
+    if(g.t==='num'){ ctl=el('span',{class:'eur'},el('input',{type:'text',inputmode:'decimal',id:'g2-'+g.id,'aria-label':g.l,placeholder:'0,0'}),el('span',{},'Mrd. €')); const inp=ctl.querySelector('input'); inp.value=S.g2[g.id]||''; inp.oninput=()=>{S.g2[g.id]=inp.value;delete S.chk.e9;save();}; }
+    else { ctl=el('select',{id:'g2-'+g.id,'aria-label':g.l}); ctl.append(el('option',{value:''},'— wählen —')); g.o.forEach((o,i)=>{const op=el('option',{value:String(i)},o); if(S.g2[g.id]===String(i)) op.selected=true; ctl.append(op);}); ctl.onchange=()=>{S.g2[g.id]=ctl.value;delete S.chk.e9;save();}; }
+    box.append(el('div',{class:'jt-row'+(d[g.id]?' s-'+d[g.id]:'')},el('span',{},g.l),ctl));
+  });
+}
+function checkG2(){
+  let sc=0; const d={};
+  G2.forEach(g=>{const v=S.g2[g.id]; if(v==null||v==='') return; const ok=g.t==='num'?Math.abs((num(v)??-99)-g.a)<0.051:+v===g.a; if(ok)sc++; d[g.id]=ok?'ok':'bad';});
+  S.chk.e9={score:sc,max:G2.length,detail:d}; save(); renderG2();
+  if(sc===G2.length) showFb($('#fb-e9'),'ok','Alles richtig!','Jugendliche hatten 19,7 Mrd. € zur Verfügung und gaben 14,6 Mrd. € aus. 5,1 Mrd. € blieben übrig – zum Beispiel zum Sparen.');
+  else showFb($('#fb-e9'),'mid',`${sc} von ${G2.length} richtig`,'Die Gesamtsummen stehen jeweils über den Balken. Die Differenz rechnest du selbst aus: Einnahmen minus Ausgaben.');
+}
+/* ---------- Station 5: Plan ---------- */
+function moneyRow(group,it,box){
+  const inp=el('input',{type:'number',id:`${group}-${it.id}`,inputmode:'numeric',min:'0',step:'1','aria-label':it.l});
+  inp.value=S[group][it.id];
+  const set=v=>{S[group][it.id]=Math.max(0,Math.round((+v||0)*100)/100);S.planTouched=true;inp.value=S[group][it.id];save();renderPlan();};
+  inp.oninput=()=>{S[group][it.id]=Math.max(0,+inp.value||0);S.planTouched=true;save();renderPlan();};
+  const mn=el('button',{class:'mv',type:'button','aria-label':it.l+' minus 5 Euro'},'−'), pl=el('button',{class:'mv',type:'button','aria-label':it.l+' plus 5 Euro'},'+');
+  mn.onclick=()=>set((+S[group][it.id]||0)-5); pl.onclick=()=>set((+S[group][it.id]||0)+5);
+  const sw=it.c?el('i',{class:'sw',style:`background:var(${it.c})`}):null;
+  box.append(el('div',{class:'mrow'},el('span',{class:'ml'},sw,it.l),el('span',{class:'mctl'},mn,el('span',{class:'eur'},inp,el('span',{},'€')),pl)));
+}
+function renderPlan(){
+  const inc=INC.reduce((a,x)=>a+(+S.inc[x.id]||0),0), out=EXP.reduce((a,x)=>a+(+S.exp[x.id]||0),0), rest=Math.round((inc-out)*100)/100;
+  const st=$('#pstat');
+  const cls=rest<0?'bad':rest===0?'ok':'mid';
+  const head=rest<0?`Du planst ${eur(-rest)} mehr aus, als du hast.`:rest===0?'Alles verplant – Einnahmen und Ausgaben gehen auf.':`${eur(rest)} sind noch nicht verplant.`;
+  st.className='pstat '+cls;
+  st.replaceChildren(el('span',{class:'pico',html:rest<0?'<svg class="i" viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>':CHECK}),el('div',{},el('b',{},head),el('span',{},`Einnahmen ${eur(inc)} · Ausgaben ${eur(out)}`)));
+  const total=Math.max(inc,out)||1, bar=$('#stack'); bar.replaceChildren();
+  EXP.forEach(x=>{const v=+S.exp[x.id]||0; if(!v) return; bar.append(el('div',{class:'seg-b',style:`width:${v/total*100}%;background:var(${x.c})`,title:`${x.l}: ${eur(v)}`}));});
+  if(rest>0) bar.append(el('div',{class:'seg-b free',style:`width:${rest/total*100}%`,title:`noch frei: ${eur(rest)}`}));
+  bar.setAttribute('aria-label',`Verteilung von ${eur(inc)}: `+EXP.map(x=>`${x.l} ${eur(+S.exp[x.id]||0)}`).join(', '));
+  const lt=$('#legendT'); lt.replaceChildren();
+  EXP.forEach(x=>{const v=+S.exp[x.id]||0; lt.append(el('tr',{},el('td',{},el('i',{class:'sw',style:`background:var(${x.c})`}),x.l),el('td',{class:'v'},eur(v)),el('td',{class:'p'},inc?Math.round(v/inc*100)+' %':'–')));});
+  if(rest>0) lt.append(el('tr',{},el('td',{},el('i',{class:'sw free'}),'noch frei'),el('td',{class:'v'},eur(rest)),el('td',{class:'p'},Math.round(rest/inc*100)+' %')));
+  const sp=+S.exp.spar||0, ga=+S.goalAmt||0, gn=(S.goalName||'').trim()||'dein Sparziel';
+  $('#goalTxt').textContent = ga<=0 ? 'Trag ein Sparziel mit Betrag ein, dann rechne ich aus, wie lange du sparen musst.' : sp>0 ? `Mit ${eur(sp)} im Monat hast du ${gn} (${eur(ga)}) in ${Math.ceil(ga/sp)} Monat${Math.ceil(ga/sp)===1?'':'en'} zusammen.` : `Ohne Sparen erreichst du ${gn} (${eur(ga)}) nicht.`;
+}
+/* ---------- Quiz ---------- */
+function renderQuiz(){
+  const box=$('#quiz'); box.replaceChildren(); const d=S.chk.e13&&S.chk.e13.detail||{};
+  QUIZ.forEach((q,i)=>{
+    const fs=el('fieldset',{class:'qz'+(d[i]?' s-'+d[i]:'')},el('legend',{},`${i+1}. ${q.q}`));
+    q.o.forEach((o,j)=>{const id=`qz-${i}-${j}`; const r=el('input',{type:'radio',name:'qz'+i,id,value:String(j)}); if(S.quiz[i]===String(j)) r.checked=true; r.onchange=()=>{S.quiz[i]=r.value;delete S.chk.e13;$('#fb-e13').hidden=true;save();}; fs.append(el('label',{for:id},r,el('span',{},o)));});
+    box.append(fs);
+  });
+}
+function checkQuiz(){
+  let sc=0; const d={}; QUIZ.forEach((q,i)=>{const v=S.quiz[i]; if(v==null) return; const ok=+v===q.a; if(ok)sc++; d[i]=ok?'ok':'bad';});
+  S.chk.e13={score:sc,max:QUIZ.length,detail:d}; save(); renderQuiz();
+  if(sc===QUIZ.length) showFb($('#fb-e13'),'ok','Alles richtig!','Du hast die Einkommens-Werkstatt gemeistert.');
+  else showFb($('#fb-e13'),'mid',`${sc} von ${QUIZ.length} richtig`,'Rot markierte Fragen: Schau in Station 1 oder 3 nach.');
+}
+
+/* ---------- Überblick ---------- */
+const answered=id=>(S.ans[id]||'').trim().length>=15;
+function renderOverview(){
+  const box=$('#overview'); box.replaceChildren();
+  const a=id=>S.chk[id]?`${S.chk[id].score}/${S.chk[id].max}`:'–';
+  const o=ids=>ids.filter(answered).length+'/'+ids.length;
+  const f=ids=>ids.filter(id=>(S.fb[id]||'').trim()).length;
+  [['entdecken','Station 1',[`Quellen zuordnen: ${a('e1')}`]],
+   ['kultur','Station 2',[`Personen: ${a('e2')}`,`Antworten: ${o(['e3'])}`]],
+   ['sichern','Station 3',[`Rechnung: ${a('e5a')}`,`Fall-Check: ${a('e6')}`,`Antworten: ${o(['e4','e5b','e7'])}`]],
+   ['existenz','Station 4',[`Beschreiben: ${a('e8')}`,`Untersuchen: ${a('e9')}`,`Antworten: ${o(['e10'])}`]],
+   ['luxus','Station 5',[`Plan: ${S.planTouched?'erstellt':'–'}`,`Antworten: ${o(['e12'])}`,`Kurz-Check: ${a('e13')}`]],
+   ['sichern','fobizz',[`${f(Object.keys(OPEN))} von ${Object.keys(OPEN).length} Antworten mit KI-Feedback`]]
+  ].forEach(([c,t,ls])=>box.append(el('div',{class:'ov c-'+c},el('b',{},t),...ls.map(l=>el('span',{},l)))));
+}
+
+/* ---------- Export ---------- */
+const sc=id=>S.chk[id]?` – ${S.chk[id].score} von ${S.chk[id].max} richtig`:' – noch nicht geprüft';
+function qItem(id){const t=OPEN[id];return {t:'q',q:`Aufgabe ${t.nr}: ${t.q}`,a:(S.ans[id]||'').trim(),ki:(S.fb[id]||'').trim()?'KI-Feedback (fobizz): '+S.fb[id].trim():null};}
+function mark(det,k){return det&&det[k]?(det[k]==='ok'?' (richtig)':' (falsch)'):'';}
+function buildReport(){
+  const d1=S.chk.e1&&S.chk.e1.detail, d2=S.chk.e2&&S.chk.e2.detail, d6=S.chk.e6&&S.chk.e6.detail, d8=S.chk.e8&&S.chk.e8.detail, d9=S.chk.e9&&S.chk.e9.detail, d13=S.chk.e13&&S.chk.e13.detail;
+  const inc=INC.reduce((a,x)=>a+(+S.inc[x.id]||0),0), out=EXP.reduce((a,x)=>a+(+S.exp[x.id]||0),0);
+  return [
+    {title:'Station 1 · Die vier Einkommensquellen',rgb:[42,127,158],items:[{t:'list',label:'Aufgabe 1 – Welche Quelle?'+sc('e1'),lines:SRC.map(s=>`${s.l}: ${S.src[s.id]?QNAME[S.src[s.id]]:'–'}${mark(d1,s.id)}`)}]},
+    {title:'Station 2 · Wer bekommt was?',rgb:[42,111,176],items:[{t:'list',label:'Aufgabe 2 – Personen und ihr Einkommen'+sc('e2'),lines:PEOPLE.map(p=>`${p.l}: ${S.ppl[p.id]||'–'}${mark(d2,p.id)}`)},qItem('e3')]},
+    {title:'Station 3 · Einkommen von Jugendlichen',rgb:[116,70,144],items:[qItem('e4'),
+      {t:'list',label:'Aufgabe 5a – Differenz der Taschengeld-Empfehlungen'+sc('e5a'),lines:[S.e5a?S.e5a+' €':'–']},qItem('e5b'),
+      {t:'list',label:'Aufgabe 6 – Fall-Check Taschengeldparagraf'+sc('e6'),lines:CASES.map(c=>`${c.t} → ${S.cases[c.id]==='y'?'gültig':S.cases[c.id]==='n'?'nicht gültig':'–'}${mark(d6,c.id)}`)},qItem('e7')]},
+    {title:'Station 4 · Grafik „Konsumfreudige Jugend“',rgb:[31,122,92],items:[
+      {t:'list',label:'Aufgabe 8 – Beschreiben'+sc('e8'),lines:G1.map(g=>`${g.l}: ${S.g1[g.id]!=null&&S.g1[g.id]!==''?g.o[+S.g1[g.id]]:'–'}${mark(d8,g.id)}`)},
+      {t:'list',label:'Aufgabe 9 – Untersuchen'+sc('e9'),lines:G2.map(g=>`${g.l}: ${g.t==='num'?(S.g2[g.id]?S.g2[g.id]+' Mrd. €':'–'):(S.g2[g.id]!=null&&S.g2[g.id]!==''?g.o[+S.g2[g.id]]:'–')}${mark(d9,g.id)}`)},qItem('e10')]},
+    {title:'Station 5 · Mein Taschengeld-Plan',rgb:[184,132,26],items:[
+      {t:'list',label:'Aufgabe 11 – Mein Plan für einen Monat',lines:[`Einnahmen: ${INC.map(x=>x.l+' '+eur(+S.inc[x.id]||0)).join(', ')} – zusammen ${eur(inc)}`,...EXP.map(x=>`${x.l}: ${eur(+S.exp[x.id]||0)}`),`Rest: ${eur(inc-out)}`,`Sparziel: ${S.goalName||'–'} (${eur(+S.goalAmt||0)})${(+S.exp.spar>0&&+S.goalAmt>0)?' – erreicht in '+Math.ceil(S.goalAmt/S.exp.spar)+' Monaten':''}`]},
+      qItem('e12'),
+      {t:'list',label:'Aufgabe 13 – Kurz-Check'+sc('e13'),lines:QUIZ.map((q,i)=>`${i+1}. ${q.q} ${S.quiz[i]!=null?q.o[+S.quiz[i]]:'–'}${mark(d13,i)}`)}]}
+  ];
+}
+function nowDE(){const d=new Date();return d.toLocaleDateString('de-DE',{day:'2-digit',month:'2-digit',year:'numeric'})+', '+d.toLocaleTimeString('de-DE',{hour:'2-digit',minute:'2-digit'})+' Uhr';}
+function reportText(){
+  const name=$('#abgName').value.trim();
+  const out=['EINKOMMENS-WERKSTATT – MEINE ERGEBNISSE','Wirtschaft · Klasse 8 · Woher kommt das Geld?',`Name: ${name||'–'} · Stand: ${nowDE()} · Fortschritt: ${$('#progTxt').textContent}`,''];
+  buildReport().forEach(sec=>{out.push('','== '+sec.title.toUpperCase()+' ==');sec.items.forEach(it=>{
+    if(it.t==='q'){out.push('',it.q,it.a||'(keine Antwort)'); if(it.ki) out.push(it.ki);} else {out.push('',it.label); it.lines.forEach(l=>out.push('  '+l));}
+  });});
+  return out.join('\n');
+}
+const CP1252='€‚ƒ„…†‡ˆ‰Š‹ŒŽ‘’“”•–—˜™š›œžŸ';
+function pdfClean(t){return String(t||'').replace(/\r/g,'').replace(/→/g,'->').replace(/−/g,'-').replace(/[   ]/g,' ').split('').filter(ch=>{const c=ch.charCodeAt(0);return c===10||(c>=32&&c<=126)||(c>=160&&c<=255)||CP1252.includes(ch);}).join('');}
+function makePdfBlob(){
+  const { jsPDF } = window.jspdf; const doc=new jsPDF({unit:'mm',format:'a4'});
+  const W=210,M=16,CW=W-2*M,BOTTOM=282; let y=16; const INK=[24,34,30],MUTED=[86,100,93],PURPLE=[91,49,117];
+  const ensure=h=>{if(y+h>BOTTOM){doc.addPage();y=18;}};
+  function write(str,o={}){const size=o.size||10.5;doc.setFont('helvetica',o.style||'normal');doc.setFontSize(size);doc.setTextColor(...(o.color||INK));const lh=size*0.3528*1.38,ind=o.indent||0;
+    pdfClean(str).split('\n').forEach(par=>{doc.splitTextToSize(par||' ',CW-ind).forEach(ln=>{ensure(lh);doc.text(ln,M+ind,y+lh*0.78);y+=lh;});}); y+=(o.after!=null?o.after:1.2);}
+  [[31,122,92],[42,111,176],[184,132,26]].forEach((c,i)=>{doc.setFillColor(...c);doc.ellipse(M+6,y+11-i*3.6,6,1.9,'F');doc.rect(M,y+8.6-i*3.6,12,2.4,'F');});
+  doc.setFont('helvetica','bold');doc.setFontSize(20);doc.setTextColor(...INK);doc.text('Einkommens-Werkstatt',M+18,y+6);
+  doc.setFont('helvetica','normal');doc.setFontSize(10);doc.setTextColor(...MUTED);doc.text(pdfClean('Meine Ergebnisse · Wirtschaft · Klasse 8 · Woher kommt das Geld?'),M+18,y+11.5); y+=18;
+  const name=$('#abgName').value.trim();
+  doc.setFillColor(233,239,234);doc.roundedRect(M,y,CW,10,2,2,'F');doc.setFont('helvetica','bold');doc.setFontSize(10.5);doc.setTextColor(...INK);doc.text(pdfClean(`Name: ${name||'–'}`),M+4,y+6.5);
+  doc.setFont('helvetica','normal');doc.text(pdfClean(`Stand: ${nowDE()}   ·   Fortschritt: ${$('#progTxt').textContent}`),M+CW-4,y+6.5,{align:'right'}); y+=16;
+  buildReport().forEach(sec=>{ensure(24);doc.setFillColor(...sec.rgb);doc.roundedRect(M,y,CW,9,2,2,'F');doc.setFont('helvetica','bold');doc.setFontSize(12);doc.setTextColor(255,255,255);doc.text(pdfClean(sec.title),M+4,y+6.2);y+=13;
+    sec.items.forEach(it=>{ensure(14);
+      if(it.t==='q'){write(it.q,{size:9.5,style:'bold',color:MUTED,after:0.8});write(it.a||'(keine Antwort)',{style:it.a?'normal':'italic',color:it.a?INK:MUTED,after:it.ki?1:3});}
+      else{write(it.label,{size:9.5,style:'bold',color:MUTED,after:0.8});it.lines.forEach((l,i)=>write(l,{indent:3,after:i===it.lines.length-1?3:0.4}));}
+      if(it.ki){doc.setDrawColor(...PURPLE);doc.setLineWidth(0.6);const y0=y;write(it.ki,{size:9.5,style:'italic',color:PURPLE,indent:3,after:0});doc.line(M+0.5,y0,M+0.5,y);y+=3;}
+    }); y+=2;});
+  const n=doc.getNumberOfPages(); for(let i=1;i<=n;i++){doc.setPage(i);doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(...MUTED);doc.text(pdfClean(`Einkommens-Werkstatt · ${name||'Ergebnisse'} · Seite ${i} von ${n}`),W/2,291,{align:'center'});}
+  return doc.output('blob');
+}
+async function savePdf(){
+  const note=$('#pdfNote'),btn=$('#pdfBtn'); note.hidden=false; S.name=$('#abgName').value.trim(); save();
+  if(!window.jspdf){note.textContent='Das PDF-Werkzeug konnte nicht geladen werden. Nutze „Als Text kopieren“.';return;}
+  if(!dl){note.textContent='PDF-Speichern ist in dieser Ansicht nicht verfügbar. Nutze „Als Text kopieren“.';return;}
+  btn.disabled=true; note.textContent='PDF wird erstellt …';
+  try{const blob=makePdfBlob(); note.textContent='Bestätige das Speichern im Fenster.'; await dl.save({filename:'Einkommens-Werkstatt_'+(norm(S.name)||'Ergebnisse')+'.pdf',data:blob}); note.textContent='PDF gespeichert.';}
+  catch(e){const c=e&&e.code; note.textContent=c==='declined'?'Speichern abgebrochen.':c==='rate_limited'?'Es ist schon ein Speichern-Fenster offen. Schließ es und versuch es noch einmal.':'Das PDF konnte nicht gespeichert werden. Nutze „Als Text kopieren“.';}
+  finally{btn.disabled=false;}
+}
+async function copyText(){
+  const note=$('#pdfNote'),ta=$('#txtOut'); S.name=$('#abgName').value.trim(); save(); const t=reportText(); ta.value=t; note.hidden=false;
+  try{await navigator.clipboard.writeText(t);ta.hidden=true;note.textContent='Kopiert! Füge den Text z. B. in IServ, Pages oder Word ein.';}
+  catch(e){ta.hidden=false;ta.focus();ta.select();note.textContent='Der Text ist markiert. Kopiere ihn mit Strg+C (am iPad: gedrückt halten → Kopieren).';}
+}
+
+
+/* ---------- Sicherungscode ---------- */
+function b64urlFromBytes(bytes){let bin='';for(let i=0;i<bytes.length;i+=0x8000)bin+=String.fromCharCode.apply(null,bytes.subarray(i,i+0x8000));return btoa(bin).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');}
+function bytesFromB64url(t){t=t.replace(/-/g,'+').replace(/_/g,'/');while(t.length%4)t+='=';const bin=atob(t);const b=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)b[i]=bin.charCodeAt(i);return b;}
+async function makeSaveCode(){
+  const data=Object.assign({},S,{name:$('#abgName').value.trim()||S.name||''});
+  const raw=new TextEncoder().encode(JSON.stringify({v:1,d:new Date().toISOString(),s:data}));
+  if(typeof CompressionStream==='function'){
+    try{const cs=new Blob([raw]).stream().pipeThrough(new CompressionStream('deflate-raw'));const buf=new Uint8Array(await new Response(cs).arrayBuffer());return 'EKW2.'+b64urlFromBytes(buf);}catch(e){}
+  }
+  return 'EKW1.'+b64urlFromBytes(raw);
+}
+async function readSaveCode(text){
+  const m=String(text||'').replace(/\s+/g,'').match(/EKW([12])\.([A-Za-z0-9_-]+)/);
+  if(!m) throw new Error('nocode');
+  let bytes=bytesFromB64url(m[2]);
+  if(m[1]==='2'){ if(typeof DecompressionStream!=='function') throw new Error('nodecomp'); const ds=new Blob([bytes]).stream().pipeThrough(new DecompressionStream('deflate-raw')); bytes=new Uint8Array(await new Response(ds).arrayBuffer()); }
+  const o=JSON.parse(new TextDecoder().decode(bytes));
+  if(!o||o.v!==1||!o.s) throw new Error('bad');
+  return o;
+}
+async function onMakeCode(){
+  S.name=$('#abgName').value.trim(); save();
+  const note=$('#codeNote'), ta=$('#codeOut'); note.hidden=false; note.textContent='Code wird erstellt …';
+  try{ const c=await makeSaveCode(); ta.value=c; ta.hidden=false; $('#cpCode').hidden=false; note.textContent=S.name?`Code für ${S.name} erstellt. Kopiere ihn vollständig.`:'Code erstellt. Tipp: Trag oben deinen Namen oder dein Kürzel ein, dann weiß deine Lehrkraft, von wem der Code ist.'; }
+  catch(e){ note.textContent='Der Code konnte nicht erstellt werden. Nutze „Als Text kopieren“.'; }
+}
+const loadArmed={};
+async function onLoad(n){
+  const box=$('#loadBox'+n), note=$('#loadNote'+n), btn=$('#loadBtn'+n); note.hidden=false;
+  let o; try{ o=await readSaveCode(box.value); }catch(e){ note.textContent = e.message==='nocode' ? 'Kein Sicherungscode gefunden. Er beginnt mit „EKW“.' : e.message==='nodecomp' ? 'Dieser Browser kann den Code nicht entpacken. Öffne die Seite in einem aktuellen Browser.' : 'Der Code ist unvollständig oder beschädigt. Kopiere ihn noch einmal ganz.'; return; }
+  if(!loadArmed[n]){ loadArmed[n]=true; btn.textContent='Ja, Stand ersetzen'; note.textContent=`Gefunden: Stand von ${o.s.name||'ohne Namen'} vom ${new Date(o.d).toLocaleString('de-DE',{day:'2-digit',month:'2-digit',hour:'2-digit',minute:'2-digit'})} Uhr. Dein aktueller Stand auf diesem Gerät wird ersetzt. Tippe noch einmal zum Bestätigen.`; setTimeout(()=>{loadArmed[n]=false; if(btn.isConnected) btn.textContent='Code laden';},8000); return; }
+  try{ localStorage.setItem(KEY,JSON.stringify(Object.assign(blank(),o.s))); }catch(e){ note.textContent='Speichern auf diesem Gerät ist nicht möglich (z. B. privates Fenster).'; return; }
+  location.reload();
+}
+
+/* ---------- Popover ---------- */
+const pop=$('#pop'); let popFrom=null;
+function openPop(btn,h,p){$('#popH').textContent=h;$('#popP').textContent=p;pop.hidden=false;popFrom=btn;const r=btn.getBoundingClientRect(),w=pop.offsetWidth;let left=r.left+window.scrollX;left=Math.min(left,window.scrollX+document.documentElement.clientWidth-w-16);left=Math.max(16+window.scrollX,left);pop.style.left=left+'px';pop.style.top=(r.bottom+window.scrollY+8)+'px';$('#popX').focus({preventScroll:true});}
+function closePop(){if(pop.hidden)return;pop.hidden=true;if(popFrom)popFrom.focus({preventScroll:true});popFrom=null;}
+document.addEventListener('click',e=>{const t=e.target.closest('.term');if(t){const d=TERMS[t.dataset.term];openPop(t,d[0],d[1]);e.stopPropagation();return;}const o=e.target.closest('.op');if(o){const d=OPS[o.dataset.op];openPop(o,'Operator: '+d[0],d[1]);e.stopPropagation();return;}if(!pop.contains(e.target))closePop();});
+$('#popX').addEventListener('click',closePop); document.addEventListener('keydown',e=>{if(e.key==='Escape')closePop();});
+
+/* ---------- Navigation & Fortschritt ---------- */
+function stationDone(i){
+  if(i===0) return !!S.chk.e1;
+  if(i===1) return !!S.chk.e2 && answered('e3');
+  if(i===2) return !!(S.chk.e5a&&S.chk.e6) && ['e4','e5b','e7'].every(answered);
+  if(i===3) return !!(S.chk.e8&&S.chk.e9) && answered('e10');
+  if(i===4) return S.planTouched && answered('e12') && !!S.chk.e13;
+}
+function progress(){
+  const steps=[!!S.chk.e1,!!S.chk.e2,answered('e3'),answered('e4'),!!S.chk.e5a,answered('e5b'),!!S.chk.e6,answered('e7'),!!S.chk.e8,!!S.chk.e9,answered('e10'),S.planTouched,answered('e12'),!!S.chk.e13];
+  const p=Math.round(steps.filter(Boolean).length/steps.length*100); $('#progTxt').textContent=p+' %'; $('#progBar').style.width=p+'%';
+  $$('.st-btn').forEach((b,i)=>b.classList.toggle('done',!!stationDone(i)));
+  if(S.st===4&&document.getElementById('overview')) renderOverview();
+}
+function buildNav(){const nav=$('#nav');STATIONS.forEach((s,i)=>{const b=el('button',{class:'st-btn c-'+s.k,type:'button'},el('span',{class:'n'},String(i+1)),s.label);b.insertAdjacentHTML('beforeend','<svg class="i ok" viewBox="0 0 24 24" aria-label="erledigt"><path d="m5 12 4 4 10-10"/></svg>');b.onclick=()=>go(i);nav.append(b);});}
+function go(i,scroll=true){
+  S.st=Math.max(0,Math.min(4,i)); save();
+  $$('.station').forEach(s=>s.hidden=+s.dataset.st!==S.st);
+  $$('.st-btn').forEach((b,j)=>{if(j===S.st)b.setAttribute('aria-current','step');else b.removeAttribute('aria-current');});
+  $('#where').textContent=`Station ${S.st+1} von 5`; $('#prev').disabled=S.st===0; $('#next').hidden=S.st===4; closePop();
+  if(S.st===4) renderOverview();
+  $$('.st-btn')[S.st].scrollIntoView({block:'nearest',inline:'center'});
+  if(scroll) window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ---------- Start ---------- */
+buildNav(); mountOpen(); renderSrc(); renderPeople(); renderCases(); renderG1(); renderG2(); renderQuiz();
+INC.forEach(x=>moneyRow('inc',x,$('#inc'))); EXP.forEach(x=>moneyRow('exp',x,$('#exp')));
+$('#goalName').value=S.goalName||''; $('#goalAmt').value=S.goalAmt;
+$('#goalName').oninput=e=>{S.goalName=e.target.value;save();renderPlan();}; $('#goalAmt').oninput=e=>{S.goalAmt=Math.max(0,+e.target.value||0);save();renderPlan();};
+renderPlan();
+$$('.tier').forEach(t=>t.addEventListener('click',()=>t.setAttribute('aria-expanded',t.getAttribute('aria-expanded')==='true'?'false':'true')));
+$('#chk-e1').onclick=checkSrc; $('#chk-e2').onclick=checkPeople; $('#chk-e5a').onclick=checkE5a; $('#chk-e6').onclick=checkCases; $('#chk-e8').onclick=checkG1; $('#chk-e9').onclick=checkG2; $('#chk-e13').onclick=checkQuiz;
+$('#e5a').value=S.e5a; $('#e5a').oninput=e=>{S.e5a=e.target.value;save();};
+$('#abgName').value=S.name||''; $('#pdfBtn').onclick=savePdf; $('#txtBtn').onclick=copyText;
+$('#mkCode').onclick=onMakeCode; $('#cpCode').onclick=()=>copyTo2($('#codeOut').value,$('#codeNote'),$('#codeOut'));
+$('#loadBtn1').onclick=()=>onLoad(1); $('#loadBtn5').onclick=()=>onLoad(5);
+let resetArmed=false;
+$('#reset').onclick=()=>{const b=$('#reset');if(!resetArmed){resetArmed=true;b.textContent='Wirklich alles löschen? Nochmal tippen';b.style.background='var(--bad)';b.style.color='var(--on-accent)';setTimeout(()=>{resetArmed=false;b.textContent='Alles löschen und neu beginnen';b.style.background='';b.style.color='';},4000);return;}try{localStorage.removeItem(KEY);}catch(e){}location.reload();};
+$('#prev').onclick=()=>go(S.st-1); $('#next').onclick=()=>go(S.st+1);
+if(S.chk.e1)checkSrc(); if(S.chk.e2)checkPeople(); if(S.chk.e5a)checkE5a(); if(S.chk.e6)checkCases(); if(S.chk.e8)checkG1(); if(S.chk.e9)checkG2(); if(S.chk.e13)checkQuiz();
+$$('.fb').forEach(f=>{ if(!f.textContent.trim()) f.hidden=true; });
+go(S.st||0,false); progress();
+})();
+</script>
+
+</body></html>

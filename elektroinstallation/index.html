@@ -1,0 +1,1690 @@
+<!doctype html><html><head><script>/* Lernplattformen auf GitHub Pages: Speichern ohne claude.ai */
+(function(){if(window.claude)return;var T={pdf:'application/pdf',txt:'text/plain;charset=utf-8',png:'image/png',jpg:'image/jpeg',jpeg:'image/jpeg',json:'application/json',csv:'text/csv;charset=utf-8',html:'text/html;charset=utf-8',docx:'application/vnd.openxmlformats-officedocument.wordprocessingml.document',xlsx:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',ino:'text/plain;charset=utf-8'};
+var dl={save:function(o){return new Promise(function(res,rej){try{var n=(o&&o.filename)||'datei',x=(n.split('.').pop()||'').toLowerCase(),d=o.data,b=d instanceof Blob?d:new Blob([d],{type:T[x]||'application/octet-stream'});var u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=n;a.rel='noopener';document.body.appendChild(a);a.click();setTimeout(function(){a.remove();URL.revokeObjectURL(u);},4000);res();}catch(e){rej({code:'failed',message:String(e)});}});}};
+window.claude={use:function(n){return Promise.resolve(n==='downloads'?dl:null);}};})();</script><meta property="og:type" content="website"><meta property="og:title" content="Elektroinstallation"><meta property="og:description" content="Stromkreisarten, Leistung und Stromstärke, Kabelquerschnitt, Sicherungen im Haus und im Kfz sowie Schaltpläne – mit Abschlussprojekt: zwei Installationen mit 12 V und 230 V."><meta property="og:url" content="https://beyrodthome.github.io/Lernplattformen/elektroinstallation/"><meta property="og:image" content="https://beyrodthome.github.io/Lernplattformen/vorschau/Vorschau_Elektroinstallation.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="description" content="Stromkreisarten, Leistung und Stromstärke, Kabelquerschnitt, Sicherungen im Haus und im Kfz sowie Schaltpläne – mit Abschlussprojekt: zwei Installationen mit 12 V und 230 V."><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Elektroinstallation – Lernplattform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#035591; --blue-d:#023a63; --yellow:#F5B700; --yellow-soft:#fff3c9;
+  --ink:#14232f; --muted:#56687a; --paper:#eef3f7; --card:#ffffff; --line:#d3dde6;
+  --accent:#035591; --accent-ink:#ffffff; --link:#035591;
+  --ok:#17803f; --ok-bg:#e2f4e8; --bad:#c23b2e; --bad-bg:#fce8e5; --miss:#b7791f; --miss-bg:#fff3d6;
+  --stripe:rgba(3,85,145,.10);
+  --f-head:'Barlow Condensed','Arial Narrow',Arial,sans-serif;
+  --f-body:'Source Sans 3','Segoe UI',Helvetica,Arial,sans-serif;
+  --pc0:#d9480f; --pc1:#1971c2; --pc2:#2b8a3e; --pc3:#9c36b5; --pc4:#c2255c; --pc5:#5c7c00;
+  --safe-t:env(safe-area-inset-top,0px); --safe-b:env(safe-area-inset-bottom,0px);
+}
+:root:not([data-theme="light"]){}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0d1922; --card:#152531; --ink:#e9f0f6; --muted:#9db1c1; --line:#2a4051;
+    --accent:#3a8fd6; --accent-ink:#04121d; --link:#7fbdf0;
+    --ok:#4cc37c; --ok-bg:#12321f; --bad:#ff8074; --bad-bg:#3a1a17; --miss:#f0b95a; --miss-bg:#3a2d10;
+    --yellow-soft:#3a3010; --stripe:rgba(127,189,240,.10);
+    --pc0:#ff9a5c; --pc1:#74b7ff; --pc2:#6fd68a; --pc3:#d59bf0; --pc4:#ff8fb5; --pc5:#b7d84a;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0d1922; --card:#152531; --ink:#e9f0f6; --muted:#9db1c1; --line:#2a4051;
+  --accent:#3a8fd6; --accent-ink:#04121d; --link:#7fbdf0;
+  --ok:#4cc37c; --ok-bg:#12321f; --bad:#ff8074; --bad-bg:#3a1a17; --miss:#f0b95a; --miss-bg:#3a2d10;
+  --yellow-soft:#3a3010; --stripe:rgba(127,189,240,.10);
+  --pc0:#ff9a5c; --pc1:#74b7ff; --pc2:#6fd68a; --pc3:#d59bf0; --pc4:#ff8fb5; --pc5:#b7d84a;
+}
+*{box-sizing:border-box}
+html{height:100%;scroll-padding-top:calc(var(--safe-t) + 70px)}
+body{margin:0;min-height:100%;background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.55;padding-top:var(--safe-t);padding-bottom:var(--safe-b);-webkit-text-size-adjust:100%}
+h1,h2,h3{font-family:var(--f-head);font-weight:700;line-height:1.1;margin:0;letter-spacing:.01em}
+h1{font-size:clamp(2.4rem,6vw,3.6rem)} h2{font-size:clamp(1.9rem,4vw,2.5rem)} h3{font-size:1.45rem;font-weight:600}
+p{margin:.6em 0} a{color:var(--link)}
+button,select,input{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
+.hidden{display:none!important}
+
+/* Layout */
+.app{display:grid;grid-template-columns:290px minmax(0,1fr);min-height:100vh}
+.app>div{min-width:0}
+aside{background:var(--blue-d);color:#eaf3fb;padding:22px 18px;position:sticky;top:0;height:100vh;overflow:auto;display:flex;flex-direction:column;gap:18px}
+:root[data-theme="dark"] aside{background:#0a141c}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) aside{background:#0a141c}}
+.brand{display:flex;gap:12px;align-items:flex-end}
+.brand b{font-family:var(--f-head);font-size:1.55rem;line-height:1;font-weight:700;display:block}
+.brand small{display:block;opacity:.75;font-size:.85rem;margin-top:4px}
+.stack{flex:none}
+nav ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+nav a{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:4px;color:#eaf3fb;text-decoration:none;font-weight:500;border-left:4px solid transparent}
+nav a:hover{background:rgba(255,255,255,.08)}
+nav a[aria-current="page"]{background:rgba(255,255,255,.14);border-left-color:var(--yellow);font-weight:700}
+nav .cnt{margin-left:auto;font-size:.85rem;opacity:.8;font-variant-numeric:tabular-nums}
+nav .done .cnt{color:var(--yellow);opacity:1;font-weight:700}
+.sidefoot{margin-top:auto;font-size:.8rem;opacity:.7}
+.themebtn{background:none;border:1px solid rgba(255,255,255,.3);color:#eaf3fb;border-radius:4px;padding:5px 10px;cursor:pointer;font-size:.85rem}
+main{padding:34px clamp(16px,4vw,56px) 90px;max-width:1000px;width:100%}
+.topbar{display:none}
+@media (max-width:900px){
+  .app{grid-template-columns:minmax(0,1fr)}
+  aside{display:none}
+  .topbar{display:block;position:sticky;top:0;z-index:20;background:var(--blue-d);color:#fff;padding:calc(8px + var(--safe-t)) 12px 8px}
+  .topbar .row{display:flex;align-items:center;gap:10px}
+  .topbar b{font-family:var(--f-head);font-size:1.25rem}
+  .topbar .pct{margin-left:auto;font-variant-numeric:tabular-nums;font-size:.9rem;opacity:.9}
+  .pills{display:flex;gap:6px;overflow-x:auto;padding:8px 0 2px;scrollbar-width:thin}
+  .pills a{flex:none;color:#fff;text-decoration:none;padding:5px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.35);font-size:.9rem;white-space:nowrap}
+  .pills a[aria-current="page"]{background:var(--yellow);color:#14232f;border-color:var(--yellow);font-weight:700}
+  html{scroll-padding-top:110px}
+  body{padding-top:0}
+}
+
+/* Hero / module header */
+.pagehead{margin-bottom:26px;padding-bottom:20px;border-bottom:3px solid transparent;border-image:repeating-linear-gradient(90deg,var(--blue) 0 14px,var(--yellow) 14px 20px) 1}
+.pagehead .lead{font-size:1.15rem;color:var(--muted);max-width:62ch;margin-top:10px}
+.hero{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:28px;align-items:center;margin-bottom:30px}
+.hero .photo{background:#fff;border-radius:6px;border:1px solid var(--line);padding:10px;position:relative;overflow:hidden}
+.hero .photo::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 9px,var(--stripe) 9px 10px);pointer-events:none}
+.hero img{display:block;width:100%;height:auto}
+@media(max-width:760px){.hero{grid-template-columns:minmax(0,1fr)}}
+.facts{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;margin:18px 0}
+.fact{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--yellow);padding:10px 14px;border-radius:4px}
+.fact b{display:block;font-family:var(--f-head);font-size:1.5rem;line-height:1.1;color:var(--accent)}
+.fact span{font-size:.92rem;color:var(--muted)}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;gap:8px;border:2px solid var(--accent);background:var(--accent);color:var(--accent-ink);padding:9px 18px;border-radius:4px;font-weight:600;cursor:pointer;text-decoration:none;min-height:44px}
+.btn:hover{filter:brightness(1.08)}
+.btn.ghost{background:transparent;color:var(--accent)}
+.btn.yellow{background:var(--yellow);border-color:var(--yellow);color:#14232f}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btnrow{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:14px}
+.field{display:flex;flex-direction:column;gap:4px;flex:1 1 220px}
+.field label{font-weight:600;font-size:.92rem}
+.field input{padding:9px 12px;border:2px solid var(--line);border-radius:4px;background:var(--card);min-height:44px}
+.field input:focus{border-color:var(--accent)}
+
+/* Info blocks */
+.card{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:18px 20px;margin:18px 0}
+.merke{border-left:6px solid var(--yellow);background:var(--yellow-soft);padding:12px 16px;border-radius:0 6px 6px 0;margin:16px 0}
+.merke b.t{font-family:var(--f-head);font-size:1.25rem;display:block;margin-bottom:2px}
+.vgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin:16px 0}
+.vcard{background:var(--card);border:1px solid var(--line);border-top:5px solid var(--blue);border-radius:4px;padding:10px 14px 14px}
+.vcard.me{border-top-color:var(--yellow);box-shadow:0 0 0 2px var(--yellow) inset}
+.vcard h3{margin:2px 0 4px}
+.vcard p{font-size:.95rem;margin:.3em 0}
+.vcard svg{width:100%;height:auto;display:block;background:var(--paper);border-radius:3px}
+.tag{display:inline-block;background:var(--yellow);color:#14232f;font-weight:700;font-size:.8rem;padding:1px 8px;border-radius:999px}
+.s-tank{fill:none;stroke:var(--ink);stroke-width:2}.s-liq{fill:var(--blue);opacity:.35}.s-pow{fill:var(--blue);opacity:.25}
+.s-plat{fill:var(--ink)}.s-model{fill:var(--yellow);stroke:var(--ink);stroke-width:1}.s-laser{stroke:#d9480f;stroke-width:2;stroke-dasharray:4 3}
+.s-spot{fill:#d9480f}.s-line{stroke:var(--ink);stroke-width:2;fill:none}.s-noz{fill:var(--ink)}.s-fil{stroke:var(--accent);stroke-width:3;fill:none}
+.s-dot{fill:var(--blue)}.s-txt{font:600 9px var(--f-body);fill:var(--ink)}
+
+/* Tasks */
+.task{background:var(--card);border:1px solid var(--line);border-left:7px solid var(--accent);border-radius:4px;padding:16px 18px 18px;margin:22px 0;transition:border-color .2s}
+.task.done{border-left-color:var(--ok)}
+.task.assisted{border-left-color:var(--miss)}
+.task .th{display:flex;align-items:baseline;gap:10px;margin-bottom:6px}
+.task .th h3{margin:0}
+.task .state{margin-left:auto;font-size:.85rem;font-weight:700;color:var(--ok)}
+.task.assisted .state{color:var(--miss)}
+.task .q{margin:.2em 0 .8em}
+.figure{margin:10px 0 14px}.figure svg,.figure img{max-width:100%;height:auto}
+.fb{margin-top:12px;font-weight:600}
+.fb .msg{display:block;padding:10px 14px;border-radius:4px;border-left:5px solid}
+.fb .good{background:var(--ok-bg);border-color:var(--ok);color:var(--ink)}
+.fb .warn{background:var(--miss-bg);border-color:var(--miss);color:var(--ink)}
+.fb .bad{background:var(--bad-bg);border-color:var(--bad);color:var(--ink)}
+.fb .why{display:block;font-weight:400;margin-top:4px}
+
+/* MC */
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{position:relative;display:flex;gap:12px;align-items:flex-start;border:2px solid var(--line);border-radius:4px;padding:10px 12px;cursor:pointer;background:var(--card)}
+.opt:hover{border-color:var(--accent)}
+.opt input{position:absolute;opacity:0;pointer-events:none}
+.opt .mark{flex:none;width:22px;height:22px;border:2px solid var(--muted);border-radius:50%;margin-top:2px;display:grid;place-items:center}
+.opt.multi .mark{border-radius:4px}
+.opt input:checked + .mark{background:var(--accent);border-color:var(--accent)}
+.opt input:checked + .mark::after{content:"";width:8px;height:8px;background:var(--accent-ink);border-radius:50%}
+.opt.multi input:checked + .mark::after{border-radius:1px;width:10px;height:10px}
+.opt input:focus-visible + .mark{outline:3px solid var(--yellow);outline-offset:2px}
+.opt.ok{border-color:var(--ok);background:var(--ok-bg)}.opt.bad{border-color:var(--bad);background:var(--bad-bg)}.opt.miss{border-color:var(--miss);border-style:dashed}
+.opt.locked{cursor:default}
+.hintline{font-size:.9rem;color:var(--muted);margin:0 0 8px}
+
+/* gaps + table */
+.gaptext{line-height:2.4;margin:.2em 0}
+select.gap,input.gap,.grid select{border:2px solid var(--line);border-radius:4px;padding:5px 8px;background:var(--card);min-height:38px;max-width:100%;margin:0 4px}
+input.gap{min-width:90px}
+select.gap:focus,input.gap:focus,.grid select:focus{border-color:var(--accent)}
+.gap.ok,.grid select.ok,input.num.ok{border-color:var(--ok)!important;background:var(--ok-bg)!important}
+.gap.bad,.grid select.bad,input.num.bad{border-color:var(--bad)!important;background:var(--bad-bg)!important}
+.tscroll{overflow-x:auto}
+table.grid{border-collapse:collapse;width:100%;min-width:560px}
+.grid th,.grid td{border:1px solid var(--line);padding:8px 8px;text-align:left;vertical-align:middle}
+.grid thead th{background:var(--accent);color:var(--accent-ink);font-family:var(--f-head);font-size:1.1rem;font-weight:600}
+.grid tbody th{background:var(--paper);font-weight:700;min-width:120px}
+.grid select{width:100%;margin:0}
+.grid .pic svg{width:130px;height:auto;display:block;background:#fff;border-radius:3px}
+
+/* order */
+ol.ord{list-style:none;counter-reset:o;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+ol.ord li{counter-increment:o;display:flex;gap:10px;align-items:center;border:2px solid var(--line);border-radius:4px;padding:8px 10px;background:var(--card)}
+ol.ord li::before{content:counter(o);flex:none;width:28px;height:28px;border-radius:50%;background:var(--paper);border:2px solid var(--line);display:grid;place-items:center;font-weight:700;font-size:.9rem}
+ol.ord li.ok{border-color:var(--ok);background:var(--ok-bg)}ol.ord li.bad{border-color:var(--bad);background:var(--bad-bg)}
+.ordbtns{margin-left:auto;display:flex;gap:4px}
+.ib{width:38px;height:38px;border:2px solid var(--line);background:var(--card);border-radius:4px;cursor:pointer;font-size:.9rem}
+.ib:hover:not(:disabled){border-color:var(--accent)}.ib:disabled{opacity:.35;cursor:default}
+
+/* match */
+.match{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px 26px}
+.mbtn{overflow-wrap:anywhere;hyphens:auto}
+.mcol{display:flex;flex-direction:column;gap:8px}
+.mbtn{position:relative;text-align:left;border:2px solid var(--line);background:var(--card);border-radius:4px;padding:9px 12px 9px 42px;cursor:pointer;min-height:48px}
+.mbtn .bd{position:absolute;left:8px;top:50%;transform:translateY(-50%);width:26px;height:26px;border-radius:50%;background:var(--paper);border:2px solid var(--line);display:grid;place-items:center;font-weight:700;font-size:.85rem}
+.mbtn.sel{border-color:var(--yellow);box-shadow:0 0 0 3px var(--yellow)}
+.mbtn.paired{border-color:var(--c)}.mbtn.paired .bd{background:var(--c);border-color:var(--c);color:#fff}
+.mbtn.ok{background:var(--ok-bg)}.mbtn.bad{background:var(--bad-bg)}
+@media(max-width:620px){.match{gap:8px 10px;font-size:.95rem}}
+
+/* sort */
+.pool,.bin .chips{display:flex;flex-wrap:wrap;gap:8px;min-height:44px}
+.pool{border:2px dashed var(--line);border-radius:6px;padding:8px;margin-bottom:12px}
+.bins{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.bin{border:2px solid var(--blue);border-radius:6px;padding:8px 10px 10px;background:var(--card);cursor:pointer}
+.bin h4{margin:0 0 6px;font-family:var(--f-head);font-size:1.25rem;color:var(--accent)}
+.bin.target{box-shadow:0 0 0 3px var(--yellow)}
+.chip{border:2px solid var(--line);background:var(--paper);border-radius:999px;padding:5px 14px;cursor:pointer;font-weight:600}
+.chip.sel{background:var(--yellow);border-color:var(--yellow);color:#14232f}
+.chip.ok{background:var(--ok-bg);border-color:var(--ok)}.chip.bad{background:var(--bad-bg);border-color:var(--bad)}
+
+/* label image */
+.imgwrap{position:relative;background:#fff;border:1px solid var(--line);border-radius:6px;max-width:640px;margin:0 auto}
+.imgwrap img{display:block;width:100%;height:auto;border-radius:6px}
+.mk{position:absolute;transform:translate(-50%,-50%);width:32px;height:32px;border-radius:50%;border:3px solid #fff;background:var(--yellow);color:#14232f;font-weight:800;cursor:pointer;box-shadow:0 1px 5px rgba(0,0,0,.5);display:grid;place-items:center;padding:0;font-size:.95rem}
+.mk.set{background:var(--accent);color:var(--accent-ink)}
+.mk.ok{background:var(--ok);color:#fff}.mk.bad{background:var(--bad);color:#fff}
+.lbl{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:8px;margin-top:14px}
+.lbl button{display:flex;gap:10px;align-items:center;text-align:left;border:2px solid var(--line);background:var(--card);border-radius:4px;padding:6px 10px;cursor:pointer;min-height:44px}
+.lbl button .n{flex:none;width:26px;height:26px;border-radius:50%;background:var(--yellow);color:#14232f;font-weight:800;display:grid;place-items:center;font-size:.85rem}
+.lbl button.set .n{background:var(--accent);color:var(--accent-ink)}
+.lbl button.ok{border-color:var(--ok);background:var(--ok-bg)}.lbl button.bad{border-color:var(--bad);background:var(--bad-bg)}
+.lbl .empty{color:var(--muted)}
+.overlay{position:fixed;inset:0;background:rgba(5,15,25,.6);display:grid;place-items:center;z-index:50;padding:16px}
+.pop{background:var(--card);border-radius:8px;max-width:440px;width:100%;max-height:86vh;overflow:auto;padding:16px 18px;box-shadow:0 10px 40px rgba(0,0,0,.5)}
+.pop h3{margin-bottom:10px}
+.pop .tl{display:flex;flex-direction:column;gap:6px}
+.pop .tl button{text-align:left;border:2px solid var(--line);background:var(--card);border-radius:4px;padding:9px 12px;cursor:pointer;min-height:44px}
+.pop .tl button:hover:not(:disabled){border-color:var(--accent)}
+.pop .tl button:disabled{opacity:.4;text-decoration:line-through;cursor:default}
+
+/* num */
+.numrow{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;margin:8px 0}
+.numrow .ql{flex:1 1 260px}
+input.num{width:110px;border:2px solid var(--line);border-radius:4px;padding:7px 10px;background:var(--card);min-height:42px;text-align:right}
+input.num:focus{border-color:var(--accent)}
+.unit{color:var(--muted)}
+.numrow .sol{font-size:.9rem;color:var(--muted)}
+
+/* Lab */
+.lab{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px}
+@media(max-width:760px){.lab{grid-template-columns:1fr}}
+.ctl{margin:0 0 12px}
+.ctl label{display:flex;justify-content:space-between;font-weight:600}
+.ctl output{font-variant-numeric:tabular-nums;color:var(--accent);font-weight:700}
+.ctl input[type=range]{width:100%;accent-color:var(--accent);height:34px}
+.ctl small{color:var(--muted);display:block}
+.viz{display:flex;gap:12px;align-items:flex-end;justify-content:center}
+.viz figure{margin:0;text-align:center;font-size:.82rem;color:var(--muted)}
+.viz svg{background:var(--paper);border:1px solid var(--line);border-radius:4px;width:150px;height:150px}
+.meters{margin:12px 0;display:grid;gap:8px}
+.meter{display:grid;grid-template-columns:96px 1fr 64px;gap:8px;align-items:center;font-size:.92rem}
+.bar{height:14px;background:var(--paper);border:1px solid var(--line);border-radius:7px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--accent);transition:width .25s}
+.readout{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0}
+.readout div{background:var(--paper);border-radius:4px;padding:6px 10px}
+.readout b{display:block;font-family:var(--f-head);font-size:1.4rem;line-height:1.1}
+.readout span{font-size:.82rem;color:var(--muted)}
+.warns{font-size:.92rem;color:var(--miss);min-height:1.4em}
+.goals{list-style:none;padding:0;margin:14px 0 0;display:grid;gap:8px}
+.goals li{display:flex;gap:10px;align-items:flex-start;border:2px solid var(--line);border-radius:4px;padding:8px 12px;background:var(--card)}
+.goals li .gi{flex:none;width:26px;height:26px;border-radius:50%;border:2px solid var(--muted);display:grid;place-items:center;font-weight:800;font-size:.9rem}
+.goals li.met{border-color:var(--ok);background:var(--ok-bg)}.goals li.met .gi{background:var(--ok);border-color:var(--ok);color:#fff}
+.goals li.now .gi{border-color:var(--yellow);background:var(--yellow);color:#14232f}
+
+/* Nav + progress */
+.modnav{display:flex;justify-content:space-between;gap:10px;margin-top:36px;flex-wrap:wrap}
+.pbar{display:flex;gap:3px;margin:8px 0}
+.pbar i{flex:1;height:10px;background:var(--line);border-radius:2px}
+.pbar i.on{background:var(--accent)}
+.pbar i.cur{background:var(--yellow)}
+.layers{display:flex;flex-direction:column-reverse;gap:3px;width:120px}
+.layers i{height:6px;background:rgba(255,255,255,.18);border-radius:1px}
+.layers i.on{background:#5aa9e6}.layers i.top{background:var(--yellow)}
+.progwrap{display:flex;gap:14px;align-items:flex-end}
+.progwrap .pnum{font-family:var(--f-head);font-size:2rem;line-height:1}
+.progwrap small{opacity:.75;display:block}
+
+/* Test */
+.qcard{background:var(--card);border:1px solid var(--line);border-left:7px solid var(--blue);padding:18px 20px;border-radius:4px}
+.qcard .qq{font-size:1.15rem;font-weight:600;margin:.2em 0 .8em}
+.dots{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 4px}
+.dots button{width:34px;height:34px;border-radius:4px;border:2px solid var(--line);background:var(--card);cursor:pointer;font-weight:700;font-size:.85rem}
+.dots button.ans{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.dots button.cur{outline:3px solid var(--yellow)}
+.score{display:flex;gap:22px;align-items:center;flex-wrap:wrap}
+.score .big{font-family:var(--f-head);font-size:4.2rem;line-height:1;color:var(--accent)}
+.rev{display:grid;gap:12px;margin-top:18px}
+.rev .ri{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--ok);border-radius:4px;padding:12px 16px}
+.rev .ri.wrong{border-left-color:var(--bad)}
+.rev .ri b{display:block}
+.rev .ri .ga{font-size:.95rem}
+
+/* Export */
+.sheet{background:#fff;color:#111;border:1px solid var(--line);border-radius:4px;padding:28px 32px;margin-top:18px}
+.sheet h2{color:#035591}
+.sheet table{border-collapse:collapse;width:100%;margin:10px 0 18px;font-size:.95rem}
+.sheet th,.sheet td{border:1px solid #c9d3dc;padding:6px 10px;text-align:left}
+.sheet th{background:#e8eff5}
+.sheet .meta{display:flex;gap:26px;flex-wrap:wrap;margin:10px 0 18px}
+.sheet .ok{color:#17803f;font-weight:700}.sheet .no{color:#c23b2e;font-weight:700}
+textarea.rep{width:100%;min-height:200px;font:14px/1.45 ui-monospace,Menlo,Consolas,monospace;border:2px solid var(--line);border-radius:4px;padding:10px;background:var(--card);color:var(--ink)}
+.toast{position:fixed;left:50%;bottom:calc(20px + var(--safe-b));transform:translateX(-50%);background:var(--ink);color:var(--paper);padding:10px 18px;border-radius:6px;z-index:80;font-weight:600;max-width:90vw}
+details.tch{margin-top:20px}details.tch summary{cursor:pointer;font-weight:600}
+footer.foot{margin-top:50px;font-size:.85rem;color:var(--muted)}
+
+
+/* Infokästen & Grafiken */
+details.info{margin:4px 0 14px;border:2px solid var(--line);border-radius:6px;background:var(--paper)}
+details.info>summary{cursor:pointer;list-style:none;padding:8px 14px;font-weight:700;color:var(--link);display:flex;gap:10px;align-items:center;min-height:44px}
+details.info>summary::-webkit-details-marker{display:none}
+details.info>summary::before{content:"i";flex:none;display:grid;place-items:center;width:24px;height:24px;border-radius:50%;background:var(--accent);color:var(--accent-ink);font-family:Georgia,serif;font-style:italic;font-weight:700}
+details.info>summary::after{content:"öffnen";margin-left:auto;font-weight:500;font-size:.9rem;color:var(--muted)}
+details.info[open]>summary::after{content:"schließen"}
+details.info[open]{border-color:var(--accent)}
+details.info .infobody{padding:2px 16px 12px}
+.ig{background:#fff;border:1px solid var(--line);border-radius:4px;padding:10px;margin:10px 0}
+.ig svg{display:block;width:100%;height:auto;max-width:460px;margin:0 auto}
+.ig figcaption,.panels figcaption{font-size:.9rem;color:#14232f;padding:6px 2px 0;line-height:1.35}
+.panels{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:10px 0}
+.panels figure{margin:0;background:#fff;border:1px solid var(--line);border-radius:4px;padding:8px}
+.panels figure svg{display:block;width:100%;height:auto;max-width:230px;margin:0 auto}
+.trio{display:flex;gap:6px}.trio svg{flex:1;min-width:0}
+.split{display:grid;grid-template-columns:minmax(0,220px) minmax(0,1fr);gap:16px;align-items:start}
+@media(max-width:600px){.split{grid-template-columns:1fr}}
+ul.il{margin:.4em 0;padding-left:1.2em}ul.il li{margin:.25em 0}
+ol.steps{margin:.3em 0 0;padding-left:1.3em}ol.steps li{margin:.2em 0}
+.merke.cura{border-left-color:var(--accent);background:var(--card);border:1px solid var(--line);border-left:6px solid var(--accent)}
+table.mt{border-collapse:collapse;width:100%;min-width:420px;font-size:.95rem;margin:8px 0;background:var(--card)}
+.mt th,.mt td{border:1px solid var(--line);padding:6px 9px;text-align:left}
+.mt thead th{background:var(--accent);color:var(--accent-ink)}
+.mt tbody th{background:var(--paper)}
+.chain{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:12px 0}
+.chain .box{background:var(--card);border:2px solid var(--accent);padding:6px 12px;border-radius:4px;font-weight:600}
+.chain .ar{font-size:1.4rem;color:var(--accent);font-weight:700}
+.hbars{margin:10px 0;display:grid;gap:6px}
+.hb{display:grid;grid-template-columns:52px minmax(0,1fr) 92px;gap:10px;align-items:center}
+.hb .bw{background:var(--line);height:18px;border-radius:2px;overflow:hidden}
+.hb i{display:block;height:100%;background:var(--accent)}
+.hb b{font-variant-numeric:tabular-nums;font-size:.95rem}
+.vgrid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(max-width:640px){.vgrid.two{grid-template-columns:1fr}}
+.vcard svg{background:#fff!important;border:1px solid var(--line)}
+/* Code */
+.codebox{font:600 1.05rem/1.6 ui-monospace,Menlo,Consolas,monospace;letter-spacing:.04em;word-break:break-all;background:var(--paper);border:2px dashed var(--accent);border-radius:6px;padding:12px 14px;user-select:all;-webkit-user-select:all}
+textarea.codein{width:100%;min-height:74px;font:600 1rem/1.5 ui-monospace,Menlo,Consolas,monospace;border:2px solid var(--line);border-radius:4px;padding:8px 10px;background:var(--card);color:var(--ink);text-transform:uppercase}
+textarea.codein:focus{border-color:var(--accent)}
+.note{padding:10px 14px;border-radius:4px;border-left:5px solid var(--miss);background:var(--miss-bg);margin:10px 0}
+.note.good{border-color:var(--ok);background:var(--ok-bg)}.note.bad{border-color:var(--bad);background:var(--bad-bg)}
+
+.slogo{width:190px;height:auto;display:block}
+.hero img.hlogo{width:min(300px,70%);height:auto;margin-bottom:14px}
+.hero img.lg-dark{display:none}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .hero img.lg-light{display:none}:root:not([data-theme="light"]) .hero img.lg-dark{display:block}}
+:root[data-theme="dark"] .hero img.lg-light{display:none}:root[data-theme="dark"] .hero img.lg-dark{display:block}
+.sheet .shead{display:flex;flex-wrap:wrap-reverse;justify-content:space-between;align-items:flex-start;gap:12px}.sheet .shead img{width:180px;max-width:60%;height:auto}
+@media(max-width:600px){.sheet{padding:18px 14px}}
+.topbar .tlogo{height:26px;width:auto}
+@media print{
+  body{background:#fff;font-size:12pt}
+  aside,.topbar,.no-print,.toast{display:none!important}
+  .app{display:block}main{padding:0;max-width:none}
+  .sheet{border:none;padding:0;margin:0}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+/* Elektro-Ergänzungen */
+.batt{display:flex;align-items:center;gap:0}
+.batt .cells{display:flex;gap:3px;padding:4px;border:2px solid rgba(255,255,255,.6);border-radius:4px;width:118px}
+.batt .cells i{flex:1;height:20px;background:rgba(255,255,255,.14);border-radius:1px}
+.batt .cells i.on{background:#5aa9e6}.batt .cells i.top{background:var(--yellow)}
+.batt .nub{width:5px;height:12px;background:rgba(255,255,255,.6);border-radius:0 2px 2px 0}
+svg.mini{width:120px;height:52px;background:#fff;border:1px solid var(--line);border-radius:3px;vertical-align:middle;margin-right:10px}
+.mbtn svg.sym{width:70px;height:44px;background:#fff;border-radius:3px;vertical-align:middle;display:block}
+.seg{display:inline-flex;border:2px solid var(--accent);border-radius:4px;overflow:hidden;margin:4px 0 14px}
+.seg button{border:0;background:var(--card);color:var(--accent);padding:7px 12px;cursor:pointer;font-weight:600;min-height:40px}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.lab.card{display:grid}
+.formula{background:var(--paper);border:1px solid var(--line);border-radius:4px;padding:8px 12px;font-size:.95rem;overflow-x:auto}
+.cablevis svg{display:block;width:100%;max-width:300px;margin:10px auto 0;background:#fff;border:1px solid var(--line);border-radius:4px}
+.devgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin:12px 0}
+.dev{display:flex;flex-direction:column;align-items:flex-start;text-align:left;border:2px solid var(--line);background:var(--card);border-radius:4px;padding:8px 10px;cursor:pointer;min-height:64px}
+.dev span{font-size:.9rem;color:var(--muted)}.dev small{font-size:.8rem;color:var(--muted)}
+.dev.on{border-color:var(--accent);background:var(--stripe)}.dev.on small{color:var(--accent);font-weight:700}
+.kasten{display:grid;grid-template-columns:auto auto minmax(0,1fr);gap:12px;align-items:start;margin-top:8px}
+@media(max-width:620px){.kasten{grid-template-columns:auto auto}.kasten .kread{grid-column:1/-1}}
+.din svg{width:96px;height:auto;display:block;background:#fff;border:1px solid var(--line);border-radius:4px}
+.vcard .din svg{margin:6px 0}
+.ampbar{position:relative;height:18px;background:var(--paper);border:1px solid var(--line);border-radius:9px;margin:26px 0 8px}
+.ampbar i{display:block;height:100%;border-radius:9px;transition:width .25s}
+.ampbar em{position:absolute;top:-22px;transform:translateX(-50%);font-style:normal;font-size:.8rem;font-weight:700;color:var(--bad)}
+.ampbar em::after{content:"";position:absolute;left:50%;top:18px;width:2px;height:24px;background:var(--bad)}
+.hero .photo svg{display:block;width:100%;height:auto}
+.opt .mini + *{vertical-align:middle}
+
+table.grid.one tbody th{font-weight:600}
+@media(max-width:620px){table.grid.one{min-width:0}.grid.one thead{display:none}.grid.one tr{display:block;border:1px solid var(--line);margin-bottom:8px}.grid.one th,.grid.one td{display:block;border:0}.grid.one td{padding-top:0}}
+.hero h1{overflow-wrap:break-word;hyphens:manual}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside id="side"></aside>
+  <div>
+    <div class="topbar" id="top"></div>
+    <main id="main" tabindex="-1"></main>
+  </div>
+</div>
+<script>
+
+'use strict';
+/* ---------- Helfer ---------- */
+const $ = (s, el = document) => el.querySelector(s);
+function h(tag, attrs, ...kids) {
+  const el = document.createElement(tag);
+  if (attrs) for (const k in attrs) {
+    const v = attrs[k];
+    if (v == null || v === false) continue;
+    if (k === 'class') el.className = v;
+    else if (k === 'html') el.innerHTML = v;
+    else if (k.startsWith('on')) el.addEventListener(k.slice(2), v);
+    else el.setAttribute(k, v === true ? '' : v);
+  }
+  for (const c of kids.flat(Infinity)) { if (c == null || c === false) continue; el.append(c.nodeType ? c : document.createTextNode(c)); }
+  return el;
+}
+function shuffle(a) { const b = a.slice(); for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } return b; }
+function shuffleNotSame(a) { let b, n = 0; do { b = shuffle(a); n++; } while (n < 25 && b.every((x, i) => x === a[i])); return b; }
+const norm = s => String(s).toLowerCase().trim().replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss').replace(/\s+/g, ' ');
+const parseNum = s => { const v = parseFloat(String(s).replace(',', '.').replace(/[^\d.\-]/g, '')); return isNaN(v) ? null : v; };
+const fmtMin = m => { m = Math.round(m); const hh = Math.floor(m / 60), mm = m % 60; return hh ? `${hh} h ${String(mm).padStart(2, '0')} min` : `${mm} min`; };
+const strip = s => String(s).replace(/<[^>]+>/g, '');
+
+/* ---------- Speicher (nur im Browser, mit Absicherung) ---------- */
+const KEY = 'elektroinstallation-lernplattform-v1';
+let S = { name: '', klasse: '', tasks: {}, test: { attempts: [] } };
+function load() { try { const r = localStorage.getItem(KEY); if (r) { const o = JSON.parse(r); S = Object.assign(S, o); S.tasks = S.tasks || {}; S.test = S.test || { attempts: [] }; } } catch (e) { } }
+function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { } }
+function tst(id) { return S.tasks[id] || (S.tasks[id] = { done: false, assisted: false, attempts: 0 }); }
+
+/* ---------- Aufgaben-Rahmen ---------- */
+const TYPES = {};
+const TASKCACHE = {};
+function buildTask(t, nr) {
+  if (TASKCACHE[t.id]) return TASKCACHE[t.id];
+  const st = tst(t.id);
+  const card = h('section', { class: 'task', id: 't-' + t.id });
+  const state = h('span', { class: 'state' });
+  const fb = h('div', { class: 'fb', 'aria-live': 'polite' });
+  const ctx = { finish: null };
+  const impl = TYPES[t.type](t, ctx);
+  const bCheck = h('button', { class: 'btn', type: 'button' }, 'Prüfen');
+  const bReveal = h('button', { class: 'btn ghost hidden', type: 'button' }, 'Lösung anzeigen');
+  const bReset = h('button', { class: 'btn ghost', type: 'button' }, 'Zurücksetzen');
+  const explain = () => t.explain ? `<span class="why">${t.explain}</span>` : '';
+  const say = (cls, msg, extra = '') => { fb.innerHTML = `<span class="msg ${cls}">${msg}${extra}</span>`; };
+  const paintState = () => {
+    card.classList.toggle('done', st.done && !st.assisted);
+    card.classList.toggle('assisted', st.done && st.assisted);
+    state.textContent = st.done ? (st.assisted ? 'mit Lösungshilfe' : 'gelöst ✓') : '';
+    refreshChrome();
+  };
+  bCheck.onclick = () => {
+    const r = impl.check();
+    st.attempts++;
+    if (r.ok) {
+      const firstTime = !st.done;
+      st.done = true; if (firstTime) st.assisted = false;
+      impl.lock && impl.lock();
+      say('good', r.msg || 'Richtig! Alles stimmt.', explain());
+      bCheck.classList.add('hidden'); bReveal.classList.add('hidden');
+    } else {
+      let m = r.msg || (r.total > 1 ? `${r.right} von ${r.total} stimmen. Schau dir die markierten Stellen noch einmal an.` : 'Das stimmt noch nicht. Lies noch einmal genau.');
+      if (t.hint) m += `<span class="why">Tipp: ${t.hint}</span>`;
+      say('bad', m);
+      if (st.attempts >= 2) bReveal.classList.remove('hidden');
+    }
+    save(); paintState();
+  };
+  bReveal.onclick = () => {
+    impl.reveal(); impl.lock && impl.lock();
+    if (!st.done) st.assisted = true;
+    st.done = true;
+    say('warn', 'So sieht die Lösung aus. Das zählt als „mit Lösungshilfe“ – versuche die Aufgabe später noch einmal ohne Hilfe.', explain());
+    bCheck.classList.add('hidden'); bReveal.classList.add('hidden');
+    save(); paintState();
+  };
+  bReset.onclick = () => {
+    impl.reset(); fb.innerHTML = '';
+    bCheck.classList.remove('hidden'); if (st.attempts < 2) bReveal.classList.add('hidden');
+  };
+  ctx.finish = () => { if (!st.done) { st.done = true; st.assisted = false; save(); paintState(); } };
+  card.append(...[
+    h('div', { class: 'th' }, h('h3', null, `Aufgabe ${nr}`), h('span', { class: 't-title' }, t.title || ''), state),
+    t.info ? h('details', { class: 'info' }, h('summary', null, 'Info zur Aufgabe'), h('div', { class: 'infobody', html: t.info })) : null,
+    t.q ? h('p', { class: 'q', html: t.q }) : null,
+    impl.el,
+    impl.auto ? null : h('div', { class: 'btnrow' }, bCheck, bReveal, bReset),
+    fb
+  ].filter(Boolean));
+  if (st.done) {
+    if (impl.auto) { impl.restoreDone && impl.restoreDone(); }
+    else {
+      impl.reveal(); impl.lock && impl.lock();
+      say(st.assisted ? 'warn' : 'good', st.assisted ? 'Bereits mit Lösungshilfe bearbeitet. Du kannst „Zurücksetzen“ drücken und es noch einmal versuchen.' : 'Bereits gelöst. Mit „Zurücksetzen“ kannst du nochmal üben.', explain());
+      bCheck.classList.add('hidden');
+    }
+    paintState();
+  }
+  // Nach „Zurücksetzen“ muss Prüfen wieder erscheinen:
+  const origReset = bReset.onclick;
+  bReset.onclick = () => { origReset(); bCheck.classList.remove('hidden'); impl.unlock && impl.unlock(); };
+  TASKCACHE[t.id] = card;
+  return card;
+}
+
+/* ---------- Aufgabentypen ---------- */
+// Einfach- und Mehrfachauswahl
+TYPES.mc = (t) => {
+  const multi = t.ans.length > 1;
+  let opts = t.opts.map((text, i) => ({ text, i, ok: t.ans.includes(i) }));
+  if (!t.fixed) opts = shuffle(opts);
+  const name = 'q_' + t.id;
+  const rows = opts.map(o => {
+    const inp = h('input', { type: multi ? 'checkbox' : 'radio', name });
+    const row = h('label', { class: 'opt' + (multi ? ' multi' : '') }, inp, h('span', { class: 'mark' }), h('span', { html: o.text }));
+    return { o, inp, row };
+  });
+  const el = h('div', null, multi ? h('p', { class: 'hintline' }, 'Mehrere Antworten sind richtig.') : null, h('div', { class: 'opts' }, rows.map(r => r.row)));
+  const clear = () => rows.forEach(r => r.row.classList.remove('ok', 'bad', 'miss'));
+  rows.forEach(r => r.inp.addEventListener('change', clear));
+  return {
+    el,
+    check() {
+      clear(); let right = 0, allOk = true;
+      rows.forEach(r => {
+        const s = r.inp.checked, good = s === r.o.ok;
+        if (good) right++; else allOk = false;
+        if (s && r.o.ok) r.row.classList.add('ok');
+        else if (s && !r.o.ok) r.row.classList.add('bad');
+        else if (!s && r.o.ok && multi) r.row.classList.add('miss');
+      });
+      if (!multi) { const any = rows.some(r => r.inp.checked); return { ok: allOk, right: allOk ? 1 : 0, total: 1, msg: any ? null : 'Wähle zuerst eine Antwort aus.' }; }
+      return { ok: allOk, right, total: rows.length, msg: allOk ? null : 'Nicht ganz: Gestrichelt markiert sind richtige Antworten, die noch fehlen. Rot sind falsch angekreuzt.' };
+    },
+    reveal() { clear(); rows.forEach(r => { r.inp.checked = r.o.ok; if (r.o.ok) r.row.classList.add('ok'); }); },
+    lock() { rows.forEach(r => { r.inp.disabled = true; r.row.classList.add('locked'); }); },
+    unlock() { rows.forEach(r => { r.inp.disabled = false; r.row.classList.remove('locked'); }); },
+    reset() { clear(); rows.forEach(r => { r.inp.checked = false; }); }
+  };
+};
+
+// Lückentext (Auswahl oder freie Eingabe)
+TYPES.gaps = (t) => {
+  const parts = t.text.split(/\{(\d+)\}/); const ctrls = [];
+  const p = h('p', { class: 'gaptext' });
+  parts.forEach((s, i) => {
+    if (i % 2 === 0) { if (s) p.append(h('span', { html: s })); return; }
+    const g = t.gaps[+s]; let c;
+    if (g.opts) c = h('select', { class: 'gap', 'aria-label': 'Lücke ' + (+s + 1) }, h('option', { value: '' }, '…'), shuffle(g.opts).map(o => h('option', { value: o }, o)));
+    else c = h('input', { class: 'gap', type: 'text', size: g.size || 10, autocomplete: 'off', autocapitalize: 'off', spellcheck: 'false', 'aria-label': 'Lücke ' + (+s + 1) });
+    c.addEventListener('input', () => c.classList.remove('ok', 'bad')); c.addEventListener('change', () => c.classList.remove('ok', 'bad'));
+    ctrls.push({ c, g }); p.append(c);
+  });
+  const acc = g => (Array.isArray(g.ans) ? g.ans : [g.ans]).map(norm);
+  return {
+    el: p,
+    check() { let right = 0; ctrls.forEach(({ c, g }) => { const ok = c.value && acc(g).includes(norm(c.value)); c.classList.remove('ok', 'bad'); c.classList.add(ok ? 'ok' : 'bad'); if (ok) right++; }); return { ok: right === ctrls.length, right, total: ctrls.length }; },
+    reveal() { ctrls.forEach(({ c, g }) => { c.value = Array.isArray(g.ans) ? g.ans[0] : g.ans; c.classList.remove('bad'); c.classList.add('ok'); }); },
+    lock() { ctrls.forEach(({ c }) => c.disabled = true); }, unlock() { ctrls.forEach(({ c }) => c.disabled = false); },
+    reset() { ctrls.forEach(({ c }) => { c.value = ''; c.classList.remove('ok', 'bad'); }); }
+  };
+};
+
+// Tabelle mit Auswahlfeldern (Steckbrief)
+TYPES.table = (t) => {
+  const cells = [];
+  const thead = h('thead', null, h('tr', null, h('th', null, t.corner || ''), t.cols.map(c => h('th', null, c.name))));
+  const tbody = h('tbody', null, t.rows.map(r => h('tr', null,
+    h('th', { scope: 'row', class: r.pic ? 'pic' : '', html: r.label }),
+    t.cols.map((c, j) => {
+      const s = h('select', { 'aria-label': strip(r.label) + ' – ' + c.name }, h('option', { value: '' }, 'wählen …'), shuffle(c.opts).map(o => h('option', { value: o }, o)));
+      s.addEventListener('change', () => s.classList.remove('ok', 'bad'));
+      cells.push({ s, ans: r.ans[j] }); return h('td', null, s);
+    }))));
+  return {
+    el: h('div', { class: 'tscroll' }, h('table', { class: 'grid' + (t.cols.length === 1 ? ' one' : '') }, thead, tbody)),
+    check() { let right = 0; cells.forEach(({ s, ans }) => { const ok = s.value === ans; s.classList.remove('ok', 'bad'); s.classList.add(ok ? 'ok' : 'bad'); if (ok) right++; }); return { ok: right === cells.length, right, total: cells.length }; },
+    reveal() { cells.forEach(({ s, ans }) => { s.value = ans; s.classList.remove('bad'); s.classList.add('ok'); }); },
+    lock() { cells.forEach(({ s }) => s.disabled = true); }, unlock() { cells.forEach(({ s }) => s.disabled = false); },
+    reset() { cells.forEach(({ s }) => { s.value = ''; s.classList.remove('ok', 'bad'); }); }
+  };
+};
+
+// Reihenfolge
+TYPES.order = (t) => {
+  let list = shuffleNotSame(t.items.map((text, i) => ({ text, i }))); let marks = []; let locked = false;
+  const ol = h('ol', { class: 'ord' });
+  function paint() {
+    ol.replaceChildren(...list.map((o, pos) => h('li', { class: marks[pos] || '' },
+      h('span', { html: o.text }),
+      h('span', { class: 'ordbtns' },
+        h('button', { class: 'ib', type: 'button', 'aria-label': 'nach oben', disabled: locked || pos === 0, onclick: () => move(pos, -1) }, '▲'),
+        h('button', { class: 'ib', type: 'button', 'aria-label': 'nach unten', disabled: locked || pos === list.length - 1, onclick: () => move(pos, 1) }, '▼')))));
+  }
+  function move(pos, d) { const j = pos + d; [list[pos], list[j]] = [list[j], list[pos]]; marks = []; paint(); }
+  paint();
+  return {
+    el: h('div', null, h('p', { class: 'hintline' }, 'Verschiebe die Schritte mit den Pfeilen in die richtige Reihenfolge.'), ol),
+    check() { let right = 0; marks = list.map((o, pos) => { const ok = o.i === pos; if (ok) right++; return ok ? 'ok' : 'bad'; }); paint(); return { ok: right === list.length, right, total: list.length, msg: right === list.length ? null : `${right} von ${list.length} Schritten stehen an der richtigen Stelle (grün). Die roten müssen noch wandern.` }; },
+    reveal() { list = list.slice().sort((a, b) => a.i - b.i); marks = list.map(() => 'ok'); paint(); },
+    lock() { locked = true; paint(); }, unlock() { locked = false; paint(); },
+    reset() { marks = []; list = shuffleNotSame(list.slice().sort((a, b) => a.i - b.i)); locked = false; paint(); }
+  };
+};
+
+// Zuordnen (antippen: links, dann rechts)
+TYPES.match = (t) => {
+  const n = t.pairs.length;
+  const L = t.pairs.map((p, i) => ({ text: p[0], i }));
+  const R = shuffleNotSame(t.pairs.map((p, i) => ({ text: p[1], i })));
+  const map = new Map(); let selL = null; let marks = {}; let locked = false;
+  const colL = h('div', { class: 'mcol' }), colR = h('div', { class: 'mcol' });
+  function paint() {
+    colL.replaceChildren(...L.map(l => {
+      const paired = map.has(l.i);
+      const b = h('button', { type: 'button', class: 'mbtn' + (selL === l.i ? ' sel' : '') + (paired ? ' paired' : '') + (marks[l.i] ? ' ' + marks[l.i] : ''), style: paired ? `--c:var(--pc${l.i % 6})` : null, disabled: locked, onclick: () => { selL = selL === l.i ? null : l.i; marks = {}; paint(); } },
+        h('span', { class: 'bd' }, String(l.i + 1)), h('span', { html: l.text }));
+      return b;
+    }));
+    colR.replaceChildren(...R.map(r => {
+      let owner = null; map.forEach((v, k) => { if (v === r.i) owner = k; });
+      const b = h('button', { type: 'button', class: 'mbtn' + (owner !== null ? ' paired' : ''), style: owner !== null ? `--c:var(--pc${owner % 6})` : null, disabled: locked, onclick: () => {
+        marks = {};
+        if (selL !== null) { map.forEach((v, k) => { if (v === r.i) map.delete(k); }); map.set(selL, r.i); selL = null; }
+        else if (owner !== null) map.delete(owner);
+        paint();
+      } }, h('span', { class: 'bd' }, owner !== null ? String(owner + 1) : ''), h('span', { html: r.text }));
+      return b;
+    }));
+  }
+  paint();
+  return {
+    el: h('div', null, h('p', { class: 'hintline' }, 'Tippe links eine Aussage an und dann rechts den passenden Begriff. Zum Lösen einer Verbindung tippe den Begriff rechts noch einmal an.'), h('div', { class: 'match' }, colL, colR)),
+    check() { let right = 0; marks = {}; L.forEach(l => { const ok = map.get(l.i) === l.i; marks[l.i] = ok ? 'ok' : 'bad'; if (ok) right++; }); paint(); return { ok: right === n, right, total: n, msg: map.size < n ? 'Es sind noch nicht alle Paare verbunden.' : null }; },
+    reveal() { marks = {}; L.forEach(l => { map.set(l.i, l.i); marks[l.i] = 'ok'; }); selL = null; paint(); },
+    lock() { locked = true; paint(); }, unlock() { locked = false; paint(); },
+    reset() { map.clear(); marks = {}; selL = null; locked = false; paint(); }
+  };
+};
+
+// Einsortieren in Gruppen
+TYPES.sort = (t) => {
+  const items = shuffle(t.items.map((it, i) => ({ ...it, i })));
+  const place = {}; items.forEach(it => place[it.i] = null);
+  let sel = null; let marks = {}; let locked = false;
+  const pool = h('div', { class: 'pool' });
+  const bins = h('div', { class: 'bins' });
+  function chip(it) { return h('button', { type: 'button', class: 'chip' + (sel === it.i ? ' sel' : '') + (marks[it.i] ? ' ' + marks[it.i] : ''), disabled: locked, onclick: (e) => { e.stopPropagation(); sel = sel === it.i ? null : it.i; marks = {}; paint(); } }, it.text); }
+  function paint() {
+    pool.replaceChildren(...items.filter(it => place[it.i] === null).map(chip));
+    pool.onclick = () => { if (sel !== null && !locked) { place[sel] = null; sel = null; marks = {}; paint(); } };
+    bins.replaceChildren(...t.cats.map((c, ci) => h('div', { class: 'bin' + (sel !== null ? ' target' : ''), onclick: () => { if (sel !== null && !locked) { place[sel] = ci; sel = null; marks = {}; paint(); } } },
+      h('h4', null, c), h('div', { class: 'chips' }, items.filter(it => place[it.i] === ci).map(chip)))));
+  }
+  paint();
+  return {
+    el: h('div', null, h('p', { class: 'hintline' }, 'Tippe einen Begriff an und dann das Feld, in das er gehört.'), pool, bins),
+    check() { let right = 0, placed = 0; marks = {}; items.forEach(it => { if (place[it.i] !== null) placed++; const ok = place[it.i] === it.cat; marks[it.i] = place[it.i] === null ? '' : (ok ? 'ok' : 'bad'); if (ok) right++; }); paint(); return { ok: right === items.length, right, total: items.length, msg: placed < items.length ? 'Es liegen noch Begriffe oben im Sammelfeld.' : null }; },
+    reveal() { items.forEach(it => { place[it.i] = it.cat; marks[it.i] = 'ok'; }); sel = null; paint(); },
+    lock() { locked = true; paint(); }, unlock() { locked = false; paint(); },
+    reset() { items.forEach(it => place[it.i] = null); marks = {}; sel = null; locked = false; paint(); }
+  };
+};
+
+// Bild beschriften
+TYPES.label = (t) => {
+  const spots = t.spots; const terms = shuffle(spots.map(s => s.name).concat(t.extra || []));
+  const assign = spots.map(() => null); let marks = spots.map(() => ''); let locked = false;
+  const wrap = h('div', { class: 'imgwrap' }, h('img', { src: t.img, alt: t.alt || 'Bild mit nummerierten Markierungen' }));
+  const list = h('div', { class: 'lbl' });
+  const mks = spots.map((s, i) => { const b = h('button', { type: 'button', class: 'mk', style: `left:${s.x}%;top:${s.y}%`, 'aria-label': 'Markierung ' + (i + 1), onclick: () => open(i) }, String(i + 1)); wrap.append(b); return b; });
+  function paint() {
+    mks.forEach((b, i) => { b.className = 'mk' + (assign[i] !== null ? ' set' : '') + (marks[i] ? ' ' + marks[i] : ''); });
+    list.replaceChildren(...spots.map((s, i) => h('button', { type: 'button', class: (assign[i] !== null ? 'set ' : '') + (marks[i] || ''), onclick: () => open(i) }, h('span', { class: 'n' }, String(i + 1)), h('span', { class: assign[i] === null ? 'empty' : '' }, assign[i] === null ? 'Begriff wählen …' : assign[i]))));
+  }
+  function open(i) {
+    if (locked) return;
+    const ov = h('div', { class: 'overlay', onclick: (e) => { if (e.target === ov) close(); } });
+    const close = () => { ov.remove(); document.removeEventListener('keydown', esc); };
+    const esc = (e) => { if (e.key === 'Escape') close(); };
+    document.addEventListener('keydown', esc);
+    ov.append(h('div', { class: 'pop', role: 'dialog', 'aria-label': 'Begriff auswählen' },
+      h('h3', null, `Was ist Nr. ${i + 1}?`),
+      h('div', { class: 'tl' },
+        terms.map(term => h('button', { type: 'button', disabled: assign.includes(term) && assign[i] !== term, onclick: () => { assign[i] = term; marks = spots.map(() => ''); close(); paint(); } }, term)),
+        assign[i] !== null ? h('button', { type: 'button', onclick: () => { assign[i] = null; marks = spots.map(() => ''); close(); paint(); } }, '↺ Auswahl entfernen') : null),
+      h('div', { class: 'btnrow' }, h('button', { class: 'btn ghost', type: 'button', onclick: close }, 'Schließen'))));
+    document.body.append(ov);
+  }
+  paint();
+  return {
+    el: h('div', null, h('p', { class: 'hintline' }, 'Tippe eine Nummer im Bild (oder in der Liste) an und wähle den passenden Begriff. Hinweis: Nicht alle Begriffe gehören zum Bild.'), wrap, list),
+    check() { let right = 0, set = 0; marks = spots.map((s, i) => { if (assign[i] !== null) set++; const ok = assign[i] === s.name; if (ok) right++; return assign[i] === null ? '' : (ok ? 'ok' : 'bad'); }); paint(); return { ok: right === spots.length, right, total: spots.length, msg: set < spots.length ? `${right} von ${spots.length} richtig. Nicht jede Nummer hat schon einen Begriff.` : null }; },
+    reveal() { spots.forEach((s, i) => { assign[i] = s.name; }); marks = spots.map(() => 'ok'); paint(); },
+    lock() { locked = true; paint(); }, unlock() { locked = false; paint(); },
+    reset() { assign.fill(null); marks = spots.map(() => ''); locked = false; paint(); }
+  };
+};
+
+// Zahleneingabe (einzeln oder mehrere)
+TYPES.num = (t) => {
+  const items = t.items; const inputs = [];
+  const el = h('div', null, items.map((it, i) => {
+    const inp = h('input', { class: 'num', type: 'text', inputmode: 'decimal', autocomplete: 'off', 'aria-label': strip(it.q) });
+    inp.addEventListener('input', () => inp.classList.remove('ok', 'bad'));
+    const sol = h('span', { class: 'sol' });
+    inputs.push({ inp, it, sol });
+    return h('div', { class: 'numrow' }, h('span', { class: 'ql', html: it.q }), inp, it.unit ? h('span', { class: 'unit' }, it.unit) : null, sol);
+  }));
+  const ok1 = (it, v) => v !== null && (it.min != null ? (v >= it.min && v <= it.max) : Math.abs(v - it.ans) <= (it.tol || 0));
+  return {
+    el,
+    check() { let right = 0; inputs.forEach(({ inp, it }) => { const v = parseNum(inp.value); const ok = ok1(it, v); inp.classList.remove('ok', 'bad'); inp.classList.add(ok ? 'ok' : 'bad'); if (ok) right++; }); return { ok: right === items.length, right, total: items.length }; },
+    reveal() { inputs.forEach(({ inp, it, sol }) => { if (it.min != null) { inp.value = it.show != null ? it.show : it.min; sol.textContent = `Richtwert: ${it.min}–${it.max} ${it.unit || ''}`; } else inp.value = String(it.ans).replace('.', ','); inp.classList.remove('bad'); inp.classList.add('ok'); }); },
+    lock() { inputs.forEach(({ inp }) => inp.disabled = true); }, unlock() { inputs.forEach(({ inp }) => inp.disabled = false); },
+    reset() { inputs.forEach(({ inp, sol }) => { inp.value = ''; inp.classList.remove('ok', 'bad'); sol.textContent = ''; }); }
+  };
+};
+
+const LOGO_L = 'data:image/png;base64,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';
+const LOGO_D = 'data:image/png;base64,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';
+
+
+/* ---------- Grafiken (feste Farben auf weißem Grund) ---------- */
+const C = { blue: '#035591', yel: '#F5B700', ink: '#14232f', grey: '#8a99a8', lgrey: '#d4dee8', red: '#c23b2e', green: '#17803f',
+  L: '#8B5A2B', N: '#1f6fd1', PEg: '#2e9e3e', PEy: '#f2c200', plus: '#d62828', minus: '#1b1b1b', metal: '#aab6c1', spark: '#d9480f' };
+const FONT = `font-family="Source Sans 3, Segoe UI, Arial, sans-serif"`;
+const T = (x, y, s, a = 'start', w = 600, sz = 13, col = C.ink) => `<text x="${x}" y="${y}" text-anchor="${a}" font-size="${sz}" font-weight="${w}" fill="${col}" ${FONT}>${s}</text>`;
+const svg = (w, hgt, body, label) => `<svg viewBox="0 0 ${w} ${hgt}" role="img" aria-label="${label}" xmlns="http://www.w3.org/2000/svg">${body}</svg>`;
+const fig = (s, cap) => `<figure class="ig">${s}${cap ? `<figcaption>${cap}</figcaption>` : ''}</figure>`;
+const panels = arr => `<div class="panels">${arr.map(([s, cap]) => `<figure>${s}<figcaption>${cap}</figcaption></figure>`).join('')}</div>`;
+const chain = arr => `<div class="chain">${arr.map((x, i) => (i ? '<span class="ar" aria-hidden="true">›</span>' : '') + `<span class="box">${x}</span>`).join('')}</div>`;
+const W_ = (x1, y1, x2, y2, col = C.ink, sw = 2, extra = '') => `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${col}" stroke-width="${sw}" ${extra}/>`;
+const DOT = (x, y) => `<circle cx="${x}" cy="${y}" r="4" fill="${C.ink}"/>`;
+const PE_LINE = (x1, y1, x2, y2, sw = 4) => W_(x1, y1, x2, y2, C.PEg, sw) + W_(x1, y1, x2, y2, C.PEy, sw, 'stroke-dasharray="8 8"');
+const f2 = v => v.toFixed(2).replace('.', ',');
+const fN = (v, d = 2) => (Math.round(v * 10 ** d) / 10 ** d).toString().replace('.', ',');
+
+const G = {};
+// Spannungsverlauf: Gleich- und Wechselspannung
+(function () {
+  const x0 = 50, x1 = 390;
+  let sine = ''; for (let i = 0; i <= 170; i++) { const x = x0 + i * 2; const y = 150 - 34 * Math.sin(i / 170 * Math.PI * 6); sine += (i ? 'L' : 'M') + x.toFixed(1) + ' ' + y.toFixed(1); }
+  const cursor = (y1, y2) => `<line x1="${x0}" y1="${y1}" x2="${x0}" y2="${y2}" stroke="${C.yel}" stroke-width="3"><animateTransform attributeName="transform" type="translate" from="0 0" to="${x1 - x0} 0" dur="6s" repeatCount="indefinite"/></line>`;
+  G.dcac = svg(420, 205,
+    T(10, 18, 'Gleichspannung (z. B. Autobatterie)', 'start', 700, 13, C.blue) +
+    W_(x0, 70, x1 + 10, 70, C.grey, 1.2) + W_(x0, 26, x0, 84, C.grey, 1.2) + T(x0 - 6, 74, '0', 'end', 600, 11) + T(x0 - 6, 40, '+12 V', 'end', 600, 11) +
+    W_(x0, 36, x1, 36, C.plus, 3) + T(x1 + 8, 84, 't', 'start', 600, 12) + cursor(26, 80) +
+    T(10, 106, 'Wechselspannung (z. B. Steckdose)', 'start', 700, 13, C.blue) +
+    W_(x0, 150, x1 + 10, 150, C.grey, 1.2) + W_(x0, 110, x0, 192, C.grey, 1.2) + T(x0 - 6, 154, '0', 'end', 600, 11) + T(x0 - 6, 120, '+', 'end', 700, 13) + T(x0 - 6, 190, '−', 'end', 700, 13) +
+    `<path d="${sine}" fill="none" stroke="${C.L}" stroke-width="3"/>` + T(x1 + 8, 164, 't', 'start', 600, 12) + cursor(110, 192),
+    'Diagramm: Gleichspannung bleibt gleich, Wechselspannung wechselt ständig zwischen Plus und Minus');
+  // Mini-Diagramme für Aufgaben
+  let s2 = ''; for (let i = 0; i <= 60; i++) { const x = 10 + i * 2; const y = 30 - 18 * Math.sin(i / 60 * Math.PI * 4); s2 += (i ? 'L' : 'M') + x + ' ' + y.toFixed(1); }
+  G.miniAC = `<svg class="mini" viewBox="0 0 140 60" aria-label="Sinuskurve">${W_(10, 30, 132, 30, C.grey, 1)}<path d="${s2}" fill="none" stroke="${C.L}" stroke-width="2.5"/></svg>`;
+  G.miniDC = `<svg class="mini" viewBox="0 0 140 60" aria-label="waagerechte Linie oberhalb der Nulllinie">${W_(10, 40, 132, 40, C.grey, 1)}${W_(10, 18, 130, 18, C.plus, 2.5)}</svg>`;
+  G.miniSaw = `<svg class="mini" viewBox="0 0 140 60" aria-label="Linie, die gleichmäßig ansteigt">${W_(10, 50, 132, 50, C.grey, 1)}${W_(10, 50, 130, 10, C.blue, 2.5)}</svg>`;
+  G.miniRect = `<svg class="mini" viewBox="0 0 140 60" aria-label="Rechteck-Impulse nur oberhalb der Nulllinie">${W_(10, 48, 132, 48, C.grey, 1)}<path d="M10 48V16H40V48H70V16H100V48H130" fill="none" stroke="${C.green}" stroke-width="2.5"/></svg>`;
+})();
+
+// Leiterfarben / Kabelquerschnitte
+G.leiter = svg(450, 170, `
+  <defs><pattern id="gyP" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="10" height="10" fill="${C.PEg}"/><rect width="5" height="10" fill="${C.PEy}"/></pattern></defs>
+  ${T(90, 20, 'Gleichstrom (Kfz)', 'middle', 700, 14, C.blue)}
+  <rect x="30" y="40" width="120" height="70" rx="35" fill="#e6eaee" stroke="${C.ink}"/>
+  <circle cx="65" cy="75" r="22" fill="${C.plus}" stroke="${C.ink}"/><circle cx="65" cy="75" r="9" fill="#c98b4a"/>
+  <circle cx="115" cy="75" r="22" fill="${C.minus}" stroke="${C.ink}"/><circle cx="115" cy="75" r="9" fill="#c98b4a"/>
+  ${T(65, 135, '+ rot', 'middle')}${T(115, 135, '− schwarz', 'middle')}
+  ${T(320, 20, '1-Phasen-Wechselstrom (Haus)', 'middle', 700, 14, C.blue)}
+  <circle cx="320" cy="78" r="58" fill="#e6eaee" stroke="${C.ink}"/>
+  <circle cx="290" cy="62" r="21" fill="${C.L}" stroke="${C.ink}"/><circle cx="290" cy="62" r="8" fill="#c98b4a"/>
+  <circle cx="350" cy="62" r="21" fill="${C.N}" stroke="${C.ink}"/><circle cx="350" cy="62" r="8" fill="#c98b4a"/>
+  <circle cx="320" cy="108" r="21" fill="url(#gyP)" stroke="${C.ink}"/><circle cx="320" cy="108" r="8" fill="#c98b4a"/>
+  ${T(264, 58, 'L braun', 'end')}${T(376, 58, 'N blau', 'start')}${T(320, 158, 'PE grün-gelb', 'middle')}`,
+  'Kabelquerschnitte: Gleichstromkabel mit roter Plus- und schwarzer Minusader; Hauskabel mit brauner Phase L, blauem Neutralleiter N und grün-gelbem Schutzleiter PE');
+
+// Schutzleiter im Haus mit Fehlerstrom
+G.pe = svg(520, 260, `
+  ${T(18, 36, 'L', 'start', 700, 15, C.L)}${T(18, 66, 'N', 'start', 700, 15, C.N)}${T(18, 96, 'PE', 'start', 700, 15, C.PEg)}
+  ${W_(44, 32, 500, 32, C.L, 4)}${W_(44, 62, 500, 62, C.N, 4)}${PE_LINE(44, 92, 500, 92)}
+  <rect x="70" y="18" width="70" height="56" rx="4" fill="#fff" stroke="${C.blue}" stroke-width="2.5" stroke-dasharray="5 4"/>
+  ${T(105, 13, 'RCD misst L und N', 'middle', 700, 11, C.blue)}
+  ${PE_LINE(110, 92, 110, 200)}<path d="M92 200H128M98 208H122M104 216H116" stroke="${C.ink}" stroke-width="2.5"/>${T(135, 214, 'Erde', 'start', 600, 12)}
+  <!-- Steckdose -->
+  <rect x="190" y="120" width="70" height="70" rx="8" fill="#f4f6f8" stroke="${C.ink}" stroke-width="2"/>
+  <circle cx="212" cy="155" r="6" fill="${C.ink}"/><circle cx="238" cy="155" r="6" fill="${C.ink}"/><rect x="221" y="124" width="8" height="12" fill="${C.metal}"/><rect x="221" y="174" width="8" height="12" fill="${C.metal}"/>
+  ${W_(212, 32, 212, 149, C.L, 3)}${W_(238, 62, 238, 149, C.N, 3)}${PE_LINE(225, 92, 225, 124, 3)}${DOT(212, 32)}${DOT(238, 62)}<circle cx="225" cy="92" r="4" fill="${C.ink}"/>
+  ${T(225, 208, 'Steckdose', 'middle', 600, 12)}
+  <!-- Gerät mit Metallgehäuse -->
+  <rect x="330" y="118" width="120" height="100" rx="6" fill="${C.metal}" stroke="${C.ink}" stroke-width="2.5"/>
+  <circle cx="390" cy="170" r="30" fill="#e6eaee" stroke="${C.ink}" stroke-width="2"/>
+  ${W_(360, 32, 360, 150, C.L, 3)}${W_(420, 62, 420, 150, C.N, 3)}${DOT(360, 32)}${DOT(420, 62)}
+  ${PE_LINE(470, 92, 470, 190, 3)}${PE_LINE(470, 190, 450, 190, 3)}<circle cx="470" cy="92" r="4" fill="${C.ink}"/>
+  <rect x="352" y="150" width="16" height="22" fill="#fff" stroke="${C.ink}"/><path d="M368 158l10 -6l-2 10l12 -4" fill="none" stroke="${C.red}" stroke-width="3"/>
+  ${T(390, 238, 'Gerät mit Metallgehäuse', 'middle', 600, 12)}
+  ${T(372, 112, 'Isolationsfehler', 'middle', 700, 11, C.red)}
+  <path d="M458 205C490 230 490 120 478 110" fill="none" stroke="${C.red}" stroke-width="2" stroke-dasharray="4 3" marker-end="url(#arR)"/>
+  <defs><marker id="arR" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="${C.red}"/></marker></defs>
+  ${T(498, 252, 'Fehlerstrom über PE zur Erde', 'end', 700, 11, C.red)}`,
+  'Schema: L, N und PE laufen durchs Haus. Steckdose und Gerät mit Metallgehäuse sind mit dem Schutzleiter verbunden. Bei einem Isolationsfehler fließt Strom über den PE zur Erde.');
+
+// Hutschienen-Geräte
+const DIN = (x, label, sub, on, extra = '') => `
+  <rect x="${x}" y="20" width="70" height="130" rx="5" fill="#f4f6f8" stroke="${C.ink}" stroke-width="2"/>
+  <rect x="${x + 22}" y="${on ? 42 : 62}" width="26" height="36" rx="4" fill="${on ? C.blue : C.red}"/>
+  ${T(x + 35, on ? 36 : 112, on ? 'EIN' : 'AUS', 'middle', 700, 11, on ? C.blue : C.red)}
+  ${T(x + 35, 128, label, 'middle', 700, 14)}${T(x + 35, 143, sub, 'middle', 500, 10)}${extra}`;
+G.rcd = (on = true) => svg(110, 170, DIN(20, 'RCD', '30 mA', on, `<circle cx="80" cy="100" r="7" fill="${C.yel}" stroke="${C.ink}"/>${T(80, 104, 'T', 'middle', 700, 9)}`), 'Fehlerstrom-Schutzschalter');
+G.ls = (on = true) => svg(110, 170, DIN(20, 'LS', 'B 16 A', on), 'Leitungsschutzschalter');
+
+// Flachstecksicherungen
+const ATO = [[1, '#1b1b1b', '#fff'], [2, '#9a9a9a', '#14232f'], [3, '#7b3fb5', '#fff'], [4, '#e87fb2', '#14232f'], [5, '#d8c29d', '#14232f'], [7.5, '#7b4a2a', '#fff'], [10, '#d62828', '#fff'], [15, '#1f6fd1', '#fff'], [20, '#f2c200', '#14232f'], [25, '#f4f4f4', '#14232f'], [30, '#2e9e3e', '#fff']];
+G.ato = svg(560, 150, ATO.map(([a, c, tc], i) => { const x = 14 + i * 49; return `
+  <rect x="${x}" y="20" width="38" height="48" rx="5" fill="${c}" stroke="${C.ink}" stroke-width="1.5" ${c === '#f4f4f4' ? 'fill-opacity=".85"' : ''}/>
+  ${T(x + 19, 50, String(a).replace('.', ','), 'middle', 700, 13, tc)}
+  <rect x="${x + 5}" y="68" width="10" height="34" fill="${C.metal}" stroke="${C.ink}"/><rect x="${x + 23}" y="68" width="10" height="34" fill="${C.metal}" stroke="${C.ink}"/>
+  ${T(x + 19, 124, String(a).replace('.', ',') + ' A', 'middle', 600, 11)}`; }).join(''),
+  'Flachstecksicherungen (ATO) von 1 A bis 30 A mit ihren Farben');
+G.schmelz = svg(360, 130, `
+  <rect x="40" y="40" width="280" height="50" rx="10" fill="#f4f6f8" stroke="${C.ink}" stroke-width="2"/>
+  ${W_(10, 65, 40, 65, C.ink, 4)}${W_(320, 65, 350, 65, C.ink, 4)}
+  <path d="M40 65H150" stroke="${C.spark}" stroke-width="3"/><path d="M210 65H320" stroke="${C.spark}" stroke-width="3"/>
+  <circle cx="162" cy="65" r="6" fill="${C.spark}" opacity=".5"/><circle cx="198" cy="65" r="6" fill="${C.spark}" opacity=".5"/>
+  ${T(180, 30, 'Schmelzdraht glüht und schmilzt durch', 'middle', 700, 12, C.red)}
+  ${T(180, 118, 'Stromkreis unterbrochen', 'middle', 600, 12)}`, 'Schmelzsicherung: Der Draht schmilzt bei zu hohem Strom und unterbricht den Stromkreis');
+
+// Kurzschluss im Kfz
+G.kurz = svg(460, 210, `
+  <rect x="10" y="170" width="440" height="24" fill="${C.metal}" stroke="${C.ink}"/>${T(230, 187, 'Karosserie = Masse (−)', 'middle', 700, 12)}
+  <rect x="24" y="92" width="92" height="62" rx="4" fill="#26323c"/>
+  <rect x="36" y="82" width="16" height="10" fill="${C.plus}"/><rect x="88" y="82" width="16" height="10" fill="${C.minus}"/>
+  ${T(44, 78, '+', 'middle', 700, 16, C.plus)}${T(96, 78, '−', 'middle', 700, 16)}${T(70, 128, '12 V', 'middle', 700, 14, '#fff')}
+  ${W_(96, 92, 96, 170, C.minus, 4)}
+  <path d="M44 82V50H120" fill="none" stroke="${C.plus}" stroke-width="4"/>
+  <rect x="120" y="38" width="26" height="24" rx="3" fill="#1f6fd1" stroke="${C.ink}"/>${T(133, 32, 'Sicherung', 'middle', 700, 11, C.blue)}
+  <path d="M146 50H300Q330 50 330 80V160" fill="none" stroke="${C.plus}" stroke-width="4"/>
+  <rect x="380" y="108" width="54" height="52" rx="4" fill="#fff" stroke="${C.ink}" stroke-width="2"/>${T(407, 138, 'Gerät', 'middle', 600, 12)}
+  <path d="M330 80H407V108" fill="none" stroke="${C.plus}" stroke-width="4"/>
+  <path d="M320 150l8 -10l2 8l10 -8l-4 12l10 -2" fill="none" stroke="${C.spark}" stroke-width="3"/>
+  ${T(318, 120, 'Isolierung durchgescheuert', 'end', 700, 11, C.red)}
+  <path d="M330 168Q220 150 110 168" fill="none" stroke="${C.red}" stroke-width="2" stroke-dasharray="5 4"/>
+  ${T(220, 158, 'Kurzschlussstrom', 'middle', 700, 11, C.red)}`,
+  'Kurzschluss im Auto: Eine Plus-Leitung scheuert durch und berührt die Karosserie, die mit dem Minuspol verbunden ist');
+
+// Schaltzeichen (klein, für Zuordnen)
+const SYM = {
+  lampe: `<circle cx="35" cy="22" r="14" fill="none" stroke="${C.ink}" stroke-width="2"/><path d="M25 12L45 32M45 12L25 32" stroke="${C.ink}" stroke-width="2"/>${W_(5, 22, 21, 22)}${W_(49, 22, 65, 22)}`,
+  dose: `<circle cx="35" cy="22" r="13" fill="none" stroke="${C.ink}" stroke-width="2.5"/><circle cx="35" cy="22" r="3.5" fill="${C.ink}"/>`,
+  schalter: `<circle cx="30" cy="28" r="10" fill="none" stroke="${C.ink}" stroke-width="2.5"/><path d="M35 19L46 3" stroke="${C.ink}" stroke-width="2.5"/>`,
+  sicherung: `${W_(4, 22, 20, 22)}<rect x="20" y="15" width="30" height="14" fill="none" stroke="${C.ink}" stroke-width="2"/>${W_(20, 22, 50, 22, C.ink, 1.2)}${W_(50, 22, 66, 22)}`,
+  led: `${W_(4, 22, 24, 22)}<path d="M24 10V34L44 22Z" fill="none" stroke="${C.ink}" stroke-width="2"/>${W_(44, 10, 44, 34)}${W_(44, 22, 66, 22)}<path d="M48 8l7 -6M53 11l7 -6" stroke="${C.ink}" stroke-width="1.5"/><path d="M55 2l0 4l-4 0M60 5l0 4l-4 0" fill="none" stroke="${C.ink}" stroke-width="1.5"/>`,
+  batterie: `${W_(4, 22, 30, 22)}${W_(30, 6, 30, 38, C.ink, 2)}<rect x="38" y="14" width="6" height="16" fill="${C.ink}"/>${W_(44, 22, 66, 22)}`,
+  ls: `${W_(2, 30, 16, 30)}<path d="M16 30L54 18" stroke="${C.ink}" stroke-width="2"/><path d="M44 21L41 9" stroke="${C.ink}" stroke-width="1.8"/><path d="M36 11L41 3L45 11Z" fill="${C.ink}"/>${W_(56, 30, 68, 30)}`,
+  schliesser: `${W_(4, 30, 22, 30)}<path d="M22 30L48 16" stroke="${C.ink}" stroke-width="2"/>${W_(48, 30, 66, 30)}`
+};
+const sym = (k, lab) => `<svg class="sym" viewBox="0 0 70 44" role="img" aria-label="${lab}">${SYM[k]}</svg>`;
+
+// Stromlaufplan Gleichstrom (Kfz)
+G.slpDC = svg(380, 250, `
+  ${W_(40, 30, 340, 30)}${W_(40, 30, 40, 105)}${W_(40, 145, 40, 225)}${W_(40, 225, 340, 225)}${W_(340, 30, 340, 95)}${W_(340, 150, 340, 225)}
+  <!-- Batterie senkrecht -->${W_(18, 105, 62, 105, C.ink, 2)}<rect x="28" y="137" width="24" height="8" fill="${C.ink}"/>${T(70, 128, 'Batterie', 'start', 600, 12)}${T(12, 100, '+', 'middle', 700, 14, C.plus)}${T(12, 152, '−', 'middle', 700, 14)}
+  <!-- Sicherung --><rect x="80" y="21" width="60" height="18" fill="#fff" stroke="${C.ink}" stroke-width="2"/>${W_(80, 30, 140, 30, C.ink, 1.2)}${T(110, 56, 'Sicherung', 'middle', 600, 12)}
+  <!-- Schalter --><rect x="200" y="22" width="60" height="16" fill="#fff" stroke="none"/><path d="M200 30L252 14" stroke="${C.ink}" stroke-width="2"/><circle cx="200" cy="30" r="3" fill="${C.ink}"/><circle cx="260" cy="30" r="3" fill="${C.ink}"/>${T(230, 56, 'Schalter', 'middle', 600, 12)}
+  <!-- LED --><rect x="320" y="95" width="40" height="55" fill="#fff" stroke="none"/><path d="M322 102H358L340 136Z" fill="#fff" stroke="${C.ink}" stroke-width="2"/>${W_(322, 138, 358, 138)}
+  <path d="M362 132l12 8M366 124l12 8" stroke="${C.ink}" stroke-width="1.5"/>${T(310, 125, 'LED', 'end', 600, 12)}`,
+  'Stromlaufplan eines Gleichstromkreises: Batterie, Sicherung, Schalter und LED hintereinander, mit Hin- und Rückleitung');
+
+// Stromlaufplan Wechselstrom (Haus) – auch für Beschriftungsaufgabe
+const SLPAC_W = 360, SLPAC_H = 410;
+const slpAC = (withLabels) => svg(SLPAC_W, SLPAC_H, `<rect width="360" height="410" fill="#fff"/>
+  ${W_(40, 40, 330, 40)}${withLabels ? T(40, 30, 'L1', 'start', 600, 15) : ''}${DOT(140, 40)}
+  ${W_(140, 40, 140, 110)}<rect x="130" y="110" width="20" height="50" fill="#fff" stroke="${C.ink}" stroke-width="2"/>${T(132, 108, '1', 'end', 500, 10)}${T(132, 172, '2', 'end', 500, 10)}
+  ${T(162, 140, '1F1', 'start', 600, 14)}
+  ${W_(140, 160, 140, 202)}<path d="M140 202L128 234" stroke="${C.ink}" stroke-width="2"/>${W_(140, 238, 140, 280)}${T(132, 200, '13', 'end', 500, 10)}${T(132, 254, '14', 'end', 500, 10)}${T(162, 226, '1S1', 'start', 600, 14)}
+  <circle cx="140" cy="300" r="20" fill="#fff" stroke="${C.ink}" stroke-width="2"/><path d="M126 286L154 314M154 286L126 314" stroke="${C.ink}" stroke-width="2"/>${T(132, 276, 'X1', 'end', 500, 10)}${T(132, 332, 'X2', 'end', 500, 10)}
+  ${T(166, 288, '1H1', 'start', 600, 14)}
+  ${W_(140, 320, 140, 340)}${W_(40, 340, 330, 340)}${DOT(140, 340)}${withLabels ? T(40, 332, 'N', 'start', 600, 15) : ''}
+  ${W_(160, 300, 230, 300)}${W_(230, 300, 230, 385)}${W_(40, 385, 330, 385)}${DOT(230, 385)}${withLabels ? T(40, 377, 'PE', 'start', 600, 15) : ''}`,
+  'Stromlaufplan im Einphasen-Wechselstromkreis: Außenleiter L1, Sicherung 1F1, Schalter 1S1, Lampe 1H1, Neutralleiter N und Schutzleiter PE');
+G.slpAC = slpAC(true);
+const SLP_IMG = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(slpAC(false));
+const pctX = x => +(100 * x / SLPAC_W).toFixed(1), pctY = y => +(100 * y / SLPAC_H).toFixed(1);
+
+// Übersichtsplan
+const SL = (x, y, n = 3) => `<path d="M${x - 6} ${y + 8}L${x + 6} ${y - 8}" stroke="${C.ink}" stroke-width="1.6"/>${T(x + 4, y - 11, String(n), 'middle', 600, 11)}`;
+G.uep = svg(470, 270, `
+  <path d="M14 140H120" stroke="${C.ink}" stroke-width="2"/><path d="M120 134L134 140L120 146Z" fill="${C.ink}"/>${SL(70, 140)}${T(40, 162, 'Spannungsquelle', 'start', 500, 11)}
+  ${W_(134, 140, 190, 140)}${SL(162, 140)}<path d="M190 140L236 126" stroke="${C.ink}" stroke-width="2"/><path d="M226 129L223 116" stroke="${C.ink}" stroke-width="1.8"/><path d="M218 118L223 108L228 118Z" fill="${C.ink}"/>${T(214, 166, 'LS-Schalter', 'middle', 500, 11)}
+  ${W_(244, 140, 344, 140)}${SL(292, 140)}
+  <circle cx="360" cy="140" r="16" fill="#fff" stroke="${C.ink}" stroke-width="2.5"/><circle cx="360" cy="140" r="4" fill="${C.ink}"/>${T(382, 144, 'Abzweigdose', 'start', 500, 11)}
+  ${W_(360, 124, 360, 64)}${SL(360, 96)}<circle cx="360" cy="46" r="18" fill="#fff" stroke="${C.ink}" stroke-width="2"/><path d="M347 33L373 59M373 33L347 59" stroke="${C.ink}" stroke-width="2"/>${T(384, 50, 'Lampe', 'start', 500, 11)}
+  ${W_(360, 156, 360, 216)}${SL(360, 186)}<circle cx="360" cy="228" r="12" fill="#fff" stroke="${C.ink}" stroke-width="2.5"/><path d="M366 218L378 198" stroke="${C.ink}" stroke-width="2.5"/>${T(384, 236, 'Schalter', 'start', 500, 11)}
+  ${T(150, 70, 'NYM-J 3 × 1,5 mm²', 'start', 600, 12, C.blue)}`,
+  'Übersichtsplan: Spannungsquelle, LS-Schalter, Abzweigdose, Lampe und Schalter, jede Verbindung als eine Linie mit Schrägstrich und der Zahl 3');
+G.uepDC = svg(470, 120, ['Batterie', 'Sicherung', 'Schalter', 'LED'].map((s, i) => `<rect x="${10 + i * 118}" y="35" width="92" height="46" fill="#fff" stroke="${C.ink}" stroke-width="2"/>${T(56 + i * 118, 63, s, 'middle', 600, 13)}${i < 3 ? W_(102 + i * 118, 58, 128 + i * 118, 58) : ''}`).join(''),
+  'Übersichtsplan eines Gleichstromkreises: Batterie, Sicherung, Schalter, LED als Kästen mit je einer Verbindungslinie');
+
+// Startbild
+G.hero = svg(520, 300, `<rect width="520" height="300" fill="#fff"/>
+  ${W_(260, 20, 260, 280, C.lgrey, 2, 'stroke-dasharray="6 6"')}
+  ${T(130, 36, '12 V – wie im Kfz', 'middle', 700, 17, C.blue)}${T(390, 36, '230 V – wie im Haus', 'middle', 700, 17, C.blue)}
+  <rect x="28" y="150" width="92" height="66" rx="5" fill="#26323c"/><rect x="40" y="140" width="16" height="10" fill="${C.plus}"/><rect x="92" y="140" width="16" height="10" fill="${C.minus}"/>${T(74, 190, '12 V', 'middle', 700, 16, '#fff')}
+  <path d="M48 140V96H110" fill="none" stroke="${C.plus}" stroke-width="5"/><rect x="110" y="84" width="28" height="26" rx="3" fill="#d62828" stroke="${C.ink}"/>${T(124, 102, '10', 'middle', 700, 12, '#fff')}
+  <path d="M138 96H206V150" fill="none" stroke="${C.plus}" stroke-width="5"/><path d="M100 140V124H230V150" fill="none" stroke="${C.minus}" stroke-width="5"/>
+  <path d="M196 150H240L218 186Z" fill="${C.yel}" stroke="${C.ink}" stroke-width="2"/>${W_(196, 188, 240, 188, C.ink, 3)}<path d="M244 168l10 -6M246 180l10 -6" stroke="${C.yel}" stroke-width="3"/>
+  ${T(130, 250, 'Gleichstrom · Schmelzsicherung', 'middle', 600, 13)}
+  <rect x="330" y="80" width="120" height="120" rx="14" fill="#f4f6f8" stroke="${C.ink}" stroke-width="2.5"/><circle cx="390" cy="140" r="40" fill="#e6eaee" stroke="${C.ink}" stroke-width="2"/>
+  <circle cx="372" cy="140" r="7" fill="${C.ink}"/><circle cx="408" cy="140" r="7" fill="${C.ink}"/><rect x="384" y="100" width="12" height="12" fill="${C.metal}"/><rect x="384" y="168" width="12" height="12" fill="${C.metal}"/>
+  <path d="M300 230H372V147" fill="none" stroke="${C.L}" stroke-width="5"/><path d="M300 246H408V147" fill="none" stroke="${C.N}" stroke-width="5"/>
+  ${PE_LINE(300, 262, 470, 262, 5)}${PE_LINE(470, 262, 470, 106, 5)}${PE_LINE(470, 106, 396, 106, 5)}
+  ${T(290, 234, 'L', 'end', 700, 13, C.L)}${T(290, 250, 'N', 'end', 700, 13, C.N)}${T(290, 266, 'PE', 'end', 700, 13, C.PEg)}
+  ${T(390, 290, 'Wechselstrom · RCD + LS', 'middle', 600, 13)}`,
+  'Links ein 12-V-Gleichstromkreis mit Batterie, Sicherung und LED. Rechts eine Steckdose mit Phase, Neutralleiter und Schutzleiter.');
+
+/* ---------- Rechner: Kabelquerschnitt ---------- */
+const NORM_A = [0.5, 0.75, 1, 1.5, 2.5, 4, 6, 10, 16, 25, 35, 50];
+const NORM_F = [1, 2, 3, 4, 5, 7.5, 10, 15, 20, 25, 30, 35, 40];
+const querschnitt = (I, L, fk, U) => (I * 0.0175 * L * 2) / (fk / 100 * U);
+function widgetRechner() {
+  const st = { mode: 'I', I: 6, P: 72, L: 2, fk: 2, U: 12 };
+  const out = h('div');
+  const mk = (id, lab, min, max, step, unit, help) => {
+    const val = h('output'); const r = h('input', { type: 'range', min, max, step, id: 'rr-' + id, value: st[id] });
+    r.addEventListener('input', () => { st[id] = +r.value; upd(); });
+    return { el: h('div', { class: 'ctl' + (id === 'I' || id === 'P' ? ' ctl-' + id : '') }, h('label', { for: 'rr-' + id }, lab, val), r, help ? h('small', null, help) : null), val, r, unit };
+  };
+  const cI = mk('I', 'Strom I', 0.5, 40, 0.5, 'A'), cP = mk('P', 'Leistung P', 5, 500, 1, 'W', 'Der Strom wird aus P und U berechnet: I = P ÷ U'), cL = mk('L', 'Kabellänge L (einfache Strecke)', 0.5, 15, 0.5, 'm'), cF = mk('fk', 'Verlustfaktor fk', 1, 10, 0.5, '%', 'So viel Prozent der Spannung dürfen im Kabel verloren gehen.');
+  const uSel = h('select', { id: 'rr-U', class: 'gap', style: 'margin:0' }, [12, 24, 230].map(u => h('option', { value: u, selected: u === 12 }, u + ' V')));
+  uSel.addEventListener('change', () => { st.U = +uSel.value; upd(); });
+  const modeBtns = h('div', { class: 'seg', role: 'group', 'aria-label': 'Eingabe' },
+    h('button', { type: 'button', 'data-m': 'I', onclick: () => { st.mode = 'I'; upd(); } }, 'Strom eingeben'),
+    h('button', { type: 'button', 'data-m': 'P', onclick: () => { st.mode = 'P'; upd(); } }, 'Leistung eingeben'));
+  const res = h('div', { class: 'readout' });
+  const formula = h('div', { class: 'formula' });
+  const vis = h('div', { class: 'cablevis' });
+  function upd() {
+    const I = st.mode === 'I' ? st.I : st.P / st.U;
+    cI.val.textContent = fN(st.I, 1) + ' A'; cP.val.textContent = st.P + ' W'; cL.val.textContent = fN(st.L, 1) + ' m'; cF.val.textContent = fN(st.fk, 1) + ' %';
+    cI.el.classList.toggle('hidden', st.mode !== 'I'); cP.el.classList.toggle('hidden', st.mode !== 'P');
+    modeBtns.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', b.dataset.m === st.mode));
+    const A = querschnitt(I, st.L, st.fk, st.U); const norm = NORM_A.find(n => n >= A - 1e-9);
+    const dU = st.fk / 100 * st.U;
+    res.replaceChildren(
+      h('div', null, h('b', null, fN(A, 2) + ' mm²'), h('span', null, 'errechneter Querschnitt')),
+      h('div', null, h('b', null, norm ? fN(norm, 2) + ' mm²' : '> 50 mm²'), h('span', null, 'nächste Normgröße')),
+      h('div', null, h('b', null, fN(st.U - dU, 2) + ' V'), h('span', null, `kommen an (Verlust ${fN(dU, 2)} V)`)));
+    formula.innerHTML = `A = (I × 0,0175 × L × 2) ÷ (fk × U)<br>A = (${fN(I, 2)} × 0,0175 × ${fN(st.L, 1)} × 2) ÷ (${fN(st.fk / 100, 3)} × ${st.U}) = <b>${fN(A, 3)} mm²</b>`;
+    const r = mm => 6 + Math.sqrt(mm) * 11;
+    const rn = norm ? r(norm) : r(60), rr = r(1.5);
+    vis.innerHTML = svg(300, 130, `<circle cx="70" cy="65" r="${rr}" fill="#c98b4a" stroke="${C.ink}"/>${T(70, 124, '1,5 mm² (Vergleich)', 'middle', 600, 11)}
+      <circle cx="210" cy="65" r="${Math.min(rn, 58)}" fill="#c98b4a" stroke="${C.ink}"/>${T(210, 124, (norm ? fN(norm, 2) : '> 50') + ' mm² (gewählt)', 'middle', 700, 11, C.blue)}`, 'Größenvergleich der Kupferquerschnitte');
+  }
+  out.append(h('div', { class: 'card lab' },
+    h('div', null, h('h3', null, 'Leitungsrechner'), h('p', { class: 'hintline' }, 'Arbeitet mit derselben Formel wie Online-Rechner. Nutze ihn für die Aufgaben unten.'),
+      modeBtns, cI.el, cP.el, cL.el, cF.el, h('div', { class: 'ctl' }, h('label', { for: 'rr-U' }, 'Spannung U'), uSel)),
+    h('div', null, res, formula, vis)));
+  upd();
+  return out;
+}
+
+/* ---------- Simulator: Sicherungskasten ---------- */
+function widgetKasten() {
+  const DEV = [['Waschmaschine', 2600], ['Wäschetrockner', 2500], ['Geschirrspüler', 2000], ['Haartrockner', 1000], ['Wasserkocher', 750], ['Staubsauger', 800], ['LED-Deckenlampe', 10], ['Laptop', 65]];
+  const on = DEV.map(() => false); let lsOn = true, rcdOn = true, fault = false; let msg = '';
+  const root = h('div', { class: 'card' });
+  const grid = h('div', { class: 'devgrid' });
+  const panel = h('div', { class: 'kasten' });
+  const info = h('div');
+  const faultBox = h('input', { type: 'checkbox', id: 'kfault' });
+  faultBox.addEventListener('change', () => { fault = faultBox.checked; evalState(); });
+  const power = () => lsOn && rcdOn;
+  function evalState() {
+    const P = DEV.reduce((s, d, i) => s + (on[i] ? d[1] : 0), 0); const I = P / 230;
+    if (power() && fault && on[5]) { rcdOn = false; msg = 'Der Fehlerstrom-Schutzschalter (RCD) hat ausgelöst: Über das Metallgehäuse des defekten Staubsaugers fließt Strom über den Schutzleiter zur Erde. Der RCD misst, dass in L mehr Strom hin- als in N zurückfließt.'; }
+    else if (power() && I > 16) { lsOn = false; msg = `Der Leitungsschutzschalter (LS) hat ausgelöst: ${fN(I, 1)} A sind mehr als die 16 A, für die die Leitung ausgelegt ist.`; }
+    paint(P, I);
+  }
+  function paint(P, I) {
+    grid.replaceChildren(...DEV.map((d, i) => h('button', { type: 'button', class: 'dev' + (on[i] ? ' on' : ''), 'aria-pressed': on[i], onclick: () => { on[i] = !on[i]; msg = ''; evalState(); } },
+      h('b', null, d[0] + (i === 5 && fault ? ' ⚠' : '')), h('span', null, d[1] + ' W'), h('small', null, on[i] ? (power() ? 'läuft' : 'kein Strom') : 'aus'))));
+    const pct = Math.min(100, 100 * I / 25);
+    panel.replaceChildren(
+      h('div', { class: 'din', html: G.rcd(rcdOn) }), h('div', { class: 'din', html: G.ls(lsOn) }),
+      h('div', { class: 'kread' },
+        h('div', { class: 'readout', style: 'grid-template-columns:repeat(2,1fr)' }, h('div', null, h('b', null, P + ' W'), h('span', null, 'eingeschaltet')), h('div', null, h('b', null, fN(I, 2) + ' A'), h('span', null, 'Strom I = P ÷ 230 V'))),
+        h('div', { class: 'ampbar', 'aria-hidden': 'true' }, h('i', { style: `width:${pct}%;background:${I > 16 ? 'var(--bad)' : 'var(--accent)'}` }), h('em', { style: `left:${100 * 16 / 25}%` }, '16 A')),
+        h('div', { class: 'btnrow' },
+          !lsOn ? h('button', { class: 'btn yellow', type: 'button', onclick: () => { lsOn = true; msg = ''; evalState(); } }, 'LS wieder einschalten') : null,
+          !rcdOn ? h('button', { class: 'btn yellow', type: 'button', onclick: () => { rcdOn = true; msg = ''; evalState(); } }, 'RCD wieder einschalten') : null,
+          h('button', { class: 'btn ghost', type: 'button', onclick: () => { on.fill(false); lsOn = rcdOn = true; msg = ''; evalState(); } }, 'Alles aus'))));
+    info.replaceChildren(msg ? h('div', { class: 'note bad' }, msg) : (power() ? h('div', { class: 'note good' }, 'Alles in Ordnung – beide Schutzschalter sind eingeschaltet.') : null));
+  }
+  root.append(h('h3', null, 'Sicherungskasten-Simulator'),
+    h('p', { class: 'hintline' }, 'Alle Geräte hängen an einem Stromkreis mit 230 V. Schalte Geräte ein und beobachte die Schutzschalter.'),
+    grid, h('label', { class: 'opt multi', style: 'margin:10px 0' }, faultBox, h('span', { class: 'mark' }), h('span', null, h('b', null, 'Defekt einbauen: '), 'Im Staubsauger berührt ein Kabel das Metallgehäuse.')),
+    panel, info,
+    h('p', { class: 'hintline' }, 'Vereinfachung: Ein echter LS löst bei leichter Überlast erst nach einiger Zeit aus, bei einem Kurzschluss sofort.'));
+  evalState();
+  return root;
+}
+
+/* ---------- Inhalte ---------- */
+const INFO_FORMEL_P = `<div class="merke"><b class="t">Leistungsformel</b>P = U · I &nbsp;&nbsp;→&nbsp;&nbsp; I = P ÷ U &nbsp;&nbsp;→&nbsp;&nbsp; U = P ÷ I<br><span class="hintline">P = Leistung in Watt (W) · U = Spannung in Volt (V) · I = Stromstärke in Ampere (A)</span></div>`;
+const INFO_FORMEL_A = `<div class="merke"><b class="t">Kabelquerschnitt</b>A = (I × 0,0175 × L × 2) ÷ (fk × U)</div>
+  <ul class="il"><li><b>I</b> maximale Stromstärke in A</li><li><b>0,0175</b> spezifischer Widerstand von Kupfer in Ω·mm²/m</li><li><b>L</b> Kabellänge in m – mal 2, weil der Strom hin- <i>und</i> zurückfließt</li><li><b>fk</b> Verlustfaktor (1 % = 0,01)</li><li><b>U</b> Spannung in V</li></ul>`;
+const INFO_NORM = `<p><b>Normquerschnitte</b> (mm²): 0,5 · 0,75 · 1 · 1,5 · 2,5 · 4 · 6 · 10 · 16 · 25<br>Gewählt wird immer der <b>nächstgrößere</b> Normquerschnitt.</p>`;
+const INFO_ATO = `${fig(G.ato, 'Flachstecksicherungen (ATO): Die Farbe zeigt die Größe, die Zahl steht zusätzlich oben drauf.')}`;
+const INFO_VL = `<p>Rechenweg für jeden Verbraucher:</p><ol class="steps"><li>Fehlende Größe mit <b>P = U · I</b> bzw. <b>I = P ÷ U</b> berechnen.</li><li>Querschnitt mit der Formel oder dem Leitungsrechner (Modul 3) berechnen.</li><li>Den <b>nächstgrößeren Normquerschnitt</b> wählen: 0,5 · 0,75 · 1 · 1,5 · 2,5 · 4 · 6 · 10 mm².</li><li>Sicherung: die <b>nächste ATO-Größe über dem maximalen Strom</b> (1 · 2 · 3 · 4 · 5 · 7,5 · 10 · 15 · 20 · 25 · 30 A).</li></ol>${INFO_FORMEL_A}`;
+
+const MODULES = [
+  {
+    id: 'stromkreise', short: 'Stromkreisarten', title: 'Stromkreisarten',
+    lead: 'Mit zwei Stromkreisarten haben wir am häufigsten zu tun: dem 1-Phasen-Wechselstrom aus der Steckdose und dem Gleichstrom aus der (Auto-)Batterie oder aus USB-Netzteilen.',
+    intro: () => `
+      <div class="merke"><b class="t">Eigentlich geht es um die Spannung</b>Der Begriff Gleich- bzw. Wechselstrom ist irreführend. Maßgebend ist die <b>Spannung</b>: Das Spannungspotenzial entscheidet über die Stromrichtung.</div>
+      ${fig(G.dcac, 'Die gelbe Linie läuft durch die Zeit: Die Gleichspannung bleibt immer gleich. Die Wechselspannung wechselt ständig zwischen Plus und Minus – in Deutschland 50-mal pro Sekunde (50 Hz).')}
+      <div class="tscroll"><table class="mt"><thead><tr><th>Stromkreisart</th><th>stromführender Leiter</th><th>rückführender Leiter</th></tr></thead><tbody>
+        <tr><th>Gleichstrom</th><td>+ (Plus, rot)</td><td>− (Minus, schwarz)</td></tr>
+        <tr><th>1-Phasen-Wechselstrom</th><td>L (Phase, braun)</td><td>N (Neutralleiter, blau)</td></tr></tbody></table></div>
+      ${fig(G.leiter, 'Beide Stromkreisarten haben einen stromführenden und einen rückführenden Leiter. Im Haus kommt der Schutzleiter PE dazu.')}
+      <div class="merke"><b class="t">Der Schutzleiter PE</b>Im 1-Phasen-Wechselstromkreis gibt es eine weitere Leitung: den Schutzleiter (kurz PE, immer <b>grün-gelb</b>). Er wird an Metallgehäuse angeschlossen und leitet gefährliche Berührungsspannung zur Erde ab, wenn die Isolierung der Phase defekt ist.</div>
+      ${fig(G.pe, 'Alle Steckdosen und Geräte mit Metallgehäuse sind mit dem Schutzleiter verbunden.')}`,
+    tasks: [
+      { id: 'k1', type: 'match', title: 'Farben der Leiter', q: 'Ordne jedem Leiter seine Farbe zu.',
+        info: fig(G.leiter, 'Leiterfarben bei Gleichstrom (links) und im Haus (rechts)'),
+        pairs: [['Phase L', 'braun'], ['Neutralleiter N', 'blau'], ['Schutzleiter PE', 'grün-gelb'], ['Plus (+) im Gleichstromkreis', 'rot'], ['Minus (−) im Gleichstromkreis', 'schwarz']],
+        explain: 'Die Farben sind genormt. Grün-gelb ist immer und ausschließlich der Schutzleiter.' },
+      { id: 'k2', type: 'table', title: 'Steckbrief Stromkreisarten', q: 'Vervollständige die Tabelle.', corner: 'Stromkreisart',
+        info: `<p>Gleichstrom liefern z. B. Autobatterie, Akku oder USB-Netzteil (an der USB-Buchse). Wechselstrom kommt aus der Steckdose.</p><div class="tscroll"><table class="mt"><thead><tr><th></th><th>hin</th><th>zurück</th></tr></thead><tbody><tr><th>Gleichstrom</th><td>+ (rot)</td><td>− (schwarz)</td></tr><tr><th>1-Phasen-Wechselstrom</th><td>L (braun)</td><td>N (blau)</td></tr></tbody></table></div>`,
+        cols: [{ name: 'stromführender Leiter', opts: ['+ (Plus, rot)', 'L (Phase, braun)', 'PE (grün-gelb)'] }, { name: 'rückführender Leiter', opts: ['− (Minus, schwarz)', 'N (Neutralleiter, blau)', 'PE (grün-gelb)'] }, { name: 'typische Quelle', opts: ['Autobatterie', 'Steckdose'] }],
+        rows: [{ label: 'Gleichstrom', ans: ['+ (Plus, rot)', '− (Minus, schwarz)', 'Autobatterie'] }, { label: '1-Phasen-Wechselstrom', ans: ['L (Phase, braun)', 'N (Neutralleiter, blau)', 'Steckdose'] }],
+        hint: 'Der Schutzleiter PE ist weder hin- noch rückführender Leiter. Er führt im Normalfall gar keinen Strom.', explain: 'Der Schutzleiter führt nur im Fehlerfall Strom – er gehört deshalb in keine der beiden Spalten.' },
+      { id: 'k3', type: 'mc', title: 'Welche Kurve?', q: 'Welches Diagramm zeigt den Verlauf einer <b>Wechselspannung</b>?', fixed: true,
+        info: fig(G.dcac, 'Vergleiche die Kurven: Wo wechselt die Spannung zwischen Plus und Minus?'),
+        opts: [G.miniDC + ' A', G.miniAC + ' B', G.miniRect + ' C', G.miniSaw + ' D'], ans: [1],
+        explain: 'Nur Kurve B wechselt gleichmäßig zwischen Plus und Minus. C schaltet nur ein und aus, bleibt aber immer im Plus.' },
+      { id: 'k4', type: 'sort', title: 'Gleich oder Wechsel?', q: 'Welche Quelle liefert Gleichstrom, welche Wechselstrom?',
+        info: `<p><b>Gleichstrom</b> kommt aus Batterien und Akkus, aus Solarmodulen und aus Netzteilen, die den Wechselstrom der Steckdose umwandeln (z. B. am USB-Ausgang).</p><p><b>Wechselstrom</b> kommt aus der Steckdose. Auch Generatoren wie ein Fahrrad-Nabendynamo erzeugen Wechselspannung.</p>`,
+        cats: ['Gleichstrom', 'Wechselstrom'],
+        items: [{ text: 'Autobatterie', cat: 0 }, { text: 'USB-Ladegerät (Ausgang)', cat: 0 }, { text: 'Powerbank', cat: 0 }, { text: 'Solarmodul', cat: 0 }, { text: 'Akku-Bohrschrauber', cat: 0 }, { text: 'Steckdose', cat: 1 }, { text: 'Fahrrad-Nabendynamo', cat: 1 }],
+        explain: 'Ein USB-Ladegerät wandelt die Wechselspannung aus der Steckdose in 5-V-Gleichspannung um.' },
+      { id: 'k5', type: 'mc', title: 'Wozu der Schutzleiter?', q: 'Welche Aufgabe hat der Schutzleiter PE?',
+        info: fig(G.pe, 'Der Schutzleiter ist mit dem Metallgehäuse und mit der Erde verbunden.'),
+        opts: ['Er leitet bei einem Isolationsfehler die gefährliche Spannung am Metallgehäuse zur Erde ab.', 'Er führt den Strom vom Gerät zurück, wie der Neutralleiter.', 'Er liefert zusätzlichen Strom für Geräte mit hoher Leistung.', 'Er schaltet das Licht im Flur.'], ans: [0],
+        explain: 'Im Normalfall fließt über den PE kein Strom. Nur wenn die Phase das Gehäuse berührt, fließt der Fehlerstrom über den PE zur Erde – statt durch einen Menschen.' },
+      { id: 'k6', type: 'gaps', title: 'Lückentext', q: 'Vervollständige den Text.',
+        info: `<p>Wechselspannung ändert ständig ihre Richtung. In Deutschland geschieht das 50-mal pro Sekunde – man sagt: Die Frequenz beträgt 50 Hertz (Hz). Die Spannung an der Steckdose beträgt 230 V.</p>`,
+        text: 'Bei Gleichstrom fließt der Strom immer in {0} Richtung. Bei Wechselstrom ändert sich die Richtung ständig, in Deutschland mit einer Frequenz von {1} Hz. An der Steckdose liegen {2} V an. Der Schutzleiter hat immer die Farbe {3}.',
+        gaps: [{ opts: ['eine', 'zwei', 'jede'], ans: 'eine' }, { opts: ['12', '50', '230', '16'], ans: '50' }, { opts: ['12', '50', '230', '400'], ans: '230' }, { opts: ['grün-gelb', 'blau', 'braun', 'schwarz'], ans: 'grün-gelb' }] }
+    ]
+  },
+  {
+    id: 'leistung', short: 'Leistung', title: 'Leistung und Stromstärke',
+    lead: 'Das 12-V-System führt schnell zu hohen Strömen. Mit der Leistungsformel kannst du ausrechnen, wie groß der Strom ist.',
+    intro: () => `
+      ${INFO_FORMEL_P}
+      <p>Physikalisch betrachtet müssen <b>mehr Elektronen fließen</b> (Strom I), wenn die gleiche Leistung P bei <b>niedrigerer Spannung</b> U erreicht werden soll.</p>
+      <div class="card"><h3>Beispiel: Kühlbox am „Zigarettenanzünder“</h3><p>Der „Zigarettenanzünder“ im Auto ist im Grunde nichts anderes als eine 12-V-Steckdose. Eine Kühlbox hat die Leistung P = 48 W. Die Spannung kennen wir: U = 12 V.</p>
+      ${chain(['P = U · I', 'umstellen', 'I = P ÷ U'])}</div>
+      <div class="merke"><b class="t">Typenschild</b>Auf der Rückseite eines Geräts steht immer die Eingangsspannung U. Stromstärke und Leistung stehen nicht immer beide drauf – mindestens aber eins von beiden. Die fehlende Größe kannst du berechnen.</div>`,
+    tasks: [
+      { id: 'l1', type: 'num', title: 'Kühlbox: 12 V oder 230 V', q: 'Berechne den Strom I durch das Kabel der Kühlbox (P = 48 W) – einmal am 12-V-Netz, einmal am 230-V-Netz.',
+        info: INFO_FORMEL_P + '<p>Beispiel für eine andere Zahl: Ein Gerät mit 36 W an 12 V braucht I = 36 W ÷ 12 V = 3 A.</p><p class="hintline">Runde auf zwei Stellen nach dem Komma.</p>',
+        items: [{ q: 'I<sub>12 V</sub> = 48 W ÷ 12 V =', ans: 4, tol: 0.01, unit: 'A' }, { q: 'I<sub>230 V</sub> = 48 W ÷ 230 V =', ans: 0.21, tol: 0.006, unit: 'A' }],
+        hint: 'I = P ÷ U. Teile die Leistung durch die Spannung.', explain: 'Bei 12 V fließt fast 20-mal so viel Strom wie bei 230 V – für dieselbe Leistung.' },
+      { id: 'l2', type: 'num', title: 'Fehlende Größe berechnen', q: 'Berechne jeweils die fehlende Größe. Die Spannung beträgt immer U = 12 V.',
+        info: INFO_FORMEL_P + '<p>Ist I gegeben, rechnest du <b>P = U · I</b>. Ist P gegeben, rechnest du <b>I = P ÷ U</b>.</p>',
+        items: [{ q: 'a) I = 1,2 A → P =', ans: 14.4, tol: 0.01, unit: 'W' }, { q: 'b) P = 24 W → I =', ans: 2, tol: 0.01, unit: 'A' }, { q: 'c) P = 75 W → I =', ans: 6.25, tol: 0.01, unit: 'A' }, { q: 'd) I = 12 A → P =', ans: 144, tol: 0.01, unit: 'W' }],
+        hint: 'Bei a) und d) multiplizierst du mit 12 V, bei b) und c) teilst du durch 12 V.' },
+      { id: 'l3', type: 'gaps', title: 'Formel umstellen', q: 'Stelle die Formel P = U · I um.',
+        info: `<p>Ein Dreieck hilft beim Umstellen: Oben steht P, unten U und I. Deckst du die gesuchte Größe ab, siehst du die Rechnung.</p>${svg(200, 120, `<path d="M100 10L190 110H10Z" fill="#fff3c9" stroke="${C.ink}" stroke-width="2"/>${W_(45, 70, 155, 70)}${W_(100, 70, 100, 110)}${T(100, 58, 'P', 'middle', 700, 20)}${T(70, 98, 'U', 'middle', 700, 20)}${T(130, 98, 'I', 'middle', 700, 20)}`, 'Formeldreieck mit P oben, U und I unten')}`,
+        text: 'I = {0} ÷ {1} &nbsp;&nbsp;&nbsp; U = {2} ÷ {3}',
+        gaps: [{ opts: ['P', 'U', 'I'], ans: 'P' }, { opts: ['P', 'U', 'I'], ans: 'U' }, { opts: ['P', 'U', 'I'], ans: 'P' }, { opts: ['P', 'U', 'I'], ans: 'I' }] },
+      { id: 'l4', type: 'mc', title: 'Warum mehr Strom bei 12 V?', q: 'Warum fließt bei 12 V ein viel größerer Strom als bei 230 V, wenn ein Gerät die gleiche Leistung hat?',
+        info: INFO_FORMEL_P + '<p>Leistung ist Spannung mal Strom. Wird die Spannung kleiner, muss der andere Faktor größer werden, damit das Produkt gleich bleibt.</p>',
+        opts: ['Weil bei gleicher Leistung und kleinerer Spannung mehr Elektronen fließen müssen.', 'Weil 12-V-Geräte immer mehr Leistung brauchen.', 'Weil Gleichstrom schneller fließt als Wechselstrom.', 'Weil die Autobatterie besonders stark ist.'], ans: [0],
+        explain: 'P = U · I: Halbe Spannung heißt doppelter Strom bei gleicher Leistung.' },
+      { id: 'l5', type: 'num', title: 'Wasserkocher im Camper?', q: 'Ein Wasserkocher hat 2000 W. Berechne den Strom an 230 V und an 12 V.',
+        info: INFO_FORMEL_P + '<p class="hintline">Runde auf eine Stelle nach dem Komma.</p>',
+        items: [{ q: 'I bei 230 V =', ans: 8.7, tol: 0.06, unit: 'A' }, { q: 'I bei 12 V =', ans: 166.7, tol: 0.1, unit: 'A' }],
+        explain: 'Rund 167 A – dafür bräuchte man extrem dicke Kabel. Deshalb gibt es kaum 12-V-Wasserkocher mit 2000 W.' }
+    ]
+  },
+  {
+    id: 'kabel', short: 'Kabelquerschnitt', title: 'Kabelquerschnitt berechnen',
+    lead: 'Hohe Ströme brauchen dicke Kabel. Mit einer Formel oder einem Rechner findest du den passenden Querschnitt in mm².',
+    intro: () => `
+      ${INFO_FORMEL_A}
+      <div class="merke"><b class="t">Der Verlustfaktor fk</b>Durch den hohen Strom erwärmt sich ein Kabel – es ist also ein elektrischer Widerstand. Je größer die Wärme, desto größer der Spannungsverlust. Ist ein 1 m langes Kabel so gewählt, dass fk = 1 %, kommen statt 12 V nur noch <b>11,88 V</b> an.</div>
+      <p>Einfacher als die Formel sind Online-Rechner (z. B. auf camperstyle.net). Man sollte aber prüfen, ob ein Rechner richtige Werte liefert. Hier kannst du direkt mit dem eingebauten Leitungsrechner arbeiten:</p>`,
+    widget: widgetRechner,
+    tasks: [
+      { id: 'q1', type: 'num', title: 'Querschnitt berechnen', q: 'Berechne den benötigten Kabelquerschnitt A mit der Formel oder dem Leitungsrechner. Die Spannung beträgt immer 12 V.',
+        info: INFO_FORMEL_A + '<p class="hintline">Runde auf zwei Stellen nach dem Komma.</p>',
+        items: [{ q: 'a) fk = 2 %, L = 2 m, I = 2 A → A =', ans: 0.58, tol: 0.015, unit: 'mm²' }, { q: 'b) fk = 1 %, L = 2 m, I = 2 A → A =', ans: 1.17, tol: 0.015, unit: 'mm²' }, { q: 'c) fk = 4 %, L = 1 m, I = 6 A → A =', ans: 0.44, tol: 0.015, unit: 'mm²' }, { q: 'd) fk = 1 %, L = 6 m, I = 4 A → A =', ans: 7, tol: 0.015, unit: 'mm²' }],
+        hint: 'Denke daran: 2 % = 0,02. Im Leitungsrechner stellst du einfach die Regler ein.',
+        explain: 'Vergleiche a) und b): Halbierst du den erlaubten Verlust, verdoppelt sich der nötige Querschnitt.' },
+      { id: 'q2', type: 'table', title: 'Normquerschnitt wählen', q: 'Kabel gibt es nur in festen Größen. Wähle zu jedem errechneten Wert den passenden Normquerschnitt.', corner: 'errechnet',
+        info: INFO_NORM + '<p>Beispiel: Errechnet sind 1,8 mm² → 1,5 mm² wäre zu dünn → gewählt wird <b>2,5 mm²</b>.</p>',
+        cols: [{ name: 'gewählter Normquerschnitt', opts: ['0,5 mm²', '0,75 mm²', '1 mm²', '1,5 mm²', '2,5 mm²', '4 mm²', '6 mm²', '10 mm²'] }],
+        rows: [{ label: 'a) 0,58 mm²', ans: ['0,75 mm²'] }, { label: 'b) 1,17 mm²', ans: ['1,5 mm²'] }, { label: 'c) 0,44 mm²', ans: ['0,5 mm²'] }, { label: 'd) 7,00 mm²', ans: ['10 mm²'] }],
+        hint: 'Immer aufrunden – nie abrunden. Ein zu dünnes Kabel wird zu warm.', explain: 'Abrunden wäre gefährlich: Das Kabel wäre dünner als berechnet.' },
+      { id: 'q3', type: 'sort', title: 'Dicker oder dünner?', q: 'Was passiert mit dem nötigen Querschnitt, wenn du jeweils nur eine Größe änderst?',
+        info: INFO_FORMEL_A + '<p>Probiere es im Leitungsrechner aus: Verändere immer nur einen Regler und beobachte den Querschnitt.</p>',
+        cats: ['Kabel muss dicker werden', 'dünneres Kabel reicht'],
+        items: [{ text: 'Kabel wird länger', cat: 0 }, { text: 'Strom wird größer', cat: 0 }, { text: 'weniger Verlust erlaubt (kleineres fk)', cat: 0 }, { text: 'mehr Verlust erlaubt (größeres fk)', cat: 1 }, { text: '24 V statt 12 V', cat: 1 }, { text: 'Kabel wird kürzer', cat: 1 }],
+        explain: 'I und L stehen im Zähler (größer → dicker), fk und U im Nenner (größer → dünner).' },
+      { id: 'q4', type: 'num', title: 'Was kommt an?', q: 'Wie viel Spannung kommt bei einem 12-V-System am Verbraucher an?',
+        info: '<p>Der Verlustfaktor gibt an, wie viel Prozent der Spannung im Kabel „verloren“ gehen. Bei fk = 1 % gehen 1 % von 12 V verloren: 0,12 V. Es kommen also 12 V − 0,12 V = 11,88 V an.</p>',
+        items: [{ q: 'bei fk = 2 %:', ans: 11.76, tol: 0.005, unit: 'V' }, { q: 'bei fk = 5 %:', ans: 11.4, tol: 0.005, unit: 'V' }, { q: 'bei fk = 10 %:', ans: 10.8, tol: 0.005, unit: 'V' }] },
+      { id: 'q5', type: 'mc', title: '12 V oder 230 V?', q: 'Bei welchem System ist der richtige Kabelquerschnitt besonders wichtig?',
+        info: INFO_FORMEL_A + INFO_FORMEL_P,
+        opts: ['Bei 12 V, weil für dieselbe Leistung viel größere Ströme fließen.', 'Bei 230 V, weil die Spannung höher ist.', 'Bei beiden ist er gleich wichtig.', 'Der Querschnitt muss immer 1,5 mm² betragen.'], ans: [0],
+        explain: 'Großer Strom und kleine Spannung: Beides macht nach der Formel einen größeren Querschnitt nötig.' }
+    ]
+  },
+  {
+    id: 'haus', short: 'Sicherungen 230 V', title: 'Sicherungen im 230-V-Netz',
+    lead: 'Sicherungen schützen Stromkreise vor zu starken Strömen und sollen Schäden verhindern. Im Haushalt gibt es dafür zwei Geräte: Fehlerstrom-Schutzschalter und Leitungsschutzschalter.',
+    intro: () => `
+      <p>Sicherungen werden immer so <b>in Reihe</b> in den Stromkreis geschaltet, dass der gesamte Strom durch sie hindurchfließt.</p>
+      <div class="vgrid two">
+        <div class="vcard"><div class="din">${G.rcd(true)}</div><h3>Fehlerstrom-Schutzschalter</h3><p>Kurz: <b>RCD</b>, früher FI-Schalter. Englisch: RCCB (Residual Current operated Circuit-Breaker). Gruppe: Fehlerstrom-Schutzeinrichtungen (RCD).</p>
+          <p>Fließt wegen eines Fehlers ein kleiner Strom über Gehäuse und Schutzleiter in die Erde, ist der Strom in der Phase größer als der Strom, der über den Neutralleiter zurückkommt. Der RCD erkennt das und trennt – „der FI löst aus“.</p></div>
+        <div class="vcard"><div class="din">${G.ls(true)}</div><h3>Leitungsschutzschalter</h3><p>Kurz: <b>LS-Schalter</b>, MCB oder Sicherungsautomat. Englisch: MCB (Miniature Circuit Breaker). Gruppe: Überstrom-Schutzeinrichtungen (OCP, Over Current Protection).</p>
+          <p>Er löst aus, wenn der Strom zu groß für die verlegte Leitung ist. Stromkreise im Haushalt sind meist für höchstens <b>16 A</b> ausgelegt.</p></div>
+      </div>`,
+    widget: widgetKasten,
+    tasks: [
+      { id: 'h1', type: 'table', title: 'Fallbeispiele', q: 'Welcher Schutzschalter löst in welchem Fall aus?', corner: 'Fallbeispiel',
+        info: `<p><b>RCD:</b> löst aus, wenn Strom einen falschen Weg nimmt – über ein Gehäuse, einen Menschen, Wasser oder die Erde. Dann kommt über N weniger zurück, als über L hinfließt.</p><p><b>LS:</b> löst aus, wenn insgesamt zu viel Strom durch die Leitung fließt – zum Beispiel, weil zu viele Geräte gleichzeitig laufen.</p><p>Probiere beides im Sicherungskasten-Simulator oben aus.</p>`,
+        cols: [{ name: 'Es löst aus …', opts: ['Fehlerstrom-Schutzschalter (RCD)', 'Leitungsschutzschalter (LS)'] }],
+        rows: [
+          { label: 'Helmut hat Waschmaschine, Trockner und Geschirrspüler in den Hauswirtschaftsraum gestellt. Als er alle drei gleichzeitig einschaltet, fliegt die Sicherung raus.', ans: ['Leitungsschutzschalter (LS)'] },
+          { label: 'In der Standbohrmaschine im Technikraum scheuert ein Kabel im Gehäuse an der Vorschub-Mechanik.', ans: ['Fehlerstrom-Schutzschalter (RCD)'] },
+          { label: 'Hannelore bohrt ein Loch in die Wand, um ein Regal aufzuhängen. Während der Bohrer tief in der Wand steckt, fliegt die Sicherung raus.', ans: ['Fehlerstrom-Schutzschalter (RCD)'] },
+          { label: 'Egal welche Steckdose Herbert wählt – auch in Räumen, in denen sonst nichts läuft: Wenn er den Staubsauger einschaltet, fliegt die Sicherung raus.', ans: ['Fehlerstrom-Schutzschalter (RCD)'] },
+          { label: 'Ein Wasserstrahl trifft eine Steckdose stark.', ans: ['Fehlerstrom-Schutzschalter (RCD)'] }],
+        hint: 'Frage dich jeweils: Ist es zu viel Strom (Überlast) – oder nimmt der Strom einen falschen Weg zur Erde?',
+        explain: 'Nur bei Helmut ist es Überlast. Bei Herbert laufen keine anderen Geräte – also ist der Staubsauger selbst defekt. Trifft Hannelores Bohrer Phase und Neutralleiter gleichzeitig, kann auch der LS auslösen (Kurzschluss).' },
+      { id: 'h2', type: 'num', title: 'Löst der LS aus?', q: 'Diese Geräte laufen gleichzeitig an einem Stromkreis: Waschmaschine (2600 W), Haartrockner (1000 W), Wasserkocher (750 W). Berechne mit P = U · I.',
+        info: INFO_FORMEL_P + '<p>Rechne zuerst alle Leistungen zusammen. Teile dann durch 230 V. Vergleiche mit den 16 A des Leitungsschutzschalters.</p><p class="hintline">Runde auf zwei Stellen nach dem Komma.</p>',
+        items: [{ q: 'Gesamtleistung P =', ans: 4350, tol: 0, unit: 'W' }, { q: 'Strom I = P ÷ 230 V =', ans: 18.91, tol: 0.02, unit: 'A' }],
+        explain: '18,91 A sind mehr als 16 A – der Leitungsschutzschalter löst aus.' },
+      { id: 'h3', type: 'mc', title: 'Auslösen vermeiden', q: 'Wie lässt sich vermeiden, dass der Leitungsschutzschalter auslöst?',
+        info: '<p>Der LS schützt die <b>Leitung</b> in der Wand vor Überhitzung. Eine Leitung für 16 A wird nicht dicker, wenn man eine größere Sicherung einsetzt. Mehrfachsteckdosen verteilen den Strom nicht auf andere Leitungen – alles fließt weiter durch dieselbe Leitung.</p>',
+        opts: ['Die Geräte nacheinander statt gleichzeitig betreiben', 'Die Geräte an Steckdosen verschiedener Stromkreise anschließen', 'Eine größere Sicherung (z. B. 25 A) einsetzen', 'Alle Geräte an eine Mehrfachsteckdose anschließen', 'Den Leitungsschutzschalter überbrücken'], ans: [0, 1],
+        explain: 'Eine größere Sicherung oder eine Überbrückung wären lebensgefährlich: Die Leitung könnte überhitzen und einen Brand auslösen.' },
+      { id: 'h4', type: 'match', title: 'Steckbrief', q: 'Ordne die Begriffe richtig zu.',
+        info: `<div class="tscroll"><table class="mt"><thead><tr><th></th><th>Fehlerstrom-Schutzschalter</th><th>Leitungsschutzschalter</th></tr></thead><tbody><tr><th>Kurz</th><td>RCD, früher FI</td><td>LS-Schalter, MCB, Sicherungsautomat</td></tr><tr><th>Englisch</th><td>RCCB</td><td>MCB</td></tr><tr><th>Gruppe</th><td>Fehlerstrom-Schutzeinrichtungen</td><td>Überstrom-Schutzeinrichtungen</td></tr></tbody></table></div>`,
+        pairs: [['früher „FI-Schalter“ genannt', 'Fehlerstrom-Schutzschalter'], ['auch „Sicherungsautomat“ genannt', 'Leitungsschutzschalter'], ['Residual Current operated Circuit-Breaker', 'RCCB'], ['Miniature Circuit Breaker', 'MCB'], ['Gruppe der Überstrom-Schutzeinrichtungen', 'OCP']] },
+      { id: 'h5', type: 'gaps', title: 'So arbeitet der RCD', q: 'Vervollständige den Text.',
+        info: fig(G.pe, 'Bei einem Isolationsfehler fließt Strom über den PE zur Erde.'),
+        text: 'Der RCD vergleicht den Strom in der {0} mit dem Strom im {1}. Fließt ein Teil über den {2} zur Erde, kommt weniger zurück. Der RCD erkennt diese {3} und trennt den Stromkreis.',
+        gaps: [{ opts: ['Phase L', 'Erde', 'Steckdose'], ans: 'Phase L' }, { opts: ['Neutralleiter N', 'Schutzleiter PE', 'Gehäuse'], ans: 'Neutralleiter N' }, { opts: ['Schutzleiter PE', 'Neutralleiter N', 'Schalter'], ans: 'Schutzleiter PE' }, { opts: ['Differenz', 'Überlast', 'Spannung'], ans: 'Differenz' }] }
+    ]
+  },
+  {
+    id: 'kfz', short: 'Sicherungen 12 V', title: 'Sicherungen im Kfz (12 V)',
+    lead: 'Im Kraftfahrzeug werden Schmelzsicherungen verwendet. Sie schützen die Kabel vor zu hohen Strömen – vor allem bei Kurzschlüssen.',
+    intro: () => `
+      ${fig(G.schmelz, 'Alle Schmelzsicherungen haben einen Schmelzdraht, durch den der Strom fließt.')}
+      <p>Schmelzsicherungen nutzen die <b>Wärmewirkung</b> des elektrischen Stromes: Übersteigt die Stromstärke den zulässigen Wert, erhitzt sich der Schmelzdraht, schmilzt und unterbricht den Stromkreis.</p>
+      ${INFO_ATO}
+      <p>Im Kfz verwendet man <b>Flachstecksicherungen</b>, oft ATO-Fuse genannt (fuse = engl. Sicherung; ATO ist ein Markenname). Die Zahl gibt an, bei wie viel Ampere die Sicherung „durchbrennt“. Für sehr große Ströme, z. B. im HiFi-Bereich, nutzt man <b>Streifensicherungen</b> der Bauform ANL.</p>
+      ${fig(G.kurz, 'Scheuert ein stromführendes Kabel auf und berührt die Karosserie (Masse), gibt es einen Kurzschluss.')}
+      <div class="merke"><b class="t">Richtig dimensionieren</b>Die Sicherung muss so groß sein, dass der Verbraucher betrieben werden kann – aber klein genug, dass sie beim Kurzschluss durchbrennt, <b>bevor</b> das Kabel schmilzt und Feuer fängt (Kabelbrand).</div>`,
+    tasks: [
+      { id: 'f1', type: 'mc', title: 'Wie funktioniert sie?', q: 'Was passiert in einer Schmelzsicherung, wenn der Strom zu groß wird?',
+        info: fig(G.schmelz, ''), opts: ['Der Schmelzdraht erhitzt sich, schmilzt und unterbricht den Stromkreis.', 'Ein Magnet zieht einen Schalter auf.', 'Die Sicherung misst den Unterschied zwischen Hin- und Rückleitung.', 'Die Sicherung speichert den überschüssigen Strom.'], ans: [0],
+        explain: 'Deshalb muss eine durchgebrannte Schmelzsicherung ersetzt werden – ein LS-Schalter lässt sich dagegen wieder einschalten.' },
+      { id: 'f2', type: 'match', title: 'Farbcode', q: 'Ordne jeder Farbe die Größe der Flachstecksicherung zu.',
+        info: INFO_ATO, pairs: [['beige', '5 A'], ['braun', '7,5 A'], ['rot', '10 A'], ['blau', '15 A'], ['gelb', '20 A'], ['grün', '30 A']],
+        explain: 'Die Farbe hilft beim schnellen Erkennen – die Zahl oben auf der Sicherung ist aber verbindlich.' },
+      { id: 'f3', type: 'mc', title: 'Kurzschluss im Auto', q: 'Wie entsteht im Kfz am häufigsten ein Kurzschluss?',
+        info: fig(G.kurz, 'Die Karosserie ist mit dem Minuspol verbunden (Masse).'),
+        opts: ['Ein stromführendes Kabel scheuert auf und berührt die Karosserie (Masse).', 'Zu viele Verbraucher sind gleichzeitig eingeschaltet.', 'Die Batterie ist leer.', 'Ein Kabel ist zu dick.'], ans: [0],
+        explain: 'Dann versucht der gesamte Strom der Batterie durch das Kabel zu fließen – es erhitzt sich und kann brennen.' },
+      { id: 'f4', type: 'num', title: 'Sicherung dimensionieren', q: 'Ein Verbraucher mit 6 A wird über ein 2 m langes Kabel mit 1,5 mm² an die Batterie (12 V) angeschlossen. Als Verlust sind höchstens 10 % erlaubt.',
+        info: `${INFO_ATO}<p><b>Mindestgröße:</b> Die Sicherung muss <b>größer</b> sein als der Strom des Verbrauchers. Nimm die nächste ATO-Größe.</p><p><b>Maximale Größe:</b> Stelle die Formel nach I um:<br><b>I<sub>max</sub> = (A × fk × U) ÷ (0,0175 × L × 2)</b><br>Die Sicherung darf nicht größer sein als dieser Strom. Nimm die ATO-Größe darunter.</p><p class="hintline">Tipp: Du kannst auch im Leitungsrechner (Modul 3) den Strom so lange erhöhen, bis 1,5 mm² gerade noch reichen.</p>`,
+        items: [{ q: 'Mindestgröße der Sicherung:', ans: 7.5, tol: 0, unit: 'A' }, { q: 'I<sub>max</sub> bei 10 % Verlust:', ans: 25.71, tol: 0.05, unit: 'A' }, { q: 'maximale Größe der Sicherung:', ans: 25, tol: 0, unit: 'A' }],
+        hint: 'Mindestgröße: nächste ATO-Größe über 6 A. I_max = (1,5 × 0,1 × 12) ÷ (0,0175 × 2 × 2).',
+        explain: 'Jede Sicherung zwischen 7,5 A und 25 A funktioniert. Sinnvoll ist eine kleine, z. B. 7,5 A oder 10 A – dann brennt sie bei Fehlern schnell durch.' },
+      { id: 'f5', type: 'mc', title: 'Wo einbauen?', q: 'An welcher Stelle ist es sinnvoll, die Sicherung einzubauen?',
+        info: fig(G.kurz, 'Überlege: Welcher Teil des Kabels ist geschützt, wenn die Sicherung am Gerät sitzt?'),
+        opts: ['Nahe an der Batterie – dann ist das ganze Kabel dahinter geschützt.', 'Nahe am Verbraucher – dann ist das Gerät besser geschützt.', 'Genau in der Mitte des Kabels.', 'Das ist egal.'], ans: [0],
+        explain: 'Scheuert das Kabel zwischen Batterie und Sicherung durch, hilft die Sicherung nicht. Darum gehört sie so nah wie möglich an die Batterie.' },
+      { id: 'f6', type: 'sort', title: 'Kfz oder Haus?', q: 'Wo werden diese Schutzeinrichtungen eingesetzt?',
+        info: '<p>Im Kfz (12 V Gleichstrom) werden Schmelzsicherungen verwendet: Flachstecksicherungen (ATO) und für große Ströme Streifensicherungen (ANL). Im Haushalt (230 V) sitzen Fehlerstrom-Schutzschalter und Leitungsschutzschalter im Sicherungskasten.</p>',
+        cats: ['Kfz (12 V)', 'Haus (230 V)'],
+        items: [{ text: 'Flachstecksicherung (ATO)', cat: 0 }, { text: 'Streifensicherung (ANL)', cat: 0 }, { text: 'Fehlerstrom-Schutzschalter (RCD)', cat: 1 }, { text: 'Leitungsschutzschalter (LS)', cat: 1 }] }
+    ]
+  },
+  {
+    id: 'plaene', short: 'Schaltpläne', title: 'Stromlaufplan und Übersichtsplan',
+    lead: 'In der Installationstechnik gibt es zwei grundsätzliche Arten, eine Schaltung darzustellen: den Stromlaufplan und den Übersichtsplan.',
+    intro: () => `
+      <div class="vgrid two">
+        <div class="vcard"><h3>Stromlaufplan</h3><p>Enthält <b>alle Leitungen</b>. In der Hausinstallation werden L, N und PE einzeln dargestellt, in der Kfz-Elektrik Plus- und Minusleitung.</p></div>
+        <div class="vcard"><h3>Übersichtsplan</h3><p>Stellt die Verbindungen mit <b>nur einer Linie</b> dar. Die Geräte werden so angeordnet, wie sie auch räumlich liegen. Genormte Symbole sorgen für Überblick.</p></div>
+      </div>
+      <h3 style="margin-top:22px">Stromlaufpläne</h3>
+      <div class="vgrid two">${fig(G.slpDC, 'Stromlaufplan im Gleichstromkreis')}${fig(G.slpAC, 'Stromlaufplan im Einphasen-Wechselstromkreis mit Schutzleiter (PE)')}</div>
+      <h3 style="margin-top:22px">Übersichtspläne</h3>
+      ${fig(G.uepDC, 'Übersichtsplan eines Gleichstromkreises (Kfz)')}
+      ${fig(G.uep, 'Übersichtsplan einer Hausinstallation. Der Schrägstrich mit der 3 bedeutet: Hier liegen drei Leiter (L, N, PE) in einem Kabel.')}`,
+    tasks: [
+      { id: 'p1', type: 'mc', title: 'Der Unterschied', q: 'Was unterscheidet den Übersichtsplan vom Stromlaufplan?',
+        info: '<p><b>Stromlaufplan:</b> jede Leitung einzeln. <b>Übersichtsplan:</b> eine Linie pro Verbindung, Geräte räumlich angeordnet.</p>',
+        opts: ['Im Übersichtsplan wird jede Verbindung mit nur einer Linie gezeichnet.', 'Im Übersichtsplan werden L, N und PE einzeln gezeichnet.', 'Der Übersichtsplan zeigt nur die Sicherungen.', 'Es gibt keinen Unterschied.'], ans: [0] },
+      { id: 'p2', type: 'match', title: 'Schaltzeichen', q: 'Ordne jedem Schaltzeichen seinen Namen zu.',
+        info: `<p>Die Schaltzeichen findest du oben in den Plänen. Tipp: Die Lampe ist ein Kreis mit Kreuz. Die LED ist eine Diode (Dreieck mit Strich) mit zwei Pfeilen für das ausgestrahlte Licht.</p>`,
+        pairs: [[sym('lampe', 'Kreis mit Kreuz'), 'Lampe'], [sym('dose', 'Kreis mit Punkt'), 'Abzweigdose'], [sym('schalter', 'kleiner Kreis mit schrägem Strich'), 'Schalter (Übersichtsplan)'], [sym('sicherung', 'Rechteck mit Linie'), 'Sicherung'], [sym('led', 'Dreieck mit Strich und zwei Pfeilen'), 'LED'], [sym('batterie', 'langer und kurzer dicker Strich'), 'Batterie'], [sym('ls', 'schräger Kontakt mit Pfeil'), 'LS-Schalter']] },
+      { id: 'p3', type: 'label', title: 'Stromlaufplan beschriften', q: 'Beschrifte den Stromlaufplan der Hausinstallation.', img: SLP_IMG, alt: 'Stromlaufplan mit nummerierten Markierungen',
+        info: `<p><b>Kennbuchstaben:</b> F = Schutzeinrichtung (Sicherung), S = Schalter, H = Leuchte/Meldegerät. Die Zahlen davor und dahinter zählen die Bauteile.</p><p>Oben verläuft der Außenleiter L1, unten Neutralleiter N und – ganz unten – der Schutzleiter PE, an den das Lampengehäuse angeschlossen ist.</p>`,
+        spots: [{ x: pctX(300), y: pctY(40), name: 'Außenleiter L1 (Phase)' }, { x: pctX(90), y: pctY(135), name: 'Sicherung 1F1' }, { x: pctX(90), y: pctY(218), name: 'Schalter 1S1' }, { x: pctX(90), y: pctY(300), name: 'Lampe 1H1' }, { x: pctX(300), y: pctY(340), name: 'Neutralleiter N' }, { x: pctX(300), y: pctY(385), name: 'Schutzleiter PE' }],
+        extra: ['Batterie', 'Abzweigdose'] },
+      { id: 'p4', type: 'sort', title: 'Welcher Plan?', q: 'Welche Eigenschaft gehört zu welchem Plan?',
+        info: '<p>Stromlaufplan: alle Leitungen einzeln, oft mit Klemmenbezeichnungen (1, 2, 13, 14, X1 …). Übersichtsplan: eine Linie pro Verbindung, die Anzahl der Leiter steht am Schrägstrich, die Geräte liegen wie im Raum.</p>',
+        cats: ['Stromlaufplan', 'Übersichtsplan'],
+        items: [{ text: 'alle Leitungen einzeln gezeichnet', cat: 0 }, { text: 'L, N und PE getrennt', cat: 0 }, { text: 'Klemmen wie 13 und 14 beschriftet', cat: 0 }, { text: 'Verbindungen mit einer Linie', cat: 1 }, { text: 'Leiterzahl am Schrägstrich', cat: 1 }, { text: 'Geräte wie im Raum angeordnet', cat: 1 }] },
+      { id: 'p5', type: 'order', title: 'Den Stromkreis verfolgen', q: 'Verfolge den Strom im Gleichstromkreis (Kfz) vom Pluspol aus. In welcher Reihenfolge fließt er durch die Bauteile?',
+        info: fig(G.slpDC, 'Stromlaufplan im Gleichstromkreis'),
+        items: ['Pluspol der Batterie', 'Sicherung', 'Schalter', 'LED', 'Minuspol der Batterie'],
+        explain: 'Die Sicherung sitzt direkt hinter dem Pluspol – so schützt sie die ganze Leitung.' },
+      { id: 'p6', type: 'num', title: 'Leiter zählen', q: 'Wie viele Leiter …',
+        info: fig(G.uep, 'Übersichtsplan mit Schrägstrichen') + '<p>Die Zahl am Schrägstrich gibt an, wie viele Leiter in der Verbindung liegen.</p>',
+        items: [{ q: '… liegen im Übersichtsplan zwischen Abzweigdose und Lampe?', ans: 3, tol: 0, unit: 'Leiter' }, { q: '… zeichnet man im Stromlaufplan eines Gleichstromkreises (Hin- und Rückleitung)?', ans: 2, tol: 0, unit: 'Leiter' }, { q: '… verlaufen im Stromlaufplan der Hausinstallation waagerecht (L1, N, PE)?', ans: 3, tol: 0, unit: 'Leiter' }] }
+    ]
+  },
+  {
+    id: 'projekt', short: 'Projekt', title: 'Projekt: Zwei Installationen',
+    lead: 'Wir bauen zwei elektrische Installationen auf: eine wie im Kfz mit 12 V Gleichstrom und eine wie im Haus mit Wechselstrom – aber mit ungefährlicher Kleinspannung von höchstens 25 V.',
+    intro: () => `
+      <div class="tscroll"><table class="mt"><thead><tr><th></th><th>Schaltung 1 (z. B. Kfz)</th><th>Schaltung 2 (z. B. Hausinstallation)</th></tr></thead><tbody>
+        <tr><th>Stromquelle</th><td>Trafo oder Autobatterie</td><td>Trafo</td></tr>
+        <tr><th>Spannung</th><td>12 V DC (Gleichstrom)</td><td>12–25 V AC (Wechselstrom), einphasig</td></tr>
+        <tr><th>Leitungen</th><td>2 (+12 V und Masse)</td><td>3 (Phase L, Neutralleiter N, Schutzleiter PE)</td></tr>
+        <tr><th>Sicherungen</th><td>Schmelzsicherung (ATO, ANL)</td><td>Fehlerstrom-Schutzeinrichtung, Leitungsschutzschalter</td></tr>
+        <tr><th>Verbraucher</th><td>LED, 12-V-Steckdosen, USB-Ladegerät</td><td>Beleuchtung, Steckdose</td></tr>
+        <tr><th>Schaltung</th><td>einzelne Absicherung der Verbraucher, einzeln schaltbar</td><td>Beleuchtung mit Wechselschaltung (Flurlichtschaltung)</td></tr>
+        <tr><th>Verbindungen</th><td>Steckverbinder, Lötverbinder, Ringkabelschuhe, Klemmen mit Aderendhülsen, Federkraftklemmen</td><td>Abzweigdosen, Federkraftklemmen, Lüsterklemmen</td></tr></tbody></table></div>
+      <div class="merke"><b class="t">Arbeitsauftrag Gruppenarbeit</b><ol class="steps"><li>Erstellt einen <b>Übersichtsplan</b> für eure Schaltung.</li><li>Nur Schaltung 1: Erstellt eine <b>Verbraucherliste</b>.</li><li>Nur Schaltung 2: Erstellt einen <b>Stromlaufplan</b>.</li></ol></div>
+      <h3 style="margin-top:22px">Die Verbraucherliste</h3>
+      <p>Im 12-V-System müssen alle Leitungen so gewählt werden, dass sie den Strom für den Verbraucher führen können, ohne durch Wärme hohe Spannungsverluste zu haben. Deshalb legt man eine Liste aller Verbraucher an: mit Leistung oder Stromaufnahme und Länge der Leitung. Damit wählt man dann Kabelquerschnitt und Sicherung aus.</p>
+      <div class="tscroll"><table class="mt"><thead><tr><th>Verbraucher</th><th>USB-Ladegerät</th><th>12-V-Steckdose</th><th>LED-Leiste</th></tr></thead><tbody>
+        <tr><th>Spannung U</th><td>12 V</td><td>12 V</td><td>12 V</td></tr>
+        <tr><th>max. Strom I</th><td>?</td><td>20 A</td><td>?</td></tr>
+        <tr><th>Leistung P</th><td>24 W</td><td>?</td><td>18 W</td></tr>
+        <tr><th>Leitungslänge</th><td>1 m</td><td>1 m</td><td>1 m</td></tr>
+        <tr><th>Verlustfaktor fk</th><td>1 %</td><td>2 %</td><td>1 %</td></tr></tbody></table></div>
+      <p class="hintline">Die Leistungen von USB-Ladegerät und LED-Leiste sind Beispielwerte. Für eure eigene Schaltung nehmt ihr die Werte vom Typenschild.</p>`,
+    tasks: [
+      { id: 'v1', type: 'sort', title: 'Welche Schaltung?', q: 'Gehört das Bauteil oder die Aufgabe zu Schaltung 1 (Kfz) oder Schaltung 2 (Haus)?',
+        info: '<p>Schaue in die Tabelle oben auf der Seite.</p>',
+        cats: ['Schaltung 1 – Kfz (12 V DC)', 'Schaltung 2 – Haus (AC)'],
+        items: [{ text: 'Autobatterie', cat: 0 }, { text: '2 Leitungen: +12 V und Masse', cat: 0 }, { text: 'Flachstecksicherung (ATO)', cat: 0 }, { text: 'USB-Ladegerät', cat: 0 }, { text: 'Ringkabelschuh', cat: 0 }, { text: 'Verbraucherliste erstellen', cat: 0 },
+          { text: '3 Leitungen: L, N, PE', cat: 1 }, { text: 'Fehlerstrom-Schutzeinrichtung', cat: 1 }, { text: 'Wechselschaltung (Flurlicht)', cat: 1 }, { text: 'Abzweigdose', cat: 1 }, { text: 'Lüsterklemme', cat: 1 }, { text: 'Stromlaufplan erstellen', cat: 1 }] },
+      { id: 'v2', type: 'num', title: 'Verbraucherliste: USB-Ladegerät', q: 'USB-Ladegerät: U = 12 V, P = 24 W, L = 1 m, fk = 1 %.',
+        info: INFO_VL,
+        items: [{ q: 'max. Strom I =', ans: 2, tol: 0.01, unit: 'A' }, { q: 'Kabelquerschnitt errechnet =', ans: 0.58, tol: 0.015, unit: 'mm²' }, { q: 'Kabelquerschnitt gewählt =', ans: 0.75, tol: 0, unit: 'mm²' }, { q: 'Sicherung gewählt =', ans: 3, tol: 0, unit: 'A' }],
+        hint: 'I = 24 W ÷ 12 V. Die Sicherung muss größer sein als der Strom.' },
+      { id: 'v3', type: 'num', title: 'Verbraucherliste: 12-V-Steckdose', q: '12-V-Steckdose: U = 12 V, I = 20 A, L = 1 m, fk = 2 %.',
+        info: INFO_VL,
+        items: [{ q: 'Leistung P =', ans: 240, tol: 0.01, unit: 'W' }, { q: 'Kabelquerschnitt errechnet =', ans: 2.92, tol: 0.015, unit: 'mm²' }, { q: 'Kabelquerschnitt gewählt =', ans: 4, tol: 0, unit: 'mm²' }, { q: 'Sicherung gewählt =', ans: 25, tol: 0, unit: 'A' }],
+        hint: 'P = 12 V × 20 A. Für den Querschnitt: fk = 2 % = 0,02.' },
+      { id: 'v4', type: 'num', title: 'Verbraucherliste: LED-Leiste', q: 'LED-Leiste: U = 12 V, P = 18 W, L = 1 m, fk = 1 %.',
+        info: INFO_VL,
+        items: [{ q: 'max. Strom I =', ans: 1.5, tol: 0.01, unit: 'A' }, { q: 'Kabelquerschnitt errechnet =', ans: 0.44, tol: 0.015, unit: 'mm²' }, { q: 'Kabelquerschnitt gewählt =', ans: 0.5, tol: 0, unit: 'mm²' }, { q: 'Sicherung gewählt =', ans: 2, tol: 0, unit: 'A' }] },
+      { id: 'v5', type: 'mc', title: 'Wozu das Ganze?', q: 'Warum legt man für eine 12-V-Installation eine Verbraucherliste an?',
+        info: '<p>Die Verbraucherliste sammelt für jedes Gerät Spannung, Strom bzw. Leistung und Leitungslänge. Daraus ergeben sich Kabelquerschnitt und Sicherung.</p>',
+        opts: ['Um für jeden Verbraucher den passenden Kabelquerschnitt und die passende Sicherung zu bestimmen.', 'Um den Preis der Geräte zu vergleichen.', 'Weil man sonst die Batterie nicht laden kann.', 'Um die Farben der Kabel festzulegen.'], ans: [0] }
+    ]
+  }
+];
+
+/* ---------- Testfragen ---------- */
+const TEST_BANK = [
+  { id: 't1', type: 'mc', q: 'Der Leitungsschutzschalter …', opts: ['soll das Gerät beschützen.', 'verhindert Stromschläge.', 'sichert die Leitung gegen Durchschmoren.', 'ist nur für die Schulleitung bestimmt.'], ans: [2], explain: 'Er schützt die Leitung vor Überlast.' },
+  { id: 't2', type: 'mc', q: 'Der Kabelquerschnitt …', opts: ['ist bei 230 V wichtiger als bei 12 V.', 'ist bei 12 V wichtiger als bei 230 V.', 'ist überall gleich wichtig.', 'muss immer 1,5 mm² betragen.'], ans: [1], explain: 'Bei 12 V fließen für dieselbe Leistung viel größere Ströme.' },
+  { id: 't3', type: 'mc', q: '1-Phasen-Wechselstrom …', opts: ['gibt es nur in Kraftwerken.', 'wird zum Betreiben von Motoren benötigt.', 'kommt aus der Steckdose.', 'ist eigentlich gar kein Strom.'], ans: [2], explain: 'Die normale Steckdose liefert 1-Phasen-Wechselstrom mit 230 V.' },
+  { id: 't4', type: 'mc', q: 'Der Schutzleiter …', opts: ['überwacht alle Elektriker auf der Baustelle.', 'dient dem sicheren Besteigen von Strommasten.', 'führt den Strom vom Gerät zurück.', 'ist mit der Erde verbunden.'], ans: [3], explain: 'Er leitet Fehlerströme zur Erde ab.' },
+  { id: 't5', type: 'mc', q: 'Der Fehlerstrom-Schutzschalter …', opts: ['schaltet den Strom ab, wenn Ströme über den Schutzleiter zur Erde fließen.', 'schützt vor dem falschen Anschließen von Steckdosen und Lampen.', 'kann im Notfall betätigt werden, wenn sich jemand an der Bohrmaschine verletzt hat.', 'knallt bei einem Kurzschluss durch.'], ans: [0], explain: 'Er erkennt, dass über N weniger zurückkommt als über L hinfließt.' },
+  { id: 't6', type: 'mc', q: 'Beim 1-Phasen-Wechselstrom ist der stromführende Leiter …', opts: ['die Phase L (braun).', 'der Neutralleiter N (blau).', 'der Schutzleiter PE (grün-gelb).', 'die Masse (schwarz).'], ans: [0], explain: 'L führt hin, N führt zurück, PE schützt.' },
+  { id: 't7', type: 'mc', q: 'Gleichstrom …', opts: ['fließt nur in eine Richtung.', 'ist besonders schnell verfügbarer Strom.', 'wird heutzutage kaum noch verwendet.', 'kommt aus der Steckdose.'], ans: [0], explain: 'Die Spannung ändert ihre Richtung nicht.' },
+  { id: 't8', type: 'mc', q: 'Was ändert sich beim Wechselstrom ständig?', opts: ['die Richtung (Plus und Minus wechseln)', 'die Farbe der Leiter', 'die Länge des Kabels', 'nichts'], ans: [0], explain: 'In Deutschland 50-mal pro Sekunde (50 Hz).' },
+  { id: 't9', type: 'mc', q: 'Welche Farbe hat der Neutralleiter N?', opts: ['blau', 'braun', 'grün-gelb', 'rot'], ans: [0], fixed: true, explain: 'N ist blau, L braun, PE grün-gelb.' },
+  { id: 't10', type: 'num', q: 'Ein 12-V-Gerät hat 60 W. Wie groß ist der Strom?', ans: 5, tol: 0.01, unit: 'A', explain: 'I = 60 W ÷ 12 V = 5 A.' },
+  { id: 't11', type: 'num', q: 'Ein 12-V-Gerät nimmt 3 A auf. Wie groß ist die Leistung?', ans: 36, tol: 0.01, unit: 'W', explain: 'P = 12 V × 3 A = 36 W.' },
+  { id: 't12', type: 'mc', q: 'Ein Gerät mit gleicher Leistung wird an 12 V statt an 230 V betrieben. Dann …', opts: ['fließt ein viel größerer Strom.', 'fließt ein viel kleinerer Strom.', 'bleibt der Strom gleich.', 'fließt kein Strom.'], ans: [0], explain: 'I = P ÷ U – kleinere Spannung, größerer Strom.' },
+  { id: 't13', type: 'mc', q: 'Die Leitung wird doppelt so lang, alles andere bleibt gleich. Der nötige Kabelquerschnitt …', opts: ['verdoppelt sich.', 'halbiert sich.', 'bleibt gleich.', 'vervierfacht sich.'], ans: [0], explain: 'L steht im Zähler der Formel.' },
+  { id: 't14', type: 'num', q: 'Bei 12 V und einem Verlustfaktor von 1 %: Wie viel Spannung kommt am Verbraucher an?', ans: 11.88, tol: 0.005, unit: 'V', explain: '1 % von 12 V sind 0,12 V.' },
+  { id: 't15', type: 'mc', q: 'Errechnet ist ein Querschnitt von 1,8 mm². Welches Kabel wählst du?', opts: ['1,5 mm²', '2,5 mm²', '1 mm²', '0,75 mm²'], ans: [1], explain: 'Immer der nächstgrößere Normquerschnitt.' },
+  { id: 't16', type: 'mc', q: 'Für welchen Strom sind Stromkreise im Haushalt meist ausgelegt?', opts: ['6 A', '10 A', '16 A', '63 A'], ans: [2], fixed: true, explain: 'Typisch ist ein LS-Schalter mit 16 A.' },
+  { id: 't17', type: 'num', q: 'Wasserkocher (2000 W), Toaster (1000 W) und Haartrockner (1000 W) laufen an einem 230-V-Stromkreis. Wie groß ist der Strom? (zwei Stellen nach dem Komma)', ans: 17.39, tol: 0.02, unit: 'A', explain: '4000 W ÷ 230 V = 17,39 A – der 16-A-LS löst aus.' },
+  { id: 't18', type: 'mc', q: 'Welche Farbe hat eine 10-A-Flachstecksicherung?', opts: ['rot', 'blau', 'gelb', 'grün'], ans: [0], explain: '10 A rot, 15 A blau, 20 A gelb, 30 A grün.' },
+  { id: 't19', type: 'mc', q: 'Wo baut man im Kfz die Sicherung am besten ein?', opts: ['nahe an der Batterie', 'nahe am Verbraucher', 'in der Mitte des Kabels', 'hinter dem Schalter'], ans: [0], explain: 'So ist das ganze Kabel dahinter geschützt.' },
+  { id: 't20', type: 'mc', q: 'Was ist typisch für einen Übersichtsplan?', opts: ['Jede Verbindung wird mit einer Linie gezeichnet, die Leiterzahl steht am Schrägstrich.', 'L, N und PE werden einzeln gezeichnet.', 'Es werden nur Sicherungen gezeichnet.', 'Er enthält keine Schaltzeichen.'], ans: [0], explain: 'Einlinige Darstellung, räumlich angeordnet.' }
+];
+
+/* ---------- Fortschritt ---------- */
+function modStats(m) { let d = 0, a = 0; m.tasks.forEach(t => { const s = S.tasks[t.id]; if (s && s.done) { d++; if (s.assisted) a++; } }); return { done: d, total: m.tasks.length, assisted: a }; }
+function overall() { let d = 0, t = 0; MODULES.forEach(m => { const s = modStats(m); d += s.done; t += s.total; }); return { done: d, total: t, pct: t ? Math.round(100 * d / t) : 0 }; }
+function bestTest() { const a = S.test.attempts; if (!a.length) return null; return a.reduce((b, x) => x.score > b.score ? x : b, a[0]); }
+
+/* ---------- Rahmen: Seitenleiste + Kopfleiste ---------- */
+let route = { name: 'start' };
+let curPbar = null;
+function navItems() {
+  const items = [{ href: '#/start', label: 'Start', key: 'start' }];
+  MODULES.forEach((m, i) => { const s = modStats(m); items.push({ href: '#/m/' + m.id, label: `${i + 1}  ${m.short}`, key: 'm:' + m.id, cnt: `${s.done}/${s.total}`, done: s.done === s.total }); });
+  const b = bestTest();
+  items.push({ href: '#/test', label: 'Abschlusstest', key: 'test', cnt: b ? `${b.score}/${b.max}` : '', done: !!b });
+  items.push({ href: '#/export', label: 'Export & Code', key: 'export' });
+  return items;
+}
+function curKey() { return route.name === 'm' ? 'm:' + route.id : route.name; }
+function refreshChrome() {
+  const o = overall(); const lit = Math.round(o.pct / 100 * 10);
+  const layers = h('div', { class: 'batt', 'aria-hidden': 'true' }, h('div', { class: 'cells' }, Array.from({ length: 10 }, (_, i) => h('i', { class: i < lit ? (i === lit - 1 ? 'on top' : 'on') : '' }))), h('div', { class: 'nub' }));
+  const nav = h('nav', { 'aria-label': 'Module' }, h('ul', null, navItems().map(it => h('li', null, h('a', { href: it.href, class: it.done ? 'done' : '', 'aria-current': curKey() === it.key ? 'page' : null }, it.label, it.cnt ? h('span', { class: 'cnt' }, it.cnt) : null)))));
+  $('#side').replaceChildren(
+    h('img', { class: 'slogo', src: LOGO_D, alt: 'Logo: dein Technik Lehrer' }),
+    h('div', { class: 'brand' }, h('div', null, h('b', null, 'Elektroinstallation'), h('small', null, 'Kfz (12 V) und Haus (230 V) · Lernplattform Technik'))),
+    h('div', { class: 'progwrap' }, layers, h('div', null, h('div', { class: 'pnum' }, o.pct + ' %'), h('small', null, `${o.done} von ${o.total} Aufgaben`))),
+    nav,
+    h('div', { class: 'sidefoot' }, h('button', { class: 'themebtn', type: 'button', onclick: toggleTheme }, 'Hell / Dunkel'), h('p', null, 'Dein Fortschritt bleibt in diesem Browser gespeichert.'))
+  );
+  $('#top').replaceChildren(
+    h('div', { class: 'row' }, h('img', { class: 'tlogo', src: LOGO_D, alt: 'Logo: dein Technik Lehrer' }), h('b', null, 'Elektroinstallation'), h('span', { class: 'pct' }, o.pct + ' %')),
+    h('div', { class: 'pills' }, navItems().map(it => h('a', { href: it.href, 'aria-current': curKey() === it.key ? 'page' : null }, it.label.replace('  ', ' '))))
+  );
+  if (curPbar && curPbar.update) curPbar.update();
+}
+function toggleTheme() {
+  const cur = document.documentElement.getAttribute('data-theme');
+  const sysDark = window.matchMedia && matchMedia('(prefers-color-scheme:dark)').matches;
+  const next = cur ? (cur === 'dark' ? 'light' : 'dark') : (sysDark ? 'light' : 'dark');
+  document.documentElement.setAttribute('data-theme', next); S.theme = next; save();
+}
+function toast(msg) { const t = h('div', { class: 'toast', role: 'status' }, msg); document.body.append(t); setTimeout(() => t.remove(), 3200); }
+
+/* ---------- Seiten ---------- */
+function viewStart() {
+  const o = overall();
+  const nameIn = h('input', { type: 'text', value: S.name || '', autocomplete: 'off', id: 'in-name', placeholder: 'Vor- und Nachname' });
+  const klIn = h('input', { type: 'text', value: S.klasse || '', autocomplete: 'off', id: 'in-kl', placeholder: 'z. B. 10a Technik' });
+  nameIn.addEventListener('input', () => { S.name = nameIn.value; save(); });
+  klIn.addEventListener('input', () => { S.klasse = klIn.value; save(); });
+  const first = MODULES.find(m => modStats(m).done < m.tasks.length) || MODULES[0];
+  return h('div', null,
+    h('div', { class: 'hero' },
+      h('div', null,
+        h('img', { class: 'hlogo lg-light', src: LOGO_L, alt: 'Logo: dein Technik Lehrer' }), h('img', { class: 'hlogo lg-dark', src: LOGO_D, alt: '' }),
+        h('h1', null, 'Elektro\u00ADinstallation: 12\u00A0V und 230\u00A0V'),
+        h('p', { class: 'lead', style: 'font-size:1.15rem;color:var(--muted)' }, 'Stromkreisarten, Leistung, Kabelquerschnitt, Sicherungen und Schaltpläne – mit Aufgaben, die dir sofort sagen, ob deine Antwort stimmt.'),
+        h('div', { class: 'btnrow' }, h('a', { class: 'btn yellow', href: '#/m/' + first.id }, o.done ? 'Weitermachen' : 'Mit Modul 1 beginnen'), h('a', { class: 'btn ghost', href: '#/test' }, 'Zum Abschlusstest'))),
+      h('div', { class: 'photo', html: G.hero })),
+    h('div', { class: 'facts' },
+      h('div', { class: 'fact' }, h('b', null, 'P = U · I'), h('span', null, 'Leistung, Spannung und Strom')),
+      h('div', { class: 'fact' }, h('b', null, 'L · N · PE'), h('span', null, 'braun · blau · grün-gelb')),
+      h('div', { class: 'fact' }, h('b', null, 'RCD + LS'), h('span', null, 'Schutzschalter im Haus (meist 16 A)')),
+      h('div', { class: 'fact' }, h('b', null, 'ATO / ANL'), h('span', null, 'Schmelzsicherungen im Kfz'))),
+    h('div', { class: 'card' }, h('h3', null, 'Dein Name auf dem Ergebnisblatt'),
+      h('p', { style: 'margin-top:4px' }, 'Trage deinen Namen ein, damit er auf deinem Ergebnisblatt steht. Er wird nur in diesem Browser gespeichert.'),
+      h('div', { class: 'btnrow', style: 'align-items:flex-end' }, h('div', { class: 'field' }, h('label', { for: 'in-name' }, 'Name'), nameIn), h('div', { class: 'field' }, h('label', { for: 'in-kl' }, 'Klasse / Kurs (optional)'), klIn))),
+    codeLoadCard(),
+    h('div', { class: 'card' }, h('h3', null, 'So funktioniert die Plattform'),
+      h('p', null, h('b', null, 'Prüfen: '), 'Bei jeder Aufgabe zeigt dir „Prüfen“ sofort, was richtig ist (grün) und was nicht (rot). Du darfst so oft probieren, wie du willst.'),
+      h('p', null, h('b', null, 'Lösung: '), 'Nach zwei Fehlversuchen kannst du dir die Lösung anzeigen lassen. Das wird im Ergebnisblatt als „mit Lösungshilfe“ vermerkt.'),
+      h('p', null, h('b', null, 'Info: '), 'Jede Aufgabe hat einen Infokasten mit Text und Grafiken. Öffne ihn, wenn du etwas nachlesen willst.'), h('p', null, h('b', null, 'Test & Export: '), 'Am Ende wartet ein Test mit 20 Fragen. Danach speicherst du dein Ergebnisblatt als PDF oder Text.'), h('p', null, h('b', null, 'Weitermachen: '), 'Unter „Export & Code“ bekommst du einen Fortsetzungscode. Damit machst du auf einem anderen Gerät weiter.')),
+    h('h2', { style: 'margin:30px 0 10px' }, 'Deine Module'),
+    h('div', { class: 'vgrid' }, MODULES.map((m, i) => { const s = modStats(m); return h('a', { class: 'vcard', href: '#/m/' + m.id, style: 'text-decoration:none;color:inherit' }, h('h3', null, `${i + 1}  ${m.title}`), h('p', null, `${s.done} von ${s.total} Aufgaben gelöst`)); })),
+    h('details', { class: 'tch' }, h('summary', null, 'Hinweise für Lehrkräfte'),
+      h('p', null, 'Die Plattform braucht keine Anmeldung und speichert keine Daten auf einem Server. Der Fortschritt liegt nur im Browser der Lernenden. Mit dem Fortsetzungscode (enthält Name, Klasse, gelöste Aufgaben und Testergebnisse) lässt sich die Arbeit auf jedem Gerät fortsetzen. Als Nachweis geben Lernende ihr Ergebnisblatt (PDF oder Text) oder den Code ab – mit dem Code können Sie das Ergebnisblatt selbst aufrufen. Alle Aufgaben werden lokal ohne KI ausgewertet.'),
+      h('p', null, 'Die Inhalte folgen den Arbeitsblättern AB01–AB06 (Elektrische Installation). Leitungsrechner und Sicherungskasten-Simulator sind vereinfachte Modelle: Der Rechner nutzt die Formel A = (I · 0,0175 · L · 2) ÷ (fk · U); der Simulator zeigt Auslösen ohne Zeitverhalten. Die Beispielwerte der Verbraucherliste (USB-Ladegerät 24 W, LED-Leiste 18 W) sind gesetzt, damit die Aufgabe automatisch prüfbar ist. Praktische Arbeiten nur mit Kleinspannung (hier: höchstens 25 V).')),
+    null);
+}
+
+function viewModule(id) {
+  const mi = MODULES.findIndex(m => m.id === id); const m = MODULES[mi];
+  if (!m) return viewStart();
+  const pb = h('div', { class: 'pbar', 'aria-hidden': 'true' });
+  const sum = h('span');
+  curPbar = { update() { pb.replaceChildren(...m.tasks.map(t => h('i', { class: S.tasks[t.id] && S.tasks[t.id].done ? 'on' : '' }))); const s = modStats(m); sum.textContent = `${s.done} von ${s.total} Aufgaben gelöst`; } };
+  const root = h('div', null,
+    h('header', { class: 'pagehead' }, h('h1', null, `${mi + 1}  ${m.title}`), h('p', { class: 'lead' }, m.lead), pb, h('span', { class: 'hintline' }, sum)),
+    h('div', { html: m.intro ? m.intro() : '' }),
+    m.widget ? m.widget() : null,
+    h('h2', { style: 'margin-top:34px' }, 'Aufgaben'),
+    m.tasks.map((t, i) => buildTask(t, i + 1)),
+    h('div', { class: 'modnav' },
+      mi > 0 ? h('a', { class: 'btn ghost', href: '#/m/' + MODULES[mi - 1].id }, '‹ ' + MODULES[mi - 1].short) : h('a', { class: 'btn ghost', href: '#/start' }, '‹ Start'),
+      mi < MODULES.length - 1 ? h('a', { class: 'btn', href: '#/m/' + MODULES[mi + 1].id }, MODULES[mi + 1].short + ' ›') : h('a', { class: 'btn yellow', href: '#/test' }, 'Zum Abschlusstest ›')));
+  curPbar.update();
+  return root;
+}
+
+/* ---------- Abschlusstest ---------- */
+let run = null; let onlyWrong = false; let submitWarn = false;
+function newRun() {
+  const qs = TEST_BANK.map(q => { const o = q.opts ? q.opts.map((text, i) => ({ text, i })) : null; return { ...q, o: o ? (q.fixed ? o : shuffle(o)) : null }; });
+  run = { qs, i: 0, ans: {}, result: null }; submitWarn = false;
+}
+function gradeQ(q, a) {
+  if (q.type === 'num') { const v = parseNum(a == null ? '' : a); return v !== null && Math.abs(v - q.ans) <= (q.tol || 0); }
+  const sel = new Set(a || []); const ok = new Set(q.ans);
+  return sel.size === ok.size && [...sel].every(x => ok.has(x));
+}
+function givenText(q, a) { if (q.type === 'num') return (a === undefined || String(a).trim() === '') ? '– keine Antwort –' : a + (q.unit ? ' ' + q.unit : ''); if (!a || !a.length) return '– keine Antwort –'; return a.slice().sort((x, y) => x - y).map(i => strip(q.opts[i])).join(' | '); }
+function correctText(q) { if (q.type === 'num') return String(q.ans).replace('.', ',') + (q.unit ? ' ' + q.unit : ''); return q.ans.map(i => strip(q.opts[i])).join(' | '); }
+function itemsFromAns(ans) { return TEST_BANK.map(q => ({ q: strip(q.q), ok: gradeQ(q, ans[q.id]), given: givenText(q, ans[q.id]), correct: correctText(q), why: q.explain || '' })); }
+function finishRun() {
+  const items = itemsFromAns(run.ans); const score = items.filter(x => x.ok).length;
+  const att = { ts: Date.now(), score, max: TEST_BANK.length, ans: JSON.parse(JSON.stringify(run.ans)), items };
+  S.test.attempts.push(att); S.test.attempts = S.test.attempts.slice(-6); save();
+  run.result = att; refreshChrome();
+}
+function verdict(p) { return p >= 85 ? 'Pro! Du kennst dich mit Elektroinstallation aus.' : p >= 60 ? 'Wackelkandidat – schau dir die Fehler an und wiederhole die passenden Module.' : 'Finger weg vom Strom! Geh die Module noch einmal in Ruhe durch und versuche den Test danach erneut.'; }
+function viewTest() {
+  const root = h('div', null, h('header', { class: 'pagehead' }, h('h1', null, 'Abschlusstest'), h('p', { class: 'lead' }, '20 Fragen zu allen Modulen – darunter das Quiz aus dem Unterricht. Die Auswertung bekommst du erst am Ende.')));
+  const b = bestTest();
+  if (!run) {
+    root.append(h('div', { class: 'card' },
+      b ? h('p', null, 'Bisher bester Versuch: ', h('b', null, `${b.score} von ${b.max} Punkten`), ` (${Math.round(100 * b.score / b.max)} %). Versuche: ${S.test.attempts.length}.`) : h('p', null, 'Du hast den Test noch nicht gemacht.'),
+      h('p', null, 'Im Test gibt es keine Infokästen. Bei Fragen mit mehreren richtigen Antworten zählt nur die vollständig richtige Auswahl. Die Reihenfolge der Antworten wird bei jedem Versuch gemischt.'),
+      h('div', { class: 'btnrow' }, h('button', { class: 'btn yellow', type: 'button', onclick: () => { newRun(); render(); } }, 'Test starten'), b ? h('a', { class: 'btn ghost', href: '#/export' }, 'Zum Export') : null)));
+    return root;
+  }
+  if (run.result) {
+    const r = run.result; const pct = Math.round(100 * r.score / r.max);
+    root.append(h('div', { class: 'card score' }, h('div', { class: 'big' }, `${r.score}/${r.max}`), h('div', null, h('h3', null, pct + ' %'), h('p', null, verdict(pct)))),
+      h('div', { class: 'btnrow' }, h('a', { class: 'btn yellow', href: '#/export' }, 'Ergebnis exportieren'), h('button', { class: 'btn ghost', type: 'button', onclick: () => { newRun(); render(); } }, 'Test wiederholen'),
+        h('button', { class: 'btn ghost', type: 'button', onclick: () => { onlyWrong = !onlyWrong; render(); } }, onlyWrong ? 'Alle Fragen zeigen' : 'Nur Fehler zeigen')),
+      h('div', { class: 'rev' }, r.items.map((it, i) => (onlyWrong && it.ok) ? null : h('div', { class: 'ri' + (it.ok ? '' : ' wrong') }, h('b', null, `${i + 1}. ${it.q}`), h('div', { class: 'ga' }, (it.ok ? '✓ Richtig: ' : '✗ Deine Antwort: ') + it.given), it.ok ? null : h('div', { class: 'ga' }, 'Richtig wäre: ' + it.correct), it.why ? h('div', { class: 'ga', style: 'color:var(--muted)' }, it.why) : null))));
+    return root;
+  }
+  const q = run.qs[run.i]; const multi = q.type === 'mc' && q.ans.length > 1;
+  const answered = qq => { const a = run.ans[qq.id]; return qq.type === 'num' ? (a !== undefined && String(a).trim() !== '') : !!(a && a.length); };
+  const body = h('div', { class: 'qcard' }, h('span', { class: 'hintline' }, `Frage ${run.i + 1} von ${run.qs.length}` + (multi ? ' – mehrere Antworten möglich' : '')), h('div', { class: 'qq', html: q.q }));
+  if (q.type === 'num') {
+    const inp = h('input', { class: 'num', type: 'text', inputmode: 'decimal', autocomplete: 'off', value: run.ans[q.id] || '', 'aria-label': 'Antwort' });
+    inp.addEventListener('input', () => { run.ans[q.id] = inp.value; dots(); });
+    body.append(h('div', { class: 'numrow' }, inp, q.unit ? h('span', { class: 'unit' }, q.unit) : null));
+  } else {
+    body.append(h('div', { class: 'opts' }, q.o.map(o => {
+      const inp = h('input', { type: multi ? 'checkbox' : 'radio', name: 'tq' });
+      inp.checked = (run.ans[q.id] || []).includes(o.i);
+      inp.addEventListener('change', () => { const cur = new Set(multi ? (run.ans[q.id] || []) : []); inp.checked ? cur.add(o.i) : cur.delete(o.i); run.ans[q.id] = [...cur]; dots(); });
+      return h('label', { class: 'opt' + (multi ? ' multi' : '') }, inp, h('span', { class: 'mark' }), h('span', { html: o.text }));
+    })));
+  }
+  const dotsEl = h('div', { class: 'dots' });
+  function dots() { dotsEl.replaceChildren(...run.qs.map((qq, i) => h('button', { type: 'button', class: (answered(qq) ? 'ans ' : '') + (i === run.i ? 'cur' : ''), 'aria-label': `Frage ${i + 1}${answered(qq) ? ' (beantwortet)' : ''}`, onclick: () => { run.i = i; render(); } }, String(i + 1)))); }
+  dots();
+  const last = run.i === run.qs.length - 1;
+  const warn = h('div', { 'aria-live': 'polite' });
+  const openN = run.qs.filter(x => !answered(x)).length;
+  if (last && submitWarn && openN) warn.append(h('div', { class: 'note' }, `${openN} Frage(n) sind noch unbeantwortet (weiße Kästchen). Klicke noch einmal auf „Trotzdem abgeben“ oder beantworte sie zuerst.`));
+  root.append(body, dotsEl, h('div', { class: 'btnrow' },
+    h('button', { class: 'btn ghost', type: 'button', disabled: run.i === 0, onclick: () => { run.i--; render(); } }, '‹ Zurück'),
+    last ? h('button', { class: 'btn yellow', type: 'button', onclick: () => { const n = run.qs.filter(x => !answered(x)).length; if (n && !submitWarn) { submitWarn = true; render(); return; } finishRun(); render(); } }, (submitWarn && openN) ? 'Trotzdem abgeben' : 'Test abgeben')
+      : h('button', { class: 'btn', type: 'button', onclick: () => { run.i++; render(); } }, 'Weiter ›')), warn);
+  return root;
+}
+
+/* ---------- Fortsetzungscode ---------- */
+const B32 = '0123456789ABCDEFGHJKMNPQRSTVWXYZ';
+const CODE_PREFIX = 'E12V';
+function taskOrder() { return MODULES.flatMap(m => m.tasks.map(t => t.id)); }
+function utf8Cut(s, max) { const enc = new TextEncoder(); let b = enc.encode(s || ''); while (b.length > max) { s = s.slice(0, -1); b = enc.encode(s); } return b; }
+function pushStr(out, s, max) { const b = utf8Cut(s, max); out.push(b.length); b.forEach(x => out.push(x)); }
+function fletcher(bytes) { let a = 0, b = 0; for (const x of bytes) { a = (a + x) % 255; b = (b + a) % 255; } return [a, b]; }
+function b32enc(bytes) { let bits = 0, val = 0, out = ''; for (const x of bytes) { val = (val << 8) | x; bits += 8; while (bits >= 5) { out += B32[(val >>> (bits - 5)) & 31]; bits -= 5; } val &= (1 << bits) - 1; } if (bits > 0) out += B32[(val << (5 - bits)) & 31]; return out; }
+function b32dec(str) { let bits = 0, val = 0; const out = []; for (const ch of str) { const i = B32.indexOf(ch); if (i < 0) throw new Error('char'); val = (val << 5) | i; bits += 5; if (bits >= 8) { out.push((val >>> (bits - 8)) & 255); bits -= 8; } val &= (1 << bits) - 1; } return out; }
+function makeCode() {
+  const b = [2];
+  pushStr(b, (S.name || '').trim(), 40); pushStr(b, (S.klasse || '').trim(), 16);
+  const ids = taskOrder(); let acc = 0, n = 0;
+  ids.forEach(id => { const s = S.tasks[id]; const v = s && s.done ? (s.assisted ? 2 : 1) : 0; acc |= v << (2 * (n % 4)); n++; if (n % 4 === 0) { b.push(acc); acc = 0; } });
+  if (n % 4) b.push(acc);
+  const atts = S.test.attempts.slice(-6); b.push(atts.length); atts.forEach(a => b.push(Math.min(255, a.score)));
+  if (atts.length) {
+    const items = atts[atts.length - 1].items || [];
+    for (let k = 0; k < TEST_BANK.length; k += 8) { let m = 0; for (let j = 0; j < 8 && k + j < TEST_BANK.length; j++) if (items[k + j] && items[k + j].ok) m |= 1 << j; b.push(m); }
+  }
+  const code = b32enc(b.concat(fletcher(b)));
+  return (CODE_PREFIX + code).match(/.{1,4}/g).join('-');
+}
+function readCode(raw) {
+  let s = String(raw || '').toUpperCase().replace(/O/g, '0').replace(/[IL]/g, '1').replace(/[^0-9A-Z]/g, '');
+  if (!s.startsWith(CODE_PREFIX)) throw new Error('Der Code muss mit „E12V“ beginnen. Prüfe, ob du ihn vollständig eingefügt hast.');
+  s = s.slice(CODE_PREFIX.length);
+  let b; try { b = b32dec(s); } catch (e) { throw new Error('Der Code enthält ungültige Zeichen.'); }
+  if (b.length < 6) throw new Error('Der Code ist zu kurz. Vermutlich fehlt ein Teil.');
+  const body = b.slice(0, -2), ck = b.slice(-2), f = fletcher(body);
+  if (ck[0] !== f[0] || ck[1] !== f[1]) throw new Error('Der Code stimmt nicht. Vermutlich ist ein Zeichen falsch oder es fehlt ein Teil.');
+  let p = 0; const dec = new TextDecoder();
+  const rd = () => { if (p >= body.length) throw new Error('Der Code ist unvollständig.'); return body[p++]; };
+  const rs = () => { const n = rd(); const arr = body.slice(p, p + n); p += n; return dec.decode(new Uint8Array(arr)); };
+  if (rd() !== 2) throw new Error('Dieser Code gehört zu einer anderen Version der Plattform.');
+  const out = { name: rs(), klasse: rs(), tasks: {}, test: { attempts: [] } };
+  const ids = taskOrder(); let byte = 0;
+  ids.forEach((id, i) => { if (i % 4 === 0) byte = rd(); const v = (byte >> (2 * (i % 4))) & 3; if (v) out.tasks[id] = { done: true, assisted: v === 2, attempts: 0 }; });
+  const n = rd(); const scores = []; for (let i = 0; i < n; i++) scores.push(rd());
+  const oks = [];
+  if (n) for (let k = 0; k < TEST_BANK.length; k += 8) { const m = rd(); for (let j = 0; j < 8 && k + j < TEST_BANK.length; j++) oks.push(!!(m & (1 << j))); }
+  const now = Date.now();
+  out.test.attempts = scores.map(sc => ({ ts: now, score: sc, max: TEST_BANK.length }));
+  if (n) out.test.attempts[n - 1].items = TEST_BANK.map((q, i) => ({ q: strip(q.q), ok: oks[i], given: '(nicht im Code gespeichert)', correct: correctText(q), why: q.explain || '' }));
+  return out;
+}
+function applyCode(data) {
+  S = { name: data.name, klasse: data.klasse, theme: S.theme, tasks: data.tasks, test: data.test }; save();
+  Object.keys(TASKCACHE).forEach(k => delete TASKCACHE[k]); run = null;
+}
+function codeLoadCard() {
+  const ta = h('textarea', { class: 'codein', id: 'codein', placeholder: 'E12V-…', autocomplete: 'off', spellcheck: 'false', 'aria-label': 'Fortsetzungscode' });
+  const msg = h('div', { 'aria-live': 'polite' }); let pending = null;
+  const has = overall().done > 0 || S.test.attempts.length > 0;
+  const btn = h('button', { class: 'btn', type: 'button' }, 'Code laden');
+  btn.onclick = () => {
+    if (pending) { applyCode(pending); pending = null; toast('Fortschritt geladen.'); location.hash = '#/start'; render(); return; }
+    let d; try { d = readCode(ta.value); } catch (e) { msg.replaceChildren(h('div', { class: 'note bad' }, e.message)); return; }
+    const sum = `Gefunden: ${d.name || '(ohne Namen)'} – ${Object.values(d.tasks).filter(x => x.done).length} gelöste Aufgaben, ${d.test.attempts.length} Testversuch(e).`;
+    if (has) { pending = d; btn.textContent = 'Ja, überschreiben und laden'; msg.replaceChildren(h('div', { class: 'note' }, sum + ' Achtung: Dein aktueller Fortschritt in diesem Browser wird ersetzt.')); return; }
+    applyCode(d); toast('Fortschritt geladen.'); render();
+  };
+  ta.addEventListener('input', () => { if (pending) { pending = null; btn.textContent = 'Code laden'; } msg.replaceChildren(); });
+  return h('div', { class: 'card' }, h('h3', null, 'Mit Code weitermachen'),
+    h('p', { style: 'margin-top:4px' }, 'Du hast schon auf einem anderen Gerät gearbeitet? Füge hier deinen Fortsetzungscode ein. Er steht auf deinem Ergebnisblatt oder unter „Export & Code“.'),
+    h('label', { for: 'codein', class: 'hintline' }, 'Fortsetzungscode'), ta, h('div', { class: 'btnrow' }, btn), msg);
+}
+
+/* ---------- Export ---------- */
+let dlNS = null, dlReady = false;
+async function initDownloads() {
+  for (let i = 0; i < 50 && !(window.claude && typeof window.claude.use === 'function'); i++) await new Promise(r => setTimeout(r, 200));
+  if (window.claude && typeof window.claude.use === 'function') { try { dlNS = await window.claude.use('downloads'); } catch (e) { dlNS = null; } }
+  dlReady = true; if (parseHash().name === 'export') render();
+}
+function buildReport() {
+  const o = overall(); const b = bestTest(); const last = S.test.attempts[S.test.attempts.length - 1];
+  const d = new Date(); const date = `${String(d.getDate()).padStart(2, '0')}.${String(d.getMonth() + 1).padStart(2, '0')}.${d.getFullYear()}`;
+  const mods = MODULES.map((m, i) => { const s = modStats(m); return { titel: `${i + 1} ${m.title}`, geloest: s.done, gesamt: s.total, mitLoesungshilfe: s.assisted }; });
+  return { date, name: S.name || '', klasse: S.klasse || '', mods, o, b, last, attempts: S.test.attempts.length, code: makeCode() };
+}
+function reportLines(r) {
+  const L = [];
+  L.push('ERGEBNISBLATT – Elektroinstallation (12 V und 230 V)', '');
+  L.push(`Name: ${r.name || '(nicht angegeben)'}`, `Klasse/Kurs: ${r.klasse || '(nicht angegeben)'}`, `Datum: ${r.date}`, '');
+  L.push('Module:');
+  r.mods.forEach(m => L.push(`- ${m.titel}: ${m.geloest}/${m.gesamt} Aufgaben gelöst` + (m.mitLoesungshilfe ? ` (davon ${m.mitLoesungshilfe} mit Lösungshilfe)` : '')));
+  L.push(`Gesamt: ${r.o.done}/${r.o.total} Aufgaben (${r.o.pct} %)`, '');
+  if (r.b) {
+    L.push('Abschlusstest:', `- Bester Versuch: ${r.b.score}/${r.b.max} Punkte (${Math.round(100 * r.b.score / r.b.max)} %)`, `- Letzter Versuch: ${r.last.score}/${r.last.max} Punkte (${Math.round(100 * r.last.score / r.last.max)} %)`, `- Anzahl Versuche: ${r.attempts}`, '');
+    const items = r.last.items || [];
+    const wrong = items.map((it, i) => ({ it, i })).filter(x => !x.it.ok);
+    if (wrong.length) { L.push('Falsch im letzten Versuch:'); wrong.forEach(({ it, i }) => L.push(`  ${i + 1}. ${it.q}`, `     Deine Antwort: ${it.given}`, `     Richtig: ${it.correct}`)); }
+    else if (items.length) L.push('Im letzten Versuch waren alle Antworten richtig.');
+  } else L.push('Abschlusstest: noch nicht bearbeitet.');
+  L.push('', 'Fortsetzungscode:', r.code);
+  return L;
+}
+async function saveFile(name, data) {
+  if (dlNS) {
+    try { await dlNS.save({ filename: name, data }); toast('Gespeichert.'); return true; }
+    catch (e) { if (e && e.code === 'declined') return false; if (e && e.code === 'rate_limited') { toast('Einen Moment – es ist schon ein Speicherfenster offen.'); return false; } }
+  }
+  if (!window.claude) {
+    try { const blob = data instanceof Blob ? data : new Blob([data], { type: 'text/plain;charset=utf-8' }); const url = URL.createObjectURL(blob); const a = h('a', { href: url, download: name }); document.body.append(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 4000); toast('Download gestartet.'); return true; } catch (e) { }
+  }
+  toast('Speichern ist in dieser Ansicht nicht möglich. Nutze „Kopieren“ und füge den Text z. B. in ein Dokument ein.');
+  return false;
+}
+function makePDF(r) {
+  const J = window.jspdf && window.jspdf.jsPDF; if (!J) return null;
+  const doc = new J({ unit: 'mm', format: 'a4' }); const W = 210, M = 18; let y = 20;
+  const need = hh => { if (y + hh > 282) { doc.addPage(); y = 20; } };
+  const line = (txt, size = 10.5, style = 'normal', color = [20, 35, 47]) => { doc.setFont('helvetica', style); doc.setFontSize(size); doc.setTextColor(...color); doc.splitTextToSize(txt, W - 2 * M).forEach(l => { need(size * 0.45); doc.text(l, M, y); y += size * 0.45; }); };
+  doc.setFillColor(3, 85, 145); doc.rect(0, 0, W, 10, 'F'); doc.setFillColor(245, 183, 0); doc.rect(0, 10, W, 1.6, 'F');
+  try { doc.addImage(LOGO_L, 'PNG', W - M - 50, 14, 50, 50 * 227 / 800); } catch (e) { }
+  y = 36; line('Ergebnisblatt – Elektroinstallation (12 V / 230 V)', 17, 'bold', [3, 85, 145]); y += 3;
+  line(`Name: ${r.name || '________________________'}     Klasse/Kurs: ${r.klasse || '__________'}     Datum: ${r.date}`, 11); y += 4;
+  line('Module', 13, 'bold', [3, 85, 145]); y += 1;
+  const col = [M, 130, 160];
+  const row = (a, b, c, bold, fill) => { need(7); if (fill) { doc.setFillColor(232, 239, 245); doc.rect(M - 1, y - 4.6, W - 2 * M + 2, 6.6, 'F'); } doc.setFont('helvetica', bold ? 'bold' : 'normal'); doc.setFontSize(10.5); doc.setTextColor(20, 35, 47); doc.text(a, col[0], y); doc.text(b, col[1], y); doc.text(c, col[2], y); y += 6.6; };
+  row('Modul', 'Gelöst', 'mit Lösungshilfe', true, true);
+  r.mods.forEach(m => row(m.titel, `${m.geloest} / ${m.gesamt}`, String(m.mitLoesungshilfe)));
+  row('Gesamt', `${r.o.done} / ${r.o.total}`, `${r.o.pct} %`, true, true); y += 4;
+  line('Abschlusstest', 13, 'bold', [3, 85, 145]); y += 1;
+  if (r.b) {
+    line(`Bester Versuch: ${r.b.score} von ${r.b.max} Punkten (${Math.round(100 * r.b.score / r.b.max)} %)   |   Letzter Versuch: ${r.last.score} von ${r.last.max}   |   Versuche: ${r.attempts}`); y += 2;
+    (r.last.items || []).forEach((it, i) => { need(6); doc.setFont('helvetica', 'bold'); doc.setFontSize(9.5); doc.setTextColor(...(it.ok ? [23, 128, 63] : [194, 59, 46])); doc.text(it.ok ? 'richtig' : 'falsch', W - M, y, { align: 'right' }); doc.setFont('helvetica', 'normal'); doc.setTextColor(20, 35, 47); const ls = doc.splitTextToSize(`${i + 1}. ${it.q}`, W - 2 * M - 22); ls.forEach(l => { need(4.4); doc.text(l, M, y); y += 4.3; }); y += 0.8; });
+  } else line('Noch nicht bearbeitet.');
+  y += 5; line('Fortsetzungscode', 13, 'bold', [3, 85, 145]); y += 1; doc.setFont('courier', 'bold'); doc.setFontSize(10.5); doc.splitTextToSize(r.code, W - 2 * M).forEach(l => { need(5); doc.text(l, M, y); y += 5; });
+  y += 1; line('Mit diesem Code lässt sich die Bearbeitung auf der Startseite der Lernplattform fortsetzen.', 9, 'normal', [86, 104, 122]);
+  return doc.output('blob');
+}
+async function copyText(txt, selectEl) {
+  try { await navigator.clipboard.writeText(txt); toast('Kopiert.'); return; } catch (e) { }
+  try { const t = h('textarea', { style: 'position:fixed;top:0;left:0;opacity:0' }); t.value = txt; document.body.append(t); t.focus(); t.select(); const ok = document.execCommand('copy'); t.remove(); if (ok) { toast('Kopiert.'); return; } } catch (e) { }
+  if (selectEl) { selectEl.focus(); if (selectEl.select) selectEl.select(); else { const rg = document.createRange(); rg.selectNodeContents(selectEl); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(rg); } }
+  toast('Automatisches Kopieren ist hier blockiert. Der Text ist markiert – kopiere ihn mit Strg+C (Tablet: lange tippen → Kopieren).');
+}
+let resetArmed = false;
+function viewExport() {
+  const r = buildReport(); const lines = reportLines(r); const txt = lines.join('\n');
+  const safe = (r.name || 'Ergebnis').replace(/[^\wäöüÄÖÜß\-]+/g, '_').replace(/^_+|_+$/g, '') || 'Ergebnis';
+  const ta = h('textarea', { class: 'rep', readonly: true, 'aria-label': 'Ergebnisblatt als Text' }); ta.value = txt;
+  const codeEl = h('div', { class: 'codebox', tabindex: '0', 'aria-label': 'Fortsetzungscode' }, r.code);
+  const pdfOk = !!(window.jspdf && window.jspdf.jsPDF);
+  const canSave = dlReady && (!!dlNS || !window.claude);
+  const pct = r.b ? Math.round(100 * r.b.score / r.b.max) : null;
+  const nameIn = h('input', { id: 'ex-name', type: 'text', value: S.name || '', autocomplete: 'off' });
+  const klIn = h('input', { id: 'ex-kl', type: 'text', value: S.klasse || '', autocomplete: 'off' });
+  nameIn.addEventListener('input', () => { S.name = nameIn.value; save(); }); klIn.addEventListener('input', () => { S.klasse = klIn.value; save(); });
+  nameIn.addEventListener('change', render); klIn.addEventListener('change', render);
+  const sheet = h('div', { class: 'sheet' },
+    h('div', { class: 'shead' }, h('h2', null, 'Ergebnisblatt – Elektroinstallation'), h('img', { src: LOGO_L, alt: 'Logo: dein Technik Lehrer' })),
+    h('div', { class: 'meta' }, h('div', null, h('b', null, 'Name: '), r.name || '________________'), h('div', null, h('b', null, 'Klasse/Kurs: '), r.klasse || '________'), h('div', null, h('b', null, 'Datum: '), r.date)),
+    h('table', null, h('thead', null, h('tr', null, h('th', null, 'Modul'), h('th', null, 'Gelöst'), h('th', null, 'Mit Lösungshilfe'))),
+      h('tbody', null, r.mods.map(m => h('tr', null, h('td', null, m.titel), h('td', null, `${m.geloest} / ${m.gesamt}`), h('td', null, String(m.mitLoesungshilfe)))), h('tr', null, h('th', null, 'Gesamt'), h('th', null, `${r.o.done} / ${r.o.total}`), h('th', null, r.o.pct + ' %')))),
+    r.b ? h('div', null, h('h3', null, 'Abschlusstest'),
+      h('p', null, `Bester Versuch: ${r.b.score} von ${r.b.max} Punkten (${pct} %). Letzter Versuch: ${r.last.score} von ${r.last.max}. Versuche: ${r.attempts}.`),
+      (r.last.items && r.last.items.length) ? h('table', null, h('thead', null, h('tr', null, h('th', null, 'Nr.'), h('th', null, 'Frage'), h('th', null, 'Ergebnis'))),
+        h('tbody', null, r.last.items.map((it, i) => h('tr', null, h('td', null, String(i + 1)), h('td', null, it.q), h('td', { class: it.ok ? 'ok' : 'no' }, it.ok ? 'richtig' : 'falsch'))))) : null) : h('p', null, 'Der Abschlusstest wurde noch nicht bearbeitet.'),
+    h('h3', null, 'Fortsetzungscode'), h('p', { style: 'font-family:ui-monospace,Menlo,Consolas,monospace;word-break:break-all;font-weight:700' }, r.code));
+  const resetBtn = h('button', { class: 'btn ghost', type: 'button', onclick: () => {
+    if (!resetArmed) { resetArmed = true; resetBtn.textContent = 'Wirklich alles löschen?'; resetBtn.classList.remove('ghost'); resetBtn.style.background = 'var(--bad)'; resetBtn.style.borderColor = 'var(--bad)'; resetBtn.style.color = '#fff'; return; }
+    resetArmed = false; S = { name: S.name, klasse: S.klasse, theme: S.theme, tasks: {}, test: { attempts: [] } }; save(); Object.keys(TASKCACHE).forEach(k => delete TASKCACHE[k]); run = null; toast('Fortschritt gelöscht.'); location.hash = '#/start'; render();
+  } }, 'Alles zurücksetzen'); resetArmed = false;
+  return h('div', null,
+    h('header', { class: 'pagehead no-print' }, h('h1', null, 'Export & Code'), h('p', { class: 'lead' }, 'Sichere dein Ergebnis für deine Lehrkraft oder hol dir einen Code, mit dem du später weitermachst.')),
+    h('div', { class: 'card no-print' }, h('div', { class: 'btnrow', style: 'margin:0;align-items:flex-end' },
+      h('div', { class: 'field' }, h('label', { for: 'ex-name' }, 'Name'), nameIn), h('div', { class: 'field' }, h('label', { for: 'ex-kl' }, 'Klasse / Kurs'), klIn))),
+    h('div', { class: 'card no-print' }, h('h3', null, 'Fortsetzungscode'),
+      h('p', null, 'Der Code enthält deinen Namen, deine Klasse, alle gelösten Aufgaben und deine Testergebnisse (Punkte und welche Fragen richtig waren). Schreib ihn ab, kopiere oder speichere ihn. Auf der Startseite gibst du ihn unter „Mit Code weitermachen“ wieder ein.'),
+      codeEl,
+      h('div', { class: 'btnrow' }, h('button', { class: 'btn', type: 'button', onclick: () => copyText(r.code, codeEl) }, 'Code kopieren'), canSave ? h('button', { class: 'btn ghost', type: 'button', onclick: () => saveFile(`Code_Elektroinstallation_${safe}.txt`, `Fortsetzungscode Lernplattform Elektroinstallation\n${r.name ? 'Name: ' + r.name + '\n' : ''}Datum: ${r.date}\n\n${r.code}\n`) }, 'Code als Datei speichern') : null),
+      h('p', { class: 'hintline' }, 'Der Code ändert sich, sobald du weitere Aufgaben löst. Hol dir am Ende der Stunde immer den neuesten.')),
+    h('div', { class: 'card no-print' }, h('h3', null, 'Ergebnisblatt'),
+      h('p', null, 'Speichere das Ergebnisblatt als PDF oder Textdatei und gib es deiner Lehrkraft. Der Fortsetzungscode steht mit darauf.'),
+      !dlReady ? h('p', { class: 'hintline' }, 'Speicherfunktion wird geladen …') : null,
+      h('div', { class: 'btnrow' },
+        (pdfOk && canSave) ? h('button', { class: 'btn yellow', type: 'button', onclick: async () => { const blob = makePDF(buildReport()); if (!blob) return toast('PDF konnte nicht erstellt werden. Nutze die Textdatei.'); await saveFile(`Ergebnis_Elektroinstallation_${safe}.pdf`, blob); } }, 'Als PDF speichern') : null,
+        canSave ? h('button', { class: 'btn', type: 'button', onclick: () => saveFile(`Ergebnis_Elektroinstallation_${safe}.txt`, txt) }, 'Als Textdatei speichern') : null,
+        h('button', { class: 'btn ghost', type: 'button', onclick: () => copyText(txt, ta) }, 'Text kopieren'),
+        h('button', { class: 'btn ghost', type: 'button', onclick: () => { try { window.print(); } catch (e) { toast('Drucken ist hier nicht möglich.'); } } }, 'Drucken')),
+      (canSave || !dlReady) ? null : h('div', { class: 'note' }, 'In dieser Ansicht können keine Dateien gespeichert werden. Kopiere den Text oder den Code und füge ihn z. B. in ein Dokument oder eine Nachricht an deine Lehrkraft ein.')),
+    sheet,
+    h('div', { class: 'no-print' }, h('h3', { style: 'margin:24px 0 8px' }, 'Ergebnisblatt als Text'), ta,
+      h('details', { class: 'tch' }, h('summary', null, 'Fortschritt zurücksetzen'), h('p', null, 'Löscht alle gelösten Aufgaben und Testversuche in diesem Browser. Hol dir vorher einen Code, falls du den Stand behalten willst.'), resetBtn)));
+}
+
+/* ---------- Router ---------- */
+function parseHash() {
+  const p = (location.hash || '#/start').replace(/^#\/?/, '').split('/');
+  if (p[0] === 'm' && p[1]) return { name: 'm', id: p[1] };
+  if (p[0] === 'test' || p[0] === 'export') return { name: p[0] };
+  return { name: 'start' };
+}
+function render() {
+  route = parseHash(); curPbar = null;
+  let v;
+  if (route.name === 'm') v = viewModule(route.id);
+  else if (route.name === 'test') v = viewTest();
+  else if (route.name === 'export') v = viewExport();
+  else v = viewStart();
+  $('#main').replaceChildren(v, h('footer', { class: 'foot no-print', html: 'Lernplattform „Elektroinstallation: 12 V und 230 V“ – Daniel Beyrodt. Lizenz: <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a>. Alle Grafiken eigens gezeichnet.' }));
+  refreshChrome();
+}
+window.addEventListener('hashchange', () => { render(); window.scrollTo(0, 0); });
+function init() {
+  load();
+  if (S.theme) document.documentElement.setAttribute('data-theme', S.theme);
+  render();
+  initDownloads();
+}
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
+
+</body></html>
