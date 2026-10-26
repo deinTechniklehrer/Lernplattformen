@@ -3,10 +3,8 @@
 var dl={save:function(o){return new Promise(function(res,rej){try{var n=(o&&o.filename)||'datei',x=(n.split('.').pop()||'').toLowerCase(),d=o.data,b=d instanceof Blob?d:new Blob([d],{type:T[x]||'application/octet-stream'});var u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=n;a.rel='noopener';document.body.appendChild(a);a.click();setTimeout(function(){a.remove();URL.revokeObjectURL(u);},4000);res();}catch(e){rej({code:'failed',message:String(e)});}});}};
 window.claude={use:function(n){return Promise.resolve(n==='downloads'?dl:null);}};})();</script><meta property="og:type" content="website"><meta property="og:title" content="MakerSpace-Kompass"><meta property="og:description" content="Making an der Schule: Erfahrungen aus der Praxis, neun Handlungsfelder aus der Forschung und Werkzeuge wie Zonenplaner und Nutzungskonzept-Check für die eigene Schule."><meta property="og:url" content="https://deintechniklehrer.github.io/Lernplattformen/makerspace-kompass/"><meta property="og:image" content="https://deintechniklehrer.github.io/Lernplattformen/vorschau/Vorschau_MakerSpace-Kompass.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="description" content="Making an der Schule: Erfahrungen aus der Praxis, neun Handlungsfelder aus der Forschung und Werkzeuge wie Zonenplaner und Nutzungskonzept-Check für die eigene Schule."><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>MakerSpace-Kompass</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script defer src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<link rel="stylesheet" href="../assets/fonts/fonts.css">
+<script defer src="../assets/jspdf.umd.min.js"></script>
 <style>
 :root{
   --blue:#035591; --blue-d:#023a63; --yellow:#F5B700; --yellow-soft:#fff3c9;
@@ -1545,7 +1543,7 @@ function viewMaterial() {
       DOWNLOADS.map(x => h('div', { class: 'vcard' }, h('span', { class: 'tag' }, x.k), h('h3', { style: 'margin-top:6px' }, x.t), h('p', null, x.d),
         h('div', { class: 'btnrow' }, dlBtn('Herunterladen', () => dlPublished(x.f), x.main ? 'yellow' : '')))),
       h('div', { class: 'vcard' }, h('span', { class: 'tag' }, 'PPTX · bearbeitbar'), h('h3', { style: 'margin-top:6px' }, 'Präsentation (PowerPoint)'), h('p', null, 'Zum Anpassen für die eigene Fachgruppe oder SchiLF – mit Notizen zu jeder Folie.'),
-        h('div', { class: 'btnrow' }, PPTX_URL ? h('a', { class: 'btn', href: PPTX_URL, target: '_blank', rel: 'noopener' }, 'Zur PowerPoint-Datei') : h('span', { class: 'hintline' }, 'Auf Anfrage bei Daniel Beyrodt (Fachmoderation AWT).'))),
+        h('div', { class: 'btnrow' }, PPTX_URL ? h('a', { class: 'btn', href: PPTX_URL, target: '_blank', rel: 'noopener' }, 'Zur PowerPoint-Datei') : h('span', { class: 'hintline' }, 'Auf Anfrage bei Daniel Beyrodt.'))),
       h('div', { class: 'vcard' }, h('span', { class: 'tag' }, 'PDF · A4 quer'), h('h3', { style: 'margin-top:6px' }, 'Werkstatt-Druckvorlagen'), h('p', null, 'Grundriss-Raster, Zonenkarten, Projekt-Canvas und Nutzungskonzept-Check.'),
         h('div', { class: 'btnrow' }, canPdf ? dlBtn('Herunterladen', async () => { const blob = makeTemplatesPDF(); if (!blob) return toast('PDF konnte nicht erstellt werden.'); await saveFile('MakerSpace-Kompass_Druckvorlagen.pdf', blob); }) : null))),
     h('div', { class: 'card' }, h('h3', null, 'Maker-Kiste für deine Schule'),
@@ -1827,7 +1825,7 @@ function pdfHead(doc, title, W) {
   try { doc.addImage(LOGO_L, 'PNG', W - 14 - 42, 13, 42, 42 * 227 / 800); } catch (e) { }
   doc.setFont('helvetica', 'bold'); doc.setFontSize(17); doc.setTextColor(3, 85, 145); doc.text(title, 14, 22);
 }
-function pdfFoot(doc, W, H) { doc.setFont('helvetica', 'normal'); doc.setFontSize(8); doc.setTextColor(86, 104, 122); doc.text('MakerSpace-Kompass · Daniel Beyrodt, Fachmoderator AWT, RLSB Hannover · CC BY-NC-SA 4.0', 14, H - 7); }
+function pdfFoot(doc, W, H) { doc.setFont('helvetica', 'normal'); doc.setFontSize(8); doc.setTextColor(86, 104, 122); doc.text('MakerSpace-Kompass · Daniel Beyrodt (dein Technik Lehrer) · CC BY-NC-SA 4.0', 14, H - 7); }
 function drawGrid(doc, x0, y0, cellmm, cols, rows, cells) {
   for (let y = 0; y < rows; y++) for (let x = 0; x < cols; x++) {
     const v = cells ? cells[y * cols + x] : '.'; const c = ZHEX[v];
@@ -1990,7 +1988,7 @@ function render() {
   else if (route.name === 'werkstatt') v = viewWerkstatt();
   else if (route.name === 'material') v = viewMaterial();
   else v = viewStart();
-  $('#main').replaceChildren(v, h('footer', { class: 'foot', html: 'MakerSpace-Kompass – Daniel Beyrodt, Fachmoderator AWT, RLSB Hannover. Lizenz: <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a>. Fotos: Projekte der KGS Gronau (Leine). Inhalte u. a. nach Maurer & Ingold (2021).' }));
+  $('#main').replaceChildren(v, h('footer', { class: 'foot', html: 'MakerSpace-Kompass – Daniel Beyrodt (dein Technik Lehrer). Lizenz: <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a>. Fotos: Projekte der KGS Gronau (Leine). Inhalte u. a. nach Maurer & Ingold (2021).' }));
   refreshChrome();
   if (route.w) setTimeout(() => { const w = document.getElementById('werk'); if (w) w.scrollIntoView({ block: 'start' }); }, 30);
 }
@@ -2099,7 +2097,7 @@ function makeDocx(r) {
   // Nächste Schritte
   B.push(wP('Nächste Schritte', { style: 'berschrift1' }));
   B.push(wTable([['Was?', 'Wer?', 'Bis wann?', 'Erledigt']].concat(Array.from({ length: 6 }, () => ['', '', '', ''])), [5000, 2000, 1600, TW - 8600], { header: true }));
-  B.push(wP('MakerSpace-Kompass · Workshop „Potenzial MakerSpace“ · Daniel Beyrodt, Fachmoderator AWT, RLSB Hannover · Lizenz CC BY-NC-SA 4.0. Grundlage u. a.: Maurer & Ingold (2021).', { style: 'Hinweis' }));
+  B.push(wP('MakerSpace-Kompass · Workshop „Potenzial MakerSpace“ · Daniel Beyrodt (dein Technik Lehrer) · Lizenz CC BY-NC-SA 4.0. Grundlage u. a.: Maurer & Ingold (2021).', { style: 'Hinweis' }));
   const body = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><w:body>${B.join('')}<w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="1134" w:right="1134" w:bottom="1134" w:left="1134" w:header="708" w:footer="708" w:gutter="0"/></w:sectPr></w:body></w:document>`;
   const now = new Date().toISOString().replace(/\.\d+Z$/, 'Z');
   return zipStore([
@@ -2114,4 +2112,4 @@ function makeDocx(r) {
 
 </script>
 
-</body></html>
+<style>.lp-legal{font:13px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif;text-align:center;padding:20px 16px calc(96px + env(safe-area-inset-bottom,0px));opacity:.8;clear:both}.lp-legal a{color:inherit;text-decoration:underline;text-underline-offset:2px}</style><div class="lp-legal">Privates Angebot von Daniel Beyrodt · <a href="../ueber-mich/">Über mich</a> · <a href="../impressum/">Impressum</a> · <a href="../datenschutz/">Datenschutz</a></div></body></html>

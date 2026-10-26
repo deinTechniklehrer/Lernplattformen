@@ -3,8 +3,7 @@
 var dl={save:function(o){return new Promise(function(res,rej){try{var n=(o&&o.filename)||'datei',x=(n.split('.').pop()||'').toLowerCase(),d=o.data,b=d instanceof Blob?d:new Blob([d],{type:T[x]||'application/octet-stream'});var u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=n;a.rel='noopener';document.body.appendChild(a);a.click();setTimeout(function(){a.remove();URL.revokeObjectURL(u);},4000);res();}catch(e){rej({code:'failed',message:String(e)});}});}};
 window.claude={use:function(n){return Promise.resolve(n==='downloads'?dl:null);}};})();</script><meta property="og:type" content="website"><meta property="og:title" content="Arduino-Lernheft Tinkercad"><meta property="og:description" content="Mikrocontroller verstehen und in Tinkercad eigene Steuerungen und Regelungen programmieren – mit Blöcken oder Text-Code. Ein echter Arduino ist nicht nötig."><meta property="og:url" content="https://deintechniklehrer.github.io/Lernplattformen/arduino-lernheft/"><meta property="og:image" content="https://deintechniklehrer.github.io/Lernplattformen/vorschau/Vorschau_Arduino-Lernheft.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="description" content="Mikrocontroller verstehen und in Tinkercad eigene Steuerungen und Regelungen programmieren – mit Blöcken oder Text-Code. Ein echter Arduino ist nicht nötig."><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>Arduino-Lernheft Tinkercad</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=JetBrains+Mono:wght@400;700&display=swap">
+<link rel="stylesheet" href="../assets/fonts/fonts.css">
 <style>[hidden]{display:none!important}
 :root{
   --ground:#eef0ea; --ground-dot:#d9ddd3; --surface:#ffffff; --surface-2:#f6f7f3; --line:#d5d9cf; --line-strong:#b9bfb2;
@@ -3270,7 +3269,7 @@ async function buildReport() {
 ${TEST.length ? '<h2>Abschlusstest</h2>' : ''}${!TEST.length ? '' : S.test.attempts.length ? `<table><tr><th>Datum</th><th>Punkte</th><th>%</th></tr>${S.test.attempts.map(a => `<tr><td>${new Date(a.at).toLocaleString('de-DE')}</td><td>${a.score}/${a.max}</td><td>${Math.round(a.score / a.max * 100)} %</td></tr>`).join('')}</table>` : '<p>Noch nicht bearbeitet.</p>'}
 ${CFG.reportExtra ? CFG.reportExtra() : ''}<h2>Abgaben</h2>${subs || '<p>Noch keine Abgaben.</p>'}
 <p class="m" style="display:flex;gap:10px;align-items:center;margin-top:28px;font-size:12px">${licenseHtml(CFG.workTitle)}</p>
-</body></html>`;
+<style>.lp-legal{font:13px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif;text-align:center;padding:20px 16px calc(96px + env(safe-area-inset-bottom,0px));opacity:.8;clear:both}.lp-legal a{color:inherit;text-decoration:underline;text-underline-offset:2px}</style><div class="lp-legal">Privates Angebot von Daniel Beyrodt · <a href="../ueber-mich/">Über mich</a> · <a href="../impressum/">Impressum</a> · <a href="../datenschutz/">Datenschutz</a></div></body></html>`;
 }
 
 /* ---------- Start ---------- */

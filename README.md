@@ -1,6 +1,6 @@
 # Lernplattformen Technik
 
-Interaktive Lernplattformen und Fortbildungsangebote für den AWT-Unterricht (Arbeit – Wirtschaft – Technik) von Daniel Beyrodt, Fachmoderator AWT, RLSB Hannover („dein Technik Lehrer“).
+Interaktive Lernplattformen und Fortbildungsangebote für den AWT-Unterricht (Arbeit – Wirtschaft – Technik) von Daniel Beyrodt, „dein Technik Lehrer“. Privates, kostenloses Angebot, keine Veröffentlichung des RLSB.
 
 **Startseite mit allen Plattformen:** https://deintechniklehrer.github.io/Lernplattformen/
 
@@ -20,7 +20,9 @@ Interaktive Lernplattformen und Fortbildungsangebote für den AWT-Unterricht (Ar
 | MakerSpace-Kompass | [/makerspace-kompass/](https://deintechniklehrer.github.io/Lernplattformen/makerspace-kompass/) |
 | KI verstehen – vom Wissen zum eigenen KI-System | [/ki-verstehen/](https://deintechniklehrer.github.io/Lernplattformen/ki-verstehen/) |
 
-Jede Plattform ist eine eigenständige HTML-Seite. Es gibt keinen Server und keine Anmeldung: Der Lernstand bleibt im Browser des jeweiligen Geräts. Lösungen für Lehrkräfte liegen nur verschlüsselt im Repository und lassen sich mit dem Lehrkräfte-Passwort öffnen.
+[Über mich](https://deintechniklehrer.github.io/Lernplattformen/ueber-mich/) · [Impressum](https://deintechniklehrer.github.io/Lernplattformen/impressum/) · [Datenschutz](https://deintechniklehrer.github.io/Lernplattformen/datenschutz/)
+
+Jede Plattform ist eine eigenständige HTML-Seite. Es gibt keinen Server und keine Anmeldung: Der Lernstand bleibt im Browser des jeweiligen Geräts. Lösungen für Lehrkräfte liegen nur verschlüsselt im Repository und lassen sich mit dem Lehrkräfte-Passwort öffnen. Schriften und Bibliotheken liegen im Repository, es werden keine Fremdserver angefragt.
 
 ## Lizenz
 
