@@ -4,6 +4,8 @@ Interaktive Lernplattformen und Fortbildungsangebote für den AWT-Unterricht (Ar
 
 **Startseite mit allen Plattformen:** https://deintechniklehrer.github.io/Lernplattformen/
 
+**Übersicht für Schülerinnen und Schüler** (ohne Lehrkräfte-Angebote): https://deintechniklehrer.github.io/Lernplattformen/schueler/
+
 | Plattform | Adresse |
 |---|---|
 | Arduino-Lernheft Tinkercad | [/arduino-lernheft/](https://deintechniklehrer.github.io/Lernplattformen/arduino-lernheft/) |
