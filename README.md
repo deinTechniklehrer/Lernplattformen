@@ -4,7 +4,9 @@ Interaktive Lernplattformen und Fortbildungsangebote für den AWT-Unterricht (Ar
 
 **Startseite mit allen Plattformen:** https://deintechniklehrer.github.io/Lernplattformen/
 
-**Übersicht für Schülerinnen und Schüler** (ohne Lehrkräfte-Angebote): https://deintechniklehrer.github.io/Lernplattformen/schueler/
+**Für Schülerinnen und Schüler** (ohne Lehrkräfte-Angebote):
+- AWT (Wirtschaft, Technik, KI): https://deintechniklehrer.github.io/Lernplattformen/schueler/
+- nur Technik: https://deintechniklehrer.github.io/Lernplattformen/schueler/technik/
 
 | Plattform | Adresse |
 |---|---|
