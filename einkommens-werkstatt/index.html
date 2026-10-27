@@ -1,7 +1,28 @@
 <!doctype html><html><head><script>/* Lernplattformen auf GitHub Pages: Speichern ohne claude.ai */
 (function(){if(window.claude)return;var T={pdf:'application/pdf',txt:'text/plain;charset=utf-8',png:'image/png',jpg:'image/jpeg',jpeg:'image/jpeg',json:'application/json',csv:'text/csv;charset=utf-8',html:'text/html;charset=utf-8',docx:'application/vnd.openxmlformats-officedocument.wordprocessingml.document',xlsx:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',ino:'text/plain;charset=utf-8'};
 var dl={save:function(o){return new Promise(function(res,rej){try{var n=(o&&o.filename)||'datei',x=(n.split('.').pop()||'').toLowerCase(),d=o.data,b=d instanceof Blob?d:new Blob([d],{type:T[x]||'application/octet-stream'});var u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=n;a.rel='noopener';document.body.appendChild(a);a.click();setTimeout(function(){a.remove();URL.revokeObjectURL(u);},4000);res();}catch(e){rej({code:'failed',message:String(e)});}});}};
-window.claude={use:function(n){return Promise.resolve(n==='downloads'?dl:null);}};})();</script><meta property="og:type" content="website"><meta property="og:title" content="Einkommens-Werkstatt"><meta property="og:description" content="Woher kommt das Geld? Die vier Einkommensquellen kennenlernen, brutto und netto verstehen. Wirtschaft, Klasse 8."><meta property="og:url" content="https://deintechniklehrer.github.io/Lernplattformen/einkommens-werkstatt/"><meta property="og:image" content="https://deintechniklehrer.github.io/Lernplattformen/vorschau/Vorschau_Einkommens-Werkstatt.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="description" content="Woher kommt das Geld? Die vier Einkommensquellen kennenlernen, brutto und netto verstehen. Wirtschaft, Klasse 8."><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+window.claude={use:function(n){return Promise.resolve(n==='downloads'?dl:null);}};})();</script><meta property="og:type" content="website"><meta property="og:title" content="Einkommens-Werkstatt"><meta property="og:description" content="Woher kommt das Geld? Die vier Einkommensquellen kennenlernen, brutto und netto verstehen. Wirtschaft, Klasse 8."><meta property="og:url" content="https://deintechniklehrer.github.io/Lernplattformen/einkommens-werkstatt/"><meta property="og:image" content="https://deintechniklehrer.github.io/Lernplattformen/vorschau/Vorschau_Einkommens-Werkstatt.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="description" content="Woher kommt das Geld? Die vier Einkommensquellen kennenlernen, brutto und netto verstehen. Wirtschaft, Klasse 8."><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><style>
+.graf{min-width:0;max-width:100%;overflow:hidden;margin:0;background:var(--surface,#fff);border:1px solid var(--line,#ddd);border-radius:14px;padding:14px 14px 10px}
+.graf figcaption b{display:block;font-size:1.05rem}
+.graf figcaption span{display:block;font-size:.85rem;color:var(--muted,#555);margin-top:2px}
+.graf .chart{width:100%;height:auto;display:block;margin-top:8px}
+.graf .chart text{font-family:inherit;fill:var(--ink,#141413)}
+.graf .chart .ax{font-size:11px;fill:var(--muted,#666)}
+.graf .chart .gl{stroke:var(--line,#ddd);stroke-width:1}
+.graf .chart .val{font-size:13px;font-weight:700}
+.graf .chart .lab{font-size:13px;font-weight:600}
+.graf .chart .lg{font-size:12.5px}
+.graf .chart .b1{fill:var(--existenz,#2b7a9b)}
+.graf .chart .b2{fill:var(--luxus,#c8961e)}
+.graf .chart .s1{fill:var(--existenz,#2b7a9b)}
+.graf .chart .s2{fill:var(--kultur,#6a8f3c)}
+.graf .chart .s3{fill:#5b6670}
+.graf .scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.graf .scroll .chart{min-width:540px}
+.graf .chart .sv{font-size:13px;font-weight:700;fill:#fff}
+.graf .sub{font-size:.9rem;margin:12px 0 0}
+.graf .src{font-size:.78rem;color:var(--muted,#555);margin:8px 0 0}
+</style></head><body>
 <title>Einkommens-Werkstatt</title>
 <link rel="stylesheet" href="../assets/fonts/fonts.css">
 <style>
@@ -525,9 +546,17 @@ a.btn{text-decoration:none}
     <section class="station c-existenz" data-st="3" aria-labelledby="h-s4" hidden>
       <div class="st-head">
         <div class="st-icon"><svg class="i" viewBox="0 0 24 24"><path d="M4 20V4M4 20h16"/><path d="M8 16v-4M12 16V8M16 16v-6"/></svg></div>
-        <div><p class="eyebrow">Station 4 · Analysieren</p><h2 id="h-s4">Wofür Jugendliche Geld ausgeben</h2><p class="goal">Du übst: eine Grafik zu Konsum und Sparen untersuchen</p></div>
+        <div><p class="eyebrow">Station 4 · Analysieren</p><h2 id="h-s4">Wie viel Geld Jugendliche haben und sparen</h2><p class="goal">Du übst: eine Grafik zu Geld und Sparen untersuchen</p></div>
       </div>
-      <div class="think"><svg class="i" viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/></svg><p>Schlage im Buch <b>Seite 21</b> die Grafik „Konsumfreudige Jugend“ auf. Du analysierst sie in drei Schritten.</p></div>
+      <div class="think"><svg class="i" viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2z"/><path d="M4 19V5"/></svg><p>Die Grafik zeigt Ergebnisse einer Befragung von Jugendlichen und jungen Erwachsenen. Du analysierst sie in drei Schritten.</p></div>
+
+      <figure class="graf">
+        <figcaption><b>Wie viel Geld haben Jugendliche – und wie viel sparen sie?</b><span>Durchschnitt pro Monat in Euro, nach Alter · Befragung von 700 Jugendlichen und jungen Erwachsenen (14 bis 24 Jahre), Herbst 2024</span></figcaption>
+        <div class="scroll"><svg class="chart" viewBox="0 0 640 330" role="img" aria-label="Säulendiagramm: Verfügbares Geld und Sparbetrag pro Monat nach Alter. 14 bis 17 Jahre: 287 Euro verfügbar, 72 Euro gespart. 18 bis 20 Jahre: 842 Euro verfügbar, 227 Euro gespart. 21 bis 24 Jahre: 1.408 Euro verfügbar, 283 Euro gespart."><line class="gl" x1="70" x2="620" y1="260.0" y2="260.0"/><text class="ax" x="62" y="264.0" text-anchor="end">0</text><line class="gl" x1="70" x2="620" y1="186.7" y2="186.7"/><text class="ax" x="62" y="190.7" text-anchor="end">500</text><line class="gl" x1="70" x2="620" y1="113.3" y2="113.3"/><text class="ax" x="62" y="117.3" text-anchor="end">1.000</text><line class="gl" x1="70" x2="620" y1="40.0" y2="40.0"/><text class="ax" x="62" y="44.0" text-anchor="end">1.500</text><rect class="b1" x="110" y="217.9" width="58" height="42.1" rx="3"/><text class="val" x="139.0" y="210.9" text-anchor="middle">287 €</text><rect class="b2" x="176" y="249.4" width="58" height="10.6" rx="3"/><text class="val" x="205.0" y="242.4" text-anchor="middle">72 €</text><text class="lab" x="172" y="282" text-anchor="middle">14 bis 17 Jahre</text><rect class="b1" x="290" y="136.5" width="58" height="123.5" rx="3"/><text class="val" x="319.0" y="129.5" text-anchor="middle">842 €</text><rect class="b2" x="356" y="226.7" width="58" height="33.3" rx="3"/><text class="val" x="385.0" y="219.7" text-anchor="middle">227 €</text><text class="lab" x="352" y="282" text-anchor="middle">18 bis 20 Jahre</text><rect class="b1" x="470" y="53.5" width="58" height="206.5" rx="3"/><text class="val" x="499.0" y="46.5" text-anchor="middle">1.408 €</text><rect class="b2" x="536" y="218.5" width="58" height="41.5" rx="3"/><text class="val" x="565.0" y="211.5" text-anchor="middle">283 €</text><text class="lab" x="532" y="282" text-anchor="middle">21 bis 24 Jahre</text><rect class="b1" x="70" y="10" width="14" height="14" rx="2"/><text class="lg" x="90" y="22">Geld, das monatlich zur Verfügung steht</text><rect class="b2" x="370" y="10" width="14" height="14" rx="2"/><text class="lg" x="390" y="22">davon gespart*</text></svg></div>
+        <p class="sub"><b>Sparen die Befragten einen Teil ihres Geldes?</b> (alle Befragten, in Prozent)</p>
+        <div class="scroll"><svg class="chart" viewBox="0 0 640 54" role="img" aria-label="Balken: 56 Prozent sparen regelmäßig, 28 Prozent ab und zu, 15 Prozent nie."><rect class="s1" x="20.0" y="10" width="336.0" height="34"/><text class="sv" x="188.0" y="32" text-anchor="middle">regelmäßig: 56 %</text><rect class="s2" x="356.0" y="10" width="168.0" height="34"/><text class="sv" x="440.0" y="32" text-anchor="middle">ab und zu: 28 %</text><rect class="s3" x="524.0" y="10" width="90.0" height="34"/><text class="sv" x="569.0" y="32" text-anchor="middle">nie: 15 %</text></svg></div>
+        <p class="src">* Sparbetrag: Durchschnitt nur der Befragten, die zumindest ab und zu sparen. Fehlende Prozente: Rundung. Quelle: Bundesverband deutscher Banken, Jugendstudie 2024 (Befragung durch Kantar, 26.08. bis 14.09.2024). Grafik: eigene Darstellung.</p>
+      </figure>
 
       <article class="task">
         <header><span class="num">8</span><h3>Schritt 1: Beschreiben</h3><button class="op" data-op="beschreiben" type="button">beschreiben</button></header>
@@ -539,7 +568,7 @@ a.btn{text-decoration:none}
 
       <article class="task">
         <header><span class="num">9</span><h3>Schritt 2: Untersuchen</h3><button class="op" data-op="untersuchen" type="button">untersuchen</button></header>
-        <p class="q">Lies die Werte ab und rechne. Alle Angaben in Milliarden Euro.</p>
+        <p class="q">Lies die Werte ab und rechne. Beträge in Euro.</p>
         <div class="jt" id="g2"></div>
         <div class="row"><button class="btn accent" id="chk-e9" type="button">Prüfen</button></div>
         <div class="fb" id="fb-e9" hidden aria-live="polite"></div>
@@ -547,8 +576,8 @@ a.btn{text-decoration:none}
 
       <article class="task">
         <header><span class="num">10</span><h3>Schritt 3: Deuten</h3><button class="op" data-op="untersuchen" type="button">untersuchen</button></header>
-        <p class="q">Formuliere zwei Kernaussagen der Grafik: eine zum Konsum und eine zum Sparen.</p>
-        <p class="hint"><b>Kritisch hinsehen:</b> Die Befragung ist von 2021 und umfasst 6- bis 19-Jährige – auch Azubis mit eigenem Gehalt. Was bedeutet das für deine Aussagen?</p>
+        <p class="q">Formuliere zwei Kernaussagen der Grafik: eine zum Geld, das Jugendliche zur Verfügung haben, und eine zum Sparen.</p>
+        <p class="hint"><b>Kritisch hinsehen:</b> Der Sparbetrag ist nur der Durchschnitt derjenigen, die sparen. Und viele Ältere verdienen in Ausbildung oder Job schon eigenes Geld. Was bedeutet das für deine Aussagen?</p>
         <div data-open="e10"></div>
       </article>
     </section>
@@ -690,18 +719,19 @@ const CASES=[
   {id:'c5',t:'Lina (16) bekommt von ihrer Oma 300 € für ein Fahrrad. Ihre Eltern sind einverstanden. Lina kauft das Fahrrad.',a:true,why:'Gültig: Das Geld wurde ihr mit Zustimmung der Eltern genau für diesen Zweck überlassen.'}
 ];
 const G1=[
-  {id:'thema',l:'Thema',o:['Einnahmen und Ausgaben von Kindern und Jugendlichen','Taschengeld in den Bundesländern','Sparen von Erwachsenen'],a:0},
-  {id:'alter',l:'Befragte Altersgruppe',o:['10 bis 14 Jahre','6 bis 19 Jahre','14 bis 25 Jahre'],a:1},
-  {id:'jahr',l:'Jahr der Befragung',o:['2019','2021','2024'],a:1},
-  {id:'einheit',l:'Einheit der Zahlen',o:['Millionen Euro','Euro pro Person','Milliarden Euro'],a:2},
-  {id:'form',l:'Darstellungsform',o:['Kreisdiagramm','Balkendiagramm','Liniendiagramm'],a:1}
+  {id:'thema',l:'Thema',o:['Geld und Sparen von Jugendlichen und jungen Erwachsenen','Taschengeld in den Bundesländern','Ausgaben von Erwachsenen für Kleidung'],a:0},
+  {id:'quelle',l:'Herausgeber der Befragung',o:['Statistisches Bundesamt','Bundesverband deutscher Banken','Deutsches Jugendinstitut'],a:1},
+  {id:'alter',l:'Befragte Altersgruppe',o:['10 bis 14 Jahre','14 bis 24 Jahre','6 bis 19 Jahre'],a:1},
+  {id:'jahr',l:'Jahr der Befragung',o:['2021','2023','2024'],a:2},
+  {id:'einheit',l:'Einheit im oberen Diagramm',o:['Milliarden Euro','Euro pro Monat','Euro pro Jahr'],a:1},
+  {id:'form',l:'Darstellungsform oben',o:['Kreisdiagramm','Säulendiagramm','Liniendiagramm'],a:1}
 ];
 const G2=[
-  {id:'ein',l:'Einnahmen insgesamt',t:'num',a:19.7},
-  {id:'aus',l:'Ausgaben insgesamt',t:'num',a:14.6},
-  {id:'dif',l:'Differenz: nicht ausgegeben (z. B. gespart)',t:'num',a:5.1},
-  {id:'topE',l:'Größte Einnahmequelle',t:'sel',o:['regelmäßiges Taschengeld','regelmäßiges Nettogehalt','Jobs, Nebentätigkeiten','Geldgeschenke'],a:1},
-  {id:'topA',l:'Größter Ausgabeposten',t:'sel',o:['Hobbys','Handygebühren','Kleidung, Mode','Süßigkeiten, Eis'],a:2}
+  {id:'ein',l:'Verfügbares Geld pro Monat, 14 bis 17 Jahre',t:'num',a:287},
+  {id:'aus',l:'Sparbetrag pro Monat, 14 bis 17 Jahre',t:'num',a:72},
+  {id:'dif',l:'Rest zum Ausgeben, wenn jemand von 287 € genau 72 € spart',t:'num',a:215},
+  {id:'topE',l:'Welche Altersgruppe spart am meisten?',t:'sel',o:['14 bis 17 Jahre','18 bis 20 Jahre','21 bis 24 Jahre'],a:2},
+  {id:'topA',l:'Wie viele Befragte sparen nie?',t:'sel',o:['5 %','15 %','28 %','56 %'],a:1}
 ];
 const QUIZ=[
   {q:'Ein Gehalt ist Einkommen aus …',o:['Vermögen','nichtselbstständiger Arbeit','staatlicher Unterstützung'],a:1},
@@ -730,7 +760,7 @@ const OPEN={
   e4:{nr:4,op:'(be)nennen',q:'Nenne drei Nebenjobs, mit denen Jugendliche ab 13 Jahren Geld verdienen dürfen.',ph:'1. …\n2. …\n3. …',min:20,chk:[]},
   e5b:{nr:'5b',op:'begründen',q:'Begründe, warum Schüler*innen im gleichen Alter unterschiedlich viel Taschengeld bekommen können.',ph:'Das Taschengeld kann unterschiedlich sein, weil …',min:60,chk:['because','any:Einkommen|Eltern|verdien']},
   e7:{nr:7,op:'erklären',q:'Erkläre mit eigenen Worten, welche Bedeutung der Taschengeldparagraf (§ 110 BGB) für Jugendliche hat. Nutze ein Beispiel.',ph:'Der Taschengeldparagraf bedeutet, dass … Zum Beispiel …',min:70,chk:['example','any:Taschengeld|freie Verfügung|freien Verfügung']},
-  e10:{nr:10,op:'untersuchen',q:'Formuliere zwei Kernaussagen der Grafik „Konsumfreudige Jugend“ (Buch S. 21): eine zum Konsum und eine zum Sparen.',ph:'1. Jugendliche geben am meisten Geld für … aus.\n2. …',min:70,chk:['numbers','any:Konsum|ausgeben|Ausgaben','any:spar|übrig|Differenz']},
+  e10:{nr:10,op:'untersuchen',q:'Formuliere zwei Kernaussagen der Grafik: eine zum Geld, das Jugendliche zur Verfügung haben, und eine zum Sparen.',ph:'1. Je älter die Befragten sind, desto …\n2. …',min:70,chk:['numbers','any:Verfügung|verfügbar|zur Verfügung|haben|Geld','any:spar|übrig|Differenz']},
   e12:{nr:12,op:'begründen',q:'Begründe deinen Taschengeld-Plan: Warum verteilst du dein Geld so? Was ist dir wichtig, und worauf verzichtest du dafür?',ph:'Ich spare … €, weil … Dafür verzichte ich auf …',min:70,chk:['because','any:spar|verzicht']}
 };
 const QC={
@@ -755,7 +785,7 @@ function showFb(fbEl,cls,head,body){fbEl.hidden=false;fbEl.className='fb '+cls;c
 function quickChecks(t,text){
   const out=[{on:text.trim().length>=t.min,l:'Ausführlich genug'}];
   for(const c of t.chk||[]){
-    if(c.startsWith('any:')){const ws=c.slice(4).split('|');out.push({on:ws.some(w=>norm(text).includes(norm(w))),l:c.includes('Arbeit')?'Einkommensquelle genannt':c.includes('Einkommen')?'Einkommen der Eltern bedacht':c.includes('Taschengeld')?'Fachbegriff genutzt':c.includes('Konsum')?'Aussage zum Konsum':c.includes('spar|übrig')?'Aussage zum Sparen':'Verzicht oder Sparen genannt'});}
+    if(c.startsWith('any:')){const ws=c.slice(4).split('|');out.push({on:ws.some(w=>norm(text).includes(norm(w))),l:c.includes('Arbeit')?'Einkommensquelle genannt':c.includes('Einkommen')?'Einkommen der Eltern bedacht':c.includes('Taschengeld')?'Fachbegriff genutzt':c.includes('Verfügung')?'Aussage zum verfügbaren Geld':c.includes('Konsum')?'Aussage zum Konsum':c.includes('spar|übrig')?'Aussage zum Sparen':'Verzicht oder Sparen genannt'});}
     else out.push({on:QC[c][0].test(text),l:QC[c][1]});
   }
   return out;
@@ -874,7 +904,7 @@ function renderG2(){
   const box=$('#g2'); box.replaceChildren(); const d=S.chk.e9&&S.chk.e9.detail||{};
   G2.forEach(g=>{
     let ctl;
-    if(g.t==='num'){ ctl=el('span',{class:'eur'},el('input',{type:'text',inputmode:'decimal',id:'g2-'+g.id,'aria-label':g.l,placeholder:'0,0'}),el('span',{},'Mrd. €')); const inp=ctl.querySelector('input'); inp.value=S.g2[g.id]||''; inp.oninput=()=>{S.g2[g.id]=inp.value;delete S.chk.e9;save();}; }
+    if(g.t==='num'){ ctl=el('span',{class:'eur'},el('input',{type:'text',inputmode:'decimal',id:'g2-'+g.id,'aria-label':g.l,placeholder:'0'}),el('span',{},'€')); const inp=ctl.querySelector('input'); inp.value=S.g2[g.id]||''; inp.oninput=()=>{S.g2[g.id]=inp.value;delete S.chk.e9;save();}; }
     else { ctl=el('select',{id:'g2-'+g.id,'aria-label':g.l}); ctl.append(el('option',{value:''},'— wählen —')); g.o.forEach((o,i)=>{const op=el('option',{value:String(i)},o); if(S.g2[g.id]===String(i)) op.selected=true; ctl.append(op);}); ctl.onchange=()=>{S.g2[g.id]=ctl.value;delete S.chk.e9;save();}; }
     box.append(el('div',{class:'jt-row'+(d[g.id]?' s-'+d[g.id]:'')},el('span',{},g.l),ctl));
   });
@@ -883,8 +913,8 @@ function checkG2(){
   let sc=0; const d={};
   G2.forEach(g=>{const v=S.g2[g.id]; if(v==null||v==='') return; const ok=g.t==='num'?Math.abs((num(v)??-99)-g.a)<0.051:+v===g.a; if(ok)sc++; d[g.id]=ok?'ok':'bad';});
   S.chk.e9={score:sc,max:G2.length,detail:d}; save(); renderG2();
-  if(sc===G2.length) showFb($('#fb-e9'),'ok','Alles richtig!','Jugendliche hatten 19,7 Mrd. € zur Verfügung und gaben 14,6 Mrd. € aus. 5,1 Mrd. € blieben übrig – zum Beispiel zum Sparen.');
-  else showFb($('#fb-e9'),'mid',`${sc} von ${G2.length} richtig`,'Die Gesamtsummen stehen jeweils über den Balken. Die Differenz rechnest du selbst aus: Einnahmen minus Ausgaben.');
+  if(sc===G2.length) showFb($('#fb-e9'),'ok','Alles richtig!','14- bis 17-Jährige haben im Schnitt 287 € im Monat. Wer spart, legt im Schnitt 72 € zurück, also etwa ein Viertel. Bleiben 215 € zum Ausgeben.');
+  else showFb($('#fb-e9'),'mid',`${sc} von ${G2.length} richtig`,'Die Werte stehen über den Säulen, die Prozente im Balken darunter. Den Rest rechnest du selbst aus: verfügbares Geld minus Sparbetrag.');
 }
 /* ---------- Station 5: Plan ---------- */
 function moneyRow(group,it,box){
@@ -961,7 +991,7 @@ function buildReport(){
       {t:'list',label:'Aufgabe 6 – Fall-Check Taschengeldparagraf'+sc('e6'),lines:CASES.map(c=>`${c.t} → ${S.cases[c.id]==='y'?'gültig':S.cases[c.id]==='n'?'nicht gültig':'–'}${mark(d6,c.id)}`)},qItem('e7')]},
     {title:'Station 4 · Grafik „Konsumfreudige Jugend“',rgb:[31,122,92],items:[
       {t:'list',label:'Aufgabe 8 – Beschreiben'+sc('e8'),lines:G1.map(g=>`${g.l}: ${S.g1[g.id]!=null&&S.g1[g.id]!==''?g.o[+S.g1[g.id]]:'–'}${mark(d8,g.id)}`)},
-      {t:'list',label:'Aufgabe 9 – Untersuchen'+sc('e9'),lines:G2.map(g=>`${g.l}: ${g.t==='num'?(S.g2[g.id]?S.g2[g.id]+' Mrd. €':'–'):(S.g2[g.id]!=null&&S.g2[g.id]!==''?g.o[+S.g2[g.id]]:'–')}${mark(d9,g.id)}`)},qItem('e10')]},
+      {t:'list',label:'Aufgabe 9 – Untersuchen'+sc('e9'),lines:G2.map(g=>`${g.l}: ${g.t==='num'?(S.g2[g.id]?S.g2[g.id]+' €':'–'):(S.g2[g.id]!=null&&S.g2[g.id]!==''?g.o[+S.g2[g.id]]:'–')}${mark(d9,g.id)}`)},qItem('e10')]},
     {title:'Station 5 · Mein Taschengeld-Plan',rgb:[184,132,26],items:[
       {t:'list',label:'Aufgabe 11 – Mein Plan für einen Monat',lines:[`Einnahmen: ${INC.map(x=>x.l+' '+eur(+S.inc[x.id]||0)).join(', ')} – zusammen ${eur(inc)}`,...EXP.map(x=>`${x.l}: ${eur(+S.exp[x.id]||0)}`),`Rest: ${eur(inc-out)}`,`Sparziel: ${S.goalName||'–'} (${eur(+S.goalAmt||0)})${(+S.exp.spar>0&&+S.goalAmt>0)?' – erreicht in '+Math.ceil(S.goalAmt/S.exp.spar)+' Monaten':''}`]},
       qItem('e12'),
