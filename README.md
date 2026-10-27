@@ -1,8 +1,10 @@
-# Lernplattformen Technik
+# Lernplattformen AWT
 
 Interaktive Lernplattformen und Fortbildungsangebote für den AWT-Unterricht (Arbeit – Wirtschaft – Technik) von Daniel Beyrodt, „dein Technik Lehrer“. Privates, kostenloses Angebot, keine Veröffentlichung des RLSB.
 
-**Startseite mit allen Plattformen:** https://deintechniklehrer.github.io/Lernplattformen/
+**Für Lehrkräfte:**
+- AWT (alle Plattformen und Fortbildungen): https://deintechniklehrer.github.io/Lernplattformen/
+- nur Technik: https://deintechniklehrer.github.io/Lernplattformen/technik/
 
 **Für Schülerinnen und Schüler** (ohne Lehrkräfte-Angebote):
 - AWT (Wirtschaft, Technik, KI): https://deintechniklehrer.github.io/Lernplattformen/schueler/
