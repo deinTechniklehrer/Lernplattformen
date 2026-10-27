@@ -97,18 +97,18 @@ async function saveCover(it){
 function card(it){
   const field=el('input',{class:'linkfield',readonly:'',value:it.url,'aria-label':'Link zu '+it.title});
   return el('article',{class:'card'},
-    el('a',{class:'cov',href:it.url,target:'_blank',rel:'noopener','aria-label':it.title+' öffnen'},el('img',{src:COV[it.cover],alt:'',loading:'lazy'})),
+    el('a',{class:'cov',href:it.url,target:it.same?null:'_blank',rel:'noopener','aria-label':it.title+' öffnen'},el('img',{src:COV[it.cover],alt:'',loading:'lazy'})),
     el('div',{class:'bd'},
       el('h3',null,it.title),el('p',null,it.desc),
       el('div',{class:'meta'},it.jg?el('span',{class:'jg'},it.jg):null,el('span',null,'aktualisiert '+it.updated)),
       it.extra.length?el('div',{class:'extra'},it.extra.map(x=>el('div',null,el('a',{href:x.url,target:'_blank',rel:'noopener'},x.label)))):null,
-      el('div',{class:'acts'},el('a',{class:'btn',href:it.url,target:'_blank',rel:'noopener'},'Öffnen'),el('button',{class:'btn ghost',type:'button',onclick:()=>copy(it.url,field)},'Link kopieren'),dl?el('button',{class:'btn ghost',type:'button',onclick:()=>saveCover(it)},'Vorschaubild'):null),
+      el('div',{class:'acts'},el('a',{class:'btn',href:it.url,target:it.same?null:'_blank',rel:'noopener'},it.btn||'Öffnen'),el('button',{class:'btn ghost',type:'button',onclick:()=>copy(it.url,field)},'Link kopieren'),dl?el('button',{class:'btn ghost',type:'button',onclick:()=>saveCover(it)},'Vorschaubild'):null),
       field));
 }
 function render(){
   const q=($('#q').value||'').toLowerCase().trim();let n=0;const out=[];
   D.groups.forEach(g=>{const items=g.items.filter(it=>!q||(it.title+' '+it.desc+' '+g.title).toLowerCase().includes(q));n+=items.length;if(!items.length)return;
-    out.push(el('section',{style:'--n:'+Math.min(items.length,3)},el('h2',null,g.title,el('small',null,items.length+(items.length===1?' Plattform':' Plattformen'))),el('div',{class:'grid'},items.map(card))));});
+    out.push(el('section',{style:'--n:'+Math.min(items.length,3)},el('h2',null,g.title,el('small',null,g.note||(items.length+(items.length===1?' Plattform':' Plattformen')))),el('div',{class:'grid'},items.map(card))));});
   if(!out.length)out.push(el('p',{class:'empty'},'Keine Plattform gefunden. Versuche einen anderen Suchbegriff.'));
   $('#list').replaceChildren(...out);
 }
