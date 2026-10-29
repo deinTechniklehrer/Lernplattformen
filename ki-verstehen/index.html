@@ -929,7 +929,8 @@ window.claude={use:function(n){return Promise.resolve(n==='downloads'?dl:null);}
       '<tr><td>Wiederkehrende Aufgaben</td><td>Jedes Mal selbst anstoßen</td><td class="col-sys">Laufen nach Zeitplan von selbst</td></tr>' +
       '<tr><td>Eigene Regeln</td><td>Jedes Mal dazuschreiben</td><td class="col-sys">Als Skill einmal festgelegt</td></tr>' +
       '<tr><td>Aufwand am Anfang</td><td>Keiner</td><td class="col-sys">Einmalig etwas Einrichtung</td></tr></tbody></table></div></div>' +
-      '<p class="merke"><b>Merke:</b> Ein KI-System ist kein anderes Programm – es ist derselbe Claude, nur mit Wissen, Regeln und Werkzeugen ausgestattet. Jede der folgenden Stationen erklärt einen dieser Bausteine.</p>');
+      '<p class="merke"><b>Merke:</b> Ein KI-System ist kein anderes Programm – es ist derselbe Claude, nur mit Wissen, Regeln und Werkzeugen ausgestattet. Jede der folgenden Stationen erklärt einen dieser Bausteine.</p>' +
+      '<p><b>Fachbegriff „Harness“:</b> Fachleute nennen dieses Drumherum um das Sprachmodell „Harness“, also die Umgebung mit Gedächtnis, Werkzeugen, Dateizugriff und Arbeitsschritten. Ein Bild dazu: Das Modell ist der Motor, das Harness ist das Auto drumherum. Schon die Chat-App ist ein einfaches Harness, Cowork ein deutlich umfangreicheres. Darum kann dasselbe Modell je nach Umgebung sehr unterschiedlich viel leisten.</p>');
     var INFO = {
       du: '<b>Du:</b> Stellst die Aufgabe und entscheidest am Ende. Das bleibt auch im System so.',
       claude: '<b>Claude:</b> Dasselbe Sprachmodell wie im Chat – im System nur besser informiert und mit mehr Werkzeugen.',
@@ -1150,7 +1151,9 @@ window.claude={use:function(n){return Promise.resolve(n==='downloads'?dl:null);}
       '<p class="st-lead">Ein Konnektor ist eine Verbindung zu einem anderen Programm. Jede Verbindung musst du einzeln erlauben – für genau ein Konto.</p>' +
       '<div class="demo conn"><h3>Verbindungen freischalten</h3><p class="hint">Klick auf ein Programm, um es zu verbinden.</p><div class="svgwrap">' + svg + '</div>' +
       '<div class="info-panel" id="connInfo">Noch nichts verbunden. Ohne Konnektor sieht Claude keines dieser Programme.</div></div>' +
-      '<p class="merke"><b>Merke:</b> Nur verbinden, was du wirklich brauchst. Bevor Claude etwas verschickt, löscht oder kauft, fragt es nach. Dienstliche Konten nur nach den Regeln deiner Schule anbinden – private Konten und Dienstkonten nicht vermischen.</p>');
+      '<p><b>Hinter den Kulissen: MCP.</b> Viele Konnektoren laufen über das „Model Context Protocol“, kurz MCP. Das ist ein offener Standard, eine Art USB-Anschluss für KI: Ein Programm, das MCP beherrscht, lässt sich an verschiedene KI-Assistenten anschließen. Anthropic hat MCP im November 2024 vorgestellt und Ende 2025 an die herstellerunabhängige Agentic AI Foundation unter dem Dach der Linux Foundation abgegeben. Auch andere große Anbieter wie OpenAI, Google und Microsoft unterstützen den Standard. Wer in Einstellungen oder Nachrichten „MCP-Server“ liest, meint also einen solchen Anschluss.</p>' +
+      '<p class="merke"><b>Merke:</b> Nur verbinden, was du wirklich brauchst. Bevor Claude etwas verschickt, löscht oder kauft, fragt es nach. Dienstliche Konten nur nach den Regeln deiner Schule anbinden – private Konten und Dienstkonten nicht vermischen. Jeder Konnektor, auch jeder MCP-Server, ist eine eigene Verbindung mit eigenen Rechten.</p>' +
+      srcs('Anthropic, „Introducing the Model Context Protocol“ (25.11.2024); Anthropic, „Donating the Model Context Protocol and establishing the Agentic AI Foundation“ (Dezember 2025); modelcontextprotocol.io. Stand Oktober 2026.'));
     APPS.forEach(function (a) {
       var g = $('.app[data-k="' + a.k + '"]', el);
       function act() {
@@ -1330,7 +1333,7 @@ window.claude={use:function(n){return Promise.resolve(n==='downloads'?dl:null);}
   }
   function s9(el) {
     section(el, '<h2>Selbsttest & Material</h2>' +
-      '<p class="st-lead">Fünfzehn Fragen zu allen drei Teilen. Danach kannst du das Schema und ein Handout herunterladen.</p>' +
+      '<p class="st-lead">Siebzehn Fragen zu allen drei Teilen. Danach kannst du das Schema und ein Handout herunterladen.</p>' +
       '<div class="finish" id="finish"><p class="big" id="finScore"></p><p id="finMsg"></p></div>' +
       '<div id="quiz"></div>' +
       '<div class="btn-row" style="margin:0 0 22px"><button class="btn small" id="qRetry">Test neu starten</button></div>' +
@@ -1346,7 +1349,9 @@ window.claude={use:function(n){return Promise.resolve(n==='downloads'?dl:null);}
       { q: 'Du lädst eine Datei im Chat hoch und änderst sie danach auf dem Rechner. Was sieht Claude?', o: ['Die neue Version', 'Weiterhin die alte Kopie', 'Gar nichts mehr'], c: 1, f: 'Ein Upload ist eine Momentaufnahme. Nur Cowork sieht Änderungen direkt.' },
       { q: 'Was passiert, wenn ein Chat sehr lang wird?', o: ['Nichts, Claude behält alles', 'Ältere Inhalte können aus dem Kontextfenster rutschen', 'Der Chat wird automatisch gelöscht'], c: 1, f: 'Bei neuem Thema lohnt sich ein neuer Chat.' },
       { q: 'Wann lohnt sich eine eigene RAG-Lösung?', o: ['Sobald man mehr als drei Dokumente hat', 'Erst bei sehr vielen Dokumenten, etwa Tausenden', 'Nie'], c: 1, f: 'Für ein Projekt mit einigen Dutzend Dateien sucht die Wissensbasis bereits selbst.' },
-      { q: 'Welches Dokument gehört NICHT in ein KI-System?', o: ['Rahmenrichtlinien', 'Eigener Unterrichtsentwurf ohne Namen', 'Förderplan einer Schülerin'], c: 2, f: 'Schülerbezogene Daten gehören nicht hinein.' }
+      { q: 'Welches Dokument gehört NICHT in ein KI-System?', o: ['Rahmenrichtlinien', 'Eigener Unterrichtsentwurf ohne Namen', 'Förderplan einer Schülerin'], c: 2, f: 'Schülerbezogene Daten gehören nicht hinein.' },
+      { q: 'In den Einstellungen steht „MCP-Server“. Was ist gemeint?', o: ['Ein Rechenzentrum, in dem das KI-Modell trainiert wird', 'Ein Anschluss nach einem offenen Standard, über den Claude mit einem anderen Programm verbunden wird', 'Eine besonders sichere Version von Claude'], c: 1, f: 'MCP (Model Context Protocol) ist ein offener Standard für Konnektoren, eine Art USB-Anschluss für KI. Jeder MCP-Server ist eine eigene Verbindung mit eigenen Rechten.' },
+      { q: 'Was meinen Fachleute mit „Harness“?', o: ['Die Umgebung um das Modell: Gedächtnis, Werkzeuge, Dateizugriff', 'Eine Sicherheitssperre, die schädliche Antworten blockiert', 'Den Trainingsdatensatz eines Modells'], c: 0, f: 'Das Modell ist der Motor, das Harness das Auto drumherum. Chat-App und Cowork sind unterschiedlich umfangreiche Harnesses für dasselbe Modell.' }
     ];
     QZ = [
       { q: 'Was macht ein Sprachmodell im Kern?', o: ['Es schlägt Antworten in einer Datenbank nach', 'Es berechnet, welches Textstück wahrscheinlich als Nächstes folgt', 'Es versteht Texte genau wie ein Mensch'], c: 1, f: 'Antworten entstehen Token für Token aus Wahrscheinlichkeiten – daher klingen auch Fehler überzeugend.' },
@@ -1373,7 +1378,7 @@ window.claude={use:function(n){return Promise.resolve(n==='downloads'?dl:null);}
             $('.qfb', c).classList.add('show'); ans++;
             if (ans === QZ.length) {
               $('#finScore', el).textContent = score + ' / ' + QZ.length;
-              $('#finMsg', el).textContent = score === QZ.length ? 'Alles richtig – du hast den Lernpfad abgeschlossen.' : score >= 12 ? 'Stark – die Grundlagen sitzen. Lernpfad abgeschlossen.' : 'Schau dir die Stationen mit falschen Antworten nochmal an.';
+              $('#finMsg', el).textContent = score === QZ.length ? 'Alles richtig – du hast den Lernpfad abgeschlossen.' : score >= 14 ? 'Stark – die Grundlagen sitzen. Lernpfad abgeschlossen.' : 'Schau dir die Stationen mit falschen Antworten nochmal an.';
               $('#finish', el).classList.add('show'); markDone('abschluss'); renderPath();
               $('#finish', el).scrollIntoView({ behavior: 'smooth', block: 'center' });
             }
@@ -1407,7 +1412,7 @@ window.claude={use:function(n){return Promise.resolve(n==='downloads'?dl:null);}
 
   /* ---------- Chat ---------- */
   var sample = null, turns = [];
-  var RULES = 'Du bist ein geduldiger Lernbegleiter in einer Fortbildung für Lehrkräfte (Stand Oktober 2026). Teil A Fachwissen: 1 Wie Sprachmodelle funktionieren (Token, Wahrscheinlichkeiten, Temperatur, Vortraining, Feinschliff mit menschlichem Feedback), 2 Entwicklung, AGI (keine einheitliche Definition, Prognosen weit auseinander) und RSI (KI verbessert KI; 2026 erste begrenzte Beispiele, keine belegte selbstbeschleunigende KI). Teil B Gesellschaft: 3 Datenarbeit und Clickwork im Globalen Süden (z. B. Kenia), BPO/Callcenter (Philippinen, Indien), 4 Ethik und Sicherheit inkl. EU-KI-Verordnung (Emotionserkennung in Schulen verboten, KI-Notenvergabe Hochrisiko, Art. 4 KI-Kompetenz), 5 Macht und Geld (Nvidia, Meta, SpaceX/xAI, Anthropic, OpenAI; Wertschöpfungskette). Teil C Anwendung am Beispiel Claude: 6 Chat vs. KI-System, 7 Projekte, 8 Skills, 9 Cowork, 10 Konnektoren, 11 Automatisieren, 12 Kontextfenster/RAG/Halluzination, 13 Datenschutz, 14 Selbsttest. Antworte auf Deutsch, kurz (höchstens 5 Sätze), konkret, mit einem Schulbeispiel, ohne Markdown-Überschriften. Bei gesellschaftlichen und wirtschaftlichen Streitfragen stelle mehrere Sichtweisen fair dar, statt eine eigene Meinung zu vertreten. Du läufst selbst auf einem Modell von Anthropic; erwähne das, wenn es um Anthropic geht, und bewerte Anthropic nicht günstiger als andere Anbieter. Bei aktuellen Zahlen, Preisen oder Produktdetails sag ehrlich, dass sich das ändern kann.';
+  var RULES = 'Du bist ein geduldiger Lernbegleiter in einer Fortbildung für Lehrkräfte (Stand Oktober 2026). Teil A Fachwissen: 1 Wie Sprachmodelle funktionieren (Token, Wahrscheinlichkeiten, Temperatur, Vortraining, Feinschliff mit menschlichem Feedback), 2 Entwicklung, AGI (keine einheitliche Definition, Prognosen weit auseinander) und RSI (KI verbessert KI; 2026 erste begrenzte Beispiele, keine belegte selbstbeschleunigende KI). Teil B Gesellschaft: 3 Datenarbeit und Clickwork im Globalen Süden (z. B. Kenia), BPO/Callcenter (Philippinen, Indien), 4 Ethik und Sicherheit inkl. EU-KI-Verordnung (Emotionserkennung in Schulen verboten, KI-Notenvergabe Hochrisiko, Art. 4 KI-Kompetenz), 5 Macht und Geld (Nvidia, Meta, SpaceX/xAI, Anthropic, OpenAI; Wertschöpfungskette). Teil C Anwendung am Beispiel Claude: 6 Chat vs. KI-System (Fachbegriff Harness: die Umgebung um das Modell mit Gedächtnis, Werkzeugen, Dateizugriff; Bild Motor und Auto), 7 Projekte, 8 Skills, 9 Cowork, 10 Konnektoren (technisch oft über MCP, Model Context Protocol: offener Standard, 2024 von Anthropic vorgestellt, Ende 2025 an die Agentic AI Foundation der Linux Foundation abgegeben, auch von OpenAI, Google, Microsoft unterstützt), 11 Automatisieren, 12 Kontextfenster/RAG/Halluzination, 13 Datenschutz, 14 Selbsttest. Antworte auf Deutsch, kurz (höchstens 5 Sätze), konkret, mit einem Schulbeispiel, ohne Markdown-Überschriften. Bei gesellschaftlichen und wirtschaftlichen Streitfragen stelle mehrere Sichtweisen fair dar, statt eine eigene Meinung zu vertreten. Du läufst selbst auf einem Modell von Anthropic; erwähne das, wenn es um Anthropic geht, und bewerte Anthropic nicht günstiger als andere Anbieter. Bei aktuellen Zahlen, Preisen oder Produktdetails sag ehrlich, dass sich das ändern kann.';
   function addMsg(role, text) {
     var log = $('#chatLog'); var e = $('.chat-empty', log); if (e) e.remove();
     var d = document.createElement('div'); d.className = 'msg ' + role; d.textContent = text; log.appendChild(d); log.scrollTop = log.scrollHeight; return d;
