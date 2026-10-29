@@ -762,6 +762,11 @@ table.tg{border-collapse:collapse;width:100%;font-size:14px}
 .seg3.keep{grid-template-columns:repeat(3,auto)}
 @media (max-width:420px){.seg3.keep{grid-template-columns:repeat(3,1fr);width:100%}.seg3.keep button{padding:7px 4px;font-size:13px}}
 .lb-code{word-break:normal;overflow-wrap:anywhere;font-size:13px}
+.zitat{margin:6px 0 14px;padding:12px 16px;border-left:5px solid var(--c);background:var(--c-soft);border-radius:0 14px 14px 0}
+.zitat p{margin:0;font-family:var(--display);font-size:22px;line-height:1.2;color:var(--ink)}
+.zitat footer{margin-top:6px;font-size:14px;color:var(--muted)}
+.info ul{margin:4px 0 12px;padding-left:20px}
+.info li{margin:0 0 6px;max-width:66ch}
 
 </style>
 
@@ -885,6 +890,17 @@ table.tg{border-collapse:collapse;width:100%;font-size:14px}
         <div class="row"><button class="btn accent" id="chk-e2" type="button">Prüfen</button></div>
         <div class="fb" id="fb-e2" hidden aria-live="polite"></div>
       </article>
+      <div class="info">
+        <h3>Versteht die KI dich?</h3>
+        <p>Oft sagen wir: „Die KI hat mich verstanden“ oder „Die KI weiß das“. Das klingt, als würde ein Mensch antworten. Du weißt jetzt aber: Ein Sprachmodell rechnet aus, welches Wort wahrscheinlich als Nächstes kommt. <b>Sag es ehrlicher!</b> Überleg dir erst selbst eine Fassung, dann tippe die Karte an.</p>
+        <div class="deep">
+          <button class="dp ctx" type="button" aria-expanded="false"><b><span class="e" aria-hidden="true">🤝</span>„Die KI hat mich verstanden.“</b><span class="tap">Tippen für die ehrlichere Fassung</span><span class="more"><p>„Die KI hat eine Antwort berechnet, die gut zu meiner Frage passt.“</p></span></button>
+          <button class="dp ctx" type="button" aria-expanded="false"><b><span class="e" aria-hidden="true">🧠</span>„Die KI weiß, wann die Mauer gefallen ist.“</b><span class="tap">Tippen für die ehrlichere Fassung</span><span class="more"><p>„Das stand in den Trainingsdaten sehr oft. Darum ist die richtige Antwort sehr wahrscheinlich. Bei wichtigen Dingen prüfe ich trotzdem nach.“</p></span></button>
+          <button class="dp ctx" type="button" aria-expanded="false"><b><span class="e" aria-hidden="true">💭</span>„Die KI findet, dass ich recht habe.“</b><span class="tap">Tippen für die ehrlichere Fassung</span><span class="more"><p>„Die KI ist darauf trainiert, freundlich zu antworten. Darum gibt sie oft recht. Das heißt nicht, dass es stimmt.“</p></span></button>
+          <button class="dp ctx" type="button" aria-expanded="false"><b><span class="e" aria-hidden="true">😢</span>„Die KI ist traurig, wenn ich unfreundlich bin.“</b><span class="tap">Tippen für die ehrlichere Fassung</span><span class="more"><p>„Die KI hat keine Gefühle. Sie schreibt Wörter, die zu einem traurigen Text passen.“</p></span></button>
+        </div>
+        <div class="callout"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg><p><b>Warum das wichtig ist:</b> Wer die KI wie einen Menschen behandelt, vertraut ihr schnell zu sehr. Die Forscherin Kate Crawford sagt sogar: „KI ist weder künstlich noch intelligent.“ Was sie damit meint, erfährst du in Level 3.</p></div>
+      </div>
       <div class="info">
         <h3>KI in deinem Feed</h3>
         <p>Du begegnest KI jeden Tag, oft ohne es zu merken: wenn dein Handy dein Gesicht erkennt, wenn ein Übersetzer arbeitet oder wenn dir TikTok, YouTube oder Instagram das nächste Video vorschlagen. Diese Vorschläge macht ein <button class="term" data-term="empfehlung" type="button">Empfehlungssystem</button>.</p>
@@ -1785,6 +1801,18 @@ table.tg{border-collapse:collapse;width:100%;font-size:14px}
         <div class="row"><button class="btn accent" id="chk-lp" type="button">Prüfen</button></div>
         <div class="fb" id="fb-lp" hidden aria-live="polite"></div>
       </article>
+      <div class="info">
+        <h3>Ausblick: KI-Agenten auf dem eigenen Computer</h3>
+        <p>Erwachsene nutzen KI-Agenten inzwischen auch direkt auf ihrem Computer. Bei Claude heißt das zum Beispiel <b>Cowork</b>, ähnliche Funktionen gibt es bei anderen Anbietern. Man installiert eine App auf dem Laptop und gibt der KI einen Ordner frei. Dann liest die KI die Dateien darin, erstellt neue und ändert vorhandene. Lehrkräfte sortieren so zum Beispiel Arbeitsblätter, werten Tabellen aus oder bereiten Präsentationen vor.</p>
+        <p><b>Das hat Risiken:</b></p>
+        <ul>
+          <li><b>Die KI handelt selbst.</b> Sie kann Dateien überschreiben oder löschen. Ein Fehler ist dann nicht nur ein falscher Satz, sondern eine kaputte Datei.</li>
+          <li><b>Mehr Zugriff, mehr Daten.</b> Was im freigegebenen Ordner liegt, kann bei der Firma hinter der KI landen, auch private Fotos oder Daten von anderen.</li>
+          <li><b>Versteckte Befehle.</b> Eine Webseite oder Datei kann Anweisungen enthalten, die der Agent für echte Aufträge hält. Fachleute nennen das <i>Prompt Injection</i>.</li>
+          <li><b>Erst ab 18.</b> Ein eigenes Claude-Konto ist erst ab 18 Jahren erlaubt, und solche Agenten gibt es meist nur mit kostenpflichtigem Konto.</li>
+        </ul>
+        <div class="callout"><svg class="i" viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/></svg><p><b>Unsere Empfehlung: Probier das als Schüler:in noch nicht aus.</b> Für die Schule reicht fobizz. Wenn du später einmal mit einem KI-Agenten arbeitest: nur einen eigenen Ordner ohne private Daten freigeben, vorher eine Sicherheitskopie machen und die KI vor wichtigen Schritten nachfragen lassen.</p></div>
+      </div>
     </section>
 
     <section class="station c-mitgestalten" data-st="15" data-lv="3" aria-labelledby="h-s15" hidden>
@@ -1823,6 +1851,13 @@ table.tg{border-collapse:collapse;width:100%;font-size:14px}
         <div class="row"><button class="btn accent" id="chk-qa" type="button">Prüfen</button></div>
         <div class="fb" id="fb-qa" hidden aria-live="polite"></div>
       </article>
+      <div class="info">
+        <h3>Ist KI überhaupt intelligent?</h3>
+        <blockquote class="zitat"><p>„KI ist weder künstlich noch intelligent.“</p><footer>Kate Crawford, KI-Forscherin, im Buch „Atlas of AI“ (2021)</footer></blockquote>
+        <p><b>Nicht künstlich,</b> sagt Crawford, weil hinter KI ganz echte Dinge stecken: Rohstoffe für Chips, viel Strom und Wasser und die Arbeit vieler Menschen, die Daten sortieren. Das kennst du aus dem Clickwork in Level 1. <b>Nicht intelligent,</b> weil die Systeme Muster berechnen, ohne zu verstehen, was sie schreiben.</p>
+        <p>Spannend ist auch das Wort selbst: Im Englischen heißt „intelligence“ auch „Informationen sammeln und auswerten“, wie beim Geheimdienst CIA, der Central Intelligence Agency. Das deutsche Wort „Intelligenz“ klingt dagegen nach Denken und Verstehen.</p>
+        <div class="callout"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg><p><b>Diskutiert in der Klasse:</b> Stimmt Crawfords Satz? Begründet mit dem, was ihr über Daten, Clickwork und Wortvorhersage gelernt habt. Und: Würde der Satz auch für eine AGI noch gelten?</p></div>
+      </div>
       <div class="info">
         <h3>Utopie oder Dystopie?</h3>
         <p>Über die Zukunft mit KI wird heftig gestritten. Manche erwarten eine <b>Utopie</b>: eine Welt ohne Krankheiten und ohne Zwang zur Arbeit. Andere warnen vor einer <b>Dystopie</b>: einer Welt, in der Menschen die Kontrolle verlieren. Viele liegen irgendwo dazwischen.</p>
