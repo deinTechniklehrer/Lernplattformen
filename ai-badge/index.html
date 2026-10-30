@@ -767,6 +767,8 @@ table.tg{border-collapse:collapse;width:100%;font-size:14px}
 .zitat footer{margin-top:6px;font-size:14px;color:var(--muted)}
 .info ul{margin:4px 0 12px;padding-left:20px}
 .info li{margin:0 0 6px;max-width:66ch}
+.filebtn{position:relative;overflow:hidden;cursor:pointer}
+.filebtn input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;font-size:0}
 
 </style>
 
@@ -802,11 +804,12 @@ table.tg{border-collapse:collapse;width:100%;font-size:14px}
         <div><p class="eyebrow">Level 1 · Station 1.1 · KI begegnen · ca. 30 Min.</p><h2 id="h-s0">Was ist KI?</h2><p class="goal">Du lernst: KI erkennt Muster und begegnet dir jeden Tag.</p><p class="lits"><span class="lit">KI begegnen</span><span class="lit dd">🙋 individuell</span></p></div>
       </div>
       <details class="fbox resume">
-        <summary>Schon angefangen? Mit deinem Sicherungscode weiterarbeiten</summary>
+        <summary>Schon angefangen? Mit Sicherungscode oder gespeicherter Datei weiterarbeiten</summary>
         <div class="fbox-in">
           <label class="fbl" for="loadBox1">Sicherungscode einfügen</label>
           <textarea id="loadBox1" class="code" placeholder="KIL…"></textarea>
-          <div class="row"><button class="btn accent" id="loadBtn1" type="button">Code laden</button></div>
+          <div class="row"><button class="btn accent" id="loadBtn1" type="button">Code laden</button><label class="btn soft filebtn" for="loadFile1">PNG oder PDF laden<input type="file" id="loadFile1" accept=".png,.pdf,image/png,application/pdf"></label></div>
+          <p class="hint">Oder lade dein gespeichertes Badge (PNG/PDF) oder dein Ergebnis-PDF hoch. Darin steckt dein Sicherungscode.</p>
           <p class="hint" id="loadNote1" hidden aria-live="polite"></p>
         </div>
       </details>
@@ -1138,7 +1141,7 @@ table.tg{border-collapse:collapse;width:100%;font-size:14px}
     <section class="station c-schein" data-st="5" data-lv="1" aria-labelledby="h-s5" hidden>
       <div class="st-head">
         <div class="st-icon"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5"/><circle cx="8.5" cy="11" r="2"/><path d="M5.5 16a3 3 0 0 1 6 0M14 10h4M14 13h4"/></svg></div>
-        <div><p class="eyebrow">Level 1 · Prüfung · ca. 10 Min.</p><h2 id="h-s5">Prüfung Level 1</h2><p class="goal">Mindestens 8 von 10 Fragen richtig. Dazu müssen alle Stationen von Level 1 erledigt sein.</p></div>
+        <div><p class="eyebrow">Level 1 · Prüfung · ca. 10 Min.</p><h2 id="h-s5">Prüfung Level 1</h2><p class="goal">Mindestens 8 von 10 Fragen richtig. Dazu müssen alle Stationen von Level 1 erledigt sein. Nach drei Fehlversuchen wird die Prüfung geleert.</p></div>
       </div>
       <article class="task">
         <header><span class="num">12</span><h3>Die Prüfung für Level 1</h3></header>
@@ -1498,7 +1501,7 @@ table.tg{border-collapse:collapse;width:100%;font-size:14px}
     <section class="station c-schein" data-st="11" data-lv="2" aria-labelledby="h-s11" hidden>
       <div class="st-head">
         <div class="st-icon"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5"/><circle cx="8.5" cy="11" r="2"/><path d="M5.5 16a3 3 0 0 1 6 0M14 10h4M14 13h4"/></svg></div>
-        <div><p class="eyebrow">Level 2 · Prüfung · ca. 10 Min.</p><h2 id="h-s11">Prüfung Level 2</h2><p class="goal">Mindestens 8 von 10 Fragen richtig. Dazu müssen alle Stationen von Level 2 erledigt sein, mit fobizz-Feedback.</p></div>
+        <div><p class="eyebrow">Level 2 · Prüfung · ca. 10 Min.</p><h2 id="h-s11">Prüfung Level 2</h2><p class="goal">Mindestens 8 von 10 Fragen richtig. Dazu müssen alle Stationen von Level 2 erledigt sein, mit fobizz-Feedback. Nach drei Fehlversuchen wird die Prüfung geleert.</p></div>
       </div>
       <div class="callout lvlock" data-lv="2" hidden><svg class="i" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><p><b>Du schaust in Level 2 hinein.</b> Ausprobieren kannst du schon alles. Die Prüfung öffnet sich aber erst, wenn du Level 1 geschafft hast.</p></div>
       <article class="task">
@@ -1983,7 +1986,7 @@ table.tg{border-collapse:collapse;width:100%;font-size:14px}
     <section class="station c-schein" data-st="17" data-lv="3" aria-labelledby="h-s17" hidden>
       <div class="st-head">
         <div class="st-icon"><svg class="i" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2.5"/><circle cx="8.5" cy="11" r="2"/><path d="M5.5 16a3 3 0 0 1 6 0M14 10h4M14 13h4"/></svg></div>
-        <div><p class="eyebrow">Level 3 · Prüfung · ca. 10 Min.</p><h2 id="h-s17">Prüfung Level 3</h2><p class="goal">Mindestens 9 von 10 Fragen richtig. Dazu müssen alle Stationen von Level 3 erledigt sein, mit fobizz-Urteil „ERFÜLLT“.</p></div>
+        <div><p class="eyebrow">Level 3 · Prüfung · ca. 10 Min.</p><h2 id="h-s17">Prüfung Level 3</h2><p class="goal">Mindestens 9 von 10 Fragen richtig. Dazu müssen alle Stationen von Level 3 erledigt sein, mit fobizz-Urteil „ERFÜLLT“. Nach drei Fehlversuchen wird die Prüfung geleert.</p></div>
       </div>
       <div class="callout lvlock" data-lv="3" hidden><svg class="i" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><p><b>Du schaust in Level 3 hinein.</b> Ausprobieren kannst du schon alles. Die Prüfung öffnet sich aber erst, wenn du Level 2 geschafft hast.</p></div>
       <article class="task">
@@ -2032,10 +2035,10 @@ table.tg{border-collapse:collapse;width:100%;font-size:14px}
           </div>
           <div class="half">
             <h4>Mit Code weiterarbeiten</h4>
-            <p class="hint">Füge einen Sicherungscode ein. Dein aktueller Stand auf diesem Gerät wird dabei ersetzt.</p>
+            <p class="hint">Füge einen Sicherungscode ein oder lade dein gespeichertes Badge oder Ergebnis-PDF hoch. Dein aktueller Stand auf diesem Gerät wird dabei ersetzt.</p>
             <label class="sr" for="loadBox6">Sicherungscode einfügen</label>
             <textarea id="loadBox6" class="code" placeholder="KIL…"></textarea>
-            <div class="row"><button class="btn soft" id="loadBtn6" type="button">Code laden</button></div>
+            <div class="row"><button class="btn soft" id="loadBtn6" type="button">Code laden</button><label class="btn soft filebtn" for="loadFile6">PNG oder PDF laden<input type="file" id="loadFile6" accept=".png,.pdf,image/png,application/pdf"></label></div>
             <p class="hint" id="loadNote6" hidden aria-live="polite"></p>
           </div>
         </div>
@@ -2646,7 +2649,7 @@ const QC={because:/\b(weil|denn|da\s|deshalb|daher|darum|deswegen)/i,openq:/\b(w
 
 /* ---------- Zustand ---------- */
 const KEY='ki-fuehrerschein-level';
-const blank=()=>({g:{},fut:'steil',pos:{},kz:{},feed:null,qf1:{},qf2:{},ka:{},kaDec:'',s3:{},q4:{},st:0,wv:'a',wvPick:{},wvSeen:{},q1:{},tf:{},s4:{},dim:'ind',s5:{},q6:{},w:{},duel:{},ans:{},fb:{},cp:{},chk:{},name:'',qm:{},qv:{},sy:{},md:{},jb:{},xq:{},fcs:{},me:{p:null,t:'',w:{},y:2046},kb:{goal:null,sel:{},built:false},mw:{},srt:{},ord:{},gap:{},mrk:{},pair:{},num:{},sld:{},wgt:{},lb:{},ex:{1:{},2:{},3:{}},xt:{1:0,2:0,3:0},xb:{1:0,2:0,3:0},xat:{1:'',2:'',3:''},lvAt:{1:'',2:'',3:''}});
+const blank=()=>({g:{},fut:'steil',pos:{},kz:{},feed:null,qf1:{},qf2:{},ka:{},kaDec:'',s3:{},q4:{},st:0,wv:'a',wvPick:{},wvSeen:{},q1:{},tf:{},s4:{},dim:'ind',s5:{},q6:{},w:{},duel:{},ans:{},fb:{},cp:{},chk:{},name:'',qm:{},qv:{},sy:{},md:{},jb:{},xq:{},fcs:{},me:{p:null,t:'',w:{},y:2046},kb:{goal:null,sel:{},built:false},mw:{},srt:{},ord:{},gap:{},mrk:{},pair:{},num:{},sld:{},wgt:{},lb:{},ex:{1:{},2:{},3:{}},xt:{1:0,2:0,3:0},xf:{1:0,2:0,3:0},xo:{},xb:{1:0,2:0,3:0},xat:{1:'',2:'',3:''},lvAt:{1:'',2:'',3:''}});
 let S=blank();
 try{const raw=localStorage.getItem(KEY); if(raw){S=Object.assign(blank(),JSON.parse(raw));}}catch(e){}
 let saveT=null;
@@ -3051,17 +3054,36 @@ function examLabel(lv){const E=EXAMS[lv],P=LV[lv].pass;if(!examOpen(lv))return `
 function levelPct(lv){let n=0,d=0;for(let i=firstOf(lv);i<firstOf(lv)+6;i++)STEPS[i].forEach(s=>{n++;if(s[1]())d++;});return Math.round(d/n*100);}
 
 /* ---------- Prüfungen ---------- */
+const XST={1:[0,0,0,0,1,1,2,2,3,4],2:[6,6,7,9,9,10,10,8,7,9],3:[15,12,12,13,14,15,15,15,16,16]};
+const XMAX=3;
+function examList(lv){const E=EXAMS[lv],o=S.xo&&S.xo[lv];if(!o)return E.map((q,i)=>Object.assign({},q,{src:i}));return o.map(([i,p])=>({q:E[i].q,o:p.map(k=>E[i].o[k]),a:p.indexOf(E[i].a),src:i}));}
+function shuf(a){for(let i=a.length-1;i>0;i--){const k=Math.floor(Math.random()*(i+1));[a[i],a[k]]=[a[k],a[i]];}return a;}
+function reshuffleExam(lv){S.xo=S.xo||{};S.xo[lv]=shuf(EXAMS[lv].map((_,i)=>i)).map(i=>[i,shuf(EXAMS[lv][i].o.map((_,k)=>k))]);}
+function xLeft(lv){return XMAX-((S.xf&&S.xf[lv])||0);}
+function xLeftTxt(lv){const n=xLeft(lv);return `Du hast noch ${n} Versuch${n===1?'':'e'}. Danach wird die Prüfung geleert und neu gemischt.`;}
 function doExam(lv){
-  const E=EXAMS[lv],P=LV[lv].pass,fb=$('#fb-x'+lv);
+  const E=examList(lv),P=LV[lv].pass,fb=$('#fb-x'+lv),st=S.ex[lv];S.xf=S.xf||{1:0,2:0,3:0};
   if(!examOpen(lv)){showFb(fb,'bad',`Erst Level ${lv-1} schaffen.`,`Die Prüfung für Level ${lv} öffnet sich, wenn du Level ${lv-1} komplett geschafft hast: alle Stationen und die Prüfung.`);return;}
-  const {sc,wrong}=checkQuiz(E,S.ex[lv],'x'+lv);S.xt[lv]=(S.xt[lv]||0)+1;if(sc>(S.xb[lv]||0))S.xb[lv]=sc;if(sc>=P&&!S.xat[lv])S.xat[lv]=new Date().toISOString();save();
-  renderQuiz($('#exam'+lv),E,S.ex[lv],'x'+lv,'ex'+lv);
+  const open=E.filter((q,i)=>st[i]==null).length;
+  if(open){showFb(fb,'mid','Noch nicht alle Fragen beantwortet.',`Beantworte erst alle ${E.length} Fragen, es fehlen noch ${open}. Dieser Versuch zählt noch nicht.`);return;}
+  const {sc}=checkQuiz(E,st,'x'+lv);S.xt[lv]=(S.xt[lv]||0)+1;if(sc>(S.xb[lv]||0))S.xb[lv]=sc;if(sc>=P&&!S.xat[lv])S.xat[lv]=new Date().toISOString();
   if(sc>=P){
+    S.xf[lv]=0;save();renderQuiz($('#exam'+lv),E,st,'x'+lv,'ex'+lv);
     const miss=[];for(let i=firstOf(lv);i<firstOf(lv)+5;i++)STEPS[i].forEach(s=>{if(!s[1]())miss.push(`Station ${lv}.${STATIONS[i].n+1}: ${stepLabel(s)}`);});
     if(miss.length) showFb(fb,'mid',`Prüfung bestanden! ${sc} von ${E.length} richtig.`,`Für Level ${lv} fehlt dir aber noch etwas:`,miss);
     else showFb(fb,'ok',`Level ${lv} geschafft! ${sc} von ${E.length} richtig.`,lv===1?'Du bist jetzt Prompt Trainee. Zeig dein Badge deiner Lehrkraft, dann bekommst du deinen fobizz-Zugang für Level 2.':lv===2?'Du bist jetzt Prompt Engineer. Weiter geht es mit Level 3.':'Du bist jetzt AI Architect. Glückwunsch, mehr geht nicht!');
+  } else {
+    S.chk['x'+lv].detail={};S.xf[lv]=(S.xf[lv]||0)+1;
+    const sts=[...new Set(E.map((q,i)=>+st[i]===q.a?null:XST[lv][q.src]).filter(x=>x!=null))].sort((a,b)=>a-b).map(i=>`Station ${lv}.${STATIONS[i].n+1}: ${STATIONS[i].label}`);
+    if(S.xf[lv]>=XMAX){
+      S.ex[lv]={};S.xf[lv]=0;delete S.chk['x'+lv];reshuffleExam(lv);save();
+      renderQuiz($('#exam'+lv),examList(lv),S.ex[lv],'x'+lv,'ex'+lv);
+      showFb(fb,'bad',`${sc} von ${E.length} richtig. Das war der dritte Versuch, die Prüfung ist jetzt geleert.`,'Durch Ausprobieren und Durchklicken lernst du nichts. Auf deinem Badge soll stehen, was du wirklich kannst. Die Fragen und Antworten sind neu gemischt. Geh diese Stationen noch einmal durch und beantworte danach alle Fragen neu:',sts);
+    } else {
+      save();renderQuiz($('#exam'+lv),E,st,'x'+lv,'ex'+lv);
+      showFb(fb,'bad',`${sc} von ${E.length} richtig. Du brauchst ${P}.`,`Welche Fragen falsch sind, zeigen wir nicht, denn durch Ausprobieren lernt man nichts. ${xLeftTxt(lv)} Schau dir vorher diese Stationen noch einmal an:`,sts);
+    }
   }
-  else showFb(fb,'bad',`${sc} von ${E.length} richtig. Du brauchst ${P}.`,`Schau dir die rot markierten Fragen noch einmal an (Frage ${wrong.map(i=>i+1).join(', ')}). Die Stationen helfen dir. Dann gib die Prüfung erneut ab.`);
   renderLic();
 }
 function paintExamLocks(){[2,3].forEach(lv=>{const b=$('#chk-x'+lv);if(b)b.disabled=!examOpen(lv);});}
@@ -3175,9 +3197,9 @@ async function saveLic(kind){
   const btns=[$('#licPng'),$('#licPdf')];btns.forEach(b=>b.disabled=true);note.textContent='Dein Badge wird erstellt …';
   try{
     const c=await drawLic(),lvR=reachedLevel();let blob,fn='AI-Badge_'+(lvR?'Level'+lvR+'_':'')+(norm(S.name)||'Name');
-    if(kind==='png'){blob=await new Promise((res,rej)=>c.toBlob(b=>b?res(b):rej(new Error('blob')),'image/png'));fn+='.png';}
-    else{const { jsPDF }=window.jspdf;const doc=new jsPDF({unit:'mm',format:[160,100],orientation:'landscape'});doc.addImage(c.toDataURL('image/png'),'PNG',0,0,160,100,undefined,'FAST');blob=doc.output('blob');fn+='.pdf';}
-    note.textContent='Bestätige das Speichern im Fenster.';await dl.save({filename:fn,data:blob});note.textContent=lvR?`Gespeichert! Level ${lvR} (${LV[lvR].name}) steht auf deinem Badge.`:'Gespeichert. Auf deinem Badge steht noch „In Arbeit“. Wenn du Level 1 geschafft hast, speicherst du es einfach noch einmal.';
+    if(kind==='png'){blob=await new Promise((res,rej)=>c.toBlob(b=>b?res(b):rej(new Error('blob')),'image/png'));blob=await pngWithCode(blob,await makeSaveCode());fn+='.png';}
+    else{const { jsPDF }=window.jspdf;const doc=new jsPDF({unit:'mm',format:[160,100],orientation:'landscape'});doc.addImage(c.toDataURL('image/png'),'PNG',0,0,160,100,undefined,'FAST');pdfCode(doc,await makeSaveCode());blob=doc.output('blob');fn+='.pdf';}
+    note.textContent='Bestätige das Speichern im Fenster.';await dl.save({filename:fn,data:blob});note.textContent=lvR?`Gespeichert! Level ${lvR} (${LV[lvR].name}) steht auf deinem Badge.`:'Gespeichert. Auf deinem Badge steht noch „In Arbeit“. Wenn du Level 1 geschafft hast, speicherst du es einfach noch einmal.';note.textContent+=' Dein Sicherungscode steckt mit in der Datei.';
   }catch(e){const cd=e&&e.code;note.textContent=cd==='declined'?'Speichern abgebrochen.':cd==='rate_limited'?'Es ist schon ein Speichern-Fenster offen. Schließ es und versuch es noch einmal.':'Das Badge konnte nicht gespeichert werden. Versuch es noch einmal.';}
   finally{btns.forEach(b=>b.disabled=false);}
 }
@@ -3247,7 +3269,7 @@ function reportText(){
   });});
   return out.join('\n');
 }
-function makePdfBlob(){
+function makePdfBlob(code){
   const { jsPDF } = window.jspdf; const doc=new jsPDF({unit:'mm',format:'a4'});
   const W=210,M=16,CW=W-2*M,BOTTOM=282;let y=16;const INK=[23,32,26],MUTED=[85,98,90],GREEN=[23,107,10];
   const ensure=h=>{if(y+h>BOTTOM){doc.addPage();y=18;}};
@@ -3266,6 +3288,7 @@ function makePdfBlob(){
       if(it.ki){doc.setDrawColor(...GREEN);doc.setLineWidth(0.6);const y0=y;write(it.ki,{size:9.5,style:'italic',color:GREEN,indent:3,after:0});doc.line(M+0.5,y0,M+0.5,y);y+=3;}
     });y+=2;});
   const n=doc.getNumberOfPages();for(let i=1;i<=n;i++){doc.setPage(i);doc.setFont('helvetica','normal');doc.setFontSize(8);doc.setTextColor(...MUTED);doc.text(pdfClean(`AI Badge · ${name||'Ergebnisse'} · Seite ${i} von ${n} · CC BY-NC-SA 4.0 deinTechniklehrer`),W/2,291,{align:'center'});}
+  pdfCode(doc,code);
   return doc.output('blob');
 }
 async function savePdf(){
@@ -3273,7 +3296,7 @@ async function savePdf(){
   if(!window.jspdf){note.textContent='Das PDF-Werkzeug konnte nicht geladen werden. Nutze „Als Text kopieren“.';return;}
   if(!dl){note.textContent='PDF-Speichern ist in dieser Ansicht nicht verfügbar. Nutze „Als Text kopieren“.';return;}
   btn.disabled=true;note.textContent='PDF wird erstellt …';
-  try{const blob=makePdfBlob();note.textContent='Bestätige das Speichern im Fenster.';await dl.save({filename:'AI-Badge_Ergebnisse_'+(norm(S.name)||'Name')+'.pdf',data:blob});note.textContent='PDF gespeichert.';}
+  try{const blob=makePdfBlob(await makeSaveCode());note.textContent='Bestätige das Speichern im Fenster.';await dl.save({filename:'AI-Badge_Ergebnisse_'+(norm(S.name)||'Name')+'.pdf',data:blob});note.textContent='PDF gespeichert. Dein Sicherungscode steckt mit in der Datei: Damit kannst du später über „PNG oder PDF laden“ weiterarbeiten.';}
   catch(e){const c=e&&e.code;note.textContent=c==='declined'?'Speichern abgebrochen.':c==='rate_limited'?'Es ist schon ein Speichern-Fenster offen. Schließ es und versuch es noch einmal.':'Das PDF konnte nicht gespeichert werden. Nutze „Als Text kopieren“.';}
   finally{btn.disabled=false;}
 }
@@ -3283,6 +3306,33 @@ async function copyText(){
   catch(e){ta.hidden=false;ta.focus();ta.select();note.textContent='Der Text ist markiert. Kopiere ihn mit Strg+C (am iPad: gedrückt halten → Kopieren).';}
 }
 
+
+
+/* ---------- Sicherungscode in PNG/PDF ---------- */
+const CRCT=(()=>{const t=new Uint32Array(256);for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c>>>0;}return t;})();
+function crc32(b){let c=0xFFFFFFFF;for(let i=0;i<b.length;i++)c=CRCT[(c^b[i])&255]^(c>>>8);return (c^0xFFFFFFFF)>>>0;}
+async function pngWithCode(blob,code){
+  try{const b=new Uint8Array(await blob.arrayBuffer()),e=b.length-12;
+    if(String.fromCharCode(b[e+4],b[e+5],b[e+6],b[e+7])!=='IEND')return blob;
+    const enc=new TextEncoder(),typ=enc.encode('tEXt'),dat=enc.encode('AI-Badge-Sicherungscode\0'+code+' '),ch=new Uint8Array(12+dat.length),dv=new DataView(ch.buffer);
+    dv.setUint32(0,dat.length);ch.set(typ,4);ch.set(dat,8);const ci=new Uint8Array(4+dat.length);ci.set(typ,0);ci.set(dat,4);dv.setUint32(8+dat.length,crc32(ci));
+    const out=new Uint8Array(b.length+ch.length);out.set(b.subarray(0,e),0);out.set(ch,e);out.set(b.subarray(e),e+ch.length);return new Blob([out],{type:'image/png'});
+  }catch(err){return blob;}
+}
+function pdfCode(doc,code){try{if(code)doc.setProperties({title:'AI Badge',subject:'AI Badge – mit Sicherungscode zum Weiterarbeiten',keywords:code,creator:'deinTechniklehrer'});}catch(e){}}
+async function codeFromFile(file){
+  const buf=new Uint8Array(await file.arrayBuffer());const txt=new TextDecoder('latin1').decode(buf);
+  const all=(txt.match(/KI[LF][12]\.[A-Za-z0-9_-]{20,}/g)||[]).sort((a,b)=>b.length-a.length);
+  for(const c of all)for(let k=0;k<=4;k++){const t=c.slice(0,c.length-k);try{await readSaveCode(t);return t;}catch(e){if(e&&e.message==='other')return t;}}
+  return all[0]||'';
+}
+async function onLoadFile(n,inp){
+  const f=inp.files&&inp.files[0],note=$('#loadNote'+n),box=$('#loadBox'+n);if(!f)return;note.hidden=false;note.textContent='Datei wird gelesen …';
+  let code='';try{code=await codeFromFile(f);}catch(e){}
+  inp.value='';
+  if(!code){note.textContent='In dieser Datei steckt kein Sicherungscode. Das klappt nur mit PNG- oder PDF-Dateien, die du hier mit „Speichern“ erstellt hast. Ein Bildschirmfoto oder eine Datei, die du aus Notability neu exportiert hast, enthält den Code meist nicht. Nimm dann den Sicherungscode.';return;}
+  box.value=code;loadArmed[n]=false;onLoad(n);
+}
 
 /* ---------- Sicherungscode ---------- */
 function b64urlFromBytes(bytes){let bin='';for(let i=0;i<bytes.length;i+=0x8000)bin+=String.fromCharCode.apply(null,bytes.subarray(i,i+0x8000));return btoa(bin).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');}
@@ -3450,7 +3500,7 @@ function solveAll(){
   qz(Q1,S.q1);TF.forEach(t=>S.tf[t.id]=t.a?'y':'n');qz(QF1,S.qf1);E4.forEach(k=>S.s4[k.id]=k.a);DUEL.forEach(p=>S.duel[p.id]=p.a);D3.forEach(k=>S.s3[k.id]=k.a);Object.values(E5).flat().forEach(k=>S.s5[k.id]=k.a);
   qz(QF2,S.qf2);KZ.forEach(z=>S.kz[z.id]=z.a?'y':'n');KA.forEach(k=>S.ka[k.id]=k.a?'y':'n');S.kaDec='ue';qz(Q4,S.q4);qz(Q6,S.q6);WITEMS.forEach(w=>S.w[w.id]=w.side==='r'?3:2);
   qz(QM,S.qm);qz(QV,S.qv);SYS.forEach(k=>S.sy[k.id]=k.a);JB.forEach(k=>S.jb[k.id]=k.a);FC.forEach(k=>S.fcs[k.id]=k.a);MW.forEach(k=>S.mw[k.id]=k.a);xtSolve();Object.keys(SRT).forEach(k=>{const st=srtStore(k);SRT[k].items.forEach(it=>st[it.id]=it.a);});Object.keys(ORD).forEach(k=>{S.ord[k]=ordRight(k);});Object.keys(XQ).forEach(k=>{const st={};XQ[k].forEach((q,i)=>st[i]=q.a);S.xq[k]=st;});S.kb={goal:'vok',sel:{p1:true,p3:true,a1:true,a2:true,a3:true,a5:true,s1:true,v1:true},built:true};S.me={y:2046,w:{arbeit:2,schule:1,gesund:1,umwelt:1,macht:0,leben:1},t:'Meine Welt ist eher hoffnungsvoll, weil KI in der Medizin und beim Lernen viel helfen kann. Aber nur, wenn Gesetze die Macht der wenigen Konzerne begrenzen, denn sonst kippt sie.'};POS.forEach(p=>S.pos[p.id]=p.a);MD.forEach(m=>{const o={};m.a.forEach(k=>o[k]=true);S.md[m.id]=o;});
-  [1,2,3].forEach(lv=>qz(EXAMS[lv],S.ex[lv]));
+  [1,2,3].forEach(lv=>qz(examList(lv),S.ex[lv]));
   Object.keys(GUESS).forEach(k=>S.g[k]={v:GUESS[k].a,shown:true});
   Object.keys(OPEN).forEach(id=>{if(MUSTER[id]){S.ans[id]=MUSTER[id];S.cp[id]=MUSTER[id];S.fb[id]=sampleFb(id);}});
   if(!S.name)S.name='Lea Meyer (Beispiel)';
@@ -3470,13 +3520,14 @@ mountD3();renderQuiz($('#q4'),Q4,S.q4,'d4','q4');redrawE4=renderAMP;renderAMP();
 renderWList();drawScale();renderDuel();renderFeed();mountGuesses();renderBench();renderFuture();renderPos();renderKZ();renderKA();
 renderQuiz($('#qm'),QM,S.qm,'qm','qmq');mountSY();renderMD();mountJB();if($('#jobDice'))$('#jobDice').onclick=rollJob;Object.keys(XQ).forEach(k=>{renderXQ(k);const b=$('#chk-'+k);if(b)b.onclick=()=>doXQ(k);});mountSys();renderWorld();renderMW();if($('#chk-mw'))$('#chk-mw').onclick=doMW;XT.forEach(([n,R,r,dofn])=>Object.keys(R).forEach(k=>{r(k);const b=$('#chk-'+k);if(b)b.onclick=()=>dofn(k);}));Object.keys(SRT).forEach(k=>{mountSRT(k);const b=$('#chk-'+k);if(b)b.onclick=()=>doSRT(k);});Object.keys(ORD).forEach(k=>{renderORD(k);const b=$('#chk-'+k);if(b)b.onclick=()=>doORD(k);});renderGM();renderKB();if($('#chk-ks'))$('#chk-ks').onclick=doKS;if($('#kbReset'))$('#kbReset').onclick=()=>{S.kb={goal:null,sel:{},built:false};kbDirty();renderKB();};if(S.kb.built)doKS();if($('#meTxt'))$('#meTxt').addEventListener('input',e=>{S.me.t=e.target.value;delete S.chk.me;$('#fb-me').hidden=true;save();});if($('#chk-me'))$('#chk-me').onclick=doMe;
 watchPower();renderMK();renderSolar();renderAgent();if($('#agNext')){$('#agNext').onclick=()=>{if(agStep<AGS.length-1){agStep++;renderAgent();}};$('#agReset').onclick=()=>{agStep=0;renderAgent();};}if($('#powerPlay'))$('#powerPlay').onclick=()=>{powerDone=true;renderPower(true);};if($('#mkNext')){$('#mkNext').onclick=()=>{if(mkGen<MKMAX){mkGen++;renderMK();}};$('#mkReset').onclick=()=>{mkGen=0;renderMK();};}
-[1,2,3].forEach(lv=>{renderQuiz($('#exam'+lv),EXAMS[lv],S.ex[lv],'x'+lv,'ex'+lv);$('#chk-x'+lv).onclick=()=>doExam(lv);});
+[1,2,3].forEach(lv=>{renderQuiz($('#exam'+lv),examList(lv),S.ex[lv],'x'+lv,'ex'+lv);$('#chk-x'+lv).onclick=()=>doExam(lv);});
 $('#chk-e2').onclick=doE2;$('#chk-f3').onclick=doF3;$('#chk-f4').onclick=doF4;$('#chk-g1').onclick=doG1;$('#feedNew').onclick=()=>{newFeed();save();renderFeed();};$('#feedReset').onclick=()=>{S.feed=null;save();renderFeed();};$('#chk-d3').onclick=doD3;$('#chk-d4').onclick=doD4;$('#chk-e4').onclick=doE4;$('#chk-e5').onclick=doE5;$('#chk-e9').onclick=doE9;
 $('#chk-qm').onclick=doQM;$('#chk-sy').onclick=doSY;$('#chk-md').onclick=doMD;$('#chk-jb').onclick=doJB;
 $('#abgName').value=S.name||'';$('#abgName').addEventListener('input',()=>{S.name=$('#abgName').value.trim();save();renderLic();});
 $('#licPng').onclick=()=>saveLic('png');$('#licPdf').onclick=()=>saveLic('pdf');$('#pdfBtn').onclick=savePdf;$('#txtBtn').onclick=copyText;
 $('#mkCode').onclick=onMakeCode;$('#cpCode').onclick=()=>copyTo2($('#codeOut').value,$('#codeNote'),$('#codeOut'),'Kopiert! Füge den Code in deine IServ-Nachricht ein.');
 $('#loadBtn1').onclick=()=>onLoad(1);$('#loadBtn6').onclick=()=>onLoad(6);
+[1,6].forEach(n=>{const f=$('#loadFile'+n);if(f)f.onchange=()=>onLoadFile(n,f);});
 let resetArmed=false;
 $('#reset').onclick=()=>{const b=$('#reset');if(!resetArmed){resetArmed=true;b.textContent='Wirklich alles löschen? Nochmal tippen';b.style.background='var(--rot)';b.style.color='var(--on-accent)';setTimeout(()=>{resetArmed=false;b.textContent='Alles löschen und neu beginnen';b.style.background='';b.style.color='';},4000);return;}try{localStorage.removeItem(KEY);}catch(e){}location.reload();};
 $('#prev').onclick=()=>go(S.st-1);$('#next').onclick=()=>go(S.st+1);
@@ -3485,7 +3536,7 @@ if(S.chk.e2)doE2();if(S.chk.f3)doF3();if(S.chk.f4)doF4();if(S.chk.g1)doG1();if(S
 if(S.chk.qm)doQM();if(S.chk.sy)doSY();if(S.chk.md)doMD();if(S.chk.jb)doJB();if(S.chk.mw)doMW();XT.forEach(([n,R,r,dofn])=>Object.keys(R).forEach(k=>{if(S.chk[k])dofn(k);}));Object.keys(SRT).forEach(k=>{if(S.chk[k])doSRT(k);});Object.keys(ORD).forEach(k=>{if(S.chk[k])doORD(k);});Object.keys(XQ).forEach(k=>{if(S.chk[k])doXQ(k);});if(S.chk.me)doMe();
 if(TEACHER){let armed=false;$$('#solveBtn,#solveBtn2').forEach(btn=>btn.onclick=()=>{if(!S.solved){solveAll();return;}if(!armed){armed=true;btn.textContent='Wirklich alles leeren? Nochmal tippen';setTimeout(()=>{armed=false;paintSolveBtn();},4000);return;}try{localStorage.removeItem(KEY);}catch(e){}location.reload();});paintSolveBtn();}
 if(TEACHER&&S.solved&&!S.solvedRun)runSolved();
-[1,2,3].forEach(lv=>{if(S.chk['x'+lv]&&S.xt[lv]){const P=LV[lv].pass,E=EXAMS[lv];const b=S.xb[lv];showFb($('#fb-x'+lv),b>=P?'ok':'bad',b>=P?`Bestanden mit ${b} von ${E.length} Punkten.`:`Bisher ${b} von ${E.length}. Du brauchst ${P}.`,null);}});
+[1,2,3].forEach(lv=>{if(S.chk['x'+lv]&&S.xt[lv]){const P=LV[lv].pass,E=EXAMS[lv];const b=S.xb[lv];showFb($('#fb-x'+lv),b>=P?'ok':'bad',b>=P?`Bestanden mit ${b} von ${E.length} Punkten.`:`Bisher ${b} von ${E.length}. Du brauchst ${P}.`,xLeftTxt(lv));}});
 go(S.st||0,false);progress();
 })();
 </script>
