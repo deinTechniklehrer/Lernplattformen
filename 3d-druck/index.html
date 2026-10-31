@@ -356,7 +356,7 @@ textarea.codein:focus{border-color:var(--accent)}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
-</head>
+<link rel="stylesheet" href="../assets/lp-support.css"><script>window.LP_CFG={"keys": ["ender3v2-lernplattform-v1"], "anchors": [{"sel": "#codein", "closest": ".card", "mode": "append"}], "slug": "3d-druck"};</script><script src="../assets/lp-support.js"></script></head>
 <body>
 <div class="app">
   <aside id="side"></aside>
@@ -421,7 +421,7 @@ function buildTask(t, nr) {
   };
   bCheck.onclick = () => {
     const r = impl.check();
-    st.attempts++;
+    st.attempts++; window.LP&&LP.result(t.id,!!r.ok,((document.querySelector('.pagehead h1')||{}).textContent||'').replace(/^\s*\d+\s+/,'')+' · Aufgabe '+nr+(t.title?': '+t.title:''),card);
     if (r.ok) {
       const firstTime = !st.done;
       st.done = true; if (firstTime) st.assisted = false;
@@ -438,7 +438,7 @@ function buildTask(t, nr) {
   };
   bReveal.onclick = () => {
     impl.reveal(); impl.lock && impl.lock();
-    if (!st.done) st.assisted = true;
+    if (!st.done) { st.assisted = true; window.LP&&LP.assist(t.id); }
     st.done = true;
     say('warn', 'So sieht die Lösung aus. Das zählt als „mit Lösungshilfe“ – versuche die Aufgabe später noch einmal ohne Hilfe.', explain());
     bCheck.classList.add('hidden'); bReveal.classList.add('hidden');
@@ -1404,6 +1404,7 @@ function reportLines(r) {
     if (wrong.length) { L.push('Falsch im letzten Versuch:'); wrong.forEach(({ it, i }) => L.push(`  ${i + 1}. ${it.q}`, `     Deine Antwort: ${it.given}`, `     Richtig: ${it.correct}`)); }
     else if (items.length) L.push('Im letzten Versuch waren alle Antworten richtig.');
   } else L.push('Abschlusstest: noch nicht bearbeitet.');
+  if (window.LP) L.push(...LP.textLines());
   L.push('', 'Fortsetzungscode:', r.code);
   return L;
 }

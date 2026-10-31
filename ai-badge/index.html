@@ -2067,7 +2067,7 @@ table.tg{border-collapse:collapse;width:100%;font-size:14px}
   </div>
 </footer>
 
-<script src="../assets/jspdf.umd.min.js"></script>
+<script src="../assets/jspdf.umd.min.js"></script><link rel="stylesheet" href="../assets/lp-support.css"><script>window.LP_CFG={"keys": [], "bottom": 78, "ignore": "^x[123]$", "slug": "ai-badge"};</script><script src="../assets/lp-support.js"></script>
 <script>
 (function(){
 "use strict";
@@ -2656,7 +2656,7 @@ let saveT=null;
 function save(){clearTimeout(saveT);saveT=setTimeout(()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}},300);progress();}
 let dl=null;
 (async()=>{ try{ dl=(window.claude&&typeof window.claude.use==='function')?await window.claude.use('downloads'):null; }catch(e){ dl=null; } })();
-function showFb(fbEl,cls,head,body,list){fbEl.hidden=false;fbEl.className='fb '+cls;const h=el('p',{class:'lvl',html:cls==='ok'?CHECK:''});h.append(head);const kids=[h];if(body)kids.push(el('p',{},body));if(list&&list.length)kids.push(el('ul',{},...list.map(t=>el('li',{},t))));fbEl.replaceChildren(...kids);}
+function showFb(fbEl,cls,head,body,list){if(window.LP)LP.fb(fbEl,cls);fbEl.hidden=false;fbEl.className='fb '+cls;const h=el('p',{class:'lvl',html:cls==='ok'?CHECK:''});h.append(head);const kids=[h];if(body)kids.push(el('p',{},body));if(list&&list.length)kids.push(el('ul',{},...list.map(t=>el('li',{},t))));fbEl.replaceChildren(...kids);}
 function lvl(sc,max){return sc===max?'ok':sc>=max*0.6?'mid':'bad';}
 
 /* ---------- Theme ---------- */
@@ -3267,6 +3267,7 @@ function reportText(){
   buildReport().forEach(sec=>{out.push('','== '+sec.title.toUpperCase()+' ==');sec.items.forEach(it=>{
     if(it.t==='q'){out.push('',it.q,it.a||'(keine Antwort)');if(it.ki)out.push(it.ki);}else{out.push('',it.label);it.lines.forEach(l=>out.push('  '+l));}
   });});
+  if(window.LP)out.push(...LP.textLines());
   return out.join('\n');
 }
 function makePdfBlob(code){

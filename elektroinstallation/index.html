@@ -1,7 +1,7 @@
 <!doctype html><html><head><script>/* Lernplattformen auf GitHub Pages: Speichern ohne claude.ai */
 (function(){if(window.claude)return;var T={pdf:'application/pdf',txt:'text/plain;charset=utf-8',png:'image/png',jpg:'image/jpeg',jpeg:'image/jpeg',json:'application/json',csv:'text/csv;charset=utf-8',html:'text/html;charset=utf-8',docx:'application/vnd.openxmlformats-officedocument.wordprocessingml.document',xlsx:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',ino:'text/plain;charset=utf-8'};
 var dl={save:function(o){return new Promise(function(res,rej){try{var n=(o&&o.filename)||'datei',x=(n.split('.').pop()||'').toLowerCase(),d=o.data,b=d instanceof Blob?d:new Blob([d],{type:T[x]||'application/octet-stream'});var u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=n;a.rel='noopener';document.body.appendChild(a);a.click();setTimeout(function(){a.remove();URL.revokeObjectURL(u);},4000);res();}catch(e){rej({code:'failed',message:String(e)});}});}};
-window.claude={use:function(n){return Promise.resolve(n==='downloads'?dl:null);}};})();</script><meta property="og:type" content="website"><meta property="og:title" content="Elektroinstallation"><meta property="og:description" content="Stromkreisarten, Leistung und Stromstärke, Kabelquerschnitt, Sicherungen im Haus und im Kfz sowie Schaltpläne – mit Abschlussprojekt: zwei Installationen mit 12 V und 230 V."><meta property="og:url" content="https://deintechniklehrer.github.io/Lernplattformen/elektroinstallation/"><meta property="og:image" content="https://deintechniklehrer.github.io/Lernplattformen/vorschau/Vorschau_Elektroinstallation.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="description" content="Stromkreisarten, Leistung und Stromstärke, Kabelquerschnitt, Sicherungen im Haus und im Kfz sowie Schaltpläne – mit Abschlussprojekt: zwei Installationen mit 12 V und 230 V."><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+window.claude={use:function(n){return Promise.resolve(n==='downloads'?dl:null);}};})();</script><meta property="og:type" content="website"><meta property="og:title" content="Elektroinstallation"><meta property="og:description" content="Stromkreisarten, Leistung und Stromstärke, Kabelquerschnitt, Sicherungen im Haus und im Kfz sowie Schaltpläne – mit Abschlussprojekt: zwei Installationen mit 12 V und 230 V."><meta property="og:url" content="https://deintechniklehrer.github.io/Lernplattformen/elektroinstallation/"><meta property="og:image" content="https://deintechniklehrer.github.io/Lernplattformen/vorschau/Vorschau_Elektroinstallation.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="description" content="Stromkreisarten, Leistung und Stromstärke, Kabelquerschnitt, Sicherungen im Haus und im Kfz sowie Schaltpläne – mit Abschlussprojekt: zwei Installationen mit 12 V und 230 V."><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><link rel="stylesheet" href="../assets/lp-support.css"><script>window.LP_CFG={"keys": ["elektroinstallation-lernplattform-v1"], "anchors": [{"sel": "#codein", "closest": ".card", "mode": "append"}], "slug": "elektroinstallation"};</script><script src="../assets/lp-support.js"></script></head><body>
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -454,7 +454,7 @@ function buildTask(t, nr) {
   };
   bCheck.onclick = () => {
     const r = impl.check();
-    st.attempts++;
+    st.attempts++; window.LP&&LP.result(t.id,!!r.ok,((document.querySelector('.pagehead h1')||{}).textContent||'').replace(/^\s*\d+\s+/,'')+' · Aufgabe '+nr+(t.title?': '+t.title:''),card);
     if (r.ok) {
       const firstTime = !st.done;
       st.done = true; if (firstTime) st.assisted = false;
@@ -471,7 +471,7 @@ function buildTask(t, nr) {
   };
   bReveal.onclick = () => {
     impl.reveal(); impl.lock && impl.lock();
-    if (!st.done) st.assisted = true;
+    if (!st.done) { st.assisted = true; window.LP&&LP.assist(t.id); }
     st.done = true;
     say('warn', 'So sieht die Lösung aus. Das zählt als „mit Lösungshilfe“ – versuche die Aufgabe später noch einmal ohne Hilfe.', explain());
     bCheck.classList.add('hidden'); bReveal.classList.add('hidden');
@@ -1562,6 +1562,7 @@ function reportLines(r) {
     if (wrong.length) { L.push('Falsch im letzten Versuch:'); wrong.forEach(({ it, i }) => L.push(`  ${i + 1}. ${it.q}`, `     Deine Antwort: ${it.given}`, `     Richtig: ${it.correct}`)); }
     else if (items.length) L.push('Im letzten Versuch waren alle Antworten richtig.');
   } else L.push('Abschlusstest: noch nicht bearbeitet.');
+  if (window.LP) L.push(...LP.textLines());
   L.push('', 'Fortsetzungscode:', r.code);
   return L;
 }

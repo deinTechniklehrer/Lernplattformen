@@ -437,7 +437,7 @@ select.s-bad{border-color:var(--bad);background:var(--bad-soft)}
       <div class="meter-row"><span>Dein Fortschritt</span><span id="progTxt">0 %</span></div>
       <div class="bar"><i id="progBar"></i></div>
     </div>
-    <span class="ki-pill on"><svg class="i" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg><span>Automatische Checks · KI-Feedback über fobizz</span></span>
+    <span class="ki-pill on"><svg class="i" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg><span>Automatische Checks · KI freiwillig ab AI Badge Level 1</span></span>
   </header>
 
   <nav class="stations" id="nav" aria-label="Stationen"></nav>
@@ -451,7 +451,7 @@ select.s-bad{border-color:var(--bad);background:var(--bad-soft)}
         <div><p class="eyebrow">Station 1 · Bedeutung</p><h2 id="h-s1">Warum arbeiten Menschen?</h2><p class="goal">Du übst: die Bedeutung von Arbeit beschreiben</p></div>
       </div>
       <details class="fbox resume">
-        <summary>Schon angefangen? Mit deinem Sicherungscode weiterarbeiten</summary>
+        <summary>Schon angefangen? Mit Sicherungscode oder gespeicherter PDF weiterarbeiten</summary>
         <div class="fbox-in">
           <label class="fbl" for="loadBox1">Sicherungscode einfügen</label>
           <textarea id="loadBox1" class="code" placeholder="AWK…"></textarea>
@@ -488,13 +488,9 @@ select.s-bad{border-color:var(--bad);background:var(--bad-soft)}
         <div class="fb" id="fb-a2" hidden aria-live="polite"></div>
       </article>
 
-      <div class="info">
-        <h3>So holst du dir KI-Feedback mit fobizz</h3>
-        <div class="howto">
-          <div><b>1 · Antwort schreiben</b>Schreib deine Antwort in das Feld der Aufgabe.</div>
-          <div><b>2 · Kopieren und öffnen</b>Tippe auf „KI-Feedback mit fobizz“, dann auf „Für fobizz kopieren“ und „fobizz öffnen“. Melde dich mit deinem Zugangscode an.</div>
-          <div><b>3 · Einfügen</b>Füge den Text im Chat ein. Die Rückmeldung kannst du hier zurückkopieren – dann steht sie in deinem PDF.</div>
-        </div>
+      <div class="info lp-kifrei">
+        <h3>KI ist hier freiwillig</h3>
+        <p>Du kannst die ganze Werkstatt ohne KI bearbeiten. Bei einzelnen Aufgaben steht <b>„Optional mit KI · ab AI Badge Level 1“</b>. Hast du Level 1 des AI Badge geschafft und deinen fobizz-Zugang, darfst du dort KI nutzen, um dein Lernen zu verbessern: Lass dir Feedback zu deiner eigenen Antwort geben. Die Antwort schreibst du selbst.</p>
       </div>
 
       <article class="task">
@@ -663,7 +659,7 @@ select.s-bad{border-color:var(--bad);background:var(--bad-soft)}
         <header><span class="num">↗</span><h3>Speichern, abgeben, weiterarbeiten</h3></header>
         <label for="abgName"><b>Dein Name oder Kürzel</b></label>
         <input type="text" id="abgName" placeholder="z. B. Lea M." autocomplete="off">
-        <p class="hint">Speichere alle Antworten, Prüfergebnisse und dein fobizz-Feedback als PDF, oder kopiere sie als Text, z. B. für IServ.</p>
+        <p class="hint">Speichere alle Antworten, Prüfergebnisse und dein freiwilliges KI-Feedback als PDF, oder kopiere sie als Text, z. B. für IServ.</p>
         <div class="row"><button class="btn accent" id="pdfBtn" type="button"><svg class="i" viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>PDF speichern</button><button class="btn soft" id="txtBtn" type="button">Als Text kopieren</button></div>
         <p class="hint" id="pdfNote" hidden aria-live="polite"></p>
         <label class="sr" for="txtOut">Deine Ergebnisse als Text</label>
@@ -706,7 +702,7 @@ select.s-bad{border-color:var(--bad);background:var(--bad-soft)}
   </div>
 </footer>
 
-<script src="../assets/jspdf.umd.min.js"></script>
+<script src="../assets/jspdf.umd.min.js"></script><link rel="stylesheet" href="../assets/lp-support.css"><script>window.LP_CFG={"keys": ["arbeits-werkstatt-v1"], "bottom": 78, "anchors": [{"sel": "#loadBtn1", "mode": "row"}, {"sel": "#loadBtn5", "mode": "row"}], "slug": "arbeits-werkstatt"};</script><script src="../assets/lp-support.js"></script>
 <script>
 (function(){
 "use strict";
@@ -809,7 +805,7 @@ let saveT=null;
 function save(){clearTimeout(saveT);saveT=setTimeout(()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}},300);progress();}
 let dl=null;
 (async()=>{ try{ dl=(window.claude&&typeof window.claude.use==='function')?await window.claude.use('downloads'):null; }catch(e){dl=null;} })();
-function showFb(fbEl,cls,head,body){fbEl.hidden=false;fbEl.className='fb '+cls;const h=el('p',{class:'lvl',html:cls==='ok'?CHECK:''});h.append(head);fbEl.replaceChildren(h,...(body?[el('p',{},body)]:[]));}
+function showFb(fbEl,cls,head,body){if(window.LP)LP.fb(fbEl,cls);fbEl.hidden=false;fbEl.className='fb '+cls;const h=el('p',{class:'lvl',html:cls==='ok'?CHECK:''});h.append(head);fbEl.replaceChildren(h,...(body?[el('p',{},body)]:[]));}
 
 /* ---------- Offene Aufgaben mit fobizz ---------- */
 function quickChecks(t,text){
@@ -827,12 +823,13 @@ function choreSummary(){
 function fobizzText(id){
   const t=OPEN[id];
   let ctx=''; if(id==='a5') ctx='\n'+choreSummary(); if(id==='a13') ctx='\nMeine Position: '+(POSL[S.pos]||'keine Angabe');
-  return `${TITLE} · Aufgabe ${t.nr}\nAufgabe: ${t.q}${ctx}\nMeine Antwort:\n${(S.ans[id]||'').trim()}`;
+  return `${TITLE} · Aufgabe ${t.nr}\nAufgabe: ${t.q}${ctx}\nMeine Antwort:\n${(S.ans[id]||'').trim()}\n\nGib mir Feedback zu meiner Antwort: Was ist gut, was fehlt noch? Schreib meine Antwort nicht neu.`;
 }
 async function copyTo(text,note,ta,msg){
   try{await navigator.clipboard.writeText(text);ta.hidden=true;note.hidden=false;note.textContent=msg||'Kopiert! Öffne fobizz und füge den Text im Chat ein.';}
   catch(e){ta.hidden=false;ta.value=text;ta.focus();ta.select();note.hidden=false;note.textContent='Der Text ist markiert. Kopiere ihn (Strg+C, am iPad: gedrückt halten → Kopieren).';}
 }
+const KI_OPT=["a12", "a13"];
 function mountOpen(){
   $$('[data-open]').forEach(host=>{
     const id=host.dataset.open, t=OPEN[id];
@@ -843,9 +840,9 @@ function mountOpen(){
     const note=el('p',{class:'hint',hidden:'','aria-live':'polite'});
     const cta=el('textarea',{class:'code',readonly:'',hidden:'','aria-label':'Text für fobizz'});
     const fbTa=el('textarea',{id:'fbin-'+id,class:'fbin',placeholder:'Füge hier die Rückmeldung der KI ein …'}); fbTa.value=S.fb[id]||'';
-    const det=el('details',{class:'fbox'+(S.fb[id]?' has':'')},el('summary',{},'KI-Feedback mit fobizz'),el('div',{class:'fbox-in'},el('div',{class:'row'},cp,go),note,cta,el('label',{for:'fbin-'+id,class:'fbl'},'Feedback von fobizz hier einfügen (optional – kommt mit ins PDF)'),fbTa));
+    const det=el('details',{class:'fbox'+(S.fb[id]?' has':'')},el('summary',{},'Optional mit KI · ab AI Badge Level 1'),el('div',{class:'fbox-in'},el('p',{class:'hint'},'Mit deinen KI-Kompetenzen aus Level 1 kannst du hier dein Lernen verbessern: Hol dir Feedback zu deiner eigenen Antwort, nicht die Antwort selbst.'),el('div',{class:'row'},cp,go),note,cta,el('label',{for:'fbin-'+id,class:'fbl'},'Feedback von fobizz hier einfügen (optional – kommt mit ins PDF)'),fbTa));
     if(S.fb[id]) det.open=true;
-    host.replaceWith(el('div',{class:'open'},ta,el('div',{class:'open-foot'},qc),det));
+    host.replaceWith(el('div',{class:'open'},ta,el('div',{class:'open-foot'},qc),...(KI_OPT.includes(id)?[det]:[])));
     const upd=()=>paintQC(qc,quickChecks(t,ta.value));
     ta.addEventListener('input',()=>{S.ans[id]=ta.value;save();upd();});
     fbTa.addEventListener('input',()=>{S.fb[id]=fbTa.value;det.classList.toggle('has',!!fbTa.value.trim());save();});
@@ -970,7 +967,7 @@ function renderOverview(){
    ['sichern','Station 3',[`Reihenfolge: ${a('a6')}`,`Berufe: ${a('a7')}`,`Antworten: ${o(['a8'])}`]],
    ['existenz','Station 4',[`Rechnung: ${a('a9')}`,`Formen: ${a('a10')}`,`Vor-/Nachteile: ${a('a11')}`,`Antworten: ${o(['a12'])}`]],
    ['luxus','Station 5',[`Antworten: ${o(['a13'])}`,`Kurz-Check: ${a('a14')}`]],
-   ['sichern','fobizz',[`${Object.keys(OPEN).filter(id=>(S.fb[id]||'').trim()).length} von ${Object.keys(OPEN).length} Antworten mit KI-Feedback`]]
+   ['sichern','Optional mit KI',[`${KI_OPT.filter(id=>(S.fb[id]||'').trim()).length} von ${KI_OPT.length} freiwilligen KI-Feedbacks`]]
   ].forEach(([c,t,ls])=>box.append(el('div',{class:'ov c-'+c},el('b',{},t),...ls.map(l=>el('span',{},l)))));
 }
 
@@ -1004,6 +1001,7 @@ function reportText(){
   const name=$('#abgName').value.trim();
   const out=[TITLE.toUpperCase()+' – MEINE ERGEBNISSE','Wirtschaft · Klasse 8 · Arbeit und Arbeitsteilung',`Name: ${name||'–'} · Stand: ${nowDE()} · Fortschritt: ${$('#progTxt').textContent}`,''];
   buildReport().forEach(sec=>{out.push('','== '+sec.title.toUpperCase()+' ==');sec.items.forEach(it=>{if(it.t==='q'){out.push('',it.q,it.a||'(keine Antwort)');if(it.ki)out.push(it.ki);}else{out.push('',it.label);it.lines.forEach(l=>out.push('  '+l));}});});
+  if(window.LP)out.push(...LP.textLines());
   return out.join('\n');
 }
 const CP1252='€‚ƒ„…†‡ˆ‰Š‹ŒŽ‘’“”•–—˜™š›œžŸ';

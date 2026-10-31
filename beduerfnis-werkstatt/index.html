@@ -300,7 +300,7 @@ select{appearance:auto;min-height:46px}
       <div class="meter-row"><span>Dein Fortschritt</span><span id="progTxt">0 %</span></div>
       <div class="bar"><i id="progBar"></i></div>
     </div>
-    <span class="ki-pill" id="kiPill"><svg class="i" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg><span id="kiPillTxt">KI-Feedback wird geprüft …</span></span>
+    <span class="ki-pill" id="kiPill"><svg class="i" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg><span id="kiPillTxt">Automatische Checks · KI freiwillig ab AI Badge Level 1</span></span>
   </header>
 
   <nav class="stations" id="nav" aria-label="Stationen"></nav>
@@ -312,6 +312,10 @@ select{appearance:auto;min-height:46px}
       <div class="st-head">
         <div class="st-icon"><svg class="i" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></div>
         <div><p class="eyebrow">Station 1 · Entdecken</p><h2 id="h-s1">Ordnet eure Bedürfnisse!</h2><p class="goal">Du übst: Bedürfnisse selbstständig ordnen</p></div>
+      </div>
+      <div class="info lp-kifrei">
+        <h3>KI ist hier freiwillig</h3>
+        <p>Du kannst die ganze Werkstatt ohne KI bearbeiten. Bei einzelnen Aufgaben steht <b>„Optional mit KI · ab AI Badge Level 1“</b>. Hast du Level 1 des AI Badge geschafft und deinen fobizz-Zugang, darfst du dort KI nutzen, um dein Lernen zu verbessern: Lass dir Feedback zu deiner eigenen Antwort geben. Die Antwort schreibst du selbst.</p>
       </div>
 
       <article class="task">
@@ -568,7 +572,7 @@ select{appearance:auto;min-height:46px}
   </div>
 </footer>
 
-<script src="../assets/jspdf.umd.min.js"></script>
+<script src="../assets/jspdf.umd.min.js"></script><link rel="stylesheet" href="../assets/lp-support.css"><script>window.LP_CFG={"keys": ["beduerfnis-werkstatt-v1"], "bottom": 78, "anchors": [{"sel": "section[data-st=\"0\"] .lp-kifrei", "mode": "after"}, {"sel": "#pdfNote", "mode": "after"}], "slug": "beduerfnis-werkstatt"};</script><script src="../assets/lp-support.js"></script>
 <script>
 (function(){
 "use strict";
@@ -669,7 +673,7 @@ let sample=null, dl=null, kiState='pending';
 function setKiPill(){
   const pill=$('#kiPill'), t=$('#kiPillTxt');
   pill.classList.toggle('on',kiState==='on');
-  t.textContent = kiState==='on' ? 'KI-Feedback ist aktiv' : kiState==='pending' ? 'KI-Feedback wird geprüft …' : kiState==='denied' ? 'KI-Feedback nicht freigegeben – Schnell-Check und Abgabe funktionieren weiter' : 'Automatische Checks aktiv · KI-Feedback über deine Lehrkraft (Abgabe in Station 5)';
+  t.textContent = kiState==='on' ? 'KI-Feedback ist aktiv' : kiState==='pending' ? 'KI-Feedback wird geprüft …' : kiState==='denied' ? 'KI-Feedback nicht freigegeben – Schnell-Check und Abgabe funktionieren weiter' : 'Automatische Checks · KI freiwillig ab AI Badge Level 1';
   $$('.btn.ki').forEach(b=>b.hidden = kiState!=='on');
 }
 (async()=>{
@@ -723,7 +727,7 @@ Antworte nur mit JSON: {"stufe":"...","feedback":"...","tipp":"..."}`;
 /* ---------- Helfer ---------- */
 function el(tag,attrs,...kids){const n=document.createElement(tag);for(const k in attrs||{}){if(k==='class')n.className=attrs[k];else if(k==='html')n.innerHTML=attrs[k];else n.setAttribute(k,attrs[k]);}for(const c of kids){if(c==null)continue;n.append(c.nodeType?c:document.createTextNode(c));}return n;}
 function norm(s){return String(s||'').toLowerCase().replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/ß/g,'ss').replace(/[^a-z]/g,'');}
-function showFb(fbEl, cls, head, body){fbEl.hidden=false;fbEl.className='fb '+cls;fbEl.replaceChildren(el('p',{class:'lvl',html:(cls==='ok'?CHECK:'')}), ...(body?[el('p',{},body)]:[]));fbEl.firstChild.append(head);}
+function showFb(fbEl, cls, head, body){if(window.LP)LP.fb(fbEl,cls);fbEl.hidden=false;fbEl.className='fb '+cls;fbEl.replaceChildren(el('p',{class:'lvl',html:(cls==='ok'?CHECK:'')}), ...(body?[el('p',{},body)]:[]));fbEl.firstChild.append(head);}
 function renderKiFb(fbEl, k, currentAnswer){
   fbEl.hidden=false; fbEl.className='fb '+k.stufe;
   const kids=[el('p',{class:'lvl',html:SPARK},LVL[k.stufe]), el('p',{},k.feedback)];
@@ -751,6 +755,8 @@ function quickChecks(t, text){
 function paintQC(box,list){box.replaceChildren(el('b',{},'Schnell-Check:'),...list.map(x=>el('span',{class:x.on?'on':''},x.l)));}
 
 /* ---------- Offene Aufgaben ---------- */
+const KI_OPT=['a4b','a8'];
+function kiOptBox(id){const t=OPEN[id];const note=el('p',{class:'hint',hidden:''});const cp=el('button',{class:'btn soft',type:'button'},'Für fobizz kopieren');const go=el('a',{class:'btn soft',href:'https://go.fobizz.com',target:'_blank',rel:'noopener'},'fobizz öffnen');cp.onclick=async()=>{const a=(S.ans[id]||'').trim();note.hidden=false;if(a.length<10){note.textContent='Schreib zuerst deine Antwort – mindestens einen ganzen Satz.';return;}const text=`Bedürfnis-Werkstatt · ${t.title}\nAufgabe: ${t.q}\nMeine Antwort:\n${a}\n\nGib mir Feedback zu meiner Antwort: Was ist gut, was fehlt noch? Schreib meine Antwort nicht neu.`;try{await navigator.clipboard.writeText(text);note.textContent='Kopiert! Öffne fobizz und füge den Text im Chat ein.';}catch(e){note.textContent='Kopieren hat nicht geklappt. Markiere deine Antwort und kopiere sie selbst.';}};return el('details',{class:'lp-kiopt'},el('summary',{},'Optional mit KI · ab AI Badge Level 1'),el('div',{},el('p',{class:'hint'},'Mit deinen KI-Kompetenzen aus Level 1 kannst du hier dein Lernen verbessern: Hol dir Feedback zu deiner eigenen Antwort, nicht die Antwort selbst.'),el('div',{class:'row'},cp,go),note));}
 function mountOpen(){
   $$('[data-open]').forEach(host=>{
     const id=host.dataset.open, t=OPEN[id];
@@ -759,7 +765,7 @@ function mountOpen(){
     const qc=el('div',{class:'qc',id:'qc-'+id});
     const kb=el('button',{class:'btn ki',type:'button',id:'kb-'+id,html:SPARK+'KI-Feedback'});
     const fb=el('div',{class:'fb',id:'fb-'+id,hidden:'','aria-live':'polite'});
-    host.replaceWith(el('div',{class:'open'},ta,el('div',{class:'open-foot'},qc,kb),fb));
+    host.replaceWith(el('div',{class:'open'},ta,el('div',{class:'open-foot'},qc,kb),fb,...(KI_OPT.includes(id)?[kiOptBox(id)]:[])));
     const upd=()=>{paintQC(qc,quickChecks(t,ta.value)); if(S.ki[id]) renderKiFb(fb,S.ki[id],ta.value);};
     ta.addEventListener('input',()=>{S.ans[id]=ta.value;save();upd();});
     kb.addEventListener('click',()=>{
@@ -1036,6 +1042,7 @@ function reportText(){
     if(it.t==='q'){out.push('',it.q,it.a||'(keine Antwort)'); if(it.ki) out.push(it.ki);}
     else {out.push('',it.label); it.lines.forEach(l=>out.push('  '+l)); if(it.ki) out.push(it.ki);}
   });});
+  if(window.LP)out.push(...LP.textLines());
   return out.join('\n');
 }
 const CP1252='€‚ƒ„…†‡ˆ‰Š‹ŒŽ‘’“”•–—˜™š›œžŸ';
