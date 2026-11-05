@@ -6,6 +6,8 @@ Interaktive Lernplattformen und Fortbildungsangebote für den AWT-Unterricht (Ar
 - AWT (alle Plattformen und Fortbildungen): https://deintechniklehrer.github.io/Lernplattformen/
 - nur Technik: https://deintechniklehrer.github.io/Lernplattformen/technik/
 - Unterrichtsboard für Beamer und Apple TV: https://deintechniklehrer.github.io/Unterrichtsboard/ (Kurzlink t1p.de/uboard)
+- Tech-Board für den Technikraum: https://deintechniklehrer.github.io/Unterrichtsboard/tech-board/
+- Klassenrat-Board mit Protokoll-Export: https://deintechniklehrer.github.io/Unterrichtsboard/klassenrat/
 
 **Für Schülerinnen und Schüler** (ohne Lehrkräfte-Angebote):
 - AWT (Wirtschaft, Technik, KI): https://deintechniklehrer.github.io/Lernplattformen/schueler/
