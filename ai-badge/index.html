@@ -677,6 +677,7 @@ table.tg{border-collapse:collapse;width:100%;font-size:14px}
 .lk-fold[open] .lk-fold-h::after{transform:rotate(-135deg);margin-top:4px}
 .lk-fold-in{display:grid;gap:12px;padding:0 12px 12px}
 .lk-fold-in .lk-intro{border:0;padding:8px 10px}
+.alt-ki-h{align-self:center;font-size:13px}
 .btn.alt-ki{font-size:14px;min-height:38px;padding:6px 12px;background:transparent;color:var(--muted);border:1.5px solid var(--line);font-weight:700}
 .btn.alt-ki:hover{color:var(--ink);border-color:var(--muted)}
 /* Reihenfolge-Aufgabe */
@@ -1163,12 +1164,12 @@ table.tg{border-collapse:collapse;width:100%;font-size:14px}
         <h3>Ab jetzt mit KI-Feedback: So geht es mit fobizz</h3>
         <div class="howto">
           <div><b>1 · Antwort schreiben</b>Schreib deine Antwort in das Feld der Aufgabe.</div>
-          <div><b>2 · Kopieren und öffnen</b>Tippe auf „Für fobizz kopieren“ und „fobizz öffnen“. Melde dich mit dem Zugangscode an, den du von deiner Lehrkraft bekommst. Nutzt deine Schule <b>AIS.chat</b> über moin.schule, nimm den kleinen Button daneben.</div>
+          <div><b>2 · Kopieren und öffnen</b>Tippe auf „Für fobizz kopieren“ und „fobizz öffnen“. Melde dich mit dem Zugangscode an, den du von deiner Lehrkraft bekommst. Nutzt deine Schule AIS.chat, meldest du dich nicht selbst an: Du bekommst von deiner Lehrkraft einen QR-Code zu einem Lernszenario. Öffne es und füge den Text dort ein.</div>
           <div><b>3 · Einfügen</b>Füge den Text im Chat ein. Kopiere die Rückmeldung der KI und füge sie hier ins Feedback-Feld ein.</div>
         </div>
         <div class="callout"><svg class="i" viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/></svg><p><b>Pflicht in Level 2:</b> Eine Schreibaufgabe ist erst erledigt, wenn du das Feedback von fobizz eingefügt hast. Nutze es, um deine Antwort zu verbessern.</p></div>
         <p class="hint"><b>Selbst testen:</b> Frag die KI bei fobizz etwas, das sie nicht wissen kann. Erfindet sie eine Antwort oder sagt sie, dass sie es nicht weiß? Viele KI-Programme wurden extra trainiert, Unwissen zuzugeben. Zuverlässig klappt das nicht immer.</p>
-        <div class="tryit"><code id="tryTxt">Wie heißt der Hund meines Opas?</code><button class="btn soft" id="tryCp" type="button">Kopieren</button><a class="btn soft" href="https://go.fobizz.com" target="_blank" rel="noopener">fobizz öffnen</a><a class="btn alt-ki" href="https://ais-chat.schule" target="_blank" rel="noopener">oder AIS.chat</a></div>
+        <div class="tryit"><code id="tryTxt">Wie heißt der Hund meines Opas?</code><button class="btn soft" id="tryCp" type="button">Kopieren</button><a class="btn soft" href="https://go.fobizz.com" target="_blank" rel="noopener">fobizz öffnen</a></div>
       </div>
       <div class="info">
         <h3>Echt oder gemacht? Deepfakes</h3>
@@ -1253,6 +1254,8 @@ table.tg{border-collapse:collapse;width:100%;font-size:14px}
           <div><b>✏️ Überarbeiten</b><span>Wenn vieles passt, aber einzelne Fehler drin sind oder es nicht ganz zu deiner Aufgabe passt.</span></div>
           <div><b>🗑️ Verwerfen</b><span>Wenn die Antwort größtenteils falsch ist oder am Thema vorbeigeht.</span></div>
         </div>
+        <div class="callout"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg><p><b>So ist es in Deutschland:</b> 74 % der 12- bis 19-Jährigen nutzen KI für Hausaufgaben oder zum Lernen. 57 % halten das, was KI ihnen liefert, für vertrauenswürdig. Umso wichtiger ist es, zu prüfen.</p></div>
+        <p class="src">Quelle: Medienpädagogischer Forschungsverbund Südwest (mpfs), JIM-Studie 2025, 1.200 Befragte, Juni und Juli 2025</p>
       </div>
       <article class="task">
         <header><span class="num">4</span><h3>KI-Antwort prüfen</h3></header>
@@ -1563,7 +1566,14 @@ table.tg{border-collapse:collapse;width:100%;font-size:14px}
         </div>
         <div class="callout"><svg class="i" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/></svg><p><b>Ein Satz genügt.</b> Im Mai 2025 antwortete der Chatbot Grok der Firma xAI plötzlich auf ganz andere Fragen mit Aussagen zur Politik in Südafrika. Laut xAI hatte jemand ohne Erlaubnis die versteckte Anweisung des Chatbots geändert. Eine kleine Änderung an einer Stelle kann also verändern, was sehr viele Menschen lesen. In Level 2 hast du gesehen, dass auch die Gesetze eines Landes ein Modell prägen.</p></div>
         <p><b>Was dagegen hilft:</b> Gesetze wie die EU-KI-Verordnung, Regeln gegen Monopole, offene KI-Modelle, die alle nutzen und prüfen können, Anbieter aus verschiedenen Ländern, auch aus Europa, und Menschen, die KI kritisch nutzen.</p>
-        <p class="src">Quellen: Prognosen der Konzerne zu den Quartalszahlen im Juli 2026; Bundesregierung, Bundeshaushalt 2026 (524,5 Mrd. €); OpenAI, Oktober 2025; Associated Press, 16.05.2025 (Stellungnahme von xAI zu Grok)</p>
+        <h3>Offen oder geschlossen?</h3>
+        <div class="ways">
+          <div><b>🔒 Geschlossene Modelle</b><span>Nur die Firma betreibt das Modell und kann hineinschauen. Beispiele: GPT von OpenAI, Gemini von Google, Claude von Anthropic.</span></div>
+          <div><b>🔓 Offene Modelle</b><span>Die Firma veröffentlicht das fertige Modell. Andere können es herunterladen, untersuchen und auf eigenen Rechnern betreiben, zum Beispiel in der EU. Beispiele: Llama von Meta, Modelle von Mistral aus Frankreich.</span></div>
+          <div><b>🏫 In der Schule</b><span>Im Schul-Chatbot AIS.chat der Bundesländer stehen Modelle mehrerer Firmen zur Wahl, darunter das offene Llama. Alle werden in der EU betrieben.</span></div>
+        </div>
+        <p class="hint">Offen heißt nicht automatisch unabhängig: Llama kommt von Meta, einem der großen Konzerne. Aber bei offenen Modellen können Forschende, Schulen und Staaten selbst prüfen und entscheiden.</p>
+        <p class="src">Quellen: Prognosen der Konzerne zu den Quartalszahlen im Juli 2026; Bundesregierung, Bundeshaushalt 2026 (524,5 Mrd. €); OpenAI, Oktober 2025; Associated Press, 16.05.2025 (Stellungnahme von xAI zu Grok); FWU, Fragen und Antworten zu AIS.chat, abgerufen am 11.11.2026; Angaben von Meta und Mistral AI zu ihren Modellen</p>
       </div>
       <article class="task">
         <header><span class="num">1</span><h3>Geld und Macht</h3></header>
@@ -2029,7 +2039,6 @@ table.tg{border-collapse:collapse;width:100%;font-size:14px}
 <script>
 (function(){
 "use strict";
-const AIS_URL='https://ais-chat.schule';
 const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
 const CHECK='<svg class="i" viewBox="0 0 24 24"><path d="m5 12 4 4 10-10"/></svg>';
 const FOBIZZ_URL='https://go.fobizz.com';
@@ -2473,7 +2482,7 @@ function renderLB(k){const h=$('#lb-'+k);if(!h)return;const T=LB[k],st=lbGet(k),
   const parts=[el('div',{class:'kb'},...grp)];const sel=T.groups.map(g=>g.o.find(o=>o.id===st[g.k]));
   if(sel.every(Boolean)){const txt=T.prompt(...sel.map(o=>o.l));const ta=el('textarea',{class:'code lb-code',readonly:'',rows:'7','aria-label':'Dein Loop-Prompt'});ta.value=txt;
     const cp=el('button',{type:'button',class:'btn soft'},'Loop-Prompt kopieren');cp.onclick=()=>{const done=()=>{cp.textContent='Kopiert ✓';setTimeout(()=>cp.textContent='Loop-Prompt kopieren',1600);};if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(txt).then(done).catch(()=>{ta.select();});else ta.select();};
-    parts.push(el('div',{class:'kb-out'},el('h4',{},'Dein Loop-Prompt'),ta,el('div',{class:'row'},cp,el('a',{class:'btn soft',href:FOBIZZ_URL,target:'_blank',rel:'noopener'},'fobizz öffnen'),el('a',{class:'btn alt-ki',href:AIS_URL,target:'_blank',rel:'noopener'},'oder AIS.chat'))));}
+    parts.push(el('div',{class:'kb-out'},el('h4',{},'Dein Loop-Prompt'),ta,el('div',{class:'row'},cp,el('a',{class:'btn soft',href:FOBIZZ_URL,target:'_blank',rel:'noopener'},'fobizz öffnen'),el('span',{class:'hint alt-ki-h'},'AIS.chat: über den QR-Code deiner Lehrkraft'))));}
   else parts.push(el('p',{class:'hint'},'Wähle aus jedem Baustein eine Karte, dann erscheint hier dein Loop-Prompt.'));
   h.replaceChildren(...parts);}
 function doLB(k){const T=LB[k],st=lbGet(k);let sc=0;const d={},tips=[];T.groups.forEach(g=>{const o=g.o.find(x=>x.id===st[g.k]);if(o&&o.ok){sc++;d[g.k]='ok';}else{d[g.k]='bad';tips.push(o?`${g.t}: ${o.why}`:`${g.t}: Noch keine Karte gewählt.`);}});
@@ -2655,7 +2664,7 @@ function mountOpen(){
     const fbLbl=el('label',{for:'kfb-'+id,class:'fbl'},t.lv===3?'Urteil von fobizz hier einfügen (Pflicht, die ganze Rückmeldung)':'Feedback von fobizz hier einfügen (Pflicht in Level 2)');
     const fbTa=el('textarea',{id:'kfb-'+id,class:'fbin',placeholder:'Füge hier die Rückmeldung der KI ein …'}); fbTa.value=S.fb[id]||'';
     const st=el('p',{class:'fbst','aria-live':'polite'});
-    const det=el('details',{class:'fbox need'},el('summary',{},t.lv===3?'fobizz-Urteil holen (Pflicht)':'KI-Feedback mit fobizz (Pflicht)'),el('div',{class:'fbox-in'},el('div',{class:'row'},cp,go,el('a',{class:'btn alt-ki',href:AIS_URL,target:'_blank',rel:'noopener',title:'Für Schulen, die AIS.chat über moin.schule nutzen'},'oder AIS.chat (moin.schule)')),note,cta,fbLbl,fbTa,st));
+    const det=el('details',{class:'fbox need'},el('summary',{},t.lv===3?'fobizz-Urteil holen (Pflicht)':'KI-Feedback mit fobizz (Pflicht)'),el('div',{class:'fbox-in'},el('div',{class:'row'},cp,go,el('span',{class:'hint alt-ki-h'},'AIS.chat: über den QR-Code deiner Lehrkraft')),note,cta,fbLbl,fbTa,st));
     det.open=true;
     const ms=(TEACHER&&MUSTER[id])?el('details',{class:'teach muster'},el('summary',{},el('span',{class:'badge'},'Lösung'),'Musterlösung'),el('div',{class:'teach-in'},...MUSTER[id].split('\n').map(l=>el('p',{},l)))):null;
     host.replaceWith(el('div',{class:'open'},...(rub?[rub]:[]),ta,qc,det,...(ms?[ms]:[])));
