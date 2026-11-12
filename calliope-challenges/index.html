@@ -1,0 +1,1349 @@
+<!doctype html>
+<html lang="de"><head><script>/* Lernplattformen auf GitHub Pages: Speichern ohne claude.ai */
+(function(){if(window.claude)return;var T={pdf:'application/pdf',txt:'text/plain;charset=utf-8',png:'image/png',jpg:'image/jpeg',jpeg:'image/jpeg',json:'application/json',csv:'text/csv;charset=utf-8',html:'text/html;charset=utf-8',docx:'application/vnd.openxmlformats-officedocument.wordprocessingml.document',xlsx:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',ino:'text/plain;charset=utf-8'};
+var dl={save:function(o){return new Promise(function(res,rej){try{var n=(o&&o.filename)||'datei',x=(n.split('.').pop()||'').toLowerCase(),d=o.data,b=d instanceof Blob?d:new Blob([d],{type:T[x]||'application/octet-stream'});var u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=n;a.rel='noopener';document.body.appendChild(a);a.click();setTimeout(function(){a.remove();URL.revokeObjectURL(u);},4000);res();}catch(e){rej({code:'failed',message:String(e)});}});}};
+window.claude={use:function(n){return Promise.resolve(n==='downloads'?dl:null);}};})();</script><meta property="og:type" content="website"><meta property="og:title" content="Calliope-Challenges"><meta property="og:description" content="Selbstlernkonzept für den Calliope mini: elf Challenges von der Anzeigetafel bis zum Liegestützzähler. In MakeCode programmieren, auf dem Calliope testen, mit How-to-Guide, Tipps, Teillösungen, Fragen und Skill-Level. Ergebnis als PDF."><meta property="og:url" content="https://deintechniklehrer.github.io/Lernplattformen/calliope-challenges/"><meta property="og:image" content="https://deintechniklehrer.github.io/Lernplattformen/vorschau/Vorschau_Calliope-Challenges.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="description" content="Selbstlernkonzept für den Calliope mini: elf Challenges von der Anzeigetafel bis zum Liegestützzähler. In MakeCode programmieren, auf dem Calliope testen, mit How-to-Guide, Tipps, Teillösungen, Fragen und Skill-Level. Ergebnis als PDF."><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Calliope-Challenges</title>
+<link rel="stylesheet" href="../assets/fonts/fonts.css">
+<style>
+[hidden]{display:none!important}
+:root{
+  --ground:#eef0ea; --ground-dot:#d9ddd3; --surface:#ffffff; --surface-2:#f6f7f3; --line:#d5d9cf; --line-strong:#b9bfb2;
+  --ink:#1c2a2d; --muted:#56676b; --accent:#0a7570; --accent-ink:#ffffff; --accent-soft:#d6ecea;
+  --signal:#d9481f; --signal-soft:#fbe3da; --ok:#1f8a4c; --ok-soft:#dcf1e3; --warn:#b7791f; --warn-soft:#fbefd9; --bad:#c23b3b; --bad-soft:#f8dede;
+  --code-bg:#fbfbf9; --code-kw:#7a2a9a; --code-num:#16734a; --code-com:#a0591c; --code-str:#b0322c; --code-fn:#1c2a2d;
+  --b-out:#6d85e6; --b-ctl:#e7ae3c; --b-math:#6cbf53; --b-var:#c057d1; --b-in:#9a5cf5; --b-com:#9a9a9a; --b-txt:#ffffff;
+  --shadow:0 1px 2px rgba(20,40,40,.06),0 4px 16px rgba(20,40,40,.06);
+  --r:10px; --font:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif; --disp:"Bricolage Grotesque","Atkinson Hyperlegible",system-ui,sans-serif; --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  color-scheme:dark;
+  --ground:#11181a; --ground-dot:#1b2528; --surface:#182224; --surface-2:#1d292b; --line:#2a383b; --line-strong:#3a4b4f;
+  --ink:#e2ebe9; --muted:#9db0b3; --accent:#3cbdb2; --accent-ink:#06201e; --accent-soft:#16393a;
+  --signal:#ff7b54; --signal-soft:#3d2219; --ok:#4cc27d; --ok-soft:#173424; --warn:#e5a94a; --warn-soft:#3a2d15; --bad:#f07171; --bad-soft:#3d1c1c;
+  --code-bg:#141d1f; --code-kw:#d08cf0; --code-num:#6fd3a0; --code-com:#e0a064; --code-str:#ff8f86; --code-fn:#e2ebe9;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 4px 16px rgba(0,0,0,.25);
+}}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --ground:#11181a; --ground-dot:#1b2528; --surface:#182224; --surface-2:#1d292b; --line:#2a383b; --line-strong:#3a4b4f;
+  --ink:#e2ebe9; --muted:#9db0b3; --accent:#3cbdb2; --accent-ink:#06201e; --accent-soft:#16393a;
+  --signal:#ff7b54; --signal-soft:#3d2219; --ok:#4cc27d; --ok-soft:#173424; --warn:#e5a94a; --warn-soft:#3a2d15; --bad:#f07171; --bad-soft:#3d1c1c;
+  --code-bg:#141d1f; --code-kw:#d08cf0; --code-num:#6fd3a0; --code-com:#e0a064; --code-str:#ff8f86; --code-fn:#e2ebe9;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 4px 16px rgba(0,0,0,.25);
+}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--ground);background-image:radial-gradient(var(--ground-dot) 1.2px,transparent 1.3px);background-size:18px 18px;color:var(--ink);font:16px/1.55 var(--font)}
+button,input,select,textarea{font:inherit;color:inherit}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+h1,h2,h3,h4{font-family:var(--disp);line-height:1.2;text-wrap:balance;margin:0}
+p{margin:0}
+img{max-width:100%;height:auto}
+code,.mono{font-family:var(--mono);font-size:.9em}
+.hidden{display:none!important}
+body[data-mode="block"] .m-code{display:none!important}
+body[data-mode="code"] .m-block{display:none!important}
+
+/* ---------- Top bar ---------- */
+.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;display:flex;align-items:center;gap:12px;padding:10px 16px;background:var(--surface);border-bottom:1px solid var(--line)}
+.brand{display:flex;align-items:center;gap:10px;min-width:0}
+.brand-mark{width:34px;height:34px;flex:none}
+.brand-t{font-family:var(--disp);font-weight:700;font-size:17px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brand-s{font-size:12px;color:var(--muted);white-space:nowrap}
+.topbar .spacer{flex:1}
+.navtoggle{display:none;border:1px solid var(--line);background:var(--surface-2);border-radius:8px;padding:6px 10px;cursor:pointer}
+.modeswitch{display:flex;border:1px solid var(--line-strong);border-radius:8px;overflow:hidden;background:var(--surface-2)}
+.modeswitch button{border:0;background:transparent;padding:6px 12px;cursor:pointer;display:flex;gap:6px;align-items:center;font-size:14px;font-weight:700;color:var(--muted)}
+.modeswitch button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.modeswitch .sw{width:12px;height:12px;border-radius:3px;display:inline-block}
+.savestate{font-size:12px;color:var(--muted);white-space:nowrap}
+.savestate b{color:var(--ok)}
+.iconbtn{border:1px solid var(--line);background:var(--surface-2);border-radius:8px;padding:6px 10px;cursor:pointer;font-size:14px}
+
+/* ---------- Layout ---------- */
+.shell{display:grid;grid-template-columns:290px minmax(0,1fr);min-height:calc(100% - 57px)}
+.side{border-right:1px solid var(--line);background:var(--surface);padding:14px 10px 40px;position:sticky;top:57px;height:calc(100vh - 57px);overflow:auto}
+.main{padding-block:24px 80px;padding-inline:16px;min-width:0}
+.page{max-width:880px;margin:0 auto;display:flex;flex-direction:column;gap:22px}
+@media (max-width:900px){
+  .shell{grid-template-columns:1fr}
+  .side{position:fixed;left:0;top:57px;bottom:0;width:min(320px,88vw);z-index:40;transform:translateX(-102%);transition:transform .2s;box-shadow:var(--shadow);height:auto}
+  body.nav-open .side{transform:none}
+  .navtoggle{display:inline-block}
+  .brand-s,.savestate{display:none}
+}
+@media (max-width:520px){.brand-t{font-size:14px;max-width:38vw}.topbar{gap:8px;padding:8px 12px}.modeswitch button{padding:6px 8px;font-size:13px}.modeswitch .lbl-long{display:none}}
+@media (max-width:380px){.brand-t{display:none}}
+
+/* ---------- Sidebar nav ---------- */
+.nav-prof{display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding:8px 10px 14px;border-bottom:1px solid var(--line);margin-bottom:8px}
+.nav-prof .av{width:36px;height:36px;border-radius:50%;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center;font-weight:700;font-family:var(--disp)}
+.nav-prof .n{font-weight:700;font-size:14px}
+.nav-prof .k{font-size:12px;color:var(--muted)}
+.nav-total{margin:6px 10px 10px;font-size:12px;color:var(--muted)}
+.bar{height:6px;border-radius:4px;background:var(--line);overflow:hidden}
+.bar>i{display:block;height:100%;background:var(--accent);border-radius:4px;transition:width .3s}
+.nav-mod{margin:14px 10px 4px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+.nav-item{display:flex;align-items:center;gap:10px;width:100%;text-align:left;border:0;background:transparent;padding:7px 10px;border-radius:8px;cursor:pointer;font-size:14px;line-height:1.3}
+.nav-item:hover{background:var(--surface-2)}
+.nav-item[aria-current="page"]{background:var(--accent-soft);font-weight:700}
+.ring{--p:0;width:20px;height:20px;border-radius:50%;flex:none;background:conic-gradient(var(--accent) calc(var(--p)*1%),var(--line) 0);display:grid;place-items:center}
+.ring::after{content:"";width:12px;height:12px;border-radius:50%;background:var(--surface)}
+.ring.done{background:var(--ok)}
+.ring.done::after{content:"✓";width:auto;height:auto;background:none;color:#fff;font-size:12px;font-weight:700}
+.nav-item .tag{margin-left:auto;font-size:10px;color:var(--muted);border:1px solid var(--line);border-radius:4px;padding:0 4px}
+
+/* ---------- Cards / sections ---------- */
+.hero{display:flex;flex-direction:column;gap:10px}
+.eyebrow{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);font-weight:700}
+.hero h1{font-size:clamp(26px,4vw,36px)}
+.goal{display:flex;gap:10px;align-items:flex-start;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:12px 14px}
+.goal .gi{font-weight:700;color:var(--accent);white-space:nowrap}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:18px;display:flex;flex-direction:column;gap:12px;box-shadow:var(--shadow)}
+.card h2{font-size:21px}
+.card h3{font-size:17px}
+.sec-h{display:flex;align-items:center;gap:6px 10px;flex-wrap:wrap}
+.sec-h h2{min-width:0}
+.sec-h .kind{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:20px;background:var(--surface-2);border:1px solid var(--line);color:var(--muted)}
+.kind.task{background:var(--signal-soft);color:var(--signal);border-color:transparent}
+.kind.ex{background:var(--accent-soft);color:var(--accent);border-color:transparent}
+.kind.sub{background:var(--warn-soft);color:var(--warn);border-color:transparent}
+.prose{display:flex;flex-direction:column;gap:10px;max-width:68ch;min-width:0}
+.prose code,li code,td code{overflow-wrap:anywhere}
+h1,h2,h3{overflow-wrap:break-word;hyphens:auto;-webkit-hyphens:auto}
+.prose ul,.prose ol{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:4px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:start}
+.two.wide-l{grid-template-columns:3fr 2fr}
+@media (max-width:700px){.two,.two.wide-l{grid-template-columns:1fr}}
+.fig{margin:0;display:flex;flex-direction:column;gap:6px}
+.fig img{border-radius:8px;border:1px solid var(--line);background:#fff}
+.fig figcaption{font-size:13px;color:var(--muted)}
+.fig.small img{max-width:260px}
+.note{border-left:4px solid var(--accent);background:var(--accent-soft);padding:10px 12px;border-radius:0 8px 8px 0;font-size:15px}
+.note.warn{border-color:var(--warn);background:var(--warn-soft)}
+.note.bad{border-color:var(--bad);background:var(--bad-soft)}
+.note.tip{border-color:var(--signal);background:var(--signal-soft)}
+.note.okn{border-color:var(--ok);background:var(--ok-soft)}
+.kbd{font-family:var(--mono);font-size:.85em;border:1px solid var(--line-strong);border-bottom-width:2px;border-radius:4px;padding:0 5px;background:var(--surface-2)}
+.pill{display:inline-block;font-size:12px;padding:1px 8px;border-radius:20px;background:var(--surface-2);border:1px solid var(--line)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.btn{border:1px solid var(--line-strong);background:var(--surface);border-radius:8px;padding:8px 14px;cursor:pointer;font-weight:700;font-size:15px;display:inline-flex;gap:8px;align-items:center}
+.btn:hover{background:var(--surface-2)}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn.primary:hover{filter:brightness(1.05)}
+.btn.small{padding:4px 10px;font-size:13px}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.linkcard{display:flex;gap:12px;align-items:center;border:1px solid var(--line);border-radius:10px;padding:8px;text-decoration:none;color:var(--ink);background:var(--surface-2);max-width:460px}
+.linkcard img{width:120px;border-radius:6px;flex:none}
+.linkcard b{display:block}
+.linkcard span{font-size:13px;color:var(--muted)}
+.pager{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+
+/* tasks */
+.tasks{display:flex;flex-direction:column;gap:8px;margin:0;padding:0;list-style:none}
+.task{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface-2)}
+.task input{width:20px;height:20px;margin-top:2px;accent-color:var(--ok);flex:none}
+.task.done{background:var(--ok-soft);border-color:transparent}
+.task label{cursor:pointer}
+
+/* ---------- Code view ---------- */
+.prog{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--code-bg)}
+.prog-h{display:flex;align-items:center;gap:8px;padding:6px 8px;background:var(--surface-2);border-bottom:1px solid var(--line);font-size:13px;flex-wrap:wrap}
+.prog-h .ttl{font-weight:700;margin-right:auto}
+.prog-tabs{display:flex;border:1px solid var(--line-strong);border-radius:6px;overflow:hidden}
+.prog-tabs button{border:0;background:var(--surface);padding:3px 10px;cursor:pointer;font-size:12px;font-weight:700;color:var(--muted)}
+.prog-tabs button[aria-pressed="true"]{background:var(--ink);color:var(--surface)}
+.prog-b{overflow:auto;max-height:560px}
+.codeview{margin:0;padding:10px 0;font:13.5px/1.6 var(--mono);color:var(--code-fn);counter-reset:ln;min-width:max-content}
+.codeview .ln{display:block;padding:0 14px 0 0;white-space:pre}
+.codeview .ln::before{counter-increment:ln;content:counter(ln);display:inline-block;width:34px;text-align:right;margin-right:14px;color:var(--muted);opacity:.6}
+.codeview .ln.hl{background:rgba(231,174,60,.22)}
+.tk-kw{color:var(--code-kw)} .tk-num{color:var(--code-num)} .tk-com{color:var(--code-com)} .tk-str{color:var(--code-str)} .tk-pp{color:var(--muted)}
+.blockview{padding:14px;min-width:max-content;background:var(--code-bg);background-image:radial-gradient(var(--ground-dot) 1px,transparent 1.2px);background-size:16px 16px}
+.prog-foot{padding:6px 10px;font-size:12px;color:var(--muted);border-top:1px solid var(--line);background:var(--surface-2)}
+
+/* ---------- Blocks (Tinkercad look) ---------- */
+.bk-stack{display:flex;flex-direction:column;align-items:flex-start}
+.bk{--c:var(--b-out);position:relative;display:inline-flex;align-items:center;flex-wrap:nowrap;gap:5px;background:var(--c);color:var(--b-txt);font:700 12.5px/1 var(--font);padding:7px 9px 7px 10px;border-radius:5px;margin-top:-1px;border:1px solid rgba(0,0,0,.14);min-height:34px;white-space:nowrap}
+.bk.notch::before{content:"";position:absolute;left:14px;top:-1px;width:22px;height:5px;background:var(--code-bg);clip-path:polygon(0 0,100% 0,78% 100%,22% 100%);opacity:.85}
+.bk.hl,.bk-c.hl>.bk-head{outline:3px solid var(--ink);outline-offset:1px}
+.bk.out{--c:var(--b-out)} .bk.ctl{--c:var(--b-ctl)} .bk.var{--c:var(--b-var)} .bk.com{--c:var(--b-com)} .bk.inp{--c:var(--b-in)} .bk.math{--c:var(--b-math)}
+.bk-c{--c:var(--b-ctl);display:flex;flex-direction:column;align-items:flex-start;margin-top:-1px}
+.bk-c>.bk-head,.bk-c>.bk-mid,.bk-c>.bk-foot{background:var(--c);color:#fff;font:700 12.5px/1 var(--font);display:inline-flex;align-items:center;gap:5px;padding:7px 10px;border:1px solid rgba(0,0,0,.14);white-space:nowrap}
+.bk-c>.bk-head{border-radius:5px 5px 5px 0;min-height:34px;min-width:120px}
+.bk-c.hat>.bk-head{border-radius:18px 18px 5px 0;padding-top:12px;min-width:110px}
+.bk-c>.bk-mid{border-radius:0 5px 5px 0;min-width:70px;min-height:24px}
+.bk-c>.bk-foot{border-radius:0 5px 5px 5px;min-width:130px;height:20px;justify-content:flex-end;padding:0 8px;font-size:12px}
+.bk-c>.bk-body{border-left:16px solid var(--c);padding:3px 0 3px 0;min-height:20px;display:flex;flex-direction:column;align-items:flex-start}
+.bk-c>.bk-body:empty{min-height:22px}
+.bk .dd,.bk-c .dd{background:rgba(0,0,0,.12);border:1px solid rgba(0,0,0,.18);border-radius:4px;padding:4px 6px;font-weight:700}
+.bk .dd::after,.bk-c .dd::after{content:" ▾";font-size:10px}
+.bk .num,.bk-c .num,.bk .txt{background:#fff;color:#333;border-radius:20px;padding:4px 9px;font-weight:600;min-width:22px;text-align:center}
+.bk .txt{border-radius:12px}
+.bk input.num,.bk-c input.num{width:auto;border:0;font:600 12.5px/1 var(--font);outline:none;padding:4px 8px;field-sizing:content;min-width:28px;max-width:70px}
+.bk .rep{display:inline-flex;align-items:center;gap:4px;border-radius:20px;padding:4px 8px;border:1px solid rgba(0,0,0,.15)}
+.bk .rep.var,.bk-c .rep.var{background:var(--b-var)}
+.bk .rep.inp,.bk-c .rep.inp{background:var(--b-in)}
+.bk .rep.math,.bk-c .rep.math{background:var(--b-math)}
+.bk-c .rep{display:inline-flex;align-items:center;gap:4px;border-radius:20px;padding:4px 8px;border:1px solid rgba(0,0,0,.15)}
+.hex{display:inline-flex;align-items:center;gap:4px;background:var(--b-math);padding:4px 12px;clip-path:polygon(9px 0,calc(100% - 9px) 0,100% 50%,calc(100% - 9px) 100%,9px 100%,0 50%)}
+.colorsw{width:22px;height:18px;border-radius:9px;border:2px solid #fff;display:inline-block}
+.bk.com .txt{background:#fff;color:#555;font-weight:400;max-width:360px;overflow:hidden;text-overflow:ellipsis}
+.bk-vars{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;align-items:center;font-size:12px;color:var(--muted)}
+.bk-vars .rep{background:var(--b-var);color:#fff;border-radius:20px;padding:3px 9px;font-weight:700;font-size:12px}
+.bk-note{font-size:12px;color:var(--muted);margin-top:10px;max-width:420px;white-space:normal}
+
+/* ---------- Simulator ---------- */
+.sim{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--surface)}
+.sim-h{display:flex;gap:8px;align-items:center;padding:8px 10px;background:var(--surface-2);border-bottom:1px solid var(--line);flex-wrap:wrap}
+.sim-h .ttl{font-weight:700;font-family:var(--disp);margin-right:auto}
+.sim-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:0}
+@media (max-width:760px){.sim-grid{grid-template-columns:1fr}}
+.sim-edit{border-right:1px solid var(--line);min-width:0}
+@media (max-width:760px){.sim-edit{border-right:0;border-bottom:1px solid var(--line)}}
+.sim-edit textarea{width:100%;min-height:260px;border:0;resize:vertical;background:var(--code-bg);font:13.5px/1.6 var(--mono);padding:10px 12px;tab-size:2;outline:none;white-space:pre;overflow:auto}
+.sim-edit .blockview{max-height:420px;overflow:auto}
+.sim-out{display:flex;flex-direction:column;gap:10px;padding:12px;min-width:0}
+.board{display:flex;flex-direction:column;gap:10px;align-items:stretch}
+.pinrow{display:grid;grid-template-columns:repeat(14,1fr);gap:3px;background:#2c5f7c;padding:6px 6px 4px;border-radius:6px}
+.pin{display:flex;flex-direction:column;align-items:center;gap:2px;font:700 9px/1 var(--mono);color:#dfe9ef}
+.pin i{width:100%;aspect-ratio:1;max-width:16px;background:#1a1a1a;border-radius:2px;box-shadow:inset 0 0 0 2px #444;transition:background .06s}
+.pin.on i{background:#ffd34d;box-shadow:0 0 6px #ffd34d}
+.pin.pwm span::before{content:"~"}
+.parts{display:flex;gap:14px;flex-wrap:wrap;align-items:flex-end}
+.part{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:12px;color:var(--muted);min-width:56px}
+.ledbulb{--c:#e53935;--l:0;width:30px;height:38px;border-radius:15px 15px 4px 4px;background:color-mix(in srgb,var(--c) calc(25% + var(--l)*75%),#555);box-shadow:0 0 calc(var(--l)*24px) calc(var(--l)*6px) color-mix(in srgb,var(--c) 80%,transparent);border:1px solid rgba(0,0,0,.3);transition:background .05s,box-shadow .05s}
+.rgbbulb{width:34px;height:40px;border-radius:17px 17px 4px 4px;border:1px solid rgba(0,0,0,.3)}
+.servo-dial{width:64px;height:40px;position:relative;border-radius:64px 64px 0 0;background:var(--surface-2);border:1px solid var(--line-strong);overflow:hidden}
+.servo-dial i{position:absolute;left:50%;bottom:0;width:3px;height:34px;background:var(--signal);transform-origin:bottom center;transition:transform .3s}
+.neo{display:flex;gap:4px;background:#222;padding:6px;border-radius:4px}
+.neo i{width:16px;height:16px;border-radius:3px;background:#333}
+.serial{background:#0f1719;color:#c9f5e4;font:12.5px/1.45 var(--mono);border-radius:8px;padding:8px 10px;height:130px;overflow:auto;white-space:pre-wrap}
+.serial:empty::before{content:"Serieller Monitor (leer)";color:#6b8a86}
+.sim-ctrl{display:flex;flex-direction:column;gap:8px;font-size:14px}
+.sim-ctrl label{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.sim-ctrl input[type=range]{flex:1;min-width:140px;accent-color:var(--accent)}
+.timeline{width:100%;height:auto;border:1px solid var(--line);border-radius:8px;background:var(--code-bg)}
+.sim-msg{font-size:13px;padding:6px 10px;border-radius:6px}
+.sim-msg.err{background:var(--bad-soft);color:var(--bad)}
+.sim-msg.info{background:var(--surface-2);color:var(--muted)}
+.clock{font:700 13px var(--mono);color:var(--muted)}
+
+/* ---------- Exercises ---------- */
+.ex{display:flex;flex-direction:column;gap:12px}
+.ex-foot{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.score{font-weight:700;font-size:14px;padding:4px 10px;border-radius:20px}
+.score.ok{background:var(--ok-soft);color:var(--ok)}
+.score.mid{background:var(--warn-soft);color:var(--warn)}
+.score.no{background:var(--bad-soft);color:var(--bad)}
+.q{display:flex;flex-direction:column;gap:8px;padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--surface-2)}
+.q .qt{font-weight:700}
+.q .qn{font-size:12px;color:var(--muted)}
+.opts{display:flex;flex-direction:column;gap:6px}
+.opt{display:flex;gap:10px;align-items:center;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--surface);cursor:pointer}
+.opt input{accent-color:var(--accent);width:18px;height:18px}
+.opt.right{border-color:var(--ok);background:var(--ok-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.opt.miss{border-style:dashed;border-color:var(--ok)}
+.tf{display:flex;gap:8px}
+.tf .opt{flex:1;justify-content:center}
+.blank{border:0;border-bottom:2px solid var(--line-strong);background:var(--surface);padding:2px 6px;min-width:110px;border-radius:4px 4px 0 0}
+.blank.right{border-color:var(--ok);background:var(--ok-soft)}
+.blank.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.fb{font-size:14px}
+.fb.ok{color:var(--ok)} .fb.no{color:var(--bad)}
+
+/* sort */
+.pool{display:flex;flex-wrap:wrap;gap:8px;min-height:48px;padding:10px;border:2px dashed var(--line-strong);border-radius:10px;background:var(--surface-2)}
+.pool:has(.chip.card),.bucket .in:has(.chip.card){display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,280px),1fr));gap:8px}
+.pool:has(.chip.card .bksvg),.bucket .in:has(.chip.card .bksvg){grid-template-columns:repeat(auto-fill,minmax(min(100%,370px),1fr))}
+.ex:has(.chip.card .bksvg) .buckets{grid-template-columns:1fr}
+.pool:empty::after{content:"Alle Karten sind verteilt.";color:var(--muted);font-size:14px}
+.chip{border:1px solid var(--line-strong);background:var(--surface);border-radius:8px;padding:6px 10px;cursor:pointer;font-size:14.5px;font-weight:700;user-select:none;display:inline-flex;align-items:center;gap:6px;max-width:100%}
+.chip[aria-pressed="true"]{outline:3px solid var(--accent);outline-offset:1px}
+.chip.right{border-color:var(--ok);background:var(--ok-soft)}
+.chip.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.chip.card{flex-direction:column;align-items:flex-start;font-weight:400;padding:8px}
+.buckets{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.bucket{border:2px solid var(--line);border-radius:10px;padding:10px;display:flex;flex-direction:column;gap:8px;min-height:110px;background:var(--surface);cursor:pointer}
+.bucket.armed{border-color:var(--accent);background:var(--accent-soft)}
+.bucket h4{font-size:15px;display:flex;justify-content:space-between}
+.bucket .in{display:flex;flex-wrap:wrap;gap:6px}
+.hint{font-size:13px;color:var(--muted)}
+
+/* hotspot */
+.hs-wrap{position:relative;display:inline-block;max-width:100%;align-self:flex-start;width:fit-content}
+.hs-wrap img{display:block;border-radius:8px;border:1px solid var(--line)}
+.hs{position:absolute;transform:translate(-50%,-50%);border:2px solid #fff;background:var(--signal);color:#fff;border-radius:20px;min-width:30px;height:30px;padding:0 8px;font-weight:700;font-size:13px;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.35);white-space:nowrap;display:flex;align-items:center;justify-content:center}
+.hs.filled{background:var(--ink);color:var(--surface);border-color:var(--surface)}
+.hs.right{background:var(--ok)} .hs.wrong{background:var(--bad)}
+.hs.armed{outline:3px solid var(--accent)}
+
+/* table exercise */
+.tbl-wrap{overflow-x:auto}
+table.ex-t{border-collapse:collapse;width:100%;font-size:14.5px}
+table.ex-t select{min-width:8.5em}
+.ex-t th,.ex-t td{border:1px solid var(--line);padding:8px;text-align:left;vertical-align:middle}
+.ex-t th{background:var(--surface-2);font-family:var(--disp)}
+.ex-t select{width:100%;padding:6px;border-radius:6px;border:1px solid var(--line-strong);background:var(--surface)}
+.ex-t select.right{border-color:var(--ok);background:var(--ok-soft)}
+.ex-t select.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.eva-h{font-size:11px;text-transform:uppercase;letter-spacing:.06em}
+
+/* text mark */
+.marktext{line-height:2.1;font-size:16px;max-width:70ch}
+.mw{border-radius:4px;padding:1px 3px;cursor:pointer;border-bottom:2px dotted var(--line-strong)}
+.mw:hover{background:var(--surface-2)}
+.mw.s{background:#cfe3ff;color:#123;border-bottom-color:#3b7ddd}
+.mw.a{background:#ffe0c7;color:#321;border-bottom-color:#e07a2a}
+.mw.right{outline:2px solid var(--ok)} .mw.wrong{outline:2px solid var(--bad)}
+.legend{display:flex;gap:12px;flex-wrap:wrap;font-size:13px}
+.legend span{display:inline-flex;gap:6px;align-items:center}
+.legend i{width:14px;height:14px;border-radius:3px;display:inline-block}
+
+/* parsons */
+.parsons{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:700px){.parsons{grid-template-columns:1fr}}
+.pz-col{border:2px dashed var(--line-strong);border-radius:10px;padding:10px;display:flex;flex-direction:column;gap:6px;min-height:160px;background:var(--surface-2)}
+.pz-col.target{border-style:solid;border-color:var(--accent);background:var(--code-bg)}
+.pz-col h4{font-size:14px}
+.pz-item{display:flex;align-items:center;gap:6px;cursor:pointer}
+.pz-item .ctr{display:flex;gap:2px;margin-left:auto}
+.pz-item .ctr button{border:1px solid var(--line);background:var(--surface);border-radius:4px;cursor:pointer;padding:0 6px;font-size:13px}
+.pz-code{font:13.5px var(--mono);background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:5px 8px}
+.pz-fixed{font:13px var(--mono);color:var(--muted);padding:2px 4px;white-space:pre}
+
+/* timeline demo */
+.tl{display:grid;grid-template-columns:auto repeat(6,1fr);gap:3px;font-size:13px;align-items:center}
+.tl .h{font-size:11px;color:var(--muted);text-align:center}
+.tl .c{height:28px;border-radius:4px;background:var(--line)}
+.tl .c.r{background:#e53935} .tl .c.g{background:#2e9d4b}
+.tl .lab{padding-right:8px;font-weight:700}
+
+/* circuit builder */
+.cb{display:flex;flex-direction:column;gap:10px}
+.cb svg{width:100%;height:auto;border-radius:10px;border:1px solid var(--line);background:#f1f1ee}
+.cb-steps{display:flex;gap:6px;flex-wrap:wrap}
+.cb-steps button{width:30px;height:30px;border-radius:50%;border:1px solid var(--line-strong);background:var(--surface);cursor:pointer;font-weight:700;font-size:13px}
+.cb-steps button[aria-current="step"],.cb-steps button.seen[aria-current="step"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.cb-steps button.seen{background:var(--accent-soft)}
+.cb-text{min-height:64px;font-size:15.5px;background:var(--surface-2);border-radius:8px;padding:10px 12px;border:1px solid var(--line)}
+.cb-text b{color:var(--accent)}
+
+/* submission */
+.sub-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:700px){.sub-grid{grid-template-columns:1fr}}
+.drop{border:2px dashed var(--line-strong);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:8px;align-items:center;justify-content:center;text-align:center;min-height:150px;background:var(--surface-2);cursor:pointer;font-size:14px;color:var(--muted)}
+.drop.over{border-color:var(--accent);background:var(--accent-soft)}
+.drop img{max-height:220px;border-radius:6px;border:1px solid var(--line)}
+.sub-grid textarea{width:100%;min-height:150px;font:13px/1.5 var(--mono);border:1px solid var(--line-strong);border-radius:8px;padding:8px;background:var(--code-bg);white-space:pre;resize:vertical}
+.checklist{display:flex;flex-direction:column;gap:6px;margin:0;padding:0;list-style:none}
+.checklist li{display:flex;gap:8px;align-items:flex-start;font-size:14.5px}
+.checklist .st{flex:none;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:700;color:#fff}
+.st.ok{background:var(--ok)} .st.no{background:var(--bad)} .st.wa{background:var(--warn)} .st.q{background:var(--line-strong)}
+.aibox{border:1px solid var(--line);border-radius:10px;padding:12px;background:var(--surface-2);font-size:15px;display:flex;flex-direction:column;gap:8px}
+.aibox .kilist{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:4px}
+.aibox textarea.prompt{width:100%;min-height:170px;font:12.5px/1.5 var(--mono);border:1px solid var(--line-strong);border-radius:8px;padding:8px;background:var(--code-bg);color:var(--ink);white-space:pre-wrap;resize:vertical;margin-top:6px}
+
+/* start page */
+.start-hero{display:grid;grid-template-columns:1.3fr 1fr;gap:20px;align-items:center}
+@media (max-width:760px){.start-hero{grid-template-columns:1fr}}
+.start-hero h1{font-size:clamp(30px,5vw,46px);letter-spacing:-.01em}
+.start-hero .lead{font-size:18px;color:var(--muted);max-width:52ch}
+.field{display:flex;flex-direction:column;gap:4px;font-size:14px;font-weight:700}
+.field input,.field select{font-weight:400;padding:8px 10px;border:1px solid var(--line-strong);border-radius:8px;background:var(--surface)}
+.modecards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:10px}
+.modecard{min-width:0;overflow:hidden;border:2px solid var(--line);border-radius:10px;padding:12px;background:var(--surface);cursor:pointer;text-align:left;display:flex;flex-direction:column;gap:8px}
+.modecard[aria-pressed="true"]{border-color:var(--accent);background:var(--accent-soft)}
+.modecard b{font-family:var(--disp);font-size:17px}
+.modgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:10px}
+.modtile{border:1px solid var(--line);border-radius:10px;padding:12px;background:var(--surface);display:flex;flex-direction:column;gap:8px;cursor:pointer;text-align:left}
+.modtile:hover{border-color:var(--accent)}
+.modtile .mt{font-family:var(--disp);font-weight:700}
+.modtile .ms{font-size:13px;color:var(--muted)}
+.codebox{font:700 22px var(--mono);letter-spacing:.12em;background:var(--surface-2);border:1px dashed var(--line-strong);border-radius:8px;padding:6px 12px;display:inline-block}
+
+/* test & export */
+.testq{display:flex;flex-direction:column;gap:8px}
+.result-big{font-family:var(--disp);font-size:40px;font-weight:800}
+.exp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.overview{width:100%;border-collapse:collapse;font-size:14px}
+.overview td,.overview th{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left}
+.overview td.num{text-align:right;font-variant-numeric:tabular-nums}
+.toast{position:fixed;bottom:calc(16px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:var(--ink);color:var(--surface);padding:10px 16px;border-radius:8px;font-size:14px;z-index:60;box-shadow:var(--shadow);max-width:90vw}
+.scrim{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:35;display:none}
+body.nav-open .scrim{display:block}
+@media (min-width:901px){body.nav-open .scrim{display:none}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ===== v2: Blöcke als SVG (Tinkercad-Look) ===== */
+.bksvg{position:relative;display:inline-block;vertical-align:top;max-width:100%;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch}
+.bksvg svg{display:block;overflow:visible}
+.bksvg .bt{fill:#fff;font:500 16px "Helvetica Neue",Helvetica,Arial,sans-serif;dominant-baseline:central}
+.bksvg .bn{fill:#575E75;font:500 16px "Helvetica Neue",Helvetica,Arial,sans-serif;dominant-baseline:central}
+.bksvg .ba{fill:none;stroke:#fff;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.bksvg .bl{fill:none;stroke:#fff;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.bksvg .blk>.bg{transition:filter .15s,stroke .15s}
+.bksvg .blk.run>.bg{stroke:#ffd500;stroke-width:4;filter:drop-shadow(0 0 6px rgba(255,213,0,.95))}
+.bksvg .blk.hl>.bg{stroke:var(--ink);stroke-width:3}
+.bnum{position:absolute;border:0;background:transparent;color:#575E75;text-align:center;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-weight:500;padding:0;border-radius:20px;outline:none;cursor:text}
+.bnum:hover{background:rgba(76,151,255,.08)}
+.bnum:focus{box-shadow:0 0 0 2px #4C97FF inset;background:#fff}
+.bk-vars{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px;align-items:center;font-size:12px;color:var(--muted)}
+.bk-vars .vchip{background:#D65CD6;color:#fff;border:1px solid #BD42BD;border-radius:20px;padding:2px 10px;font:500 12px "Helvetica Neue",Helvetica,Arial,sans-serif}
+.blockview{background-color:#f9f9f9;background-image:radial-gradient(#dcdcdc 1px,transparent 1.2px)}
+:root[data-theme="dark"] .blockview{background-color:#1f2a2c;background-image:radial-gradient(#34454a 1px,transparent 1.2px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .blockview{background-color:#1f2a2c;background-image:radial-gradient(#34454a 1px,transparent 1.2px)}}
+.prog-b.both{display:grid;grid-template-columns:auto 1fr}
+.prog-b.both .pv-block{border-right:1px solid var(--line)}
+@media (max-width:760px){.prog-b.both{grid-template-columns:1fr}.prog-b.both .pv-block{border-right:0;border-bottom:1px solid var(--line)}}
+
+/* ===== v2: Simulator ===== */
+.sim-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:0}
+@media (max-width:820px){.sim-grid{grid-template-columns:1fr}}
+.sim-left{display:flex;flex-direction:column;gap:10px;padding:12px;border-right:1px solid var(--line);min-width:0;background:var(--surface)}
+@media (max-width:820px){.sim-left{border-right:0;border-bottom:1px solid var(--line)}}
+.sim-right{display:flex;flex-direction:column;gap:10px;padding:12px;min-width:0}
+.board-wrap{background:#f3f3f1;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.board-svg{display:block;width:100%;height:auto}
+.board-svg .bpl{fill:#e8f1f5;font:700 8px var(--mono)}
+.board-svg .brl{font:700 13px var(--mono);fill:#333}
+.board-svg .bpart{font:600 10.5px var(--font);fill:#4a5558}
+.board-svg .wire-hi{pointer-events:none}
+.board-svg .sensor,.board-svg .btn-part{cursor:pointer}
+.board-svg .btn-part .cap{transition:r .08s,fill .08s}
+.board-svg .btn-part.pressed .cap{r:8;fill:#0a7570}
+.board-svg [data-buzz] .waves path,.board-svg [data-us] .ping path{fill:none;stroke:#8a5cf5;stroke-width:2.2;stroke-linecap:round;opacity:0}
+.board-svg [data-buzz].on .waves path{animation:wave .6s infinite}
+.board-svg [data-buzz].on .waves path:nth-child(2){animation-delay:.2s}
+.board-svg [data-us] .ping path{stroke:#2f7fd8}
+.board-svg [data-us].on .ping path{animation:wave 1s infinite}
+.board-svg [data-us].on .ping path:nth-child(2){animation-delay:.35s}
+@keyframes wave{0%{opacity:0}30%{opacity:1}100%{opacity:0}}
+.board-svg .glow{transition:opacity .06s}
+.board-svg .horn{transition:transform .35s cubic-bezier(.3,.7,.3,1)}
+.simgo{background:#fff;border-color:#2da44e;color:#1c7a36}
+.simgo .ico{font-size:12px}
+.simgo.stop{background:#2da44e;color:#fff;border-color:#2da44e}
+.sp-l{font-size:12px;color:var(--muted);display:flex;gap:4px;align-items:center}
+.clock{font:700 12.5px var(--mono);color:var(--muted);margin-right:auto}
+.sim-h .ttl{margin-right:12px}
+.ed-h{display:flex;gap:8px;align-items:baseline}
+.ed-h .ed-mode{font-weight:700;font-size:13px;background:var(--surface-2);border:1px solid var(--line);border-radius:6px;padding:2px 8px}
+.ed .blockview{max-height:460px;overflow:auto;padding:12px;border:1px solid var(--line);border-radius:8px}
+.ed-code{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:var(--code-bg)}
+.ed-code .gutter{margin:0;padding:10px 6px 10px 0;width:44px;text-align:right;font:13.5px/1.6 var(--mono);color:var(--muted);opacity:.8;overflow:hidden;user-select:none;background:var(--surface-2);border-right:1px solid var(--line);flex:none}
+.ed-code .gutter span{display:inline-block;width:100%;padding-right:4px;border-radius:0 4px 4px 0}
+.ed-code .gutter span.run{background:#ffd500;color:#222;font-weight:700;opacity:1}
+.ed-code .gutter span.run::before{content:"▶ ";font-size:9px}
+.ed-code textarea{flex:1;min-width:0;border:0;border-radius:0;height:100%!important;min-height:0!important;resize:none!important}
+.ed-code .gutter{height:100%}
+.sim-edit textarea,.ed-code textarea{width:100%;min-height:240px;resize:vertical;background:var(--code-bg);font:13.5px/1.6 var(--mono);padding:10px 12px;tab-size:2;outline:none;white-space:pre;overflow:auto;color:var(--ink)}
+.mon{border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.mon-h{display:flex;gap:6px;align-items:center;padding:4px 8px;background:var(--surface-2);border-bottom:1px solid var(--line);font-size:13px;font-weight:700}
+.mon-h .spacer{flex:1}
+.mon .serial{border-radius:0;height:140px;background:#fff;color:#222}
+:root[data-theme="dark"] .mon .serial{background:#0f1719;color:#c9f5e4}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .mon .serial{background:#0f1719;color:#c9f5e4}}
+.mon .serial:empty::before{color:#98a5a8}
+.plot{display:block;width:100%;height:120px}
+input.pulse{outline:3px solid var(--accent);outline-offset:3px}
+
+/* ===== v2: Steckbrett-Aufbau ===== */
+.cb svg{width:100%;height:auto;border-radius:10px;border:1px solid var(--line);background:#f3f3f1}
+.cb svg .lbl{font:600 11px var(--mono);fill:#555}
+.cb svg .lbl.b{fill:#222;font-size:16px}.cb svg .lbl.r{fill:#c62828;font-size:16px}
+.cb svg .pl{font:700 9px var(--mono);fill:#e8f1f5}
+.cb svg .hole{fill:#6d6d6d;transition:fill .08s}
+.cb svg .hole.grp{fill:#3cb043}
+.cb svg .hole:hover{fill:#1f8a2e}
+.cb svg .hl{fill:rgba(60,176,67,.18);stroke:#3cb043;stroke-width:2;display:none;pointer-events:none}
+.cb svg .el{display:none}
+.cb svg .el.on,.cb svg .hl.on{display:inline}
+.cb svg .leg-l{font:800 12px var(--mono);fill:#333}
+.cb svg .glow{opacity:0}
+.cb svg .w .wd{stroke-dasharray:none}
+.cb svg .w.enter .wd{stroke-dasharray:1;stroke-dashoffset:1;animation:cbdraw .8s ease forwards}
+.cb svg .led.enter,.cb svg .res.enter{transform-box:fill-box;transform-origin:center;animation:cbdrop .55s cubic-bezier(.2,.8,.3,1.25)}
+@keyframes cbdraw{to{stroke-dashoffset:0}}
+@keyframes cbdrop{0%{opacity:0;transform:translateY(-26px) scale(.9)}100%{opacity:1;transform:none}}
+.cb svg .flow{fill:none;stroke:#ffd500;stroke-width:3.2;stroke-dasharray:1.5 11;stroke-linecap:round;display:none;pointer-events:none}
+.cb svg.blinkA .f1{display:inline;animation:cbflow .9s linear infinite,cbon 2s steps(1) infinite}
+.cb svg.blinkB .f2{display:inline;animation:cbflow .9s linear infinite,cboff 2s steps(1) infinite}
+.cb svg.blinkA .led1 .glow{animation:cbon 2s steps(1) infinite}.cb svg.blinkA .led1 .lit{animation:cblit 2s steps(1) infinite}
+.cb svg.blinkB .led2 .glow{animation:cboff 2s steps(1) infinite}.cb svg.blinkB .led2 .lit{animation:cblit2 2s steps(1) infinite}
+.cb svg.blinkA .bl-L{animation:cbL 2s steps(1) infinite}
+@keyframes cbflow{to{stroke-dashoffset:-25}}
+@keyframes cbon{0%{opacity:1}50%{opacity:0}}
+@keyframes cboff{0%{opacity:0}50%{opacity:1}}
+@keyframes cblit{0%{opacity:.35}50%{opacity:0}}
+@keyframes cblit2{0%{opacity:0}50%{opacity:.35}}
+@keyframes cbL{0%{fill:#ffd23f}50%{fill:#6b5a2a}}
+.cb svg .tip{pointer-events:none;transition:opacity .1s}
+@media (prefers-reduced-motion:reduce){.cb svg .w.enter .wd{stroke-dashoffset:0}}
+
+/* v2b: Simulator-Layout mit großer Schaltung */
+.sim-top{padding:12px 12px 0;background:var(--surface)}
+.sim-top .board-wrap{max-width:820px;margin:0 auto}
+.sim-grid{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)}
+.sim-grid .sim-right{border-right:1px solid var(--line)}
+.sim-grid .sim-left{border-right:0;background:transparent}
+@media (max-width:820px){.sim-grid .sim-right{border-right:0;border-bottom:1px solid var(--line)}}
+@media (max-width:820px){.sim-grid{grid-template-columns:1fr}.sim-grid .sim-right{border-right:0;border-bottom:1px solid var(--line)}}
+.board-svg .bled{fill:#ffd23f;filter:drop-shadow(0 0 3px #ffd23f)}
+.board-svg .bled[data-bl="ON"]{fill:#5bea5b;filter:drop-shadow(0 0 3px #5bea5b)}
+.board-wrap{background:#f4f5f6}
+.cb svg .bl-L{fill:#ffd23f;opacity:0}
+.cb svg .bl-ON{fill:#5bea5b;filter:drop-shadow(0 0 3px #5bea5b)}
+.cb svg.blinkA .bl-L{animation:cbon 2s steps(1) infinite;filter:drop-shadow(0 0 3px #ffd23f)}
+
+/* ===== Basis-Heft: Schritt-Karten, Wörter-Hilfe ===== */
+.stp{display:flex;flex-direction:column;gap:12px}
+.stp-bar{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.stp-count{font-weight:700;color:var(--muted);font-size:14px;margin-right:auto}
+.stp-dots{display:flex;gap:6px;flex-wrap:wrap}
+.stp-dots button{width:34px;height:34px;border-radius:50%;border:2px solid var(--line-strong);background:var(--surface);font-weight:700;cursor:pointer}
+.stp-dots button.done{background:var(--ok);border-color:var(--ok);color:#fff}
+.stp-dots button[aria-current="step"]{outline:3px solid var(--accent);outline-offset:2px}
+.stp-card{display:grid;grid-template-columns:56px 1fr;gap:14px;background:var(--surface-2);border:1px solid var(--line);border-radius:12px;padding:16px}
+@media (max-width:520px){.stp-card{grid-template-columns:1fr}}
+.stp-num{width:48px;height:48px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font:800 22px var(--disp)}
+.stp-body{display:flex;flex-direction:column;gap:10px;min-width:0;font-size:17px;line-height:1.6}
+.stp-body h3{font-size:20px}
+.stp-text p+p{margin-top:8px}
+.stp-text ul{margin:6px 0 0;padding-left:22px}
+.stp-blocks{overflow-x:auto;padding:10px;border-radius:8px;background:#f9f9f9;border:1px solid var(--line)}
+.stp-tips{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.stp-tip{background:var(--warn-soft);border-left:4px solid var(--warn);padding:8px 12px;border-radius:0 8px 8px 0;font-size:16px}
+.tipbtn{color:var(--warn);border-color:var(--warn)}
+.stp-list{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:10px}
+.basis .prose,.basis .card>p{font-size:17px;line-height:1.65}
+.term{border-bottom:2px dotted var(--accent);cursor:help;position:relative;font-weight:700}
+.term:hover::after,.term:focus::after{content:attr(data-def);position:absolute;left:0;top:130%;z-index:20;width:max-content;max-width:260px;background:var(--ink);color:var(--surface);font-weight:400;font-size:14px;line-height:1.4;padding:6px 10px;border-radius:6px;box-shadow:var(--shadow)}
+.merk{border:2px solid var(--accent);border-radius:12px;padding:12px 14px;background:var(--accent-soft);font-size:17px}
+.merk b:first-child{display:block;font-family:var(--disp);color:var(--accent);margin-bottom:4px}
+.wl{display:grid;grid-template-columns:minmax(120px,max-content) 1fr;gap:8px 16px;font-size:16px}
+.wl dt{font-weight:700}.wl dd{margin:0}
+.ican li{list-style:none}
+/* Steckbrett-Trainer */
+.bbt{display:flex;flex-direction:column;gap:10px}
+.bbt-head{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.bbt-dots{display:flex;gap:5px}.bbt-dots i{width:12px;height:12px;border-radius:50%;background:var(--line);display:block}
+.bbt-dots i.cur{background:var(--accent)}.bbt-dots i.ok{background:var(--ok)}.bbt-dots i.no{background:var(--bad)}
+.bbt-q{margin:0;font-size:16.5px;min-height:2.6em}
+.bbt-svg{max-width:560px}
+.bbt svg{width:100%;height:auto;border-radius:10px;border:1px solid var(--line);background:#f3f3f1;touch-action:manipulation}
+.bbt svg .lbl{font:600 12px var(--mono);fill:#555}.bbt svg .lbl.b{fill:#222;font-size:17px}.bbt svg .lbl.r{fill:#c62828;font-size:17px}
+.bbt svg .h{cursor:pointer}.bbt svg .h .hit{fill:transparent}
+.bbt svg .h .dot{fill:#6d6d6d;transition:fill .1s}
+.bbt svg .h:hover .dot{fill:#2c6fb7}
+.bbt svg .h.sel .dot{fill:#1e88e5;stroke:#0d47a1;stroke-width:2}
+.bbt svg .h.show .dot{fill:#3cb043}
+.bbt svg .h.right .dot{fill:#1f8a4c;stroke:#0b5d2e;stroke-width:2.5}
+.bbt svg .h.wrong .dot{fill:#d32f2f;stroke:#7f1010;stroke-width:2.5}
+.bbt svg .mk circle{fill:rgba(245,124,0,.22);stroke:#f57c00;stroke-width:3}
+.bbt svg .mk text{font:800 13px var(--mono);fill:#b35900}
+.bbt svg .mk{pointer-events:none}.bbt svg .ledp{pointer-events:none}
+.bbt svg .mk.leg circle{fill:rgba(30,136,229,.18);stroke:#1e88e5}.bbt svg .mk.leg text{fill:#0d47a1}
+.bbt-end{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:8px}
+/* Branding & Lizenz */
+.logo-chip{display:inline-flex;align-items:center;background:#fff;border-radius:8px;padding:3px 7px;flex:none;box-shadow:0 0 0 1px var(--line)}
+.logo-chip .brand-logo{display:block}
+@media (max-width:520px){.logo-chip .brand-logo{height:24px!important}}
+footer.lic{display:flex;gap:12px;align-items:center;margin:28px 0 8px;padding:12px 14px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted);line-height:1.45}
+footer.lic a{color:inherit}
+.ring.book{display:inline-grid;place-items:center;font:700 11px var(--mono);color:var(--muted);background:var(--surface-2);border:1px solid var(--line)}
+.ring.book::before,.ring.book::after{content:none!important}
+.sim.demo .sim-grid{grid-template-columns:1fr}
+.sim.demo .sim-grid .sim-left{border-right:0}
+/* ===== Challenges ===== */
+.lvl-badge{display:inline-flex;align-items:center;padding:3px 10px;border-radius:6px;background:var(--lc);color:#fff;font:800 13px var(--disp);letter-spacing:.02em;text-shadow:0 1px 1px rgba(0,0,0,.25)}
+.lvl-badge.sm{font-size:11px;padding:2px 7px}
+.lvl-badge.none{background:var(--surface-2);color:var(--muted);text-shadow:none;border:1px solid var(--line)}
+.ch-head{display:flex;flex-wrap:wrap;align-items:center;gap:12px 20px;margin-bottom:6px}
+.ch-chili{display:flex;gap:2px}
+.ch-cp{display:flex;align-items:center;gap:8px;font-weight:700}
+.story{color:var(--muted);font-style:italic}
+.ctask{font-size:17.5px}
+.sub-h{font-size:16px;margin:14px 0 6px}
+ul.must,ul.parts{margin:0;padding-left:0;list-style:none;display:flex;flex-direction:column;align-items:stretch;text-align:left;gap:6px}
+ul.must li{padding-left:28px;position:relative}
+ul.must li::before{content:"";position:absolute;left:2px;top:3px;width:16px;height:16px;border:2px solid var(--accent);border-radius:4px}
+ul.parts li{padding-left:18px;position:relative}ul.parts li::before{content:"•";position:absolute;left:4px;color:var(--accent);font-weight:700}
+table.pins{border-collapse:collapse;width:100%}table.pins td{padding:5px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+.goal-box{background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:12px;overflow-x:auto}
+.goal-svg{width:100%;max-width:640px;height:auto;display:block;background:#fbfaf6;border-radius:6px}
+.goal-colors{display:flex;flex-wrap:wrap;gap:8px}.goal-colors span{display:flex;align-items:center;gap:6px;font-weight:700;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:4px 10px 4px 4px}
+.goal-colors i{width:22px;height:22px;border-radius:50%;border:1px solid rgba(0,0,0,.25);display:block}
+.goal-note{margin:8px 0 0;color:var(--muted);font-size:14px}
+.goal-serial{background:#fff;color:#1c2a2d;border:1px solid #cfd6da;border-radius:6px;font:13px/1.6 var(--mono);max-width:360px;padding:0 0 6px}
+.goal-serial .gs-h{background:#e9ecee;padding:3px 10px;font:700 12px var(--font);border-bottom:1px solid #cfd6da;margin-bottom:4px}.goal-serial div:not(.gs-h){padding:0 10px}
+table.goal-io{border-collapse:collapse;width:100%;max-width:640px;background:var(--surface)}
+table.goal-io th,table.goal-io td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}table.goal-io th{background:var(--surface-2);font-size:13px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+.cmds{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-start}.cmd{max-width:100%}
+.cmd .codeview{background:var(--code-bg);border:1px solid var(--line);border-radius:8px;padding:8px 0;min-width:0}
+details.tipbox{margin-top:12px;border:1px dashed var(--line-strong);border-radius:8px;padding:8px 12px;background:var(--surface-2)}details.tipbox summary{cursor:pointer;font-weight:700}details.tipbox p{margin:8px 0 0}
+.nav-num{font:700 12px var(--mono);color:var(--muted);margin-right:2px}
+.nav-cp{color:#e8a200;font-size:14px;margin-left:auto}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin:6px 0 12px;font-size:14px;color:var(--muted)}.legend span{display:flex;align-items:center;gap:4px}
+.ctiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px}
+.ctile{position:relative;text-align:left;border:1px solid var(--line);border-radius:10px;background:var(--surface);padding:10px 12px;cursor:pointer;display:grid;grid-template-columns:auto 1fr;gap:4px 8px;align-items:center;font:inherit;color:inherit}
+.ctile:hover{border-color:var(--accent)}
+.ctile.done{border-color:var(--ok);background:var(--ok-soft)}
+.ct-n{font:800 20px var(--disp)}.ct-c{justify-self:end;line-height:0}
+.ct-t{grid-column:1/-1;font-weight:700;line-height:1.25}
+.ct-s{grid-column:1/-1;display:flex;gap:10px;font-size:12.5px;color:var(--muted)}.ct-s .ok{color:var(--ok);font-weight:700}
+.ct-cp{grid-column:1/-1;justify-self:start;font-size:11.5px;font-weight:800;color:var(--lc);border:1.5px solid var(--lc);border-radius:5px;padding:0 6px}
+.ct-cp.ok{background:var(--lc);color:#fff}
+.ladder{display:flex;flex-direction:column-reverse;gap:6px;max-width:560px}
+.rung{display:flex;align-items:center;gap:12px;border-radius:8px;border:2px solid var(--lc);padding:6px 10px;opacity:.75}
+.rung b{min-width:110px;font:800 17px var(--disp);color:var(--lc)}
+.rung.got{background:var(--lc);opacity:1}.rung.got b{color:#fff}
+.rung.cur{box-shadow:0 0 0 3px var(--accent)}
+.rung a{font-weight:700;font-size:13px;color:inherit;text-decoration:none;border-radius:4px;padding:1px 5px;background:var(--surface)}
+.rung a.ok{background:#fff;color:#1c7a3a}
+.howflow{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:6px}
+
+.nav-lvl{flex-basis:100%;font-size:12.5px;color:var(--muted);display:flex;align-items:center;gap:6px}
+.nav-chili{display:inline-flex;vertical-align:middle;margin-right:2px}
+.codeview,.codeview *,code,pre,textarea,.mono{font-variant-ligatures:none;font-feature-settings:"liga" 0,"calt" 0}
+.two>*{min-width:0}
+.cmd{max-width:100%;overflow-x:auto}
+.cmd .codeview{white-space:pre-wrap;min-width:0}
+
+/* ---------- Calliope-Challenges: Ergänzungen ---------- */
+/* MakeCode-Blöcke (eigene Nachbildung), Farben der Bereiche wie im Editor */
+.k-basic{--c:#1f9e94}.k-in{--c:#c2187a}.k-music{--c:#d9431f}.k-logic{--c:#2b5868}.k-loops{--c:#3a8f2f}.k-var{--c:#c62828}.k-math{--c:#7b3fbf}
+.bk-c>.bk-head,.bk-c>.bk-mid,.bk-c>.bk-foot{background:var(--c)}
+.bk-c>.bk-body{border-left-color:var(--c)}
+.rep{display:inline-flex;align-items:center;gap:4px;border-radius:20px;padding:4px 8px;border:1px solid rgba(0,0,0,.15);color:#fff;font-weight:700}
+.rep.k-in{background:#c2187a}.rep.k-var{background:#c62828}.rep.k-math{background:#7b3fbf}.rep.k-logic{background:#2b5868}.rep.k-basic{background:#1f9e94}.rep.k-music{background:#d9431f}
+.bk-stacks{display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+.bk-gap{border:2px dashed var(--line-strong);border-radius:6px;padding:6px 10px;margin:3px 0;font:600 12.5px var(--font);color:var(--muted);background:var(--surface);white-space:nowrap}
+.bk.mini{min-height:28px;padding:5px 8px;margin:0;white-space:nowrap;font-size:12.5px;display:inline-flex}
+.bk.mini.notch::before{display:none}
+.ledg{display:inline-grid;grid-template-columns:repeat(5,7px);gap:2px;background:#0d1b2a;padding:3px;border-radius:4px;vertical-align:middle}
+.ledg i{width:7px;height:7px;border-radius:2px;background:#37475a}
+.ledg i.on{background:#ff5a4f}
+.tk-kw{color:var(--code-kw);font-weight:700}.tk-str{color:var(--code-str)}.tk-nm{color:var(--code-num)}.tk-com{color:var(--code-com);font-style:italic}
+
+.lead{font-size:18px;color:var(--muted)}
+.hero .lead{max-width:62ch}
+.tnum{font:800 12px var(--font);letter-spacing:.06em;text-transform:uppercase;color:var(--accent);background:var(--accent-soft);border-radius:20px;padding:2px 9px}
+.qtask h3{font-size:17px;line-height:1.35}
+.op{font:inherit;font-weight:800;color:var(--accent);background:none;border:0;border-bottom:2px dotted var(--accent);padding:0;cursor:help}
+.pop{position:absolute;z-index:60;max-width:340px;background:var(--surface);border:1px solid var(--line-strong);border-radius:10px;box-shadow:var(--shadow);padding:12px 14px;font-size:14px}
+.pop h4{font-size:14px;margin-bottom:4px}
+.pop .x{position:absolute;top:4px;right:6px;border:0;background:none;font-size:20px;cursor:pointer;color:var(--muted)}
+/* Widgets */
+.wfb{border-radius:8px;padding:10px 12px;font-size:15px;border:1px solid var(--line)}
+.wfb.ok{background:var(--ok-soft);border-color:var(--ok)}
+.wfb.mid{background:var(--warn-soft);border-color:var(--warn)}
+.wfb.err{background:var(--bad-soft);border-color:var(--bad)}
+.wfb p+p,.wfb p+ul{margin-top:4px}.wfb ul{margin:4px 0 0;padding-left:20px}
+.wfb .lvl{font-weight:700}
+.s-ok{outline:2px solid var(--ok)!important;background:var(--ok-soft)!important}
+.s-bad{outline:2px solid var(--bad)!important;background:var(--bad-soft)!important}
+.seglist{display:flex;flex-direction:column;gap:8px}
+.segrow{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;justify-content:space-between;border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:var(--surface-2)}
+.segrow>span{flex:1 1 160px;min-width:0}
+.seg{display:flex;flex-wrap:wrap;gap:4px}
+.seg button{border:1px solid var(--line-strong);background:var(--surface);border-radius:20px;padding:5px 12px;cursor:pointer;font-weight:700;font-size:14px}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.rank{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.rank li{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:8px;padding:6px 8px;background:var(--surface-2)}
+.rank .pos{font:800 13px var(--mono);color:var(--muted);width:20px;text-align:right;flex:none}
+.rank .lbl{flex:1;min-width:0;overflow-x:auto}
+.mv{width:36px;height:36px;border-radius:8px;border:1px solid var(--line-strong);background:var(--surface);cursor:pointer;font-weight:700;flex:none}
+.mv:disabled{opacity:.35;cursor:default}
+.cloze{line-height:2.4}
+.cloze select{font:inherit;font-weight:700;padding:3px 6px;border-radius:6px;border:1px solid var(--line-strong);background:var(--surface);max-width:100%}
+.pairs{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:560px){.pairs{grid-template-columns:1fr}}
+.pcol{display:flex;flex-direction:column;gap:6px}
+.pcol h4{font-size:13px;color:var(--muted);font-family:var(--font)}
+.pc{display:flex;gap:8px;align-items:center;text-align:left;border:1px solid var(--line-strong);background:var(--surface);border-radius:8px;padding:8px 10px;cursor:pointer;font-size:14.5px}
+.pc[aria-pressed="true"]{outline:3px solid var(--accent)}
+.pc .k{flex:none;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:12px;background:var(--surface-2);border:1px solid var(--line)}
+.pc .k.on{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.marklist{display:flex;flex-direction:column;gap:4px;align-items:flex-start;padding:10px;border-radius:8px;background:var(--code-bg);border:1px solid var(--line);overflow-x:auto;max-width:100%}
+.ms{border:2px solid transparent;background:none;border-radius:8px;padding:2px;cursor:pointer;text-align:left}
+.ms[aria-pressed="true"]{border-color:var(--signal);background:var(--signal-soft)}
+.numin{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.numin input{width:9em;font:700 18px var(--font);padding:6px 10px;border:1px solid var(--line-strong);border-radius:8px;background:var(--surface)}
+.qz{border:1px solid var(--line);border-radius:8px;padding:8px 12px;margin:0;display:flex;flex-direction:column;gap:4px}
+.qz legend{font-weight:700;padding:0 4px}
+.qz label,.multi label{display:flex;gap:8px;align-items:flex-start;padding:4px 6px;border-radius:6px;cursor:pointer}
+.qz input,.multi input{accent-color:var(--accent);width:18px;height:18px;flex:none;margin-top:2px}
+.multi{display:flex;flex-direction:column;gap:4px}
+.quiz{display:flex;flex-direction:column;gap:10px}
+.open textarea{width:100%;min-height:130px;padding:10px;border:1px solid var(--line-strong);border-radius:8px;background:var(--surface);font:inherit;resize:vertical}
+.open-foot{display:flex;flex-wrap:wrap;gap:6px 12px;justify-content:space-between;align-items:center;margin-top:6px}
+.qc{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:13px}
+.qc span{border:1px solid var(--line);border-radius:20px;padding:1px 8px;color:var(--muted)}
+.qc span.on{border-color:var(--ok);color:var(--ok);font-weight:700}.qc span.on::after{content:" ✓"}
+.muster{background:var(--surface-2);border:1px dashed var(--line-strong);border-radius:8px;padding:10px 12px}
+.muster ul{margin:6px 0;padding-left:20px}
+/* Platine */
+.boardgrid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:16px;align-items:start}
+@media (max-width:760px){.boardgrid{grid-template-columns:1fr}}
+.cal-svg{width:100%;height:auto;display:block;max-width:520px;margin:0 auto;touch-action:manipulation}
+.cal-svg .bp{cursor:pointer;outline:none}
+.cal-svg .bp .hl{fill:none;stroke:none}
+.cal-svg .bp:hover .hl,.cal-svg .bp:focus-visible .hl{stroke:#ffffff;stroke-width:5;stroke-dasharray:10 6}
+.cal-svg .bp.sel .hl{stroke:#ffd23f;stroke-width:9;stroke-dasharray:none}
+.cal-svg .bp.ok .hl{stroke:#4cc27d;stroke-width:9;stroke-dasharray:none}
+.cal-svg .bp.bad .hl{stroke:#f07171;stroke-width:9;stroke-dasharray:none}
+.cal-svg .lab{font:700 17px Arial,Helvetica,sans-serif;fill:#fff;opacity:.92;pointer-events:none;letter-spacing:.04em}
+.nolab .cal-svg .lab{display:none}
+.partinfo{background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:14px;display:flex;flex-direction:column;gap:8px;min-height:160px}
+.partinfo h3{font-size:19px}
+.partlist{display:flex;flex-wrap:wrap;gap:6px}
+.uses{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.uses .chip{font-size:13.5px;padding:4px 10px}
+.spotq{display:flex;flex-direction:column;gap:6px}
+.spotq button{display:flex;justify-content:space-between;gap:10px;align-items:center;text-align:left;border:1px solid var(--line-strong);background:var(--surface);border-radius:8px;padding:8px 10px;cursor:pointer;font-size:14.5px}
+.spotq button[aria-pressed="true"]{outline:3px solid var(--accent)}
+.spotq .ans{font-weight:700;color:var(--accent);white-space:nowrap}
+/* Challenge-Seite */
+.auftrag{font-size:18px;line-height:1.6}
+.tipzone{display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+.tipbox{background:var(--warn-soft);border-left:4px solid var(--warn);padding:10px 12px;border-radius:0 8px 8px 0;max-width:100%}
+.tipbox h4{font-size:15px;margin-bottom:4px}
+.progbox{overflow-x:auto;max-width:100%;border:1px solid var(--line);border-radius:8px;background:var(--code-bg);-webkit-overflow-scrolling:touch}
+.prog{max-width:100%;min-width:0}
+.runchk{display:flex;gap:12px;align-items:center;font-weight:700;font-size:18px;border:2px solid var(--line-strong);border-radius:10px;padding:12px 14px;cursor:pointer;background:var(--surface-2)}
+.runchk input{width:26px;height:26px;accent-color:var(--ok);flex:none}
+.runchk.on{border-color:var(--ok);background:var(--ok-soft)}
+.status{display:flex;gap:10px;align-items:center;font-weight:700}
+.status.done{color:var(--ok)}
+details.info{border:1px solid var(--line);border-radius:10px;background:var(--surface-2)}
+details.info>summary{cursor:pointer;padding:10px 14px;font-weight:700;font-family:var(--disp);font-size:16px}
+details.info>.infobody{padding:0 14px 14px;display:flex;flex-direction:column;gap:10px}
+details.info[open]>summary{border-bottom:1px solid var(--line);margin-bottom:10px}
+.howlist{display:flex;flex-direction:column;gap:8px}
+.steps{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:4px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;font-size:14px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:4px}
+.sumlist{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.sumlist li{display:flex;gap:10px;align-items:center;flex-wrap:wrap;border:1px solid var(--line);border-radius:8px;padding:6px 10px}
+.sumlist li .t{flex:1 1 180px;min-width:0}
+.sumlist li .st{font-weight:700;font-size:13.5px}
+.sumlist li.done{border-color:var(--ok);background:var(--ok-soft)}
+.codeout{width:100%;min-height:70px;font:13px var(--mono);padding:8px;border:1px dashed var(--line-strong);border-radius:8px;background:var(--surface-2);word-break:break-all}
+.lic{display:flex;gap:12px;align-items:center;font-size:13px;color:var(--muted)}
+.lic a{color:inherit}
+.linkcard .ico{width:56px;height:56px;border-radius:10px;display:grid;place-items:center;font-size:26px;flex:none;background:var(--accent-soft)}
+.side .nav-item .nav-cp{margin-left:auto}
+.nav-chili svg{display:block}
+@media (max-width:520px){.savestate{display:none}.logo-chip{padding:2px 5px}.brand-t{max-width:34vw}}
+@media (max-width:430px){.brand-t{display:none}}
+</style>
+</head>
+<body data-mode="block">
+<header class="topbar">
+  <button class="navtoggle" id="navT" type="button" aria-label="Menü öffnen" aria-expanded="false">☰</button>
+  <div class="brand"><span class="logo-chip"><img class="brand-logo" src="data:image/png;base64,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" alt="Logo: dein Technik Lehrer" style="height:24px;width:auto"></span>
+    <div style="min-width:0"><div class="brand-t">Calliope-Challenges</div><div class="brand-s">Selbstlernkonzept · Calliope mini + MakeCode</div></div></div>
+  <span class="spacer"></span>
+  <span class="savestate" id="saveState"></span>
+  <div class="modeswitch" role="group" aria-label="Programme zeigen als">
+    <button type="button" data-m="block" aria-pressed="true"><span class="sw" style="background:#1f9e94"></span><span class="lbl-long">Blöcke</span></button>
+    <button type="button" data-m="code" aria-pressed="false">{ } <span class="lbl-long">Text</span></button>
+  </div>
+</header>
+<div class="scrim" id="scrim"></div>
+<div class="shell">
+  <aside class="side" id="side" aria-label="Navigation"><div class="nav-prof" id="prof"></div><nav id="nav"></nav></aside>
+  <main class="main" id="main"></main>
+</div>
+<div class="pop" id="pop" hidden role="dialog" aria-labelledby="popH"><button class="x" id="popX" type="button" aria-label="Schließen">×</button><h4 id="popH"></h4><p id="popP"></p></div>
+
+<script src="../assets/jspdf.umd.min.js"></script><link rel="stylesheet" href="../assets/lp-support.css"><script>window.LP_CFG={"keys": ["calliope-challenges-v1"], "uploadTitle": "Mit Ergebnis-PDF weiterarbeiten", "uploadText": "Lade deine Ergebnis-PDF hoch, die du hier gespeichert hast. Dann machst du dort weiter, wo du aufgehört hast.", "anchors": [{"sel": "#lpUp1", "mode": "append"}, {"sel": "#lpUp2", "mode": "append"}], "slug": "calliope-challenges"};</script><script src="../assets/lp-support.js"></script>
+<script>
+/* Calliope-Challenges: MakeCode-Blöcke als eigene Grafik (HTML/CSS) und Text-Code mit Hervorhebung.
+   Wird von make_calliope.py in die Schülerseite und in die Lösungsseite eingesetzt.
+   Kurzschrift im Blocktext:
+     (12)            Zahlenfeld
+     "Text"          Textfeld
+     {rot}           Auswahlfeld
+     {g:#.#.#/.....} LED-Bild 5×5, Reihen mit / getrennt, # = an
+     [Inhalt|kat]    runder Block (kat: in, var, math, logic, basic, music)
+   Blöcke: {s:kat,t}  Befehl · {e:kat,t,b:[]}  Ereignis · {c:kat,t,b:[],x:[[t,[]],…]}  Klammer mit „sonst“-Teilen
+           {n:'…'}    Lücke („hier fehlt noch etwas“) */
+var CB = (function () {
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function grid(v) {
+    var rows = v.split('/'), h = '<span class="ledg" role="img" aria-label="LED-Bild">';
+    rows.forEach(function (r) { for (var i = 0; i < 5; i++) h += '<i' + (r[i] === '#' ? ' class="on"' : '') + '></i>'; });
+    return h + '</span>';
+  }
+  function inl(s) {
+    var o = '', i = 0;
+    while (i < s.length) {
+      var ch = s[i], j, close = { '(': ')', '"': '"', '{': '}', '[': ']' }[ch];
+      if (close && s.indexOf(close, i + 1) < 0) { o += esc(s.slice(i)); break; }
+      if (ch === '(') { j = s.indexOf(')', i); o += '<span class="num">' + esc(s.slice(i + 1, j)) + '</span>'; i = j + 1; }
+      else if (ch === '"') { j = s.indexOf('"', i + 1); o += '<span class="txt">' + esc(s.slice(i + 1, j)) + '</span>'; i = j + 1; }
+      else if (ch === '{') { j = s.indexOf('}', i); var v = s.slice(i + 1, j); o += v.indexOf('g:') === 0 ? grid(v.slice(2)) : '<span class="dd">' + esc(v) + '</span>'; i = j + 1; }
+      else if (ch === '[') {
+        var d = 0; for (j = i; j < s.length; j++) { if (s[j] === '[') d++; else if (s[j] === ']') { d--; if (!d) break; } }
+        var inner = s.slice(i + 1, j), k = inner.lastIndexOf('|');
+        o += '<span class="rep k-' + inner.slice(k + 1) + '">' + inl(inner.slice(0, k)) + '</span>'; i = j + 1;
+      } else { j = i; while (j < s.length && '("{['.indexOf(s[j]) < 0) j++; o += esc(s.slice(i, j)); i = j; }
+    }
+    return o;
+  }
+  function blk(b) {
+    if (b.n) return '<div class="bk-gap">' + esc(b.n) + '</div>';
+    if (b.s) return '<div class="bk notch k-' + b.s + '">' + inl(b.t) + '</div>';
+    var cat = b.e || b.c, h = '<div class="bk-c k-' + cat + (b.e ? ' hat' : '') + '"><div class="bk-head">' + inl(b.t) + '</div><div class="bk-body">' + (b.b || []).map(blk).join('') + '</div>';
+    (b.x || []).forEach(function (x) { h += '<div class="bk-mid">' + inl(x[0]) + '</div><div class="bk-body">' + x[1].map(blk).join('') + '</div>'; });
+    return h + '<div class="bk-foot"></div></div>';
+  }
+  function blocks(list) { return '<div class="blockview"><div class="bk-stacks">' + list.map(function (b) { return '<div class="bk-stack">' + blk(b) + '</div>'; }).join('') + '</div></div>'; }
+  function hl(l) {
+    var re = /(\/\/.*$)|("[^"]*"|`[^`]*`)|\b(let|if|else|function|for|while|true|false)\b|\b(0x[0-9a-fA-F]+|\d+)\b/g, o = '', k = 0, m;
+    while ((m = re.exec(l))) { o += esc(l.slice(k, m.index)); o += '<span class="tk-' + (m[1] ? 'com' : m[2] ? 'str' : m[3] ? 'kw' : 'nm') + '">' + esc(m[0]) + '</span>'; k = re.lastIndex; }
+    return o + esc(l.slice(k));
+  }
+  function code(src) { return '<pre class="codeview">' + src.split('\n').map(function (l) { return '<span class="ln">' + (hl(l) || ' ') + '</span>'; }).join('') + '</pre>'; }
+  /* Programm in beiden Darstellungen; sichtbar je nach body[data-mode] */
+  function prog(p) {
+    return '<div class="prog"><div class="m-block progbox">' + blocks(p.blocks) + '</div><div class="m-code progbox">' + code(p.js) + '</div></div>';
+  }
+  /* Ein einzelner Block als Text-Chip (für Reihenfolge- und Markier-Aufgaben) */
+  function chip(cat, t) { return '<span class="bk mini k-' + cat + '">' + inl(t) + '</span>'; }
+  return { esc: esc, inl: inl, blocks: blocks, code: code, prog: prog, chip: chip };
+})();
+
+</script>
+<script>
+(function(){
+"use strict";
+const KEY='calliope-challenges-v1';
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const esc=CB.esc, inl=CB.inl;
+function el(t,a,...k){const e=document.createElement(t);if(a)for(const n in a){const v=a[n];if(v==null||v===false)continue;if(n==='class')e.className=v;else if(n==='html')e.innerHTML=v;else if(n.startsWith('on'))e.addEventListener(n.slice(2),v);else e.setAttribute(n,v===true?'':v);}k.flat().forEach(c=>{if(c==null||c===false)return;e.append(c.nodeType?c:document.createTextNode(c));});return e;}
+
+/* ---------- Schwierigkeit und Skill-Level ---------- */
+const CHILI=[null,{k:'mild',t:'MILD',c:'#3aa935',d:'#23801f'},{k:'spicy',t:'SPICY',c:'#f5a300',d:'#c77f00'},{k:'hot',t:'HOT',c:'#f0501e',d:'#c23a10'},{k:'extra',t:'EXTRA',c:'#d5121e',d:'#9e0a14'}];
+const LEVELS=[{t:'Beginner',c:'#4fa9e0',cp:5},{t:'Basic',c:'#43b649',cp:6},{t:'Skilled',c:'#b5c214',cp:8},{t:'Specialist',c:'#ef4b24',cp:10},{t:'Expert',c:'#e8202a',cp:11}];
+function chiliSvg(level,on,h){const L=CHILI[level],c=on?L.c:'#cfcfcf',d=on?L.d:'#adadad',g=on?'#3c9a2c':'#a5a5a5',w=h*64/54;
+  return `<svg class="chili" viewBox="0 0 64 54" width="${w.toFixed(1)}" height="${h}" role="img" aria-label="${L.t}${on?'':' (nicht)'}"><path d="M26 22c-6-8 1-12-1-19c7 5 10 10 8 16c3-4 3-7 2-11c6 6 7 12 3 17z" fill="${c}" opacity=".85"/><path d="M43 17c9 0 15 8 13 18c-3 12-19 18-35 17c-7 0-12-2-17-6c10 0 18-3 23-8c6-5 8-10 9-15c1-4 4-6 7-6z" fill="${c}" stroke="${d}" stroke-width="1.6" stroke-linejoin="round"/><path d="M41 20c2-3 6-4 9-2c-2 1-2 3-1 5c-3-1-6-1-8-3z" fill="${g}"/><path d="M47 18c1-5 4-9 9-10" fill="none" stroke="${g}" stroke-width="3" stroke-linecap="round"/><path d="M49 24c2 4 1 9-3 13" fill="none" stroke="#fff" stroke-opacity=".45" stroke-width="2" stroke-linecap="round"/>${h>=30?`<text x="38" y="39" transform="rotate(-38 38 39)" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="800" font-size="8" fill="#fff">${L.t}</text>`:''}</svg>`;}
+function chiliRow(level,h){return [1,2,3,4].map(l=>chiliSvg(l,l===level,h)).join('');}
+function levelBadge(lv,small){return `<span class="lvl-badge${small?' sm':''}" style="--lc:${lv.c}">${lv.t}</span>`;}
+
+/* ---------- Bauteile der Platine ---------- */
+const PARTS={
+  matrix:{n:'LED-Matrix',d:'25 kleine LEDs in 5 Reihen und 5 Spalten. Sie zeigt Text, Zahlen und Bilder. Gleichzeitig misst sie die <b>Lichtstärke</b>, also wie hell es ist (0 bis 255).',u:[1,3,4,5,7,8,9,10,11]},
+  rgb:{n:'RGB-LED',d:'Eine LED unter der LED-Matrix. Sie mischt <b>Rot</b>, <b>Grün</b> und <b>Blau</b> und kann so in vielen Farben leuchten.',u:[2,3,6,7,8]},
+  a:{n:'Taste A',d:'Ein Taster links. Dein Programm kann reagieren, wenn du ihn drückst.',u:[11]},
+  b:{n:'Taste B',d:'Ein Taster rechts. Dein Programm kann reagieren, wenn du ihn drückst.',u:[11]},
+  acc:{n:'Lagesensor',d:'Er merkt, wie der Calliope gehalten wird und ob er bewegt oder <b>geschüttelt</b> wird.',u:[9,10]},
+  spk:{n:'Lautsprecher',d:'Er spielt Töne und kleine Melodien.',u:[4,7,8,9,10,11]},
+  mic:{n:'Mikrofon',d:'Es misst die <b>Lautstärke</b> in der Umgebung (0 = leise bis 255 = sehr laut).',u:[6]},
+  cpu:{n:'Prozessor',d:'Das „Gehirn“ des Calliope: Er führt dein Programm aus. In ihm steckt auch ein <b>Temperatursensor</b>.',u:[5,8]},
+  usb:{n:'USB-Anschluss',d:'Hier verbindest du den Calliope mit einem Computer: für Strom und zum Übertragen von Programmen.',u:[]},
+  reset:{n:'Reset-Taste',d:'Sie startet dein Programm neu. Zusammen mit A und B schaltest du den Bluetooth-Modus ein (siehe How-to-Guide).',u:[]},
+  bat:{n:'Batterieanschluss',d:'Hier steckst du das Batteriepack an. Achtung: Schließe nie gleichzeitig das Batteriepack und USB oder eine Powerbank an!',u:[]},
+  grove:{n:'Anschlüsse A0 und A1',d:'Stecker für zusätzliche Sensoren und Aktoren, zum Beispiel einen Bewegungsmelder.',u:[]},
+  pins:{n:'Pins 0, 1, 2, 3, − und +',d:'Sechs goldene Anschlüsse am Rand. Die Pins 0 bis 3 kannst du als <b>Touch-Sensoren</b> nutzen oder Bauteile anschließen. − und + liefern Strom für Bauteile.',u:[]}
+};
+/* Eigene Zeichnung des Calliope mini (keine Vorlage übernommen) */
+function boardSvg(){
+  const C=[500,480],R=380,ang=[0,60,120,180,240,300],pl=['3','2','1','0','−','+'];
+  const P=ang.map(a=>[C[0]+R*Math.cos(a*Math.PI/180),C[1]+R*Math.sin(a*Math.PI/180)]);
+  const k='#0f1214',grey='#c9ccc6';
+  const g=(id,inner,hl)=>`<g class="bp" data-p="${id}" tabindex="0" role="button" aria-label="${PARTS[id].n}">${inner}${hl}</g>`;
+  let s=`<svg class="cal-svg" viewBox="15 45 970 870" role="group" aria-label="Calliope mini, eigene Zeichnung. Tippe auf ein Bauteil.">`;
+  s+='<g>'+P.map(p=>`<line x1="${C[0]}" y1="${C[1]}" x2="${p[0].toFixed(1)}" y2="${p[1].toFixed(1)}" stroke="#1d3c55" stroke-width="196" stroke-linecap="round"/>`).join('')+`<circle cx="500" cy="480" r="292" fill="#1d3c55"/>`;
+  s+=`<g fill="none" stroke="#2c5674" stroke-width="3" opacity=".7"><path d="M300 360 L360 300 L440 300"/><path d="M700 360 L640 300 L560 300"/><path d="M430 610 L470 650 L520 650"/><path d="M230 560 L300 620"/></g></g>`;
+  /* Pins */
+  s+=g('pins',P.map((p,i)=>`<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="50" fill="#e4dc6a"/><circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="22" fill="#f4f3ec"/>`).join('')+P.map((p,i)=>{const x=p[0]+(C[0]-p[0])*.21,y=p[1]+(C[1]-p[1])*.21+11;return `<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="700" font-size="34" fill="#fff" pointer-events="none">${pl[i]}</text>`;}).join(''),
+    P.map(p=>`<circle class="hl" cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="60"/>`).join(''));
+  /* Kopfleiste (Deko) */
+  
+  s+=g('usb',`<rect x="465" y="198" width="70" height="56" rx="3" fill="${grey}"/><text class="lab" x="500" y="282" text-anchor="middle">USB</text>`,`<rect class="hl" x="453" y="186" width="94" height="80" rx="10"/>`);
+  s+=g('reset',`<ellipse cx="588" cy="226" rx="14" ry="18" fill="#eceee9"/><text class="lab" x="590" y="268" text-anchor="middle">RESET</text>`,`<circle class="hl" cx="588" cy="226" r="32"/>`);
+  s+=g('mic',`<rect x="372" y="214" width="46" height="42" rx="3" fill="${k}"/><text class="lab" x="395" y="282" text-anchor="middle">MIKROFON</text>`,`<rect class="hl" x="360" y="202" width="70" height="66" rx="10"/>`);
+  const grove=(x,rot,l,lx)=>`<g transform="translate(${x} 300) rotate(${rot})"><rect x="-52" y="-19" width="104" height="38" rx="3" fill="${grey}"/>${[-27,-9,9,27].map(d=>`<circle cx="${d}" cy="0" r="4.5" fill="#33393c"/>`).join('')}<rect class="hl" x="-64" y="-31" width="128" height="62" rx="10"/></g><text class="lab" x="${lx}" y="356" text-anchor="middle">${l}</text>`;
+  s+=g('grove',grove(318,60,'A0',372)+grove(682,-60,'A1',628),'');
+  s+=g('a',`<g transform="translate(262 470) rotate(45)"><rect x="-27" y="-27" width="54" height="54" rx="4" fill="#d9dbd6"/></g><circle cx="262" cy="470" r="17" fill="#45c0de"/><text x="262" y="414" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="700" font-size="32" fill="#fff" pointer-events="none">A</text>`,`<circle class="hl" cx="262" cy="466" r="54"/>`);
+  s+=g('b',`<g transform="translate(738 470) rotate(45)"><rect x="-27" y="-27" width="54" height="54" rx="4" fill="#d9dbd6"/></g><circle cx="738" cy="470" r="17" fill="#ef4a5e"/><text x="738" y="414" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="700" font-size="32" fill="#fff" pointer-events="none">B</text>`,`<circle class="hl" cx="738" cy="466" r="54"/>`);
+  s+=g('acc',`<rect x="318" y="504" width="50" height="30" rx="3" fill="${k}"/><text class="lab" x="300" y="564" text-anchor="middle">LAGESENSOR</text>`,`<rect class="hl" x="306" y="492" width="74" height="54" rx="10"/>`);
+  let leds='';for(let r=0;r<5;r++)for(let c=0;c<5;c++)leds+=`<rect x="${415+c*40}" y="${348+r*38}" width="10" height="26" rx="2" fill="#d8dad5"/>`;
+  s+=g('matrix',`<rect x="398" y="336" width="204" height="200" rx="10" fill="#000" fill-opacity="0"/>${leds}`,`<rect class="hl" x="394" y="332" width="212" height="208" rx="14"/>`);
+  s+=g('rgb',`<rect x="486" y="566" width="28" height="28" rx="3" fill="#e3e6e2"/><circle cx="500" cy="580" r="9" fill="#a9bdb9"/><text class="lab" x="500" y="624" text-anchor="middle">RGB-LED</text>`,`<circle class="hl" cx="500" cy="580" r="32"/>`);
+  s+=g('spk',`<g transform="translate(688 572) rotate(-30)"><rect x="-42" y="-42" width="84" height="84" rx="4" fill="${k}"/><circle r="10" fill="#22282b"/><rect class="hl" x="-56" y="-56" width="112" height="112" rx="12"/></g><text class="lab" x="640" y="654" text-anchor="middle">LAUTSPRECHER</text>`,'');
+  s+=g('cpu',`<g transform="translate(392 640) rotate(45)"><rect x="-30" y="-30" width="60" height="60" rx="3" fill="${k}"/><rect class="hl" x="-44" y="-44" width="88" height="88" rx="10"/></g><text class="lab" x="392" y="706" text-anchor="middle">PROZESSOR</text>`,'');
+  s+=g('bat',`<g transform="translate(566 706) rotate(-30)"><rect x="-36" y="-24" width="72" height="48" rx="3" fill="#eceee9"/><rect x="-26" y="-12" width="52" height="10" rx="2" fill="#c9ccc6"/><rect class="hl" x="-48" y="-36" width="96" height="72" rx="10"/></g><text class="lab" x="562" y="764" text-anchor="middle">BATTERIE</text>`,'');
+  return s+'</svg>';
+}
+
+/* ---------- Inhalte ---------- */
+const HOWTO=[
+ {id:'anschliessen',t:'Calliope anschließen',h:`<ol class="steps"><li>Stecke das Kabel des <b>Batteriepacks</b> in den grauen Batterieanschluss des Calliope.</li><li>Schalte das Batteriepack am Schalter ein. Der Calliope startet dann das Programm, das zuletzt übertragen wurde.</li></ol><div class="note warn">Willst du den Calliope mit einem Computer oder einer Powerbank verbinden, darf das Batteriepack auf keinen Fall gleichzeitig angeschlossen sein!</div>`},
+ {id:'makecode',t:'MakeCode öffnen',h:`<ol class="steps"><li>Öffne die App <b>„Calliope mini“</b> auf dem iPad. Erlaube die Bluetooth-Verbindung mit „OK“.</li><li>Tippe unten auf <b>„Editoren und Programme“</b> und dann auf <b>„MakeCode“</b>.</li><li>Tippe auf <b>„Neues Projekt“</b>, gib einen Namen ein und tippe auf „Erstellen“.</li></ol><p>Links siehst du die <b>Simulation</b>: Sie zeigt, was dein Programm macht. In der Mitte stehen die <b>Befehle</b>, sortiert nach Bereichen wie Grundlagen, Eingabe, Musik, Logik, Schleifen, Variablen und Mathematik. Ziehe Befehle nach rechts in deinen <b>Code</b> und stecke sie zusammen.</p><p class="hint">Am Computer geht es auch im Browser: <a href="https://makecode.calliope.cc/" target="_blank" rel="noopener">makecode.calliope.cc</a> (öffnet in neuem Tab).</p>`},
+ {id:'uebertragen',t:'Code übertragen',h:`<ol class="steps"><li>Schalte den Calliope ein.</li><li>Drücke <b>A + B + Reset</b> gleichzeitig und halte sie etwa 3 Sekunden.</li><li>Lass <b>nur Reset</b> los, A und B hältst du weiter gedrückt.</li><li>Warte, bis auf der LED-Matrix das <b>Bluetooth-Symbol</b> erscheint.</li><li>Lass A und B los. Jetzt leuchtet ein <b>Muster</b>.</li><li>Tippe in MakeCode oben rechts auf das rote Verbinden-Symbol und trage das Muster vom Calliope ein.</li><li>Tippe unten links auf <b>„Herunterladen“</b> und im Fenster noch einmal auf „Herunterladen“. Warte, bis 100 % erreicht sind.</li></ol><p>Änderst du dein Programm, überträgst du es einfach noch einmal.</p><div class="note">Startet die Bluetooth-Verbindung nicht und erscheint kein Muster, hilft deine Lehrkraft: Sie spielt einmal eine Startdatei per USB vom Computer auf.</div>`},
+ {id:'matrix',t:'LED-Matrix',h:`<p>Die <b>LED-Matrix</b> besteht aus 25 LEDs in 5 Reihen und 5 Spalten. Mit diesen Befehlen aus <b>Grundlagen</b> zeigst du etwas an:</p>##zeige Text "Hallo"|zeige Zahl (42)|zeige Symbol {g:...../.#.#./...../#...#/.###.}|zeige LEDs {g:.#.#./#####/#####/.###./..#..}##<p><b>zeige Symbol</b> hat fertige Bilder (Pfeil nach unten antippen). Mit <b>zeige LEDs</b> malst du ein eigenes Bild. <b>Bildschirminhalt löschen</b> schaltet alle LEDs aus.</p>`},
+ {id:'rgb',t:'RGB-LED',h:`<p>Die <b>RGB-LED</b> sitzt unter der LED-Matrix. Sie mischt ihre Farbe aus Rot, Grün und Blau. Die Befehle findest du in <b>Grundlagen</b>:</p>##setze RGB-LED-Farbe auf {rot}|eingebaute RGB-LED ausschalten##<p>Tippe auf die Farbe, um eine andere zu wählen.</p>`},
+ {id:'pause',t:'Warten mit „pausiere“',h:`<p><b>pausiere (ms)</b> wartet, bevor der nächste Befehl kommt. Die Zeit steht in <b>Millisekunden</b>: <b>1000 ms = 1 Sekunde</b>, 5000 ms = 5 Sekunden.</p>##pausiere (ms) (1000)##`},
+ {id:'musik',t:'Töne',h:`<p>Der <b>Lautsprecher</b> spielt Töne. Im Bereich <b>Musik</b> findest du:</p>##!music:spiele Note {Mittleres C} für {1} Schlag##<p>Die <b>Note</b> bestimmt, wie hoch der Ton ist. Die <b>Schläge</b> bestimmen, wie lange er dauert.</p>`},
+ {id:'sensoren',t:'Sensoren',h:`<p>Der Calliope hat mehrere <b>Sensoren</b>. Ihre Messwerte sind runde Blöcke im Bereich <b>Eingabe</b>. Du setzt sie zum Beispiel in „zeige Zahl“ ein:</p>##zeige Zahl [Lichtstärke|in]|zeige Zahl [Lautstärke|in]|zeige Zahl [Temperatur °C|in]##<ul><li><b>Lichtstärke</b>: misst die LED-Matrix (0 = dunkel bis 255 = hell).</li><li><b>Lautstärke</b>: misst das Mikrofon (0 bis 255).</li><li><b>Temperatur</b>: misst ein Sensor im Prozessor, in °C.</li><li>Der <b>Lagesensor</b> erkennt Bewegung: <b>wenn geschüttelt</b>.</li></ul><p>Tipp: Setze den Befehl in „dauerhaft“. Dann siehst du, welche Werte bei dir vorkommen.</p>`},
+ {id:'bedingung',t:'Bedingte Anweisung und Verzweigung',h:`<p>Mit <b>wenn … dann</b> (Bereich <b>Logik</b>) führt der Calliope Befehle nur aus, wenn eine <b>Bedingung</b> erfüllt ist. Mit dem <b>+</b> bekommst du <b>ansonsten</b> und <b>sonst wenn</b>.</p>@@cond@@<p>Als Bedingung kannst du Zahlen <b>vergleichen</b>: <b>&gt;</b> größer als, <b>&lt;</b> kleiner als, <b>=</b> gleich. Die Verzweigung wird nur geprüft, wenn das Programm gerade an dieser Stelle ist. Blöcke wie <b>wenn Knopf A geklickt</b> oder <b>wenn geschüttelt</b> reagieren dagegen sofort, egal wo das Programm gerade ist.</p>`},
+ {id:'schleife',t:'Schleifen',h:`<p>Eine <b>Schleife</b> wiederholt Befehle. <b>dauerhaft</b> wiederholt immer weiter. <b>wiederhole … mal</b> (Bereich <b>Schleifen</b>) wiederholt genau so oft, wie du einstellst, dann geht es darunter weiter.</p>@@loop@@`},
+ {id:'variablen',t:'Variablen',h:`<p>Eine <b>Variable</b> speichert eine Zahl unter einem Namen. Erstelle sie im Bereich <b>Variablen</b> mit „Erstelle eine Variable“.</p>##!var:setze {zähler} auf (0)|!var:ändere {zähler} um (1)##<p>Eine <b>Sensor-Variable</b> speichert einen Messwert, damit du ihn mehrmals nutzen kannst. Eine <b>Zähler-Variable</b> zählt etwas, zum Beispiel wie oft eine Taste gedrückt wurde.</p>`},
+ {id:'zufall',t:'Zufallszahlen',h:`<p>Im Bereich <b>Mathematik</b> liefert <b>wähle eine zufällige Zahl von … bis …</b> bei jedem Aufruf eine neue <b>Zufallszahl</b>.</p>##zeige Zahl [wähle eine zufällige Zahl von (1) bis (10)|math]##`},
+ {id:'touch',t:'Touch-Pins',h:`<p>Am Rand hat der Calliope sechs goldene <b>Pins</b>. Die Pins 0 bis 3 sind <b>Touch-Sensoren</b>: Berührst du den Pin − und gleichzeitig einen Touch-Pin, merkt das der Calliope. Die Befehle findest du unter „Fortgeschritten“ → „Pins“.</p>`}
+];
+const HOW_EXTRA={
+ cond:[{e:'basic',t:'dauerhaft',b:[{c:'logic',t:'wenn [[Lautstärke|in] > (50)|logic] dann',b:[{s:'basic',t:'setze RGB-LED-Farbe auf {rot}'}],x:[['ansonsten',[{s:'basic',t:'eingebaute RGB-LED ausschalten'}]]]}]}],
+ loop:[{e:'basic',t:'beim Start',b:[{c:'loops',t:'wiederhole (3) mal',b:[{s:'basic',t:'zeige Symbol {g:.#.#./#####/#####/.###./..#..}'},{s:'basic',t:'Bildschirminhalt löschen'}]},{s:'basic',t:'zeige Text "fertig"'}]}]
+};
+/* Kurzschrift ##a|b## = einzelne Befehle (Grundlagen, sonst !kat:) */
+function howHtml(h){return h.replace(/##(.+?)##/g,(m,x)=>'<div class="progbox"><div class="blockview"><div class="bk-stacks" style="display:flex;flex-direction:column;gap:8px">'+x.split(/\|(?![^\[]*\])/).map(t=>{let c='basic';const mm=t.match(/^!(\w+):(.*)$/);if(mm){c=mm[1];t=mm[2];}return '<div class="bk-stack"><div class="bk notch k-'+c+'">'+inl(t)+'</div></div>';}).join('')+'</div></div></div>').replace(/@@(\w+)@@/g,(m,k)=>'<div class="progbox">'+CB.blocks(HOW_EXTRA[k])+'</div>');}
+
+const OPS={'nennen':'Fakten, Begriffe oder Regeln ohne Erläuterung aufzählen.','beschreiben':'Strukturiert und fachsprachlich angemessen Sachverhalte darlegen.','zuordnen':'Begründet für ein Objekt eine Gruppe, eine Position oder ein Material zuweisen.','ordnen':'Etwas kriteriengeleitet in eine bestimmte Systematik oder Reihenfolge bringen.','unterscheiden':'Etwas im Hinblick auf seine besonderen Merkmale erkennen und von Alternativen abgrenzen.','erklären':'Sachverhalte so darstellen, dass Bedingungen, Ursachen und Funktionszusammenhänge verständlich werden.','ermitteln':'Einen Zusammenhang oder eine Lösung finden und das Ergebnis formulieren.','überprüfen':'Inhalte oder Aussagen auf ihre sachliche Richtigkeit bzw. innere Logik hin untersuchen.','entwickeln':'Zu einer Problemstellung ein Lösungsmodell oder ein Lösungskonzept begründet darlegen.'};
+
+/* Aufgaben: q mit *Operatorwort* */
+const T={
+ p1:{op:'zuordnen',q:'*Ordne* die Bauteile *zu*: Tippe zuerst eine Aufgabe an und dann auf der Platine das Bauteil, das sie erledigt.',type:'spot',qs:[['misst die Temperatur','cpu'],['misst die Lautstärke','mic'],['erkennt, dass du den Calliope schüttelst','acc'],['leuchtet in vielen Farben','rgb'],['spielt Töne ab','spk']]},
+ p2:{op:'unterscheiden',q:'*Unterscheide* Sensoren und Aktoren.',type:'seg',cats:['Sensor','Aktor'],items:[['Mikrofon',0],['Lautsprecher',1],['RGB-LED',1],['Lagesensor',0],['Taste A',0],['Temperatursensor im Prozessor',0],['LED-Matrix, wenn sie Text anzeigt',1]]},
+ h1:{op:'ordnen',q:'*Ordne* die Schritte, mit denen du ein Programm per Bluetooth auf den Calliope überträgst.',type:'order',items:['Calliope einschalten','A + B + Reset etwa 3 Sekunden gedrückt halten','Nur Reset loslassen, A und B weiter halten','Warten, bis das Bluetooth-Symbol erscheint','A und B loslassen: Ein Muster leuchtet','In MakeCode auf das Verbinden-Symbol tippen und das Muster eintragen','Auf „Herunterladen“ tippen und bis 100 % warten'],start:[3,0,5,1,6,2,4]},
+ c1a:{op:'nennen',q:'*Nenne* die passenden Befehle: Fülle die Lücken.',type:'gap',text:'Den Schriftzug zeigt der Befehl {0}. Den Smiley zeigt der Befehl {1}. Beide Befehle findest du im Bereich {2}. Was unter {3} steht, läuft nur einmal nach dem Einschalten.',gaps:[[['zeige Zahl','zeige Text','zeige LEDs'],1],[['zeige Symbol','setze LED-Farbe','zeige Text'],0],[['Grundlagen','Musik','Variablen'],0],[['dauerhaft','beim Start','pausiere'],1]]},
+ c1b:{op:'unterscheiden',q:'*Unterscheide*, wie sich Änderungen am Programm auswirken.',type:'quiz',qs:[{q:'Du setzt beide Befehle in „dauerhaft“ statt in „beim Start“. Dann …',o:['läuft die Anzeige nur einmal.','wiederholen sich Schriftzug und Smiley immer wieder.','zeigt der Calliope gar nichts an.'],a:1,why:'„dauerhaft“ wiederholt die Befehle, solange der Calliope an ist.'},{q:'Du tauschst die Reihenfolge der beiden Befehle. Dann …',o:['erscheint zuerst der Smiley und danach der Schriftzug.','ändert sich nichts.','erscheinen beide gleichzeitig.'],a:0,why:'Der Calliope führt die Befehle von oben nach unten aus.'}]},
+ c2a:{op:'ermitteln',q:'*Ermittle*, wie viele Sekunden ein kompletter Durchlauf deiner Ampel dauert (Rot, Gelb, Grün, Gelb).',type:'num',answer:14,unit:'Sekunden',why:'5 + 2 + 5 + 2 = 14 Sekunden.'},
+ c2b:{op:'überprüfen',q:'*Überprüfe* Bens Ampel. Die Gelbphasen sollen 2 Sekunden dauern. Tippe die Zeile an, die nicht stimmt.',type:'mark',lines:[['basic','dauerhaft',0,false],['basic','setze RGB-LED-Farbe auf {rot}',1,false],['basic','pausiere (ms) (5000)',1,false],['basic','setze RGB-LED-Farbe auf {gelb}',1,false],['basic','pausiere (ms) (200)',1,true],['basic','setze RGB-LED-Farbe auf {grün}',1,false],['basic','pausiere (ms) (5000)',1,false],['basic','setze RGB-LED-Farbe auf {gelb}',1,false],['basic','pausiere (ms) (2000)',1,false]],why:'200 ms sind nur 0,2 Sekunden. Für 2 Sekunden brauchst du 2000 ms.'},
+ c3a:{op:'ordnen',q:'*Ordne* die Befehle des Countdowns von oben nach unten.',type:'order',chips:true,items:[['var','setze {zahl} auf (10)'],['loops','wiederhole (10) mal'],['basic','zeige Zahl [zahl|var] (in der Schleife)'],['var','ändere {zahl} um (-1) (in der Schleife)'],['basic','setze RGB-LED-Farbe auf {rot} (nach der Schleife)']],start:[2,4,0,3,1]},
+ c3b:{op:'zuordnen',q:'*Ordne* jedem Befehl seine Wirkung im Raketenstart *zu*.',type:'pair',left:['setze zahl auf 10','ändere zahl um -1','pausiere (ms) 1000','setze RGB-LED-Farbe auf rot'],right:['Die Rakete startet: Das Signal leuchtet.','Der Countdown beginnt bei 10.','Die Zahl wird um 1 kleiner.','Jede Zahl bleibt 1 Sekunde stehen.'],ans:[1,2,3,0]},
+ c4a:{op:'erklären',q:'*Erkläre*, wo die Töne im Programm stehen müssen: Fülle die Lücken.',type:'gap',text:'Der Piepton steht {0} der Schleife, damit er bei jeder Zahl erklingt. Der besondere Ton steht {1} der Schleife, damit er nur einmal bei der 0 kommt. Den Befehl dafür findest du im Bereich {2}. Wie lange ein Ton dauert, legst du mit den {3} fest.',gaps:[[['innerhalb','nach','vor'],0],[['innerhalb','nach'],1],[['Grundlagen','Musik','Eingabe'],1],[['Schlägen','Noten','Variablen'],0]]},
+ c4b:{op:'unterscheiden',q:'*Unterscheide*: Mit welchen Änderungen klingt der letzte Ton anders als die Pieptöne? Wähle alle passenden aus.',type:'multi',opts:[['eine höhere Note wählen',true],['den Ton länger spielen (mehr Schläge)',true],['eine tiefere Note wählen',true],['die Zahl auf der LED-Matrix größer anzeigen',false],['die eingebaute RGB-LED ausschalten',false]]},
+ c5a:{op:'ermitteln',q:'*Ermittle*, wie oft pro Minute dein Thermometer einen neuen Wert anzeigt, wenn es nach jeder Anzeige 1000 ms wartet. Die Zeit für die Anzeige selbst lässt du weg.',type:'num',answer:60,unit:'mal',why:'1000 ms sind 1 Sekunde. Eine Minute hat 60 Sekunden, also 60 neue Werte.'},
+ c5b:{op:'überprüfen',q:'*Überprüfe* die Aussagen zum Thermometer. Wähle alle richtigen aus.',type:'multi',opts:[['Der Temperatursensor sitzt im Prozessor.',true],['Legst du den Finger auf den Prozessor, steigt der Wert.',true],['Der Calliope misst die Temperatur mit dem Mikrofon.',false],['Der Wert kann etwas höher sein als die Raumtemperatur, weil der Prozessor selbst warm wird.',true],['Die Temperatur wird in Millisekunden angegeben.',false]]},
+ c6a:{op:'ermitteln',q:'*Ermittle*, in welcher Farbe die Lärmampel bei diesen Messwerten leuchtet.',type:'seg',cats:['grün','rot'],items:[['Lautstärke 40',0],['Lautstärke 100',0],['Lautstärke 101',1],['Lautstärke 180',1],['Lautstärke 0',0],['Lautstärke 255',1]]},
+ c6b:{op:'ordnen',q:'*Ordne* die Blöcke der Lärmampel von oben nach unten.',type:'order',chips:true,items:[['basic','dauerhaft'],['logic','wenn [[Lautstärke|in] > (100)|logic] dann'],['basic','setze RGB-LED-Farbe auf {rot}'],['logic','ansonsten'],['basic','setze RGB-LED-Farbe auf {grün}']],start:[3,0,4,2,1]},
+ c7a:{op:'überprüfen',q:'*Überprüfe* Mias Schrankwächter: Er schlägt Alarm, wenn der Schrank zu ist, und bleibt still, wenn die Tür offen ist. Tippe die fehlerhafte Zeile an.',type:'mark',lines:[['basic','dauerhaft',0,false],['logic','wenn [[Lichtstärke|in] < (80)|logic] dann',1,true],['basic','setze RGB-LED-Farbe auf {rot}',2,false],['basic','zeige Text "A"',2,false],['music','spiele Note {Hohes H} für {1/4} Schlag',2,false],['logic','ansonsten',1,false],['basic','eingebaute RGB-LED ausschalten',2,false],['basic','Bildschirminhalt löschen',2,false]],why:'Mit „< 80“ startet der Alarm im Dunkeln. Richtig ist „> 80“: Alarm, wenn es beim Öffnen hell wird.'},
+ c7b:{op:'beschreiben',q:'*Beschreibe*, wie der Schrankwächter funktioniert: Fülle die Lücken.',type:'gap',text:'Die Helligkeit misst die {0}. Geht die Schranktür auf, wird der Messwert {1}. Ist er größer als 80, ist die Bedingung {2} und der Alarm startet. Sonst führt der Calliope die Befehle unter {3} aus.',gaps:[[['RGB-LED','LED-Matrix','Taste A'],1],[['größer','kleiner'],0],[['erfüllt','nicht erfüllt'],0],[['dann','ansonsten','beim Start'],1]]},
+ c8a:{op:'ermitteln',q:'*Ermittle* die Farbe der RGB-LED bei diesen Temperaturen.',type:'seg',cats:['grün','gelb','rot'],items:[['25 °C',0],['28 °C',0],['29 °C',1],['30 °C',2],['34 °C',2],['20 °C',0]]},
+ c8b:{op:'erklären',q:'*Erkläre* die Reihenfolge der Bedingungen im Hitzefrei-Melder.',type:'quiz',qs:[{q:'Stünde „temp > 28“ an erster Stelle, dann …',o:['würde die LED bei 30 °C gelb statt rot leuchten, weil 30 auch größer als 28 ist.','würde sich nichts ändern.','würde die RGB-LED nie leuchten.'],a:0,why:'Der Calliope prüft von oben nach unten und nimmt die erste erfüllte Bedingung.'},{q:'Bei genau 29 °C ist die Bedingung „temp > 29“ …',o:['erfüllt.','nicht erfüllt, denn 29 ist nicht größer als 29.'],a:1,why:'„größer als“ schließt die Zahl selbst aus. Bei 29 °C leuchtet die LED gelb.'}]},
+ c9a:{op:'nennen',q:'*Nenne* die passenden Einstellungen: Fülle die Lücken.',type:'gap',text:'Für einen Würfel stellst du die Zufallszahl von {0} bis {1} ein. Das Schütteln erkennt der {2}. Der Block „wenn geschüttelt“ steht im Bereich {3}.',gaps:[[['0','1','6'],1],[['6','10','5'],0],[['Lagesensor','Lautsprecher','Prozessor'],0],[['Eingabe','Musik','Logik'],0]]},
+ c9b:{op:'zuordnen',q:'*Ordne* jedem Startblock *zu*, wann seine Befehle laufen.',type:'pair',left:['beim Start','dauerhaft','wenn geschüttelt','wenn Knopf A geklickt'],right:['sobald jemand den Calliope schüttelt','einmal nach dem Einschalten','wenn jemand die linke Taste drückt','immer wieder, ohne Ende'],ans:[1,3,0,2]},
+ c10a:{op:'ordnen',q:'*Ordne* die Blöcke des Spiels von oben nach unten.',type:'order',chips:true,items:[['in','wenn {geschüttelt}'],['var','setze {wahl} auf [zufällige Zahl von (1) bis (3)|math]'],['logic','wenn [[wahl|var] = (1)|logic] dann'],['basic','zeige Symbol {g:##..#/##.#./..#../##.#./##..#}'],['logic','sonst wenn [[wahl|var] = (2)|logic] dann'],['basic','zeige LEDs {g:...../.###./.###./.###./.....}'],['logic','ansonsten'],['basic','zeige LEDs {g:#####/#...#/#...#/#...#/#####}']],start:[2,5,0,7,4,1,6,3]},
+ c10b:{op:'ermitteln',q:'*Ermittle*: Ihr spielt 30 Runden. Wie oft zeigt der Calliope ungefähr den Stein?',type:'num',answer:10,unit:'mal',why:'Alle drei Bilder kommen im Schnitt gleich oft: 30 : 3 = 10. Weil es Zufall ist, sind es im echten Spiel mal etwas mehr, mal etwas weniger.'},
+ c11a:{op:'erklären',q:'*Erkläre*, warum es die Variable „unten“ braucht: Fülle die Lücken.',type:'gap',text:'Ohne „unten“ würde der Calliope {0} zählen, solange es dunkel ist, denn „dauerhaft“ prüft die Bedingung viele Male pro Sekunde. Mit „unten“ zählt er nur beim {1} Mal, wenn es dunkel wird. Erst wenn es wieder {2} wird, setzt das Programm „unten“ auf {3} zurück.',gaps:[[['nur einmal','immer weiter'],1],[['ersten','zehnten'],0],[['hell','dunkel'],0],[['0','1'],0]]},
+ c11b:{op:'entwickeln',q:'*Entwickle* eine Erweiterung: Beschreibe, wie dein Liegestützzähler nach 10 Liegestützen ein Lob zeigt. Nenne die Bedingung und die Befehle.',type:'open',min:60,checks:[['Bedingung',/wenn|falls|=|gleich|10/i],['Variable anzahl',/anzahl|zähler|variable/i],['Anzeige oder Ton',/zeige|symbol|text|smiley|herz|ton|note|led|farbe|melodie/i]],muster:['In „dauerhaft“ kommt eine weitere Verzweigung: wenn anzahl = 10 dann …','Unter „dann“ stehen zum Beispiel „zeige Symbol Herz“ oder „zeige Text "Super!"“ und eine kurze Melodie.','Damit das Lob nicht immer wieder erscheint, merkst du dir in einer weiteren Variablen, dass es schon gezeigt wurde.']}
+};
+
+/* Challenges: Auftrag nach Daniels Challenge-Karten */
+const CH=[
+ {n:1,t:'Anzeigetafel „Hitzefrei“',lv:1,uses:['matrix'],how:['matrix','makecode','uebertragen'],tasks:['c1a','c1b'],
+  auf:'Die Anzeigetafel zeigt einen Schriftzug und danach einen Smiley. Auf dem Schriftzug steht: „Nach der 4. Stunde ist hitzefrei!“ Anschließend erscheint ein Smiley, der sich freut.',
+  info:'Text und Bilder zeigst du auf der <b>LED-Matrix</b>. Die Befehle findest du im Bereich <b>Grundlagen</b>: <b>zeige Text</b> lässt einen Text durchlaufen, <b>zeige Symbol</b> zeigt ein fertiges Bild. Alles unter <b>beim Start</b> läuft einmal nach dem Einschalten, alles in <b>dauerhaft</b> immer wieder. Der Calliope arbeitet die Befehle von oben nach unten ab.',
+  tip:'Du brauchst zwei Befehle aus dem Bereich Grundlagen. Schau im How-to-Guide unter „LED-Matrix“.',
+  teil:{blocks:[{e:'basic',t:'beim Start',b:[{s:'basic',t:'zeige Text "Nach der 4. Stunde ist hitzefrei!"'},{n:'Hier fehlt noch der Smiley.'}]}],js:'basic.showString("Nach der 4. Stunde ist hitzefrei!")\n// Ergänze hier den Smiley'}},
+ {n:2,t:'Ampel',lv:1,uses:['rgb'],how:['rgb','pause'],tasks:['c2a','c2b'],
+  auf:'Programmiere mit der RGB-LED eine Ampel. Die Rot- und die Grünphase dauern je 5 Sekunden, die Gelbphasen je 2 Sekunden. Nutze den Befehl „pausiere“, um die Dauer der Phasen einzustellen.',
+  info:'Die <b>RGB-LED</b> unter der LED-Matrix kann in vielen Farben leuchten. Mit <b>setze RGB-LED-Farbe auf</b> wählst du die Farbe. <b>pausiere (ms)</b> wartet, bevor der nächste Befehl kommt. Die Zeit steht in <b>Millisekunden</b>: <b>1000 ms sind 1 Sekunde</b>.',
+  tip:'Reihenfolge einer Ampel: Rot → Gelb → Grün → Gelb → wieder Rot. Nach jeder Farbe kommt ein „pausiere“. Setze alles in „dauerhaft“.',
+  teil:{blocks:[{e:'basic',t:'dauerhaft',b:[{s:'basic',t:'setze RGB-LED-Farbe auf {rot}'},{s:'basic',t:'pausiere (ms) (5000)'},{s:'basic',t:'setze RGB-LED-Farbe auf {gelb}'},{s:'basic',t:'pausiere (ms) (2000)'},{n:'Ergänze Grün und das zweite Gelb.'}]}],js:'basic.forever(function () {\n    basic.setLedColor(0xff0000)\n    basic.pause(5000)\n    basic.setLedColor(0xffff00)\n    basic.pause(2000)\n    // Ergänze Grün und das zweite Gelb\n})'}},
+ {n:3,t:'Raketenstart',lv:1,uses:['matrix','rgb'],how:['variablen','schleife','matrix','rgb'],tasks:['c3a','c3b'],
+  auf:'Die LED-Matrix zeigt einen Countdown, der von 10 bis 0 herunterzählt. Wenn die 0 erscheint, leuchtet die RGB-LED rot. Nach ein paar Sekunden beginnt der Raketenstart von vorn.',
+  info:'Für den Countdown brauchst du eine <b>Variable</b>, zum Beispiel <b>zahl</b>. Sie merkt sich eine Zahl. <b>setze zahl auf 10</b> gibt ihr den Startwert, <b>ändere zahl um -1</b> macht sie um 1 kleiner. Eine <b>Schleife</b> wie <b>wiederhole 10 mal</b> führt die Befehle darin mehrmals aus. Was <b>nach der Schleife</b> steht, kommt erst, wenn die Schleife fertig ist.',
+  tip:'Erstelle unter „Variablen“ eine Variable „zahl“. In der Schleife: Zahl anzeigen, 1 Sekunde warten, Zahl um 1 verkleinern. Nach der Schleife: 0 anzeigen und die RGB-LED rot schalten.',
+  teil:{blocks:[{e:'basic',t:'dauerhaft',b:[{s:'basic',t:'eingebaute RGB-LED ausschalten'},{s:'var',t:'setze {zahl} auf (10)'},{c:'loops',t:'wiederhole (10) mal',b:[{s:'basic',t:'zeige Zahl [zahl|var]'},{s:'basic',t:'pausiere (ms) (1000)'},{n:'Die Zahl muss kleiner werden.'}]},{n:'0 anzeigen, RGB-LED rot, ein paar Sekunden warten.'}]}],js:'let zahl = 0\nbasic.forever(function () {\n    basic.turnRgbLedOff()\n    zahl = 10\n    for (let index = 0; index < 10; index++) {\n        basic.showNumber(zahl)\n        basic.pause(1000)\n        // Die Zahl muss kleiner werden\n    }\n    // 0 anzeigen, RGB-LED rot, warten\n})'}},
+ {n:4,t:'Raketenstart mit Sound',lv:1,uses:['matrix','rgb','spk'],how:['musik','schleife'],tasks:['c4a','c4b'],
+  auf:'Programmiere den Countdown aus Challenge #03. Ergänze ihn so, dass bei jeder neuen Zahl ein Piepton erklingt. Der letzte Ton bei der 0 soll anders klingen.',
+  info:'Töne spielt der <b>Lautsprecher</b>. Im Bereich <b>Musik</b> findest du <b>spiele Note … für … Schlag</b>. Die <b>Note</b> bestimmt, wie hoch der Ton ist, die <b>Schläge</b> bestimmen, wie lange er dauert. Was <b>in der Schleife</b> steht, passiert bei jeder Zahl. Was <b>nach der Schleife</b> steht, passiert nur einmal am Ende.',
+  tip:'Den Piepton setzt du in die Schleife, direkt nach „zeige Zahl“. Den anderen Ton für die 0 setzt du nach der Schleife, zum Beispiel höher und länger.',
+  teil:{blocks:[{c:'loops',t:'wiederhole (10) mal',b:[{s:'basic',t:'zeige Zahl [zahl|var]'},{s:'music',t:'spiele Note {Mittleres C} für {1/4} Schlag'},{s:'basic',t:'pausiere (ms) (750)'},{s:'var',t:'ändere {zahl} um (-1)'}]},{n:'Nach der Schleife: 0, rote LED und ein anderer Ton.'}],js:'for (let index = 0; index < 10; index++) {\n    basic.showNumber(zahl)\n    music.playTone(262, music.beat(BeatFraction.Quarter))\n    basic.pause(750)\n    zahl += -1\n}\n// Nach der Schleife: 0, rote LED und ein anderer Ton'}},
+ {n:5,t:'Thermometer',lv:1,uses:['cpu','matrix'],how:['sensoren'],tasks:['c5a','c5b'],
+  auf:'Einmal pro Sekunde zeigt die LED-Matrix die Temperatur an. Der Temperatursensor sitzt im Prozessor des Calliope. Lege deinen Finger auf den Prozessor und teste, ob das Thermometer funktioniert. Die Temperatur sollte dadurch steigen.',
+  info:'Der Calliope misst die <b>Temperatur</b> mit einem Sensor im <b>Prozessor</b>. Den Messwert findest du als runden Block <b>Temperatur (°C)</b> im Bereich <b>Eingabe</b>. Du setzt ihn in <b>zeige Zahl</b> ein. Weil der Prozessor beim Arbeiten selbst etwas <b>warm</b> wird, zeigt er meist ein wenig mehr an als ein Raumthermometer.',
+  tip:'Du brauchst „dauerhaft“, „zeige Zahl“, den runden Block „Temperatur (°C)“ und „pausiere“.',
+  teil:{blocks:[{e:'basic',t:'dauerhaft',b:[{s:'basic',t:'zeige Zahl (0)'},{n:'Setze den Messwert ein und ergänze die Pause.'}]}],js:'basic.forever(function () {\n    basic.showNumber(0) // Messwert einsetzen\n    // Pause ergänzen\n})'}},
+ {n:6,t:'Lärmampel',lv:2,uses:['mic','rgb'],how:['sensoren','bedingung'],tasks:['c6a','c6b'],
+  auf:'Die RGB-LED soll rot leuchten, wenn die Lautstärke größer als 100 ist. Ist die Lautstärke kleiner oder gleich 100, soll sie grün leuchten.',
+  info:'Die <b>Lautstärke</b> misst das <b>Mikrofon</b>. Der Wert liegt zwischen 0 (ganz leise) und 255 (sehr laut). Mit einer <b>Verzweigung</b> <b>wenn … dann … ansonsten</b> aus dem Bereich <b>Logik</b> entscheidet der Calliope: Ist die Bedingung erfüllt, führt er die Befehle unter „dann“ aus, sonst die unter „ansonsten“. Die Bedingung baust du mit einem <b>Vergleich</b>, zum Beispiel <b>Lautstärke &gt; 100</b>. „&gt;“ heißt „größer als“: 100 selbst gehört noch nicht dazu.',
+  tip:'Schau im How-to-Guide unter „Sensoren“ und „Bedingte Anweisung“. Lass dir die Lautstärke zuerst als Zahl anzeigen, dann weißt du, welche Werte bei dir vorkommen.',
+  teil:{blocks:[{e:'basic',t:'dauerhaft',b:[{c:'logic',t:'wenn [[Lautstärke|in] > (100)|logic] dann',b:[{s:'basic',t:'setze RGB-LED-Farbe auf {rot}'}],x:[['ansonsten',[{n:'Was passiert, wenn es leise ist?'}]]]}]}],js:'basic.forever(function () {\n    if (input.soundLevel() > 100) {\n        basic.setLedColor(0xff0000)\n    } else {\n        // Was passiert, wenn es leise ist?\n    }\n})'}},
+ {n:7,t:'Schrankwächter',lv:2,uses:['matrix','rgb','spk'],how:['sensoren','bedingung'],tasks:['c7a','c7b'],
+  auf:'Der Schrankwächter ist eine Alarmanlage für den Schrank. Ist die Helligkeit größer als 80 (die Tür geht auf), leuchtet die RGB-LED rot, ein Piepton erklingt und auf der LED-Matrix erscheint ein A. Ist die Helligkeit kleiner oder gleich 80, bleibt der Calliope ruhig.',
+  info:'Die <b>LED-Matrix</b> misst auch die <b>Lichtstärke</b> (0 = dunkel bis 255 = sehr hell). Den Wert findest du im Bereich <b>Eingabe</b>. Im geschlossenen Schrank ist es dunkel, beim Öffnen wird es hell, der Wert wird also <b>größer</b>. Unter <b>ansonsten</b> sorgst du dafür, dass der Calliope ruhig ist: <b>eingebaute RGB-LED ausschalten</b> und <b>Bildschirminhalt löschen</b>.',
+  tip:'Baue wie bei der Lärmampel eine Verzweigung. Unter „dann“ stehen drei Befehle: rote Farbe, Buchstabe A, Ton.',
+  teil:{blocks:[{e:'basic',t:'dauerhaft',b:[{c:'logic',t:'wenn [[Lichtstärke|in] > (80)|logic] dann',b:[{s:'basic',t:'setze RGB-LED-Farbe auf {rot}'},{n:'Ergänze das A und den Ton.'}],x:[['ansonsten',[{s:'basic',t:'eingebaute RGB-LED ausschalten'},{n:'Auch die LED-Matrix soll aus sein.'}]]]}]}],js:'basic.forever(function () {\n    if (input.lightLevel() > 80) {\n        basic.setLedColor(0xff0000)\n        // Ergänze das A und den Ton\n    } else {\n        basic.turnRgbLedOff()\n        // Auch die LED-Matrix soll aus sein\n    }\n})'}},
+ {n:8,t:'Hitzefrei-Melder',lv:2,uses:['cpu','matrix','rgb','spk'],how:['sensoren','bedingung','variablen'],tasks:['c8a','c8b'],
+  auf:'Der Hitzefrei-Melder gibt eurer Schulleitung Bescheid, wenn es zu heiß ist. Auf der LED-Matrix zeigt er dauerhaft die Temperatur an. Ist sie größer als 29 °C, piepst der Calliope in einem hohen Ton und die RGB-LED leuchtet rot. Ist sie größer als 28 °C, piepst er alle 5 Sekunden tief und die RGB-LED leuchtet gelb. Ansonsten leuchtet die RGB-LED grün.',
+  info:'Mit <b>sonst wenn</b> prüft der Calliope mehrere Bedingungen nacheinander, <b>von oben nach unten</b>. Sobald eine Bedingung erfüllt ist, führt er nur deren Befehle aus und überspringt den Rest. Eine <b>Sensor-Variable</b> wie <b>temp</b> speichert den Messwert, damit du ihn mehrmals nutzen kannst. Das <b>+</b> an der Verzweigung fügt einen „sonst wenn“-Teil hinzu. Zum Testen kannst du die Grenzen kurz niedriger setzen und den Finger auf den Prozessor legen.',
+  tip:'How-to-Guide: Sensoren, Bedingte Anweisung, Variablen. Prüfe zuerst „> 29“, dann „> 28“.',
+  teil:{blocks:[{e:'basic',t:'dauerhaft',b:[{s:'var',t:'setze {temp} auf [Temperatur °C|in]'},{s:'basic',t:'zeige Zahl [temp|var]'},{c:'logic',t:'wenn [[temp|var] > (29)|logic] dann',b:[{s:'basic',t:'setze RGB-LED-Farbe auf {rot}'},{s:'music',t:'spiele Note {Hohes H} für {1/2} Schlag'}],x:[['sonst wenn [[temp|var] > (28)|logic] dann',[{n:'Gelb, tiefer Ton, 5 Sekunden warten'}]],['ansonsten',[{n:'Grün'}]]]}]}],js:'let temp = 0\nbasic.forever(function () {\n    temp = input.temperature()\n    basic.showNumber(temp)\n    if (temp > 29) {\n        basic.setLedColor(0xff0000)\n        music.playTone(988, music.beat(BeatFraction.Half))\n    } else if (temp > 28) {\n        // Gelb, tiefer Ton, 5 Sekunden warten\n    } else {\n        // Grün\n    }\n})'}},
+ {n:9,t:'Würfel',lv:2,uses:['acc','matrix','spk'],how:['sensoren','zufall'],tasks:['c9a','c9b'],
+  auf:'Der Calliope zeigt wie ein echter Würfel eine Zahl zwischen 1 und 6 an, wenn er geschüttelt wird. Lass ihn nach dem Schütteln einmal piepsen, damit man weiß, dass er genug geschüttelt wurde.',
+  info:'Der <b>Lagesensor</b> merkt, wenn der Calliope bewegt oder <b>geschüttelt</b> wird. Der Block <b>wenn geschüttelt</b> (Bereich <b>Eingabe</b>) startet seine Befehle sofort beim Schütteln. Eine <b>Zufallszahl</b> liefert <b>wähle eine zufällige Zahl von … bis …</b> aus dem Bereich <b>Mathematik</b>.',
+  tip:'Du brauchst einen Befehl aus „Mathematik“. Setze ihn in „zeige Zahl“ ein.',
+  teil:{blocks:[{e:'in',t:'wenn {geschüttelt}',b:[{s:'basic',t:'zeige Zahl (0)'},{n:'Zufallszahl einsetzen, Ton ergänzen'}]}],js:'input.onGesture(Gesture.Shake, function () {\n    basic.showNumber(0) // Zufallszahl einsetzen\n    // Ton ergänzen\n})'}},
+ {n:10,t:'Schere, Stein, Papier',lv:3,uses:['acc','matrix','spk'],how:['zufall','variablen','bedingung','matrix'],tasks:['c10a','c10b'],
+  auf:'Lass den Calliope für dich „Schere, Stein, Papier“ spielen. Wenn er geschüttelt wird, piepst er einmal und zeigt zufällig Schere, Stein oder Papier auf der LED-Matrix an.',
+  info:'Speichere eine Zufallszahl von 1 bis 3 in einer <b>Variablen</b>, zum Beispiel <b>wahl</b>. Dann entscheidet eine <b>Verzweigung</b> mit <b>sonst wenn</b>: Bei 1 zeigst du die Schere, bei 2 den Stein, sonst das Papier. Eigene Bilder malst du mit <b>zeige LEDs</b>. Zahlen vergleichst du mit <b>=</b> aus dem Bereich Logik. Jedes Bild kommt im Schnitt <b>gleich oft</b> vor.',
+  tip:'Du brauchst einen Befehl aus „Mathematik“ und eine Variable (How-to-Guide: Variablen). Für die Schere gibt es ein fertiges Symbol.',
+  teil:{blocks:[{e:'in',t:'wenn {geschüttelt}',b:[{s:'music',t:'spiele Note {Mittleres C} für {1/8} Schlag'},{s:'var',t:'setze {wahl} auf [wähle eine zufällige Zahl von (1) bis (3)|math]'},{c:'logic',t:'wenn [[wahl|var] = (1)|logic] dann',b:[{s:'basic',t:'zeige Symbol {g:##..#/##.#./..#../##.#./##..#}'}],x:[['ansonsten',[{n:'Stein und Papier ergänzen (mit „sonst wenn“)'}]]]}]}],js:'let wahl = 0\ninput.onGesture(Gesture.Shake, function () {\n    music.playTone(262, music.beat(BeatFraction.Eighth))\n    wahl = randint(1, 3)\n    if (wahl == 1) {\n        basic.showIcon(IconNames.Scissors)\n    } else {\n        // Stein und Papier ergänzen\n    }\n})'}},
+ {n:11,t:'Liegestützzähler',lv:4,uses:['matrix','a','b','spk'],how:['variablen','bedingung','sensoren'],tasks:['c11a','c11b'],
+  auf:'Lass den Calliope deine Liegestütze zählen. Wenn du bei der Liegestütze ganz unten bist, ist es über dem Calliope dunkel. Nutze das, um die Liegestütze zu zählen. Drückst du Taste A, zeigt der Calliope die Anzahl an. Mit Taste B setzt du die Anzahl zurück. Lass den Calliope einmal piepsen, wenn du unten bist, damit du weißt, dass die Liegestütze gezählt wurde.',
+  info:'Eine <b>Zähler-Variable</b> wie <b>anzahl</b> zählt mit: <b>ändere anzahl um 1</b>. Damit eine Liegestütze nur <b>einmal</b> zählt, merkst du dir in einer zweiten Variablen <b>unten</b>, ob du gerade unten bist (1) oder nicht (0). Gezählt wird nur, wenn es dunkel ist <b>und</b> unten noch 0 ist. Wird es wieder <b>hell</b>, setzt du unten auf 0 zurück. Die Tasten fragst du mit <b>wenn Knopf A geklickt</b> ab. Miss vorher die <b>Lichtstärke</b>: Welche Werte zeigt der Calliope oben, welche unten?',
+  tip:'Miss zuerst mit „zeige Zahl Lichtstärke“, welche Werte oben und unten vorkommen, und wähle die Grenze dazwischen. Den Block „und“ findest du im Bereich Logik.',
+  teil:{blocks:[{e:'in',t:'wenn Knopf {A} geklickt',b:[{s:'basic',t:'zeige Zahl [anzahl|var]'}]},{e:'in',t:'wenn Knopf {B} geklickt',b:[{n:'anzahl zurücksetzen'}]},{e:'basic',t:'dauerhaft',b:[{c:'logic',t:'wenn [[[unten|var] = (0)|logic] und [[Lichtstärke|in] < (70)|logic]|logic] dann',b:[{s:'var',t:'ändere {anzahl} um (1)'},{s:'var',t:'setze {unten} auf (1)'},{n:'Ton ergänzen'}]},{n:'Wird es wieder hell, unten auf 0 setzen.'}]}],js:'let unten = 0\nlet anzahl = 0\ninput.onButtonPressed(Button.A, function () {\n    basic.showNumber(anzahl)\n})\ninput.onButtonPressed(Button.B, function () {\n    // anzahl zurücksetzen\n})\nbasic.forever(function () {\n    if (unten == 0 && input.lightLevel() < 70) {\n        anzahl += 1\n        unten = 1\n        // Ton ergänzen\n    }\n    // Wird es wieder hell, unten auf 0 setzen\n})'}}
+];
+const CHN={};CH.forEach(c=>CHN[c.n]=c);
+const pad=n=>String(n).padStart(2,'0');
+const cpOf=n=>LEVELS.find(l=>l.cp===n);
+
+/* ---------- Zustand ---------- */
+let S;try{S=JSON.parse(localStorage.getItem(KEY)||'null');}catch(e){S=null;}
+if(!S||typeof S!=='object')S={};
+S.pg=S.pg||'start';S.a=S.a||{};S.ok=S.ok||{};S.run=S.run||{};S.tip=S.tip||{};S.muster=S.muster||{};S.name=S.name||'';S.kl=S.kl||'';S.mode=S.mode==='code'?'code':'block';
+let saveT=0;
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S));const s=$('#saveState');if(s){const d=new Date();s.innerHTML='Gespeichert <b>✓</b> '+pad(d.getHours())+':'+pad(d.getMinutes());}}catch(e){}}
+
+const TASK_IDS=Object.keys(T);
+const label={};
+function isDone(id){const t=T[id];if(t.type==='open')return (S.a[id]||'').trim().length>=t.min;return !!S.ok[id];}
+function chDone(n){return !!S.run[n]&&CHN[n].tasks.every(isDone);}
+function chPart(n){const c=CHN[n];return ((S.run[n]?1:0)+c.tasks.filter(isDone).length)/(1+c.tasks.length);}
+function level(){let lv=-1;LEVELS.forEach((l,i)=>{if(chDone(l.cp))lv=Math.max(lv,i);});return lv;}
+
+/* ---------- Rückmeldung ---------- */
+function showFb(fb,cls,head,body,list){fb.hidden=false;fb.className='wfb '+cls;const kids=[el('p',{class:'lvl'},head)];if(body)kids.push(el('p',{},body));if(list&&list.length)kids.push(el('ul',{},...list.map(x=>el('li',{},x))));fb.replaceChildren(...kids);}
+function report(id,ok,art,fb){S.ok[id]=S.ok[id]||ok;save();refresh();if(window.LP)LP.result(id,ok,label[id],art,fb);}
+function mkCheck(id,art,fn){const fb=el('div',{class:'wfb',hidden:true,'aria-live':'polite'});const b=el('button',{class:'btn primary',type:'button'},'Prüfen');b.onclick=()=>fn(fb);art.append(el('div',{class:'row'},b),fb);return fb;}
+const chipHtml=it=>Array.isArray(it)?CB.chip(it[0],it[1]):esc(it);
+
+/* ---------- Aufgabenformate ---------- */
+function wSeg(id,t,w,art){
+  const v=S.a[id]=Array.isArray(S.a[id])&&S.a[id].length===t.items.length?S.a[id]:t.items.map(()=>-1);
+  const rows=t.items.map((it,i)=>{const r=el('div',{class:'segrow'});const seg=el('div',{class:'seg',role:'group','aria-label':it[0]});
+    t.cats.forEach((c,ci)=>{const b=el('button',{type:'button','aria-pressed':String(v[i]===ci)},c);b.onclick=()=>{v[i]=ci;$$('button',seg).forEach((x,xi)=>x.setAttribute('aria-pressed',String(xi===ci)));r.classList.remove('s-ok','s-bad');save();};seg.append(b);});
+    r.append(el('span',{},it[0]),seg);return r;});
+  w.className='w seglist';w.append(...rows);
+  mkCheck(id,art,fb=>{if(v.some(x=>x<0)){showFb(fb,'mid','Noch nicht fertig','Ordne zuerst alle Zeilen zu.');return;}
+    let ok=0;t.items.forEach((it,i)=>{const g=v[i]===it[1];rows[i].classList.toggle('s-ok',g);rows[i].classList.toggle('s-bad',!g);if(g)ok++;});
+    const all=ok===t.items.length;
+    if(all)showFb(fb,'ok','Alles richtig!',ok+' von '+t.items.length+' richtig.');else showFb(fb,ok>=t.items.length*.6?'mid':'err',ok+' von '+t.items.length+' richtig','Die rot markierten Zeilen stimmen noch nicht. Lies die Information noch einmal.');
+    report(id,all,art,fb);});
+}
+function wQuiz(id,t,w,art){
+  const v=S.a[id]=Array.isArray(S.a[id])&&S.a[id].length===t.qs.length?S.a[id]:t.qs.map(()=>-1);
+  const fs=t.qs.map((q,qi)=>{const f=el('fieldset',{class:'qz'},el('legend',{},q.q));q.o.forEach((o,oi)=>{const inp=el('input',{type:'radio',name:id+'-'+qi,value:oi});if(v[qi]===oi)inp.checked=true;inp.onchange=()=>{v[qi]=oi;f.classList.remove('s-ok','s-bad');save();};f.append(el('label',{},inp,o));});return f;});
+  w.className='w quiz';w.append(...fs);
+  mkCheck(id,art,fb=>{if(v.some(x=>x<0)){showFb(fb,'mid','Noch nicht fertig','Beantworte zuerst alle Teile.');return;}
+    let ok=0;t.qs.forEach((q,qi)=>{const g=v[qi]===q.a;fs[qi].classList.toggle('s-ok',g);fs[qi].classList.toggle('s-bad',!g);if(g)ok++;});
+    const all=ok===t.qs.length;
+    if(all)showFb(fb,'ok','Alles richtig!',null,t.qs.map(q=>q.why));else showFb(fb,'err',ok+' von '+t.qs.length+' richtig','Rot umrandet: Das stimmt noch nicht. Lies die Information noch einmal.');
+    report(id,all,art,fb);});
+}
+function wMulti(id,t,w,art){
+  const v=S.a[id]=Array.isArray(S.a[id])&&S.a[id].length===t.opts.length?S.a[id]:t.opts.map(()=>false);
+  const ls=t.opts.map((o,i)=>{const inp=el('input',{type:'checkbox'});inp.checked=!!v[i];const l=el('label',{},inp,o[0]);inp.onchange=()=>{v[i]=inp.checked;l.classList.remove('s-ok','s-bad');save();};return l;});
+  w.className='w multi';w.append(...ls);
+  mkCheck(id,art,fb=>{if(!v.some(Boolean)){showFb(fb,'mid','Noch nicht fertig','Wähle zuerst mindestens eine Antwort.');return;}
+    let ok=0;t.opts.forEach((o,i)=>{const g=!!v[i]===o[1];ls[i].classList.toggle('s-ok',g&&o[1]);ls[i].classList.toggle('s-bad',!g);if(g)ok++;});
+    const all=ok===t.opts.length;
+    if(all)showFb(fb,'ok','Alles richtig!','Du hast alle passenden Antworten gefunden und nichts Falsches gewählt.');else showFb(fb,'err','Noch nicht ganz','Rot markiert: Diese Antwort fehlt oder passt nicht.');
+    report(id,all,art,fb);});
+}
+function wOrder(id,t,w,art){
+  let v=S.a[id];if(!Array.isArray(v)||v.length!==t.items.length)v=S.a[id]=t.start.slice();
+  const ol=el('ol',{class:'rank'});w.className='w';w.append(ol);
+  function draw(){ol.replaceChildren(...v.map((ix,pos)=>{const up=el('button',{class:'mv',type:'button','aria-label':'nach oben'},'↑');const dn=el('button',{class:'mv',type:'button','aria-label':'nach unten'},'↓');up.disabled=pos===0;dn.disabled=pos===v.length-1;
+    up.onclick=()=>{[v[pos-1],v[pos]]=[v[pos],v[pos-1]];save();draw();ol.children[pos-1].querySelector('.mv').focus();};
+    dn.onclick=()=>{[v[pos+1],v[pos]]=[v[pos],v[pos+1]];save();draw();ol.children[pos+1].querySelectorAll('.mv')[1].focus();};
+    return el('li',{},el('span',{class:'pos'},String(pos+1)),el('span',{class:'lbl',html:chipHtml(t.items[ix])}),up,dn);}));}
+  draw();
+  mkCheck(id,art,fb=>{let ok=0;v.forEach((ix,pos)=>{const g=ix===pos;ol.children[pos].classList.toggle('s-ok',g);ol.children[pos].classList.toggle('s-bad',!g);if(g)ok++;});
+    const all=ok===v.length;
+    if(all)showFb(fb,'ok','Richtige Reihenfolge!',null);else showFb(fb,ok>=v.length*.6?'mid':'err',ok+' von '+v.length+' an der richtigen Stelle','Die rot umrandeten Zeilen stehen noch falsch. Überlege, was zuerst passieren muss.');
+    report(id,all,art,fb);});
+}
+function wGap(id,t,w,art){
+  const v=S.a[id]=Array.isArray(S.a[id])&&S.a[id].length===t.gaps.length?S.a[id]:t.gaps.map(()=>-1);
+  const p=el('p',{class:'cloze'});const sels=[];
+  t.text.split(/\{(\d+)\}/).forEach((part,i)=>{if(i%2===0){if(part)p.append(part);return;}const gi=+part,g=t.gaps[gi];
+    const sel=el('select',{'aria-label':'Lücke '+(gi+1)},el('option',{value:'-1'},'…'),...g[0].map((o,oi)=>el('option',{value:String(oi)},o)));sel.value=String(v[gi]);
+    sel.onchange=()=>{v[gi]=+sel.value;sel.classList.remove('s-ok','s-bad');save();};sels[gi]=sel;p.append(sel);});
+  w.className='w';w.append(p);
+  mkCheck(id,art,fb=>{if(v.some(x=>x<0)){showFb(fb,'mid','Noch nicht fertig','Fülle zuerst alle Lücken.');return;}
+    let ok=0;t.gaps.forEach((g,gi)=>{const good=v[gi]===g[1];sels[gi].classList.toggle('s-ok',good);sels[gi].classList.toggle('s-bad',!good);if(good)ok++;});
+    const all=ok===t.gaps.length;
+    if(all)showFb(fb,'ok','Alles richtig!',null);else showFb(fb,ok>=t.gaps.length*.6?'mid':'err',ok+' von '+t.gaps.length+' Lücken richtig','Die rot markierten Lücken stimmen noch nicht.');
+    report(id,all,art,fb);});
+}
+function wPair(id,t,w,art){
+  let v=S.a[id];if(!Array.isArray(v)||v.length!==t.left.length)v=S.a[id]=t.left.map(()=>-1);
+  let armed=-1;const L=[],R=[];
+  const lc=el('div',{class:'pcol'},el('h4',{},'Zuerst antippen'));const rc=el('div',{class:'pcol'},el('h4',{},'Dann das Passende'));
+  t.left.forEach((x,i)=>{const b=el('button',{type:'button',class:'pc','aria-pressed':'false'},el('span',{class:'k on'},String(i+1)),x);b.onclick=()=>{armed=armed===i?-1:i;draw();};L.push(b);lc.append(b);});
+  t.right.forEach((x,ri)=>{const b=el('button',{type:'button',class:'pc'},el('span',{class:'k'},'–'),x);b.onclick=()=>{if(armed<0){const li=v.indexOf(ri);if(li>=0){armed=li;draw();}return;}
+    v.forEach((rr,li)=>{if(rr===ri)v[li]=-1;});v[armed]=ri;armed=-1;save();L.forEach(n=>n.classList.remove('s-ok','s-bad'));draw();};R.push(b);rc.append(b);});
+  function draw(){L.forEach((b,i)=>b.setAttribute('aria-pressed',String(i===armed)));R.forEach((b,ri)=>{const li=v.indexOf(ri);const k=b.querySelector('.k');k.textContent=li>=0?String(li+1):'–';k.classList.toggle('on',li>=0);b.setAttribute('aria-label',(li>=0?'verbunden mit '+(li+1)+': ':'')+t.right[ri]);});}
+  w.className='w pairs';w.append(lc,rc);draw();
+  mkCheck(id,art,fb=>{if(v.some(x=>x<0)){showFb(fb,'mid','Noch nicht fertig','Verbinde zuerst alle Paare.');return;}
+    let ok=0;t.left.forEach((x,i)=>{const g=v[i]===t.ans[i];L[i].classList.toggle('s-ok',g);L[i].classList.toggle('s-bad',!g);if(g)ok++;});
+    const all=ok===t.left.length;
+    if(all)showFb(fb,'ok','Alle Paare richtig!',null);else showFb(fb,ok>=t.left.length*.6?'mid':'err',ok+' von '+t.left.length+' Paaren richtig','Bei den rot umrandeten stimmt die Verbindung noch nicht. Tippe sie an und verbinde neu.');
+    report(id,all,art,fb);});
+}
+function wMark(id,t,w,art){
+  const v=S.a[id]=Array.isArray(S.a[id])&&S.a[id].length===t.lines.length?S.a[id]:t.lines.map(()=>false);
+  const box=el('div',{class:'marklist',role:'group','aria-label':'Programm'});
+  const B=t.lines.map((x,i)=>{const b=el('button',{type:'button',class:'ms','aria-pressed':String(!!v[i]),style:'margin-left:'+(x[2]*22)+'px',html:CB.chip(x[0],x[1])});b.onclick=()=>{v[i]=!v[i];b.setAttribute('aria-pressed',String(v[i]));B.forEach(n=>n.classList.remove('s-ok','s-bad'));save();};box.append(b);return b;});
+  w.className='w';w.append(box);
+  mkCheck(id,art,fb=>{if(!v.some(Boolean)){showFb(fb,'mid','Noch nicht fertig','Tippe zuerst die fehlerhafte Zeile an.');return;}
+    const need=t.lines.filter(x=>x[3]).length;let hit=0,wrong=0;
+    t.lines.forEach((x,i)=>{B[i].classList.toggle('s-ok',v[i]&&x[3]);B[i].classList.toggle('s-bad',v[i]&&!x[3]);if(v[i]&&x[3])hit++;if(v[i]&&!x[3])wrong++;});
+    const all=hit===need&&!wrong;
+    if(all)showFb(fb,'ok','Fehler gefunden!',t.why);else showFb(fb,'err',wrong?'Diese Zeile ist richtig':'Noch nicht gefunden',wrong?'Rot markierte Zeilen sind in Ordnung. Tippe sie noch einmal an, um die Markierung zu entfernen.':'Geh das Programm Zeile für Zeile durch und vergleiche mit dem Auftrag.');
+    report(id,all,art,fb);});
+}
+function wNum(id,t,w,art){
+  const inp=el('input',{type:'text',inputmode:'decimal','aria-label':'Ergebnis in '+t.unit,autocomplete:'off'});inp.value=S.a[id]||'';
+  inp.oninput=()=>{S.a[id]=inp.value;inp.classList.remove('s-ok','s-bad');save();};
+  w.className='w numin';w.append(inp,el('span',{},t.unit));
+  mkCheck(id,art,fb=>{const raw=(inp.value||'').replace(/\s/g,'').replace(',','.');
+    if(!raw){showFb(fb,'mid','Noch nicht fertig','Trag zuerst dein Ergebnis ein.');return;}
+    const n=parseFloat(raw);const g=!isNaN(n)&&Math.abs(n-t.answer)<=(t.tol||0);
+    inp.classList.toggle('s-ok',g);inp.classList.toggle('s-bad',!g);
+    if(g)showFb(fb,'ok','Richtig!',t.why);else showFb(fb,'err','Noch nicht richtig','Rechne noch einmal. Die Information oben hilft dir.');
+    report(id,g,art,fb);});
+}
+function wOpen(id,t,w,art){
+  const ta=el('textarea',{'aria-label':'Deine Antwort'});ta.value=S.a[id]||'';
+  const qc=el('div',{class:'qc'},el('b',{},'Denk an:'),...t.checks.map(c=>el('span',{},c[0])));
+  const cnt=el('span',{class:'hint'});
+  const mb=el('button',{class:'btn',type:'button'},'Mit Musterlösung vergleichen');
+  const mbox=el('div',{class:'muster',hidden:true},el('b',{},'So könnte eine Antwort aussehen'),el('ul',{},...t.muster.map(m=>el('li',{},m))),el('p',{class:'hint'},'Vergleiche: Was hast du auch? Was fehlt dir noch?'));
+  function upd(){const s=ta.value;S.a[id]=s;const len=s.trim().length;[...qc.querySelectorAll('span')].forEach((sp,i)=>sp.classList.toggle('on',t.checks[i][1].test(s)));
+    cnt.textContent=len>=t.min?'Genug geschrieben ✓':'Noch '+(t.min-len)+' Zeichen';mb.disabled=len<t.min;if(S.muster[id])mbox.hidden=false;}
+  ta.oninput=()=>{upd();save();refresh();};
+  mb.onclick=()=>{S.muster[id]=1;mbox.hidden=false;save();};
+  w.className='w open';w.append(ta,el('div',{class:'open-foot'},qc,cnt),el('div',{class:'row'},mb),mbox);upd();
+}
+function wSpot(id,t,w,art){
+  const v=S.a[id]=Array.isArray(S.a[id])&&S.a[id].length===t.qs.length?S.a[id]:t.qs.map(()=>'');
+  let armed=v.findIndex(x=>!x);if(armed<0)armed=0;
+  const grid=el('div',{class:'boardgrid nolab'});const svgBox=el('div',{html:boardSvg()});
+  const list=el('div',{class:'spotq'});
+  const Q=t.qs.map((q,i)=>{const b=el('button',{type:'button'},el('span',{},q[0]),el('span',{class:'ans'}));b.onclick=()=>{armed=i;draw();};list.append(b);return b;});
+  function draw(){Q.forEach((b,i)=>{b.setAttribute('aria-pressed',String(i===armed));b.querySelector('.ans').textContent=v[i]?PARTS[v[i]].n:'–';});
+    $$('.bp',svgBox).forEach(g=>g.classList.toggle('sel',g.dataset.p===v[armed]));}
+  $$('.bp',svgBox).forEach(g=>{const pick=()=>{if(armed<0)return;v[armed]=g.dataset.p;Q.forEach(b=>b.classList.remove('s-ok','s-bad'));$$('.bp',svgBox).forEach(x=>x.classList.remove('ok','bad'));const nx=v.findIndex(x=>!x);if(nx>=0)armed=nx;save();draw();};
+    g.addEventListener('click',pick);g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();pick();}});});
+  grid.append(svgBox,el('div',{},el('p',{class:'hint'},'Aufgabe antippen, dann das Bauteil auf der Platine.'),list));
+  w.className='w';w.append(grid);draw();
+  mkCheck(id,art,fb=>{if(v.some(x=>!x)){showFb(fb,'mid','Noch nicht fertig','Ordne zuerst jeder Aufgabe ein Bauteil zu.');return;}
+    let ok=0;t.qs.forEach((q,i)=>{const g=v[i]===q[1];Q[i].classList.toggle('s-ok',g);Q[i].classList.toggle('s-bad',!g);if(g)ok++;});
+    const all=ok===t.qs.length;
+    if(all)showFb(fb,'ok','Alles richtig!','Du kennst die wichtigsten Bauteile.');else showFb(fb,ok>=3?'mid':'err',ok+' von '+t.qs.length+' richtig','Bei den rot umrandeten Aufgaben stimmt das Bauteil noch nicht. Schau oben in der Bauteil-Erklärung nach.');
+    report(id,all,art,fb);});
+}
+const WIDGET={seg:wSeg,quiz:wQuiz,multi:wMulti,order:wOrder,gap:wGap,pair:wPair,mark:wMark,num:wNum,open:wOpen,spot:wSpot};
+
+/* ---------- Bausteine der Seiten ---------- */
+function opQ(t){return esc(t.q).replace(/\*(.+?)\*/g,(m,x)=>`<button class="op" type="button" data-op="${t.op}">${x}</button>`);}
+function taskCard(id,where,nr){const t=T[id];label[id]=where+' · Frage '+nr;
+  const art=el('article',{class:'card qtask',id:'t-'+id},el('div',{class:'sec-h'},el('span',{class:'tnum'},'Frage '+nr)),el('h3',{html:opQ(t)}),el('div',{class:'w'}));
+  WIDGET[t.type](id,t,$('.w',art),art);return art;}
+function pager(prev,next){const p=el('div',{class:'pager'});p.append(prev?el('button',{class:'btn',type:'button','data-go':prev[0]},'← '+prev[1]):el('span'));if(next)p.append(el('button',{class:'btn primary',type:'button','data-go':next[0]},next[1]+' →'));return p;}
+function card(...k){return el('div',{class:'card'},...k);}
+function howDetails(id,open){const h=HOWTO.find(x=>x.id===id);return el('details',{class:'info','data-how':id,open:open||null},el('summary',{},h.t),el('div',{class:'infobody',html:howHtml(h.h)}));}
+function licenseBlock(){return el('div',{class:'lic',html:`<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de" target="_blank" rel="noopener license" style="flex:none;line-height:0"><svg viewBox="0 0 88 31" width="79" height="28" role="img" aria-label="Creative Commons BY-NC-SA"><rect x=".5" y=".5" width="87" height="30" rx="2" fill="#aab2ab" stroke="#000"/><rect x="1" y="21" width="86" height="9.5" fill="#000"/><g font-family="Arial,Helvetica,sans-serif" font-weight="700" fill="#fff" font-size="6.2" text-anchor="middle"><text x="36" y="28.3">BY</text><text x="54" y="28.3">NC</text><text x="72" y="28.3">SA</text></g><circle cx="14.5" cy="15.5" r="12" fill="#fff" stroke="#000" stroke-width="2.2"/><text x="14.5" y="19.3" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="700" font-size="11">cc</text><circle cx="36" cy="11" r="8.2" fill="#fff" stroke="#000" stroke-width="1.4"/><circle cx="36" cy="6.8" r="1.6"/><path d="M33.4 9.3h5.2v4.4h-1.3v4h-2.6v-4h-1.3z"/><circle cx="54" cy="11" r="8.2" fill="#fff" stroke="#000" stroke-width="1.4"/><text x="54.3" y="14.4" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="700" font-size="9.5">€</text><path d="M48.6 5.4l10.8 11.2" stroke="#000" stroke-width="1.6"/><circle cx="72" cy="11" r="8.2" fill="#fff" stroke="#000" stroke-width="1.4"/><path d="M68.3 11a3.8 3.8 0 1 1 1.2 2.8" fill="none" stroke="#000" stroke-width="1.7"/><path d="M66.4 9.6l2 2.6 2-2.6z"/></svg></a><span><b>Calliope-Challenges</b> von <b>Daniel Beyrodt</b> (dein Technik Lehrer) steht unter der Lizenz <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de" target="_blank" rel="noopener license">CC BY-NC-SA 4.0</a>. Alle Grafiken selbst gezeichnet. „Calliope mini“ ist der Name des Mikrocontrollers der Calliope gGmbH; diese Seite ist kein Angebot der Calliope gGmbH.</span>`});}
+
+/* ---------- Seiten aufbauen ---------- */
+const main=$('#main');const PAGES={};
+function page(id){const s=el('section',{class:'page','data-pg':id,hidden:true});PAGES[id]=s;main.append(s);return s;}
+
+/* Start */
+(function(){const s=page('start');
+  const nameIn=el('input',{id:'fName',autocomplete:'off',placeholder:'z. B. Mia',maxlength:'30'});const klIn=el('input',{id:'fKl',autocomplete:'off',placeholder:'z. B. 6b',maxlength:'10'});
+  nameIn.value=S.name;klIn.value=S.kl;nameIn.oninput=()=>{S.name=nameIn.value;save();paintProf();};klIn.oninput=()=>{S.kl=klIn.value;save();};
+  s.append(el('div',{class:'start-hero'},
+    el('div',{class:'hero'},el('p',{class:'eyebrow'},'Selbstlernkonzept · Technik'),el('h1',{},'Calliope-Challenges'),
+      el('p',{class:'lead',html:'Löse Challenges in deinem eigenen Tempo: <b>in MakeCode programmieren, dann auf deinem Calliope mini testen</b>. Die Chilis zeigen, wie schwer eine Challenge ist. Mit den <b>Checkpoint-Challenges ★</b> erreichst du dein nächstes <b>Skill-Level</b>.'}),
+      el('div',{class:'row'},el('button',{class:'btn primary',type:'button','data-go':'board'},'Calliope kennenlernen →'),el('button',{class:'btn',type:'button','data-go':'c1'},'Mit Challenge #01 starten'),el('button',{class:'btn',type:'button','data-go':'howto'},'📖 How-to-Guide'))),
+    el('div',{class:'card'},el('h2',{},'Deine Angaben'),el('label',{class:'field'},'Vorname',nameIn),el('label',{class:'field'},'Klasse',klIn),el('p',{class:'hint'},'Alles bleibt nur in diesem Browser. Unter „Abgabe“ speicherst du deinen Stand als Ergebnis-PDF.'))));
+  s.append(card(el('h2',{},'Schon angefangen?'),el('div',{id:'lpUp1'})));
+  s.append(card(el('h2',{},'So arbeitest du'),el('ol',{class:'steps'},
+    el('li',{html:'<b>Wähle eine Challenge.</b> Du musst dich nicht an die Reihenfolge halten und nicht alle machen. Du darfst auch gleich schwierigere nehmen.'}),
+    el('li',{html:'<b>Lies den Auftrag</b> und programmiere in MakeCode.'}),
+    el('li',{html:'<b>Kommst du nicht weiter?</b> Schau in den How-to-Guide, dann in den Tipp, dann in die Teillösung. Frag auch andere aus deiner Klasse.'}),
+    el('li',{html:'<b>Übertrage dein Programm</b> auf den Calliope, teste es und setze den Haken „Läuft auf meinem Calliope“.'}),
+    el('li',{html:'<b>Beantworte die Fragen</b> zur Challenge. Erst mit Haken und richtigen Fragen ist die Challenge geschafft.'}),
+    el('li',{html:'<b>Speichere am Ende die Ergebnis-PDF</b> unter „Abgabe“.'}))));
+  s.append(card(el('h2',{},'Dein Skill-Level'),el('p',{},'Für jedes Level gibt es eine Checkpoint-Challenge ★. Schaffst du sie, hast du das Level erreicht, egal in welcher Reihenfolge.'),el('div',{class:'ladder',id:'ladder'}),el('p',{class:'hint',id:'ladderTxt'})));
+  s.append(card(el('h2',{},'Challenges'),el('div',{class:'legend',html:[1,2,3,4].map(l=>'<span>'+chiliSvg(l,true,20)+['','leicht','mittel','schwer','sehr schwer'][l]+'</span>').join('')+'<span>★ Checkpoint</span>'}),el('div',{class:'ctiles',id:'tiles'})));
+  s.append(card(el('h2',{},'Zum Einstieg'),el('div',{class:'row'},
+    el('a',{class:'linkcard',href:'https://www.youtube.com/watch?v=JIy1mip5pJI',target:'_blank',rel:'noopener'},el('span',{class:'ico','aria-hidden':'true'},'▶'),el('div',{},el('b',{},'Einstiegsvideo zum Calliope mini'),el('span',{},'Video auf YouTube, öffnet in neuem Tab'))),
+    el('a',{class:'linkcard',href:'https://makecode.calliope.cc/',target:'_blank',rel:'noopener'},el('span',{class:'ico','aria-hidden':'true'},'🧩'),el('div',{},el('b',{},'MakeCode im Browser'),el('span',{},'Am iPad nutzt du die App „Calliope mini“'))))));
+  s.append(card(licenseBlock()));
+})();
+
+/* Platine */
+(function(){const s=page('board');
+  s.append(el('div',{class:'hero'},el('p',{class:'eyebrow'},'Station 1'),el('h1',{},'Den Calliope mini kennenlernen'),el('p',{class:'lead'},'Tippe auf ein Bauteil. Du erfährst, was es kann und in welchen Challenges du es brauchst.')));
+  const info=el('div',{class:'partinfo',id:'partInfo','aria-live':'polite'},el('h3',{},'Tippe ein Bauteil an'),el('p',{},'Die Zeichnung zeigt die Vorderseite des Calliope mini 2.'));
+  const svgBox=el('div',{html:boardSvg()});
+  const labBtn=el('button',{class:'btn small',type:'button','aria-pressed':'true'},'Beschriftung ausblenden');
+  const wrap=el('div',{class:'boardgrid'},el('div',{},svgBox,el('div',{class:'row',style:'justify-content:center;margin-top:8px'},labBtn)),info);
+  labBtn.onclick=()=>{const on=wrap.classList.toggle('nolab');labBtn.textContent=on?'Beschriftung zeigen':'Beschriftung ausblenden';labBtn.setAttribute('aria-pressed',String(!on));};
+  function show(p){const P=PARTS[p];$$('.bp',svgBox).forEach(g=>g.classList.toggle('sel',g.dataset.p===p));
+    info.replaceChildren(el('h3',{},P.n),el('p',{html:P.d}),P.u.length?el('div',{},el('p',{class:'hint'},'Brauchst du in:'),el('div',{class:'partlist'},...P.u.map(n=>el('button',{class:'chip',type:'button','data-go':'c'+n},'#'+pad(n)+' '+CHN[n].t)))):el('p',{class:'hint'},'Wird in den Challenges nicht programmiert.'));}
+  $$('.bp',svgBox).forEach(g=>{g.addEventListener('click',()=>show(g.dataset.p));g.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();show(g.dataset.p);}});});
+  window.__showPart=show;
+  s.append(card(wrap));
+  s.append(card(el('details',{class:'info',open:true},el('summary',{},'Sensoren und Aktoren'),el('div',{class:'infobody',html:'<p><b>Sensoren</b> nehmen etwas aus der Umwelt auf: Licht, Geräusche, Bewegung, Temperatur oder einen Tastendruck. Beim Calliope sind das zum Beispiel das <b>Mikrofon</b>, der <b>Lagesensor</b>, die <b>Tasten</b> und der <b>Temperatursensor</b>.</p><p><b>Aktoren</b> geben etwas aus: Licht oder Töne. Beim Calliope sind das die <b>RGB-LED</b>, der <b>Lautsprecher</b> und die <b>LED-Matrix</b>, wenn sie etwas anzeigt.</p><p>Dazwischen arbeitet der <b>Prozessor</b>: Er verarbeitet, was die Sensoren melden, und steuert die Aktoren. So entsteht der Ablauf <b>Eingabe → Verarbeitung → Ausgabe</b>.</p>'}))));
+  s.append(taskCard('p1','Calliope kennenlernen',1),taskCard('p2','Calliope kennenlernen',2));
+  s.append(pager(['start','Start'],['howto','How-to-Guide']));
+})();
+
+/* How-to */
+(function(){const s=page('howto');
+  s.append(el('div',{class:'hero'},el('p',{class:'eyebrow'},'Station 2'),el('h1',{},'How-to-Guide'),el('p',{class:'lead'},'Hier schlägst du nach, wie etwas geht. Du musst nicht alles lesen: Öffne nur das, was du gerade brauchst.')));
+  s.append(card(el('h2',{},'Erste Schritte'),el('div',{class:'howlist'},howDetails('anschliessen'),howDetails('makecode'),howDetails('uebertragen'))));
+  s.append(card(el('h2',{},'Befehle nachschlagen'),el('div',{class:'howlist'},...HOWTO.slice(3).map(h=>howDetails(h.id)))));
+  s.append(taskCard('h1','How-to-Guide',1));
+  s.append(card(el('p',{html:'Die Druckfassung des How-to-Guides hat deine Lehrkraft. Den Guide gibt es auch als PDF (CC BY-NC-SA).'})));
+  s.append(pager(['board','Calliope kennenlernen'],['c1','Challenge #01']));
+})();
+
+/* Challenges */
+CH.forEach((c,ci)=>{const s=page('c'+c.n),L=CHILI[c.lv],cp=cpOf(c.n);
+  s.append(el('div',{class:'hero'},el('p',{class:'eyebrow'},'Challenge #'+pad(c.n)+' · '+L.t),
+    el('div',{class:'ch-head'},el('h1',{},'#'+pad(c.n)+' '+c.t),el('span',{class:'ch-chili',html:chiliRow(c.lv,30)}),cp?el('span',{class:'ch-cp',html:'★ Checkpoint für '+levelBadge(cp)}):null)));
+  s.append(card(el('h2',{},'Dein Auftrag'),el('p',{class:'auftrag'},c.auf),el('div',{class:'uses'},el('span',{class:'hint'},'Das brauchst du:'),...c.uses.map(p=>el('button',{class:'chip',type:'button','data-part':p},PARTS[p].n)))));
+  s.append(card(el('details',{class:'info'},el('summary',{},'So geht’s'),el('div',{class:'infobody',html:'<p>'+c.info+'</p>'})),
+    el('div',{class:'uses'},el('span',{class:'hint'},'Im How-to-Guide:'),...c.how.map(h=>el('button',{class:'chip',type:'button','data-how':h},HOWTO.find(x=>x.id===h).t)))));
+  const tz=el('div',{class:'tipzone'});
+  function drawTips(){const st=S.tip[c.n]|0;tz.replaceChildren();
+    if(st>=1)tz.append(el('div',{class:'tipbox'},el('h4',{},'Tipp'),el('p',{},c.tip)));
+    if(st>=2)tz.append(el('div',{class:'tipbox'},el('h4',{},'Teillösung'),el('p',{class:'hint'},'Hier fehlt noch etwas. Oben rechts wählst du Blöcke oder Text.'),el('div',{html:CB.prog(c.teil)})));
+    if(st<2)tz.append(el('button',{class:'btn tipbtn',type:'button',onclick:()=>{S.tip[c.n]=st+1;save();drawTips();}},st===0?'💡 Tipp anzeigen':'🧩 Teillösung anzeigen'));
+    if(st===0)tz.prepend(el('p',{class:'hint'},'Probier es zuerst selbst. Hilft der How-to-Guide nicht weiter, hol dir einen Tipp.'));}
+  drawTips();
+  s.append(card(el('h2',{},'Hilfe, wenn du nicht weiterkommst'),tz));
+  const chk=el('input',{type:'checkbox'});chk.checked=!!S.run[c.n];const lab=el('label',{class:'runchk'+(chk.checked?' on':'')},chk,'Läuft auf meinem Calliope');
+  chk.onchange=()=>{S.run[c.n]=chk.checked;lab.classList.toggle('on',chk.checked);save();refresh();};
+  s.append(card(el('h2',{},'Testen'),el('p',{},'Übertrage dein Programm auf den Calliope und teste alles, was im Auftrag steht. Läuft es? Dann setze den Haken und zeig es deiner Lehrkraft.'),lab));
+  s.append(el('h2',{style:'margin-top:6px'},'Fragen zur Challenge'));
+  c.tasks.forEach((id,i)=>s.append(taskCard(id,'#'+pad(c.n)+' '+c.t,i+1)));
+  s.append(card(el('div',{class:'status','data-status':c.n})));
+  const prev=ci===0?['howto','How-to-Guide']:['c'+CH[ci-1].n,'#'+pad(CH[ci-1].n)],next=ci===CH.length-1?['abgabe','Zur Abgabe']:['c'+CH[ci+1].n,'#'+pad(CH[ci+1].n)+' '+CH[ci+1].t];
+  s.append(pager(prev,next));
+});
+
+/* Abgabe */
+(function(){const s=page('abgabe');
+  s.append(el('div',{class:'hero'},el('p',{class:'eyebrow'},'Abgabe'),el('h1',{},'Ergebnis-PDF'),el('p',{class:'lead'},'Speichere deinen Stand als PDF und lege sie in deinem Ordner ab. Darin stehen deine geschafften Challenges, dein Skill-Level und deine Lernenergie.')));
+  s.append(card(el('h2',{},'Dein Stand'),el('div',{id:'sumLvl'}),el('ul',{class:'sumlist',id:'sumList'})));
+  const nm=el('input',{autocomplete:'off',maxlength:'30'}),kl=el('input',{autocomplete:'off',maxlength:'10'});nm.value=S.name;kl.value=S.kl;
+  nm.oninput=()=>{S.name=nm.value;$('#fName').value=S.name;save();paintProf();};kl.oninput=()=>{S.kl=kl.value;$('#fKl').value=S.kl;save();};
+  s.append(card(el('h2',{},'Speichern'),el('div',{class:'two'},el('label',{class:'field'},'Vorname',nm),el('label',{class:'field'},'Klasse',kl)),
+    el('div',{class:'row'},el('button',{class:'btn primary',type:'button',id:'pdfBtn'},'Ergebnis-PDF speichern')),el('p',{class:'hint',id:'pdfNote',hidden:true}),
+    el('div',{class:'note warn'},'Heb die Original-PDF auf. Darin steckt dein Arbeitsstand. Eine aus Notability neu exportierte PDF oder ein Bildschirmfoto enthält ihn meist nicht.')));
+  s.append(card(el('div',{id:'lpUp2'})));
+  s.append(card(el('h2',{},'Sicherungscode'),el('p',{},'Zusätzlich kannst du deinen Stand als Code kopieren und später hier einfügen.'),el('textarea',{class:'codeout',id:'codeOut',readonly:true,'aria-label':'Sicherungscode'}),
+    el('div',{class:'row'},el('button',{class:'btn',type:'button',id:'codeCopy'},'Code kopieren')),el('p',{class:'hint',id:'codeNote',hidden:true}),
+    el('label',{class:'field'},'Code einfügen',el('textarea',{class:'codeout',id:'codeIn'})),el('div',{class:'row'},el('button',{class:'btn',type:'button',id:'codeLoad'},'Code laden')),el('p',{class:'hint',id:'codeLoadNote',hidden:true})));
+  s.append(card(licenseBlock()));
+  s.append(pager(['c11','#11 Liegestützzähler'],null));
+})();
+
+/* ---------- Navigation und Anzeige ---------- */
+const nav=$('#nav');
+function navItem(pg,html,ring,extra){const b=el('button',{class:'nav-item',type:'button','data-go':pg});b.innerHTML=html;if(ring!=null)b.prepend(el('span',{class:'ring'+(ring>=1?' done':''),style:'--p:'+Math.round(ring*100)}));if(extra)b.append(extra);if(S.pg===pg)b.setAttribute('aria-current','page');return b;}
+function paintNav(){const tot=TASK_IDS.length+CH.length,done=TASK_IDS.filter(isDone).length+CH.filter(c=>S.run[c.n]).length,pct=Math.round(100*done/tot);
+  const kids=[navItem('start','Start &amp; Übersicht'),el('div',{class:'nav-total',html:'Gesamtfortschritt '+pct+' %<div class="bar" style="margin-top:4px"><i style="width:'+pct+'%"></i></div>'}),
+    navItem('board','Calliope kennenlernen',['p1','p2'].filter(isDone).length/2),navItem('howto','How-to-Guide',isDone('h1')?1:0)];
+  [1,2,3,4].forEach(lv=>{const list=CH.filter(c=>c.lv===lv);if(!list.length)return;kids.push(el('div',{class:'nav-mod',html:'<span class="nav-chili">'+chiliSvg(lv,true,16)+'</span> '+CHILI[lv].t}));
+    list.forEach(c=>kids.push(navItem('c'+c.n,'<span class="nav-num">#'+pad(c.n)+'</span> '+esc(c.t),chDone(c.n)?1:chPart(c.n),cpOf(c.n)?el('span',{class:'nav-cp',title:'Checkpoint'},'★'):null)));});
+  kids.push(el('div',{class:'nav-mod'},'Abschluss'),navItem('abgabe','Abgabe (Ergebnis-PDF)'));
+  nav.replaceChildren(...kids);}
+function paintProf(){const lv=level();$('#prof').innerHTML=`<span class="av">${esc((S.name||'?').trim().charAt(0).toUpperCase()||'?')}</span><span class="n">${esc(S.name||'Noch kein Name')}</span><span class="nav-lvl">Skill-Level: ${lv>=0?levelBadge(LEVELS[lv],true):'<span class="lvl-badge sm none">noch keins</span>'}</span>`;}
+function paintStart(){const lv=level();
+  $('#ladder').innerHTML=LEVELS.map((l,i)=>`<div class="rung${i<=lv&&chDone(l.cp)?' got':''}${i===lv+1?' cur':''}" style="--lc:${l.c}"><b>${l.t}</b><a href="#" data-go="c${l.cp}" class="${chDone(l.cp)?'ok':''}">★ #${pad(l.cp)} ${esc(CHN[l.cp].t)}</a></div>`).join('');
+  const nxt=LEVELS[lv+1];$('#ladderTxt').innerHTML=lv>=4?'Du hast das höchste Level erreicht: <b>Expert</b>!':(lv>=0?'Du bist <b>'+LEVELS[lv].t+'</b>. ':'Du hast noch kein Level. ')+(nxt?'Für <b>'+nxt.t+'</b> brauchst du: Challenge #'+pad(nxt.cp)+' (Haken gesetzt und Fragen gelöst).':'');
+  $('#tiles').replaceChildren(...CH.map(c=>{const cp=cpOf(c.n),d=chDone(c.n);const b=el('button',{class:'ctile'+(d?' done':''),type:'button','data-go':'c'+c.n});
+    b.innerHTML=`<span class="ct-n">#${pad(c.n)}</span><span class="ct-c">${chiliSvg(c.lv,true,26)}</span><span class="ct-t">${esc(c.t)}</span><span class="ct-s">${S.run[c.n]?'<span class="ok">✓ läuft</span>':'<span>noch nicht getestet</span>'}<span>${c.tasks.filter(isDone).length}/${c.tasks.length} Fragen</span></span>${cp?`<span class="ct-cp${d?' ok':''}" style="--lc:${cp.c}">★ ${cp.t}</span>`:''}`;return b;}));}
+function statusTxt(n){const c=CHN[n],q=c.tasks.filter(isDone).length;if(chDone(n))return ['done','✓ Geschafft! Programm läuft und alle Fragen sind gelöst.'];
+  const miss=[];if(!S.run[n])miss.push('Haken „Läuft auf meinem Calliope“');if(q<c.tasks.length)miss.push((c.tasks.length-q)+' Frage'+(c.tasks.length-q>1?'n':''));return ['','Noch offen: '+miss.join(' und ')+'.'];}
+function paintStatus(){$$('[data-status]').forEach(d=>{const [cls,t]=statusTxt(+d.dataset.status);d.className='status '+cls;d.textContent=t;});}
+function paintSum(){const lv=level();$('#sumLvl').innerHTML='<p>Skill-Level: '+(lv>=0?levelBadge(LEVELS[lv]):'<span class="lvl-badge none">noch keins</span>')+'</p>';
+  $('#sumList').replaceChildren(...CH.map(c=>{const d=chDone(c.n);return el('li',{class:d?'done':''},el('span',{html:chiliSvg(c.lv,true,18)}),el('span',{class:'t'},'#'+pad(c.n)+' '+c.t),el('span',{class:'st'},d?'geschafft':S.run[c.n]?'läuft, Fragen offen':c.tasks.some(isDone)?'Fragen begonnen':'offen'));}),
+    el('li',{},el('span',{class:'t'},'Calliope kennenlernen und How-to-Guide'),el('span',{class:'st'},['p1','p2','h1'].filter(isDone).length+' von 3 Fragen')));
+  const co=$('#codeOut');if(co)co.value=window.LP?LP.stateCode():'(nur in der veröffentlichten Fassung)';}
+function refresh(){paintNav();paintProf();paintStart();paintStatus();if(S.pg==='abgabe')paintSum();}
+
+function go(pg,opt){if(!PAGES[pg])pg='start';S.pg=pg;save();Object.keys(PAGES).forEach(k=>PAGES[k].hidden=k!==pg);
+  if(pg==='abgabe')paintSum();paintNav();document.body.classList.remove('nav-open');$('#navT').setAttribute('aria-expanded','false');
+  if(!opt||!opt.keep)window.scrollTo({top:0,behavior:'auto'});}
+document.addEventListener('click',e=>{
+  const g=e.target.closest('[data-go]');if(g){e.preventDefault();go(g.dataset.go);return;}
+  const p=e.target.closest('[data-part]');if(p){go('board');window.__showPart(p.dataset.part);return;}
+  const h=e.target.closest('button[data-how]');if(h){go('howto');const d=$('details[data-how="'+h.dataset.how+'"]',PAGES.howto);if(d){d.open=true;setTimeout(()=>d.scrollIntoView({block:'start'}),30);}return;}
+});
+$('#navT').onclick=()=>{const o=document.body.classList.toggle('nav-open');$('#navT').setAttribute('aria-expanded',String(o));};
+$('#scrim').onclick=()=>{document.body.classList.remove('nav-open');$('#navT').setAttribute('aria-expanded','false');};
+/* Blöcke / Text */
+function setMode(m){S.mode=m;document.body.dataset.mode=m;$$('.modeswitch button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.m===m)));save();}
+$$('.modeswitch button').forEach(b=>b.onclick=()=>setMode(b.dataset.m));
+/* Operatoren */
+const pop=$('#pop');
+document.addEventListener('click',e=>{const b=e.target.closest('.op');if(b){const k=b.dataset.op;$('#popH').textContent='Operator: '+k;$('#popP').textContent=(OPS[k]||'')+' (Kerncurriculum AWT IGS 2024, Anhang A1)';pop.hidden=false;const r=b.getBoundingClientRect();pop.style.left=Math.max(12,Math.min(r.left+scrollX,scrollX+innerWidth-352))+'px';pop.style.top=(r.bottom+scrollY+8)+'px';e.stopPropagation();return;}if(!pop.hidden&&!pop.contains(e.target))pop.hidden=true;});
+$('#popX').onclick=()=>{pop.hidden=true;};document.addEventListener('keydown',e=>{if(e.key==='Escape')pop.hidden=true;});
+/* Hilfe-Knopf des Lernenergie-Moduls: Infotexte der aktuellen Seite */
+if(window.LP_CFG)window.LP_CFG.help=c=>{const pg=c.closest('section.page');if(!pg)return [];if(pg.dataset.pg==='howto')return $$('details[data-how="uebertragen"]',pg);return $$('details.info',pg);};
+
+/* Sicherungscode */
+$('#codeCopy').onclick=async()=>{const n=$('#codeNote');n.hidden=false;try{await navigator.clipboard.writeText($('#codeOut').value);n.textContent='Kopiert. Heb den Code gut auf.';}catch(e){n.textContent='Kopieren hat nicht geklappt. Markiere den Code und kopiere ihn selbst.';}};
+$('#codeLoad').onclick=()=>{const n=$('#codeLoadNote');n.hidden=false;const o=window.LP&&LP._codeFrom($('#codeIn').value||'');
+  if(!o){n.textContent='Das ist kein gültiger Sicherungscode. Kopiere ihn vollständig.';return;}
+  if(window.LP_CFG&&o.s!==LP_CFG.slug){n.textContent='Dieser Code gehört zu einer anderen Lernplattform.';return;}
+  try{Object.keys(o.ls).forEach(k=>localStorage.setItem(k,o.ls[k]));}catch(e){n.textContent='Speichern auf diesem Gerät ist nicht möglich.';return;}
+  n.textContent='Geladen. Die Seite startet neu …';setTimeout(()=>location.reload(),400);};
+
+/* ---------- Ergebnis-PDF ---------- */
+const CP='€‚ƒ„…†‡ˆ‰Š‹ŒŽ‘’“”•–—˜™š›œžŸ';
+function clean(t){return String(t||'').replace(/→/g,'->').replace(/★/g,'*').replace(/−/g,'-').replace(/[\u{1F300}-\u{1FAFF}☀-➿️‍]/gu,'').split('').filter(ch=>{const c=ch.charCodeAt(0);return c===10||(c>=32&&c<=126)||(c>=160&&c<=255)||CP.indexOf(ch)>=0;}).join('');}
+const hex=c=>[1,3,5].map(i=>parseInt(c.slice(i,i+2),16));
+$('#pdfBtn').onclick=()=>{const note=$('#pdfNote');note.hidden=false;
+  if(!(window.jspdf&&window.jspdf.jsPDF)){note.textContent='Das PDF-Werkzeug konnte nicht geladen werden.';return;}
+  const d=new window.jspdf.jsPDF({unit:'mm',format:'a4'}),M=16,W=210-2*M;let y=20;
+  const need=h=>{if(y+h>282){d.addPage();y=20;}};
+  const txt=(s,o={})=>{d.setFont('helvetica',o.b?'bold':'normal');d.setFontSize(o.size||10.5);const c=o.col||[28,42,45];d.setTextColor(c[0],c[1],c[2]);d.splitTextToSize(clean(s),W-(o.ind||0)).forEach(l=>{need(5.5);d.text(l,M+(o.ind||0),y);y+=(o.lh||5.2);});};
+  txt('Calliope-Challenges – mein Ergebnis',{b:1,size:18,col:[10,117,112],lh:8});
+  txt('Technik · '+(S.name?'Name: '+S.name+' · ':'')+(S.kl?'Klasse: '+S.kl+' · ':'')+'Stand: '+new Date().toLocaleDateString('de-DE'));y+=3;
+  const lv=level();need(14);
+  if(lv>=0){const c=hex(LEVELS[lv].c);d.setFillColor(c[0],c[1],c[2]);d.roundedRect(M,y-5,70,10,2,2,'F');d.setTextColor(255,255,255);d.setFont('helvetica','bold');d.setFontSize(12);d.text('Skill-Level: '+LEVELS[lv].t,M+4,y+1.6);}
+  else{d.setDrawColor(150);d.roundedRect(M,y-5,70,10,2,2,'S');d.setTextColor(90,100,105);d.setFont('helvetica','bold');d.setFontSize(12);d.text('Skill-Level: noch keins',M+4,y+1.6);}
+  y+=12;
+  const nd=CH.filter(c=>chDone(c.n)).length;txt('Geschafft: '+nd+' von '+CH.length+' Challenges',{b:1,size:12,lh:6});y+=2;
+  CH.forEach(c=>{need(13);const L=CHILI[c.lv],cc=hex(L.c),done=chDone(c.n),cp=cpOf(c.n);
+    d.setFillColor(cc[0],cc[1],cc[2]);d.roundedRect(M,y-3.8,15,5.2,1,1,'F');d.setTextColor(255,255,255);d.setFont('helvetica','bold');d.setFontSize(7.5);d.text(L.t,M+7.5,y,{align:'center'});
+    d.setTextColor(28,42,45);d.setFontSize(11);d.text(clean('#'+pad(c.n)+' '+c.t),M+18,y);
+    const st=done?'geschafft':S.run[c.n]?'läuft, Fragen offen':'offen';const sc=done?[31,138,76]:S.run[c.n]?[183,121,31]:[120,130,135];
+    d.setTextColor(sc[0],sc[1],sc[2]);d.text(clean(st),210-M,y,{align:'right'});y+=4.6;
+    const q=c.tasks.filter(isDone).length;const det=[(S.run[c.n]?'läuft auf dem Calliope':'noch nicht getestet'),'Fragen: '+q+' von '+c.tasks.length+' gelöst'];if((S.tip[c.n]|0)>=2)det.push('mit Teillösung');else if((S.tip[c.n]|0)===1)det.push('mit Tipp');if(cp)det.push('* Checkpoint '+cp.t);
+    d.setFont('helvetica','normal');d.setFontSize(9);d.setTextColor(86,103,107);d.text(clean(det.join(' · ')),M+18,y);y+=6;});
+  y+=2;txt('Calliope kennenlernen und How-to-Guide: '+['p1','p2','h1'].filter(isDone).length+' von 3 Fragen gelöst',{size:10});
+  if(S.a.c11b&&isDone('c11b')){y+=3;txt('Meine Erweiterung zum Liegestützzähler (Challenge #11):',{b:1});txt(S.a.c11b,{ind:4});}
+  y+=4;txt('In dieser PDF steckt dein Arbeitsstand. Über „PDF laden“ auf der Startseite machst du damit weiter.',{size:9,col:[86,103,107]});
+  txt('Calliope-Challenges von Daniel Beyrodt (dein Technik Lehrer) · CC BY-NC-SA 4.0',{size:9,col:[86,103,107]});
+  const blob=d.output('blob'),fn='Calliope-Challenges_'+(S.name?clean(S.name).replace(/[^A-Za-z0-9ÄÖÜäöüß-]+/g,'_')+'_':'')+new Date().toISOString().slice(0,10)+'.pdf';
+  Promise.resolve(window.claude&&window.claude.use?window.claude.use('downloads'):null).then(dl=>{if(dl)return dl.save({filename:fn,data:blob});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=fn;document.body.appendChild(a);a.click();a.remove();})
+    .then(()=>{note.textContent='Gespeichert. In der PDF steckt dein Arbeitsstand.';}).catch(e=>{note.textContent=e&&e.code==='declined'?'Speichern abgebrochen.':'Speichern hat nicht geklappt.';});
+};
+
+window.__CAL={CH,T,CHILI,LEVELS,PARTS,chiliSvg,chiliRow,levelBadge,boardSvg,cpOf,pad};
+setMode(S.mode);refresh();go(S.pg,{keep:true});
+})();
+</script>
+<style>.lp-legal{font:13px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif;text-align:center;padding:20px 16px calc(96px + env(safe-area-inset-bottom,0px));opacity:.8;clear:both}.lp-legal a{color:inherit;text-decoration:underline;text-underline-offset:2px}</style><div class="lp-legal">Privates Angebot von Daniel Beyrodt · <a href="../ueber-mich/">Über mich</a> · <a href="../impressum/">Impressum</a> · <a href="../datenschutz/">Datenschutz</a></div></body></html>
