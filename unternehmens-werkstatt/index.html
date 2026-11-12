@@ -902,7 +902,8 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')pop.hidden=true;});
 const nav=$('#nav');
 function paintNav(){const cur=chOf[S.st];nav.replaceChildren(...CH.map((c,ci)=>{const first=chOf.indexOf(ci);const ids=parts.map((p,pi)=>pi).filter(pi=>chOf[pi]===ci);const done=ids.every(partDone);
   const b=el('button',{class:'st-btn '+parts[first].classList[1]+(done?' done':''),type:'button'},el('span',{class:'n'},String(ci)),c,el('span',{class:'ok',html:CHECK}));if(ci===cur)b.setAttribute('aria-current','step');b.onclick=()=>go(first);return b;}));
-  const cb=nav.querySelector('[aria-current]');if(cb&&cb.scrollIntoView)cb.scrollIntoView({block:'nearest',inline:'nearest'});}
+  /* nur die Leiste seitwärts verschieben, nie die Seite (scrollIntoView würde beim Tippen und Prüfen nach oben springen) */
+  const cb=nav.querySelector('[aria-current]');if(cb){const nr=nav.getBoundingClientRect(),br=cb.getBoundingClientRect();if(br.left<nr.left||br.right>nr.right)nav.scrollLeft+=br.left-nr.left-(nr.width-br.width)/2;}}
 function headFor(pi){const p=parts[pi];if(p.querySelector('.st-head'))return;const ci=chOf[pi];const sib=parts.map((x,i)=>i).filter(i=>chOf[i]===ci);
   const h=el('div',{class:'st-head'},el('div',{},el('p',{class:'eyebrow'},'Kapitel '+ci+' · Station '+pids[pi]),el('h2',{},CH_L[ci]),el('div',{class:'teile',role:'group','aria-label':'Häppchen'})));p.prepend(h);}
 parts.forEach((p,pi)=>headFor(pi));
