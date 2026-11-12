@@ -1,0 +1,953 @@
+<!doctype html>
+<html lang="de"><head><script>/* Lernplattformen auf GitHub Pages: Speichern ohne claude.ai */
+(function(){if(window.claude)return;var T={pdf:'application/pdf',txt:'text/plain;charset=utf-8',png:'image/png',jpg:'image/jpeg',jpeg:'image/jpeg',json:'application/json',csv:'text/csv;charset=utf-8',html:'text/html;charset=utf-8',docx:'application/vnd.openxmlformats-officedocument.wordprocessingml.document',xlsx:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',ino:'text/plain;charset=utf-8'};
+var dl={save:function(o){return new Promise(function(res,rej){try{var n=(o&&o.filename)||'datei',x=(n.split('.').pop()||'').toLowerCase(),d=o.data,b=d instanceof Blob?d:new Blob([d],{type:T[x]||'application/octet-stream'});var u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=n;a.rel='noopener';document.body.appendChild(a);a.click();setTimeout(function(){a.remove();URL.revokeObjectURL(u);},4000);res();}catch(e){rej({code:'failed',message:String(e)});}});}};
+window.claude={use:function(n){return Promise.resolve(n==='downloads'?dl:null);}};})();</script><meta property="og:type" content="website"><meta property="og:title" content="Marketing-Werkstatt"><meta property="og:description" content="Absatz und Marketing: Marktanalyse, Marketing-Mix, ein Produkt entwickeln, Preis kalkulieren und bewerben, dazu Arbeitsplätze in der Bäckerei. Wirtschaft, Klasse 8. Ergebnis als PDF."><meta property="og:url" content="https://deintechniklehrer.github.io/Lernplattformen/marketing-werkstatt/"><meta property="og:image" content="https://deintechniklehrer.github.io/Lernplattformen/vorschau/Vorschau_Marketing-Werkstatt.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="description" content="Absatz und Marketing: Marktanalyse, Marketing-Mix, ein Produkt entwickeln, Preis kalkulieren und bewerben, dazu Arbeitsplätze in der Bäckerei. Wirtschaft, Klasse 8. Ergebnis als PDF."><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Marketing-Werkstatt</title>
+<link rel="stylesheet" href="../assets/fonts/fonts.css">
+<style>
+[hidden]{display:none!important}
+
+:root{
+  --bg:#F3F6F2; --surface:#FFFFFF; --surface-2:#E9EFEA; --ink:#18221E; --muted:#56645D; --line:#D3DDD6;
+  --on-accent:#FFFFFF;
+  --existenz:#1F7A5C; --existenz-soft:#E1F0E9; --existenz-ink:#165C45;
+  --kultur:#2A6FB0;   --kultur-soft:#E2ECF7;   --kultur-ink:#1D568E;
+  --luxus:#B8841A;    --luxus-soft:#F6ECD6;    --luxus-ink:#7A5308;
+  --entdecken:#2A7F9E; --entdecken-soft:#DFEFF5; --entdecken-ink:#1B6380;
+  --sichern:#744690;  --sichern-soft:#EEE5F4;  --sichern-ink:#5B3175;
+  --bad:#B4483C; --bad-soft:#F6E1DE; --bad-ink:#8E3228;
+  --shadow:0 10px 30px rgb(24 34 30 / .14);
+  --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#101613; --surface:#18201C; --surface-2:#212B26; --ink:#E5ECE8; --muted:#9AA9A1; --line:#2F3B35;
+    --on-accent:#0F1512;
+    --existenz:#53BB91; --existenz-soft:#1A3128; --existenz-ink:#7FD3B0;
+    --kultur:#6FA8E2;   --kultur-soft:#1A2937;   --kultur-ink:#9CC4EE;
+    --luxus:#E2B458;    --luxus-soft:#372C15;    --luxus-ink:#EDCB86;
+    --entdecken:#5FB4D2; --entdecken-soft:#172F38; --entdecken-ink:#8FCDE3;
+    --sichern:#B690D0;  --sichern-soft:#2A2134;  --sichern-ink:#CFB2E2;
+    --bad:#E27E71; --bad-soft:#3A201C; --bad-ink:#F0A79D;
+    --shadow:0 10px 30px rgb(0 0 0 / .45);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#101613; --surface:#18201C; --surface-2:#212B26; --ink:#E5ECE8; --muted:#9AA9A1; --line:#2F3B35;
+  --on-accent:#0F1512;
+  --existenz:#53BB91; --existenz-soft:#1A3128; --existenz-ink:#7FD3B0;
+  --kultur:#6FA8E2;   --kultur-soft:#1A2937;   --kultur-ink:#9CC4EE;
+  --luxus:#E2B458;    --luxus-soft:#372C15;    --luxus-ink:#EDCB86;
+  --entdecken:#5FB4D2; --entdecken-soft:#172F38; --entdecken-ink:#8FCDE3;
+  --sichern:#B690D0;  --sichern-soft:#2A2134;  --sichern-ink:#CFB2E2;
+  --bad:#E27E71; --bad-soft:#3A201C; --bad-ink:#F0A79D;
+  --shadow:0 10px 30px rgb(0 0 0 / .45);
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55}
+.app{max-width:980px;margin:0 auto;padding-inline:16px;padding-block:20px 110px}
+h1,h2,h3,h4{font-family:var(--display);text-wrap:balance;line-height:1.15}
+.i{width:22px;height:22px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+:focus-visible{outline:3px solid var(--kultur);outline-offset:2px}
+
+/* Kopf */
+.top{display:grid;grid-template-columns:1fr minmax(170px,240px);gap:10px 24px;align-items:center}
+.brand{display:flex;gap:14px;align-items:center}
+.logo{width:48px;height:48px;flex:none}
+.brand h1{margin:0;font-weight:800;font-size:clamp(25px,4.2vw,34px);letter-spacing:-.015em}
+.brand p{margin:0;color:var(--muted);font-size:14px}
+.meter{display:grid;gap:6px}
+.meter-row{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.bar{height:10px;border-radius:99px;background:var(--surface-2);overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--existenz),var(--kultur) 55%,var(--luxus));transition:width .5s ease}
+.ki-pill{grid-column:1/-1;justify-self:start;display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;padding:5px 12px 5px 9px;border-radius:99px;background:var(--surface-2);color:var(--muted)}
+.ki-pill .i{width:16px;height:16px}
+.ki-pill.on{background:var(--sichern-soft);color:var(--sichern-ink)}
+@media (max-width:620px){.top{grid-template-columns:1fr}}
+
+/* Stationen-Navigation */
+.stations{display:flex;gap:8px;margin:18px 0 20px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
+.st-btn{flex:1 0 auto;display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-size:15px;font-weight:700;cursor:pointer;min-height:48px}
+.st-btn .n{display:grid;place-items:center;width:24px;height:24px;border-radius:8px;background:var(--c-soft);color:var(--c-ink);font-size:13px;font-variant-numeric:tabular-nums}
+.st-btn[aria-current="step"]{background:var(--c);border-color:var(--c);color:var(--on-accent)}
+.st-btn[aria-current="step"] .n{background:rgb(255 255 255 / .22);color:inherit}
+.st-btn .ok{display:none;width:18px;height:18px;color:var(--existenz)}
+.st-btn.done .ok{display:block}
+.st-btn[aria-current="step"].done .ok{color:inherit}
+
+/* Farbräume */
+.c-entdecken{--c:var(--entdecken);--c-soft:var(--entdecken-soft);--c-ink:var(--entdecken-ink)}
+.c-verstehen,.c-existenz{--c:var(--existenz);--c-soft:var(--existenz-soft);--c-ink:var(--existenz-ink)}
+.c-ordnen,.c-kultur{--c:var(--kultur);--c-soft:var(--kultur-soft);--c-ink:var(--kultur-ink)}
+.c-bewerten,.c-luxus{--c:var(--luxus);--c-soft:var(--luxus-soft);--c-ink:var(--luxus-ink)}
+.c-sichern{--c:var(--sichern);--c-soft:var(--sichern-soft);--c-ink:var(--sichern-ink)}
+
+/* Station */
+.station{display:grid;gap:16px}
+.st-head{display:flex;gap:16px;align-items:center;padding:20px 22px;border-radius:18px;background:var(--c);color:var(--on-accent)}
+.st-icon{width:58px;height:58px;flex:none;border-radius:16px;background:rgb(255 255 255 / .2);display:grid;place-items:center}
+.st-icon .i{width:32px;height:32px}
+.eyebrow{margin:0;text-transform:uppercase;letter-spacing:.09em;font-size:12px;font-weight:700;opacity:.92}
+.st-head h2{margin:2px 0 4px;font-size:clamp(23px,3.6vw,31px);font-weight:800}
+.goal{margin:0;font-size:15px}
+.lead{margin:0;max-width:65ch}
+
+.task{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;display:grid;gap:12px}
+.task>header{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.num{width:34px;height:34px;flex:none;border-radius:10px;background:var(--c);color:var(--on-accent);display:grid;place-items:center;font-family:var(--display);font-weight:800;font-variant-numeric:tabular-nums}
+.task h3{margin:0;font-size:19px;flex:1;min-width:12ch}
+.op{font:inherit;font-size:13px;font-weight:700;padding:5px 11px;border-radius:99px;border:0;background:var(--c-soft);color:var(--c-ink);cursor:pointer}
+.q{margin:0;max-width:68ch}
+.hint{margin:0;font-size:14px;color:var(--muted)}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+
+.btn{font:inherit;font-size:16px;font-weight:700;display:inline-flex;align-items:center;gap:8px;padding:10px 16px;min-height:46px;border-radius:12px;border:0;background:var(--ink);color:var(--bg);cursor:pointer}
+.btn.soft{background:var(--surface-2);color:var(--ink)}
+.btn.accent{background:var(--c);color:var(--on-accent)}
+.btn.ki{background:var(--sichern);color:var(--on-accent)}
+.btn:disabled{opacity:.55;cursor:default}
+.btn .i{width:19px;height:19px}
+
+textarea,input[type=text],input[type=number],select{font:inherit;font-size:16px;width:100%;padding:12px 14px;border-radius:12px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink)}
+textarea{min-height:112px;resize:vertical;line-height:1.5}
+select{appearance:auto;min-height:46px}
+
+/* Karten sortieren */
+.tray{display:grid;grid-template-columns:repeat(auto-fill,minmax(172px,1fr));gap:8px;padding:12px;border:2px dashed var(--line);border-radius:14px;min-height:70px}
+.tray.empty::after{content:"Alle Karten sind einsortiert. Tippe eine Karte an, um sie zu verschieben.";grid-column:1/-1;color:var(--muted);font-size:14px}
+.nc{display:flex;align-items:center;gap:9px;padding:9px 11px;min-height:50px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-size:15px;line-height:1.25;text-align:left;cursor:pointer;touch-action:manipulation;position:relative}
+.nc .e{font-size:24px;line-height:1}
+.nc[aria-pressed="true"]{outline:3px solid var(--c);outline-offset:2px;box-shadow:var(--shadow)}
+.nc .st{margin-left:auto;font-size:13px;font-weight:800;width:22px;height:22px;border-radius:99px;display:none;place-items:center;flex:none}
+.nc.s-ok{border-color:var(--existenz)} .nc.s-ok .st{display:grid;background:var(--existenz);color:var(--on-accent)}
+.nc.s-alt{border-color:var(--luxus);border-style:dashed} .nc.s-alt .st{display:grid;background:var(--luxus);color:var(--on-accent)}
+.nc.s-bad{border-color:var(--bad)} .nc.s-bad .st{display:grid;background:var(--bad);color:var(--on-accent)}
+.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media (max-width:680px){.cols{grid-template-columns:1fr}}
+.col{border-radius:14px;background:var(--c-soft);border:2px solid transparent;padding:10px;display:grid;gap:8px;align-content:start;min-height:150px;cursor:pointer;font:inherit;color:var(--ink);text-align:left}
+.col.armed{border-color:var(--c);border-style:dashed}
+.col.over{border-color:var(--c);border-style:solid}
+.col h4{margin:0;padding:9px 11px;border-radius:10px;background:var(--c);color:var(--on-accent);font-size:16px;display:flex;justify-content:space-between;gap:8px}
+.col h4 small{font-family:var(--body);font-weight:700;font-variant-numeric:tabular-nums;opacity:.9}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:14px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.dot{width:12px;height:12px;border-radius:99px;display:inline-block}
+
+/* Offene Aufgaben */
+.open{display:grid;gap:10px}
+.open-foot{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.qc{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.qc b{font-size:13px;color:var(--muted);margin-right:2px}
+.qc span{font-size:13px;padding:4px 10px;border-radius:99px;background:var(--surface-2);color:var(--muted)}
+.qc span.on{background:var(--existenz-soft);color:var(--existenz-ink)}
+.qc span.on::before{content:"✓ "}
+.fb{border-radius:14px;padding:14px 16px;background:var(--surface-2);display:grid;gap:6px}
+.fb p{margin:0;max-width:68ch}
+.fb .lvl{display:flex;align-items:center;gap:8px;font-weight:800;font-family:var(--display);font-size:17px}
+.fb .lvl .i{width:18px;height:18px}
+.fb.stark{background:var(--existenz-soft)} .fb.stark .lvl{color:var(--existenz-ink)}
+.fb.solide{background:var(--kultur-soft)} .fb.solide .lvl{color:var(--kultur-ink)}
+.fb.ausbaufaehig{background:var(--luxus-soft)} .fb.ausbaufaehig .lvl{color:var(--luxus-ink)}
+.fb.fehlt,.fb.err{background:var(--bad-soft)} .fb.fehlt .lvl,.fb.err .lvl{color:var(--bad-ink)}
+.fb .stale{font-size:13px;color:var(--muted)}
+.fb.wait .lvl{color:var(--muted)}
+.fb.ok{background:var(--existenz-soft)} .fb.ok .lvl{color:var(--existenz-ink)}
+.fb.mid{background:var(--luxus-soft)} .fb.mid .lvl{color:var(--luxus-ink)}
+.dots::after{content:"";animation:dots 1.4s steps(4) infinite}
+@keyframes dots{0%{content:""}25%{content:"."}50%{content:".."}75%{content:"..."}}
+@media (prefers-reduced-motion:reduce){.dots::after{animation:none;content:" …"}.bar i{transition:none}}
+
+/* Infotext */
+.info{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px 22px;display:grid;gap:12px}
+.info p{margin:0;max-width:66ch}
+.info h3{margin:0;font-size:21px}
+.term{font:inherit;background:none;border:0;padding:0 1px;color:var(--c-ink);font-weight:700;text-decoration:underline dotted 2px;text-underline-offset:4px;cursor:pointer}
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media (max-width:680px){.tiers{grid-template-columns:1fr}}
+.tier{border-radius:14px;padding:14px;background:var(--c-soft);border:0;text-align:left;font:inherit;color:var(--ink);cursor:pointer;display:grid;gap:4px;align-content:start;min-height:112px}
+.tier b{font-family:var(--display);font-size:18px;color:var(--c-ink)}
+.tier .tag{font-size:13px;font-weight:700;color:var(--c-ink)}
+.tier .more{display:none;font-size:15px}
+.tier[aria-expanded="true"] .more{display:block}
+.tier .tap{font-size:13px;color:var(--muted)}
+.tier[aria-expanded="true"] .tap{display:none}
+.flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:8px;align-items:stretch}
+.fstep{border-radius:14px;padding:12px 14px;background:var(--surface-2);display:grid;gap:2px;align-content:start}
+.fstep b{font-family:var(--display);font-size:18px}
+.fstep small{font-size:14px;color:var(--muted)}
+.farr{display:grid;place-items:center;font-size:13px;font-weight:700;color:var(--muted);text-align:center;max-width:110px}
+@media (max-width:680px){.flow{grid-template-columns:1fr}.farr{max-width:none}}
+
+/* Materiell / immateriell */
+.mi{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:8px}
+.mi-row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 8px 8px 12px;border-radius:12px;background:var(--surface-2);border:1.5px solid transparent}
+.mi-row.s-ok{border-color:var(--existenz)} .mi-row.s-bad{border-color:var(--bad)}
+.seg{display:inline-flex;border-radius:10px;overflow:hidden;border:1.5px solid var(--line);flex:none}
+.seg button{font:inherit;font-size:14px;font-weight:700;padding:7px 10px;border:0;background:var(--surface);color:var(--muted);cursor:pointer;min-height:38px}
+.seg button[aria-pressed="true"]{background:var(--c);color:var(--on-accent)}
+
+/* Lückentext */
+.cloze{line-height:2.4;max-width:70ch;margin:0}
+.cloze select{width:auto;display:inline-block;padding:6px 10px;min-height:40px;font-weight:700;margin:0 2px}
+.cloze select.s-ok{border-color:var(--existenz);background:var(--existenz-soft)}
+.cloze select.s-bad{border-color:var(--bad);background:var(--bad-soft)}
+
+/* Pyramide */
+.pyr-wrap{display:grid;grid-template-columns:minmax(220px,300px) 1fr;gap:18px;align-items:center}
+@media (max-width:680px){.pyr-wrap{grid-template-columns:1fr}}
+.pyr{width:100%;max-width:300px;height:auto;justify-self:center}
+.pyr polygon{cursor:pointer;stroke:var(--surface);stroke-width:4}
+.pyr .p-l{fill:var(--luxus)} .pyr .p-k{fill:var(--kultur)} .pyr .p-e{fill:var(--existenz)}
+.pyr text{fill:var(--on-accent);font-family:var(--display);font-weight:800;font-size:15px;text-anchor:middle;pointer-events:none}
+.pyr text.s{font-family:var(--body);font-weight:700;font-size:11px}
+.pyr-in{display:grid;gap:10px}
+.pyr-row{border-radius:14px;padding:10px 12px;background:var(--c-soft);display:grid;gap:8px}
+.pyr-row h4{margin:0;font-size:16px;color:var(--c-ink)}
+.pyr-row .two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media (max-width:420px){.pyr-row .two{grid-template-columns:1fr}}
+
+/* Fallbeispiel */
+.story{border-radius:16px;padding:18px 20px;background:var(--luxus-soft);display:grid;gap:12px}
+.story h3{margin:0;font-size:20px;color:var(--luxus-ink)}
+.story p{margin:0;max-width:68ch}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.price{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:12px;background:var(--surface);font-weight:700;font-size:15px}
+.price .e{font-size:20px}
+.price.wallet{background:var(--ink);color:var(--bg)}
+.budget{position:relative;height:46px;border-radius:12px;background:var(--surface-2);display:flex;overflow:visible;margin-top:24px}
+.bseg{height:100%;display:grid;place-items:center;color:var(--on-accent);font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;padding-inline:4px}
+.bseg:first-child{border-radius:12px 0 0 12px}.bseg:last-child{border-radius:0 12px 12px 0}
+.bseg.cut{background-image:repeating-linear-gradient(45deg,rgb(255 255 255 / .35) 0 6px,transparent 6px 12px)}
+.bmark{position:absolute;top:-24px;bottom:-6px;border-left:3px solid var(--ink);padding-left:6px;font-size:13px;font-weight:800;white-space:nowrap}
+.jt{display:grid;gap:8px}
+.jt-row{display:grid;grid-template-columns:1fr minmax(160px,220px);gap:10px;align-items:center;padding:8px 8px 8px 12px;border-radius:12px;background:var(--surface-2);border:1.5px solid transparent}
+.jt-row.s-ok{border-color:var(--existenz)} .jt-row.s-alt{border-color:var(--luxus);border-style:dashed} .jt-row.s-bad{border-color:var(--bad)}
+@media (max-width:480px){.jt-row{grid-template-columns:1fr}}
+.gap-in{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.gap-in input{width:120px}
+
+/* Rangfolge */
+.rank{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.rank li{display:flex;align-items:center;gap:10px;padding:10px 10px 10px 12px;border-radius:12px;background:var(--surface-2)}
+.rank .pos{width:30px;height:30px;border-radius:9px;background:var(--c);color:var(--on-accent);display:grid;place-items:center;font-weight:800;flex:none;font-variant-numeric:tabular-nums}
+.rank .e{font-size:22px}
+.rank .lbl{flex:1;font-weight:700;line-height:1.25}
+.rank .lbl small{display:block;font-weight:400;color:var(--muted);font-size:14px}
+.mv{font:inherit;width:42px;height:42px;border-radius:10px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;display:grid;place-items:center}
+.mv:disabled{opacity:.35;cursor:default}
+.think{border-radius:14px;padding:12px 14px;border:1.5px dashed var(--luxus);display:flex;gap:10px;align-items:flex-start}
+.think p{margin:0}
+.think .i{color:var(--luxus-ink);margin-top:2px}
+.scale{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+@media (max-width:560px){.scale{grid-template-columns:1fr}}
+.scale label{display:grid;place-items:center;text-align:center;gap:4px;padding:10px 6px;border-radius:12px;background:var(--surface-2);border:1.5px solid transparent;cursor:pointer;font-size:14px;font-weight:700;min-height:56px}
+.scale input{position:absolute;opacity:0;pointer-events:none}
+.scale label:has(input:checked){background:var(--c);color:var(--on-accent)}
+.scale label:has(input:focus-visible){outline:3px solid var(--kultur);outline-offset:2px}
+.bonus{border-radius:16px;padding:18px;border:2px solid var(--luxus);background:var(--surface);display:grid;gap:12px}
+.bonus h3{margin:0;font-size:19px;display:flex;gap:8px;align-items:center}
+.bonus .star{color:var(--luxus)}
+
+/* Sichern */
+.trio{display:grid;gap:10px}
+.trio-row{display:grid;grid-template-columns:52px 1fr;gap:12px;align-items:start}
+.big{width:52px;height:52px;border-radius:14px;background:var(--c);color:var(--on-accent);display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:26px}
+.trio-row .fields{display:grid;gap:8px}
+.trio-row .three{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+@media (max-width:560px){.trio-row .three{grid-template-columns:1fr}}
+.trio-row input.s-ok{border-color:var(--existenz);background:var(--existenz-soft)}
+.trio-row input.s-bad{border-color:var(--luxus)}
+.over-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px}
+.ov{border-radius:12px;padding:12px;background:var(--c-soft);display:grid;gap:4px}
+.ov b{font-family:var(--display);color:var(--c-ink)}
+.ov span{font-size:14px;color:var(--ink);font-variant-numeric:tabular-nums}
+.code{font-family:ui-monospace,Consolas,monospace;font-size:13px;min-height:90px;word-break:break-all}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:720px){.split{grid-template-columns:1fr}}
+.half{border-radius:14px;background:var(--c-soft);padding:14px;display:grid;gap:10px;align-content:start;min-width:0}
+.half h4{margin:0;font-size:17px;color:var(--c-ink)}
+
+/* Popover */
+.pop{position:absolute;z-index:60;width:min(340px,calc(100vw - 32px));background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px 16px;box-shadow:var(--shadow);display:grid;gap:6px}
+.pop h4{margin:0;font-size:18px;padding-right:34px}
+.pop p{margin:0;font-size:15px}
+.pop .x{position:absolute;top:8px;right:8px;width:34px;height:34px;border-radius:9px;border:0;background:var(--surface-2);color:var(--ink);font:inherit;font-size:18px;cursor:pointer}
+@media (max-width:560px){.pop{position:fixed;left:12px!important;right:12px;top:auto!important;bottom:calc(84px + env(safe-area-inset-bottom,0px));width:auto}}
+
+/* Blättern */
+.pager{position:fixed;left:0;right:0;bottom:0;z-index:40;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line)}
+.pager-in{max-width:980px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.pager-in .where{font-size:14px;color:var(--muted);text-align:center;font-variant-numeric:tabular-nums}
+
+/* Einkommens-Werkstatt: Ergänzungen */
+:root{--s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a;--s4:#eda100;--s5:#e87ba4;--s6:#008300;--free:#D3DDD6}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--s5:#d55181;--s6:#008300;--free:#2F3B35}}
+:root[data-theme="dark"]{--s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--s5:#d55181;--s6:#008300;--free:#2F3B35}
+.srcs{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media (max-width:620px){.srcs{grid-template-columns:1fr}}
+.srcs .tier .e{font-size:26px;line-height:1}
+.srcs .tier b{font-size:17px}
+.mi-row{flex-wrap:wrap}
+#srcSort{grid-template-columns:repeat(auto-fill,minmax(290px,1fr))}
+#srcSort .mi-row{flex-direction:column;align-items:stretch;gap:6px}
+.seg4{display:grid;grid-template-columns:repeat(4,1fr)}
+.seg4 button{padding:7px 4px;font-size:13.5px}
+.rule{border-radius:12px;padding:12px 14px;background:var(--surface-2);display:grid;gap:4px}
+.rule p{margin:0}
+.src{font-size:13px;color:var(--muted)}
+p.src{margin:0}
+.law blockquote{margin:0;padding:10px 14px;border-left:4px solid var(--sichern);background:var(--sichern-soft);border-radius:0 12px 12px 0;font-style:italic;max-width:68ch}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;max-width:420px}
+table.tg{border-collapse:collapse;width:100%;font-size:15px;font-variant-numeric:tabular-nums}
+.tg th,.tg td{padding:8px 12px;text-align:left;border-bottom:1px solid var(--line)}
+.tg th{background:var(--surface-2);font-size:13px;color:var(--muted)}
+.tg tr:last-child td{border-bottom:0}
+.tg tbody tr:nth-child(3){background:var(--c-soft);font-weight:700}
+.cases{display:grid;gap:8px}
+.case{display:grid;grid-template-columns:1fr auto;gap:6px 12px;align-items:center;padding:10px 10px 10px 14px;border-radius:12px;background:var(--surface-2);border:1.5px solid transparent}
+.case p{margin:0}
+.case .why{grid-column:1/-1;font-size:14px;color:var(--muted)}
+.case.s-ok{border-color:var(--existenz)} .case.s-bad{border-color:var(--bad)}
+@media (max-width:520px){.case{grid-template-columns:1fr}}
+.pe{font-size:20px}
+.eur{display:inline-flex;align-items:center;gap:6px}
+.eur input{width:96px}
+.jt-row .eur{justify-self:start}
+.jt-row .eur input{width:110px}
+.plan{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;align-items:start}
+@media (max-width:760px){.plan{grid-template-columns:1fr}}
+.plan-col{display:grid;gap:10px;min-width:0}
+.plan h4{margin:6px 0 0;font-size:16px;color:var(--c-ink)}
+.money{display:grid;gap:6px}
+.mrow{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 6px 6px 12px;border-radius:12px;background:var(--surface-2)}
+.ml{display:inline-flex;align-items:center;gap:8px;font-size:15px}
+.mctl{display:inline-flex;align-items:center;gap:6px}
+.mctl .mv{width:38px;height:38px;font-size:18px;font-weight:800}
+.mctl input{width:72px;text-align:right;padding:8px 10px}
+.sw{display:inline-block;width:12px;height:12px;border-radius:4px;flex:none}
+.sw.free{background:var(--free)}
+.goalrow{display:flex;gap:8px;flex-wrap:wrap}
+.goalrow input[type=text]{flex:1;min-width:150px}
+.pstat{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-radius:14px;background:var(--surface-2)}
+.pstat b{display:block;font-family:var(--display);font-size:17px}
+.pstat span{font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
+.pstat .pico{display:grid;place-items:center;width:32px;height:32px;border-radius:10px;flex:none}
+.pstat.ok{background:var(--existenz-soft)} .pstat.ok .pico{background:var(--existenz);color:var(--on-accent)}
+.pstat.mid{background:var(--luxus-soft)} .pstat.mid .pico{background:var(--luxus);color:var(--on-accent)}
+.pstat.bad{background:var(--bad-soft)} .pstat.bad .pico{background:var(--bad);color:var(--on-accent)}
+.stack{display:flex;gap:2px;height:30px;border-radius:8px;overflow:hidden;background:var(--surface)}
+.seg-b{height:100%;min-width:3px}
+.seg-b:first-child{border-radius:4px 0 0 4px}.seg-b:last-child{border-radius:0 4px 4px 0}
+.seg-b.free{background:var(--free)}
+table.legend-t{border-collapse:collapse;width:100%;font-size:15px;font-variant-numeric:tabular-nums}
+.legend-t td{padding:5px 4px;border-bottom:1px solid var(--line)}
+.legend-t td:first-child{display:flex;align-items:center;gap:8px}
+.legend-t td.v,.legend-t td.p{text-align:right;white-space:nowrap}
+.legend-t td.p{color:var(--muted);width:56px}
+.quiz{display:grid;gap:10px}
+.qz{border:1.5px solid var(--line);border-radius:12px;padding:10px 14px 12px;margin:0;display:grid;gap:6px}
+.qz legend{font-weight:700;padding:0 4px}
+.qz label{display:flex;gap:10px;align-items:center;padding:6px 8px;border-radius:9px;cursor:pointer}
+.qz label:has(input:checked){background:var(--c-soft)}
+.qz input{width:18px;height:18px;accent-color:var(--c)}
+.qz.s-ok{border-color:var(--existenz)} .qz.s-bad{border-color:var(--bad)}
+.fbox{border-radius:12px;border:1.5px dashed var(--sichern);background:var(--surface)}
+.fbox.has{border-style:solid;background:var(--sichern-soft)}
+.fbox>summary{cursor:pointer;padding:10px 14px;font-weight:700;color:var(--sichern-ink);list-style:none;display:flex;align-items:center;gap:8px}
+.fbox>summary::-webkit-details-marker{display:none}
+.fbox>summary::before{content:"";width:8px;height:8px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s}
+.fbox[open]>summary::before{transform:rotate(45deg)}
+.fbox-in{padding:0 14px 14px;display:grid;gap:10px}
+.fbl{font-size:14px;font-weight:700;color:var(--muted)}
+.fbin{min-height:80px}
+a.btn{text-decoration:none}
+.resume{background:var(--surface)}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:720px){.split{grid-template-columns:1fr}}
+.half{border-radius:14px;background:var(--c-soft);padding:14px;display:grid;gap:10px;align-content:start;min-width:0}
+.half h4{margin:0;font-size:17px;color:var(--c-ink)}
+.howto{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+@media (max-width:680px){.howto{grid-template-columns:1fr}}
+.howto div{border-radius:12px;padding:10px 12px;background:var(--sichern-soft);font-size:15px}
+.howto b{display:block;color:var(--sichern-ink);font-family:var(--display)}
+
+/* Unternehmens-Werkstatt: Ergänzungen */
+
+.teile{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.teile button{font:inherit;font-size:13px;font-weight:700;min-width:44px;min-height:32px;padding:4px 10px;border-radius:99px;border:1.5px solid rgb(255 255 255 / .55);background:transparent;color:inherit;cursor:pointer}
+.teile button[aria-current="step"]{background:var(--on-accent);color:var(--c);border-color:var(--on-accent)}
+.teile button.done::after{content:" ✓"}
+.st-btn{flex:0 0 auto}
+.mi.w2{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+.mi-row{flex-wrap:wrap}
+.mi-row>span{flex:1 1 140px}
+.seg{flex-wrap:wrap}
+.seg button{border-right:1px solid var(--line)}
+.seg button:last-child{border-right:0}
+@media (max-width:440px){.mi-row{flex-direction:column;align-items:stretch}.seg{display:flex}.seg button{flex:1}}
+.multi{display:grid;gap:6px}
+.multi label{display:flex;gap:10px;align-items:center;padding:8px 10px;border-radius:10px;background:var(--surface-2);border:1.5px solid transparent;cursor:pointer}
+.multi label:has(input:checked){background:var(--c-soft)}
+.multi input{width:20px;height:20px;accent-color:var(--c);flex:none}
+.multi label.s-ok{border-color:var(--existenz)} .multi label.s-bad{border-color:var(--bad)}
+.rank li.s-ok{outline:2px solid var(--existenz)} .rank li.s-bad{outline:2px solid var(--bad)}
+.muster{border-radius:12px;padding:12px 14px;background:var(--existenz-soft);color:var(--ink);display:grid;gap:6px}
+.muster h4{margin:0;font-size:16px;color:var(--existenz-ink)}
+.muster p,.muster ul{margin:0}
+.muster ul{padding-left:20px}
+.rate{display:grid;gap:10px}
+.rate fieldset{border:1.5px solid var(--line);border-radius:12px;padding:10px 12px 12px;margin:0;display:grid;gap:8px}
+.rate legend{font-weight:700;padding:0 4px}
+.rate .scale{grid-template-columns:repeat(4,1fr)}
+@media (max-width:560px){.rate .scale{grid-template-columns:repeat(2,1fr)}}
+.scale label{position:relative}
+.sumlist{display:grid;gap:6px;margin:0;padding:0;list-style:none}
+.sumlist li{display:flex;justify-content:space-between;gap:10px;padding:8px 12px;border-radius:10px;background:var(--surface-2)}
+.lic{margin:26px 0 0;font-size:13px;color:var(--muted);text-align:center}
+.lic a{color:inherit}
+.story{background:var(--surface);border:1px solid var(--line);border-left:6px solid var(--c);border-radius:16px;padding:16px 18px;display:grid;gap:8px}
+.story p{margin:0;max-width:66ch}
+.story h3{margin:0;font-size:19px}
+.lp-kiopt{margin:4px 0 0;border:1.5px dashed #8a7ad6;border-radius:12px;padding:8px 12px}
+.lp-kiopt summary{cursor:pointer;font-weight:700;color:#5b4bb5}
+.lp-kiopt .row{margin:8px 0}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .lp-kiopt summary{color:#b9adf5}}
+:root[data-theme="dark"] .lp-kiopt summary{color:#b9adf5}
+.cloze select{font-size:16px}
+.pairs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:560px){.pairs{grid-template-columns:1fr}}
+.pairs .pcol{display:grid;gap:8px;align-content:start}
+.pairs h4{margin:0;font-size:14px;color:var(--muted)}
+.pc{display:flex;align-items:center;gap:9px;padding:9px 11px;min-height:48px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-size:15px;line-height:1.25;text-align:left;cursor:pointer}
+.pc .k{flex:none;width:26px;height:26px;border-radius:8px;display:grid;place-items:center;font-weight:800;font-size:13px;background:var(--surface-2);color:var(--muted)}
+.pc .k.on{background:var(--c);color:var(--on-accent)}
+.pc[aria-pressed="true"]{outline:3px solid var(--c);outline-offset:2px}
+.pc.s-ok{border-color:var(--existenz)} .pc.s-bad{border-color:var(--bad)}
+.marktext{margin:0;line-height:2;max-width:70ch}
+.ms{font:inherit;font-size:16px;line-height:1.5;color:var(--ink);background:var(--surface-2);border:1.5px solid transparent;border-radius:8px;padding:2px 6px;margin:2px 2px;cursor:pointer;text-align:left;-webkit-box-decoration-break:clone;box-decoration-break:clone;display:inline}
+.ms[aria-pressed="true"]{background:var(--c-soft);border-color:var(--c);font-weight:700}
+.ms.s-ok{border-color:var(--existenz);background:var(--existenz-soft)} .ms.s-bad{border-color:var(--bad);background:var(--bad-soft)}
+.numin{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.numin input{width:150px}
+.numin input.s-ok{border-color:var(--existenz)} .numin input.s-bad{border-color:var(--bad)}
+.tg tbody tr:nth-child(3){background:none;font-weight:400}
+code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overflow:auto;padding:8px 10px;border-radius:10px;background:var(--surface-2)}
+</style></head><body>
+<div class="app">
+  <header class="top">
+    <div class="brand">
+<svg class="logo" viewBox="0 0 48 48" aria-hidden="true">
+        <path d="M10 16h28l-3 26H13z" fill="var(--luxus)"/>
+        <path d="M18 16v-3a6 6 0 0 1 12 0v3" fill="none" stroke="var(--existenz)" stroke-width="3" stroke-linecap="round"/>
+        <rect x="16" y="24" width="16" height="10" rx="2" fill="var(--surface)"/>
+        <text x="24" y="32.5" text-anchor="middle" font-size="9" font-weight="800" fill="var(--kultur)" font-family="Bricolage Grotesque, sans-serif">€</text>
+      </svg>
+      <div>
+        <h1>Marketing-Werkstatt</h1>
+        <p>Wirtschaft · Klasse 8 · Absatz, Marketing und Arbeitsplätze</p>
+      </div>
+    </div>
+    <div class="meter" aria-label="Fortschritt">
+      <div class="meter-row"><span>Dein Fortschritt</span><span id="progTxt">0 %</span></div>
+      <div class="bar"><i id="progBar"></i></div>
+    </div>
+    <span class="ki-pill"><svg class="i" viewBox="0 0 24 24"><path d="m5 12 4 4 10-10"/></svg><span>Automatische Checks · KI freiwillig ab AI Badge Level 1</span></span>
+  </header>
+
+  <nav class="stations" id="nav" aria-label="Kapitel"></nav>
+
+  <main id="main">
+
+<!-- ================= MARKETING-WERKSTATT: START ================= -->
+<section class="station c-kultur" data-ch="11" data-w="3" data-p="" aria-label="Start">
+  <div class="info">
+    <h3>Willkommen im Verkauf</h3>
+    <p>Die <b>Bäckerei Krume</b> kennst du vielleicht schon: Frau Krume backt mit 25 Mitarbeitenden und verkauft in drei Filialen, bald kommt eine vierte neben der Gesamtschule dazu. Die Bäckerei ist ausgedacht, aber so könnte sie in deinem Ort stehen.</p>
+    <p>Hier geht es um den <b>Absatz</b>: Wer kauft bei der Bäckerei, wie gewinnt sie neue Kundschaft, und wie bringt sie ein neues Produkt auf den Markt? Zum Schluss lernst du drei <b>Arbeitsplätze</b> in der Bäckerei kennen.</p>
+    <p>Jedes Kapitel besteht aus kurzen Häppchen. Mit „Weiter“ unten kommst du zum nächsten. Am Ende speicherst du dein Ergebnis als PDF.</p>
+  </div>
+  <details class="fbox resume" id="lpUp1">
+    <summary>Schon angefangen? Mit Ergebnis-PDF oder Sicherungscode weiterarbeiten</summary>
+    <div class="fbox-in">
+      <label class="fbl" for="codeIn1">Sicherungscode einfügen</label>
+      <textarea id="codeIn1" class="code" placeholder="LPS0.…"></textarea>
+      <div class="row"><button class="btn accent" type="button" data-loadcode="codeIn1">Code laden</button></div>
+      <p class="hint" data-loadnote="codeIn1" hidden aria-live="polite"></p>
+    </div>
+  </details>
+</section>
+
+<!-- ================= KAPITEL 6: ABSATZ ================= -->
+<section class="station c-kultur" data-ch="6" data-w="3" data-p="6.1" aria-label="Station 6.1" hidden>
+  <div class="info">
+    <h3>Erst den Markt kennen</h3>
+    <p>Bevor ein Unternehmen verkauft, untersucht es den Markt. Diese <b>Marktanalyse</b> fragt: Wer ist meine <b>Zielgruppe</b>? Was sind die <b>Wünsche der Kundschaft</b>? Was macht die <b>Konkurrenz</b>?</p>
+  </div>
+  <article class="task">
+    <header><span class="num"></span><h3>Fragen der Marktanalyse</h3><button class="op" data-op="zuordnen" type="button">zuordnen</button></header>
+    <p class="q">Frau Krume will eine vierte Filiale neben der Gesamtschule eröffnen. Ordne jede ihrer Fragen einem Bereich der Marktanalyse zu.</p>
+    <div class="w" data-t="u21"></div>
+  </article>
+</section>
+
+<section class="station c-kultur" data-ch="6" data-w="3" data-p="6.2" aria-label="Station 6.2" hidden>
+  <div class="info">
+    <h3>Der Marketing-Mix</h3>
+    <p>Mit vier <b>Marketing-Instrumenten</b> sorgt ein Unternehmen dafür, dass seine Produkte gekauft werden. Zusammen heißen sie <b>Marketing-Mix</b>. Tippe sie an:</p>
+    <div class="srcs">
+      <button class="tier" type="button" aria-expanded="false"><span class="e" aria-hidden="true">🥐</span><b>Produktpolitik</b><span class="tag">das Angebot</span><span class="tap">Tippen für mehr</span><span class="more">Neue Produkte entwickeln, Qualität, Verpackung, Name und Auswahl. Das Produkt soll sich von der Konkurrenz abheben.</span></button>
+      <button class="tier" type="button" aria-expanded="false"><span class="e" aria-hidden="true">🏷️</span><b>Preispolitik</b><span class="tag">der Preis</span><span class="tap">Tippen für mehr</span><span class="more">Preise festlegen und unterscheiden: nach Zeit (Angebot am Abend), nach Personen (Schülerpreis), nach Menge (Rabatt ab 10 Stück).</span></button>
+      <button class="tier" type="button" aria-expanded="false"><span class="e" aria-hidden="true">🚚</span><b>Absatzwegepolitik</b><span class="tag">der Weg zur Kundschaft</span><span class="tap">Tippen für mehr</span><span class="more"><b>Direkt</b>: eigene Filialen, eigener Online-Shop, Verkaufswagen. <b>Indirekt</b>: über Händler, zum Beispiel einen Supermarkt.</span></button>
+      <button class="tier" type="button" aria-expanded="false"><span class="e" aria-hidden="true">📣</span><b>Kommunikationspolitik</b><span class="tag">Informieren und werben</span><span class="tap">Tippen für mehr</span><span class="more">Werbung, Aktionen zur Verkaufsförderung (Gutscheine), Öffentlichkeitsarbeit (Tag der offenen Tür) und Sponsoring (z. B. Trikots für einen Sportverein).</span></button>
+    </div>
+  </div>
+  <article class="task">
+    <header><span class="num"></span><h3>Marketing-Instrumente zuordnen</h3><button class="op" data-op="zuordnen" type="button">zuordnen</button></header>
+    <p class="q">Ordne jede Maßnahme der Bäckerei einem Marketing-Instrument zu.</p>
+    <div class="w" data-t="u22"></div>
+  </article>
+</section>
+
+<section class="station c-kultur" data-ch="6" data-w="3" data-p="6.3" aria-label="Station 6.3" hidden>
+  <div class="story">
+    <h3>Dein Auftrag</h3>
+    <p>Die neue Filiale neben der Gesamtschule ist eröffnet. Frau Krume möchte, dass dort mehr Schüler:innen einkaufen. Sie bittet dich um Ideen.</p>
+  </div>
+  <article class="task">
+    <header><span class="num"></span><h3>Dein Marketing-Mix</h3><button class="op" data-op="entwickeln" type="button">entwickeln</button></header>
+    <p class="q">Entwickle für jedes der vier Marketing-Instrumente eine Maßnahme, mit der die Bäckerei mehr Schüler:innen als Kundschaft gewinnt. Schreibe zu jeder Maßnahme kurz, warum sie wirkt.</p>
+    <div class="w" data-t="u23"></div>
+  </article>
+</section>
+
+<!-- ================= KAPITEL 9: PRODUKT ENTWICKELN ================= -->
+<section class="station c-sichern" data-ch="9" data-w="3" data-p="" aria-label="Station" hidden>
+  <div class="info">
+    <h3>Von der Idee zum Produkt</h3>
+    <p>Frau Krume will für die neue Filiale einen Pausensnack entwickeln: den <b>„Krume-Kracher“</b>. Ein neues Produkt entsteht in mehreren Schritten. Zuerst wird eine <b>Idee</b> gesammelt. Mit einer <b>Marktanalyse</b> prüft die Bäckerei, wer den Snack kaufen soll und was die Konkurrenz anbietet. Dann wird das Produkt <b>entworfen und getestet</b>, zum Beispiel mit einem Probebacken, bei dem Kund:innen probieren. Danach legt die Bäckerei den <b>Preis</b> fest und bringt den Snack mit <b>Werbung</b> auf den Markt. Zum Schluss beobachtet sie, wie er sich verkauft, und <b>verbessert</b> ihn.</p>
+  </div>
+  <article class="task">
+    <header><span class="num"></span><h3>Der Weg des Krume-Krachers</h3><button class="op" data-op="ordnen" type="button">ordnen</button></header>
+    <p class="q">Ordne die Schritte, mit denen die Bäckerei den Krume-Kracher entwickelt und auf den Markt bringt.</p>
+    <div class="w" data-t="u27"></div>
+  </article>
+</section>
+
+<section class="station c-sichern" data-ch="9" data-w="3" data-p="" aria-label="Station" hidden>
+  <div class="info">
+    <h3>Den Preis kalkulieren</h3>
+    <p>Der Preis muss alle <b>Kosten</b> decken: Zutaten, Löhne, Strom und Miete. Zusammen ergeben sie die <b>Selbstkosten</b> je Stück. Damit die Bäckerei etwas verdient, schlägt sie einen <b>Gewinnaufschlag</b> auf, zum Beispiel 20 Prozent der Selbstkosten. Im Laden kommt noch die Mehrwertsteuer dazu, die lassen wir hier weg.</p>
+    <div class="tablewrap"><table class="tg">
+      <thead><tr><th>Kosten je Krume-Kracher</th><th>Euro</th></tr></thead>
+      <tbody><tr><td>Zutaten</td><td>0,40</td></tr><tr><td>Lohn</td><td>0,30</td></tr><tr><td>Strom und Miete</td><td>0,20</td></tr></tbody>
+    </table></div>
+  </div>
+  <article class="task">
+    <header><span class="num"></span><h3>Verkaufspreis ermitteln</h3><button class="op" data-op="ermitteln" type="button">ermitteln</button></header>
+    <p class="q">Ermittle den Verkaufspreis des Krume-Krachers ohne Mehrwertsteuer: Rechne zuerst die Selbstkosten zusammen und schlage dann 20 Prozent Gewinn auf.</p>
+    <p class="hint"><b>Starthilfe:</b> 10 Prozent von 0,90 Euro sind 0,09 Euro.</p>
+    <div class="w" data-t="u28"></div>
+  </article>
+</section>
+
+<section class="station c-sichern" data-ch="9" data-w="3" data-p="" aria-label="Station" hidden>
+  <div class="info">
+    <h3>Werbung, die wirkt</h3>
+    <p>Gute Werbung spricht die <b>Zielgruppe</b> direkt an. Sie nennt den <b>Nutzen</b> für die Kundschaft, wichtige Angaben wie <b>Preis</b> und <b>Ort</b> und macht neugierig. Ein bekanntes Muster heißt <b>AIDA</b>: Aufmerksamkeit wecken, Interesse halten, Wunsch auslösen, zum Handeln auffordern.</p>
+  </div>
+  <article class="task">
+    <header><span class="num"></span><h3>Zwei Plakate im Vergleich</h3><button class="op" data-op="vergleichen" type="button">vergleichen</button></header>
+    <p class="q">Vergleiche jeweils zwei Plakattexte für die Filiale an der Gesamtschule. Wähle den Text, der die Schüler:innen besser anspricht.</p>
+    <div class="w" data-t="u29"></div>
+  </article>
+</section>
+
+<section class="station c-sichern" data-ch="9" data-w="3" data-p="" aria-label="Station" hidden>
+  <div class="story">
+    <h3>Jetzt bist du dran</h3>
+    <p>Frau Krume sucht noch ein zweites neues Produkt. Sie bittet dich, eines zu entwickeln.</p>
+  </div>
+  <article class="task">
+    <header><span class="num"></span><h3>Dein Produkt-Steckbrief</h3><button class="op" data-op="entwickeln" type="button">entwickeln</button></header>
+    <p class="q">Entwickle einen Steckbrief für ein neues Produkt der Bäckerei Krume. Nenne den Namen, die Zielgruppe, einen Preis mit kurzer Begründung, den Verkaufsort und eine Werbeidee.</p>
+    <div class="w" data-t="u30"></div>
+  </article>
+</section>
+
+<!-- ================= KAPITEL 7: ARBEITSPLÄTZE ================= -->
+<section class="station c-luxus" data-ch="7" data-w="3" data-p="7.1" aria-label="Station 7.1" hidden>
+  <div class="info">
+    <h3>Arbeitsplätze untersuchen</h3>
+    <p>Einen Arbeitsplatz beschreibst du mit drei Fragen: <b>Was</b> wird gemacht (Tätigkeit)? <b>Wo</b> wird gearbeitet (Arbeitsort, Umgebung, Arbeitszeit)? <b>Womit</b> wird gearbeitet (Arbeitsmittel)?</p>
+    <p>In der Bäckerei Krume gibt es zum Beispiel diese drei Arbeitsplätze: <b>Bäcker:in</b> in der Backstube, <b>Verkäufer:in</b> in der Filiale und <b>Fahrer:in</b> im Lieferwagen.</p>
+  </div>
+  <article class="task">
+    <header><span class="num"></span><h3>Arbeitsplatz Bäcker:in</h3><button class="op" data-op="beschreiben" type="button">beschreiben</button></header>
+    <p class="q">Beschreibe den Arbeitsplatz Bäcker:in: Ordne jedem Merkmal die passende Beschreibung zu. Tippe zuerst links ein Merkmal an, dann rechts die Beschreibung.</p>
+    <div class="w" data-t="u24"></div>
+  </article>
+</section>
+
+<section class="station c-luxus" data-ch="7" data-w="3" data-p="7.2" aria-label="Station 7.2" hidden>
+  <div class="info">
+    <h3>Anforderungen und Arbeitsschutz</h3>
+    <p>Jeder Arbeitsplatz stellt <b>Anforderungen</b>: körperliche (lange stehen, schwer heben), geistige (rechnen, planen) und soziale (freundlich sein, im Team arbeiten). Damit niemand zu Schaden kommt, gibt es <b>Arbeitsschutz</b>: Schutzkleidung wie hitzefeste Handschuhe, rutschfeste Schuhe, <b>Hygieneregeln</b> wie Haarnetz und Händewaschen sowie feste Pausen.</p>
+  </div>
+  <article class="task">
+    <header><span class="num"></span><h3>Anforderungen und Arbeitsschutz</h3><button class="op" data-op="nennen" type="button">nennen</button></header>
+    <p class="q">Nenne jeweils die passende Ergänzung.</p>
+    <div class="w" data-t="u25"></div>
+  </article>
+  <article class="task">
+    <header><span class="num"></span><h3>Dein Lieblingsarbeitsplatz</h3><button class="op" data-op="bewerten" type="button">bewerten</button></header>
+    <p class="q">Wähle den Arbeitsplatz in der Bäckerei Krume, der dir am meisten zusagt, und bewerte ihn: Nutze mindestens zwei Merkmale und eine Anforderung. Nenne auch einen Nachteil.</p>
+    <div class="w" data-t="u26"></div>
+  </article>
+</section>
+
+<!-- ================= KAPITEL 8: ABGABE ================= -->
+<section class="station c-existenz" data-ch="8" data-w="1 2 3" data-p="8.1" aria-label="Station 8.1" hidden>
+  <div class="info">
+    <h3>Deine Selbsteinschätzung</h3>
+    <p>Schätze ehrlich ein, wie sicher du dich fühlst. Deine Einschätzung steht in deinem Ergebnis-PDF. So sieht deine Lehrkraft, wo du noch Hilfe brauchst.</p>
+  </div>
+  <article class="task">
+    <header><span class="num">✓</span><h3>Selbsteinschätzung</h3><button class="op" data-op="beurteilen" type="button">beurteilen</button></header>
+    <div class="rate" id="rate"></div>
+  </article>
+</section>
+
+<section class="station c-existenz" data-ch="8" data-w="1 2 3" data-p="8.2" aria-label="Station 8.2" hidden>
+  <article class="task">
+    <header><span class="num">✓</span><h3>Dein Ergebnis</h3></header>
+    <ul class="sumlist" id="sumList"></ul>
+    <label class="fbl" for="abgName">Dein Vorname</label>
+    <input type="text" id="abgName" autocomplete="off" placeholder="z. B. Lea">
+    <div class="row"><button class="btn accent" id="pdfBtn" type="button">Ergebnis als PDF speichern</button></div>
+    <p class="hint" id="pdfNote" hidden aria-live="polite"></p>
+    <p class="hint">Leg die PDF zum Beispiel in Notability ab oder gib sie deiner Lehrkraft. Darin steckt auch dein Arbeitsstand.</p>
+  </article>
+  <details class="fbox" id="lpUp2">
+    <summary>Sicherungscode und weiterarbeiten</summary>
+    <div class="fbox-in">
+      <p class="hint">Mit diesem Code kannst du auf einem anderen Gerät weiterarbeiten.</p>
+      <code class="cd" id="codeOut"></code>
+      <div class="row"><button class="btn soft" id="codeCopy" type="button">Code kopieren</button></div>
+      <p class="hint" id="codeNote" hidden aria-live="polite"></p>
+      <label class="fbl" for="codeIn2">Sicherungscode einfügen</label>
+      <textarea id="codeIn2" class="code" placeholder="LPS0.…"></textarea>
+      <div class="row"><button class="btn accent" type="button" data-loadcode="codeIn2">Code laden</button></div>
+      <p class="hint" data-loadnote="codeIn2" hidden aria-live="polite"></p>
+    </div>
+  </details>
+</section>
+
+  </main>
+  <p class="lic">Marketing-Werkstatt · Daniel Beyrodt · <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> · Alle Unternehmen in dieser Werkstatt sind ausgedacht.</p>
+</div>
+
+<div class="pop" id="pop" role="dialog" aria-modal="false" hidden>
+  <button class="x" id="popX" type="button" aria-label="Schließen">×</button>
+  <h4 id="popH"></h4>
+  <p id="popP"></p>
+</div>
+
+<footer class="pager">
+  <div class="pager-in">
+    <button class="btn soft" id="prev" type="button"><svg class="i" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>Zurück</button>
+    <span class="where" id="where">Station 0.1</span>
+    <button class="btn" id="next" type="button"><span id="nextTxt">Weiter</span><svg class="i" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
+  </div>
+</footer>
+
+<script src="../assets/jspdf.umd.min.js"></script><link rel="stylesheet" href="../assets/lp-support.css"><script>window.LP_CFG={"keys": ["marketing-werkstatt-v1"], "bottom": 78, "uploadTitle": "Mit Ergebnis-PDF weiterarbeiten", "uploadText": "Lade dein Ergebnis-PDF hoch, das du hier gespeichert hast. Dann machst du dort weiter, wo du aufgehört hast.", "anchors": [{"sel": "#lpUp1 .fbox-in", "mode": "append"}, {"sel": "#lpUp2 .fbox-in", "mode": "append"}], "slug": "marketing-werkstatt"};</script><script src="../assets/lp-support.js"></script>
+<script>
+(function(){
+"use strict";
+const CFG_W={"key": "marketing-werkstatt-v1", "title": "Marketing-Werkstatt", "ch": [[11, "Start", "Verkaufen"], [6, "Absatz", "Absatz und Marketing"], [9, "Produkt", "Ein Produkt entwickeln und vermarkten"], [7, "Arbeitsplätze", "Arbeitsplätze"], [8, "Abgabe", "Abgabe"]], "rate": ["Ich kann die vier Instrumente des Marketing-Mix erklären und eigene Maßnahmen entwickeln.", "Ich kann die Schritte der Produktentwicklung ordnen und einen Verkaufspreis ermitteln.", "Ich kann Merkmale von Arbeitsplätzen beschreiben.", "Ich kann Arbeitsplätze und ihre Anforderungen bewerten."]};
+const KEY=CFG_W.key;
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const CHECK='<svg class="i" viewBox="0 0 24 24"><path d="m5 12 4 4 10-10"/></svg>';
+function el(t,a,...k){const e=document.createElement(t);if(a)for(const n in a){const v=a[n];if(v==null||v===false)continue;if(n==='class')e.className=v;else if(n==='html')e.innerHTML=v;else if(n.startsWith('on'))e.addEventListener(n.slice(2),v);else e.setAttribute(n,v===true?'':v);}k.flat().forEach(c=>{if(c==null||c===false)return;e.append(c.nodeType?c:document.createTextNode(c));});return e;}
+
+/* ---------- Kapitel ---------- */
+const CH=CFG_W.ch.map(c=>c[1]);
+const CH_L=CFG_W.ch.map(c=>c[2]);
+const LAST=CH.length-1;
+
+/* ---------- Aufgaben ---------- */
+const T={
+u1:{type:'mark',parts:[['Um sechs Uhr holt Frau Krume ihr neues Fahrrad ab.',false],['Auf dem Weg lässt sie sich beim Friseur die Haare schneiden.',true],['In der Filiale verkauft sie Brötchen und Brezeln.',false],['Mittags bringt ihr Fahrer eine Torte zu einer Geburtstagsfeier.',true],['Am Nachmittag berät eine Bankberaterin sie zu einem Kredit.',true],['Für das Büro kauft sie einen Schreibtisch.',false],['Abends repariert ein Techniker ihr Smartphone.',true]]},
+u2:{type:'seg',cats:['Produktion','Handel','Dienstleistung'],items:[['Autowerk',0],['Supermarkt',1],['Friseursalon',2],['Möbelhaus (verkauft Möbel anderer Hersteller)',1],['Tischlerei',0],['Bank',2],['Online-Shop für Schuhe',1],['Molkerei',0],['Fahrschule',2]]},
+u3:{type:'gap',text:'Die Stadtwerke versorgen die Stadt mit Wasser. Sie gehören der {0}. Deshalb sind sie ein {1} Unternehmen. Ihr wichtigstes Ziel ist, die Menschen zuverlässig zu {2}. Die Bäckerei Krume gehört Frau Krume. Sie ist ein {3} Unternehmen und will vor allem {4} erzielen.',gaps:[[['Bank','Stadt','Familie Krume'],1],[['privates','öffentliches'],1],[['versorgen','bewerben','unterhalten'],0],[['öffentliches','privates'],1],[['Steuern','Strom','Gewinn'],2]]},
+u4:{type:'multi',opts:[['Sie versorgt die Menschen mit Brot und Brötchen.',true],['Sie bietet Arbeitsplätze und Ausbildungsplätze.',true],['Sie legt die Schulnoten fest.',false],['Sie zahlt Löhne an ihre Mitarbeitenden.',true],['Sie baut die Straßen im Ort.',false],['Sie zahlt Steuern an die Gemeinde.',true],['Sie beschließt Gesetze.',false]]},
+u5:{type:'open',min:60,checks:[['Arbeitsplätze',/arbeit|job|ausbild|stelle|kündig|entlass/i],['Versorgung',/brot|brötchen|einkauf|kaufen|weit|fahren|kilometer|versorg/i],['Einkommen oder Steuern',/lohn|gehalt|geld|einkommen|steuer|gemeinde/i]],
+  muster:['Die 25 Mitarbeitenden verlieren ihren Arbeitsplatz und ihr Einkommen. Auch Ausbildungsplätze fallen weg.','Die Menschen müssen für frisches Brot acht Kilometer fahren. Für ältere Menschen ohne Auto ist das schwer.','Die Gemeinde bekommt weniger Steuern und hat weniger Geld, zum Beispiel für Schulen oder Straßen.','Der Ort wird weniger lebendig: Ein Treffpunkt fehlt, Lieferanten verlieren einen Kunden.']},
+u6:{type:'seg',cats:['ökonomisch','sozial','ökologisch'],items:[['Gewinn steigern',0],['faire Löhne zahlen',1],['Strom sparen',2],['Produktionskosten senken',0],['Arbeitsplätze sichern',1],['Verpackungsmüll vermeiden',2],['neue Kundschaft gewinnen',0],['Mitarbeitende weiterbilden',1],['CO₂-Ausstoß verringern',2],['Mitarbeitende am Gewinn beteiligen',1]]},
+u7:{type:'pair',left:['weniger Verpackungsmüll','zufriedene Mitarbeitende in der Nachtschicht','mehr Gewinn','weniger Stromverbrauch'],right:['sparsame Backöfen anschaffen','Rabatt, wenn Kund:innen ihren eigenen Beutel mitbringen','eine Filiale an einem belebten Ort eröffnen','einen Zuschlag für Nachtarbeit zahlen'],ans:[1,3,2,0]},
+u8:{type:'open',min:90,checks:[['ökonomisch',/gewinn|umsatz|kosten|kund|verkauf|preis|geld/i],['sozial',/mitarbeit|lohn|gehalt|ausbild|pause|team|arbeitspl|zuschlag|schicht/i],['ökologisch',/umwelt|strom|energie|müll|plastik|tüte|bio|regional|co2|co₂|wasser|solar/i],['Strategie',/strategie|indem|durch|damit|dafür|so dass|sodass/i]],
+  muster:['Ökonomisch: mehr Kundschaft am Morgen. Strategie: einen Frühstücks-Snack zum festen Preis anbieten.','Sozial: Mitarbeitende lange halten. Strategie: Weiterbildungen bezahlen und Wünsche bei den Schichten berücksichtigen.','Ökologisch: weniger Brötchen wegwerfen. Strategie: übrig gebliebene Ware abends günstiger verkaufen oder an die Tafel spenden.']},
+u9:{type:'seg',cats:['Zielkonflikt','Zielharmonie'],items:[['Die Bäckerei kauft teureres Bio-Mehl und will gleichzeitig die Kosten senken.',0],['Die Bäckerei spart Strom und senkt damit ihre Kosten.',1],['Die Bäckerei erhöht die Löhne und will den Gewinn steigern.',0],['Die Bäckerei bildet ihre Mitarbeitenden weiter. Die Brötchen werden besser, und es kommen mehr Kund:innen.',1]]},
+u10:{type:'mark',parts:[['Ein T-Shirt kostet bei FlinkFashion nur wenige Euro.',false],['Jede Woche gibt es neue Kollektionen.',false],['Viele Kund:innen tragen die Sachen nur kurz und werfen sie dann weg.',true],['Die Näherinnen arbeiten oft zwölf Stunden am Tag.',true],['Sie verdienen kaum genug zum Leben.',true],['Beim Färben gelangen Chemikalien ins Flusswasser.',true],['FlinkFashion wächst jedes Jahr.',false]]},
+u11:{type:'open',min:120,checks:[['Entscheidung',/sollte|ja|nein|finde|meiner meinung|ich bin|dafür|dagegen/i],['zwei Sichtweisen',/(wirtschaft|gewinn|preis|kosten|kund).*(näher|lohn|gewerkschaft|sozial|arbeit|umwelt)|(näher|lohn|gewerkschaft|sozial|arbeit|umwelt).*(wirtschaft|gewinn|preis|kosten|kund)/is],['Begründung',/weil|denn|deshalb|daher|da /i]],
+  muster:['Ich finde, FlinkFashion sollte die Löhne erhöhen.','Aus Sicht der Gewerkschafterin ist das gerecht, weil die Näherinnen von ihrem Lohn leben können müssen.','Die Wirtschaftsexpertin warnt: Werden die T-Shirts teurer, kaufen manche Kund:innen woanders, und der Gewinn sinkt.','Ich halte das für lösbar, denn der Lohn macht bei einem T-Shirt nur einen kleinen Teil des Preises aus. Viele Kund:innen zahlen etwas mehr, wenn die Kleidung fair hergestellt ist.','Wichtig: Eine gute Stellungnahme nennt deine Meinung, beide Seiten und eine Begründung. Auch „Nein“ ist möglich, wenn du es gut begründest.']},
+u12:{type:'order',items:['Frau Krume berechnet, wie viel Mehl sie braucht.','Frau Krume bestellt Mehl bei der Mühle.','In der Backstube wird der Teig geknetet.','Die Brötchen werden gebacken.','Der Fahrer bringt die Brötchen in die Filialen.','Die Verkäuferin verkauft die Brötchen.'],start:[3,0,5,2,4,1]},
+u13:{type:'seg',cats:['Beschaffung','Produktion','Absatz'],items:[['Angebote verschiedener Mühlen vergleichen',0],['Teig kneten',1],['ein Werbeplakat gestalten',2],['einen neuen Backofen kaufen',0],['Brötchen backen',1],['Brötchen an ein Café liefern',2],['eine neue Bäckerin einstellen',0],['prüfen, ob die Brötchen schön braun sind',1],['die Preise für die Filialen festlegen',2]]},
+u14:{type:'gap',text:'Die Mühle kann drei Tage lang kein Mehl liefern. Dann steht die {0} still. In den Filialen fehlen Brötchen, deshalb sinkt der {1}. Im Sommerurlaub kaufen weniger Menschen Brötchen. Die Backstube backt weniger, und die Beschaffung bestellt {2} Mehl. Die drei Grundfunktionen {3}.',gaps:[[['Werbung','Produktion','Beschaffung'],1],[['Einkauf','Lohn','Absatz'],2],[['mehr','weniger','genauso viel'],1],[['arbeiten unabhängig voneinander','hängen voneinander ab'],1]]},
+u15:{type:'seg',cats:['Arbeit','Betriebsmittel','Werkstoffe'],items:[['Bäckerin',0],['Backofen',1],['Mehl',2],['Lieferwagen',1],['Verkäufer',0],['Hefe',2],['Teigknetmaschine',1],['Strom für die Öfen',2],['Auszubildender',0],['Backstube (Gebäude)',1]]},
+u16:{type:'pair',left:['Bedarf ermitteln','Angebote vergleichen','Bestellen','Lieferung prüfen','Lagern'],right:['Sie bestellt 40 Säcke bei der günstigsten passenden Mühle.','Sie zählt die Mehlsäcke im Lager und plant den Verbrauch der nächsten Wochen.','Die Säcke kommen trocken und sauber ins Regal.','Sie holt Preise und Lieferzeiten von drei Mühlen ein.','Sie zählt die gelieferten Säcke und prüft, ob das Mehl in Ordnung ist.'],ans:[1,3,0,4,2]},
+u17:{type:'gap',text:'Frau Krume bezahlt einen Teil des Ofens mit ihren Ersparnissen. Das ist {0}. Für den Rest nimmt sie einen Kredit bei der Bank auf. Das ist {1}. Für geliehenes Geld muss sie {2} zahlen. Ein Vorteil der Eigenfinanzierung: Es entstehen keine {3}.',gaps:[[['Fremdfinanzierung','Eigenfinanzierung'],1],[['Eigenfinanzierung','Fremdfinanzierung'],1],[['Steuern','Zinsen','Löhne'],1],[['Schulden','Kosten für Zutaten','Kunden'],0]]},
+u18:{type:'num',answer:2000,unit:'Euro',why:'5 % von 40.000 Euro sind 2.000 Euro. Zinsen sind der Preis für geliehenes Geld. Bei Eigenfinanzierung fallen sie weg.'},
+u19:{type:'seg',cats:['Einzelfertigung','Serienfertigung','Massenfertigung'],items:[['eine Hochzeitstorte nach Wunsch des Brautpaares',0],['300 Weihnachtsstollen im Dezember',1],['Millionen Packungen Toastbrot in einer Großbäckerei',2],['ein Geburtstagskuchen in Form eines Fußballs',0],['500 Berliner zu Karneval',1],['Getränkedosen in einer Abfüllanlage',2],['ein maßgeschneiderter Anzug',0],['eine Sonderserie von 1.000 Sneakern',1]]},
+u20:{type:'seg',cats:['stimmt','stimmt nicht'],items:[['Die Qualitätskontrolle sorgt dafür, dass die Kundschaft gleichbleibend gute Ware bekommt.',0],['Kontrolliert wird nur ganz am Ende, wenn die Brötchen fertig sind.',1],['Verbrannte Brötchen werden trotzdem verkauft, damit nichts verschwendet wird.',1],['Bei einem Fehler sucht man die Ursache, zum Beispiel eine falsche Ofentemperatur.',0],['Auch die gelieferten Zutaten werden geprüft.',0]]},
+u27:{type:'order',items:['Ideen für einen Pausensnack sammeln','Marktanalyse: Zielgruppe und Konkurrenz an der Schule untersuchen','Den Snack entwerfen und beim Probebacken testen','Den Preis festlegen','Den Snack mit Werbung auf den Markt bringen','Verkauf beobachten und den Snack verbessern'],start:[2,5,0,4,1,3]},
+u28:{type:'num',answer:1.08,tol:0.005,unit:'Euro',why:'Selbstkosten: 0,40 + 0,30 + 0,20 = 0,90 Euro. 20 Prozent davon sind 0,18 Euro. Verkaufspreis ohne Mehrwertsteuer: 1,08 Euro.'},
+u29:{type:'quiz',qs:[
+  {q:'Plakat 1: Besser spricht die Schüler:innen an …',o:['„Krume-Kracher. Jetzt neu.“','„Hunger in der großen Pause? Der Krume-Kracher macht satt: Vollkornbrötchen mit Käse, 1,50 Euro mit Schülerausweis.“'],a:1,why:'Der zweite Text spricht die Zielgruppe an und nennt Nutzen und Preis.'},
+  {q:'Plakat 2: Besser spricht die Schüler:innen an …',o:['„Probier-Woche: Zeig diesen Gutschein an der Theke und bekomm den Krume-Kracher zum halben Preis. Nur bis Freitag!“','„Bäckerei Krume – Tradition seit 1985.“'],a:0,why:'Der erste Text fordert zum Handeln auf und gibt einen Anreiz mit Frist.'},
+  {q:'Plakat 3: Besser spricht die Schüler:innen an …',o:['„Unsere Backwaren werden nach überlieferten Rezepturen unter Verwendung ausgewählter Rohstoffe gefertigt.“','„Frisch aus dem Ofen, direkt neben eurer Schule. Vorbestellen und in der Pause ohne Schlange abholen!“'],a:1,why:'Der zweite Text ist kurz, verständlich und nennt Ort und Nutzen für Schüler:innen.'}]},
+u30:{type:'open',min:120,checks:[['Name',/name|heißt|„/i],['Zielgruppe',/zielgruppe|schüler|kinder|familie|sportler|ältere|kund/i],['Preis mit Begründung',/(\d+[,.]?\d*\s*(€|euro))|preis/i],['Verkaufsort',/filiale|stand|wagen|online|markt|schule|kiosk|laden/i],['Werbeidee',/werbung|plakat|instagram|flyer|gutschein|aktion|social|tiktok|probier/i]],
+  muster:['Name: „Power-Brezel“, eine Brezel mit Körnern und Frischkäse.','Zielgruppe: Schüler:innen und Sportler:innen aus dem Verein nebenan.','Preis: 1,80 Euro. Die Zutaten sind etwas teurer als bei einer normalen Brezel, und der Preis soll für Taschengeld noch passen.','Verkaufsort: in der Filiale an der Gesamtschule und am Wochenende am Sportplatz.','Werbeidee: Plakat am Sportplatz und eine Probier-Aktion beim Fußballturnier.']},
+u21:{type:'seg',cats:['Zielgruppe','Kundenwünsche','Konkurrenz'],items:[['Wie viele Schüler:innen kommen morgens an der Filiale vorbei?',0],['Gibt es in der Nähe schon einen Backshop?',2],['Wünschen sich die Kund:innen vegane Brötchen?',1],['Welche Preise verlangt der Kiosk gegenüber?',2],['Wie alt sind die meisten Menschen, die dort vorbeikommen?',0],['Hätten die Kund:innen gern eine Sitzecke?',1]]},
+u22:{type:'seg',cats:['Produkt','Preis','Absatzweg','Kommunikation'],items:[['neue Brötchen-Kreation „Krume-Kracher“',0],['Wochenangebot: Laugenbrezel für 50 Cent',1],['eine vierte Filiale eröffnen',2],['Werbung auf dem Lieferwagen',3],['größere Auswahl an Vollkornbrot',0],['Bonuskarte: das zehnte Brötchen gratis',1],['Brot auch im Supermarkt verkaufen',2],['Tag der offenen Tür in der Backstube',3],['Schülerpreis gegen Vorlage des Schülerausweises',1],['Verkaufswagen auf dem Wochenmarkt',2],['Trikots für die Fußball-Jugend sponsern',3],['umweltfreundliche Papiertüten mit Logo',0]],four:true},
+u23:{type:'open',min:120,ki:true,checks:[['Produkt',/produkt|snack|brötchen|sandwich|vegan|angebot an|neue/i],['Preis',/preis|rabatt|günstig|euro|€|schüler.*ausweis|angebot|bonus/i],['Absatzweg',/filiale|verkauf|stand|wagen|pause|online|app|vorbestell|liefer|kiosk|mensa/i],['Kommunikation',/werbung|instagram|plakat|social|tiktok|flyer|sponsor|aktion|gutschein/i]],
+  muster:['Produkt: ein „Pausen-Snack“, z. B. belegtes Vollkornbrötchen mit Getränk. Er ist schnell gegessen und sättigt.','Preis: Schülerpreis mit Schülerausweis. Viele Schüler:innen haben wenig Taschengeld.','Absatzweg: Vorbestellen per Zettel oder App, Abholung in der großen Pause. So gibt es keine lange Schlange.','Kommunikation: Plakat im Schulflur und eine Aktion „Probier-Woche“ mit Gutscheinen. So erfahren alle davon.']},
+u24:{type:'pair',left:['Tätigkeit','Arbeitsort','Arbeitsmittel','Arbeitszeit','körperliche Anforderung','Arbeitsschutz'],right:['in der warmen Backstube','ab drei Uhr nachts','Teig kneten, Brötchen formen und backen','hitzefeste Handschuhe und Haarnetz','Backofen, Knetmaschine und Waage','lange stehen und schwere Mehlsäcke heben'],ans:[2,0,4,1,5,3]},
+u25:{type:'quiz',qs:[
+  {q:'Für Verkäufer:innen ist besonders wichtig, …',o:['freundlich mit Menschen umzugehen.','schwere Maschinen zu reparieren.','nachts allein zu arbeiten.'],a:0,why:'Verkäufer:innen haben den ganzen Tag Kontakt zur Kundschaft.'},
+  {q:'Am Backofen schützen …',o:['eine Schwimmbrille.','hitzefeste Handschuhe.','ein Fahrradhelm.'],a:1,why:'Hitzefeste Handschuhe schützen vor Verbrennungen.'},
+  {q:'Bäcker:innen tragen ein Haarnetz, …',o:['damit keine Haare in den Teig fallen.','weil es modern ist.','damit sie schneller arbeiten.'],a:0,why:'Lebensmittel müssen sauber bleiben. Das schreiben die Hygieneregeln vor.'}]},
+u26:{type:'open',min:90,checks:[['Arbeitsplatz gewählt',/bäcker|verkäuf|fahrer/i],['Merkmale',/nacht|früh|ofen|theke|kasse|kund|auto|wagen|fahren|draußen|backstube|filiale/i],['Anforderung',/freundlich|heben|stehen|rechnen|team|pünktlich|führerschein|geduld|kräftig|früh aufstehen|sorgfalt/i],['Nachteil',/nachteil|aber|allerdings|jedoch|anstrengend|schwer|stress/i]],
+  muster:['Mir würde der Arbeitsplatz als Verkäufer:in gefallen, weil ich gern mit Menschen rede (Was: Kundschaft beraten, kassieren). Ich arbeite in einer hellen Filiale (Wo) mit Kasse und Waage (Womit).','Anforderung: Man muss freundlich bleiben, auch wenn es voll ist.','Nachteil: Man steht den ganzen Tag und arbeitet oft auch samstags.','Deine Antwort darf anders aussehen: Wichtig sind deine Wahl, zwei Merkmale, eine Anforderung und ein Nachteil.']}
+};
+
+const RATE=CFG_W.rate;
+const RATE_L=['noch nicht','mit Hilfe','meistens','sicher'];
+
+const OPS={'nennen':'(be)nennen: Fakten, Daten, Begriffe, Regeln ohne Erläuterung aufzählen.','beschreiben':'Strukturiert und fachsprachlich angemessen Materialien vorstellen und/oder Sachverhalte darlegen.','zuordnen':'Begründet für ein Objekt eine Gruppe, eine Position oder ein Material zuweisen oder einen Sachverhalt begründet in einen Zusammenhang stellen.','ordnen':'Etwas kriteriengeleitet in eine bestimmte Systematik oder Reihenfolge bringen.','unterscheiden':'Etwas im Hinblick auf seine besonderen Merkmale erkennen und von Alternativen abgrenzen.','erklären':'Sachverhalte so darstellen, dass Bedingungen, Ursachen, Gesetzmäßigkeiten und/oder Funktionszusammenhänge verständlich werden.','ermitteln':'Einen Zusammenhang oder eine Lösung finden und das Ergebnis formulieren.','herausarbeiten':'Materialien auf bestimmte, nicht unbedingt genannte Sachverhalte hin untersuchen und Zusammenhänge herstellen.','vergleichen':'Gemeinsamkeiten, Ähnlichkeiten und Unterschiede von Sachverhalten kriterienorientiert darlegen.','überprüfen':'Inhalte oder Aussagen auf ihre sachliche Richtigkeit bzw. innere Logik hin untersuchen.','entwickeln':'Zu einem Sachverhalt oder einer Problemstellung eine Einschätzung, ein Lösungsmodell oder ein Lösungskonzept begründet darlegen.','Stellung nehmen':'Beurteilung mit zusätzlicher Reflexion eigener Wertmaßstäbe, die zu einem begründeten eigenen Werturteil führt.','bewerten':'Einen Gegenstand an erkennbaren Wertkategorien oder bekannten Beurteilungskriterien messen.','beurteilen':'Den Stellenwert von Sachverhalten bestimmen, um kriterienorientiert zu einem begründeten Sachurteil zu gelangen.'};
+
+/* ---------- Zustand ---------- */
+let S;
+try{S=JSON.parse(localStorage.getItem(KEY)||'null');}catch(e){S=null;}
+if(!S||typeof S!=='object')S={};
+S.st=S.st|0;S.a=S.a||{};S.ok=S.ok||{};S.seen=S.seen||{};S.rate=S.rate||{};S.name=S.name||'';S.muster=S.muster||{};
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
+
+const parts=$$('.station');
+const chOf=parts.map(p=>CFG_W.ch.findIndex(c=>c[0]===+p.dataset.ch));
+const pids=parts.map((p,pi)=>chOf[pi]+'.'+(chOf.slice(0,pi).filter(c=>c===chOf[pi]).length+1));
+let num=0;const label={},home={};
+parts.forEach((p,pi)=>{$$('.task',p).forEach(a=>{const w=$('.w',a);const n=$('.num',a);if(w){num++;n.textContent=num;const id=w.dataset.t;label[id]='Station '+pids[pi]+' · Aufgabe '+num+': '+$('h3',a).textContent;home[id]=pi;}});});
+const TASK_IDS=$$('.w[data-t]').map(w=>w.dataset.t);
+function isDone(id){const t=T[id];if(t.type==='open')return (S.a[id]||'').trim().length>=t.min;return !!S.ok[id];}
+function partDone(pi){const ids=TASK_IDS.filter(id=>home[id]===pi);if(!ids.length)return !!S.seen[pids[pi]];return ids.every(isDone);}
+
+/* ---------- Rückmeldung ---------- */
+function showFb(fb,cls,head,body,list){fb.hidden=false;fb.className='fb '+cls;const h=el('p',{class:'lvl',html:cls==='ok'?CHECK:''});h.append(head);const kids=[h];if(body)kids.push(el('p',{},body));if(list&&list.length)kids.push(el('ul',{},...list.map(x=>el('li',{},x))));fb.replaceChildren(...kids);}
+function report(id,ok,art,fb){S.ok[id]=S.ok[id]||ok;save();paint();if(window.LP)LP.result(id,ok,label[id],art,fb);}
+
+/* ---------- Widgets ---------- */
+function mkCheck(id,art,fn){const fb=el('div',{class:'fb',id:'fb-'+id,hidden:true,'aria-live':'polite'});const b=el('button',{class:'btn accent',type:'button',id:'chk-'+id},'Prüfen');b.onclick=()=>fn(fb);art.append(el('div',{class:'row'},b),fb);return fb;}
+
+function wSeg(id,t,w,art){
+  const v=S.a[id]=S.a[id]||t.items.map(()=>-1);
+  const rows=t.items.map((it,i)=>{const r=el('div',{class:'mi-row'});const seg=el('div',{class:'seg',role:'group','aria-label':it[0]});
+    t.cats.forEach((c,ci)=>{const b=el('button',{type:'button','aria-pressed':String(v[i]===ci)},c);b.onclick=()=>{v[i]=ci;$$('button',seg).forEach((x,xi)=>x.setAttribute('aria-pressed',String(xi===ci)));r.classList.remove('s-ok','s-bad');save();};seg.append(b);});
+    r.append(el('span',{},it[0]),seg);return r;});
+  w.className='mi'+(t.cats.length>2?' w2':'');w.append(...rows);
+  mkCheck(id,art,fb=>{
+    if(v.some(x=>x<0)){showFb(fb,'mid','Noch nicht fertig','Ordne zuerst alle Karten zu.');return;}
+    let ok=0;const wrong=[];t.items.forEach((it,i)=>{const good=v[i]===it[1];rows[i].classList.toggle('s-ok',good);rows[i].classList.toggle('s-bad',!good);if(good)ok++;else wrong.push(it[0]);});
+    const all=ok===t.items.length;
+    if(all)showFb(fb,'ok','Alles richtig!',ok+' von '+t.items.length+' richtig zugeordnet.');
+    else showFb(fb,ok>=t.items.length*0.6?'mid':'err',ok+' von '+t.items.length+' richtig','Die rot markierten Karten stimmen noch nicht. Lies die Information oben noch einmal und ändere sie.');
+    report(id,all,art,fb);});
+}
+function wQuiz(id,t,w,art){
+  const v=S.a[id]=S.a[id]||t.qs.map(()=>-1);
+  const fs=t.qs.map((q,qi)=>{const f=el('fieldset',{class:'qz'},el('legend',{},q.q));q.o.forEach((o,oi)=>{const inp=el('input',{type:'radio',name:id+'-'+qi,value:oi});if(v[qi]===oi)inp.checked=true;inp.onchange=()=>{v[qi]=oi;f.classList.remove('s-ok','s-bad');save();};f.append(el('label',{},inp,o));});return f;});
+  w.className='quiz';w.append(...fs);
+  mkCheck(id,art,fb=>{
+    if(v.some(x=>x<0)){showFb(fb,'mid','Noch nicht fertig','Beantworte zuerst alle Fragen.');return;}
+    let ok=0;const tips=[];t.qs.forEach((q,qi)=>{const good=v[qi]===q.a;fs[qi].classList.toggle('s-ok',good);fs[qi].classList.toggle('s-bad',!good);if(good)ok++;});
+    const all=ok===t.qs.length;
+    if(all)showFb(fb,'ok','Alles richtig!',null,t.qs.map(q=>q.why));
+    else showFb(fb,ok>=t.qs.length*0.6?'mid':'err',ok+' von '+t.qs.length+' richtig','Die rot umrandeten Fragen stimmen noch nicht. Lies die Information oben noch einmal.');
+    report(id,all,art,fb);});
+}
+function wMulti(id,t,w,art){
+  const v=S.a[id]=S.a[id]||t.opts.map(()=>false);
+  const ls=t.opts.map((o,i)=>{const inp=el('input',{type:'checkbox'});inp.checked=!!v[i];const l=el('label',{},inp,o[0]);inp.onchange=()=>{v[i]=inp.checked;l.classList.remove('s-ok','s-bad');save();};return l;});
+  w.className='multi';w.append(...ls);
+  mkCheck(id,art,fb=>{
+    if(!v.some(Boolean)){showFb(fb,'mid','Noch nicht fertig','Wähle zuerst mindestens eine Antwort.');return;}
+    let ok=0;t.opts.forEach((o,i)=>{const good=!!v[i]===o[1];ls[i].classList.toggle('s-ok',good&&o[1]);ls[i].classList.toggle('s-bad',!good);if(good)ok++;});
+    const all=ok===t.opts.length;
+    if(all)showFb(fb,'ok','Alles richtig!','Du hast alle Aufgaben gefunden und nichts Falsches gewählt.');
+    else showFb(fb,'err','Noch nicht ganz','Rot markiert: Diese Antwort fehlt oder passt nicht. Lies die Aufgaben oben noch einmal.');
+    report(id,all,art,fb);});
+}
+function wOrder(id,t,w,art){
+  let v=S.a[id];if(!Array.isArray(v)||v.length!==t.items.length)v=S.a[id]=t.start.slice();
+  const ol=el('ol',{class:'rank'});w.append(ol);
+  function draw(){ol.replaceChildren(...v.map((ix,pos)=>{const up=el('button',{class:'mv',type:'button','aria-label':'nach oben'},'↑');const dn=el('button',{class:'mv',type:'button','aria-label':'nach unten'},'↓');up.disabled=pos===0;dn.disabled=pos===v.length-1;
+    up.onclick=()=>{[v[pos-1],v[pos]]=[v[pos],v[pos-1]];save();draw();ol.children[pos-1].querySelector('.mv').focus();};
+    dn.onclick=()=>{[v[pos+1],v[pos]]=[v[pos],v[pos+1]];save();draw();ol.children[pos+1].querySelectorAll('.mv')[1].focus();};
+    return el('li',{},el('span',{class:'pos'},String(pos+1)),el('span',{class:'lbl'},t.items[ix]),up,dn);}));}
+  draw();
+  mkCheck(id,art,fb=>{let ok=0;v.forEach((ix,pos)=>{const good=ix===pos;ol.children[pos].classList.toggle('s-ok',good);ol.children[pos].classList.toggle('s-bad',!good);if(good)ok++;});
+    const all=ok===v.length;
+    if(all)showFb(fb,'ok','Richtige Reihenfolge!',null);else showFb(fb,ok>=v.length*0.6?'mid':'err',ok+' von '+v.length+' an der richtigen Stelle','Die rot umrandeten Schritte stehen noch falsch. Überlege, was zuerst passieren muss.');
+    report(id,all,art,fb);});
+}
+function wOpen(id,t,w,art){
+  const ta=el('textarea',{id:'ta-'+id,'aria-label':'Deine Antwort'});ta.value=S.a[id]||'';
+  const qc=el('div',{class:'qc'},el('b',{},'Denk an:'),...t.checks.map(c=>el('span',{},c[0])));
+  const cnt=el('span',{class:'hint'});
+  const mb=el('button',{class:'btn soft',type:'button'},'Mit Musterlösung vergleichen');
+  const mbox=el('div',{class:'muster',hidden:true},el('h4',{},'So könnte eine Antwort aussehen'),el('ul',{},...t.muster.map(m=>el('li',{},m))),el('p',{class:'hint'},'Vergleiche: Was hast du auch? Was fehlt dir noch? Ergänze deine Antwort, wenn du magst.'));
+  function upd(){const s=ta.value;S.a[id]=s;const len=s.trim().length;[...qc.querySelectorAll('span')].forEach((sp,i)=>sp.classList.toggle('on',t.checks[i][1].test(s)));
+    cnt.textContent=len>=t.min?'Genug geschrieben ✓':'Noch '+(t.min-len)+' Zeichen';mb.disabled=len<t.min;if(S.muster[id])mbox.hidden=false;}
+  ta.oninput=()=>{upd();save();paint();};
+  mb.onclick=()=>{S.muster[id]=1;mbox.hidden=false;save();};
+  w.className='open';w.append(ta,el('div',{class:'open-foot'},qc,cnt),el('div',{class:'row'},mb),mbox);
+  if(t.ki){const note=el('p',{class:'hint',hidden:true});const cp=el('button',{class:'btn soft',type:'button'},'Für fobizz kopieren');
+    cp.onclick=async()=>{const a=ta.value.trim();note.hidden=false;if(a.length<t.min){note.textContent='Schreib zuerst deine eigene Antwort.';return;}
+      const txt=CFG_W.title+'\nAufgabe: '+$('.q',art).textContent+'\nMeine Antwort:\n'+a+'\n\nGib mir Feedback zu meiner Antwort: Was ist gut, was fehlt noch? Schreib meine Antwort nicht neu.';
+      try{await navigator.clipboard.writeText(txt);note.textContent='Kopiert! Öffne fobizz und füge den Text im Chat ein.';}catch(e){note.textContent='Kopieren hat nicht geklappt. Markiere deine Antwort und kopiere sie selbst.';}};
+    w.append(el('details',{class:'lp-kiopt'},el('summary',{},'Optional mit KI · ab AI Badge Level 1'),el('div',{},el('p',{class:'hint'},'Mit deinen KI-Kompetenzen aus Level 1 kannst du hier dein Lernen verbessern: Hol dir Feedback zu deiner eigenen Antwort, nicht die Antwort selbst.'),el('div',{class:'row'},cp,el('a',{class:'btn soft',href:'https://go.fobizz.com',target:'_blank',rel:'noopener'},'fobizz öffnen')),note)));}
+  upd();
+}
+function wGap(id,t,w,art){
+  const v=S.a[id]=S.a[id]||t.gaps.map(()=>-1);
+  const p=el('p',{class:'cloze'});const sels=[];
+  t.text.split(/\{(\d+)\}/).forEach((part,i)=>{if(i%2===0){if(part)p.append(part);return;}const gi=+part,g=t.gaps[gi];
+    const sel=el('select',{'aria-label':'Lücke '+(gi+1)},el('option',{value:'-1'},'…'),...g[0].map((o,oi)=>el('option',{value:String(oi)},o)));sel.value=String(v[gi]);
+    sel.onchange=()=>{v[gi]=+sel.value;sel.classList.remove('s-ok','s-bad');save();};sels[gi]=sel;p.append(sel);});
+  w.append(p);
+  mkCheck(id,art,fb=>{if(v.some(x=>x<0)){showFb(fb,'mid','Noch nicht fertig','Fülle zuerst alle Lücken.');return;}
+    let ok=0;t.gaps.forEach((g,gi)=>{const good=v[gi]===g[1];sels[gi].classList.toggle('s-ok',good);sels[gi].classList.toggle('s-bad',!good);if(good)ok++;});
+    const all=ok===t.gaps.length;
+    if(all)showFb(fb,'ok','Alles richtig!',null);else showFb(fb,ok>=t.gaps.length*0.6?'mid':'err',ok+' von '+t.gaps.length+' Lücken richtig','Die rot markierten Lücken stimmen noch nicht. Lies die Information oben noch einmal.');
+    report(id,all,art,fb);});
+}
+function wPair(id,t,w,art){
+  let v=S.a[id];if(!Array.isArray(v)||v.length!==t.left.length)v=S.a[id]=t.left.map(()=>-1);
+  let armed=-1;const L=[],R=[];
+  const lc=el('div',{class:'pcol'},el('h4',{},'Antippen'));const rc=el('div',{class:'pcol'},el('h4',{},'Dann passend dazu'));
+  t.left.forEach((x,i)=>{const b=el('button',{type:'button',class:'pc','aria-pressed':'false'},el('span',{class:'k on'},String(i+1)),x);b.onclick=()=>{armed=armed===i?-1:i;draw();};L.push(b);lc.append(b);});
+  t.right.forEach((x,ri)=>{const b=el('button',{type:'button',class:'pc'},el('span',{class:'k'},'–'),x);b.onclick=()=>{if(armed<0){const li=v.indexOf(ri);if(li>=0){armed=li;draw();}return;}
+      v.forEach((rr,li)=>{if(rr===ri)v[li]=-1;});v[armed]=ri;armed=-1;save();L.forEach(n=>n.classList.remove('s-ok','s-bad'));draw();};R.push(b);rc.append(b);});
+  function draw(){L.forEach((b,i)=>b.setAttribute('aria-pressed',String(i===armed)));R.forEach((b,ri)=>{const li=v.indexOf(ri);const k=b.querySelector('.k');k.textContent=li>=0?String(li+1):'–';k.classList.toggle('on',li>=0);b.setAttribute('aria-label',(li>=0?'verbunden mit '+(li+1)+': ':'')+t.right[ri]);});}
+  w.className='pairs';w.append(lc,rc);draw();
+  mkCheck(id,art,fb=>{if(v.some(x=>x<0)){showFb(fb,'mid','Noch nicht fertig','Verbinde zuerst alle Paare.');return;}
+    let ok=0;t.left.forEach((x,i)=>{const good=v[i]===t.ans[i];L[i].classList.toggle('s-ok',good);L[i].classList.toggle('s-bad',!good);if(good)ok++;});
+    const all=ok===t.left.length;
+    if(all)showFb(fb,'ok','Alle Paare richtig!',null);else showFb(fb,ok>=t.left.length*0.6?'mid':'err',ok+' von '+t.left.length+' Paaren richtig','Bei den rot umrandeten Begriffen stimmt die Verbindung noch nicht. Tippe sie an und verbinde neu.');
+    report(id,all,art,fb);});
+}
+function wMark(id,t,w,art){
+  const v=S.a[id]=S.a[id]||t.parts.map(()=>false);
+  const p=el('p',{class:'marktext'});const B=t.parts.map((x,i)=>{const b=el('button',{type:'button',class:'ms','aria-pressed':String(!!v[i])},x[0]);b.onclick=()=>{v[i]=!v[i];b.setAttribute('aria-pressed',String(v[i]));B.forEach(n=>n.classList.remove('s-ok','s-bad'));save();};p.append(b,' ');return b;});
+  w.append(p);
+  mkCheck(id,art,fb=>{if(!v.some(Boolean)){showFb(fb,'mid','Noch nicht fertig','Tippe zuerst die passenden Sätze an.');return;}
+    const need=t.parts.filter(x=>x[1]).length;let hit=0,wrong=0;
+    t.parts.forEach((x,i)=>{B[i].classList.toggle('s-ok',v[i]&&x[1]);B[i].classList.toggle('s-bad',v[i]&&!x[1]);if(v[i]&&x[1])hit++;if(v[i]&&!x[1])wrong++;});
+    const all=hit===need&&!wrong;
+    if(all)showFb(fb,'ok','Alles gefunden!',need+' von '+need+' Sätzen richtig markiert.');
+    else showFb(fb,hit>=need*0.6&&wrong<=1?'mid':'err',hit+' von '+need+' gefunden'+(wrong?', '+wrong+' falsch markiert':''),wrong?'Rot markierte Sätze passen nicht. Tippe sie noch einmal an, um die Markierung zu entfernen.':'Es fehlen noch Sätze. Lies den Text noch einmal genau.');
+    report(id,all,art,fb);});
+}
+function wNum(id,t,w,art){
+  const inp=el('input',{type:'text',inputmode:'decimal',id:'num-'+id,'aria-label':'Ergebnis in '+t.unit,autocomplete:'off'});inp.value=S.a[id]||'';
+  inp.oninput=()=>{S.a[id]=inp.value;inp.classList.remove('s-ok','s-bad');save();};
+  w.className='numin';w.append(inp,el('span',{},t.unit));
+  mkCheck(id,art,fb=>{const raw=(inp.value||'').replace(/\s|€|euro/gi,'').replace(/\.(?=\d{3}(\D|$))/g,'').replace(',','.');
+    if(!raw){showFb(fb,'mid','Noch nicht fertig','Trag zuerst dein Ergebnis ein.');return;}
+    const n=parseFloat(raw);const good=!isNaN(n)&&Math.abs(n-t.answer)<=(t.tol||0);
+    inp.classList.toggle('s-ok',good);inp.classList.toggle('s-bad',!good);
+    if(good)showFb(fb,'ok','Richtig!',t.why);else showFb(fb,'err','Noch nicht richtig','Rechne noch einmal. Nutze die Starthilfe.');
+    report(id,good,art,fb);});
+}
+$$('.w[data-t]').forEach(w=>{const id=w.dataset.t,t=T[id],art=w.closest('.task');({seg:wSeg,quiz:wQuiz,multi:wMulti,order:wOrder,open:wOpen,gap:wGap,pair:wPair,mark:wMark,num:wNum})[t.type](id,t,w,art);});
+
+/* Selbsteinschätzung */
+$('#rate').append(...RATE.map((r,i)=>{const f=el('fieldset',{},el('legend',{},r));const sc=el('div',{class:'scale'});
+  RATE_L.forEach((l,li)=>{const inp=el('input',{type:'radio',name:'rate-'+i,value:li});if(S.rate[i]===li)inp.checked=true;inp.onchange=()=>{S.rate[i]=li;save();};sc.append(el('label',{},inp,l));});f.append(sc);return f;}));
+
+/* Infokarten aufklappen */
+$$('button.tier').forEach(b=>b.addEventListener('click',()=>b.setAttribute('aria-expanded',String(b.getAttribute('aria-expanded')!=='true'))));
+
+/* Operatoren */
+const pop=$('#pop');
+$$('.op').forEach(b=>b.addEventListener('click',e=>{const k=b.dataset.op;$('#popH').textContent='Operator: '+k;$('#popP').textContent=(OPS[k]||'')+' (Kerncurriculum AWT IGS 2024, Anhang A1)';pop.hidden=false;const r=b.getBoundingClientRect();pop.style.left=Math.max(12,Math.min(r.left+scrollX,innerWidth-352))+'px';pop.style.top=(r.bottom+scrollY+8)+'px';e.stopPropagation();}));
+$('#popX').onclick=()=>{pop.hidden=true;};
+document.addEventListener('click',e=>{if(!pop.hidden&&!pop.contains(e.target))pop.hidden=true;});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')pop.hidden=true;});
+
+/* ---------- Navigation ---------- */
+const nav=$('#nav');
+function paintNav(){const cur=chOf[S.st];nav.replaceChildren(...CH.map((c,ci)=>{const first=chOf.indexOf(ci);const ids=parts.map((p,pi)=>pi).filter(pi=>chOf[pi]===ci);const done=ids.every(partDone);
+  const b=el('button',{class:'st-btn '+parts[first].classList[1]+(done?' done':''),type:'button'},el('span',{class:'n'},String(ci)),c,el('span',{class:'ok',html:CHECK}));if(ci===cur)b.setAttribute('aria-current','step');b.onclick=()=>go(first);return b;}));
+  const cb=nav.querySelector('[aria-current]');if(cb&&cb.scrollIntoView)cb.scrollIntoView({block:'nearest',inline:'nearest'});}
+function headFor(pi){const p=parts[pi];if(p.querySelector('.st-head'))return;const ci=chOf[pi];const sib=parts.map((x,i)=>i).filter(i=>chOf[i]===ci);
+  const h=el('div',{class:'st-head'},el('div',{},el('p',{class:'eyebrow'},'Kapitel '+ci+' · Station '+pids[pi]),el('h2',{},CH_L[ci]),el('div',{class:'teile',role:'group','aria-label':'Häppchen'})));p.prepend(h);}
+parts.forEach((p,pi)=>headFor(pi));
+function paintTeile(){const pi=S.st,ci=chOf[pi];const sib=parts.map((x,i)=>i).filter(i=>chOf[i]===ci);const box=$('.teile',parts[pi]);
+  box.replaceChildren(...sib.map(i=>{const b=el('button',{type:'button',class:partDone(i)?'done':''},pids[i]);if(i===pi)b.setAttribute('aria-current','step');b.onclick=()=>go(i);return b;}));}
+function go(i,scroll=true){S.st=Math.max(0,Math.min(parts.length-1,i));S.seen[pids[S.st]]=1;save();
+  parts.forEach((p,pi)=>p.hidden=pi!==S.st);
+  $('#where').textContent='Station '+pids[S.st]+' · '+(S.st+1)+' von '+parts.length;
+  $('#prev').disabled=S.st===0;
+  const last=S.st===parts.length-1;$('#next').disabled=last;$('#nextTxt').textContent=chOf[S.st+1]===LAST&&chOf[S.st]!==LAST?'Zur Abgabe':'Weiter';
+  if(chOf[S.st]===LAST)fillSum();
+  paint();if(scroll)window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'});}
+$('#prev').onclick=()=>go(S.st-1);$('#next').onclick=()=>go(S.st+1);
+
+function paint(){const done=TASK_IDS.filter(isDone).length;const p=Math.round(100*done/TASK_IDS.length);$('#progTxt').textContent=p+' %';$('#progBar').style.width=p+'%';paintNav();paintTeile();}
+
+/* ---------- Abgabe ---------- */
+function fillSum(){$('#sumList').replaceChildren(...CH.slice(1,LAST).map((c,i)=>{const ci=i+1;const ids=TASK_IDS.filter(id=>chOf[home[id]]===ci);const d=ids.filter(isDone).length;return el('li',{},el('span',{},ci+' · '+c),el('b',{},d+' von '+ids.length));}));
+  $('#codeOut').textContent=window.LP?LP.stateCode():'(nur in der veröffentlichten Fassung)';}
+const nm=$('#abgName');nm.value=S.name;nm.oninput=()=>{S.name=nm.value.slice(0,40);save();};
+$('#codeCopy').onclick=async()=>{const n=$('#codeNote');n.hidden=false;try{await navigator.clipboard.writeText($('#codeOut').textContent);n.textContent='Kopiert. Heb den Code gut auf.';}catch(e){n.textContent='Kopieren hat nicht geklappt. Markiere den Code und kopiere ihn selbst.';}};
+$$('[data-loadcode]').forEach(b=>b.onclick=()=>{const id=b.dataset.loadcode,n=$('[data-loadnote="'+id+'"]');n.hidden=false;
+  const o=window.LP&&LP._codeFrom($('#'+id).value||'');
+  if(!o){n.textContent='Das ist kein gültiger Sicherungscode. Kopiere ihn vollständig.';return;}
+  if(window.LP_CFG&&o.s!==LP_CFG.slug){n.textContent='Dieser Code gehört zu einer anderen Lernplattform.';return;}
+  try{Object.keys(o.ls).forEach(k=>localStorage.setItem(k,o.ls[k]));}catch(e){n.textContent='Speichern auf diesem Gerät ist nicht möglich.';return;}
+  n.textContent='Geladen. Die Seite startet neu …';setTimeout(()=>location.reload(),400);});
+
+const CP='€‚ƒ„…†‡ˆ‰Š‹ŒŽ‘’“”•–—˜™š›œžŸ';
+function clean(t){return String(t||'').replace(/→/g,'->').replace(/₂/g,'2').replace(/[\u{1F300}-\u{1FAFF}☀-➿️‍]/gu,'').split('').filter(ch=>{const c=ch.charCodeAt(0);return c===10||(c>=32&&c<=126)||(c>=160&&c<=255)||CP.indexOf(ch)>=0;}).join('');}
+$('#pdfBtn').onclick=()=>{const note=$('#pdfNote');note.hidden=false;
+  if(!(window.jspdf&&window.jspdf.jsPDF)){note.textContent='Das PDF-Werkzeug konnte nicht geladen werden.';return;}
+  const d=new window.jspdf.jsPDF({unit:'mm',format:'a4'}),M=18,W=210-2*M;let y=22;
+  const need=h=>{if(y+h>280){d.addPage();y=22;}};
+  const txt=(s,o={})=>{d.setFont('helvetica',o.b?'bold':'normal');d.setFontSize(o.size||10.5);const c=o.col||[20,35,47];d.setTextColor(c[0],c[1],c[2]);d.splitTextToSize(clean(s),W-(o.ind||0)).forEach(l=>{need(5.5);d.text(l,M+(o.ind||0),y);y+=(o.lh||5.2);});};
+  txt(CFG_W.title+' – mein Ergebnis',{b:1,size:17,col:[31,122,92],lh:8});
+  txt('Wirtschaft · Klasse 8 · '+(S.name?'Name: '+S.name+' · ':'')+'Stand: '+new Date().toLocaleDateString('de-DE'));y+=4;
+  const done=TASK_IDS.filter(isDone).length;txt('Bearbeitet: '+done+' von '+TASK_IDS.length+' Aufgaben',{b:1});y+=3;
+  CH.slice(1,LAST).forEach((c,i)=>{const ci=i+1;const ids=TASK_IDS.filter(id=>chOf[home[id]]===ci);need(14);y+=2;txt('Kapitel '+ci+': '+c,{b:1,size:13,col:[3,85,145],lh:6.5});
+    ids.forEach(id=>{const t=T[id];const l=label[id].replace(/^Station [\d.]+ · /,'');
+      if(t.type==='open'){txt(l,{b:1});const a=(S.a[id]||'').trim();txt(a||'(noch keine Antwort)',{ind:4,col:a?[20,35,47]:[120,130,135]});if(S.muster[id])txt('Mit Musterlösung verglichen.',{ind:4,size:9,col:[86,103,107]});y+=1.5;}
+      else{const ok=!!S.ok[id];d.setFont('helvetica','bold');d.setFontSize(10.5);d.setTextColor(ok?31:194,ok?138:59,ok?76:46);need(5.5);d.text(ok?'gelöst':'offen',M,y);const yy=y;y=yy;txt(l,{ind:16});}});});
+  need(20);y+=4;txt('Selbsteinschätzung',{b:1,size:13,col:[3,85,145],lh:6.5});
+  RATE.forEach((r,i)=>{const v=S.rate[i];need(6);d.setFont('helvetica','bold');d.setFontSize(10);d.setTextColor(20,35,47);d.text(clean(v==null?'–':RATE_L[v]),M,y);txt(r,{ind:26,size:10});});
+  y+=4;txt('In dieser PDF steckt dein Arbeitsstand. Über „PDF laden“ in der Werkstatt machst du damit weiter.',{size:9,col:[86,103,107]});
+  txt('Material von Daniel Beyrodt · CC BY-NC-SA 4.0',{size:9,col:[86,103,107]});
+  const blob=d.output('blob'),fn=CFG_W.title+'_'+(S.name?clean(S.name).replace(/[^A-Za-z0-9ÄÖÜäöüß-]+/g,'_')+'_':'')+new Date().toISOString().slice(0,10)+'.pdf';
+  Promise.resolve(window.claude&&window.claude.use?window.claude.use('downloads'):null).then(dl=>{if(dl)return dl.save({filename:fn,data:blob});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=fn;document.body.appendChild(a);a.click();a.remove();})
+    .then(()=>{note.textContent='Gespeichert. In der PDF steckt dein Arbeitsstand.';}).catch(e=>{note.textContent=e&&e.code==='declined'?'Speichern abgebrochen.':'Speichern hat nicht geklappt.';});
+};
+
+go(S.st,false);
+})();
+</script>
+<style>.lp-legal{font:13px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif;text-align:center;padding:20px 16px calc(96px + env(safe-area-inset-bottom,0px));opacity:.8;clear:both}.lp-legal a{color:inherit;text-decoration:underline;text-underline-offset:2px}</style><div class="lp-legal">Privates Angebot von Daniel Beyrodt · <a href="../ueber-mich/">Über mich</a> · <a href="../impressum/">Impressum</a> · <a href="../datenschutz/">Datenschutz</a></div></body></html>
