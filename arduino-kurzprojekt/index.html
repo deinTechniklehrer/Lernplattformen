@@ -1,0 +1,1015 @@
+<!doctype html><html lang="de"><head><script>/* Lernplattformen auf GitHub Pages: Speichern ohne claude.ai */
+(function(){if(window.claude)return;var T={pdf:'application/pdf',txt:'text/plain;charset=utf-8',png:'image/png',jpg:'image/jpeg',jpeg:'image/jpeg',json:'application/json',csv:'text/csv;charset=utf-8',html:'text/html;charset=utf-8',docx:'application/vnd.openxmlformats-officedocument.wordprocessingml.document',xlsx:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',ino:'text/plain;charset=utf-8'};
+var dl={save:function(o){return new Promise(function(res,rej){try{var n=(o&&o.filename)||'datei',x=(n.split('.').pop()||'').toLowerCase(),d=o.data,b=d instanceof Blob?d:new Blob([d],{type:T[x]||'application/octet-stream'});var u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=n;a.rel='noopener';document.body.appendChild(a);a.click();setTimeout(function(){a.remove();URL.revokeObjectURL(u);},4000);res();}catch(e){rej({code:'failed',message:String(e)});}});}};
+window.claude={use:function(n){return Promise.resolve(n==='downloads'?dl:null);}};})();</script><meta property="og:type" content="website"><meta property="og:title" content="Arduino-Kurzprojekt"><meta property="og:description" content="Für alle, die Arduino schon können: ein eigenes Projekt mit Sensor und Aktor planen, bauen und dokumentieren. Bauteile, Variablen und Pinbelegung werden geprüft, der Code wird mit der Planung abgeglichen. Ergebnis als PDF."><meta property="og:url" content="https://deintechniklehrer.github.io/Lernplattformen/arduino-kurzprojekt/"><meta property="og:image" content="https://deintechniklehrer.github.io/Lernplattformen/vorschau/Vorschau_Arduino-Kurzprojekt.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="description" content="Für alle, die Arduino schon können: ein eigenes Projekt mit Sensor und Aktor planen, bauen und dokumentieren. Bauteile, Variablen und Pinbelegung werden geprüft, der Code wird mit der Planung abgeglichen. Ergebnis als PDF."><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Arduino-Kurzprojekt</title>
+<meta name="description" content="Dein eigenes Arduino-Projekt planen, bauen und dokumentieren: Bauteile, Variablen und Pinbelegung mit Prüfung, Code-Abgleich und Projektmappe als PDF.">
+<link rel="stylesheet" href="../assets/fonts/fonts.css">
+<script src="../assets/jspdf.umd.min.js"></script><link rel="stylesheet" href="../assets/lp-support.css"><script>window.LP_CFG={"keys": ["arduino-kurzprojekt-v1"], "uploadTitle": "Schon angefangen?", "uploadText": "Lade deine Ergebnis-PDF hoch, die du hier gespeichert hast. Dann machst du dort weiter, wo du aufgehört hast. Fehlen auf diesem Gerät Schaltplan oder Foto, füge sie danach neu hinzu.", "anchors": [{"sel": "#lpUp1", "mode": "append"}, {"sel": "#lpUp2", "mode": "append"}], "slug": "arduino-kurzprojekt"};</script><script src="../assets/lp-support.js"></script>
+<style>
+/* Farben wie die übrigen Arduino-Plattformen: Petrol für Sensoren und Bedienung, Orange für Aktoren */
+:root{
+  --bg:#EEF0EA; --surface:#FFFFFF; --surface-2:#F4F5F1; --line:#D5D9CF; --line-strong:#B9BFB2;
+  --ink:#1C2A2D; --muted:#56676B;
+  --accent:#0A7570; --accent-soft:#D6ECEA; --accent-ink:#075A56;
+  --signal:#C2461C; --signal-soft:#FBE3DA; --signal-ink:#94330F;
+  --ok:#1F8A4C; --ok-soft:#DCF1E3; --ok-ink:#176A3A;
+  --warn:#9A6514; --warn-soft:#FBEFD9;
+  --bad:#C23B3B; --bad-soft:#F8DEDE; --bad-ink:#9A2626;
+  --on-accent:#FFFFFF; --shadow:0 1px 2px rgba(20,40,40,.06),0 6px 22px rgba(20,40,40,.08);
+  --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible","Segoe UI",system-ui,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Consolas,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#11181A; --surface:#182224; --surface-2:#1D292B; --line:#2A383B; --line-strong:#3A4B4F;
+    --ink:#E2EBE9; --muted:#9DB0B3;
+    --accent:#3CBDB2; --accent-soft:#16393A; --accent-ink:#8FDCD4;
+    --signal:#FF7B54; --signal-soft:#3D2219; --signal-ink:#FFAD92;
+    --ok:#4CC27D; --ok-soft:#173424; --ok-ink:#8FDDB0;
+    --warn:#E5A94A; --warn-soft:#3A2D15;
+    --bad:#F07171; --bad-soft:#3D1C1C; --bad-ink:#F5A3A3;
+    --on-accent:#06201E; --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 22px rgba(0,0,0,.3);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#11181A; --surface:#182224; --surface-2:#1D292B; --line:#2A383B; --line-strong:#3A4B4F;
+  --ink:#E2EBE9; --muted:#9DB0B3;
+  --accent:#3CBDB2; --accent-soft:#16393A; --accent-ink:#8FDCD4;
+  --signal:#FF7B54; --signal-soft:#3D2219; --signal-ink:#FFAD92;
+  --ok:#4CC27D; --ok-soft:#173424; --ok-ink:#8FDDB0;
+  --warn:#E5A94A; --warn-soft:#3A2D15;
+  --bad:#F07171; --bad-soft:#3D1C1C; --bad-ink:#F5A3A3;
+  --on-accent:#06201E; --shadow:0 1px 2px rgba(0,0,0,.3),0 6px 22px rgba(0,0,0,.3);
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55}
+.app{max-width:980px;margin:0 auto;padding:max(18px,env(safe-area-inset-top)) 16px 90px}
+h1,h2,h3{font-family:var(--display);line-height:1.15;text-wrap:balance}
+h2{font-size:clamp(23px,3.6vw,29px);margin:0 0 6px;font-weight:800}
+h3{font-size:19px;margin:0 0 8px}
+p{margin:0 0 10px}
+a{color:var(--accent-ink)}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+code,.mono{font-family:var(--mono);font-size:.9em}
+
+/* Kopf */
+.top{display:flex;flex-wrap:wrap;gap:12px 22px;align-items:center;justify-content:space-between}
+.brand{display:flex;gap:14px;align-items:center;min-width:0}
+.logo{flex:none;background:#fff;border-radius:12px;padding:6px 9px;box-shadow:0 1px 0 var(--line)}
+.logo img{display:block;width:128px;height:auto}
+.brand h1{margin:0;font-size:clamp(26px,4.4vw,36px);font-weight:800;letter-spacing:-.015em}
+.brand p{margin:0;color:var(--muted);font-size:14.5px}
+.meter{flex:1 1 200px;max-width:260px;display:grid;gap:6px}
+.meter-row{display:flex;justify-content:space-between;font-size:13.5px;color:var(--muted)}
+.bar{height:10px;border-radius:99px;background:var(--surface);overflow:hidden;border:1px solid var(--line)}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--ok));transition:width .5s ease}
+.back{display:inline-block;margin:0 0 10px;font-weight:700;font-size:15px}
+
+/* Stationen */
+.stations{display:flex;gap:8px;margin:18px 0;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
+.st-btn{flex:1 0 auto;display:flex;align-items:center;gap:8px;min-height:48px;padding:8px 13px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);cursor:pointer;font-weight:700;font-size:15px;text-align:left}
+.st-btn .n{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;background:var(--surface-2);font-size:13.5px;flex:none}
+.st-btn[aria-current="step"]{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.st-btn.done .n{background:var(--ok);color:var(--on-accent)}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:clamp(16px,3vw,26px);box-shadow:var(--shadow)}
+.lead{color:var(--muted);margin-bottom:16px}
+.task{margin:22px 0 0;padding-top:18px;border-top:1px dashed var(--line)}
+.task-h{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.op{display:inline-block;font-size:12.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:2px 8px;border-radius:6px;background:var(--accent-soft);color:var(--accent-ink)}
+.info-box{background:var(--accent-soft);border-radius:14px;padding:14px 16px;margin:6px 0 4px}
+.info-box h3{color:var(--accent-ink);font-size:17px;margin-bottom:6px}
+.info-box p:last-child,.info-box ul:last-child{margin-bottom:0}
+.info-box ul{margin:4px 0 0;padding-left:20px}
+.info-box b{color:var(--ink)}
+.req{border:1.5px solid var(--signal);background:var(--signal-soft);color:var(--ink);border-radius:14px;padding:12px 16px;margin:12px 0}
+.req b{color:var(--signal-ink)}
+
+/* Knöpfe und Felder */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:10px 18px;border-radius:12px;border:1.5px solid var(--ink);background:var(--ink);color:var(--bg);font-weight:700;cursor:pointer;text-decoration:none}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn.small{min-height:40px;padding:7px 14px;font-size:15px}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:14px}
+.fb{margin-top:12px;padding:12px 14px;border-radius:12px;font-size:16px}
+.fb:empty{display:none}
+.fb.ok{background:var(--ok-soft);color:var(--ok-ink)}
+.fb.bad{background:var(--bad-soft);color:var(--bad-ink)}
+.fb.neutral{background:var(--surface-2);color:var(--ink);border:1px solid var(--line)}
+.fb ul{margin:6px 0 0;padding-left:20px}
+.fb li.w{color:var(--warn)}
+.nextrow{display:flex;justify-content:space-between;gap:10px;margin-top:22px;flex-wrap:wrap}
+select,input[type=text],input[type=date],textarea{min-height:44px;padding:8px 10px;border-radius:10px;border:1.5px solid var(--line);background:var(--surface);max-width:100%}
+textarea{width:100%;resize:vertical;line-height:1.45}
+select{padding-right:28px}
+label.lab{display:block;font-weight:700;font-size:15px;margin:12px 0 4px}
+.hint{font-size:14px;color:var(--muted)}
+.field-bad{border-color:var(--bad)!important;background:var(--bad-soft)!important}
+.field-ok{border-color:var(--ok)!important}
+
+/* Fragen */
+.q{margin:14px 0 0;padding:14px;border-radius:14px;border:1.5px solid var(--line)}
+.q legend{font-weight:700;padding:0 6px}
+.opt{display:flex;gap:10px;align-items:flex-start;padding:9px 10px;border-radius:10px;cursor:pointer}
+.opt:hover{background:var(--surface-2)}
+.opt input{width:22px;height:22px;margin:2px 0 0;flex:none;accent-color:var(--accent)}
+.q.ok{border-color:var(--ok)}
+.q.bad{border-color:var(--bad)}
+.sortgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:8px;margin-top:6px}
+.sortgrid .it{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:8px 10px;border:1px solid var(--line);border-radius:10px;background:var(--surface)}
+.sortgrid .it select{min-width:118px}
+
+/* Idee */
+.idea{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:10px;padding:12px 14px;border-radius:14px;background:var(--surface-2);border:1px dashed var(--line-strong)}
+.idea p{margin:0;flex:1 1 260px}
+.anf{display:grid;gap:8px}
+.anf .ar{display:flex;gap:8px;align-items:center}
+.anf .ar span{font-weight:700;color:var(--muted);width:20px;text-align:right;flex:none}
+.anf input{flex:1;min-width:0}
+.boards{display:flex;flex-wrap:wrap;gap:8px}
+.chip{min-height:44px;padding:8px 14px;border-radius:999px;border:1.5px solid var(--line);background:var(--surface);cursor:pointer;font-weight:700;font-size:15px}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+
+/* Tabellen */
+.tw{overflow-x:auto;margin-top:12px;border:1px solid var(--line);border-radius:12px}
+table.t{width:100%;border-collapse:collapse;font-size:15.5px;min-width:600px}
+table.t th,table.t td{border-bottom:1px solid var(--line);padding:7px 8px;text-align:left;vertical-align:middle}
+table.t th{background:var(--surface-2);font-size:13.5px;color:var(--muted);font-weight:700}
+table.t tr:last-child td{border-bottom:0}
+table.t td input[type=text],table.t td select{width:100%;min-height:40px}
+table.t td.n{width:44px;text-align:center;font-weight:700;color:var(--muted)}
+table.t td.qty{width:120px;white-space:nowrap}
+table.t td.x{width:44px;text-align:center}
+.xb{border:0;background:none;cursor:pointer;font-size:22px;color:var(--muted);padding:4px 8px;border-radius:8px}
+.xb:hover{background:var(--surface-2);color:var(--bad)}
+.step{display:inline-flex;align-items:center;gap:4px}
+.step button{width:36px;height:36px;border-radius:10px;border:1.5px solid var(--line);background:var(--surface);cursor:pointer;font-weight:700;font-size:18px;line-height:1}
+.step output{min-width:24px;text-align:center;font-weight:700}
+.tag{display:inline-block;font-size:12.5px;font-weight:700;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.tag.s{background:var(--accent-soft);color:var(--accent-ink)}
+.tag.a{background:var(--signal-soft);color:var(--signal-ink)}
+.tag.w{background:var(--surface-2);color:var(--muted);border:1px solid var(--line)}
+.tag.sig{background:transparent;border:1px solid var(--line-strong);color:var(--muted)}
+.addrow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+.addrow select{flex:1 1 260px}
+tr.rowbad td{background:var(--bad-soft)}
+tr.roww td{background:var(--warn-soft)}
+
+/* Pinleiste */
+.board{margin-top:14px;padding:14px;border-radius:14px;background:#13474A;color:#E9F4F2;display:grid;gap:12px}
+.board h4{margin:0;font:700 13px var(--body);letter-spacing:.06em;text-transform:uppercase;color:#BFE3DE}
+.pins{display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:6px}
+.pin{border-radius:9px;border:1.5px solid rgba(255,255,255,.22);padding:6px 6px 7px;min-height:58px;display:flex;flex-direction:column;gap:3px;background:rgba(0,0,0,.18)}
+.pin b{font-family:var(--mono);font-size:13px}
+.pin b .pw{color:#FFD08A}
+.pin span{font-size:11.5px;line-height:1.25;overflow-wrap:anywhere}
+.pin.s{background:#E6F4F2;color:#0B3B39;border-color:#E6F4F2}
+.pin.s .pw,.pin.a .pw{color:inherit}
+.pin.a{background:#FFE3D6;color:#6A2208;border-color:#FFE3D6}
+.pin.x{outline:3px solid #FF6B6B;outline-offset:1px}
+.pin.off{opacity:.45}
+.board .lg{font-size:12.5px;color:#BFE3DE}
+
+/* Bauen */
+.steps{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:8px}
+.steps li{display:grid;grid-template-columns:30px minmax(0,1fr) auto;gap:6px 10px;align-items:center;padding:8px 10px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface)}
+.steps li .nr{font-weight:800;font-family:var(--display);text-align:center;font-size:17px}
+.steps li input[type=text]{grid-column:2 / -1;width:100%;min-height:40px;font-size:15px}
+.steps li.done{border-color:var(--ok);background:var(--ok-soft)}
+.donechk{display:flex;align-items:center;gap:6px;font-size:14px;font-weight:700;cursor:pointer}
+.donechk input{width:24px;height:24px;accent-color:var(--ok)}
+@media (min-width:760px){.steps li{grid-template-columns:30px minmax(0,1.1fr) minmax(0,1fr) auto}.steps li input[type=text]{grid-column:auto}}
+.uploads{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin-top:12px}
+.up{border:1.5px dashed var(--line-strong);border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:8px;background:var(--surface-2)}
+.up h4{margin:0;font-size:16px}
+.up .ph{aspect-ratio:4/3;border-radius:10px;background:var(--surface);border:1px solid var(--line);display:grid;place-items:center;overflow:hidden;color:var(--muted);font-size:14px;text-align:center;padding:8px}
+.up .ph img{width:100%;height:100%;object-fit:contain;display:block}
+.up .acts{display:flex;gap:8px;flex-wrap:wrap}
+.filebtn{position:relative;overflow:hidden}
+.filebtn input{position:absolute;inset:0;opacity:0;cursor:pointer;font-size:0}
+textarea.code{font-family:var(--mono);font-size:14px;min-height:220px;white-space:pre;tab-size:2;background:var(--surface-2)}
+.cmp{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:4px}
+.cmp li{display:flex;gap:8px;align-items:flex-start}
+.cmp li i{flex:none;width:20px;height:20px;border-radius:50%;margin-top:3px;display:grid;place-items:center;font-style:normal;font-size:12px;font-weight:700;color:var(--on-accent)}
+.cmp li.y i{background:var(--ok)} .cmp li.n i{background:var(--warn)}
+
+/* Abgabe */
+.rate{min-width:560px}
+.rate td.c{width:150px}
+.rate tr.grp td{background:var(--surface-2);font-weight:700;font-size:14px;color:var(--muted)}
+.sum{font-weight:700;margin-top:8px}
+.form{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.form input{width:100%}
+.checklist{list-style:none;padding:0;margin:14px 0 0;display:grid;gap:6px}
+.checklist li{display:flex;gap:10px;align-items:center}
+.checklist .dot{width:22px;height:22px;border-radius:50%;border:2px solid var(--muted);flex:none;display:grid;place-items:center}
+.checklist li.ok .dot{background:var(--ok);border-color:var(--ok)}
+.checklist li.ok .dot::after{content:"";width:9px;height:5px;border:solid var(--on-accent);border-width:0 0 2.5px 2.5px;transform:translateY(-1px) rotate(-45deg)}
+.checklist button{border:0;background:none;color:var(--accent-ink);text-decoration:underline;cursor:pointer;padding:0;font-size:15px}
+.savebox{margin-top:18px;padding:16px;border-radius:14px;background:var(--ok-soft)}
+.savebox h3{color:var(--ok-ink)}
+.note{font-size:15px;margin-top:8px}
+.foot{margin-top:28px;font-size:13.5px;color:var(--muted);text-align:center}
+.foot a{color:inherit}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;scroll-behavior:auto!important}}
+@media print{.stations,.row,.nextrow,.top .meter{display:none!important}}
+</style>
+</head><body>
+<div class="app">
+  <a class="back" href="../arduino/">← Alle Arduino-Plattformen</a>
+  <header class="top">
+    <div class="brand">
+      <div class="logo"><img src="data:image/png;base64,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" alt="dein Technik Lehrer" width="128" height="36"></div>
+      <div><h1>Arduino-Kurzprojekt</h1><p>Steuern und Regeln · Dein eigenes Projekt planen, bauen und dokumentieren</p></div>
+    </div>
+    <div class="meter" aria-live="polite"><div class="meter-row"><span>Fortschritt</span><span id="progTxt">0 von 6</span></div><div class="bar"><i id="progBar"></i></div></div>
+  </header>
+
+  <nav class="stations" aria-label="Stationen" id="stations"></nav>
+
+  <!-- 1 Start -->
+  <section class="panel" data-st="0">
+    <h2>1 · Bist du bereit?</h2>
+    <p class="lead">Im Kurzprojekt planst und baust du ein eigenes Arduino-Projekt. Dafür solltest du die Grundlagen aus dem Lernheft oder aus „Schritt für Schritt“ kennen. Prüfe hier kurz, ob du startklar bist.</p>
+    <div id="lpUp1"></div>
+    <div class="req"><b>Deine Projektaufgabe:</b> Plane, baue und dokumentiere ein eigenes Arduino-Projekt. Es enthält <b>mindestens einen Sensor und einen Aktor</b> und ist <b>kein Beispiel aus dem Lernheft</b>.</div>
+
+    <div class="info-box" id="info-basis">
+      <h3>Info: Das Wichtigste in Kürze</h3>
+      <p>Ein <b>Sensor</b> misst etwas und gibt die Information an den Arduino (Eingabe). Ein <b>Aktor</b> führt etwas aus, zum Beispiel leuchten, piepen oder sich drehen (Ausgabe). Dazwischen verarbeitet dein Programm die Werte. Das ist das <b>EVA-Prinzip</b>: Eingabe, Verarbeitung, Ausgabe.</p>
+      <p><b>Analoge Sensoren</b> wie der Fotowiderstand liefern viele verschiedene Werte. Du schließt sie an einen <b>analogen Eingang</b> an: <b>A0 bis A5</b> beim Uno. <b>analogRead()</b> liefert dort Werte von <b>0 bis 1023</b>.</p>
+      <p><b>Digitale Pins</b> (0 bis 13) kennen nur zwei Zustände: an oder aus. Willst du eine LED <b>dimmen</b> oder einen Motor langsamer laufen lassen, brauchst du einen <b>PWM-Pin</b>. Das sind die Pins mit der Welle (~): <b>3, 5, 6, 9, 10 und 11</b>. Der Befehl dafür ist <b>analogWrite()</b> mit Werten von 0 bis 255.</p>
+      <p>Eine Variable speichert entweder einen <b>Sensorwert</b> (zum Beispiel die gemessene Helligkeit) oder einen <b>Zählerwert</b> (zum Beispiel, wie oft ein Taster gedrückt wurde).</p>
+      <p>Beim Verkabeln gilt: <b>schwarz für GND</b> (Minus), <b>rot für 5 V</b> (Plus). So findest du Fehler schneller.</p>
+    </div>
+
+    <div class="task" id="t-fit">
+      <div class="task-h"><span class="op">Ordne zu · Wähle aus</span><h3>Startklar-Check</h3></div>
+      <p>Beantworte alle sechs Fragen und prüfe dann.</p>
+      <div id="fitQs"></div>
+      <div class="row"><button class="btn" type="button" id="chkFit">Prüfen</button></div>
+      <div class="fb" id="fb-fit" aria-live="polite"></div>
+    </div>
+    <div class="nextrow"><span></span><button class="btn ghost" type="button" data-go="1">Weiter zur Idee →</button></div>
+  </section>
+
+  <!-- 2 Idee -->
+  <section class="panel" data-st="1" hidden>
+    <h2>2 · Deine Projektidee</h2>
+    <p class="lead">Ein gutes Projekt löst ein kleines Problem aus deinem Alltag oder aus der Schule. Überlege: Was soll gemessen werden, und was soll dann passieren?</p>
+    <div class="info-box" id="info-idee">
+      <h3>Info: So beschreibst du dein Projekt</h3>
+      <p>Die <b>Beschreibung</b> nennt das <b>Ziel</b>: Wofür ist das Projekt gut, und wer nutzt es? Ein Satz mit <b>wenn … dann …</b> hilft: „Wenn es im Zimmer dunkel wird, dann schaltet sich ein Nachtlicht ein.“</p>
+      <p>Die <b>Anforderungen</b> sagen genau, was dein Projekt können muss. Jede Anforderung lässt sich später testen, zum Beispiel: „Die LED leuchtet, sobald der Sensorwert unter 300 fällt.“</p>
+    </div>
+
+    <div class="task" id="t-idee">
+      <div class="task-h"><span class="op">Beschreibe</span><h3>Name, Ziel und Anforderungen</h3></div>
+      <div class="idea"><p id="ideaTxt">Keine Idee? Lass dir eine Kombination vorschlagen und überlege, wofür man sie brauchen könnte.</p><button class="btn small ghost" type="button" id="ideaBtn">Kombination würfeln</button></div>
+      <label class="lab" for="pName">Name deines Projekts</label>
+      <input type="text" id="pName" maxlength="60" style="width:100%" placeholder="z. B. Fahrradlicht-Erinnerung">
+      <label class="lab" for="pZiel">Ziel des Projekts</label>
+      <textarea id="pZiel" rows="3" maxlength="600" placeholder="Wenn …, dann … Das hilft, weil …"></textarea>
+      <label class="lab">Anforderungen: Das muss dein Projekt können</label>
+      <div class="anf" id="anf"></div>
+      <label class="lab">Mit welchem Board arbeitest du?</label>
+      <div class="boards" id="boards" role="group" aria-label="Board">
+        <button class="chip" type="button" data-b="uno">Arduino Uno</button>
+        <button class="chip" type="button" data-b="nano">Arduino Nano</button>
+      </div>
+      <p class="hint">Baust du nur in Tinkercad, wähle den Uno.</p>
+      <div class="row"><button class="btn" type="button" id="chkIdee">Idee prüfen</button></div>
+      <div class="fb" id="fb-idee" aria-live="polite"></div>
+    </div>
+    <div class="nextrow"><button class="btn ghost" type="button" data-go="0">← Zurück</button><button class="btn ghost" type="button" data-go="2">Weiter zu den Bauteilen →</button></div>
+  </section>
+
+  <!-- 3 Bauteile -->
+  <section class="panel" data-st="2" hidden>
+    <h2>3 · Bauteile</h2>
+    <p class="lead">Lege fest, welche Bauteile du brauchst. Sensoren, Aktoren und weitere Bauteile wie Widerstände gehören alle in die Liste.</p>
+    <div class="info-box" id="info-teile">
+      <h3>Info: Das gehört dazu</h3>
+      <ul>
+        <li>Zu jeder <b>LED</b> gehört ein <b>Vorwiderstand</b> (220 Ω bis 330 Ω), sonst geht sie kaputt. Eine RGB-LED braucht drei.</li>
+        <li>Ein <b>Fotowiderstand</b> braucht einen <b>10-kΩ-Widerstand</b> als Spannungsteiler, sonst misst der Arduino keine sinnvollen Werte.</li>
+        <li>Ein <b>Taster</b> braucht einen <b>10-kΩ-Widerstand</b>, außer du schaltest im Code den eingebauten Widerstand mit <b>INPUT_PULLUP</b> ein.</li>
+        <li>Ein <b>Gleichstrommotor</b> braucht einen <b>Motortreiber</b> und eine eigene Stromquelle. Der Arduino-Pin allein schafft den Strom nicht.</li>
+      </ul>
+    </div>
+    <div class="task" id="t-teile">
+      <div class="task-h"><span class="op">Wähle aus</span><h3>Deine Bauteilliste</h3></div>
+      <div class="addrow">
+        <label class="hint" for="partSel" style="flex-basis:100%">Bauteil hinzufügen</label>
+        <select id="partSel"></select>
+        <button class="btn small" type="button" id="partAdd">Hinzufügen</button>
+      </div>
+      <div class="tw"><table class="t"><thead><tr><th>Anzahl</th><th>Bauteil</th><th>Art</th><th>Signal</th><th><span class="hint">entfernen</span></th></tr></thead><tbody id="partBody"></tbody></table></div>
+      <div class="row"><button class="btn" type="button" id="chkTeile">Bauteile prüfen</button></div>
+      <div class="fb" id="fb-teile" aria-live="polite"></div>
+    </div>
+    <div class="nextrow"><button class="btn ghost" type="button" data-go="1">← Zurück</button><button class="btn ghost" type="button" data-go="3">Weiter zu den Variablen →</button></div>
+  </section>
+
+  <!-- 4 Variablen -->
+  <section class="panel" data-st="3" hidden>
+    <h2>4 · Variablen</h2>
+    <p class="lead">Plane, welche Werte sich dein Programm merken muss. Jede Variable bekommt einen Namen, eine Art und eine kurze Beschreibung.</p>
+    <div class="info-box" id="info-var">
+      <h3>Info: Gute Variablennamen</h3>
+      <ul>
+        <li>Ein Name beginnt mit einem <b>Buchstaben</b> und enthält nur Buchstaben, Ziffern und den Unterstrich.</li>
+        <li><b>Keine Leerzeichen und keine Umlaute</b> (ä, ö, ü, ß). Statt „Helligkeit Wert“ schreibst du <code>helligkeitWert</code>.</li>
+        <li>Wörter, die die Programmiersprache selbst nutzt, sind tabu, zum Beispiel <code>int</code>, <code>if</code>, <code>loop</code> oder <code>HIGH</code>.</li>
+        <li>Ein <b>Sensorwert</b> speichert, was ein Sensor gemessen hat. Ein <b>Zählerwert</b> zählt mit, zum Beispiel Tastendrücke oder Durchläufe.</li>
+      </ul>
+    </div>
+    <div class="task" id="t-var">
+      <div class="task-h"><span class="op">Lege fest</span><h3>Deine Variablen</h3></div>
+      <div class="tw"><table class="t"><thead><tr><th>Nr.</th><th>Name</th><th>Art</th><th>Beschreibung der Funktion</th><th><span class="hint">entfernen</span></th></tr></thead><tbody id="varBody"></tbody></table></div>
+      <div class="row"><button class="btn small ghost" type="button" id="varAdd">+ Variable</button><button class="btn" type="button" id="chkVar">Variablen prüfen</button></div>
+      <div class="fb" id="fb-var" aria-live="polite"></div>
+    </div>
+    <div class="nextrow"><button class="btn ghost" type="button" data-go="2">← Zurück</button><button class="btn ghost" type="button" data-go="4">Weiter zur Pinbelegung →</button></div>
+  </section>
+
+  <!-- 5 Pinbelegung -->
+  <section class="panel" data-st="4" hidden>
+    <h2>5 · Pinbelegung</h2>
+    <p class="lead">Ordne jedem Anschluss deiner Sensoren und Aktoren einen Pin zu. Die Liste entsteht aus deinen Bauteilen.</p>
+    <div class="info-box" id="info-pins">
+      <h3>Info: Welcher Pin passt?</h3>
+      <ul>
+        <li><b>Analoge Sensoren</b> gehören an <b>A0 bis A5</b> (beim Nano A0 bis A7).</li>
+        <li><b>Dimmen</b> und <b>Tempo regeln</b> geht nur an den <b>PWM-Pins 3, 5, 6, 9, 10, 11</b>. Eine RGB-LED braucht drei davon.</li>
+        <li>Jeder Pin darf nur <b>einmal</b> belegt sein.</li>
+        <li>Pin <b>0 und 1</b> nutzt der Arduino zum Hochladen und für den seriellen Monitor. Lass sie lieber frei.</li>
+        <li>Nutzt du einen <b>Servo</b>, funktioniert analogWrite() an Pin 9 und 10 nicht mehr.</li>
+        <li>Beim Nano können <b>A6 und A7</b> nur analog messen, also nichts schalten.</li>
+      </ul>
+    </div>
+    <div class="task" id="t-pins">
+      <div class="task-h"><span class="op">Ordne zu</span><h3>Pins zuordnen</h3></div>
+      <p class="hint" id="pinEmpty" hidden>Füge zuerst in Station 3 Sensoren und Aktoren hinzu.</p>
+      <div class="tw"><table class="t"><thead><tr><th>Bauteil</th><th>Anschluss</th><th>braucht</th><th>Pin</th></tr></thead><tbody id="pinBody"></tbody></table></div>
+      <div class="board" aria-label="Übersicht der Pins">
+        <h4>Digital</h4><div class="pins" id="boardD"></div>
+        <h4>Analog</h4><div class="pins" id="boardA"></div>
+        <div class="lg">Hell: Sensor · Orange: Aktor · <span style="color:#FFD08A">~</span> = PWM-Pin</div>
+      </div>
+      <div class="row"><button class="btn" type="button" id="chkPins">Pinbelegung prüfen</button></div>
+      <div class="fb" id="fb-pins" aria-live="polite"></div>
+    </div>
+    <div class="nextrow"><button class="btn ghost" type="button" data-go="3">← Zurück</button><button class="btn ghost" type="button" data-go="5">Weiter zum Bauen →</button></div>
+  </section>
+
+  <!-- 6 Bauen -->
+  <section class="panel" data-st="5" hidden>
+    <h2>6 · Bauen, programmieren, testen</h2>
+    <p class="lead">Jetzt setzt du deine Planung um. Hake jeden Schritt ab und notiere, was dir auffällt. Das hilft dir bei der Reflexion.</p>
+    <div class="task" id="t-ablauf">
+      <div class="task-h"><span class="op">Dokumentiere</span><h3>Arbeitsablauf</h3></div>
+      <ol class="steps" id="steps"></ol>
+    </div>
+    <div class="task" id="t-code">
+      <div class="task-h"><span class="op">Dokumentiere</span><h3>Dein Code</h3></div>
+      <p>Kopiere deinen Code hier hinein. In Tinkercad: <b>Code</b> öffnen, auf <b>Text</b> stellen, alles markieren und kopieren. Programmierst du mit Blöcken, zeigt dir Tinkercad bei „Blöcke + Text“ denselben Code als Text.</p>
+      <label class="lab" for="code">Code</label>
+      <textarea class="code" id="code" spellcheck="false" autocapitalize="off" autocomplete="off" placeholder="void setup() {&#10;  …&#10;}&#10;&#10;void loop() {&#10;  …&#10;}"></textarea>
+      <div class="row"><button class="btn small" type="button" id="chkCode">Code mit Planung abgleichen</button></div>
+      <div class="fb" id="fb-code" aria-live="polite"></div>
+    </div>
+    <div class="task" id="t-bilder">
+      <div class="task-h"><span class="op">Dokumentiere</span><h3>Schaltplan und Foto</h3></div>
+      <p>Füge einen Screenshot deines Schaltplans aus Tinkercad und ein Foto deines Aufbaus hinzu. Den Code kannst du zusätzlich als Screenshot einfügen, wenn du mit Blöcken arbeitest. Achte beim Schaltplan auf die Kabelfarben: schwarz für GND, rot für 5 V.</p>
+      <div class="uploads" id="uploads"></div>
+      <p class="hint">Die Bilder bleiben nur auf diesem Gerät und kommen in deine Projektmappe. Lädst du die PDF später auf einem anderen Gerät, füge die Bilder dort neu hinzu.</p>
+    </div>
+    <div class="nextrow"><button class="btn ghost" type="button" data-go="4">← Zurück</button><button class="btn ghost" type="button" data-go="6">Weiter zur Abgabe →</button></div>
+  </section>
+
+  <!-- 7 Abgabe -->
+  <section class="panel" data-st="6" hidden>
+    <h2>7 · Reflexion und Projektmappe</h2>
+    <p class="lead">Zum Schluss schaust du auf dein Projekt zurück und speicherst die Projektmappe als PDF.</p>
+    <div class="task" id="t-refl">
+      <div class="task-h"><span class="op">Erläutere</span><h3>Reflexion</h3></div>
+      <fieldset class="q"><legend>Funktioniert dein Projekt so, wie du es beschrieben hast?</legend>
+        <div class="boards" id="funkt" role="group" aria-label="Funktioniert dein Projekt?">
+          <button class="chip" type="button" data-f="ja">Ja</button><button class="chip" type="button" data-f="teilweise">Teilweise</button><button class="chip" type="button" data-f="nein">Nein</button>
+        </div>
+        <label class="lab" for="rText">Erläutere: Was klappt, was nicht, und woran liegt es?</label>
+        <textarea id="rText" rows="3" maxlength="1200"></textarea>
+      </fieldset>
+      <label class="lab" for="rVerb">Welche Verbesserungen sind möglich?</label>
+      <textarea id="rVerb" rows="3" maxlength="1200"></textarea>
+      <label class="lab" for="rZusatz">Zusatz: Was hast du schon verbessert? <span class="hint">(freiwillig)</span></label>
+      <textarea id="rZusatz" rows="2" maxlength="800"></textarea>
+    </div>
+    <div class="task" id="t-self">
+      <div class="task-h"><span class="op">Beurteile</span><h3>So wird dein Projekt bewertet</h3></div>
+      <p>Schätze dein Projekt selbst ein: <b>0</b> = nicht erfüllt, <b>1</b> = teilweise erfüllt, <b>2</b> = erfüllt. Deine Lehrkraft bewertet nach denselben Kriterien. Deine Einschätzung kommt mit in die Projektmappe.</p>
+      <div class="tw"><table class="t rate"><thead><tr><th>Kriterium</th><th>Deine Einschätzung</th></tr></thead><tbody id="rateBody"></tbody></table></div>
+      <p class="sum" id="rateSum"></p>
+    </div>
+    <div class="task">
+      <div class="task-h"><span class="op">Speichere</span><h3>Deine Projektmappe</h3></div>
+      <div class="form">
+        <div><label class="lab" for="sName">Vorname</label><input type="text" id="sName" maxlength="40" autocomplete="off"></div>
+        <div><label class="lab" for="sKlasse">Klasse oder Kurs</label><input type="text" id="sKlasse" maxlength="20" autocomplete="off"></div>
+        <div><label class="lab" for="sDatum">Datum</label><input type="date" id="sDatum"></div>
+      </div>
+      <ul class="checklist" id="checklist"></ul>
+      <div class="savebox">
+        <h3>Ergebnis-PDF speichern</h3>
+        <p>In der PDF stehen deine ganze Planung, Code, Bilder und Reflexion. Darin steckt auch dein Arbeitsstand: Über „PDF laden“ arbeitest du später damit weiter. Heb die Original-PDF auf. Eine aus Notability neu exportierte PDF enthält den Arbeitsstand meist nicht.</p>
+        <div class="row"><button class="btn" type="button" id="pdfBtn">Ergebnis-PDF speichern</button><button class="btn ghost small" type="button" id="resetBtn">Neu anfangen</button></div>
+        <p class="note" id="pdfNote" aria-live="polite" hidden></p>
+        <div id="lpUp2"></div>
+      </div>
+    </div>
+    <div class="nextrow"><button class="btn ghost" type="button" data-go="5">← Zurück</button><span></span></div>
+  </section>
+
+  <p class="foot">Arduino-Kurzprojekt von Daniel Beyrodt (dein Technik Lehrer) · <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de" rel="license noopener" target="_blank">CC BY-NC-SA 4.0</a> · Arduino ist eine Marke der Arduino SA. Diese Plattform ist kein Angebot von Arduino.</p>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var KEY = 'arduino-kurzprojekt-v1', IMGKEY = 'arduino-kurzprojekt-bilder-v1';
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return [].slice.call((r || document).querySelectorAll(s)); };
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+
+  /* ---------- Bauteile ---------- */
+  // art: s Sensor, a Aktor, w weiteres Bauteil · t: a analog, d digital, p PWM
+  var COMP = [
+    { id: 'ldr', n: 'Fotowiderstand (LDR)', art: 's', pins: [['Signal', 'a']], needs: 'r10k' },
+    { id: 'poti', n: 'Potentiometer (Drehregler)', art: 's', pins: [['Schleifer', 'a']] },
+    { id: 'tmp36', n: 'Temperatursensor TMP36', art: 's', pins: [['Signal', 'a']] },
+    { id: 'boden', n: 'Bodenfeuchtesensor', art: 's', pins: [['Signal', 'a']] },
+    { id: 'mq135', n: 'Gassensor MQ-135', art: 's', pins: [['Signal', 'a']] },
+    { id: 'taster', n: 'Taster', art: 's', pins: [['Signal', 'd']], needs: 'r10k', pullup: 1 },
+    { id: 'hcsr04', n: 'Ultraschallsensor HC-SR04', art: 's', pins: [['Trig', 'd'], ['Echo', 'd']] },
+    { id: 'pir', n: 'Bewegungsmelder (PIR)', art: 's', pins: [['Signal', 'd']] },
+    { id: 'neigung', n: 'Neigungsschalter', art: 's', pins: [['Signal', 'd']] },
+    { id: 'led', n: 'LED (an/aus)', art: 'a', pins: [['Plus über Vorwiderstand', 'd']], needs: 'r220' },
+    { id: 'leddim', n: 'LED (gedimmt)', art: 'a', pins: [['Plus über Vorwiderstand', 'p']], needs: 'r220' },
+    { id: 'rgb', n: 'RGB-LED', art: 'a', pins: [['Rot', 'p'], ['Grün', 'p'], ['Blau', 'p']], needs: 'r220', needN: 3 },
+    { id: 'buzzer', n: 'Piezo-Buzzer', art: 'a', pins: [['Plus', 'd']] },
+    { id: 'servo', n: 'Servomotor', art: 'a', pins: [['Signal', 'd']] },
+    { id: 'motor', n: 'Gleichstrommotor mit Motortreiber L293D', art: 'a', pins: [['Enable (Tempo)', 'p'], ['Richtung 1', 'd'], ['Richtung 2', 'd']], needs: 'batt' },
+    { id: 'relais', n: 'Relais-Modul', art: 'a', pins: [['Signal', 'd']] },
+    { id: 'neopixel', n: 'Neopixel-Streifen', art: 'a', pins: [['Daten (DIN)', 'd']] },
+    { id: 'r220', n: 'Widerstand 220–330 Ω (Vorwiderstand)', art: 'w', pins: [] },
+    { id: 'r10k', n: 'Widerstand 10 kΩ', art: 'w', pins: [] },
+    { id: 'batt', n: 'Batterie oder Netzteil für den Motor', art: 'w', pins: [] },
+    { id: 'steck', n: 'Steckbrett und Kabel', art: 'w', pins: [] },
+    { id: 'eigen', n: 'Anderes Bauteil (selbst eintragen)', art: 'w', pins: [], own: 1 }
+  ];
+  var ART = { s: 'Sensor', a: 'Aktor', w: 'weiteres Bauteil' };
+  var SIG = { a: 'analog', d: 'digital', p: 'PWM ~', '': '–' };
+  function comp(id) { return COMP.filter(function (c) { return c.id === id; })[0]; }
+
+  /* ---------- Startklar-Check ---------- */
+  var SORT = [['Fotowiderstand', 's'], ['Servomotor', 'a'], ['Taster', 's'], ['Piezo-Buzzer', 'a'], ['Ultraschallsensor', 's'], ['LED', 'a']];
+  var FIT = [
+    { id: 'q1', t: 'Ordne zu: Sensor oder Aktor?', sort: 1 },
+    { id: 'q2', t: 'An welchen Pin schließt du einen Fotowiderstand an, damit du verschiedene Helligkeiten messen kannst?', o: [['a', 'A0'], ['b', 'Digital 7'], ['c', 'GND']], r: 'a' },
+    { id: 'q3', t: 'Welche Werte liefert analogRead()?', o: [['a', '0 oder 1'], ['b', '0 bis 255'], ['c', '0 bis 1023']], r: 'c' },
+    { id: 'q4', t: 'Du willst eine LED langsam heller werden lassen. Was passt?', o: [['a', 'digitalWrite() an Pin 9'], ['b', 'analogWrite() an Pin 9'], ['c', 'analogWrite() an Pin 7']], r: 'b' },
+    { id: 'q5', t: 'Die Variable anzahlKlicks speichert, wie oft ein Taster gedrückt wurde. Was für eine Variable ist das?', o: [['a', 'Sensorwert'], ['b', 'Zählerwert']], r: 'b' },
+    { id: 'q6', t: 'Welche Kabelfarbe nimmst du für GND?', o: [['a', 'rot'], ['b', 'schwarz'], ['c', 'gelb']], r: 'b' }
+  ];
+
+  /* ---------- Arbeitsablauf und Bewertung (aus Daniels Arbeitsmappe und Bewertungsbogen) ---------- */
+  var STEPS = ['Projektplanung (Bauteile, Variablen, Pinbelegung)', 'Schaltung in Tinkercad aufbauen', 'Code programmieren', 'Code testen', 'Schaltung auf dem Steckbrett aufbauen', 'Code auf den Arduino übertragen', 'Funktionsweise testen', 'Wenn vorhanden, Fehler beheben', 'Projekt reflektieren', 'Zusatz: Projekt verbessern'];
+  var CRIT = [
+    ['Projektplanung', [['c1', 'Die Beschreibung zeigt Ziel und Anforderungen des Projekts.'], ['c2', 'Die Anforderungen passen zur Beschreibung.'], ['c3', 'Sensoren, Aktoren und weitere Bauteile sind richtig benannt.'], ['c4', 'Variablen sind richtig benannt und beschrieben.'], ['c5', 'Die Pinbelegung ist vollständig, richtig und passt zu Code und Schaltplan.']]],
+    ['Code', [['c6', 'Der Code ist übersichtlich formatiert.'], ['c7', 'Der Code lässt sich ohne Fehler übersetzen (kompilieren).'], ['c8', 'Es gibt keine doppelten oder unnötigen Befehle.'], ['c9', 'Die Befehle passen zum geplanten Projekt.'], ['c10', 'Der Code erreicht das Ziel aus der Beschreibung.']]],
+    ['Schaltplan', [['c11', 'Alle Bauteile sind vorhanden.'], ['c12', 'Alle Bauteile sind wie geplant und fachlich richtig angeschlossen.'], ['c13', 'Der Schaltplan ist übersichtlich.'], ['c14', 'Die Kabelfarben sind gut gewählt (schwarz für GND, rot für 5 V).']]],
+    ['Komplexität', [['c15', 'Das Projekt ist angemessen anspruchsvoll (zählt doppelt).']]]
+  ];
+  var IMGS = [['schaltplan', 'Schaltplan (Screenshot)'], ['foto', 'Foto vom Aufbau'], ['codebild', 'Code als Screenshot (freiwillig)']];
+  var STATIONS = ['Start', 'Idee', 'Bauteile', 'Variablen', 'Pins', 'Bauen', 'Abgabe'];
+
+  /* ---------- Zustand ---------- */
+  function fresh() {
+    return { fit: { sort: {} }, okFit: false, name: '', ziel: '', anf: ['', '', ''], board: 'uno', okIdee: false,
+      parts: [], uid: 1, okParts: false, vars: [{ n: '', k: '', d: '' }, { n: '', k: '', d: '' }], okVars: false,
+      pins: {}, okPins: false, steps: {}, code: '', funkt: '', rText: '', rVerb: '', rZusatz: '', self: {},
+      sName: '', sKlasse: '', sDatum: '', st: 0 };
+  }
+  var S;
+  try { S = JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) { S = null; }
+  if (!S || typeof S !== 'object') S = fresh();
+  var f0 = fresh(); Object.keys(f0).forEach(function (k) { if (S[k] === undefined) S[k] = f0[k]; });
+  function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) { } }
+  var IMG = {};
+  try { IMG = JSON.parse(localStorage.getItem(IMGKEY) || '{}') || {}; } catch (e) { IMG = {}; }
+  function saveImg() { try { localStorage.setItem(IMGKEY, JSON.stringify(IMG)); return true; } catch (e) { return false; } }
+
+  function report(key, ok, label, el, at) { if (window.LP) window.LP.result(key, ok, label, el, at); }
+
+  /* ---------- Navigation ---------- */
+  function okBau() { return !!(S.code.trim().length > 20 || IMG.schaltplan || IMG.codebild); }
+  function okOf(i) { return [S.okFit, S.okIdee, S.okParts, S.okVars, S.okPins, okBau(), false][i]; }
+  function renderNav() {
+    var nav = $('#stations'); nav.innerHTML = '';
+    STATIONS.forEach(function (t, i) {
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'st-btn' + (okOf(i) ? ' done' : '');
+      b.innerHTML = '<span class="n">' + (okOf(i) ? '✓' : (i + 1)) + '</span>' + esc(t);
+      if (i === S.st) b.setAttribute('aria-current', 'step');
+      b.onclick = function () { go(i); };
+      nav.appendChild(b);
+    });
+    var n = [0, 1, 2, 3, 4, 5].filter(okOf).length;
+    $('#progTxt').textContent = n + ' von 6';
+    $('#progBar').style.width = Math.round(n / 6 * 100) + '%';
+  }
+  function go(i, noScroll) {
+    S.st = i; save();
+    $$('section[data-st]').forEach(function (s) { s.hidden = +s.dataset.st !== i; });
+    if (i === 4) renderPins();
+    if (i === 6) renderCheck();
+    renderNav();
+    if (!noScroll) window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  $$('[data-go]').forEach(function (b) { b.onclick = function () { go(+b.dataset.go); }; });
+
+  /* ---------- 1 Startklar-Check ---------- */
+  var qHost = $('#fitQs');
+  FIT.forEach(function (q, i) {
+    var fs = document.createElement('fieldset'); fs.className = 'q'; fs.id = 'q-' + q.id;
+    var h = '<legend>' + (i + 1) + '. ' + esc(q.t) + '</legend>';
+    if (q.sort) {
+      h += '<div class="sortgrid">' + SORT.map(function (s, j) {
+        return '<label class="it"><span>' + esc(s[0]) + '</span><select data-j="' + j + '" aria-label="' + esc(s[0]) + '"><option value="">wählen</option><option value="s">Sensor</option><option value="a">Aktor</option></select></label>';
+      }).join('') + '</div>';
+    } else {
+      h += q.o.map(function (o) { return '<label class="opt"><input type="radio" name="' + q.id + '" value="' + o[0] + '"><span>' + esc(o[1]) + '</span></label>'; }).join('');
+    }
+    fs.innerHTML = h; qHost.appendChild(fs);
+    if (q.sort) $$('select', fs).forEach(function (sel) { sel.value = S.fit.sort[sel.dataset.j] || ''; sel.onchange = function () { S.fit.sort[sel.dataset.j] = sel.value; fs.classList.remove('ok', 'bad'); save(); }; });
+    else $$('input', fs).forEach(function (r) { r.checked = S.fit[q.id] === r.value; r.onchange = function () { S.fit[q.id] = r.value; fs.classList.remove('ok', 'bad'); save(); }; });
+  });
+  function qFilled(q) { return q.sort ? SORT.every(function (s, j) { return !!S.fit.sort[j]; }) : !!S.fit[q.id]; }
+  function qOk(q) { return q.sort ? SORT.every(function (s, j) { return S.fit.sort[j] === s[1]; }) : S.fit[q.id] === q.r; }
+  $('#chkFit').onclick = function () {
+    var fb = $('#fb-fit'), miss = FIT.filter(function (q) { return !qFilled(q); }).length;
+    if (miss) { fb.className = 'fb neutral'; fb.textContent = 'Es fehlen noch ' + miss + (miss === 1 ? ' Antwort.' : ' Antworten.'); return; }
+    var wrong = [];
+    FIT.forEach(function (q, i) {
+      var ok = qOk(q), fs = $('#q-' + q.id);
+      fs.classList.toggle('ok', ok); fs.classList.toggle('bad', !ok);
+      if (!ok) wrong.push(i + 1);
+      report('fit-' + q.id, ok, 'Start · Frage ' + (i + 1) + ': ' + q.t, fs);
+    });
+    S.okFit = !wrong.length; save(); renderNav();
+    if (!wrong.length) { fb.className = 'fb ok'; fb.textContent = 'Alles richtig. Du bist startklar für dein Projekt!'; }
+    else { fb.className = 'fb bad'; fb.innerHTML = (wrong.length === 1 ? 'Frage ' + wrong[0] + ' stimmt' : 'Die Fragen ' + wrong.join(', ') + ' stimmen') + ' noch nicht (rot umrandet). Lies die Info oben noch einmal. Bist du unsicher, wiederhole die Grundlagen im <a href="../arduino-lernheft/">Lernheft</a> oder in <a href="../arduino-schritt-fuer-schritt/">Schritt für Schritt</a>.'; }
+  };
+  if (S.okFit) FIT.forEach(function (q) { $('#q-' + q.id).classList.add('ok'); });
+
+  /* ---------- 2 Idee ---------- */
+  var IDEA_S = ['einem Fotowiderstand', 'einem Taster', 'einem Ultraschallsensor', 'einem Temperatursensor', 'einem Bodenfeuchtesensor', 'einem Bewegungsmelder', 'einem Neigungsschalter', 'einem Drehregler'];
+  var IDEA_A = ['einem Buzzer', 'einem Servomotor', 'einer RGB-LED', 'einem Neopixel-Streifen', 'zwei LEDs', 'einem Relais', 'einem kleinen Motor'];
+  var IDEA_O = ['im Klassenraum', 'am Fahrrad', 'in deinem Zimmer', 'im Schulgarten', 'an der Haustür', 'beim Sport', 'in der Küche', 'im Technikraum'];
+  function pick(a) { return a[Math.floor(Math.random() * a.length)]; }
+  $('#ideaBtn').onclick = function () { $('#ideaTxt').innerHTML = 'Was könntest du mit <b>' + pick(IDEA_S) + '</b> und <b>' + pick(IDEA_A) + '</b> ' + pick(IDEA_O) + ' bauen? Wer hätte etwas davon?'; };
+  function bindText(id, prop, after) { var el = $('#' + id); el.value = S[prop] || ''; el.oninput = function () { S[prop] = el.value; if (after) after(); save(); }; }
+  bindText('pName', 'name', function () { if (S.okIdee) { S.okIdee = false; renderNav(); } });
+  bindText('pZiel', 'ziel', function () { if (S.okIdee) { S.okIdee = false; renderNav(); } });
+  function renderAnf() {
+    var host = $('#anf'); host.innerHTML = '';
+    S.anf.forEach(function (a, i) {
+      var r = document.createElement('div'); r.className = 'ar';
+      r.innerHTML = '<span>' + (i + 1) + '.</span><input type="text" maxlength="160" aria-label="Anforderung ' + (i + 1) + '" placeholder="' + (i === 0 ? 'z. B. Die LED leuchtet, wenn es dunkel ist.' : 'Anforderung ' + (i + 1)) + '">';
+      var inp = $('input', r); inp.value = a; inp.oninput = function () { S.anf[i] = inp.value; if (S.okIdee) { S.okIdee = false; renderNav(); } save(); };
+      host.appendChild(r);
+    });
+    if (S.anf.length < 6) { var b = document.createElement('button'); b.type = 'button'; b.className = 'btn small ghost'; b.textContent = '+ Anforderung'; b.style.justifySelf = 'start'; b.onclick = function () { S.anf.push(''); save(); renderAnf(); }; host.appendChild(b); }
+  }
+  renderAnf();
+  function renderBoards() { $$('#boards .chip').forEach(function (b) { b.setAttribute('aria-pressed', String(S.board === b.dataset.b)); }); }
+  $$('#boards .chip').forEach(function (b) { b.onclick = function () { S.board = b.dataset.b; if (S.okPins) S.okPins = false; save(); renderBoards(); renderNav(); }; });
+  renderBoards();
+  $('#chkIdee').onclick = function () {
+    var fb = $('#fb-idee'), m = [];
+    if (S.name.trim().length < 3) m.push('Gib deinem Projekt einen Namen.');
+    if (S.ziel.trim().length < 25) m.push('Beschreibe das Ziel in mindestens einem ganzen Satz: Was soll passieren, und wofür ist das gut?');
+    var n = S.anf.filter(function (a) { return a.trim().length >= 8; }).length;
+    if (n < 2) m.push('Schreib mindestens zwei Anforderungen auf, die man testen kann.');
+    S.okIdee = !m.length; save(); renderNav();
+    if (!m.length) { fb.className = 'fb ok'; fb.innerHTML = 'Deine Idee steht. Denk daran: Das Projekt braucht einen Sensor und einen Aktor und ist kein Beispiel aus dem Lernheft.'; }
+    else { fb.className = 'fb neutral'; fb.innerHTML = 'Noch nicht vollständig:<ul>' + m.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>'; }
+  };
+
+  /* ---------- 3 Bauteile ---------- */
+  var sel = $('#partSel');
+  sel.innerHTML = '<option value="">Bauteil wählen …</option>' + [['s', 'Sensoren'], ['a', 'Aktoren'], ['w', 'weitere Bauteile']].map(function (g) {
+    return '<optgroup label="' + g[1] + '">' + COMP.filter(function (c) { return c.art === g[0]; }).map(function (c) { return '<option value="' + c.id + '">' + esc(c.n) + '</option>'; }).join('') + '</optgroup>';
+  }).join('');
+  $('#partAdd').onclick = function () {
+    var c = comp(sel.value); if (!c) return;
+    var p = { u: 'p' + (S.uid++), id: c.id, q: 1 };
+    if (c.own) { p.own = ''; p.art = 'w'; p.sig = ''; }
+    S.parts.push(p); sel.value = ''; changedParts(); renderParts();
+  };
+  function partName(p) { var c = comp(p.id); return c.own ? (p.own || 'Anderes Bauteil') : c.n; }
+  function partArt(p) { var c = comp(p.id); return c.own ? p.art : c.art; }
+  function partPins(p) { var c = comp(p.id); if (c.own) return p.art !== 'w' && p.sig ? [['Signal', p.sig]] : []; return c.pins; }
+  function partSig(p) { var pins = partPins(p); return pins.length ? pins.map(function (x) { return SIG[x[1]]; }).filter(function (v, i, a) { return a.indexOf(v) === i; }).join(', ') : '–'; }
+  function renderParts(mark) {
+    var body = $('#partBody'); body.innerHTML = '';
+    if (!S.parts.length) { body.innerHTML = '<tr><td colspan="5" class="hint">Noch keine Bauteile. Wähle oben ein Bauteil aus und tippe auf „Hinzufügen“.</td></tr>'; return; }
+    S.parts.forEach(function (p, i) {
+      var c = comp(p.id), tr = document.createElement('tr'), art = partArt(p);
+      if (mark && mark[p.u]) tr.className = mark[p.u];
+      var name = c.own ? '<input type="text" maxlength="60" placeholder="Name des Bauteils" aria-label="Name des Bauteils">' : esc(c.n);
+      var artH = c.own ? '<select aria-label="Art"><option value="s">Sensor</option><option value="a">Aktor</option><option value="w">weiteres Bauteil</option></select>' : '<span class="tag ' + art + '">' + ART[art] + '</span>';
+      var sigH = c.own ? '<select aria-label="Signal" class="sg"><option value="">kein Pin</option><option value="a">analog</option><option value="d">digital</option><option value="p">PWM ~</option></select>' : '<span class="tag sig">' + partSig(p) + '</span>';
+      tr.innerHTML = '<td class="qty"><span class="step"><button type="button" aria-label="Eins weniger">−</button><output>' + p.q + '</output><button type="button" aria-label="Eins mehr">+</button></span></td><td>' + name + '</td><td>' + artH + '</td><td>' + sigH + '</td><td class="x"><button class="xb" type="button" aria-label="' + esc(partName(p)) + ' entfernen">×</button></td>';
+      var bs = $$('.step button', tr);
+      bs[0].onclick = function () { if (p.q > 1) { p.q--; changedParts(); renderParts(); } };
+      bs[1].onclick = function () { if (p.q < 20) { p.q++; changedParts(); renderParts(); } };
+      $('.xb', tr).onclick = function () { S.parts.splice(i, 1); Object.keys(S.pins).forEach(function (k) { if (k.indexOf(p.u + ':') === 0) delete S.pins[k]; }); changedParts(); renderParts(); };
+      if (c.own) {
+        var inp = $('input', tr); inp.value = p.own || ''; inp.oninput = function () { p.own = inp.value; changedParts(); };
+        var ss = $$('select', tr); ss[0].value = p.art || 'w'; ss[1].value = p.sig || '';
+        ss[0].onchange = function () { p.art = ss[0].value; changedParts(); };
+        ss[1].onchange = function () { p.sig = ss[1].value; changedParts(); };
+      }
+      body.appendChild(tr);
+    });
+  }
+  function changedParts() { if (S.okParts) S.okParts = false; if (S.okPins) S.okPins = false; $('#fb-teile').textContent = ''; save(); renderNav(); }
+  function count(id) { return S.parts.filter(function (p) { return p.id === id; }).reduce(function (s, p) { return s + p.q; }, 0); }
+  $('#chkTeile').onclick = function () {
+    var fb = $('#fb-teile'), err = [], warn = [], mark = {};
+    var nS = S.parts.filter(function (p) { return partArt(p) === 's'; }).length, nA = S.parts.filter(function (p) { return partArt(p) === 'a'; }).length;
+    if (!S.parts.length) { fb.className = 'fb neutral'; fb.textContent = 'Füge zuerst deine Bauteile hinzu.'; return; }
+    if (!nS) err.push('Dein Projekt braucht mindestens einen Sensor.');
+    if (!nA) err.push('Dein Projekt braucht mindestens einen Aktor.');
+    S.parts.forEach(function (p) { var c = comp(p.id); if (c.own && (p.own || '').trim().length < 3) { err.push('Gib dem eigenen Bauteil einen Namen.'); mark[p.u] = 'rowbad'; } });
+    var nLed = count('led') + count('leddim') + 3 * count('rgb');
+    if (nLed && count('r220') < nLed) { err.push('Für ' + nLed + (nLed === 1 ? ' LED-Anschluss brauchst du einen Vorwiderstand' : ' LED-Anschlüsse brauchst du ' + nLed + ' Vorwiderstände') + ' (220–330 Ω). Stell die Anzahl ein.'); }
+    if (count('ldr') && count('r10k') < count('ldr')) err.push('Jeder Fotowiderstand braucht einen 10-kΩ-Widerstand als Spannungsteiler.');
+    if (count('taster') && count('r10k') < count('taster') + count('ldr')) warn.push('Taster: Plane einen 10-kΩ-Widerstand ein oder nutze im Code INPUT_PULLUP.');
+    if (count('motor') && !count('batt')) err.push('Der Motor braucht eine eigene Stromquelle (Batterie oder Netzteil).');
+    if (!count('steck')) warn.push('Denk an Steckbrett und Kabel, wenn du echt aufbaust.');
+    var ok = !err.length;
+    report('teile', ok, 'Bauteile · Bauteilliste prüfen', $('#t-teile'), fb);
+    S.okParts = ok; save(); renderNav(); renderParts(mark);
+    var li = function (a, cls) { return a.map(function (x) { return '<li' + (cls ? ' class="' + cls + '"' : '') + '>' + esc(x) + '</li>'; }).join(''); };
+    if (ok) { fb.className = 'fb ok'; fb.innerHTML = 'Deine Bauteilliste passt: ' + nS + (nS === 1 ? ' Sensor' : ' Sensoren') + ' und ' + nA + (nA === 1 ? ' Aktor.' : ' Aktoren.') + (warn.length ? '<ul>' + li(warn, 'w') + '</ul>' : ''); }
+    else { fb.className = 'fb bad'; fb.innerHTML = 'Das passt noch nicht:<ul>' + li(err) + li(warn, 'w') + '</ul>'; }
+  };
+
+  /* ---------- 4 Variablen ---------- */
+  var RESERVED = ['int', 'long', 'float', 'double', 'char', 'byte', 'bool', 'boolean', 'void', 'const', 'unsigned', 'if', 'else', 'for', 'while', 'do', 'switch', 'case', 'break', 'continue', 'return', 'true', 'false', 'HIGH', 'LOW', 'INPUT', 'OUTPUT', 'INPUT_PULLUP', 'setup', 'loop', 'delay', 'millis', 'String', 'new', 'class', 'struct', 'default'];
+  function varErr(v, all) {
+    var n = (v.n || '').trim();
+    if (!n) return 'Name fehlt.';
+    if (/\s/.test(n)) return '„' + n + '“ enthält ein Leerzeichen. Schreib die Wörter zusammen, zum Beispiel ' + n.split(/\s+/).map(function (w, i) { return i ? w.charAt(0).toUpperCase() + w.slice(1) : w.charAt(0).toLowerCase() + w.slice(1); }).join('') + '.';
+    if (/[äöüÄÖÜß]/.test(n)) return '„' + n + '“ enthält einen Umlaut oder ß. Schreib ae, oe, ue oder ss.';
+    if (/^[0-9]/.test(n)) return '„' + n + '“ beginnt mit einer Ziffer. Ein Name muss mit einem Buchstaben beginnen.';
+    if (!/^[A-Za-z_][A-Za-z0-9_]*$/.test(n)) return '„' + n + '“ enthält ein Zeichen, das nicht erlaubt ist. Nur Buchstaben, Ziffern und _.';
+    if (RESERVED.indexOf(n) >= 0) return '„' + n + '“ ist ein Wort der Programmiersprache. Wähle einen anderen Namen.';
+    if (all.filter(function (w) { return (w.n || '').trim() === n; }).length > 1) return '„' + n + '“ gibt es zweimal. Jeder Name darf nur einmal vorkommen.';
+    if (!v.k) return 'Wähle für „' + n + '“, ob es ein Sensorwert oder ein Zählerwert ist.';
+    if ((v.d || '').trim().length < 8) return 'Beschreibe kurz, wofür „' + n + '“ da ist.';
+    return '';
+  }
+  function renderVars(marks) {
+    var body = $('#varBody'); body.innerHTML = '';
+    S.vars.forEach(function (v, i) {
+      var tr = document.createElement('tr');
+      if (marks && marks[i]) tr.className = 'rowbad';
+      tr.innerHTML = '<td class="n">' + (i + 1) + '</td><td><input type="text" class="mono" maxlength="40" spellcheck="false" autocapitalize="off" aria-label="Name der Variable ' + (i + 1) + '" placeholder="z. B. helligkeit"></td>' +
+        '<td><select aria-label="Art der Variable ' + (i + 1) + '"><option value="">wählen</option><option value="s">Sensorwert</option><option value="z">Zählerwert</option></select></td>' +
+        '<td><input type="text" maxlength="140" aria-label="Beschreibung der Variable ' + (i + 1) + '" placeholder="Wofür ist sie da?"></td><td class="x"><button class="xb" type="button" aria-label="Variable ' + (i + 1) + ' entfernen">×</button></td>';
+      var ins = $$('input', tr), s = $('select', tr);
+      ins[0].value = v.n || ''; ins[1].value = v.d || ''; s.value = v.k || '';
+      ins[0].oninput = function () { v.n = ins[0].value; changedVars(); };
+      ins[1].oninput = function () { v.d = ins[1].value; changedVars(); };
+      s.onchange = function () { v.k = s.value; changedVars(); };
+      $('.xb', tr).onclick = function () { S.vars.splice(i, 1); if (!S.vars.length) S.vars.push({ n: '', k: '', d: '' }); changedVars(); renderVars(); };
+      body.appendChild(tr);
+    });
+  }
+  function changedVars() { if (S.okVars) { S.okVars = false; renderNav(); } $('#fb-var').textContent = ''; save(); }
+  $('#varAdd').onclick = function () { if (S.vars.length < 12) { S.vars.push({ n: '', k: '', d: '' }); save(); renderVars(); } };
+  $('#chkVar').onclick = function () {
+    var fb = $('#fb-var'), used = S.vars.filter(function (v) { return (v.n || '').trim() || (v.d || '').trim() || v.k; });
+    if (!used.length) { fb.className = 'fb neutral'; fb.textContent = 'Trag zuerst mindestens eine Variable ein.'; return; }
+    S.vars = used; renderVars();
+    var errs = [], marks = {};
+    S.vars.forEach(function (v, i) { var e = varErr(v, S.vars); if (e) { errs.push('Nr. ' + (i + 1) + ': ' + e); marks[i] = 1; } });
+    var nAna = S.parts.filter(function (p) { return partPins(p).some(function (x) { return x[1] === 'a'; }); }).length;
+    var nSens = S.vars.filter(function (v) { return v.k === 's'; }).length;
+    var hint = nAna > nSens ? 'Du hast ' + nAna + (nAna === 1 ? ' analogen Sensor' : ' analoge Sensoren') + ', aber ' + (nSens || 'keine') + (nSens === 1 ? ' Variable' : ' Variablen') + ' für Sensorwerte. Meist braucht jeder Sensor eine Variable für seinen Messwert.' : '';
+    var ok = !errs.length;
+    report('var', ok, 'Variablen · Namen und Art festlegen', $('#t-var'), fb);
+    S.okVars = ok; save(); renderNav(); renderVars(marks);
+    if (ok) { fb.className = 'fb ok'; fb.innerHTML = 'Alle Variablen sind richtig benannt und beschrieben.' + (hint ? '<ul><li class="w">' + esc(hint) + '</li></ul>' : ''); }
+    else { fb.className = 'fb bad'; fb.innerHTML = 'Das passt noch nicht:<ul>' + errs.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + (hint ? '<li class="w">' + esc(hint) + '</li>' : '') + '</ul>'; }
+  };
+
+  /* ---------- 5 Pinbelegung ---------- */
+  var PWM = ['D3', 'D5', 'D6', 'D9', 'D10', 'D11'];
+  function boardPins() {
+    var d = [], a = [], i; for (i = 0; i <= 13; i++) d.push('D' + i);
+    for (i = 0; i <= (S.board === 'nano' ? 7 : 5); i++) a.push('A' + i);
+    return { d: d, a: a };
+  }
+  function pinLabel(pin) { return pin.charAt(0) === 'D' ? 'Pin ' + pin.slice(1) + (PWM.indexOf(pin) >= 0 ? ' ~' : '') : pin; }
+  function slots() {
+    var out = [];
+    S.parts.forEach(function (p) {
+      var pins = partPins(p), art = partArt(p); if (art === 'w' || !pins.length) return;
+      for (var k = 0; k < p.q; k++) pins.forEach(function (x, j) {
+        out.push({ key: p.u + ':' + k + ':' + j, part: partName(p) + (p.q > 1 ? ' ' + (k + 1) : ''), con: x[0], t: x[1], art: art, servo: p.id === 'servo' });
+      });
+    });
+    return out;
+  }
+  function renderPins(bad) {
+    var sl = slots(), body = $('#pinBody'), bp = boardPins(), all = bp.d.concat(bp.a);
+    $('#pinEmpty').hidden = !!sl.length;
+    body.innerHTML = '';
+    sl.forEach(function (s) {
+      if (S.pins[s.key] && all.indexOf(S.pins[s.key]) < 0) delete S.pins[s.key];
+      var tr = document.createElement('tr'); if (bad && bad[s.key]) tr.className = 'rowbad';
+      tr.innerHTML = '<td><span class="tag ' + s.art + '">' + ART[s.art] + '</span> ' + esc(s.part) + '</td><td>' + esc(s.con) + '</td><td>' + SIG[s.t] + '</td><td><select aria-label="Pin für ' + esc(s.part + ', ' + s.con) + '"><option value="">wählen</option><optgroup label="Digital">' +
+        bp.d.map(function (p) { return '<option value="' + p + '">' + pinLabel(p) + '</option>'; }).join('') + '</optgroup><optgroup label="Analog">' + bp.a.map(function (p) { return '<option value="' + p + '">' + p + '</option>'; }).join('') + '</optgroup></select></td>';
+      var se = $('select', tr); se.value = S.pins[s.key] || '';
+      se.onchange = function () { S.pins[s.key] = se.value; if (S.okPins) { S.okPins = false; renderNav(); } $('#fb-pins').textContent = ''; save(); renderBoard(); };
+      body.appendChild(tr);
+    });
+    renderBoard(bad);
+  }
+  function renderBoard(bad) {
+    var sl = slots(), bp = boardPins(), use = {};
+    sl.forEach(function (s) { var p = S.pins[s.key]; if (p) (use[p] = use[p] || []).push(s); });
+    function cell(p) {
+      var u = use[p] || [], cls = 'pin' + (u.length ? ' ' + u[0].art : '') + (u.length > 1 || (bad && u.some(function (s) { return bad[s.key]; })) ? ' x' : '') + ((p === 'D0' || p === 'D1') && !u.length ? ' off' : '');
+      var lab = p.charAt(0) === 'D' ? p.slice(1) + (PWM.indexOf(p) >= 0 ? '<span class="pw">~</span>' : '') : p;
+      return '<div class="' + cls + '"><b>' + lab + '</b><span>' + (u.length ? u.map(function (s) { return esc(s.part + ' · ' + s.con); }).join('<br>') : (p === 'D0' ? 'RX' : p === 'D1' ? 'TX' : '')) + '</span></div>';
+    }
+    $('#boardD').innerHTML = bp.d.map(cell).join('');
+    $('#boardA').innerHTML = bp.a.map(cell).join('');
+  }
+  $('#chkPins').onclick = function () {
+    var fb = $('#fb-pins'), sl = slots(), err = [], warn = [], bad = {};
+    if (!sl.length) { fb.className = 'fb neutral'; fb.textContent = 'Es gibt noch keine Anschlüsse. Füge in Station 3 Sensoren und Aktoren hinzu.'; return; }
+    var miss = sl.filter(function (s) { return !S.pins[s.key]; });
+    if (miss.length) { fb.className = 'fb neutral'; fb.textContent = 'Es fehlen noch ' + miss.length + (miss.length === 1 ? ' Pin.' : ' Pins.'); return; }
+    var byPin = {};
+    sl.forEach(function (s) { (byPin[S.pins[s.key]] = byPin[S.pins[s.key]] || []).push(s); });
+    Object.keys(byPin).forEach(function (p) { if (byPin[p].length > 1) { err.push(pinLabel(p) + ' ist ' + byPin[p].length + '-mal belegt: ' + byPin[p].map(function (s) { return s.part + ' (' + s.con + ')'; }).join(', ') + '.'); byPin[p].forEach(function (s) { bad[s.key] = 1; }); } });
+    var hasServo = sl.some(function (s) { return s.servo; });
+    sl.forEach(function (s) {
+      var p = S.pins[s.key], name = s.part + ' (' + s.con + ')';
+      if (s.t === 'a' && p.charAt(0) !== 'A') { err.push(name + ' liefert einen analogen Wert und gehört an einen analogen Eingang (A0 bis A' + (S.board === 'nano' ? 7 : 5) + ').'); bad[s.key] = 1; }
+      if (s.t === 'p' && PWM.indexOf(p) < 0) { err.push(name + ' braucht einen PWM-Pin: 3, 5, 6, 9, 10 oder 11.'); bad[s.key] = 1; }
+      if ((p === 'A6' || p === 'A7') && s.t !== 'a') { err.push(name + ': ' + p + ' kann beim Nano nur analog messen. Nimm einen anderen Pin.'); bad[s.key] = 1; }
+      if (p === 'D0' || p === 'D1') warn.push(name + ' an ' + pinLabel(p) + ': Dieser Pin wird beim Hochladen und für den seriellen Monitor gebraucht. Nimm lieber einen anderen.');
+      if (hasServo && s.t === 'p' && (p === 'D9' || p === 'D10')) { err.push(name + ' an ' + pinLabel(p) + ': Mit Servo funktioniert analogWrite() an Pin 9 und 10 nicht. Nimm 3, 5, 6 oder 11.'); bad[s.key] = 1; }
+    });
+    var uniq = function (a) { return a.filter(function (x, i) { return a.indexOf(x) === i; }); };
+    err = uniq(err); warn = uniq(warn);
+    var ok = !err.length;
+    report('pins', ok, 'Pinbelegung · Pins zuordnen', $('#t-pins'), fb);
+    S.okPins = ok; save(); renderNav(); renderPins(bad);
+    if (ok) { fb.className = 'fb ok'; fb.innerHTML = 'Deine Pinbelegung passt. Übernimm sie genau so in Schaltplan und Code.' + (warn.length ? '<ul>' + warn.map(function (x) { return '<li class="w">' + esc(x) + '</li>'; }).join('') + '</ul>' : ''); }
+    else { fb.className = 'fb bad'; fb.innerHTML = 'Das passt noch nicht (rot markiert):<ul>' + err.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + warn.map(function (x) { return '<li class="w">' + esc(x) + '</li>'; }).join('') + '</ul>'; }
+  };
+
+  /* ---------- 6 Bauen ---------- */
+  function renderSteps() {
+    var ol = $('#steps'); ol.innerHTML = '';
+    STEPS.forEach(function (t, i) {
+      var st = S.steps[i] || (S.steps[i] = { n: '', d: false });
+      var li = document.createElement('li'); li.className = st.d ? 'done' : '';
+      li.innerHTML = '<span class="nr">' + (i + 1) + '</span><span>' + esc(t) + '</span><input type="text" maxlength="200" aria-label="Notizen zu Schritt ' + (i + 1) + '" placeholder="Notizen"><label class="donechk"><input type="checkbox" aria-label="Schritt ' + (i + 1) + ' erledigt"> erledigt</label>';
+      var ins = $$('input', li); ins[0].value = st.n || ''; ins[1].checked = !!st.d;
+      ins[0].oninput = function () { st.n = ins[0].value; save(); };
+      ins[1].onchange = function () { st.d = ins[1].checked; li.className = st.d ? 'done' : ''; save(); };
+      ol.appendChild(li);
+    });
+  }
+  bindText('code', 'code', function () { renderNav(); });
+  $('#chkCode').onclick = function () {
+    var fb = $('#fb-code'), c = S.code;
+    if (c.trim().length < 20) { fb.className = 'fb neutral'; fb.textContent = 'Kopiere zuerst deinen Code in das Feld.'; return; }
+    var plain = c.replace(/\/\*[\s\S]*?\*\//g, ' ').replace(/\/\/.*$/gm, ' ');
+    var items = [];
+    items.push([/void\s+setup\s*\(/.test(plain), 'void setup() ist vorhanden']);
+    items.push([/void\s+loop\s*\(/.test(plain), 'void loop() ist vorhanden']);
+    var o = (plain.match(/\{/g) || []).length, z = (plain.match(/\}/g) || []).length;
+    items.push([o === z, o === z ? 'Geschweifte Klammern: ' + o + ' auf, ' + z + ' zu' : 'Geschweifte Klammern: ' + o + ' auf, aber ' + z + ' zu. Prüfe, ob eine fehlt.']);
+    slots().forEach(function (s) {
+      var p = S.pins[s.key]; if (!p) return;
+      var re = p.charAt(0) === 'A' ? new RegExp('\\b(' + p + '|' + (14 + +p.slice(1)) + ')\\b') : new RegExp('\\b' + p.slice(1) + '\\b');
+      items.push([re.test(plain), pinLabel(p) + ' für ' + s.part + ' (' + s.con + ') ' + (re.test(plain) ? 'kommt im Code vor' : 'finde ich im Code nicht')]);
+    });
+    S.vars.forEach(function (v) { var n = (v.n || '').trim(); if (!n || !/^[A-Za-z_]\w*$/.test(n)) return; var f = new RegExp('\\b' + n + '\\b').test(plain); items.push([f, 'Variable ' + n + (f ? ' kommt im Code vor' : ' finde ich im Code nicht')]); });
+    var miss = items.filter(function (x) { return !x[0]; }).length;
+    fb.className = 'fb neutral';
+    fb.innerHTML = '<b>' + (miss ? miss + (miss === 1 ? ' Punkt solltest du prüfen.' : ' Punkte solltest du prüfen.') : 'Code und Planung passen zusammen.') + '</b><ul class="cmp">' + items.map(function (x) { return '<li class="' + (x[0] ? 'y' : 'n') + '"><i aria-hidden="true">' + (x[0] ? '✓' : '?') + '</i><span>' + esc(x[1]) + '</span></li>'; }).join('') + '</ul><p class="hint" style="margin:8px 0 0">Der Abgleich sucht nur nach Pins und Namen. Ob dein Code fehlerfrei läuft, zeigt dir erst Tinkercad oder die Arduino-Software.</p>';
+  };
+  function renderUploads() {
+    var host = $('#uploads'); host.innerHTML = '';
+    IMGS.forEach(function (m) {
+      var d = document.createElement('div'); d.className = 'up';
+      var im = IMG[m[0]];
+      d.innerHTML = '<h4>' + esc(m[1]) + '</h4><div class="ph">' + (im ? '<img alt="' + esc(m[1]) + '">' : 'Noch kein Bild') + '</div><div class="acts"><label class="btn small filebtn">' + (im ? 'Bild ersetzen' : 'Bild wählen') + '<input type="file" accept="image/*" aria-label="' + esc(m[1]) + ' wählen"></label>' + (im ? '<button class="btn small ghost" type="button">Entfernen</button>' : '') + '</div><p class="hint" hidden></p>';
+      if (im) $('img', d).src = im.u;
+      var inp = $('input', d), note = $('p.hint', d);
+      inp.onchange = function () {
+        var f = inp.files && inp.files[0]; inp.value = ''; if (!f) return;
+        note.hidden = false; note.textContent = 'Bild wird vorbereitet …';
+        shrink(f).then(function (r) {
+          IMG[m[0]] = r; var stored = saveImg(); renderUploads(); renderNav();
+          if (!stored) { var n2 = $$('#uploads .up')[IMGS.indexOf(m)].querySelector('p.hint'); n2.hidden = false; n2.textContent = 'Das Bild ist zu groß für den Gerätespeicher. Es kommt trotzdem in die PDF, wenn du jetzt speicherst.'; }
+        }).catch(function () { note.textContent = 'Dieses Bild konnte nicht geladen werden. Versuch ein Foto als JPG oder PNG.'; });
+      };
+      var rm = $('button', d); if (rm) rm.onclick = function () { delete IMG[m[0]]; saveImg(); renderUploads(); renderNav(); };
+      host.appendChild(d);
+    });
+  }
+  function shrink(file) {
+    return new Promise(function (res, rej) {
+      var url = URL.createObjectURL(file), img = new Image();
+      img.onload = function () {
+        var max = 1400, w = img.naturalWidth, h = img.naturalHeight, k = Math.min(1, max / Math.max(w, h));
+        var cv = document.createElement('canvas'); cv.width = Math.round(w * k); cv.height = Math.round(h * k);
+        var cx = cv.getContext('2d'); cx.fillStyle = '#fff'; cx.fillRect(0, 0, cv.width, cv.height); cx.drawImage(img, 0, 0, cv.width, cv.height);
+        URL.revokeObjectURL(url);
+        res({ u: cv.toDataURL('image/jpeg', 0.78), w: cv.width, h: cv.height });
+      };
+      img.onerror = function () { URL.revokeObjectURL(url); rej(); };
+      img.src = url;
+    });
+  }
+
+  /* ---------- 7 Abgabe ---------- */
+  function renderFunkt() { $$('#funkt .chip').forEach(function (b) { b.setAttribute('aria-pressed', String(S.funkt === b.dataset.f)); }); }
+  $$('#funkt .chip').forEach(function (b) { b.onclick = function () { S.funkt = b.dataset.f; save(); renderFunkt(); renderCheck(); }; });
+  renderFunkt();
+  bindText('rText', 'rText'); bindText('rVerb', 'rVerb'); bindText('rZusatz', 'rZusatz');
+  function renderRate() {
+    var body = $('#rateBody'), h = '';
+    CRIT.forEach(function (g) {
+      h += '<tr class="grp"><td colspan="2">' + esc(g[0]) + '</td></tr>';
+      g[1].forEach(function (c) { h += '<tr><td>' + esc(c[1]) + '</td><td class="c"><select data-c="' + c[0] + '" aria-label="Einschätzung: ' + esc(c[1]) + '"><option value="">–</option><option value="0">0 · nicht erfüllt</option><option value="1">1 · teilweise</option><option value="2">2 · erfüllt</option></select></td></tr>'; });
+    });
+    body.innerHTML = h;
+    $$('select', body).forEach(function (s) { s.value = S.self[s.dataset.c] || ''; s.onchange = function () { S.self[s.dataset.c] = s.value; save(); rateSum(); }; });
+    rateSum();
+  }
+  function rateVals() { var n = 0, sum = 0; CRIT.forEach(function (g) { g[1].forEach(function (c) { var v = S.self[c[0]]; if (v !== '' && v != null) { n++; sum += (+v) * (c[0] === 'c15' ? 2 : 1); } }); }); return { n: n, sum: sum }; }
+  function rateSum() { var r = rateVals(); $('#rateSum').textContent = r.n ? 'Deine Einschätzung: ' + r.sum + ' von 32 Punkten' + (r.n < 15 ? ' (' + r.n + ' von 15 Kriterien eingeschätzt)' : '') : ''; }
+  var iso = new Date().toISOString().slice(0, 10);
+  if (!S.sDatum) S.sDatum = iso;
+  bindText('sName', 'sName'); bindText('sKlasse', 'sKlasse'); bindText('sDatum', 'sDatum');
+  function renderCheck() {
+    var items = [[S.okFit, 'Startklar-Check bestanden', 0], [S.okIdee, 'Idee mit Ziel und Anforderungen', 1], [S.okParts, 'Bauteilliste geprüft', 2], [S.okVars, 'Variablen geprüft', 3], [S.okPins, 'Pinbelegung geprüft', 4],
+      [S.code.trim().length > 20 || !!IMG.codebild, 'Code eingefügt', 5], [!!IMG.schaltplan, 'Schaltplan eingefügt', 5], [!!IMG.foto, 'Foto vom Aufbau eingefügt (wenn du echt gebaut hast)', 5], [!!S.funkt && S.rText.trim().length > 10, 'Reflexion geschrieben', 6]];
+    $('#checklist').innerHTML = items.map(function (it) { return '<li class="' + (it[0] ? 'ok' : '') + '"><span class="dot" aria-hidden="true"></span><span>' + esc(it[1]) + (it[0] || it[2] === 6 ? '' : ' <button type="button" data-g="' + it[2] + '">zu Station ' + (it[2] + 1) + '</button>') + '</span></li>'; }).join('');
+    $$('#checklist [data-g]').forEach(function (b) { b.onclick = function () { go(+b.dataset.g); }; });
+  }
+  $('#resetBtn').onclick = function () {
+    var note = $('#pdfNote'); note.hidden = false;
+    note.innerHTML = 'Wirklich alles löschen? Speichere vorher deine Ergebnis-PDF. <button class="btn small" type="button" id="resYes">Ja, alles löschen</button> <button class="btn small ghost" type="button" id="resNo">Abbrechen</button>';
+    $('#resYes').onclick = function () { try { localStorage.removeItem(KEY); localStorage.removeItem(IMGKEY); Object.keys(localStorage).forEach(function (k) { if (/^lp-energy:/.test(k) && k.indexOf('arduino-kurzprojekt') >= 0) localStorage.removeItem(k); }); } catch (e) { } location.reload(); };
+    $('#resNo').onclick = function () { note.hidden = true; };
+  };
+
+  /* ---------- PDF ---------- */
+  function cl(t) { return String(t == null ? '' : t).replace(/−/g, '-').replace(/→/g, '->').replace(/Ω/g, 'Ohm').replace(/\t/g, '  ').replace(/[^\x0A\x20-\x7E\xA0-\xFF„“‚‘’–—]/g, ''); }
+  function fmtDate(v) { if (!v) return ''; var p = String(v).split('-'); return p.length === 3 ? p[2] + '.' + p[1] + '.' + p[0] : v; }
+  $('#pdfBtn').onclick = function () {
+    var note = $('#pdfNote'); note.hidden = false;
+    if (!(window.jspdf && window.jspdf.jsPDF)) { note.textContent = 'Das PDF-Werkzeug konnte nicht geladen werden. Lade die Seite neu.'; return; }
+    note.textContent = 'PDF wird erstellt …';
+    var blob; try { blob = buildPdf(); } catch (e) { note.textContent = 'Die PDF konnte nicht erstellt werden.'; return; }
+    var fn = 'Arduino-Kurzprojekt_' + (cl(S.name).replace(/[^A-Za-z0-9ÄÖÜäöüß-]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 40) || 'Projekt') + '_' + (S.sDatum || iso) + '.pdf';
+    Promise.resolve(window.claude && window.claude.use ? window.claude.use('downloads') : null).then(function (dl) {
+      if (dl) return dl.save({ filename: fn, data: blob });
+      var a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = fn; document.body.appendChild(a); a.click(); a.remove();
+    }).then(function () { note.textContent = 'Gespeichert. Über „PDF laden“ kannst du mit dieser Datei später hier weiterarbeiten.'; })
+      .catch(function (e) { note.textContent = e && e.code === 'declined' ? 'Speichern abgebrochen.' : 'Speichern hat nicht geklappt.'; });
+  };
+  function buildPdf() {
+    var d = new window.jspdf.jsPDF({ unit: 'mm', format: 'a4' });
+    var W = 210, M = 16, CW = W - 2 * M, BOT = 280, page = 1, y = 18;
+    var INK = [28, 42, 45], MUT = [86, 103, 107], AC = [10, 117, 112], HD = [214, 236, 234], GR = [190, 198, 192];
+    function color(c) { d.setTextColor(c[0], c[1], c[2]); }
+    function foot() { d.setFont('helvetica', 'normal'); d.setFontSize(8); color(MUT); d.text(cl('Projektmappe Arduino-Kurzprojekt · dein Technik Lehrer · CC BY-NC-SA 4.0'), M, 289); d.text(String(page), W - M, 289, { align: 'right' }); }
+    function newPage() { foot(); d.addPage(); page++; y = 18; }
+    function need(h) { if (y + h > BOT) newPage(); }
+    function head(t) { need(16); y += 3; d.setFillColor(HD[0], HD[1], HD[2]); d.rect(M, y, CW, 8, 'F'); d.setFont('helvetica', 'bold'); d.setFontSize(11.5); color(AC); d.text(cl(t), M + 2.5, y + 5.6); y += 12; color(INK); }
+    function para(t, opt) {
+      opt = opt || {}; d.setFont(opt.font || 'helvetica', opt.bold ? 'bold' : 'normal'); d.setFontSize(opt.fs || 10.5); color(opt.c || INK);
+      var lh = (opt.fs || 10.5) * 0.45;
+      d.splitTextToSize(cl(t || '–'), CW - (opt.ind || 0)).forEach(function (l) { need(lh + 1); d.text(l, M + (opt.ind || 0), y); y += lh; });
+      y += opt.after == null ? 2 : opt.after;
+    }
+    function table(cols, rows, opt) {
+      opt = opt || {}; var fs = opt.fs || 9.5, lh = fs * 0.42;
+      function rowH(cells, bold) { d.setFont('helvetica', bold ? 'bold' : 'normal'); d.setFontSize(fs); var mx = 1; cells.forEach(function (t, i) { mx = Math.max(mx, d.splitTextToSize(cl(t), cols[i][1] - 3).length); }); return mx * lh + 3.2; }
+      function draw(cells, bold, fill) {
+        var h = rowH(cells, bold); if (y + h > BOT) { newPage(); if (!bold) draw(cols.map(function (c) { return c[0]; }), true, true); }
+        var x = M; d.setDrawColor(GR[0], GR[1], GR[2]); d.setLineWidth(0.2);
+        cells.forEach(function (t, i) {
+          var w = cols[i][1]; if (fill) { d.setFillColor(HD[0], HD[1], HD[2]); d.rect(x, y, w, h, 'FD'); } else d.rect(x, y, w, h);
+          d.setFont('helvetica', bold ? 'bold' : 'normal'); d.setFontSize(fs); color(INK);
+          d.splitTextToSize(cl(t), w - 3).forEach(function (l, k) { d.text(l, x + 1.5, y + 2.2 + lh * (k + 0.8)); });
+          x += w;
+        });
+        y += h;
+      }
+      draw(cols.map(function (c) { return c[0]; }), true, true);
+      rows.forEach(function (r) { draw(r, false, false); });
+      y += 4;
+    }
+    function image(im, maxH) {
+      if (!im) return false;
+      var k = Math.min(CW / im.w, maxH / im.h), w = im.w * k, h = im.h * k;
+      need(h + 2); d.addImage(im.u, 'JPEG', M + (CW - w) / 2, y, w, h); y += h + 4; return true;
+    }
+    /* Kopf */
+    d.setFont('helvetica', 'bold'); d.setFontSize(10); color(AC); d.text(cl('PROJEKTMAPPE · ARDUINO-KURZPROJEKT'), M, y); y += 8;
+    d.setFontSize(20); color(INK); d.splitTextToSize(cl(S.name || 'Mein Arduino-Projekt'), CW).forEach(function (l) { d.text(l, M, y); y += 8; });
+    d.setFont('helvetica', 'normal'); d.setFontSize(10.5); color(MUT);
+    d.text(cl('Name: ' + (S.sName || '________________') + '   ·   Klasse/Kurs: ' + (S.sKlasse || '______') + '   ·   Datum: ' + (fmtDate(S.sDatum) || '__________') + '   ·   Board: Arduino ' + (S.board === 'nano' ? 'Nano' : 'Uno')), M, y); y += 5;
+    d.setFontSize(9.5); d.splitTextToSize(cl('Aufgabe: Plane, baue und dokumentiere ein eigenes Arduino-Projekt mit mindestens einem Sensor und einem Aktor, das kein Beispiel aus dem Lernheft ist.'), CW).forEach(function (l) { d.text(l, M, y); y += 4.3; }); y += 2;
+    head('Beschreibung des Projekts');
+    para('Ziel', { bold: 1, after: 0.5 }); para(S.ziel);
+    para('Anforderungen', { bold: 1, after: 0.5 });
+    var an = S.anf.filter(function (a) { return a.trim(); });
+    if (an.length) an.forEach(function (a, i) { para((i + 1) + '. ' + a, { ind: 2, after: 0.8 }); }); else para('–');
+    head('Bauteile');
+    if (S.parts.length) table([['Anzahl', 18], ['Bauteil', 92], ['Art', 38], ['Signal', 30]], S.parts.map(function (p) { return [String(p.q), partName(p), ART[partArt(p)], partSig(p)]; }));
+    else para('Keine Bauteile eingetragen.');
+    head('Variablen');
+    var vs = S.vars.filter(function (v) { return (v.n || '').trim(); });
+    if (vs.length) table([['Name', 46], ['Art', 32], ['Beschreibung der Funktion', 100]], vs.map(function (v) { return [v.n, v.k === 's' ? 'Sensorwert' : v.k === 'z' ? 'Zählerwert' : '–', v.d || '']; }));
+    else para('Keine Variablen eingetragen.');
+    head('Pinbelegung');
+    var sl = slots().filter(function (s) { return S.pins[s.key]; }).sort(function (a, b) { var pa = S.pins[a.key], pb = S.pins[b.key]; return (pa.charAt(0) === pb.charAt(0) ? (+pa.slice(1) - +pb.slice(1)) : (pa.charAt(0) === 'A' ? 1 : -1)); });
+    if (sl.length) table([['Pin', 26], ['Bauteil', 80], ['Anschluss', 44], ['Signal', 28]], sl.map(function (s) { return [pinLabel(S.pins[s.key]), s.part, s.con, SIG[s.t]]; }));
+    else para('Keine Pins zugeordnet.');
+    head('Arbeitsablauf');
+    table([['Nr.', 11], ['Arbeitsschritt', 78], ['Notizen', 71], ['erledigt', 18]], STEPS.map(function (t, i) { var st = S.steps[i] || {}; return [String(i + 1), t, st.n || '', st.d ? 'ja' : '']; }));
+    head('Schaltplan');
+    if (!image(IMG.schaltplan, 120)) para('Kein Schaltplan eingefügt.');
+    head('Code');
+    if (S.code.trim()) {
+      d.setFont('courier', 'normal'); d.setFontSize(8.5); color(INK);
+      cl(S.code).split('\n').forEach(function (line) { d.splitTextToSize(line.length ? line : ' ', CW).forEach(function (l) { need(4); d.text(l, M, y); y += 3.7; }); });
+      y += 3;
+    }
+    if (IMG.codebild) image(IMG.codebild, 150);
+    if (!S.code.trim() && !IMG.codebild) para('Kein Code eingefügt.');
+    head('Foto vom Aufbau');
+    if (!image(IMG.foto, 120)) para('Kein Foto eingefügt.');
+    head('Reflexion');
+    para('Funktioniert das Projekt so, wie es beschrieben ist? ' + ({ ja: 'Ja', teilweise: 'Teilweise', nein: 'Nein' }[S.funkt] || '–'), { bold: 1 });
+    para(S.rText);
+    para('Mögliche Verbesserungen', { bold: 1, after: 0.5 }); para(S.rVerb);
+    if (S.rZusatz.trim()) { para('Schon verbessert', { bold: 1, after: 0.5 }); para(S.rZusatz); }
+    head('Selbsteinschätzung nach den Bewertungskriterien');
+    var rows = [];
+    CRIT.forEach(function (g) { g[1].forEach(function (c) { var v = S.self[c[0]]; rows.push([g[0], c[1], v === '' || v == null ? '–' : v + (c[0] === 'c15' && v !== '' ? ' (x2)' : '')]); }); });
+    table([['Bereich', 30], ['Kriterium', 124], ['Punkte', 24]], rows, { fs: 9 });
+    var r = rateVals(); para('Eigene Einschätzung: ' + r.sum + ' von 32 Punkten' + (r.n < 15 ? ' (' + r.n + ' von 15 Kriterien eingeschätzt)' : '') + '.   Bewertung durch die Lehrkraft: ______ von 32 Punkten', { bold: 1 });
+    foot();
+    return d.output('blob');
+  }
+
+  /* ---------- Hilfe des Hilfsmoduls: passende Infobox markieren ---------- */
+  if (window.LP_CFG) window.LP_CFG.help = function (c) {
+    var sec = c && c.closest('section'); var box = sec && sec.querySelector('.info-box');
+    return box ? [box] : [];
+  };
+
+  /* Zurück zur passenden Arduino-Auswahl (Schüler- oder Lehrkräfteseite) */
+  try { if (/\/schueler\//.test(document.referrer)) $('.back').href = '../schueler/arduino/'; } catch (e) { }
+
+  /* ---------- Start ---------- */
+  renderParts(); renderVars(); renderSteps(); renderUploads(); renderRate();
+  go(Math.min(Math.max(+S.st || 0, 0), 6), true);
+})();
+</script>
+<style>.lp-legal{font:13px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif;text-align:center;padding:20px 16px calc(96px + env(safe-area-inset-bottom,0px));opacity:.8;clear:both}.lp-legal a{color:inherit;text-decoration:underline;text-underline-offset:2px}</style><div class="lp-legal">Privates Angebot von Daniel Beyrodt · <a href="../ueber-mich/">Über mich</a> · <a href="../impressum/">Impressum</a> · <a href="../datenschutz/">Datenschutz</a></div></body></html>
