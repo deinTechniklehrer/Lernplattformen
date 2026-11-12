@@ -378,11 +378,7 @@ a.btn{text-decoration:none}
 .howto b{display:block;color:var(--sichern-ink);font-family:var(--display)}
 
 /* Unternehmens-Werkstatt: Ergänzungen */
-.awtlogo{display:grid;justify-items:center;gap:6px;flex:none}
-.awtlogo b{font:800 46px/.85 var(--display);color:#3CA7DD;letter-spacing:.01em}
-.awtdots{display:flex;gap:5px}
-.awtdots i{width:13px;height:13px;border-radius:50%;background:var(--c);display:block;box-shadow:0 0 0 1px rgb(255 255 255 / .35)}
-.awtdots i.on{box-shadow:0 0 0 2px var(--bg),0 0 0 3.5px var(--c)}
+
 .teile{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
 .teile button{font:inherit;font-size:13px;font-weight:700;min-width:44px;min-height:32px;padding:4px 10px;border-radius:99px;border:1.5px solid rgb(255 255 255 / .55);background:transparent;color:inherit;cursor:pointer}
 .teile button[aria-current="step"]{background:var(--on-accent);color:var(--c);border-color:var(--on-accent)}
@@ -423,15 +419,39 @@ a.btn{text-decoration:none}
 .lp-kiopt .row{margin:8px 0}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .lp-kiopt summary{color:#b9adf5}}
 :root[data-theme="dark"] .lp-kiopt summary{color:#b9adf5}
+.cloze select{font-size:16px}
+.pairs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:560px){.pairs{grid-template-columns:1fr}}
+.pairs .pcol{display:grid;gap:8px;align-content:start}
+.pairs h4{margin:0;font-size:14px;color:var(--muted)}
+.pc{display:flex;align-items:center;gap:9px;padding:9px 11px;min-height:48px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-size:15px;line-height:1.25;text-align:left;cursor:pointer}
+.pc .k{flex:none;width:26px;height:26px;border-radius:8px;display:grid;place-items:center;font-weight:800;font-size:13px;background:var(--surface-2);color:var(--muted)}
+.pc .k.on{background:var(--c);color:var(--on-accent)}
+.pc[aria-pressed="true"]{outline:3px solid var(--c);outline-offset:2px}
+.pc.s-ok{border-color:var(--existenz)} .pc.s-bad{border-color:var(--bad)}
+.marktext{margin:0;line-height:2;max-width:70ch}
+.ms{font:inherit;font-size:16px;line-height:1.5;color:var(--ink);background:var(--surface-2);border:1.5px solid transparent;border-radius:8px;padding:2px 6px;margin:2px 2px;cursor:pointer;text-align:left;-webkit-box-decoration-break:clone;box-decoration-break:clone;display:inline}
+.ms[aria-pressed="true"]{background:var(--c-soft);border-color:var(--c);font-weight:700}
+.ms.s-ok{border-color:var(--existenz);background:var(--existenz-soft)} .ms.s-bad{border-color:var(--bad);background:var(--bad-soft)}
+.numin{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.numin input{width:150px}
+.numin input.s-ok{border-color:var(--existenz)} .numin input.s-bad{border-color:var(--bad)}
 code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overflow:auto;padding:8px 10px;border-radius:10px;background:var(--surface-2)}
 </style></head><body>
 <div class="app">
   <header class="top">
     <div class="brand">
-      <div class="awtlogo" role="img" aria-label="Arbeit – Wirtschaft – Technik"><b>AWT</b><span class="awtdots" aria-hidden="true"><i style="--c:#3CA7DD"></i><i class="on" style="--c:#007A7C"></i><i style="--c:#79C96B"></i><i style="--c:#FF9800"></i><i style="--c:#035591"></i></span></div>
+      <svg class="logo" viewBox="0 0 48 48" aria-hidden="true">
+        <rect x="9" y="22" width="30" height="20" rx="2" fill="var(--existenz)"/>
+        <path d="M6 22 L10 12 H38 L42 22 Z" fill="var(--luxus)"/>
+        <path d="M10 12 h7 l-2 10 h-9 z M24 12 h7 l1 10 h-9 z" fill="var(--kultur)"/>
+        <rect x="14" y="28" width="9" height="14" rx="1.5" fill="var(--surface)"/>
+        <rect x="27" y="28" width="8" height="7" rx="1.5" fill="var(--surface)"/>
+        <circle cx="31" cy="31.5" r="2" fill="var(--luxus)"/>
+      </svg>
       <div>
         <h1>Unternehmens-Werkstatt</h1>
-        <p>Wirtschaft · Klasse 8 · Was macht ein Unternehmen?</p>
+        <p>Wirtschaft · Klasse 8 · Aufgaben, Ziele und Grundfunktionen</p>
       </div>
     </div>
     <div class="meter" aria-label="Fortschritt">
@@ -466,13 +486,13 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
 
 <section class="station c-entdecken" data-ch="0" data-p="0.2" aria-label="Station 0.2" hidden>
   <div class="info">
-    <h3>Was ist ein Unternehmen?</h3>
+    <h3>Unternehmen, Sachgüter und Dienstleistungen</h3>
     <p>Ein <b>Unternehmen</b> stellt <b>Güter</b> her oder bietet <b>Dienstleistungen</b> an, um die Bedürfnisse von Menschen zu decken. Private Unternehmen wollen dabei meist einen <b>Gewinn</b> erzielen.</p>
     <p><b>Sachgüter</b> kannst du anfassen, zum Beispiel ein Brötchen. Eine <b>Dienstleistung</b> ist eine Tätigkeit für andere, zum Beispiel wenn die Bäckerei eine Torte zum Geburtstag liefert.</p>
   </div>
   <article class="task">
-    <header><span class="num"></span><h3>Sachgut oder Dienstleistung?</h3><button class="op" data-op="zuordnen" type="button">zuordnen</button></header>
-    <p class="q">Ordne jedes Beispiel zu.</p>
+    <header><span class="num"></span><h3>Dienstleistungen erkennen</h3><button class="op" data-op="unterscheiden" type="button">unterscheiden</button></header>
+    <p class="q">Unterscheide Sachgüter und Dienstleistungen: Tippe in Frau Krumes Tag alle Sätze an, in denen eine Dienstleistung vorkommt.</p>
     <div class="w" data-t="u1"></div>
   </article>
 </section>
@@ -484,12 +504,13 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
     <p><b>Private Unternehmen</b> gehören Privatpersonen. Sie wollen vor allem Gewinn erzielen. <b>Öffentliche Unternehmen</b> gehören ganz oder überwiegend dem Staat oder einer Gemeinde. Ihr Hauptziel ist, die Menschen zuverlässig zu versorgen, zum Beispiel mit Wasser, Strom oder Busverbindungen.</p>
   </div>
   <article class="task">
-    <header><span class="num"></span><h3>Welche Art von Unternehmen?</h3><button class="op" data-op="zuordnen" type="button">zuordnen</button></header>
+    <header><span class="num"></span><h3>Unternehmensarten</h3><button class="op" data-op="zuordnen" type="button">zuordnen</button></header>
     <p class="q">Ordne jedes Unternehmen einer Art zu.</p>
     <div class="w" data-t="u2"></div>
   </article>
   <article class="task">
-    <header><span class="num"></span><h3>Privat oder öffentlich?</h3><button class="op" data-op="unterscheiden" type="button">unterscheiden</button></header>
+    <header><span class="num"></span><h3>Private und öffentliche Unternehmen</h3><button class="op" data-op="unterscheiden" type="button">unterscheiden</button></header>
+    <p class="q">Unterscheide private und öffentliche Unternehmen: Ergänze den Text. Wähle in jeder Lücke das passende Wort.</p>
     <div class="w" data-t="u3"></div>
   </article>
 </section>
@@ -497,7 +518,7 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
 <!-- ================= KAPITEL 1: AUFGABEN ================= -->
 <section class="station c-kultur" data-ch="1" data-p="1.1" aria-label="Station 1.1" hidden>
   <div class="info">
-    <h3>Wofür braucht man Unternehmen?</h3>
+    <h3>Aufgaben von Unternehmen</h3>
     <p>Unternehmen erfüllen wichtige <b>Aufgaben</b> für alle:</p>
     <div class="srcs">
       <button class="tier" type="button" aria-expanded="false"><span class="e" aria-hidden="true">🥖</span><b>Versorgen</b><span class="tap">Tippen für mehr</span><span class="more">Sie stellen <b>Güter und Dienstleistungen</b> bereit, die Menschen brauchen.</span></button>
@@ -508,15 +529,15 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
     <p>Damit ein Unternehmen das alles auf Dauer leisten kann, muss es <b>Gewinn</b> erzielen oder zumindest seine Kosten decken.</p>
   </div>
   <article class="task">
-    <header><span class="num"></span><h3>Was leistet die Bäckerei Krume?</h3><button class="op" data-op="nennen" type="button">nennen</button></header>
-    <p class="q">Welche Aufgaben erfüllt die Bäckerei Krume für die Menschen im Ort? Wähle alle passenden aus.</p>
+    <header><span class="num"></span><h3>Aufgaben der Bäckerei Krume</h3><button class="op" data-op="nennen" type="button">nennen</button></header>
+    <p class="q">Nenne die Aufgaben, die die Bäckerei Krume für die Menschen im Ort erfüllt. Tippe alle passenden Aussagen an.</p>
     <div class="w" data-t="u4"></div>
   </article>
 </section>
 
 <section class="station c-kultur" data-ch="1" data-p="1.2" aria-label="Station 1.2" hidden>
   <div class="story">
-    <h3>Was wäre, wenn …</h3>
+    <h3>Stell dir vor …</h3>
     <p>Frau Krume überlegt, ihre Bäckerei zu schließen. Die nächste Bäckerei liegt dann acht Kilometer entfernt.</p>
   </div>
   <article class="task">
@@ -537,7 +558,7 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
     </div>
   </div>
   <article class="task">
-    <header><span class="num"></span><h3>Welche Zielart?</h3><button class="op" data-op="zuordnen" type="button">zuordnen</button></header>
+    <header><span class="num"></span><h3>Zielarten zuordnen</h3><button class="op" data-op="zuordnen" type="button">zuordnen</button></header>
     <p class="q">Die Bäckerei Krume hat sich viele Ziele gesetzt. Ordne jedes Ziel einer Zielart zu.</p>
     <div class="w" data-t="u6"></div>
   </article>
@@ -549,7 +570,8 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
     <p>Ein Ziel sagt, <b>was</b> ein Unternehmen erreichen will. Eine <b>Strategie</b> sagt, <b>wie</b> es das schaffen will. Beispiel: Ziel „Strom sparen“, Strategie „alte Backöfen durch sparsame Öfen ersetzen“.</p>
   </div>
   <article class="task">
-    <header><span class="num"></span><h3>Welche Strategie passt?</h3><button class="op" data-op="zuordnen" type="button">zuordnen</button></header>
+    <header><span class="num"></span><h3>Ziel und Strategie verbinden</h3><button class="op" data-op="zuordnen" type="button">zuordnen</button></header>
+    <p class="q">Ordne jedem Ziel die passende Strategie zu. Tippe zuerst ein Ziel an, dann die Strategie.</p>
     <div class="w" data-t="u7"></div>
   </article>
   <article class="task">
@@ -572,7 +594,8 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
     </div>
   </div>
   <article class="task">
-    <header><span class="num"></span><h3>Konflikt oder Harmonie?</h3><button class="op" data-op="unterscheiden" type="button">unterscheiden</button></header>
+    <header><span class="num"></span><h3>Zielkonflikt oder Zielharmonie</h3><button class="op" data-op="unterscheiden" type="button">unterscheiden</button></header>
+    <p class="q">Unterscheide: Entscheide für jeden Fall, ob ein Zielkonflikt oder eine Zielharmonie vorliegt.</p>
     <div class="w" data-t="u9"></div>
   </article>
 </section>
@@ -580,17 +603,16 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
 <section class="station c-luxus" data-ch="2" data-p="2.4" aria-label="Station 2.4" hidden>
   <div class="story">
     <h3>Fallbeispiel: die Modekette „FlinkFashion“</h3>
-    <p>FlinkFashion ist ausgedacht, aber so arbeiten viele Billig-Modeketten. Ein T-Shirt kostet im Laden nur wenige Euro, jede Woche gibt es neue Kollektionen. Viele Kund:innen kaufen viel und tragen die Sachen nur kurz.</p>
-    <p>Genäht wird in Fabriken in Ländern mit sehr niedrigen Löhnen. Die Näherinnen arbeiten oft lange und verdienen kaum genug zum Leben. Beim Färben gelangen Chemikalien ins Flusswasser. FlinkFashion wächst trotzdem jedes Jahr.</p>
+    <p>FlinkFashion ist ausgedacht, aber so arbeiten viele Billig-Modeketten. Genäht wird in Fabriken in Ländern mit sehr niedrigen Löhnen. Den ganzen Fall liest du in der ersten Aufgabe.</p>
   </div>
   <article class="task">
-    <header><span class="num"></span><h3>Welche Ziele sind betroffen?</h3><button class="op" data-op="zuordnen" type="button">zuordnen</button></header>
-    <p class="q">Um welche Zielart geht es bei jeder Aussage?</p>
+    <header><span class="num"></span><h3>Verletzte Ziele herausarbeiten</h3><button class="op" data-op="herausarbeiten" type="button">herausarbeiten</button></header>
+    <p class="q">Arbeite heraus, wo FlinkFashion soziale oder ökologische Ziele verletzt: Tippe die passenden Sätze an.</p>
     <div class="w" data-t="u10"></div>
   </article>
   <article class="task">
-    <header><span class="num"></span><h3>Höhere Löhne für die Näherinnen?</h3><button class="op" data-op="Stellung nehmen" type="button">Stellung nehmen</button></header>
-    <p class="q">FlinkFashion überlegt, die Löhne in den Fabriken zu erhöhen. Dann würden die T-Shirts teurer. Nimm Stellung: Sollte FlinkFashion das tun? Beziehe die Sicht von mindestens zwei Rollen ein.</p>
+    <header><span class="num"></span><h3>Höhere Löhne für die Näherinnen</h3><button class="op" data-op="Stellung nehmen" type="button">Stellung nehmen</button></header>
+    <p class="q">FlinkFashion überlegt, die Löhne in den Fabriken zu erhöhen. Dann würden die T-Shirts teurer. Nimm Stellung zu diesem Plan. Beziehe die Sicht von mindestens zwei Rollen ein.</p>
     <div class="w" data-t="u11"></div>
   </article>
 </section>
@@ -610,18 +632,18 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
   </div>
   <article class="task">
     <header><span class="num"></span><h3>Ein Tag in der Bäckerei</h3><button class="op" data-op="ordnen" type="button">ordnen</button></header>
-    <p class="q">Bringe die Schritte in die richtige Reihenfolge. Verschiebe sie mit den Pfeilen.</p>
+    <p class="q">Ordne die Schritte in der richtigen Reihenfolge. Verschiebe sie mit den Pfeilen.</p>
     <div class="w" data-t="u12"></div>
   </article>
 </section>
 
 <section class="station c-existenz" data-ch="3" data-p="3.2" aria-label="Station 3.2" hidden>
   <div class="info">
-    <h3>Wer macht was?</h3>
+    <h3>Abteilungen im Unternehmen</h3>
     <p>In größeren Unternehmen kümmern sich eigene Abteilungen um die Grundfunktionen. Der <b>Einkauf</b> beschafft, die <b>Produktion</b> stellt her, der <b>Vertrieb</b> sorgt für den Absatz. In der Bäckerei Krume macht Frau Krume den Einkauf selbst, die Backstube produziert, die Filialen verkaufen.</p>
   </div>
   <article class="task">
-    <header><span class="num"></span><h3>Beschaffung, Produktion oder Absatz?</h3><button class="op" data-op="zuordnen" type="button">zuordnen</button></header>
+    <header><span class="num"></span><h3>Grundfunktionen zuordnen</h3><button class="op" data-op="zuordnen" type="button">zuordnen</button></header>
     <p class="q">Ordne jede Tätigkeit der passenden Grundfunktion zu.</p>
     <div class="w" data-t="u13"></div>
   </article>
@@ -634,6 +656,7 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
   </div>
   <article class="task">
     <header><span class="num"></span><h3>Kettenreaktion</h3><button class="op" data-op="erklären" type="button">erklären</button></header>
+    <p class="q">Erkläre, wie die Grundfunktionen zusammenhängen: Ergänze den Text.</p>
     <div class="w" data-t="u14"></div>
   </article>
 </section>
@@ -650,7 +673,7 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
     </div>
   </div>
   <article class="task">
-    <header><span class="num"></span><h3>Welcher Produktionsfaktor?</h3><button class="op" data-op="zuordnen" type="button">zuordnen</button></header>
+    <header><span class="num"></span><h3>Produktionsfaktoren zuordnen</h3><button class="op" data-op="zuordnen" type="button">zuordnen</button></header>
     <p class="q">Ordne zu, was die Bäckerei Krume braucht.</p>
     <div class="w" data-t="u15"></div>
   </article>
@@ -663,24 +686,26 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
   </div>
   <article class="task">
     <header><span class="num"></span><h3>Mehl bestellen</h3><button class="op" data-op="ordnen" type="button">ordnen</button></header>
-    <p class="q">Frau Krume braucht neues Mehl. Bringe die Schritte der Beschaffung in die richtige Reihenfolge.</p>
+    <p class="q">Frau Krume braucht neues Mehl. Ordne die Schritte der Beschaffung in der richtigen Reihenfolge.</p>
     <div class="w" data-t="u16"></div>
   </article>
 </section>
 
 <section class="station c-sichern" data-ch="4" data-p="4.3" aria-label="Station 4.3" hidden>
   <div class="info">
-    <h3>Woher kommt das Geld?</h3>
+    <h3>Finanzierung</h3>
     <p>Auch Geld muss beschafft werden, zum Beispiel für einen neuen Backofen. Das nennt man <b>Finanzierung</b>.</p>
     <p><b>Eigenfinanzierung</b>: Das Geld gehört dem Unternehmen oder den Eigentümer:innen, zum Beispiel Ersparnisse oder Gewinne aus dem Vorjahr. <b>Fremdfinanzierung</b>: Das Geld ist geliehen, zum Beispiel ein Kredit von der Bank. Es muss mit <b>Zinsen</b> zurückgezahlt werden.</p>
   </div>
   <article class="task">
-    <header><span class="num"></span><h3>Eigen oder fremd?</h3><button class="op" data-op="zuordnen" type="button">zuordnen</button></header>
-    <p class="q">Der neue Backofen kostet 40.000 Euro. Wie könnte Frau Krume ihn bezahlen? Ordne zu.</p>
+    <header><span class="num"></span><h3>Eigen- oder Fremdfinanzierung</h3><button class="op" data-op="zuordnen" type="button">zuordnen</button></header>
+    <p class="q">Der neue Backofen kostet 40.000 Euro. Ordne jede Möglichkeit, ihn zu bezahlen, der richtigen Finanzierungsart zu.</p>
     <div class="w" data-t="u17"></div>
   </article>
   <article class="task">
-    <header><span class="num"></span><h3>Vor- und Nachteile</h3><button class="op" data-op="unterscheiden" type="button">unterscheiden</button></header>
+    <header><span class="num"></span><h3>Zinsen ermitteln</h3><button class="op" data-op="ermitteln" type="button">ermitteln</button></header>
+    <p class="q">Frau Krume leiht sich die 40.000 Euro bei der Bank. Die Bank verlangt 5 % Zinsen im Jahr. Ermittle die Zinsen, die Frau Krume im ersten Jahr zahlt. Vereinfachung: Im ersten Jahr zahlt sie noch nichts zurück.</p>
+    <p class="hint"><b>Starthilfe:</b> 1 % von 40.000 Euro sind 400 Euro.</p>
     <div class="w" data-t="u18"></div>
   </article>
 </section>
@@ -688,7 +713,7 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
 <!-- ================= KAPITEL 5: PRODUKTION ================= -->
 <section class="station c-entdecken" data-ch="5" data-p="5.1" aria-label="Station 5.1" hidden>
   <div class="info">
-    <h3>Einzeln, in Serie oder in Masse?</h3>
+    <h3>Fertigungsarten</h3>
     <div class="tiers">
       <div class="tier" style="cursor:default"><b>Einzelfertigung</b><span>Ein einzelnes Stück nach Wunsch der Kundschaft, z. B. eine Hochzeitstorte</span></div>
       <div class="tier" style="cursor:default"><b>Serienfertigung</b><span>Eine begrenzte Menge gleicher Produkte, danach wird umgestellt, z. B. 300 Weihnachtsstollen im Dezember</span></div>
@@ -696,7 +721,8 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
     </div>
   </div>
   <article class="task">
-    <header><span class="num"></span><h3>Welche Fertigungsart?</h3><button class="op" data-op="zuordnen" type="button">zuordnen</button></header>
+    <header><span class="num"></span><h3>Fertigungsarten zuordnen</h3><button class="op" data-op="zuordnen" type="button">zuordnen</button></header>
+    <p class="q">Ordne jedes Produkt der passenden Fertigungsart zu.</p>
     <div class="w" data-t="u19"></div>
   </article>
 </section>
@@ -707,7 +733,8 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
     <p>Kein Brötchen soll verbrannt oder zu klein in der Tüte landen. Deshalb gibt es die <b>Qualitätskontrolle</b>. Sie prüft schon die gelieferten Zutaten, dann <b>während</b> der Produktion (Teig, Ofentemperatur) und am <b>Ende</b> (Gewicht, Farbe, Geschmack). Fehlerhafte Ware wird aussortiert, und man sucht die Ursache, damit der Fehler nicht wieder passiert.</p>
   </div>
   <article class="task">
-    <header><span class="num"></span><h3>Qualitätskontrolle in der Backstube</h3><button class="op" data-op="erklären" type="button">erklären</button></header>
+    <header><span class="num"></span><h3>Aussagen zur Qualitätskontrolle</h3><button class="op" data-op="überprüfen" type="button">überprüfen</button></header>
+    <p class="q">Überprüfe jede Aussage und entscheide: stimmt oder stimmt nicht.</p>
     <div class="w" data-t="u20"></div>
   </article>
 </section>
@@ -720,7 +747,7 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
   </div>
   <article class="task">
     <header><span class="num"></span><h3>Fragen der Marktanalyse</h3><button class="op" data-op="zuordnen" type="button">zuordnen</button></header>
-    <p class="q">Frau Krume will eine vierte Filiale neben der Gesamtschule eröffnen. Zu welchem Bereich gehört jede Frage?</p>
+    <p class="q">Frau Krume will eine vierte Filiale neben der Gesamtschule eröffnen. Ordne jede ihrer Fragen einem Bereich der Marktanalyse zu.</p>
     <div class="w" data-t="u21"></div>
   </article>
 </section>
@@ -730,14 +757,14 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
     <h3>Der Marketing-Mix</h3>
     <p>Mit vier <b>Marketing-Instrumenten</b> sorgt ein Unternehmen dafür, dass seine Produkte gekauft werden. Zusammen heißen sie <b>Marketing-Mix</b>. Tippe sie an:</p>
     <div class="srcs">
-      <button class="tier" type="button" aria-expanded="false"><span class="e" aria-hidden="true">🥐</span><b>Produktpolitik</b><span class="tag">Was verkaufen wir?</span><span class="tap">Tippen für mehr</span><span class="more">Neue Produkte entwickeln, Qualität, Verpackung, Name und Auswahl. Das Produkt soll sich von der Konkurrenz abheben.</span></button>
-      <button class="tier" type="button" aria-expanded="false"><span class="e" aria-hidden="true">🏷️</span><b>Preispolitik</b><span class="tag">Zu welchem Preis?</span><span class="tap">Tippen für mehr</span><span class="more">Preise festlegen und unterscheiden: nach Zeit (Angebot am Abend), nach Personen (Schülerpreis), nach Menge (Rabatt ab 10 Stück).</span></button>
-      <button class="tier" type="button" aria-expanded="false"><span class="e" aria-hidden="true">🚚</span><b>Absatzwegepolitik</b><span class="tag">Wo und wie kommt es zur Kundschaft?</span><span class="tap">Tippen für mehr</span><span class="more"><b>Direkt</b>: eigene Filialen, eigener Online-Shop, Verkaufswagen. <b>Indirekt</b>: über Händler, zum Beispiel einen Supermarkt.</span></button>
-      <button class="tier" type="button" aria-expanded="false"><span class="e" aria-hidden="true">📣</span><b>Kommunikationspolitik</b><span class="tag">Wie erfahren die Leute davon?</span><span class="tap">Tippen für mehr</span><span class="more">Werbung, Aktionen zur Verkaufsförderung (Gutscheine), Öffentlichkeitsarbeit (Tag der offenen Tür) und Sponsoring (z. B. Trikots für einen Sportverein).</span></button>
+      <button class="tier" type="button" aria-expanded="false"><span class="e" aria-hidden="true">🥐</span><b>Produktpolitik</b><span class="tag">das Angebot</span><span class="tap">Tippen für mehr</span><span class="more">Neue Produkte entwickeln, Qualität, Verpackung, Name und Auswahl. Das Produkt soll sich von der Konkurrenz abheben.</span></button>
+      <button class="tier" type="button" aria-expanded="false"><span class="e" aria-hidden="true">🏷️</span><b>Preispolitik</b><span class="tag">der Preis</span><span class="tap">Tippen für mehr</span><span class="more">Preise festlegen und unterscheiden: nach Zeit (Angebot am Abend), nach Personen (Schülerpreis), nach Menge (Rabatt ab 10 Stück).</span></button>
+      <button class="tier" type="button" aria-expanded="false"><span class="e" aria-hidden="true">🚚</span><b>Absatzwegepolitik</b><span class="tag">der Weg zur Kundschaft</span><span class="tap">Tippen für mehr</span><span class="more"><b>Direkt</b>: eigene Filialen, eigener Online-Shop, Verkaufswagen. <b>Indirekt</b>: über Händler, zum Beispiel einen Supermarkt.</span></button>
+      <button class="tier" type="button" aria-expanded="false"><span class="e" aria-hidden="true">📣</span><b>Kommunikationspolitik</b><span class="tag">Informieren und werben</span><span class="tap">Tippen für mehr</span><span class="more">Werbung, Aktionen zur Verkaufsförderung (Gutscheine), Öffentlichkeitsarbeit (Tag der offenen Tür) und Sponsoring (z. B. Trikots für einen Sportverein).</span></button>
     </div>
   </div>
   <article class="task">
-    <header><span class="num"></span><h3>Welches Instrument?</h3><button class="op" data-op="zuordnen" type="button">zuordnen</button></header>
+    <header><span class="num"></span><h3>Marketing-Instrumente zuordnen</h3><button class="op" data-op="zuordnen" type="button">zuordnen</button></header>
     <p class="q">Ordne jede Maßnahme der Bäckerei einem Marketing-Instrument zu.</p>
     <div class="w" data-t="u22"></div>
   </article>
@@ -763,8 +790,8 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
     <p>In der Bäckerei Krume gibt es zum Beispiel diese drei Arbeitsplätze: <b>Bäcker:in</b> in der Backstube, <b>Verkäufer:in</b> in der Filiale und <b>Fahrer:in</b> im Lieferwagen.</p>
   </div>
   <article class="task">
-    <header><span class="num"></span><h3>Wer arbeitet so?</h3><button class="op" data-op="zuordnen" type="button">zuordnen</button></header>
-    <p class="q">Zu welchem Arbeitsplatz passt jedes Merkmal am besten?</p>
+    <header><span class="num"></span><h3>Arbeitsplatz Bäcker:in</h3><button class="op" data-op="beschreiben" type="button">beschreiben</button></header>
+    <p class="q">Beschreibe den Arbeitsplatz Bäcker:in: Ordne jedem Merkmal die passende Beschreibung zu. Tippe zuerst links ein Merkmal an, dann rechts die Beschreibung.</p>
     <div class="w" data-t="u24"></div>
   </article>
 </section>
@@ -775,12 +802,13 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
     <p>Jeder Arbeitsplatz stellt <b>Anforderungen</b>: körperliche (lange stehen, schwer heben), geistige (rechnen, planen) und soziale (freundlich sein, im Team arbeiten). Damit niemand zu Schaden kommt, gibt es <b>Arbeitsschutz</b>: Schutzkleidung wie hitzefeste Handschuhe, rutschfeste Schuhe, <b>Hygieneregeln</b> wie Haarnetz und Händewaschen sowie feste Pausen.</p>
   </div>
   <article class="task">
-    <header><span class="num"></span><h3>Was wird verlangt?</h3><button class="op" data-op="nennen" type="button">nennen</button></header>
+    <header><span class="num"></span><h3>Anforderungen und Arbeitsschutz</h3><button class="op" data-op="nennen" type="button">nennen</button></header>
+    <p class="q">Nenne jeweils die passende Ergänzung.</p>
     <div class="w" data-t="u25"></div>
   </article>
   <article class="task">
     <header><span class="num"></span><h3>Dein Lieblingsarbeitsplatz</h3><button class="op" data-op="bewerten" type="button">bewerten</button></header>
-    <p class="q">Welcher der drei Arbeitsplätze in der Bäckerei Krume würde dir am meisten zusagen? Bewerte ihn mit mindestens zwei Merkmalen und einer Anforderung. Nenne auch einen Nachteil.</p>
+    <p class="q">Wähle den Arbeitsplatz in der Bäckerei Krume, der dir am meisten zusagt, und bewerte ihn: Nutze mindestens zwei Merkmale und eine Anforderung. Nenne auch einen Nachteil.</p>
     <div class="w" data-t="u26"></div>
   </article>
 </section>
@@ -788,7 +816,7 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
 <!-- ================= KAPITEL 8: ABGABE ================= -->
 <section class="station c-existenz" data-ch="8" data-p="8.1" aria-label="Station 8.1" hidden>
   <div class="info">
-    <h3>Was kannst du jetzt?</h3>
+    <h3>Deine Selbsteinschätzung</h3>
     <p>Schätze ehrlich ein, wie sicher du dich fühlst. Deine Einschätzung steht in deinem Ergebnis-PDF. So sieht deine Lehrkraft, wo du noch Hilfe brauchst.</p>
   </div>
   <article class="task">
@@ -851,60 +879,42 @@ function el(t,a,...k){const e=document.createElement(t);if(a)for(const n in a){c
 
 /* ---------- Kapitel ---------- */
 const CH=['Start','Aufgaben','Ziele','Grundfunktionen','Beschaffung','Produktion','Absatz','Arbeitsplätze','Abgabe'];
-const CH_L=['Was ist ein Unternehmen?','Aufgaben von Unternehmen','Ziele von Unternehmen','Beschaffung, Produktion, Absatz','Beschaffung','Produktion','Absatz und Marketing','Arbeitsplätze','Abgabe'];
+const CH_L=['Unternehmen kennenlernen','Aufgaben von Unternehmen','Ziele von Unternehmen','Beschaffung, Produktion, Absatz','Beschaffung','Produktion','Absatz und Marketing','Arbeitsplätze','Abgabe'];
 
 /* ---------- Aufgaben ---------- */
 const T={
-u1:{type:'seg',cats:['Sachgut','Dienstleistung'],items:[['Brötchen',0],['Haarschnitt beim Friseur',1],['Fahrrad',0],['Busfahrt zur Schule',1],['Smartphone',0],['Reparatur des Smartphones',1],['Schreibtisch',0],['Beratung in der Bank',1]]},
+u1:{type:'mark',parts:[['Um sechs Uhr holt Frau Krume ihr neues Fahrrad ab.',false],['Auf dem Weg lässt sie sich beim Friseur die Haare schneiden.',true],['In der Filiale verkauft sie Brötchen und Brezeln.',false],['Mittags bringt ihr Fahrer eine Torte zu einer Geburtstagsfeier.',true],['Am Nachmittag berät eine Bankberaterin sie zu einem Kredit.',true],['Für das Büro kauft sie einen Schreibtisch.',false],['Abends repariert ein Techniker ihr Smartphone.',true]]},
 u2:{type:'seg',cats:['Produktion','Handel','Dienstleistung'],items:[['Autowerk',0],['Supermarkt',1],['Friseursalon',2],['Möbelhaus (verkauft Möbel anderer Hersteller)',1],['Tischlerei',0],['Bank',2],['Online-Shop für Schuhe',1],['Molkerei',0],['Fahrschule',2]]},
-u3:{type:'quiz',qs:[
-  {q:'Die Stadtwerke versorgen die Stadt mit Wasser. Sie gehören der Stadt. Was für ein Unternehmen sind sie?',o:['ein privates Unternehmen','ein öffentliches Unternehmen'],a:1,why:'Sie gehören der Stadt und sollen die Menschen versorgen.'},
-  {q:'Was ist das wichtigste Ziel eines öffentlichen Unternehmens?',o:['möglichst viel Gewinn','die Menschen zuverlässig versorgen','möglichst viele Filialen'],a:1,why:'Öffentliche Unternehmen sollen vor allem die Versorgung sichern, auch wenn sich das nicht immer lohnt.'},
-  {q:'Die Bäckerei Krume gehört Frau Krume. Was für ein Unternehmen ist sie?',o:['ein privates Unternehmen','ein öffentliches Unternehmen'],a:0,why:'Sie gehört einer Privatperson und will Gewinn erzielen.'}]},
+u3:{type:'gap',text:'Die Stadtwerke versorgen die Stadt mit Wasser. Sie gehören der {0}. Deshalb sind sie ein {1} Unternehmen. Ihr wichtigstes Ziel ist, die Menschen zuverlässig zu {2}. Die Bäckerei Krume gehört Frau Krume. Sie ist ein {3} Unternehmen und will vor allem {4} erzielen.',gaps:[[['Bank','Stadt','Familie Krume'],1],[['privates','öffentliches'],1],[['versorgen','bewerben','unterhalten'],0],[['öffentliches','privates'],1],[['Steuern','Strom','Gewinn'],2]]},
 u4:{type:'multi',opts:[['Sie versorgt die Menschen mit Brot und Brötchen.',true],['Sie bietet Arbeitsplätze und Ausbildungsplätze.',true],['Sie legt die Schulnoten fest.',false],['Sie zahlt Löhne an ihre Mitarbeitenden.',true],['Sie baut die Straßen im Ort.',false],['Sie zahlt Steuern an die Gemeinde.',true],['Sie beschließt Gesetze.',false]]},
 u5:{type:'open',min:60,checks:[['Arbeitsplätze',/arbeit|job|ausbild|stelle|kündig|entlass/i],['Versorgung',/brot|brötchen|einkauf|kaufen|weit|fahren|kilometer|versorg/i],['Einkommen oder Steuern',/lohn|gehalt|geld|einkommen|steuer|gemeinde/i]],
   muster:['Die 25 Mitarbeitenden verlieren ihren Arbeitsplatz und ihr Einkommen. Auch Ausbildungsplätze fallen weg.','Die Menschen müssen für frisches Brot acht Kilometer fahren. Für ältere Menschen ohne Auto ist das schwer.','Die Gemeinde bekommt weniger Steuern und hat weniger Geld, zum Beispiel für Schulen oder Straßen.','Der Ort wird weniger lebendig: Ein Treffpunkt fehlt, Lieferanten verlieren einen Kunden.']},
 u6:{type:'seg',cats:['ökonomisch','sozial','ökologisch'],items:[['Gewinn steigern',0],['faire Löhne zahlen',1],['Strom sparen',2],['Produktionskosten senken',0],['Arbeitsplätze sichern',1],['Verpackungsmüll vermeiden',2],['neue Kundschaft gewinnen',0],['Mitarbeitende weiterbilden',1],['CO₂-Ausstoß verringern',2],['Mitarbeitende am Gewinn beteiligen',1]]},
-u7:{type:'quiz',qs:[
-  {q:'Ziel: weniger Verpackungsmüll (ökologisch). Welche Strategie passt?',o:['Brötchen nur noch in Plastiktüten verkaufen','Rabatt, wenn Kund:innen ihren eigenen Beutel mitbringen','die Preise erhöhen'],a:1,why:'Der Rabatt belohnt mitgebrachte Beutel, so werden weniger Tüten gebraucht.'},
-  {q:'Ziel: zufriedene Mitarbeitende (sozial). Welche Strategie passt?',o:['Zuschlag für die Nachtschicht zahlen','mehr Werbung im Radio','billigeres Mehl kaufen'],a:0,why:'Wer nachts arbeitet, bekommt mehr Geld. Das macht die harte Schicht fairer.'},
-  {q:'Ziel: mehr Gewinn (ökonomisch). Welche Strategie passt?',o:['abends übrig gebliebene Brötchen wegwerfen','eine neue Filiale an einem belebten Ort eröffnen','allen Mitarbeitenden kündigen'],a:1,why:'Eine Filiale an einem belebten Ort bringt mehr Kundschaft und damit mehr Umsatz.'}]},
+u7:{type:'pair',left:['weniger Verpackungsmüll','zufriedene Mitarbeitende in der Nachtschicht','mehr Gewinn','weniger Stromverbrauch'],right:['sparsame Backöfen anschaffen','Rabatt, wenn Kund:innen ihren eigenen Beutel mitbringen','eine Filiale an einem belebten Ort eröffnen','einen Zuschlag für Nachtarbeit zahlen'],ans:[1,3,2,0]},
 u8:{type:'open',min:90,checks:[['ökonomisch',/gewinn|umsatz|kosten|kund|verkauf|preis|geld/i],['sozial',/mitarbeit|lohn|gehalt|ausbild|pause|team|arbeitspl|zuschlag|schicht/i],['ökologisch',/umwelt|strom|energie|müll|plastik|tüte|bio|regional|co2|co₂|wasser|solar/i],['Strategie',/strategie|indem|durch|damit|dafür|so dass|sodass/i]],
   muster:['Ökonomisch: mehr Kundschaft am Morgen. Strategie: einen Frühstücks-Snack zum festen Preis anbieten.','Sozial: Mitarbeitende lange halten. Strategie: Weiterbildungen bezahlen und Wünsche bei den Schichten berücksichtigen.','Ökologisch: weniger Brötchen wegwerfen. Strategie: übrig gebliebene Ware abends günstiger verkaufen oder an die Tafel spenden.']},
-u9:{type:'quiz',qs:[
-  {q:'Die Bäckerei kauft teureres Bio-Mehl und will gleichzeitig die Kosten senken.',o:['Zielkonflikt','Zielharmonie'],a:0,why:'Bio-Mehl ist gut für die Umwelt, kostet aber mehr. Die Ziele behindern sich.'},
-  {q:'Die Bäckerei spart Strom und senkt damit ihre Kosten.',o:['Zielkonflikt','Zielharmonie'],a:1,why:'Weniger Strom ist gut für die Umwelt und spart Geld. Die Ziele helfen sich.'},
-  {q:'Die Bäckerei erhöht die Löhne und will den Gewinn steigern.',o:['Zielkonflikt','Zielharmonie'],a:0,why:'Höhere Löhne sind Kosten und senken den Gewinn.'},
-  {q:'Die Bäckerei bildet ihre Mitarbeitenden weiter, damit die Brötchen besser werden und mehr Kund:innen kommen.',o:['Zielkonflikt','Zielharmonie'],a:1,why:'Gut ausgebildete Mitarbeitende backen besser, das bringt mehr Kundschaft.'}]},
-u10:{type:'seg',cats:['ökonomisch','sozial','ökologisch'],items:[['T-Shirts möglichst billig herstellen',0],['Die Näherinnen verdienen kaum genug zum Leben.',1],['Kleidung wird nach kurzer Zeit weggeworfen.',2],['Der Umsatz wächst jedes Jahr.',0],['Chemikalien gelangen ins Flusswasser.',2],['lange Arbeitstage in den Fabriken',1]]},
+u9:{type:'seg',cats:['Zielkonflikt','Zielharmonie'],items:[['Die Bäckerei kauft teureres Bio-Mehl und will gleichzeitig die Kosten senken.',0],['Die Bäckerei spart Strom und senkt damit ihre Kosten.',1],['Die Bäckerei erhöht die Löhne und will den Gewinn steigern.',0],['Die Bäckerei bildet ihre Mitarbeitenden weiter. Die Brötchen werden besser, und es kommen mehr Kund:innen.',1]]},
+u10:{type:'mark',parts:[['Ein T-Shirt kostet bei FlinkFashion nur wenige Euro.',false],['Jede Woche gibt es neue Kollektionen.',false],['Viele Kund:innen tragen die Sachen nur kurz und werfen sie dann weg.',true],['Die Näherinnen arbeiten oft zwölf Stunden am Tag.',true],['Sie verdienen kaum genug zum Leben.',true],['Beim Färben gelangen Chemikalien ins Flusswasser.',true],['FlinkFashion wächst jedes Jahr.',false]]},
 u11:{type:'open',min:120,checks:[['Entscheidung',/sollte|ja|nein|finde|meiner meinung|ich bin|dafür|dagegen/i],['zwei Sichtweisen',/(wirtschaft|gewinn|preis|kosten|kund).*(näher|lohn|gewerkschaft|sozial|arbeit|umwelt)|(näher|lohn|gewerkschaft|sozial|arbeit|umwelt).*(wirtschaft|gewinn|preis|kosten|kund)/is],['Begründung',/weil|denn|deshalb|daher|da /i]],
   muster:['Ich finde, FlinkFashion sollte die Löhne erhöhen.','Aus Sicht der Gewerkschafterin ist das gerecht, weil die Näherinnen von ihrem Lohn leben können müssen.','Die Wirtschaftsexpertin warnt: Werden die T-Shirts teurer, kaufen manche Kund:innen woanders, und der Gewinn sinkt.','Ich halte das für lösbar, denn der Lohn macht bei einem T-Shirt nur einen kleinen Teil des Preises aus. Viele Kund:innen zahlen etwas mehr, wenn die Kleidung fair hergestellt ist.','Wichtig: Eine gute Stellungnahme nennt deine Meinung, beide Seiten und eine Begründung. Auch „Nein“ ist möglich, wenn du es gut begründest.']},
 u12:{type:'order',items:['Frau Krume berechnet, wie viel Mehl sie braucht.','Frau Krume bestellt Mehl bei der Mühle.','In der Backstube wird der Teig geknetet.','Die Brötchen werden gebacken.','Der Fahrer bringt die Brötchen in die Filialen.','Die Verkäuferin verkauft die Brötchen.'],start:[3,0,5,2,4,1]},
 u13:{type:'seg',cats:['Beschaffung','Produktion','Absatz'],items:[['Angebote verschiedener Mühlen vergleichen',0],['Teig kneten',1],['ein Werbeplakat gestalten',2],['einen neuen Backofen kaufen',0],['Brötchen backen',1],['Brötchen an ein Café liefern',2],['eine neue Bäckerin einstellen',0],['prüfen, ob die Brötchen schön braun sind',1],['die Preise für die Filialen festlegen',2]]},
-u14:{type:'quiz',qs:[
-  {q:'Die Mühle kann drei Tage lang kein Mehl liefern. Was passiert zuerst?',o:['In der Backstube kann weniger gebacken werden.','Die Bäckerei macht mehr Werbung.','Die Preise sinken.'],a:0,why:'Ohne Mehl aus der Beschaffung steht die Produktion still.'},
-  {q:'Was folgt daraus für den Absatz?',o:['In den Filialen gibt es mehr Brötchen.','In den Filialen fehlen Brötchen, die Bäckerei verkauft weniger.','Nichts, der Absatz hängt nicht davon ab.'],a:1,why:'Was nicht gebacken wird, kann nicht verkauft werden.'},
-  {q:'Im Sommerurlaub kaufen viel weniger Menschen Brötchen. Wie sollte die Beschaffung reagieren?',o:['mehr Mehl bestellen','weniger Mehl bestellen','gar nichts ändern'],a:1,why:'Sinkt der Absatz, wird weniger produziert und weniger Mehl gebraucht.'}]},
+u14:{type:'gap',text:'Die Mühle kann drei Tage lang kein Mehl liefern. Dann steht die {0} still. In den Filialen fehlen Brötchen, deshalb sinkt der {1}. Im Sommerurlaub kaufen weniger Menschen Brötchen. Die Backstube backt weniger, und die Beschaffung bestellt {2} Mehl. Die drei Grundfunktionen {3}.',gaps:[[['Werbung','Produktion','Beschaffung'],1],[['Einkauf','Lohn','Absatz'],2],[['mehr','weniger','genauso viel'],1],[['arbeiten unabhängig voneinander','hängen voneinander ab'],1]]},
 u15:{type:'seg',cats:['Arbeit','Betriebsmittel','Werkstoffe'],items:[['Bäckerin',0],['Backofen',1],['Mehl',2],['Lieferwagen',1],['Verkäufer',0],['Hefe',2],['Teigknetmaschine',1],['Strom für die Öfen',2],['Auszubildender',0],['Backstube (Gebäude)',1]]},
 u16:{type:'order',items:['Bedarf ermitteln: Wie viel Mehl ist noch da, wie viel wird gebraucht?','Angebote von mehreren Mühlen einholen und vergleichen','Mehl beim günstigsten passenden Anbieter bestellen','Lieferung prüfen: Stimmen Menge und Qualität?','Mehl trocken lagern'],start:[2,4,0,3,1]},
 u17:{type:'seg',cats:['Eigenfinanzierung','Fremdfinanzierung'],items:[['Ersparnisse von Frau Krume',0],['Kredit von der Bank',1],['Gewinn aus dem letzten Jahr',0],['Ratenkauf beim Ofenhersteller',1],['Geld von einer neuen Mitinhaberin',0],['Darlehen von Frau Krumes Onkel, mit Zinsen zurückzuzahlen',1]]},
-u18:{type:'quiz',qs:[
-  {q:'Was ist ein Nachteil der Fremdfinanzierung?',o:['Man muss Zinsen zahlen und das Geld zurückzahlen.','Man darf das Geld nicht ausgeben.','Man verliert sofort das Unternehmen.'],a:0,why:'Geliehenes Geld kostet Zinsen und muss zurückgezahlt werden.'},
-  {q:'Was ist ein Vorteil der Eigenfinanzierung?',o:['Es gibt keine Zinsen und keine Schulden.','Man bekommt immer mehr Geld als bei der Bank.','Man muss nie Steuern zahlen.'],a:0,why:'Eigenes Geld muss niemandem zurückgezahlt werden.'}]},
+u18:{type:'num',answer:2000,unit:'Euro',why:'5 % von 40.000 Euro sind 2.000 Euro. Zinsen sind der Preis für geliehenes Geld. Bei Eigenfinanzierung fallen sie weg.'},
 u19:{type:'seg',cats:['Einzelfertigung','Serienfertigung','Massenfertigung'],items:[['eine Hochzeitstorte nach Wunsch des Brautpaares',0],['300 Weihnachtsstollen im Dezember',1],['Millionen Packungen Toastbrot in einer Großbäckerei',2],['ein Geburtstagskuchen in Form eines Fußballs',0],['500 Berliner zu Karneval',1],['Getränkedosen in einer Abfüllanlage',2],['ein maßgeschneiderter Anzug',0],['eine Sonderserie von 1.000 Sneakern',1]]},
-u20:{type:'quiz',qs:[
-  {q:'Warum gibt es in der Bäckerei eine Qualitätskontrolle?',o:['Damit die Kundschaft gleichbleibend gute Ware bekommt.','Damit die Mitarbeitenden weniger arbeiten.','Weil sie Werbung ersetzt.'],a:0,why:'Gute, gleichbleibende Qualität hält die Kundschaft und spart Ärger.'},
-  {q:'Wann wird kontrolliert?',o:['nur ganz am Ende','bei den Zutaten, während der Produktion und am Ende','nur, wenn sich jemand beschwert'],a:1,why:'Je früher ein Fehler auffällt, desto weniger Ware ist verdorben.'},
-  {q:'Ein Blech Brötchen ist verbrannt. Was ist richtig?',o:['trotzdem verkaufen','aussortieren und die Ursache suchen, z. B. die Ofentemperatur','die Qualitätskontrolle abschaffen'],a:1,why:'Fehlerhafte Ware kommt nicht in den Verkauf, und die Ursache wird behoben.'}]},
+u20:{type:'seg',cats:['stimmt','stimmt nicht'],items:[['Die Qualitätskontrolle sorgt dafür, dass die Kundschaft gleichbleibend gute Ware bekommt.',0],['Kontrolliert wird nur ganz am Ende, wenn die Brötchen fertig sind.',1],['Verbrannte Brötchen werden trotzdem verkauft, damit nichts verschwendet wird.',1],['Bei einem Fehler sucht man die Ursache, zum Beispiel eine falsche Ofentemperatur.',0],['Auch die gelieferten Zutaten werden geprüft.',0]]},
 u21:{type:'seg',cats:['Zielgruppe','Kundenwünsche','Konkurrenz'],items:[['Wie viele Schüler:innen kommen morgens an der Filiale vorbei?',0],['Gibt es in der Nähe schon einen Backshop?',2],['Wünschen sich die Kund:innen vegane Brötchen?',1],['Welche Preise verlangt der Kiosk gegenüber?',2],['Wie alt sind die meisten Menschen, die dort vorbeikommen?',0],['Hätten die Kund:innen gern eine Sitzecke?',1]]},
 u22:{type:'seg',cats:['Produkt','Preis','Absatzweg','Kommunikation'],items:[['neue Brötchen-Kreation „Krume-Kracher“',0],['Wochenangebot: Laugenbrezel für 50 Cent',1],['eine vierte Filiale eröffnen',2],['Werbung auf dem Lieferwagen',3],['größere Auswahl an Vollkornbrot',0],['Bonuskarte: das zehnte Brötchen gratis',1],['Brot auch im Supermarkt verkaufen',2],['Tag der offenen Tür in der Backstube',3],['Schülerpreis gegen Vorlage des Schülerausweises',1],['Verkaufswagen auf dem Wochenmarkt',2],['Trikots für die Fußball-Jugend sponsern',3],['umweltfreundliche Papiertüten mit Logo',0]],four:true},
 u23:{type:'open',min:120,ki:true,checks:[['Produkt',/produkt|snack|brötchen|sandwich|vegan|angebot an|neue/i],['Preis',/preis|rabatt|günstig|euro|€|schüler.*ausweis|angebot|bonus/i],['Absatzweg',/filiale|verkauf|stand|wagen|pause|online|app|vorbestell|liefer|kiosk|mensa/i],['Kommunikation',/werbung|instagram|plakat|social|tiktok|flyer|sponsor|aktion|gutschein/i]],
   muster:['Produkt: ein „Pausen-Snack“, z. B. belegtes Vollkornbrötchen mit Getränk. Er ist schnell gegessen und sättigt.','Preis: Schülerpreis mit Schülerausweis. Viele Schüler:innen haben wenig Taschengeld.','Absatzweg: Vorbestellen per Zettel oder App, Abholung in der großen Pause. So gibt es keine lange Schlange.','Kommunikation: Plakat im Schulflur und eine Aktion „Probier-Woche“ mit Gutscheinen. So erfahren alle davon.']},
-u24:{type:'seg',cats:['Bäcker:in','Verkäufer:in','Fahrer:in'],items:[['beginnt oft um drei Uhr nachts',0],['berät die Kundschaft an der Theke',1],['bringt die Ware zu Cafés und Filialen',2],['arbeitet am heißen Ofen',0],['arbeitet mit der Kasse',1],['lädt Kisten ein und aus',2],['wiegt Zutaten nach Rezept ab',0],['fährt bei jedem Wetter durch die Stadt',2]]},
+u24:{type:'pair',left:['Tätigkeit','Arbeitsort','Arbeitsmittel','Arbeitszeit','körperliche Anforderung','Arbeitsschutz'],right:['in der warmen Backstube','ab drei Uhr nachts','Teig kneten, Brötchen formen und backen','hitzefeste Handschuhe und Haarnetz','Backofen, Knetmaschine und Waage','lange stehen und schwere Mehlsäcke heben'],ans:[2,0,4,1,5,3]},
 u25:{type:'quiz',qs:[
-  {q:'Welche Anforderung ist für Verkäufer:innen besonders wichtig?',o:['freundlich mit Menschen umgehen','schwere Maschinen reparieren','nachts allein arbeiten'],a:0,why:'Verkäufer:innen haben den ganzen Tag Kontakt zur Kundschaft.'},
-  {q:'Welche Schutzausrüstung braucht man am Backofen?',o:['Schwimmbrille','hitzefeste Handschuhe','Fahrradhelm'],a:1,why:'Hitzefeste Handschuhe schützen vor Verbrennungen.'},
-  {q:'Warum tragen Bäcker:innen ein Haarnetz?',o:['aus Hygiene, damit keine Haare in den Teig fallen','weil es modern ist','damit sie schneller arbeiten'],a:0,why:'Lebensmittel müssen sauber bleiben. Das schreiben Hygieneregeln vor.'}]},
+  {q:'Für Verkäufer:innen ist besonders wichtig, …',o:['freundlich mit Menschen umzugehen.','schwere Maschinen zu reparieren.','nachts allein zu arbeiten.'],a:0,why:'Verkäufer:innen haben den ganzen Tag Kontakt zur Kundschaft.'},
+  {q:'Am Backofen schützen …',o:['eine Schwimmbrille.','hitzefeste Handschuhe.','ein Fahrradhelm.'],a:1,why:'Hitzefeste Handschuhe schützen vor Verbrennungen.'},
+  {q:'Bäcker:innen tragen ein Haarnetz, …',o:['damit keine Haare in den Teig fallen.','weil es modern ist.','damit sie schneller arbeiten.'],a:0,why:'Lebensmittel müssen sauber bleiben. Das schreiben die Hygieneregeln vor.'}]},
 u26:{type:'open',min:90,checks:[['Arbeitsplatz gewählt',/bäcker|verkäuf|fahrer/i],['Merkmale',/nacht|früh|ofen|theke|kasse|kund|auto|wagen|fahren|draußen|backstube|filiale/i],['Anforderung',/freundlich|heben|stehen|rechnen|team|pünktlich|führerschein|geduld|kräftig|früh aufstehen|sorgfalt/i],['Nachteil',/nachteil|aber|allerdings|jedoch|anstrengend|schwer|stress/i]],
   muster:['Mir würde der Arbeitsplatz als Verkäufer:in gefallen, weil ich gern mit Menschen rede (Was: Kundschaft beraten, kassieren). Ich arbeite in einer hellen Filiale (Wo) mit Kasse und Waage (Womit).','Anforderung: Man muss freundlich bleiben, auch wenn es voll ist.','Nachteil: Man steht den ganzen Tag und arbeitet oft auch samstags.','Deine Antwort darf anders aussehen: Wichtig sind deine Wahl, zwei Merkmale, eine Anforderung und ein Nachteil.']}
 };
@@ -912,7 +922,7 @@ u26:{type:'open',min:90,checks:[['Arbeitsplatz gewählt',/bäcker|verkäuf|fahre
 const RATE=['Ich kann grundlegende Aufgaben von Unternehmen nennen.','Ich kann Sachgüter und Dienstleistungen unterscheiden.','Ich kann private und öffentliche Unternehmen unterscheiden.','Ich kann Ziele von Unternehmen nennen und ökonomisch, sozial oder ökologisch ordnen.','Ich kann Zielkonflikte aus der Sicht verschiedener Menschen erklären und Stellung nehmen.','Ich kann die Grundfunktionen Beschaffung, Produktion und Absatz beschreiben.','Ich kann Zusammenhänge zwischen den Grundfunktionen erkennen.','Ich kann die Produktionsfaktoren Arbeit, Betriebsmittel und Werkstoffe beschreiben.','Ich kann Einzel-, Serien- und Massenfertigung unterscheiden.','Ich kann die vier Instrumente des Marketing-Mix erklären und eigene Maßnahmen entwickeln.','Ich kann Merkmale von Arbeitsplätzen beschreiben.','Ich kann Arbeitsplätze und ihre Anforderungen bewerten.'];
 const RATE_L=['noch nicht','mit Hilfe','meistens','sicher'];
 
-const OPS={'nennen':'Informationen ohne Erklärung aufzählen.','beschreiben':'Einen Sachverhalt in eigenen Worten genau und geordnet darstellen.','zuordnen':'Dinge passend einer Gruppe oder einem Begriff zuweisen.','ordnen':'Dinge in eine sinnvolle Reihenfolge bringen.','unterscheiden':'Unterschiede zwischen zwei oder mehr Dingen erkennen und benennen.','erklären':'Einen Zusammenhang so darstellen, dass Ursachen und Folgen klar werden.','entwickeln':'Eigene Ideen oder Lösungen zu einer Aufgabe ausarbeiten.','Stellung nehmen':'Eine eigene Meinung bilden und mit Argumenten begründen. Auch Gegenargumente bedenken.','bewerten':'Etwas nach Maßstäben einschätzen und deine Entscheidung begründen.','beurteilen':'Etwas prüfen und zu einer begründeten Einschätzung kommen.'};
+const OPS={'nennen':'(be)nennen: Fakten, Daten, Begriffe, Regeln ohne Erläuterung aufzählen.','beschreiben':'Strukturiert und fachsprachlich angemessen Materialien vorstellen und/oder Sachverhalte darlegen.','zuordnen':'Begründet für ein Objekt eine Gruppe, eine Position oder ein Material zuweisen oder einen Sachverhalt begründet in einen Zusammenhang stellen.','ordnen':'Etwas kriteriengeleitet in eine bestimmte Systematik oder Reihenfolge bringen.','unterscheiden':'Etwas im Hinblick auf seine besonderen Merkmale erkennen und von Alternativen abgrenzen.','erklären':'Sachverhalte so darstellen, dass Bedingungen, Ursachen, Gesetzmäßigkeiten und/oder Funktionszusammenhänge verständlich werden.','ermitteln':'Einen Zusammenhang oder eine Lösung finden und das Ergebnis formulieren.','herausarbeiten':'Materialien auf bestimmte, nicht unbedingt genannte Sachverhalte hin untersuchen und Zusammenhänge herstellen.','überprüfen':'Inhalte oder Aussagen auf ihre sachliche Richtigkeit bzw. innere Logik hin untersuchen.','entwickeln':'Zu einem Sachverhalt oder einer Problemstellung eine Einschätzung, ein Lösungsmodell oder ein Lösungskonzept begründet darlegen.','Stellung nehmen':'Beurteilung mit zusätzlicher Reflexion eigener Wertmaßstäbe, die zu einem begründeten eigenen Werturteil führt.','bewerten':'Einen Gegenstand an erkennbaren Wertkategorien oder bekannten Beurteilungskriterien messen.','beurteilen':'Den Stellenwert von Sachverhalten bestimmen, um kriterienorientiert zu einem begründeten Sachurteil zu gelangen.'};
 
 /* ---------- Zustand ---------- */
 let S;
@@ -1006,7 +1016,58 @@ function wOpen(id,t,w,art){
     w.append(el('details',{class:'lp-kiopt'},el('summary',{},'Optional mit KI · ab AI Badge Level 1'),el('div',{},el('p',{class:'hint'},'Mit deinen KI-Kompetenzen aus Level 1 kannst du hier dein Lernen verbessern: Hol dir Feedback zu deiner eigenen Antwort, nicht die Antwort selbst.'),el('div',{class:'row'},cp,el('a',{class:'btn soft',href:'https://go.fobizz.com',target:'_blank',rel:'noopener'},'fobizz öffnen')),note)));}
   upd();
 }
-$$('.w[data-t]').forEach(w=>{const id=w.dataset.t,t=T[id],art=w.closest('.task');({seg:wSeg,quiz:wQuiz,multi:wMulti,order:wOrder,open:wOpen})[t.type](id,t,w,art);});
+function wGap(id,t,w,art){
+  const v=S.a[id]=S.a[id]||t.gaps.map(()=>-1);
+  const p=el('p',{class:'cloze'});const sels=[];
+  t.text.split(/\{(\d+)\}/).forEach((part,i)=>{if(i%2===0){if(part)p.append(part);return;}const gi=+part,g=t.gaps[gi];
+    const sel=el('select',{'aria-label':'Lücke '+(gi+1)},el('option',{value:'-1'},'…'),...g[0].map((o,oi)=>el('option',{value:String(oi)},o)));sel.value=String(v[gi]);
+    sel.onchange=()=>{v[gi]=+sel.value;sel.classList.remove('s-ok','s-bad');save();};sels[gi]=sel;p.append(sel);});
+  w.append(p);
+  mkCheck(id,art,fb=>{if(v.some(x=>x<0)){showFb(fb,'mid','Noch nicht fertig','Fülle zuerst alle Lücken.');return;}
+    let ok=0;t.gaps.forEach((g,gi)=>{const good=v[gi]===g[1];sels[gi].classList.toggle('s-ok',good);sels[gi].classList.toggle('s-bad',!good);if(good)ok++;});
+    const all=ok===t.gaps.length;
+    if(all)showFb(fb,'ok','Alles richtig!',null);else showFb(fb,ok>=t.gaps.length*0.6?'mid':'err',ok+' von '+t.gaps.length+' Lücken richtig','Die rot markierten Lücken stimmen noch nicht. Lies die Information oben noch einmal.');
+    report(id,all,art,fb);});
+}
+function wPair(id,t,w,art){
+  let v=S.a[id];if(!Array.isArray(v)||v.length!==t.left.length)v=S.a[id]=t.left.map(()=>-1);
+  let armed=-1;const L=[],R=[];
+  const lc=el('div',{class:'pcol'},el('h4',{},'Antippen'));const rc=el('div',{class:'pcol'},el('h4',{},'Dann passend dazu'));
+  t.left.forEach((x,i)=>{const b=el('button',{type:'button',class:'pc','aria-pressed':'false'},el('span',{class:'k on'},String(i+1)),x);b.onclick=()=>{armed=armed===i?-1:i;draw();};L.push(b);lc.append(b);});
+  t.right.forEach((x,ri)=>{const b=el('button',{type:'button',class:'pc'},el('span',{class:'k'},'–'),x);b.onclick=()=>{if(armed<0){const li=v.indexOf(ri);if(li>=0){armed=li;draw();}return;}
+      v.forEach((rr,li)=>{if(rr===ri)v[li]=-1;});v[armed]=ri;armed=-1;save();L.forEach(n=>n.classList.remove('s-ok','s-bad'));draw();};R.push(b);rc.append(b);});
+  function draw(){L.forEach((b,i)=>b.setAttribute('aria-pressed',String(i===armed)));R.forEach((b,ri)=>{const li=v.indexOf(ri);const k=b.querySelector('.k');k.textContent=li>=0?String(li+1):'–';k.classList.toggle('on',li>=0);b.setAttribute('aria-label',(li>=0?'verbunden mit '+(li+1)+': ':'')+t.right[ri]);});}
+  w.className='pairs';w.append(lc,rc);draw();
+  mkCheck(id,art,fb=>{if(v.some(x=>x<0)){showFb(fb,'mid','Noch nicht fertig','Verbinde zuerst alle Paare.');return;}
+    let ok=0;t.left.forEach((x,i)=>{const good=v[i]===t.ans[i];L[i].classList.toggle('s-ok',good);L[i].classList.toggle('s-bad',!good);if(good)ok++;});
+    const all=ok===t.left.length;
+    if(all)showFb(fb,'ok','Alle Paare richtig!',null);else showFb(fb,ok>=t.left.length*0.6?'mid':'err',ok+' von '+t.left.length+' Paaren richtig','Bei den rot umrandeten Begriffen stimmt die Verbindung noch nicht. Tippe sie an und verbinde neu.');
+    report(id,all,art,fb);});
+}
+function wMark(id,t,w,art){
+  const v=S.a[id]=S.a[id]||t.parts.map(()=>false);
+  const p=el('p',{class:'marktext'});const B=t.parts.map((x,i)=>{const b=el('button',{type:'button',class:'ms','aria-pressed':String(!!v[i])},x[0]);b.onclick=()=>{v[i]=!v[i];b.setAttribute('aria-pressed',String(v[i]));B.forEach(n=>n.classList.remove('s-ok','s-bad'));save();};p.append(b,' ');return b;});
+  w.append(p);
+  mkCheck(id,art,fb=>{if(!v.some(Boolean)){showFb(fb,'mid','Noch nicht fertig','Tippe zuerst die passenden Sätze an.');return;}
+    const need=t.parts.filter(x=>x[1]).length;let hit=0,wrong=0;
+    t.parts.forEach((x,i)=>{B[i].classList.toggle('s-ok',v[i]&&x[1]);B[i].classList.toggle('s-bad',v[i]&&!x[1]);if(v[i]&&x[1])hit++;if(v[i]&&!x[1])wrong++;});
+    const all=hit===need&&!wrong;
+    if(all)showFb(fb,'ok','Alles gefunden!',need+' von '+need+' Sätzen richtig markiert.');
+    else showFb(fb,hit>=need*0.6&&wrong<=1?'mid':'err',hit+' von '+need+' gefunden'+(wrong?', '+wrong+' falsch markiert':''),wrong?'Rot markierte Sätze passen nicht. Tippe sie noch einmal an, um die Markierung zu entfernen.':'Es fehlen noch Sätze. Lies den Text noch einmal genau.');
+    report(id,all,art,fb);});
+}
+function wNum(id,t,w,art){
+  const inp=el('input',{type:'text',inputmode:'decimal',id:'num-'+id,'aria-label':'Ergebnis in '+t.unit,autocomplete:'off'});inp.value=S.a[id]||'';
+  inp.oninput=()=>{S.a[id]=inp.value;inp.classList.remove('s-ok','s-bad');save();};
+  w.className='numin';w.append(inp,el('span',{},t.unit));
+  mkCheck(id,art,fb=>{const raw=(inp.value||'').replace(/\s|€|euro/gi,'').replace(/\.(?=\d{3}(\D|$))/g,'').replace(',','.');
+    if(!raw){showFb(fb,'mid','Noch nicht fertig','Trag zuerst dein Ergebnis ein.');return;}
+    const n=parseFloat(raw);const good=!isNaN(n)&&Math.abs(n-t.answer)<=(t.tol||0);
+    inp.classList.toggle('s-ok',good);inp.classList.toggle('s-bad',!good);
+    if(good)showFb(fb,'ok','Richtig!',t.why);else showFb(fb,'err','Noch nicht richtig','Rechne noch einmal. Nutze die Starthilfe.');
+    report(id,good,art,fb);});
+}
+$$('.w[data-t]').forEach(w=>{const id=w.dataset.t,t=T[id],art=w.closest('.task');({seg:wSeg,quiz:wQuiz,multi:wMulti,order:wOrder,open:wOpen,gap:wGap,pair:wPair,mark:wMark,num:wNum})[t.type](id,t,w,art);});
 
 /* Selbsteinschätzung */
 $('#rate').append(...RATE.map((r,i)=>{const f=el('fieldset',{},el('legend',{},r));const sc=el('div',{class:'scale'});
@@ -1017,7 +1078,7 @@ $$('button.tier').forEach(b=>b.addEventListener('click',()=>b.setAttribute('aria
 
 /* Operatoren */
 const pop=$('#pop');
-$$('.op').forEach(b=>b.addEventListener('click',e=>{const k=b.dataset.op;$('#popH').textContent='Operator: '+k;$('#popP').textContent=OPS[k]||'';pop.hidden=false;const r=b.getBoundingClientRect();pop.style.left=Math.max(12,Math.min(r.left+scrollX,innerWidth-352))+'px';pop.style.top=(r.bottom+scrollY+8)+'px';e.stopPropagation();}));
+$$('.op').forEach(b=>b.addEventListener('click',e=>{const k=b.dataset.op;$('#popH').textContent='Operator: '+k;$('#popP').textContent=(OPS[k]||'')+' (Kerncurriculum AWT IGS 2024, Anhang A1)';pop.hidden=false;const r=b.getBoundingClientRect();pop.style.left=Math.max(12,Math.min(r.left+scrollX,innerWidth-352))+'px';pop.style.top=(r.bottom+scrollY+8)+'px';e.stopPropagation();}));
 $('#popX').onclick=()=>{pop.hidden=true;};
 document.addEventListener('click',e=>{if(!pop.hidden&&!pop.contains(e.target))pop.hidden=true;});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')pop.hidden=true;});
