@@ -1906,13 +1906,33 @@ const rrF=(x,n=0)=>x.toLocaleString('de-DE',{minimumFractionDigits:n,maximumFrac
   const d2=rrCalc(Object.assign({},RR_DEF),130);T.t31.answer=Math.round(d2.D.cost100*100)/100;
   T.t31.why='Bei 130 km/h braucht der Diesel etwa '+rrF(d2.D.per100,1)+' l je 100 km. Das kostet rund '+rrF(d2.D.cost100,2)+' Euro. Bei 100 km/h wären es nur '+rrF(rrCalc(Object.assign({},RR_DEF),100).D.cost100,2)+' Euro.';})();
 /* Grafiken des Rechners: Autos, Fahrbahn, Tankuhr und Akku-Anzeige, alles selbst gezeichnet */
+/* Seitenansichten: Fahrtrichtung nach rechts, Boden bei y=88, viewBox 300x92 */
 const RR_CAR=[
- {col:'#d8483b',cy:70,r:18,wx:[70,232],body:'M14 74 L14 62 Q18 52 52 50 L104 38 Q118 32 150 32 L182 32 Q204 34 226 50 Q272 54 284 64 L286 74 Z',win:['M84 50 L112 40 Q120 37 150 37 L160 37 L160 50 Z','M166 37 L182 37 Q198 39 214 50 L166 50 Z'],light:[279,62]},
- {col:'#2f7fbf',cy:70,r:18,wx:[72,228],body:'M18 74 L18 58 Q20 48 46 45 L92 24 Q102 18 122 18 L186 18 Q204 18 220 32 L242 46 Q274 50 280 60 L283 74 Z',win:['M72 44 L100 27 Q104 24 122 24 L148 24 L148 44 Z','M154 24 L186 24 Q200 24 214 36 L224 44 L154 44 Z'],light:[275,58]},
- {col:'#3d9a6a',cy:68,r:20,wx:[74,228],body:'M18 72 L18 44 Q20 36 40 34 L70 12 Q76 8 92 8 L204 8 Q218 8 226 20 L242 40 Q276 44 280 54 L283 72 Z',win:['M58 36 L80 16 Q84 14 92 14 L140 14 L140 36 Z','M146 14 L202 14 Q212 14 218 22 L228 36 L146 36 Z'],light:[275,52]}];
-function rrCar(kl,spin){const c=RR_CAR[kl];
-  const wheel=x=>`<g class="rr-wheel${spin?' spin':''}"><circle cx="${x}" cy="${c.cy}" r="${c.r}" fill="#1f2528"/><circle cx="${x}" cy="${c.cy}" r="${(c.r*0.56).toFixed(1)}" fill="#c9ced2"/><path d="M${x-c.r*0.5} ${c.cy}H${x+c.r*0.5}M${x} ${c.cy-c.r*0.5}V${c.cy+c.r*0.5}" stroke="#7b858e" stroke-width="2.5"/><circle cx="${x}" cy="${c.cy}" r="3" fill="#5b6570"/></g>`;
-  return `<path d="${c.body}" fill="${c.col}"/>${c.win.map(w=>`<path d="${w}" fill="#d7ecf8"/>`).join('')}<path d="M152 ${c.cy-22}V${c.cy+2}" stroke="#0003" stroke-width="2"/><rect x="${c.light[0]-5}" y="${c.light[1]-3}" width="9" height="7" rx="2" fill="#ffe27a"/><rect x="15" y="${c.light[1]-2}" width="6" height="7" rx="2" fill="#8f1d14"/>${c.wx.map(wheel).join('')}`;}
+ {col:'#c8362b',r:17,wx:[70,232],sill:77,R:21,
+  top:'M12 75 L11 63 Q11 57 19 55 L70 51 Q104 34 140 31 Q166 30 184 35 L210 48 Q256 51 280 57 Q291 60 291 67 L290 75',
+  win:'M106 48 Q123 37 142 35 Q163 34 179 38 L196 48 Z',bp:[150,35,148,48],spoiler:'M13 56 L15 50 L38 48.5 L38 53 Z',
+  light:'M274 57 L289 61 L289 64 L278 63 Z',tail:'M11 59 L22 57 L22 61 L11 63 Z',door:'M150 34 L148 75 M204 48 L208 75',handle:[184,54],mirror:'M196 46 l9 -3 l2 5 l-8 2 Z',sideln:'M24 64 Q150 60 286 66'},
+ {col:'#2a6fb0',r:16,wx:[72,234],sill:76,R:20,
+  top:'M10 74 L10 60 Q10 52 18 50 L82 46 L118 23 Q126 19 140 19 L182 19 Q194 19 204 26 L230 43 Q266 46 284 52 Q291 55 291 62 L290 74',
+  win:'M90 45 L120 26 Q126 23 140 23 L180 23 Q190 23 198 29 L218 45 Z',bp:[156,23,154,45],
+  light:'M278 52 L290 56 L290 60 L280 59 Z',tail:'M10 56 L22 53 L22 59 L10 61 Z',door:'M156 22 L154 74 M220 45 L222 74',handle:[[134,52],[196,52]],mirror:'M214 43 l9 -3 l2 5 l-8 2 Z',sideln:'M20 60 Q150 56 286 61'},
+ {col:'#3a8a5f',r:20,wx:[74,230],sill:70,R:24,
+  top:'M12 70 L11 30 Q11 14 22 12 Q50 9 92 9 L190 9 Q202 9 210 16 L238 38 Q270 41 284 47 Q291 50 291 58 L290 70',
+  win:'M24 34 L24 18 Q24 15 30 15 L188 15 Q198 15 204 21 L222 36 Z',bp:[[80,15,80,36],[154,15,152,36]],
+  light:'M276 46 L290 50 L290 55 L278 54 Z',tail:'M11 22 L18 22 L18 40 L11 40 Z',door:'M154 14 L152 70 M220 36 L222 70',clad:1,handle:[[130,44],[200,44]],mirror:'M218 34 l9 -3 l2 6 l-8 2 Z',sideln:'M20 52 Q150 48 286 54',rails:'M40 8 L196 8'}];
+function rrCar(kl,spin){const c=RR_CAR[kl],cy=88-c.r,R=c.R,b=c.sill,dx=Math.sqrt(R*R-(b-cy)*(b-cy)).toFixed(1),[w1,w2]=c.wx;
+  const body=`${c.top} L${(w2+ +dx).toFixed(1)} ${b} A${R} ${R} 0 1 0 ${(w2-dx).toFixed(1)} ${b} L${(w1+ +dx).toFixed(1)} ${b} A${R} ${R} 0 1 0 ${(w1-dx).toFixed(1)} ${b} Z`;
+  const aD=w=>`M${(w+ +dx).toFixed(1)} ${b} A${R} ${R} 0 1 0 ${(w-dx).toFixed(1)} ${b}`,well=w=>`<path d="${aD(w)}Z" fill="#23282c"/>`,arch=w=>`<path d="${aD(w)}" fill="none" stroke="${c.clad?'#2b3136':'#0005'}" stroke-width="${c.clad?6:2.5}"/>`;
+  const wheel=x=>{let sp='';for(let i=0;i<5;i++){const a=i*72*Math.PI/180,rr=c.r*0.6;sp+=`<path d="M${x} ${cy}L${(x+rr*Math.sin(a)).toFixed(1)} ${(cy-rr*Math.cos(a)).toFixed(1)}"/>`;}
+    return `<g class="rr-wheel${spin?' spin':''}"><circle cx="${x}" cy="${cy}" r="${c.r}" fill="#1c2023"/><circle cx="${x}" cy="${cy}" r="${(c.r*0.66).toFixed(1)}" fill="#b9c0c6"/><circle cx="${x}" cy="${cy}" r="${(c.r*0.58).toFixed(1)}" fill="#6d767e"/><g stroke="#cfd5da" stroke-width="${(c.r*0.17).toFixed(1)}" stroke-linecap="round">${sp}</g><circle cx="${x}" cy="${cy}" r="${(c.r*0.16).toFixed(1)}" fill="#e3e7ea"/></g>`;};
+  const bps=(Array.isArray(c.bp[0])?c.bp:[c.bp]).map(p=>`<path d="M${p[0]} ${p[1]}L${p[2]} ${p[3]}" stroke="${c.col}" stroke-width="5"/>`).join('');
+  const hs=(Array.isArray(c.handle[0])?c.handle:[c.handle]).map(h=>`<rect x="${h[0]}" y="${h[1]}" width="9" height="2.6" rx="1.3" fill="#0006"/>`).join('');
+  return `<ellipse cx="150" cy="88.5" rx="140" ry="3" fill="#0003"/>${c.rails?`<path d="${c.rails}" stroke="#2b3136" stroke-width="3" stroke-linecap="round"/>`:''}${well(w1)}${well(w2)}<path d="${body}" fill="${c.col}"/>${c.spoiler?`<path d="${c.spoiler}" fill="#22272b"/>`:''}
+   <path d="M${c.top.match(/^M([\d.]+)/)[1]} ${b-6} L${(w1-dx).toFixed(1)} ${b-6} M${(w1+ +dx).toFixed(1)} ${b-6} L${(w2-dx).toFixed(1)} ${b-6} M${(w2+ +dx).toFixed(1)} ${b-6} L290 ${b-6}" stroke="${c.clad?'#2b3136':'#0004'}" stroke-width="${c.clad?7:5}"/>
+   <path d="${c.win}" fill="#cfe6f3"/><path d="${c.win}" fill="none" stroke="#1d2328" stroke-width="2.2" stroke-linejoin="round"/>${bps}
+   <path d="${c.door}" stroke="#0005" stroke-width="1.4" fill="none"/>${hs}<path d="${c.sideln}" stroke="#fff4" stroke-width="1.6" fill="none"/>
+   <path d="${c.mirror}" fill="${c.col}" stroke="#0005" stroke-width="1"/><path d="${c.light}" fill="#fff3b0" stroke="#0004" stroke-width="1"/><path d="${c.tail}" fill="#b3161b"/>
+   ${arch(w1)}${arch(w2)}${c.wx.map(wheel).join('')}`;}
 const RR_GROUND=[['#4a5157','#f4f6f7','28 22',4],['#8b8f92','#d9dcde','3 22',5],['#8a6a47','#b89872','3 22',5],['#e3c98a','#c9a85c','3 22',5]];
 function rrScene(o){const g=RR_GROUND[o.ug];
   return `<svg class="rr-svg" viewBox="0 0 600 196" role="img" aria-label="${RR_KL[o.kl][0]} fährt auf ${RR_UG[o.ug][0]}. Pfeile zeigen Luftwiderstand und Rollwiderstand.">
