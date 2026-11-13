@@ -1,0 +1,1698 @@
+<!doctype html>
+<html lang="de"><head><script>/* Lernplattformen auf GitHub Pages: Speichern ohne claude.ai */
+(function(){if(window.claude)return;var T={pdf:'application/pdf',txt:'text/plain;charset=utf-8',png:'image/png',jpg:'image/jpeg',jpeg:'image/jpeg',json:'application/json',csv:'text/csv;charset=utf-8',html:'text/html;charset=utf-8',docx:'application/vnd.openxmlformats-officedocument.wordprocessingml.document',xlsx:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',ino:'text/plain;charset=utf-8'};
+var dl={save:function(o){return new Promise(function(res,rej){try{var n=(o&&o.filename)||'datei',x=(n.split('.').pop()||'').toLowerCase(),d=o.data,b=d instanceof Blob?d:new Blob([d],{type:T[x]||'application/octet-stream'});var u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=n;a.rel='noopener';document.body.appendChild(a);a.click();setTimeout(function(){a.remove();URL.revokeObjectURL(u);},4000);res();}catch(e){rej({code:'failed',message:String(e)});}});}};
+window.claude={use:function(n){return Promise.resolve(n==='downloads'?dl:null);}};})();</script><meta property="og:type" content="website"><meta property="og:title" content="Elektronik-Grundlagen (Fortbildung)"><meta property="og:description" content="Selbstlern-Fortbildung für Lehrkräfte, auch fachfremd: Spannung, Strom und Widerstand, Bauteile mit Farbcode- und Vorwiderstand-Trainer, Schaltpläne, Löten, Messen mit interaktivem Multimeter, Sicherheit nach RiSU und die Unterrichtseinheit LED-Leuchte mit LDR. Mit Checkliste für den Fachraum. Ergebnis als PDF."><meta property="og:url" content="https://deintechniklehrer.github.io/Lernplattformen/elektronik-grundlagen/"><meta property="og:image" content="https://deintechniklehrer.github.io/Lernplattformen/vorschau/Vorschau_Elektronik-Grundlagen.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="description" content="Selbstlern-Fortbildung für Lehrkräfte, auch fachfremd: Spannung, Strom und Widerstand, Bauteile mit Farbcode- und Vorwiderstand-Trainer, Schaltpläne, Löten, Messen mit interaktivem Multimeter, Sicherheit nach RiSU und die Unterrichtseinheit LED-Leuchte mit LDR. Mit Checkliste für den Fachraum. Ergebnis als PDF."><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Elektronik-Grundlagen – Fortbildung</title>
+<link rel="stylesheet" href="../assets/fonts/fonts.css">
+<style>
+[hidden]{display:none!important}
+
+:root{
+  --bg:#F3F6F2; --surface:#FFFFFF; --surface-2:#E9EFEA; --ink:#18221E; --muted:#56645D; --line:#D3DDD6;
+  --on-accent:#FFFFFF;
+  --existenz:#1F7A5C; --existenz-soft:#E1F0E9; --existenz-ink:#165C45;
+  --kultur:#2A6FB0;   --kultur-soft:#E2ECF7;   --kultur-ink:#1D568E;
+  --luxus:#B8841A;    --luxus-soft:#F6ECD6;    --luxus-ink:#7A5308;
+  --entdecken:#2A7F9E; --entdecken-soft:#DFEFF5; --entdecken-ink:#1B6380;
+  --sichern:#744690;  --sichern-soft:#EEE5F4;  --sichern-ink:#5B3175;
+  --bad:#B4483C; --bad-soft:#F6E1DE; --bad-ink:#8E3228;
+  --shadow:0 10px 30px rgb(24 34 30 / .14);
+  --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#101613; --surface:#18201C; --surface-2:#212B26; --ink:#E5ECE8; --muted:#9AA9A1; --line:#2F3B35;
+    --on-accent:#0F1512;
+    --existenz:#53BB91; --existenz-soft:#1A3128; --existenz-ink:#7FD3B0;
+    --kultur:#6FA8E2;   --kultur-soft:#1A2937;   --kultur-ink:#9CC4EE;
+    --luxus:#E2B458;    --luxus-soft:#372C15;    --luxus-ink:#EDCB86;
+    --entdecken:#5FB4D2; --entdecken-soft:#172F38; --entdecken-ink:#8FCDE3;
+    --sichern:#B690D0;  --sichern-soft:#2A2134;  --sichern-ink:#CFB2E2;
+    --bad:#E27E71; --bad-soft:#3A201C; --bad-ink:#F0A79D;
+    --shadow:0 10px 30px rgb(0 0 0 / .45);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#101613; --surface:#18201C; --surface-2:#212B26; --ink:#E5ECE8; --muted:#9AA9A1; --line:#2F3B35;
+  --on-accent:#0F1512;
+  --existenz:#53BB91; --existenz-soft:#1A3128; --existenz-ink:#7FD3B0;
+  --kultur:#6FA8E2;   --kultur-soft:#1A2937;   --kultur-ink:#9CC4EE;
+  --luxus:#E2B458;    --luxus-soft:#372C15;    --luxus-ink:#EDCB86;
+  --entdecken:#5FB4D2; --entdecken-soft:#172F38; --entdecken-ink:#8FCDE3;
+  --sichern:#B690D0;  --sichern-soft:#2A2134;  --sichern-ink:#CFB2E2;
+  --bad:#E27E71; --bad-soft:#3A201C; --bad-ink:#F0A79D;
+  --shadow:0 10px 30px rgb(0 0 0 / .45);
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55}
+.app{max-width:980px;margin:0 auto;padding-inline:16px;padding-block:20px 110px}
+h1,h2,h3,h4{font-family:var(--display);text-wrap:balance;line-height:1.15}
+.i{width:22px;height:22px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+:focus-visible{outline:3px solid var(--kultur);outline-offset:2px}
+
+/* Kopf */
+.top{display:grid;grid-template-columns:1fr minmax(170px,240px);gap:10px 24px;align-items:center}
+.brand{display:flex;gap:14px;align-items:center}
+.logo{width:48px;height:48px;flex:none}
+.brand h1{margin:0;font-weight:800;font-size:clamp(25px,4.2vw,34px);letter-spacing:-.015em}
+.brand p{margin:0;color:var(--muted);font-size:14px}
+.meter{display:grid;gap:6px}
+.meter-row{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.bar{height:10px;border-radius:99px;background:var(--surface-2);overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--existenz),var(--kultur) 55%,var(--luxus));transition:width .5s ease}
+.ki-pill{grid-column:1/-1;justify-self:start;display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;padding:5px 12px 5px 9px;border-radius:99px;background:var(--surface-2);color:var(--muted)}
+.ki-pill .i{width:16px;height:16px}
+.ki-pill.on{background:var(--sichern-soft);color:var(--sichern-ink)}
+@media (max-width:620px){.top{grid-template-columns:1fr}}
+
+/* Stationen-Navigation */
+.stations{display:flex;gap:8px;margin:18px 0 20px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
+.st-btn{flex:1 0 auto;display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-size:15px;font-weight:700;cursor:pointer;min-height:48px}
+.st-btn .n{display:grid;place-items:center;width:24px;height:24px;border-radius:8px;background:var(--c-soft);color:var(--c-ink);font-size:13px;font-variant-numeric:tabular-nums}
+.st-btn[aria-current="step"]{background:var(--c);border-color:var(--c);color:var(--on-accent)}
+.st-btn[aria-current="step"] .n{background:rgb(255 255 255 / .22);color:inherit}
+.st-btn .ok{display:none;width:18px;height:18px;color:var(--existenz)}
+.st-btn.done .ok{display:block}
+.st-btn[aria-current="step"].done .ok{color:inherit}
+
+/* Farbräume */
+.c-entdecken{--c:var(--entdecken);--c-soft:var(--entdecken-soft);--c-ink:var(--entdecken-ink)}
+.c-verstehen,.c-existenz{--c:var(--existenz);--c-soft:var(--existenz-soft);--c-ink:var(--existenz-ink)}
+.c-ordnen,.c-kultur{--c:var(--kultur);--c-soft:var(--kultur-soft);--c-ink:var(--kultur-ink)}
+.c-bewerten,.c-luxus{--c:var(--luxus);--c-soft:var(--luxus-soft);--c-ink:var(--luxus-ink)}
+.c-sichern{--c:var(--sichern);--c-soft:var(--sichern-soft);--c-ink:var(--sichern-ink)}
+
+/* Station */
+.station{display:grid;gap:16px}
+.st-head{display:flex;gap:16px;align-items:center;padding:20px 22px;border-radius:18px;background:var(--c);color:var(--on-accent)}
+.st-icon{width:58px;height:58px;flex:none;border-radius:16px;background:rgb(255 255 255 / .2);display:grid;place-items:center}
+.st-icon .i{width:32px;height:32px}
+.eyebrow{margin:0;text-transform:uppercase;letter-spacing:.09em;font-size:12px;font-weight:700;opacity:.92}
+.st-head h2{margin:2px 0 4px;font-size:clamp(23px,3.6vw,31px);font-weight:800}
+.goal{margin:0;font-size:15px}
+.lead{margin:0;max-width:65ch}
+
+.task{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;display:grid;gap:12px}
+.task>header{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.num{width:34px;height:34px;flex:none;border-radius:10px;background:var(--c);color:var(--on-accent);display:grid;place-items:center;font-family:var(--display);font-weight:800;font-variant-numeric:tabular-nums}
+.task h3{margin:0;font-size:19px;flex:1;min-width:12ch}
+.op{font:inherit;font-size:13px;font-weight:700;padding:5px 11px;border-radius:99px;border:0;background:var(--c-soft);color:var(--c-ink);cursor:pointer}
+.q{margin:0;max-width:68ch}
+.hint{margin:0;font-size:14px;color:var(--muted)}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+
+.btn{font:inherit;font-size:16px;font-weight:700;display:inline-flex;align-items:center;gap:8px;padding:10px 16px;min-height:46px;border-radius:12px;border:0;background:var(--ink);color:var(--bg);cursor:pointer}
+.btn.soft{background:var(--surface-2);color:var(--ink)}
+.btn.accent{background:var(--c);color:var(--on-accent)}
+.btn.ki{background:var(--sichern);color:var(--on-accent)}
+.btn:disabled{opacity:.55;cursor:default}
+.btn .i{width:19px;height:19px}
+
+textarea,input[type=text],input[type=number],select{font:inherit;font-size:16px;width:100%;padding:12px 14px;border-radius:12px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink)}
+textarea{min-height:112px;resize:vertical;line-height:1.5}
+select{appearance:auto;min-height:46px}
+
+/* Karten sortieren */
+.tray{display:grid;grid-template-columns:repeat(auto-fill,minmax(172px,1fr));gap:8px;padding:12px;border:2px dashed var(--line);border-radius:14px;min-height:70px}
+.tray.empty::after{content:"Alle Karten sind einsortiert. Tippe eine Karte an, um sie zu verschieben.";grid-column:1/-1;color:var(--muted);font-size:14px}
+.nc{display:flex;align-items:center;gap:9px;padding:9px 11px;min-height:50px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-size:15px;line-height:1.25;text-align:left;cursor:pointer;touch-action:manipulation;position:relative}
+.nc .e{font-size:24px;line-height:1}
+.nc[aria-pressed="true"]{outline:3px solid var(--c);outline-offset:2px;box-shadow:var(--shadow)}
+.nc .st{margin-left:auto;font-size:13px;font-weight:800;width:22px;height:22px;border-radius:99px;display:none;place-items:center;flex:none}
+.nc.s-ok{border-color:var(--existenz)} .nc.s-ok .st{display:grid;background:var(--existenz);color:var(--on-accent)}
+.nc.s-alt{border-color:var(--luxus);border-style:dashed} .nc.s-alt .st{display:grid;background:var(--luxus);color:var(--on-accent)}
+.nc.s-bad{border-color:var(--bad)} .nc.s-bad .st{display:grid;background:var(--bad);color:var(--on-accent)}
+.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media (max-width:680px){.cols{grid-template-columns:1fr}}
+.col{border-radius:14px;background:var(--c-soft);border:2px solid transparent;padding:10px;display:grid;gap:8px;align-content:start;min-height:150px;cursor:pointer;font:inherit;color:var(--ink);text-align:left}
+.col.armed{border-color:var(--c);border-style:dashed}
+.col.over{border-color:var(--c);border-style:solid}
+.col h4{margin:0;padding:9px 11px;border-radius:10px;background:var(--c);color:var(--on-accent);font-size:16px;display:flex;justify-content:space-between;gap:8px}
+.col h4 small{font-family:var(--body);font-weight:700;font-variant-numeric:tabular-nums;opacity:.9}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:14px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.dot{width:12px;height:12px;border-radius:99px;display:inline-block}
+
+/* Offene Aufgaben */
+.open{display:grid;gap:10px}
+.open-foot{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.qc{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.qc b{font-size:13px;color:var(--muted);margin-right:2px}
+.qc span{font-size:13px;padding:4px 10px;border-radius:99px;background:var(--surface-2);color:var(--muted)}
+.qc span.on{background:var(--existenz-soft);color:var(--existenz-ink)}
+.qc span.on::before{content:"✓ "}
+.fb{border-radius:14px;padding:14px 16px;background:var(--surface-2);display:grid;gap:6px}
+.fb p{margin:0;max-width:68ch}
+.fb .lvl{display:flex;align-items:center;gap:8px;font-weight:800;font-family:var(--display);font-size:17px}
+.fb .lvl .i{width:18px;height:18px}
+.fb.stark{background:var(--existenz-soft)} .fb.stark .lvl{color:var(--existenz-ink)}
+.fb.solide{background:var(--kultur-soft)} .fb.solide .lvl{color:var(--kultur-ink)}
+.fb.ausbaufaehig{background:var(--luxus-soft)} .fb.ausbaufaehig .lvl{color:var(--luxus-ink)}
+.fb.fehlt,.fb.err{background:var(--bad-soft)} .fb.fehlt .lvl,.fb.err .lvl{color:var(--bad-ink)}
+.fb .stale{font-size:13px;color:var(--muted)}
+.fb.wait .lvl{color:var(--muted)}
+.fb.ok{background:var(--existenz-soft)} .fb.ok .lvl{color:var(--existenz-ink)}
+.fb.mid{background:var(--luxus-soft)} .fb.mid .lvl{color:var(--luxus-ink)}
+.dots::after{content:"";animation:dots 1.4s steps(4) infinite}
+@keyframes dots{0%{content:""}25%{content:"."}50%{content:".."}75%{content:"..."}}
+@media (prefers-reduced-motion:reduce){.dots::after{animation:none;content:" …"}.bar i{transition:none}}
+
+/* Infotext */
+.info{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px 22px;display:grid;gap:12px}
+.info p{margin:0;max-width:66ch}
+.info h3{margin:0;font-size:21px}
+.term{font:inherit;background:none;border:0;padding:0 1px;color:var(--c-ink);font-weight:700;text-decoration:underline dotted 2px;text-underline-offset:4px;cursor:pointer}
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media (max-width:680px){.tiers{grid-template-columns:1fr}}
+.tier{border-radius:14px;padding:14px;background:var(--c-soft);border:0;text-align:left;font:inherit;color:var(--ink);cursor:pointer;display:grid;gap:4px;align-content:start;min-height:112px}
+.tier b{font-family:var(--display);font-size:18px;color:var(--c-ink)}
+.tier .tag{font-size:13px;font-weight:700;color:var(--c-ink)}
+.tier .more{display:none;font-size:15px}
+.tier[aria-expanded="true"] .more{display:block}
+.tier .tap{font-size:13px;color:var(--muted)}
+.tier[aria-expanded="true"] .tap{display:none}
+.flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:8px;align-items:stretch}
+.fstep{border-radius:14px;padding:12px 14px;background:var(--surface-2);display:grid;gap:2px;align-content:start}
+.fstep b{font-family:var(--display);font-size:18px}
+.fstep small{font-size:14px;color:var(--muted)}
+.farr{display:grid;place-items:center;font-size:13px;font-weight:700;color:var(--muted);text-align:center;max-width:110px}
+@media (max-width:680px){.flow{grid-template-columns:1fr}.farr{max-width:none}}
+
+/* Materiell / immateriell */
+.mi{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:8px}
+.mi-row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 8px 8px 12px;border-radius:12px;background:var(--surface-2);border:1.5px solid transparent}
+.mi-row.s-ok{border-color:var(--existenz)} .mi-row.s-bad{border-color:var(--bad)}
+.seg{display:inline-flex;border-radius:10px;overflow:hidden;border:1.5px solid var(--line);flex:none}
+.seg button{font:inherit;font-size:14px;font-weight:700;padding:7px 10px;border:0;background:var(--surface);color:var(--muted);cursor:pointer;min-height:38px}
+.seg button[aria-pressed="true"]{background:var(--c);color:var(--on-accent)}
+
+/* Lückentext */
+.cloze{line-height:2.4;max-width:70ch;margin:0}
+.cloze select{width:auto;display:inline-block;padding:6px 10px;min-height:40px;font-weight:700;margin:0 2px}
+.cloze select.s-ok{border-color:var(--existenz);background:var(--existenz-soft)}
+.cloze select.s-bad{border-color:var(--bad);background:var(--bad-soft)}
+
+/* Pyramide */
+.pyr-wrap{display:grid;grid-template-columns:minmax(220px,300px) 1fr;gap:18px;align-items:center}
+@media (max-width:680px){.pyr-wrap{grid-template-columns:1fr}}
+.pyr{width:100%;max-width:300px;height:auto;justify-self:center}
+.pyr polygon{cursor:pointer;stroke:var(--surface);stroke-width:4}
+.pyr .p-l{fill:var(--luxus)} .pyr .p-k{fill:var(--kultur)} .pyr .p-e{fill:var(--existenz)}
+.pyr text{fill:var(--on-accent);font-family:var(--display);font-weight:800;font-size:15px;text-anchor:middle;pointer-events:none}
+.pyr text.s{font-family:var(--body);font-weight:700;font-size:11px}
+.pyr-in{display:grid;gap:10px}
+.pyr-row{border-radius:14px;padding:10px 12px;background:var(--c-soft);display:grid;gap:8px}
+.pyr-row h4{margin:0;font-size:16px;color:var(--c-ink)}
+.pyr-row .two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media (max-width:420px){.pyr-row .two{grid-template-columns:1fr}}
+
+/* Fallbeispiel */
+.story{border-radius:16px;padding:18px 20px;background:var(--luxus-soft);display:grid;gap:12px}
+.story h3{margin:0;font-size:20px;color:var(--luxus-ink)}
+.story p{margin:0;max-width:68ch}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.price{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:12px;background:var(--surface);font-weight:700;font-size:15px}
+.price .e{font-size:20px}
+.price.wallet{background:var(--ink);color:var(--bg)}
+.budget{position:relative;height:46px;border-radius:12px;background:var(--surface-2);display:flex;overflow:visible;margin-top:24px}
+.bseg{height:100%;display:grid;place-items:center;color:var(--on-accent);font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;padding-inline:4px}
+.bseg:first-child{border-radius:12px 0 0 12px}.bseg:last-child{border-radius:0 12px 12px 0}
+.bseg.cut{background-image:repeating-linear-gradient(45deg,rgb(255 255 255 / .35) 0 6px,transparent 6px 12px)}
+.bmark{position:absolute;top:-24px;bottom:-6px;border-left:3px solid var(--ink);padding-left:6px;font-size:13px;font-weight:800;white-space:nowrap}
+.jt{display:grid;gap:8px}
+.jt-row{display:grid;grid-template-columns:1fr minmax(160px,220px);gap:10px;align-items:center;padding:8px 8px 8px 12px;border-radius:12px;background:var(--surface-2);border:1.5px solid transparent}
+.jt-row.s-ok{border-color:var(--existenz)} .jt-row.s-alt{border-color:var(--luxus);border-style:dashed} .jt-row.s-bad{border-color:var(--bad)}
+@media (max-width:480px){.jt-row{grid-template-columns:1fr}}
+.gap-in{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.gap-in input{width:120px}
+
+/* Rangfolge */
+.rank{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.rank li{display:flex;align-items:center;gap:10px;padding:10px 10px 10px 12px;border-radius:12px;background:var(--surface-2)}
+.rank .pos{width:30px;height:30px;border-radius:9px;background:var(--c);color:var(--on-accent);display:grid;place-items:center;font-weight:800;flex:none;font-variant-numeric:tabular-nums}
+.rank .e{font-size:22px}
+.rank .lbl{flex:1;font-weight:700;line-height:1.25}
+.rank .lbl small{display:block;font-weight:400;color:var(--muted);font-size:14px}
+.mv{font:inherit;width:42px;height:42px;border-radius:10px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;display:grid;place-items:center}
+.mv:disabled{opacity:.35;cursor:default}
+.think{border-radius:14px;padding:12px 14px;border:1.5px dashed var(--luxus);display:flex;gap:10px;align-items:flex-start}
+.think p{margin:0}
+.think .i{color:var(--luxus-ink);margin-top:2px}
+.scale{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+@media (max-width:560px){.scale{grid-template-columns:1fr}}
+.scale label{display:grid;place-items:center;text-align:center;gap:4px;padding:10px 6px;border-radius:12px;background:var(--surface-2);border:1.5px solid transparent;cursor:pointer;font-size:14px;font-weight:700;min-height:56px}
+.scale input{position:absolute;opacity:0;pointer-events:none}
+.scale label:has(input:checked){background:var(--c);color:var(--on-accent)}
+.scale label:has(input:focus-visible){outline:3px solid var(--kultur);outline-offset:2px}
+.bonus{border-radius:16px;padding:18px;border:2px solid var(--luxus);background:var(--surface);display:grid;gap:12px}
+.bonus h3{margin:0;font-size:19px;display:flex;gap:8px;align-items:center}
+.bonus .star{color:var(--luxus)}
+
+/* Sichern */
+.trio{display:grid;gap:10px}
+.trio-row{display:grid;grid-template-columns:52px 1fr;gap:12px;align-items:start}
+.big{width:52px;height:52px;border-radius:14px;background:var(--c);color:var(--on-accent);display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:26px}
+.trio-row .fields{display:grid;gap:8px}
+.trio-row .three{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+@media (max-width:560px){.trio-row .three{grid-template-columns:1fr}}
+.trio-row input.s-ok{border-color:var(--existenz);background:var(--existenz-soft)}
+.trio-row input.s-bad{border-color:var(--luxus)}
+.over-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px}
+.ov{border-radius:12px;padding:12px;background:var(--c-soft);display:grid;gap:4px}
+.ov b{font-family:var(--display);color:var(--c-ink)}
+.ov span{font-size:14px;color:var(--ink);font-variant-numeric:tabular-nums}
+.code{font-family:ui-monospace,Consolas,monospace;font-size:13px;min-height:90px;word-break:break-all}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:720px){.split{grid-template-columns:1fr}}
+.half{border-radius:14px;background:var(--c-soft);padding:14px;display:grid;gap:10px;align-content:start;min-width:0}
+.half h4{margin:0;font-size:17px;color:var(--c-ink)}
+
+/* Popover */
+.pop{position:absolute;z-index:60;width:min(340px,calc(100vw - 32px));background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px 16px;box-shadow:var(--shadow);display:grid;gap:6px}
+.pop h4{margin:0;font-size:18px;padding-right:34px}
+.pop p{margin:0;font-size:15px}
+.pop .x{position:absolute;top:8px;right:8px;width:34px;height:34px;border-radius:9px;border:0;background:var(--surface-2);color:var(--ink);font:inherit;font-size:18px;cursor:pointer}
+@media (max-width:560px){.pop{position:fixed;left:12px!important;right:12px;top:auto!important;bottom:calc(84px + env(safe-area-inset-bottom,0px));width:auto}}
+
+/* Blättern */
+.pager{position:fixed;left:0;right:0;bottom:0;z-index:40;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line)}
+.pager-in{max-width:980px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.pager-in .where{font-size:14px;color:var(--muted);text-align:center;font-variant-numeric:tabular-nums}
+
+/* Einkommens-Werkstatt: Ergänzungen */
+:root{--s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a;--s4:#eda100;--s5:#e87ba4;--s6:#008300;--free:#D3DDD6}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--s5:#d55181;--s6:#008300;--free:#2F3B35}}
+:root[data-theme="dark"]{--s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--s5:#d55181;--s6:#008300;--free:#2F3B35}
+.srcs{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media (max-width:620px){.srcs{grid-template-columns:1fr}}
+.srcs .tier .e{font-size:26px;line-height:1}
+.srcs .tier b{font-size:17px}
+.mi-row{flex-wrap:wrap}
+#srcSort{grid-template-columns:repeat(auto-fill,minmax(290px,1fr))}
+#srcSort .mi-row{flex-direction:column;align-items:stretch;gap:6px}
+.seg4{display:grid;grid-template-columns:repeat(4,1fr)}
+.seg4 button{padding:7px 4px;font-size:13.5px}
+.rule{border-radius:12px;padding:12px 14px;background:var(--surface-2);display:grid;gap:4px}
+.rule p{margin:0}
+.src{font-size:13px;color:var(--muted)}
+p.src{margin:0}
+.law blockquote{margin:0;padding:10px 14px;border-left:4px solid var(--sichern);background:var(--sichern-soft);border-radius:0 12px 12px 0;font-style:italic;max-width:68ch}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;max-width:420px}
+table.tg{border-collapse:collapse;width:100%;font-size:15px;font-variant-numeric:tabular-nums}
+.tg th,.tg td{padding:8px 12px;text-align:left;border-bottom:1px solid var(--line)}
+.tg th{background:var(--surface-2);font-size:13px;color:var(--muted)}
+.tg tr:last-child td{border-bottom:0}
+.tg tbody tr:nth-child(3){background:var(--c-soft);font-weight:700}
+.cases{display:grid;gap:8px}
+.case{display:grid;grid-template-columns:1fr auto;gap:6px 12px;align-items:center;padding:10px 10px 10px 14px;border-radius:12px;background:var(--surface-2);border:1.5px solid transparent}
+.case p{margin:0}
+.case .why{grid-column:1/-1;font-size:14px;color:var(--muted)}
+.case.s-ok{border-color:var(--existenz)} .case.s-bad{border-color:var(--bad)}
+@media (max-width:520px){.case{grid-template-columns:1fr}}
+.pe{font-size:20px}
+.eur{display:inline-flex;align-items:center;gap:6px}
+.eur input{width:96px}
+.jt-row .eur{justify-self:start}
+.jt-row .eur input{width:110px}
+.plan{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;align-items:start}
+@media (max-width:760px){.plan{grid-template-columns:1fr}}
+.plan-col{display:grid;gap:10px;min-width:0}
+.plan h4{margin:6px 0 0;font-size:16px;color:var(--c-ink)}
+.money{display:grid;gap:6px}
+.mrow{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 6px 6px 12px;border-radius:12px;background:var(--surface-2)}
+.ml{display:inline-flex;align-items:center;gap:8px;font-size:15px}
+.mctl{display:inline-flex;align-items:center;gap:6px}
+.mctl .mv{width:38px;height:38px;font-size:18px;font-weight:800}
+.mctl input{width:72px;text-align:right;padding:8px 10px}
+.sw{display:inline-block;width:12px;height:12px;border-radius:4px;flex:none}
+.sw.free{background:var(--free)}
+.goalrow{display:flex;gap:8px;flex-wrap:wrap}
+.goalrow input[type=text]{flex:1;min-width:150px}
+.pstat{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-radius:14px;background:var(--surface-2)}
+.pstat b{display:block;font-family:var(--display);font-size:17px}
+.pstat span{font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
+.pstat .pico{display:grid;place-items:center;width:32px;height:32px;border-radius:10px;flex:none}
+.pstat.ok{background:var(--existenz-soft)} .pstat.ok .pico{background:var(--existenz);color:var(--on-accent)}
+.pstat.mid{background:var(--luxus-soft)} .pstat.mid .pico{background:var(--luxus);color:var(--on-accent)}
+.pstat.bad{background:var(--bad-soft)} .pstat.bad .pico{background:var(--bad);color:var(--on-accent)}
+.stack{display:flex;gap:2px;height:30px;border-radius:8px;overflow:hidden;background:var(--surface)}
+.seg-b{height:100%;min-width:3px}
+.seg-b:first-child{border-radius:4px 0 0 4px}.seg-b:last-child{border-radius:0 4px 4px 0}
+.seg-b.free{background:var(--free)}
+table.legend-t{border-collapse:collapse;width:100%;font-size:15px;font-variant-numeric:tabular-nums}
+.legend-t td{padding:5px 4px;border-bottom:1px solid var(--line)}
+.legend-t td:first-child{display:flex;align-items:center;gap:8px}
+.legend-t td.v,.legend-t td.p{text-align:right;white-space:nowrap}
+.legend-t td.p{color:var(--muted);width:56px}
+.quiz{display:grid;gap:10px}
+.qz{border:1.5px solid var(--line);border-radius:12px;padding:10px 14px 12px;margin:0;display:grid;gap:6px}
+.qz legend{font-weight:700;padding:0 4px}
+.qz label{display:flex;gap:10px;align-items:center;padding:6px 8px;border-radius:9px;cursor:pointer}
+.qz label:has(input:checked){background:var(--c-soft)}
+.qz input{width:18px;height:18px;accent-color:var(--c)}
+.qz.s-ok{border-color:var(--existenz)} .qz.s-bad{border-color:var(--bad)}
+.fbox{border-radius:12px;border:1.5px dashed var(--sichern);background:var(--surface)}
+.fbox.has{border-style:solid;background:var(--sichern-soft)}
+.fbox>summary{cursor:pointer;padding:10px 14px;font-weight:700;color:var(--sichern-ink);list-style:none;display:flex;align-items:center;gap:8px}
+.fbox>summary::-webkit-details-marker{display:none}
+.fbox>summary::before{content:"";width:8px;height:8px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s}
+.fbox[open]>summary::before{transform:rotate(45deg)}
+.fbox-in{padding:0 14px 14px;display:grid;gap:10px}
+.fbl{font-size:14px;font-weight:700;color:var(--muted)}
+.fbin{min-height:80px}
+a.btn{text-decoration:none}
+.resume{background:var(--surface)}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:720px){.split{grid-template-columns:1fr}}
+.half{border-radius:14px;background:var(--c-soft);padding:14px;display:grid;gap:10px;align-content:start;min-width:0}
+.half h4{margin:0;font-size:17px;color:var(--c-ink)}
+.howto{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+@media (max-width:680px){.howto{grid-template-columns:1fr}}
+.howto div{border-radius:12px;padding:10px 12px;background:var(--sichern-soft);font-size:15px}
+.howto b{display:block;color:var(--sichern-ink);font-family:var(--display)}
+
+/* Elektronik-Grundlagen: Grafikfarben (hell/dunkel) und eigene Bausteine */
+:root{--e-line:#22303a;--e-bg:#fff;--e-board:#2f8f5b;--e-cu:#c77b30;--e-sol:#b9c2c9;--e-solhi:#fff;--e-lead:#9aa5ad;--e-red:#c8402e;--e-blue:#2a6fb0;--e-glow:#ff5a3c;--e-dmm:#f2b400;--e-dmmf:#2b3238;--e-lcd:#c9d8c0;--e-lcdt:#1d2a1d}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--e-line:#e3eaee;--e-bg:#17201c;--e-board:#2c7a52;--e-sol:#c9d1d7;--e-lead:#aab4bb}}
+:root[data-theme="dark"]{--e-line:#e3eaee;--e-bg:#17201c;--e-board:#2c7a52;--e-sol:#c9d1d7;--e-lead:#aab4bb}
+.eg{display:block;width:100%;height:auto;max-height:70vh}
+.eg-w,.eg-w2,.eg-wire{fill:none;stroke:var(--e-line);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.eg-w2{stroke-width:2}
+.eg-wire{stroke-width:3}
+.eg-s{fill:var(--e-bg);stroke:var(--e-line);stroke-width:2.5;stroke-linejoin:round}
+.eg-s0{fill:none;stroke:var(--e-line);stroke-width:2}
+.eg-p{fill:none;stroke:var(--e-line);stroke-width:3.5}
+.eg-p3{fill:none;stroke:var(--e-line);stroke-width:9}
+.eg-ah{fill:var(--e-line)}
+.eg-dot{fill:var(--e-line)}
+.eg-dot0{fill:var(--e-bg);stroke:var(--e-line);stroke-width:2}
+.eg-bg{fill:var(--surface)}
+.eg-t,.eg-tm,.eg-tp,.eg-tn,.eg-tl,.eg-tw{font-family:var(--body);font-weight:700;fill:var(--ink)}
+.eg-t{font-size:15px}.eg-c{text-anchor:middle}
+.eg-ts{font-family:var(--body);font-size:13px;font-weight:700;fill:var(--muted)}
+.eg-tm{font-size:18px;text-anchor:middle}
+.eg-tp{font-size:16px}
+.eg-tn{font-size:15px}
+.eg-tl{font-size:13px;text-anchor:middle}
+.eg-tw{font-size:22px;fill:#fff;text-anchor:middle}
+.eg-sym{max-width:150px}
+.eg-lead{fill:none;stroke:var(--e-lead);stroke-width:5;stroke-linecap:round}
+.eg-rbody{fill:#e4cfa0;stroke:#9c8456;stroke-width:1.5}
+.eg-band{stroke:#0003;stroke-width:.6}
+.eg-ledd{fill:#e2392f;fill-opacity:.82;stroke:#9c1e17;stroke-width:1.5}
+.eg-ledr{fill:#e2392f;stroke:#9c1e17;stroke-width:1.5}
+.eg-ledi{fill:none;stroke:#7c140f;stroke-width:3;opacity:.6}
+.eg-elko{fill:#2c56a8;stroke:#163064;stroke-width:1.5}
+.eg-elkos{fill:#b9c8e6}
+.eg-ldr{fill:#e7c48b;stroke:#8f6b2e;stroke-width:1.5}
+.eg-ldrz{fill:none;stroke:#b5442a;stroke-width:3}
+.eg-to92{fill:#2a2f33;stroke:#000;stroke-width:1}
+.eg-rel{fill:#2a2f33;stroke:#000}
+.eg-relc{fill:none;stroke:#888;stroke-width:2}
+.eg-glow{fill:var(--e-glow)}
+.eg-edot{fill:var(--e-blue)}
+.eg-warn{color:var(--bad);font-weight:700}
+.eg-bb{fill:#f1f1ec;stroke:#b8b8ae;stroke-width:1.5}
+.eg-hole{fill:#55585b}
+.eg-railp{fill:none;stroke:var(--e-red);stroke-width:2}
+.eg-railm{fill:none;stroke:var(--e-blue);stroke-width:2}
+.eg-col{fill:none;stroke:#2e9a5e;stroke-width:3}
+.eg-gap{stroke:#c9c9bf;stroke-width:6}
+.eg-board{fill:var(--e-board)}
+.eg-pad{fill:var(--e-cu)}
+.eg-lead2{fill:var(--e-lead)}
+.eg-solder{fill:var(--e-sol);stroke:#6b7780;stroke-width:1.2}
+.eg-shine{fill:none;stroke:var(--e-solhi);stroke-width:3;stroke-linecap:round;opacity:.9}
+.eg-cold{fill:#8d9298;stroke:#5a6066;stroke-width:1.2;stroke-dasharray:3 2}
+.eg-gapw{stroke:#e03b2f;stroke-width:3}
+.eg-comp{fill:#5677b8;stroke:var(--e-line);stroke-width:1.5}
+.eg-heat{fill:#ff8a3c;fill-opacity:.28}
+.eg-iron{fill:#8e979e;stroke:var(--e-line);stroke-width:1.5}
+.eg-ironb{fill:none;stroke:#3a4148;stroke-width:22;stroke-linecap:round}
+.eg-wiresol{fill:none;stroke:var(--e-sol);stroke-width:7;stroke-linecap:round}
+.eg-joint{max-width:200px}
+.eg-dmm{fill:var(--e-dmm);stroke:#a37a00;stroke-width:2}
+.eg-dmmf{fill:var(--e-dmmf)}
+.eg-lcd{fill:var(--e-lcd)} .eg-lcd.bad{fill:#f3c2bb}
+.eg-lcdt{font:700 44px ui-monospace,Menlo,Consolas,monospace;fill:var(--e-lcdt);text-anchor:end}
+.eg-dial{fill:#40484f;stroke:#11161a;stroke-width:3}
+.eg-knob{fill:#f4f6f7}
+.eg-dpos{font:700 12px var(--body);fill:#cfd6db;text-anchor:middle}
+.eg-dpos.on{fill:#ffd23f}
+.eg-sock{fill:#1a1e21;stroke:#d24b3b;stroke-width:3} .eg-sock.com{stroke:#888}
+.eg-sock.on{stroke:#ffd23f}
+.eg-cblk{fill:none;stroke:#111;stroke-width:6;stroke-linecap:round}
+.eg-cred{fill:none;stroke:#d0302a;stroke-width:6;stroke-linecap:round}
+/* Tabellen, Kacheln */
+.eg-ct{border-collapse:collapse;width:100%;min-width:460px;font-size:15px}
+.eg-ct th,.eg-ct td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:left}
+.eg-ct thead th{background:var(--c-soft);color:var(--c-ink)}
+.sw{display:inline-block;width:18px;height:18px;border-radius:4px;border:1px solid #0004;vertical-align:-4px;margin-right:8px}
+.symgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}
+.symgrid figure{margin:0;border:1px solid var(--line);border-radius:12px;padding:8px;background:var(--surface);display:grid;gap:4px;justify-items:center;text-align:center;font-size:14px;font-weight:700}
+.partgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.partgrid figure{margin:0;border:1px solid var(--line);border-radius:12px;padding:10px;background:var(--surface);display:grid;gap:6px;font-size:14px}
+.partgrid figure svg{max-height:150px}
+.partgrid figcaption b{display:block;font-size:15px}
+.figsel{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+.figsel .ft{border:1.5px solid var(--line);border-radius:12px;padding:8px;background:var(--surface);display:grid;gap:6px;justify-items:center}
+.figsel .ft .no{font-weight:800;color:var(--muted);font-size:13px;justify-self:start}
+.figsel select{width:100%;min-height:42px;font-size:15px}
+.figsel .ft.s-ok{border-color:var(--existenz)} .figsel .ft.s-bad{border-color:var(--bad)}
+.drill{display:grid;gap:10px}
+.drill .dq{border-radius:12px;padding:12px 14px;background:var(--surface-2);display:grid;gap:8px}
+.drill .dq svg{max-width:320px}
+.drill .streak{display:flex;gap:6px;align-items:center;font-size:14px;font-weight:700;color:var(--muted)}
+.drill .streak i{width:16px;height:16px;border-radius:99px;border:2px solid var(--c);display:inline-block}
+.drill .streak i.on{background:var(--c)}
+.drill .row2{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.drill input,.drill select{min-height:44px}
+.drill input{width:150px}
+.est{display:grid;gap:8px}
+.est .val{font:800 22px var(--display);color:var(--c-ink)}
+.est input[type=range]{width:100%;accent-color:var(--c);min-height:40px}
+.est .reveal{border-radius:12px;padding:10px 12px;background:var(--kultur-soft)}
+.dmmw{display:grid;grid-template-columns:minmax(200px,280px) 1fr;gap:16px;align-items:start}
+@media (max-width:640px){.dmmw{grid-template-columns:1fr}.dmmw .dmmfig{max-width:260px;justify-self:center}}
+.dmmw .sc{display:flex;flex-wrap:wrap;gap:6px}
+.dmmw .sc .btn[aria-pressed="true"]{background:var(--c);color:var(--on-accent)}
+.dmmw .ctl{display:grid;gap:10px}
+.dmmw label.fbl{margin:0}
+.dmmw select{min-height:44px;font-size:15px}
+.dmmw .opt{display:flex;flex-wrap:wrap;gap:6px}
+.dmmw .opt label{display:flex;gap:6px;align-items:center;padding:8px 10px;border-radius:10px;background:var(--surface-2);cursor:pointer}
+.dmmw .msg{border-radius:12px;padding:10px 12px;background:var(--surface-2);font-size:15px;min-height:3em}
+.dmmw .msg.ok{background:var(--existenz-soft)} .dmmw .msg.bad{background:var(--bad-soft)}
+.dmmw .scdesc{font-size:15px;margin:0}
+.help2{display:grid;gap:6px;margin-top:4px}
+.help2 .row{gap:6px}
+.help2 .hbox{border-radius:12px;padding:10px 12px;background:var(--luxus-soft);font-size:15px}
+.tipbox{border-radius:14px;padding:12px 14px;background:var(--kultur-soft);display:grid;gap:6px;font-size:15px}
+.tipbox h4{margin:0;font-size:15px}
+.tipbox p,.tipbox ul{margin:0}.tipbox ul{padding-left:20px}
+.src{font-size:13px;color:var(--muted)}
+.chk{display:grid;gap:12px}
+.chk fieldset{border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;margin:0;display:grid;gap:6px}
+.chk legend{font-weight:700;padding:0 4px}
+.chk label{display:flex;gap:10px;align-items:center;padding:6px 8px;border-radius:10px;background:var(--surface-2);cursor:pointer}
+.chk input[type=checkbox]{width:20px;height:20px;accent-color:var(--c);flex:none}
+.chk textarea{min-height:60px}
+.brand .tlogo{height:46px;width:auto;flex:none;background:#fff;border-radius:10px;padding:4px 6px}
+.anim{display:grid;gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px}
+.anim-fig{max-width:460px;width:100%;justify-self:center}
+.anim-fig.wide{max-width:640px}
+.anim-ctl{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.anim-rl{display:flex;align-items:center;gap:10px;flex:1 1 220px;font-weight:700;font-size:15px}
+.anim-rl input{flex:1;accent-color:var(--c);min-height:40px}
+.anim-steps{display:flex;flex-wrap:wrap;gap:6px}
+.anim-steps .btn{min-height:40px;padding:6px 12px;font-size:15px}
+.anim-steps .btn[aria-pressed="true"]{background:var(--c);color:var(--on-accent)}
+.anim-out{margin:0;font-size:15px;max-width:70ch;min-height:3em}
+
+/* aus der Unternehmens-Werkstatt übernommen */
+.teile{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.teile button{font:inherit;font-size:13px;font-weight:700;min-width:44px;min-height:32px;padding:4px 10px;border-radius:99px;border:1.5px solid rgb(255 255 255 / .55);background:transparent;color:inherit;cursor:pointer}
+.teile button[aria-current="step"]{background:var(--on-accent);color:var(--c);border-color:var(--on-accent)}
+.teile button.done::after{content:" ✓"}
+.st-btn{flex:0 0 auto}
+.mi.w2{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+.mi-row{flex-wrap:wrap}
+.mi-row>span{flex:1 1 140px}
+.seg{flex-wrap:wrap}
+.seg button{border-right:1px solid var(--line)}
+.seg button:last-child{border-right:0}
+@media (max-width:440px){.mi-row{flex-direction:column;align-items:stretch}.seg{display:flex}.seg button{flex:1}}
+.multi{display:grid;gap:6px}
+.multi label{display:flex;gap:10px;align-items:center;padding:8px 10px;border-radius:10px;background:var(--surface-2);border:1.5px solid transparent;cursor:pointer}
+.multi label:has(input:checked){background:var(--c-soft)}
+.multi input{width:20px;height:20px;accent-color:var(--c);flex:none}
+.multi label.s-ok{border-color:var(--existenz)} .multi label.s-bad{border-color:var(--bad)}
+.rank li.s-ok{outline:2px solid var(--existenz)} .rank li.s-bad{outline:2px solid var(--bad)}
+.muster{border-radius:12px;padding:12px 14px;background:var(--existenz-soft);color:var(--ink);display:grid;gap:6px}
+.muster h4{margin:0;font-size:16px;color:var(--existenz-ink)}
+.muster p,.muster ul{margin:0}
+.muster ul{padding-left:20px}
+.rate{display:grid;gap:10px}
+.rate fieldset{border:1.5px solid var(--line);border-radius:12px;padding:10px 12px 12px;margin:0;display:grid;gap:8px}
+.rate legend{font-weight:700;padding:0 4px}
+.rate .scale{grid-template-columns:repeat(4,1fr)}
+@media (max-width:560px){.rate .scale{grid-template-columns:repeat(2,1fr)}}
+.scale label{position:relative}
+.sumlist{display:grid;gap:6px;margin:0;padding:0;list-style:none}
+.sumlist li{display:flex;justify-content:space-between;gap:10px;padding:8px 12px;border-radius:10px;background:var(--surface-2)}
+.lic{margin:26px 0 0;font-size:13px;color:var(--muted);text-align:center}
+.lic a{color:inherit}
+.lp-kiopt{margin:4px 0 0;border:1.5px dashed #8a7ad6;border-radius:12px;padding:8px 12px}
+.lp-kiopt summary{cursor:pointer;font-weight:700;color:#5b4bb5}
+.lp-kiopt .row{margin:8px 0}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .lp-kiopt summary{color:#b9adf5}}
+:root[data-theme="dark"] .lp-kiopt summary{color:#b9adf5}
+.cloze select{font-size:16px}
+.pairs{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:560px){.pairs{grid-template-columns:1fr}}
+.pairs .pcol{display:grid;gap:8px;align-content:start}
+.pairs h4{margin:0;font-size:14px;color:var(--muted)}
+.pc{display:flex;align-items:center;gap:9px;padding:9px 11px;min-height:48px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-size:15px;line-height:1.25;text-align:left;cursor:pointer}
+.pc .k{flex:none;width:26px;height:26px;border-radius:8px;display:grid;place-items:center;font-weight:800;font-size:13px;background:var(--surface-2);color:var(--muted)}
+.pc .k.on{background:var(--c);color:var(--on-accent)}
+.pc[aria-pressed="true"]{outline:3px solid var(--c);outline-offset:2px}
+.pc.s-ok{border-color:var(--existenz)} .pc.s-bad{border-color:var(--bad)}
+.marktext{margin:0;line-height:2;max-width:70ch}
+.ms{font:inherit;font-size:16px;line-height:1.5;color:var(--ink);background:var(--surface-2);border:1.5px solid transparent;border-radius:8px;padding:2px 6px;margin:2px 2px;cursor:pointer;text-align:left;-webkit-box-decoration-break:clone;box-decoration-break:clone;display:inline}
+.ms[aria-pressed="true"]{background:var(--c-soft);border-color:var(--c);font-weight:700}
+.ms.s-ok{border-color:var(--existenz);background:var(--existenz-soft)} .ms.s-bad{border-color:var(--bad);background:var(--bad-soft)}
+.numin{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.numin input{width:150px}
+.numin input.s-ok{border-color:var(--existenz)} .numin input.s-bad{border-color:var(--bad)}
+code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overflow:auto;padding:8px 10px;border-radius:10px;background:var(--surface-2)}
+.qz{border:1.5px solid var(--line);border-radius:12px;padding:10px 12px;margin:0;display:grid;gap:6px}
+.qz legend{font-weight:700;padding:0 4px}
+.qz label{display:flex;gap:10px;align-items:center;padding:6px 8px;border-radius:10px;background:var(--surface-2);cursor:pointer}
+.qz.s-ok{border-color:var(--existenz)} .qz.s-bad{border-color:var(--bad)}
+.quiz{display:grid;gap:10px}
+.info ul{margin:0;padding-left:20px;display:grid;gap:4px;max-width:66ch}
+
+/* Beschriften */
+.lab{display:grid;grid-template-columns:minmax(220px,360px) 1fr;gap:16px;align-items:start}
+@media (max-width:640px){.lab{grid-template-columns:1fr}}
+.lab-fig{position:relative;max-width:360px;width:100%;justify-self:center}
+.lab.wide{grid-template-columns:1fr}.lab.wide .lab-fig{max-width:580px}
+.lab-fig svg{touch-action:manipulation}
+.lab .mk circle{fill:var(--c);stroke:#fff;stroke-width:2.5;cursor:pointer}
+.lab .mk text{fill:var(--on-accent);font:800 15px var(--body);text-anchor:middle;pointer-events:none}
+.lab .mk.armed circle{fill:#ffd23f}
+.lab .mk.drop circle{stroke:#ffd23f;stroke-width:5}
+.lab-side{display:grid;gap:10px;align-content:start}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:inherit;font-size:15px;font-weight:700;padding:7px 12px;min-height:40px;border-radius:99px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none}
+.chip[aria-pressed="true"]{outline:3px solid var(--c);outline-offset:2px}
+.chip.used{opacity:.4}
+.chip.ghost{position:fixed;z-index:80;pointer-events:none;box-shadow:var(--shadow);opacity:.95}
+.slots{display:grid;gap:6px;margin:0;padding:0;list-style:none}
+.slot{display:flex;align-items:center;gap:10px;padding:6px 8px;border-radius:12px;background:var(--surface-2);border:1.5px solid transparent;min-height:46px;cursor:pointer;font:inherit;color:var(--ink);text-align:left;width:100%}
+.slot .k{flex:none;width:28px;height:28px;border-radius:99px;background:var(--c);color:var(--on-accent);display:grid;place-items:center;font-weight:800;font-size:14px}
+.slot .v{font-weight:700}
+.slot .v.empty{color:var(--muted);font-weight:400}
+.slot.drop{border-color:var(--c);border-style:dashed}
+.slot.s-ok{border-color:var(--existenz)} .slot.s-bad{border-color:var(--bad)}
+
+/* Tabelle ausfüllen */
+.tbox{overflow-x:auto;border-radius:12px;border:1px solid var(--line)}
+.gt{border-collapse:collapse;width:100%;min-width:620px;font-size:15px}
+.gt th,.gt td{padding:8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:middle}
+.gt thead th{background:var(--c-soft);color:var(--c-ink);font-family:var(--display)}
+.gt tbody th{font-weight:700;width:150px}
+.gt select{min-height:40px;padding:6px 8px;font-size:15px}
+.gt select.s-ok{border-color:var(--existenz);background:var(--existenz-soft)} .gt select.s-bad{border-color:var(--bad);background:var(--bad-soft)}
+
+.lab.wide{grid-template-columns:1fr}.lab.wide .lab-fig{max-width:580px}
+
+</style></head><body>
+<div class="app">
+  <header class="top">
+    <div class="brand">
+      <img class="tlogo" src="data:image/png;base64,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" alt="Logo: dein Technik Lehrer">
+      <div>
+        <h1>Elektronik-Grundlagen</h1>
+        <p>Selbstlern-Fortbildung für Lehrkräfte · Technik und AWT</p>
+      </div>
+    </div>
+    <div class="meter" aria-label="Fortschritt">
+      <div class="meter-row"><span>Dein Fortschritt</span><span id="progTxt">0 %</span></div>
+      <div class="bar"><i id="progBar"></i></div>
+    </div>
+    <span class="ki-pill"><svg class="i" viewBox="0 0 24 24"><path d="m5 12 4 4 10-10"/></svg><span>Automatische Checks · Rechenaufgaben mit Zufallswerten</span></span>
+  </header>
+
+  <nav class="stations" id="nav" aria-label="Kapitel"></nav>
+
+  <main id="main">
+
+<!-- ================= KAPITEL 0: START ================= -->
+<section class="station c-entdecken" data-ch="0">
+  <div class="info">
+
+    <h3>Willkommen zur Fortbildung Elektronik-Grundlagen</h3>
+    <p>Diese Lernplattform bereitet dich auf den Praxistag vor und dient danach zum Nachschlagen. Du brauchst kein Vorwissen: Wir starten bei Spannung, Strom und Widerstand und kommen über Bauteile, Schaltpläne, Löten und Messen bis zu einer fertigen Unterrichtseinheit, der LED-Leuchte mit Dämmerungsschalter.</p>
+    <p>Jedes Kapitel besteht aus kurzen Häppchen. Rechenaufgaben bekommen Zufallswerte, du kannst sie also beliebig oft üben. Zu schwierigen Aufgaben gibt es einen Tipp und eine Teillösung. Am Ende speicherst du dein Ergebnis als PDF, zusammen mit einer Checkliste für deinen eigenen Fachraum.</p>
+
+
+  </div>
+  <details class="fbox resume" id="lpUp1">
+    <summary>Schon angefangen? Mit Ergebnis-PDF oder Sicherungscode weiterarbeiten</summary>
+    <div class="fbox-in">
+      <label class="fbl" for="codeIn1">Sicherungscode einfügen</label>
+      <textarea id="codeIn1" class="code" placeholder="LPS0.…"></textarea>
+      <div class="row"><button class="btn accent" type="button" data-loadcode="codeIn1">Code laden</button></div>
+      <p class="hint" data-loadnote="codeIn1" hidden aria-live="polite"></p>
+      <p class="hint">Heb die Original-PDF auf. Eine in Notability neu exportierte PDF oder ein Bildschirmfoto enthält deinen Arbeitsstand meist nicht.</p>
+    </div>
+  </details>
+</section>
+
+<section class="station c-entdecken" data-ch="0" hidden>
+  <div class="info">
+    <h3>Was weißt du schon?</h3>
+    <p>Hier geht es nicht um richtig oder falsch. Die drei Schätzfragen zeigen dir, wo du stehst. Schätz einfach, leg deine Schätzung fest und vergleiche dann mit dem Wert darunter.</p>
+  </div>
+  <article class="task">
+    <header><span class="num"></span><h3>Strom für eine LED</h3><button class="op" data-op="schätzen" type="button">schätzen</button></header>
+    <p class="q">Schätze, wie viel Strom eine übliche rote LED mit 5 mm Durchmesser im Betrieb braucht.</p>
+    <div class="w" data-t="e1"></div>
+  </article>
+  <article class="task">
+    <header><span class="num"></span><h3>Heiße Spitze</h3><button class="op" data-op="schätzen" type="button">schätzen</button></header>
+    <p class="q">Schätze die Temperatur der Lötspitze beim Löten mit bleifreiem Lot.</p>
+    <div class="w" data-t="e2"></div>
+  </article>
+  <article class="task">
+    <header><span class="num"></span><h3>Wann wird Spannung gefährlich?</h3><button class="op" data-op="schätzen" type="button">schätzen</button></header>
+    <p class="q">Schätze, ab welcher Gleichspannung eine Spannung im Unterricht als berührungsgefährlich gilt.</p>
+    <div class="w" data-t="e3"></div>
+  </article>
+</section>
+
+<!-- ================= KAPITEL 1: GRUNDGRÖSSEN ================= -->
+<section class="station c-kultur" data-ch="1" hidden>
+  <div class="info">
+    <h3>Spannung, Strom und Widerstand</h3>
+    <p>Stell dir einen Wasserkreislauf vor. Die Pumpe erzeugt Druck, das Wasser fließt durch ein Rohr, eine enge Stelle bremst es.</p>
+    <ul>
+      <li>Die <b>Spannung</b> ist wie der Druck der Pumpe. Sie treibt den Strom an. Formelzeichen U, Einheit <b>Volt (V)</b>. Eine Batterie oder ein Netzgerät liefert die Spannung.</li>
+      <li>Die <b>Stromstärke</b> sagt, wie viel elektrische Ladung pro Sekunde fließt, wie die Wassermenge im Rohr. Formelzeichen I, Einheit <b>Ampere (A)</b>. 1 A = 1000 mA (Milliampere).</li>
+      <li>Der <b>Widerstand</b> bremst den Strom wie eine enge Stelle im Rohr. Formelzeichen R, Einheit <b>Ohm (Ω)</b>. 1 kΩ = 1000 Ω.</li>
+      <li>Die <b>Leistung</b> gibt an, wie viel Energie pro Sekunde umgesetzt wird. Formelzeichen P, Einheit <b>Watt (W)</b>. Es gilt P = U · I.</li>
+    </ul>
+    <p>Strom fließt nur in einem geschlossenen <b>Stromkreis</b>: von der Spannungsquelle über die Bauteile zurück zur Quelle.</p>
+  </div>
+  <article class="task">
+    <header><span class="num"></span><h3>Größen und Einheiten</h3><button class="op" data-op="zuordnen" type="button">zuordnen</button></header>
+    <p class="q">Ordne jeder Größe ihr Formelzeichen und ihre Einheit zu.</p>
+    <div class="w" data-t="t1"></div>
+  </article>
+</section>
+
+<section class="station c-kultur" data-ch="1" hidden>
+  <div class="info">
+    <h3>Das ohmsche Gesetz</h3>
+    <p>Spannung, Strom und Widerstand hängen zusammen: <b>U = R · I</b>. Daraus folgt <b>I = U : R</b> und <b>R = U : I</b>. Mehr Spannung bedeutet mehr Strom, mehr Widerstand bedeutet weniger Strom.</p>
+    <p>Wichtig beim Rechnen: Stromstärken in Ampere einsetzen. 20 mA sind 0,02 A. Probier es in der Simulation aus: Stell Spannung und Widerstand ein und lies die Stromstärke ab.</p>
+  </div>
+  <div data-sim="r"></div>
+  <article class="task">
+    <header><span class="num"></span><h3>Rechnen mit dem ohmschen Gesetz</h3><button class="op" data-op="ermitteln" type="button">ermitteln</button></header>
+    <p class="q">Ermittle die fehlende Größe. Löse drei Aufgaben hintereinander richtig.</p>
+    <div class="w" data-t="t2"></div>
+  </article>
+</section>
+
+<!-- ================= KAPITEL 2: BAUTEILE ================= -->
+<section class="station c-existenz" data-ch="2" hidden>
+  <div class="info">
+    <h3>Widerstände und ihr Farbcode</h3>
+    <p>Auf kleinen Widerständen steht der Wert nicht als Zahl, sondern als <b>Farbcode</b> aus Ringen. Bei vier Ringen gilt: <b>1. Ring</b> erste Ziffer, <b>2. Ring</b> zweite Ziffer, <b>3. Ring</b> Multiplikator (so viele Nullen hängst du an), <b>4. Ring</b> Toleranz. Der Toleranzring (meist gold) steht etwas abseits, von der anderen Seite fängst du an zu lesen.</p>
+    <p>Beispiel: gelb (4), violett (7), rot (× 100), gold (± 5 %) ergibt 47 · 100 Ω = 4700 Ω = 4,7 kΩ.</p>
+    <div class="tbox" data-ctable></div>
+  </div>
+  <article class="task">
+    <header><span class="num"></span><h3>Farbcode-Trainer</h3><button class="op" data-op="ermitteln" type="button">ermitteln</button></header>
+    <p class="q">Ermittle den Wert des Widerstands in Ohm. Du kannst auch k schreiben, zum Beispiel 4,7k. Löse drei Aufgaben hintereinander richtig.</p>
+    <div class="w" data-t="t3"></div>
+  </article>
+</section>
+
+<section class="station c-existenz" data-ch="2" hidden>
+  <div class="info">
+    <h3>Die Leuchtdiode (LED)</h3>
+    <p>Eine <b>LED</b> lässt Strom nur in eine Richtung durch, die <b>Durchlassrichtung</b>. Ihr Plus-Anschluss heißt <b>Anode</b>, das ist das <b>längere Bein</b>. Der Minus-Anschluss heißt <b>Kathode</b>, das ist das <b>kürzere Bein</b>. Auf der Seite der Kathode ist der Rand der LED <b>abgeflacht</b>. Im Schaltzeichen zeigt das Dreieck in Stromrichtung, der Strich steht für die Kathode.</p>
+    <p>Andersherum eingebaut leuchtet die LED nicht. Eine LED darf nie ohne <b>Vorwiderstand</b> an eine Batterie: Der Strom würde zu groß, und die LED geht kaputt. Probier es in der Simulation aus.</p>
+  </div>
+  <div data-sim="led"></div>
+  <article class="task">
+    <header><span class="num"></span><h3>LED beschriften</h3><button class="op" data-op="benennen" type="button">benennen</button></header>
+    <p class="q">Benenne die markierten Stellen der LED: Zieh jeden Begriff auf die passende Nummer oder tippe erst den Begriff und dann die Nummer an.</p>
+    <div class="w" data-t="t4"></div>
+  </article>
+</section>
+
+<section class="station c-existenz" data-ch="2" hidden>
+  <div class="info">
+    <h3>Den Vorwiderstand berechnen</h3>
+    <p>An der LED fällt eine feste Spannung ab, die <b>Durchlassspannung U<sub>F</sub></b>. Den Rest der Batteriespannung muss der Vorwiderstand aufnehmen. Den passenden Strom <b>I<sub>F</sub></b> und die Durchlassspannung findest du im <b>Datenblatt</b> der LED. Es gilt:</p>
+    <p><b>R<sub>V</sub> = (U<sub>B</sub> − U<sub>F</sub>) : I<sub>F</sub></b> &nbsp; (U<sub>B</sub> = Batteriespannung)</p>
+    <p>Beispiel: 9 V Batterie, rote LED mit 2,0 V und 20 mA: R<sub>V</sub> = (9 V − 2,0 V) : 0,02 A = 350 Ω.</p>
+    <p>Widerstände gibt es nur in bestimmten Werten, zum Beispiel in der <b>E12-Reihe</b>: 10, 12, 15, 18, 22, 27, 33, 39, 47, 56, 68, 82 und deren Zehnfache (100, 120 … 820, 1000 …). Nimm den <b>nächstgrößeren Wert</b>, dann bleibt der Strom etwas kleiner und die LED ist sicher. Im Beispiel: 390 Ω.</p>
+  </div>
+  <article class="task">
+    <header><span class="num"></span><h3>Vorwiderstand-Trainer</h3><button class="op" data-op="ermitteln" type="button">ermitteln</button></header>
+    <p class="q">Ermittle den Vorwiderstand und wähle den passenden Wert aus der E12-Reihe. Löse zwei Aufgaben hintereinander richtig.</p>
+    <div class="w" data-t="t5"></div>
+  </article>
+</section>
+
+<section class="station c-existenz" data-ch="2" hidden>
+  <div class="info">
+    <h3>Kondensator, LDR, Transistor und Relais</h3>
+    <div class="partgrid" data-parts></div>
+    <ul>
+      <li>Ein <b>Kondensator</b> speichert für kurze Zeit elektrische Ladung und gibt sie wieder ab, zum Beispiel um Spannungsschwankungen zu glätten. Beim <b>Elektrolytkondensator (Elko)</b> musst du auf die Polung achten, der Minus-Anschluss ist mit einem Streifen markiert.</li>
+      <li>Der <b>Fotowiderstand (LDR)</b> ändert seinen Widerstand mit dem Licht: Bei Helligkeit ist sein Widerstand <b>klein</b>, bei Dunkelheit <b>groß</b>.</li>
+      <li>Der <b>Transistor</b> ist ein elektronischer Schalter und Verstärker. Ein kleiner Strom an der <b>Basis (B)</b> schaltet einen größeren Strom zwischen <b>Kollektor (C)</b> und <b>Emitter (E)</b>.</li>
+      <li>Das <b>Relais</b> ist ein Schalter mit Elektromagnet. Fließt Strom durch die Spule, zieht der Magnet einen Kontakt an und schaltet einen zweiten, getrennten Stromkreis.</li>
+    </ul>
+  </div>
+  <article class="task">
+    <header><span class="num"></span><h3>Bauteil und Eigenschaft</h3><button class="op" data-op="zuordnen" type="button">zuordnen</button></header>
+    <p class="q">Ordne jedem Bauteil seine Eigenschaft zu.</p>
+    <div class="w" data-t="t6"></div>
+  </article>
+</section>
+
+<!-- ================= KAPITEL 3: SCHALTPLAN ================= -->
+<section class="station c-luxus" data-ch="3" hidden>
+  <div class="info">
+    <h3>Schaltzeichen</h3>
+    <p>Im Schaltplan zeichnet man Bauteile nicht als Bild, sondern als genormtes <b>Schaltzeichen</b> (nach DIN EN 60617). Die Linien sind Leitungen, ein dicker Punkt ist eine Verbindung (Knoten).</p>
+    <div class="symgrid" data-symgrid></div>
+  </div>
+  <article class="task">
+    <header><span class="num"></span><h3>Schaltzeichen erkennen</h3><button class="op" data-op="zuordnen" type="button">zuordnen</button></header>
+    <p class="q">Ordne jedem Schaltzeichen den richtigen Namen zu.</p>
+    <div class="w" data-t="t7"></div>
+  </article>
+</section>
+
+<section class="station c-luxus" data-ch="3" hidden>
+  <div class="info">
+    <h3>Der Schaltplan der Dunkelschaltung</h3>
+    <p>So sieht der Schaltplan eines Dämmerungsschalters aus, der <b>Dunkelschaltung</b>. Oben liegt die Leitung mit Plus (9 V), unten die mit Minus (0 V). Links bilden ein <b>Potentiometer</b> (einstellbarer Widerstand) und ein <b>LDR</b> einen Spannungsteiler. Die Mitte dazwischen ist mit der Basis des <b>Transistors</b> verbunden. Rechts liegen <b>Vorwiderstand</b>, <b>LED</b> und Transistor hintereinander. Die <b>Batterie</b> versorgt alles.</p>
+  </div>
+  <article class="task">
+    <header><span class="num"></span><h3>Bauteile im Schaltplan</h3><button class="op" data-op="benennen" type="button">benennen</button></header>
+    <p class="q">Benenne die nummerierten Bauteile im Schaltplan.</p>
+    <div class="w" data-t="t8"></div>
+  </article>
+</section>
+
+<section class="station c-luxus" data-ch="3" hidden>
+  <div class="info">
+    <h3>So funktioniert die Dunkelschaltung</h3>
+    <p>Potentiometer und LDR teilen die 9 V unter sich auf: Am größeren Widerstand fällt die größere Spannung ab. Der LDR liegt zwischen Basis und Minus. Wird es <b>dunkel</b>, steigt der Widerstand des LDR. Damit steigt auch die Spannung an der <b>Basis</b>. Ab etwa 0,7 V fließt ein kleiner Basisstrom, der Transistor <b>schaltet durch</b>. Jetzt fließt Strom von Plus durch Vorwiderstand und LED über Kollektor und Emitter nach Minus: Die LED leuchtet.</p>
+    <p>Wird es hell, sinkt der Widerstand des LDR, die Basisspannung fällt, der Transistor sperrt und die LED geht aus. Mit dem Potentiometer stellst du ein, wie dunkel es werden muss.</p>
+  </div>
+  <article class="task">
+    <header><span class="num"></span><h3>Wenn es dunkel wird</h3><button class="op" data-op="ordnen" type="button">ordnen</button></header>
+    <p class="q">Ordne, was in der Dunkelschaltung nacheinander passiert, wenn es dunkel wird.</p>
+    <div class="w" data-t="t9"></div>
+  </article>
+</section>
+
+<section class="station c-luxus" data-ch="3" hidden>
+  <div class="info">
+    <h3>Vom Schaltplan zum Aufbau</h3>
+    <p>Zum Ausprobieren steckst du die Schaltung auf ein <b>Steckbrett</b>, ganz ohne Löten. Im Steckbrett sind immer die fünf Löcher einer Spalte leitend miteinander verbunden. Der <b>Mittelsteg</b> trennt die obere von der unteren Hälfte. Die langen <b>Randleisten</b> nutzt du für Plus und Minus.</p>
+    <p>Für ein haltbares Gerät lötest du die Bauteile auf eine <b>Lochrasterplatine</b>. Bei einer <b>Streifenrasterplatine</b> sind die Löcher einer Reihe über Kupferstreifen verbunden. Wo keine Verbindung sein darf, unterbrichst du den Streifen, zum Beispiel mit einem Bohrer. Übertrage jede Verbindung aus dem Schaltplan und hake sie im Plan ab.</p>
+  </div>
+  <div class="fig" data-fig="steckbrett" data-aria="Steckbrett mit verbundenen Spalten und Randleisten"></div>
+  <article class="task">
+    <header><span class="num"></span><h3>Steckbrett und Platine</h3><button class="op" data-op="beschreiben" type="button">beschreiben</button></header>
+    <p class="q">Beschreibe Steckbrett und Platine: Wähle in jeder Lücke das passende Wort.</p>
+    <div class="w" data-t="t10"></div>
+  </article>
+</section>
+
+<!-- ================= KAPITEL 4: LÖTEN ================= -->
+<section class="station c-entdecken" data-ch="4" hidden>
+  <div class="info">
+    <h3>Löten in vier Schritten</h3>
+    <p>Beim <b>Weichlöten</b> verbindest du Bauteil und Platine mit geschmolzenem <b>Lot</b>. Im Lötdraht steckt ein Flussmittel, das die Oberflächen reinigt, damit das Lot gut fließt. Wichtig: Erwärmt werden Lötpad und Bauteilbein, das Lot gibst du an die heiße Lötstelle, nicht an die Spitze. Schau dir die Schritte an.</p>
+  </div>
+  <div data-anim="solder"></div>
+  <article class="task">
+    <header><span class="num"></span><h3>Die richtige Reihenfolge</h3><button class="op" data-op="ordnen" type="button">ordnen</button></header>
+    <p class="q">Ordne die Arbeitsschritte beim Löten.</p>
+    <div class="w" data-t="t11"></div>
+  </article>
+</section>
+
+<section class="station c-entdecken" data-ch="4" hidden>
+  <div class="info">
+    <h3>Typische Lötfehler</h3>
+    <div class="partgrid" data-joints></div>
+    <ul>
+      <li><b>Gute Lötstelle:</b> glänzend, sieht aus wie ein kleiner Vulkan, das Lot umschließt Bein und Pad.</li>
+      <li><b>Kalte Lötstelle:</b> matt und kugelig, das Lot ist nicht auf das Pad geflossen. Ursache: Lötstelle zu kurz oder zu wenig erwärmt oder beim Erstarren bewegt.</li>
+      <li><b>Zu viel Lot:</b> eine dicke Kugel, man sieht nicht, ob das Lot am Pad hält.</li>
+      <li><b>Zu wenig Lot:</b> Pad nur teilweise bedeckt, die Verbindung hält schlecht.</li>
+      <li><b>Lötbrücke:</b> Lot verbindet zwei Pads, die nicht verbunden sein dürfen. Das gibt einen Kurzschluss.</li>
+    </ul>
+  </div>
+  <article class="task">
+    <header><span class="num"></span><h3>Lötstellen beurteilen</h3><button class="op" data-op="zuordnen" type="button">zuordnen</button></header>
+    <p class="q">Ordne jeder Lötstelle die passende Bezeichnung zu.</p>
+    <div class="w" data-t="t12"></div>
+  </article>
+</section>
+
+<section class="station c-entdecken" data-ch="4" hidden>
+  <div class="info">
+    <h3>Lötstation pflegen</h3>
+    <ul>
+      <li>Die <b>Lötspitze</b> immer verzinnt halten. Vor dem Ablegen etwas frisches Lot auf die Spitze geben, das schützt sie.</li>
+      <li>Die Spitze an einem feuchten <b>Schwamm</b> oder in <b>Messingwolle</b> abstreifen, nicht abschmirgeln oder abfeilen.</li>
+      <li>Die Temperatur nicht höher als nötig einstellen. Für bleifreies Lot nennt die RiSU eine Lötspitzentemperatur von etwa 390 bis 400 °C.</li>
+      <li>Den Lötkolben immer in die <b>Ablage</b> stellen, nie auf den Tisch legen. Die Spitze nicht als Hebel oder Schraubendreher benutzen.</li>
+      <li>Vor der Arbeit das <b>Kabel</b> auf Schäden prüfen, nach der Arbeit die Station ausschalten.</li>
+    </ul>
+  </div>
+  <article class="task">
+    <header><span class="num"></span><h3>Gut für die Lötspitze</h3><button class="op" data-op="nennen" type="button">nennen</button></header>
+    <p class="q">Nenne alle Handgriffe, die die Lötspitze schonen: Wähle alle passenden aus.</p>
+    <div class="w" data-t="t13"></div>
+  </article>
+</section>
+
+<!-- ================= KAPITEL 5: MESSEN ================= -->
+<section class="station c-kultur" data-ch="5" hidden>
+  <div class="info">
+    <h3>Messen mit dem Multimeter</h3>
+    <ul>
+      <li>Die <b>schwarze</b> Messleitung steckt immer in <b>COM</b>. Die <b>rote</b> steckt für Spannung und Widerstand in <b>VΩ</b>, für Strom in <b>mA</b> oder <b>10A</b>.</li>
+      <li><b>Spannung</b> misst du <b>parallel</b>: Die Messspitzen berühren die beiden Anschlüsse des Bauteils oder der Batterie.</li>
+      <li><b>Strom</b> misst du <b>in Reihe</b>: Du trennst den Stromkreis auf und baust das Messgerät dazwischen ein. Der Strom fließt durch das Messgerät.</li>
+      <li><b>Widerstand</b> misst du nur ohne Spannung, am besten am ausgebauten Bauteil.</li>
+      <li>Den <b>Messbereich</b> wählst du etwas größer als den erwarteten Wert. Zeigt die Anzeige nur eine <b>1</b>, ist der Wert zu groß für den Bereich: nächstgrößeren Bereich wählen. Weißt du nicht, was dich erwartet, fängst du mit dem größten Bereich an.</li>
+      <li>Ein Strommesser hat fast keinen Widerstand. Parallel angeschlossen erzeugt er einen <b>Kurzschluss</b>, die Sicherung im Gerät brennt durch.</li>
+    </ul>
+  </div>
+  <article class="task">
+    <header><span class="num"></span><h3>Richtig anschließen</h3><button class="op" data-op="unterscheiden" type="button">unterscheiden</button></header>
+    <p class="q">Unterscheide richtige und falsche Messungen: Wähle jeweils die passende Antwort.</p>
+    <div class="w" data-t="t14"></div>
+  </article>
+</section>
+
+<section class="station c-kultur" data-ch="5" hidden>
+  <div class="info">
+    <h3>Das Multimeter ausprobieren</h3>
+    <p>Hier misst du an einer Schaltung mit 9-V-Batterie, Vorwiderstand und LED. Stell für jede Messung den Drehschalter ein, steck die rote Leitung in eine Buchse und wähle, wie du das Gerät anschließt. Die Anzeige reagiert sofort, auch auf Fehler. Probier ruhig aus, was bei einer falschen Einstellung passiert.</p>
+  </div>
+  <article class="task">
+    <header><span class="num"></span><h3>Drei Messungen</h3><button class="op" data-op="messen" type="button">messen</button></header>
+    <p class="q">Miss Spannung, Strom und Widerstand richtig und im genauesten Messbereich. Stell alle drei Messungen ein, dann prüfe.</p>
+    <div class="w" data-t="t15"></div>
+  </article>
+</section>
+
+<!-- ================= KAPITEL 6: SICHERHEIT ================= -->
+<section class="station c-existenz" data-ch="6" hidden>
+  <div class="info">
+
+    <h3>Löten im Unterricht</h3>
+    <p>Die Richtlinie zur Sicherheit im Unterricht (RiSU) regelt das Löten an Schulen. Die wichtigsten Punkte:</p>
+    <ul>
+      <li><b>Weichlöten ist erlaubt.</b> Für übliche Lötarbeiten reicht in der Regel die natürliche Raumlüftung (Fensterlüftung). <span class="src">RiSU I – 4.5, S. 49</span></li>
+      <li><b>Nur bleifreies Lot</b> verwenden. Bleihaltiges Lot darf nach der RoHS-Richtlinie nicht mehr verwendet werden. <span class="src">RiSU I – 4.5, S. 49</span></li>
+      <li>Bleifreies Lot braucht mehr Wärme: Lötspitze etwa 390 bis 400 °C, Lötzeit über 3 Sekunden. <span class="src">RiSU II – 5.6, Tabelle 7, S. 128</span></li>
+      <li><b>Kein Lötwasser</b> (Salzsäure) verwenden. Vor der Arbeit die <b>Zuleitungen</b> prüfen. Die heiße Spitze darf das Kabel nicht berühren: möglichst Lötkolben mit Silikonkabel oder Lötstationen mit 12 V Ausgangsspannung einsetzen. <span class="src">RiSU II – 5.6, S. 128</span></li>
+      <li>Nach der Arbeit <b>Hände waschen</b>. Überstehende Drahtenden so abschneiden, dass sie nicht durch die Luft fliegen. <span class="src">RiSU II – 5.6, S. 128</span></li>
+      <li>Lötkolben und Lötstation: Jahrgang 5/6 <b>teilselbstständig</b>, ab Jahrgang 7 <b>selbstständig</b>. Eine Einweisung ist erforderlich. <span class="src">RiSU I – 4.3.2, Tabelle 4, S. 48</span></li>
+    </ul>
+    <p class="src">Quelle: Richtlinie zur Sicherheit im Unterricht (RiSU), Empfehlung der Kultusministerkonferenz, Beschluss vom 09.09.1994 i. d. F. vom 21.09.2023 (<a href="https://www.kmk.org/fileadmin/Dateien/veroeffentlichungen_beschluesse/1994/1994_09_09-Sicherheit-im-Unterricht.pdf" target="_blank" rel="noopener">PDF bei der KMK</a>). Weitere Hilfen: <a href="https://www.sichere-schule.de/" target="_blank" rel="noopener">Sichere Schule (DGUV)</a>, <a href="https://publikationen.dguv.de/" target="_blank" rel="noopener">DGUV-Publikationen</a>.</p>
+
+
+  </div>
+  <article class="task">
+    <header><span class="num"></span><h3>Sicherheitscheck am Lötplatz</h3><button class="op" data-op="überprüfen" type="button">überprüfen</button></header>
+    <p class="q">Überprüfe, wie Jona und Ela am Lötplatz arbeiten: Markiere alle Sätze, in denen jemand gegen eine Sicherheitsregel verstößt.</p>
+    <div class="w" data-t="t16"></div>
+  </article>
+</section>
+
+
+<section class="station c-existenz" data-ch="6" hidden>
+  <div class="info">
+    <h3>Spannungen im Schülerexperiment</h3>
+    <ul>
+      <li>Schülerinnen und Schüler dürfen grundsätzlich nicht mit <b>berührungsgefährlicher Spannung</b> experimentieren, also über 25 V Wechselspannung oder 60 V Gleichspannung. <span class="src">RiSU III – 7.2, S. 266</span></li>
+      <li>Als Spannungsquelle eignen sich Batterien, Akkus oder Netzgeräte mit Sicherheitstransformator nach EN 61558-2-6. <b>Steckernetzteile und Ladegeräte</b> für Handys oder Laptops sind zum Experimentieren nicht geeignet. <span class="src">RiSU III – 7.2.1, S. 266</span></li>
+      <li>Aufbau, Umbau und Abbau nur im spannungsfreien Zustand. Die Lehrkraft prüft den Aufbau vor dem Einschalten. <span class="src">RiSU III – 7.3, S. 268</span></li>
+    </ul>
+    <div class="tipbox"><h4>Im Unterricht</h4><p>Die Dunkelschaltung mit 9-V-Batterie liegt weit unter diesen Grenzen. Das eigentliche Risiko beim Löten sind Verbrennungen und Brandgefahr am Lötplatz. Plane deshalb eine feste Einweisung mit Betriebsanweisung, eine Ablage pro Lötplatz und einen freien, nicht brennbaren Arbeitsbereich ein.</p></div>
+  </div>
+  <article class="task">
+    <header><span class="num"></span><h3>Was die RiSU sagt</h3><button class="op" data-op="herausarbeiten" type="button">herausarbeiten</button></header>
+    <p class="q">Arbeite die Regeln der RiSU heraus: Wähle in jeder Lücke das passende Wort.</p>
+    <div class="w" data-t="t17"></div>
+  </article>
+</section>
+
+
+<!-- ================= KAPITEL 7: UNTERRICHTSEINHEIT / PROJEKT ================= -->
+<section class="station c-luxus" data-ch="7" hidden>
+  <div class="info">
+
+    <h3>Unterrichtseinheit LED-Leuchte mit LDR</h3>
+    <p class="hint">Diese Station wird gerade mit der Unterrichtseinheit LED-Tischleuchte (Fassung 06.2026) abgeglichen: Ablauf, Stolperstellen der Schüler:innen, Material zum Herunterladen und Lösungen hinter dem Lehrkräfte-Passwort folgen.</p>
+
+
+  </div>
+</section>
+
+<!-- ================= KAPITEL 8: SELBSTTEST ================= -->
+<section class="station c-sichern" data-ch="8" hidden>
+  <div class="info">
+    <h3>Selbsttest: Rechnen und Messen</h3>
+    <p>Im Selbsttest gibt es keine neuen Informationen. Die Aufgaben mischen ohmsches Gesetz, Farbcode und Vorwiderstand. Wenn du hängst, schau in den Kapiteln davor nach.</p>
+  </div>
+  <article class="task">
+    <header><span class="num"></span><h3>Gemischte Rechenaufgaben</h3><button class="op" data-op="ermitteln" type="button">ermitteln</button></header>
+    <p class="q">Ermittle die gesuchten Werte. Löse vier Aufgaben hintereinander richtig.</p>
+    <div class="w" data-t="t18"></div>
+  </article>
+  <article class="task">
+    <header><span class="num"></span><h3>Was misst du so?</h3><button class="op" data-op="zuordnen" type="button">zuordnen</button></header>
+    <p class="q">Ordne jede Beschreibung der Messung von Spannung, Strom oder Widerstand zu.</p>
+    <div class="w" data-t="t19"></div>
+  </article>
+</section>
+
+<section class="station c-sichern" data-ch="8" hidden>
+  <div class="info">
+    <h3>Selbsttest: Erklären</h3>
+    <p>Schreib in ganzen Sätzen und mit Fachbegriffen. Vergleiche danach mit der Musterlösung.</p>
+  </div>
+  <article class="task">
+    <header><span class="num"></span><h3>Warum ein Vorwiderstand?</h3><button class="op" data-op="erklären" type="button">erklären</button></header>
+    <p class="q">Erkläre, warum eine LED an einer 9-V-Batterie einen Vorwiderstand braucht und wie du seinen Wert bestimmst.</p>
+    <div class="w" data-t="t20"></div>
+  </article>
+</section>
+
+<!-- ================= KAPITEL 9: ABGABE ================= -->
+<section class="station c-sichern" data-ch="9" hidden>
+  <article class="task">
+    <header><span class="num">✓</span><h3>Wie sicher bist du?</h3></header>
+    <p class="q">Schätze dich selbst ein. Das kommt mit in deine Ergebnis-PDF.</p>
+    <div class="rate" id="rate"></div>
+  </article>
+</section>
+
+
+<section class="station c-sichern" data-ch="9" hidden>
+  <article class="task">
+    <header><span class="num">✓</span><h3>Checkliste für deinen Fachraum</h3></header>
+    <p class="q">Hake ab, was in deinem Fachraum schon vorhanden ist. Die Liste kommt mit in deine Ergebnis-PDF, so siehst du später, was noch fehlt.</p>
+    <div class="chk" id="chk"></div>
+  </article>
+</section>
+
+
+<section class="station c-sichern" data-ch="9" hidden>
+  <article class="task">
+    <header><span class="num">✓</span><h3>Dein Ergebnis</h3></header>
+    <ul class="sumlist" id="sumList"></ul>
+    <label class="fbl" for="abgName">Dein Vorname</label>
+    <input type="text" id="abgName" autocomplete="off" placeholder="z. B. Lea">
+    <div class="row"><button class="btn accent" id="pdfBtn" type="button">Ergebnis als PDF speichern</button></div>
+    <p class="hint" id="pdfNote" hidden aria-live="polite"></p>
+    <p class="hint">Leg die Ergebnis-PDF zum Beispiel in Notability ab. Darin steckt auch dein Arbeitsstand.</p>
+  </article>
+  <details class="fbox" id="lpUp2">
+    <summary>Sicherungscode und weiterarbeiten</summary>
+    <div class="fbox-in">
+      <p class="hint">Mit diesem Code kannst du auf einem anderen Gerät weiterarbeiten.</p>
+      <code class="cd" id="codeOut"></code>
+      <div class="row"><button class="btn soft" id="codeCopy" type="button">Code kopieren</button></div>
+      <p class="hint" id="codeNote" hidden aria-live="polite"></p>
+      <label class="fbl" for="codeIn2">Sicherungscode einfügen</label>
+      <textarea id="codeIn2" class="code" placeholder="LPS0.…"></textarea>
+      <div class="row"><button class="btn accent" type="button" data-loadcode="codeIn2">Code laden</button></div>
+      <p class="hint" data-loadnote="codeIn2" hidden aria-live="polite"></p>
+    </div>
+  </details>
+</section>
+
+  </main>
+  <p class="lic">Elektronik-Grundlagen · Daniel Beyrodt (dein Technik Lehrer) · <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> · Alle Grafiken selbst gezeichnet, Schaltzeichen in Anlehnung an DIN EN 60617.</p>
+</div>
+
+<div class="pop" id="pop" role="dialog" aria-modal="false" hidden>
+  <button class="x" id="popX" type="button" aria-label="Schließen">×</button>
+  <h4 id="popH"></h4>
+  <p id="popP"></p>
+</div>
+
+<footer class="pager">
+  <div class="pager-in">
+    <button class="btn soft" id="prev" type="button"><svg class="i" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>Zurück</button>
+    <span class="where" id="where">Station 0.1</span>
+    <button class="btn" id="next" type="button"><span id="nextTxt">Weiter</span><svg class="i" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
+  </div>
+</footer>
+
+<script src="../assets/jspdf.umd.min.js"></script><link rel="stylesheet" href="../assets/lp-support.css"><script>window.LP_CFG={"keys": ["elektronik-grundlagen-v1"], "bottom": 78, "uploadTitle": "Mit Ergebnis-PDF weiterarbeiten", "uploadText": "Lade dein Ergebnis-PDF hoch, das du hier gespeichert hast. Dann machst du dort weiter, wo du aufgehört hast.", "anchors": [{"sel": "#lpUp1 .fbox-in", "mode": "append"}, {"sel": "#lpUp2 .fbox-in", "mode": "append"}], "slug": "elektronik-grundlagen"};</script><script src="../assets/lp-support.js"></script>
+<script>
+/* Elektronik-Grundlagen: eigene Grafiken (SVG), selbst gezeichnet, CC BY-NC-SA 4.0 Daniel Beyrodt.
+   Schaltzeichen in Anlehnung an DIN EN 60617, Bauteile, Stromkreis-Simulation, Löten, Lötfehler, Multimeter ohne Marke.
+   Farben über CSS-Klassen (.eg-…) für hell/dunkel. */
+var EG = (function () {
+  'use strict';
+  var RM = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function f(n) { return Math.round(n * 10) / 10; }
+  function svg(vb, body, label, cls) { return '<svg class="eg' + (cls ? ' ' + cls : '') + '" viewBox="' + vb + '" role="img" aria-label="' + (label || '') + '">' + body + '</svg>'; }
+  var AH = function (x, y, a, s) { s = s || 7; var r = a * Math.PI / 180, b1 = r + 2.6, b2 = r - 2.6; return '<path class="eg-ah" d="M' + f(x) + ' ' + f(y) + 'L' + f(x + s * Math.cos(b1)) + ' ' + f(y + s * Math.sin(b1)) + 'L' + f(x + s * Math.cos(b2)) + ' ' + f(y + s * Math.sin(b2)) + 'Z"/>'; };
+
+  /* ---------------- Schaltzeichen (120 × 60, Anschlüsse bei y = 30) ---------------- */
+  var SYM = {
+    widerstand: function () { return '<path class="eg-w" d="M0 30H35M85 30H120"/><rect class="eg-s" x="35" y="20" width="50" height="20"/>'; },
+    led: function () { return '<path class="eg-w" d="M0 30H45M75 30H120M75 14V46"/><path class="eg-s" d="M45 14V46L75 30Z"/><path class="eg-w2" d="M62 12L74 0M72 16L84 4"/>' + AH(74, 0, -45, 7) + AH(84, 4, -45, 7); },
+    diode: function () { return '<path class="eg-w" d="M0 30H45M75 30H120M75 14V46"/><path class="eg-s" d="M45 14V46L75 30Z"/>'; },
+    kondensator: function () { return '<path class="eg-w" d="M0 30H54M66 30H120"/><path class="eg-p" d="M54 12V48M66 12V48"/>'; },
+    ldr: function () { return '<path class="eg-w" d="M0 30H35M85 30H120"/><rect class="eg-s" x="35" y="20" width="50" height="20"/><path class="eg-w2" d="M30 0L44 14M44 0L58 14"/>' + AH(44, 14, 45, 7) + AH(58, 14, 45, 7); },
+    poti: function () { return '<path class="eg-w" d="M0 30H35M85 30H120M60 60V44"/><rect class="eg-s" x="35" y="20" width="50" height="20"/>' + AH(60, 42, -90, 9); },
+    batterie: function () { return '<path class="eg-w" d="M0 30H55M67 30H120"/><path class="eg-p" d="M55 8V52"/><path class="eg-p3" d="M67 18V42"/><text class="eg-tp" x="44" y="12">+</text>'; },
+    schalter: function () { return '<path class="eg-w" d="M0 30H40M80 30H120M40 30L76 12"/><circle class="eg-dot" cx="40" cy="30" r="3"/><circle class="eg-dot0" cx="80" cy="30" r="3"/>'; },
+    lampe: function () { return '<path class="eg-w" d="M0 30H44M76 30H120"/><circle class="eg-s" cx="60" cy="30" r="16"/><path class="eg-w" d="M49 19L71 41M71 19L49 41"/>'; },
+    transistor: function () { return '<circle class="eg-s0" cx="62" cy="30" r="26"/><path class="eg-w" d="M0 30H50M50 14V46M50 22L78 6V0M50 38L78 54V60"/>' + AH(76, 53, 30, 9); },
+    relais: function () { return '<path class="eg-w" d="M0 30H10M40 30H50"/><rect class="eg-s" x="10" y="18" width="30" height="24"/><path class="eg-w" d="M12 40L38 20"/><path class="eg-w2" d="M40 30H70" stroke-dasharray="4 4"/><path class="eg-w" d="M62 46H76L100 32M100 46H120"/><circle class="eg-dot" cx="76" cy="46" r="3"/><circle class="eg-dot0" cx="100" cy="46" r="3"/>'; },
+    voltmeter: function () { return '<path class="eg-w" d="M0 30H44M76 30H120"/><circle class="eg-s" cx="60" cy="30" r="16"/><text class="eg-tm" x="60" y="36">V</text>'; },
+    amperemeter: function () { return '<path class="eg-w" d="M0 30H44M76 30H120"/><circle class="eg-s" cx="60" cy="30" r="16"/><text class="eg-tm" x="60" y="36">A</text>'; }
+  };
+  function sym(k, lab) { return svg('-6 -8 132 76', SYM[k](), lab || k, 'eg-sym'); }
+
+  /* ---------------- Farbcode ---------------- */
+  var COL = [['schwarz', '#1c1c1c'], ['braun', '#7a4a21'], ['rot', '#d0302a'], ['orange', '#f08a1c'], ['gelb', '#f5d000'], ['grün', '#2f9a4a'], ['blau', '#2a63c4'], ['violett', '#8a45b8'], ['grau', '#8d9399'], ['weiß', '#f4f4f4']];
+  var GOLD = ['gold', '#c9a227'], SILVER = ['silber', '#b9c0c7'];
+  var E12 = [10, 12, 15, 18, 22, 27, 33, 39, 47, 56, 68, 82];
+  function bandsOf(ohm) { var e = 0, v = ohm; while (v >= 100) { v /= 10; e++; } while (v < 10) { v *= 10; e--; } v = Math.round(v); return [COL[Math.floor(v / 10)], COL[v % 10], e >= 0 ? COL[e] : (e === -1 ? GOLD : SILVER), GOLD]; }
+  function fmtOhm(o) { var s = o >= 1e6 ? (o / 1e6) + ' MΩ' : o >= 1e3 ? (o / 1e3) + ' kΩ' : o + ' Ω'; return s.replace('.', ','); }
+  function resistor(ohm, o) {
+    o = o || {}; var b = bandsOf(ohm), body = '';
+    body += '<path class="eg-lead" d="M0 40H48M192 40H240"/>';
+    body += '<path class="eg-rbody" d="M48 26Q48 18 60 18H72Q78 24 86 24H154Q162 24 168 18H180Q192 18 192 26V54Q192 62 180 62H168Q162 56 154 56H86Q78 56 72 62H60Q48 62 48 54Z"/>';
+    [64, 92, 116, 172].forEach(function (x, i) { body += '<rect x="' + (x - 6) + '" y="' + (i === 0 || i === 3 ? 18 : 24) + '" width="' + (i === 3 ? 9 : 12) + '" height="' + (i === 0 || i === 3 ? 44 : 32) + '" fill="' + b[i][1] + '" class="eg-band"/>'; });
+    return svg('0 0 240 80', body, 'Widerstand mit Farbringen' + (o.say ? ': ' + b.map(function (x) { return x[0]; }).join(', ') : ''));
+  }
+  function colorTable() {
+    var r = '<table class="eg-ct"><thead><tr><th>Farbe</th><th>1. und 2. Ring: Ziffer</th><th>3. Ring: mal</th><th>4. Ring: Toleranz</th></tr></thead><tbody>';
+    COL.forEach(function (c, i) { r += '<tr><td><span class="sw" style="background:' + c[1] + '"></span>' + c[0] + '</td><td>' + i + '</td><td>' + (i < 7 ? (i === 0 ? '1' : '1' + '0'.repeat(i)).replace(/(\d)(?=(\d{3})+$)/g, '$1.') : '–') + '</td><td>' + (i === 1 ? '± 1 %' : i === 2 ? '± 2 %' : '') + '</td></tr>'; });
+    r += '<tr><td><span class="sw" style="background:' + GOLD[1] + '"></span>gold</td><td>–</td><td>0,1</td><td>± 5 %</td></tr><tr><td><span class="sw" style="background:' + SILVER[1] + '"></span>silber</td><td>–</td><td>0,01</td><td>± 10 %</td></tr></tbody></table>';
+    return r;
+  }
+
+  /* ---------------- Bauteile ---------------- */
+  var PART = {
+    led: function () { return svg('0 0 160 220', '<path class="eg-ledd" d="M50 40A30 30 0 0 1 110 40V110H50Z"/><rect class="eg-ledr" x="44" y="106" width="72" height="12" rx="2"/><path class="eg-ledr" d="M110 106V118H116V106Z"/><path class="eg-lead" d="M66 118V214M94 118V184"/><path class="eg-ledi" d="M66 70V100M94 60V100M66 70L94 60"/>', 'Leuchtdiode mit langem und kurzem Bein'); },
+    elko: function () { return svg('0 0 120 200', '<rect class="eg-elko" x="30" y="10" width="60" height="110" rx="10"/><rect class="eg-elkos" x="70" y="10" width="14" height="110"/><text class="eg-tw" x="77" y="50">−</text><text class="eg-tw" x="77" y="90">−</text><path class="eg-lead" d="M48 120V196M72 120V176"/>', 'Elektrolytkondensator'); },
+    ldr: function () { return svg('0 0 120 200', '<circle class="eg-ldr" cx="60" cy="56" r="44"/><path class="eg-ldrz" d="M34 36H86V46H34V56H86V66H34V76H86"/><path class="eg-lead" d="M44 98V196M76 98V196"/>', 'Fotowiderstand LDR'); },
+    transistor: function () { return svg('0 0 120 200', '<path class="eg-to92" d="M24 90V40A36 36 0 0 1 96 40V90Z"/><path class="eg-lead" d="M38 90V196M60 90V196M82 90V196"/><text class="eg-tl" x="38" y="190">E</text><text class="eg-tl" x="60" y="190">B</text><text class="eg-tl" x="82" y="190">C</text>', 'Transistor im Kunststoffgehäuse'); },
+    relais: function () { return svg('0 0 160 160', '<rect class="eg-rel" x="20" y="20" width="120" height="90" rx="6"/><path class="eg-lead" d="M40 110V150M70 110V150M100 110V150M120 110V150"/><rect class="eg-relc" x="34" y="34" width="40" height="40" rx="4"/><path class="eg-w2" d="M84 54H124" stroke-dasharray="4 4"/>', 'Relais'); },
+    widerstand: function () { return resistor(4700); }
+  };
+
+  /* ---------------- Stromkreis-Simulation ---------------- */
+  var CPATH = 'M60 60H460V250H60Z';
+  function circuitFig(st) {
+    var b = '<path class="eg-wire" d="' + CPATH + '"/>';
+    b += '<rect class="eg-bg" x="36" y="120" width="48" height="74"/>';
+    b += '<g transform="translate(60 155) rotate(-90)"><path class="eg-p" d="M-26 -22V22"/><path class="eg-p3" d="M-12 -12V12"/></g><text class="eg-t" x="94" y="152">Batterie</text><text class="eg-t" x="94" y="170">' + st.U.toLocaleString('de-DE') + ' V</text><text class="eg-tp" x="44" y="126">+</text>';
+    b += '<rect class="eg-bg" x="170" y="40" width="80" height="40"/>' + (st.on ? '<path class="eg-w" d="M170 60H250"/>' : '<path class="eg-w" d="M170 60L232 34"/>') + '<circle class="eg-dot" cx="170" cy="60" r="4"/><circle class="eg-dot0" cx="250" cy="60" r="4"/><text class="eg-t eg-c" x="210" y="26">Schalter ' + (st.on ? 'zu' : 'offen') + '</text>';
+    b += '<rect class="eg-bg" x="300" y="44" width="90" height="32"/><rect class="eg-s" x="310" y="48" width="70" height="24"/><text class="eg-t eg-c" x="345" y="100">' + (st.led ? 'Vorwiderstand ' : 'Widerstand ') + st.R + ' Ω</text>';
+    if (st.led) {
+      var glow = Math.min(1, st.I / 0.02);
+      b += '<rect class="eg-bg" x="440" y="130" width="40" height="70"/><g transform="translate(460 165) rotate(90)"><path class="eg-s" d="M-16 -16V16L16 0Z"/><path class="eg-w" d="M16 -16V16"/></g>';
+      b += '<circle cx="460" cy="165" r="34" class="eg-glow" fill-opacity="' + f(glow * 0.8) + '"/><text class="eg-t" x="490" y="170">LED</text>';
+    } else {
+      b += '<rect class="eg-bg" x="440" y="130" width="40" height="70"/><circle class="eg-s" cx="460" cy="165" r="20"/><text class="eg-tm" x="460" y="172">A</text><text class="eg-t" x="490" y="170">Strommesser</text>';
+    }
+    b += '<g class="dots"></g>';
+    return { vb: '0 0 600 290', body: b };
+  }
+  function circuit(box, o) {
+    o = o || {};
+    var st = { U: o.U || 9, R: o.R || 470, on: true, led: !!o.led, I: 0 };
+    var wrap = document.createElement('div'); wrap.className = 'anim';
+    var fig = document.createElement('div'); fig.className = 'anim-fig wide';
+    var ctl = document.createElement('div'); ctl.className = 'anim-ctl';
+    var out = document.createElement('p'); out.className = 'anim-out'; out.setAttribute('aria-live', 'polite');
+    function rng(lab, min, max, step, val, fn) { var l = document.createElement('label'); l.className = 'anim-rl'; var i = document.createElement('input'); i.type = 'range'; i.min = min; i.max = max; i.step = step; i.value = val; i.oninput = function () { fn(+i.value); draw(); }; l.append(lab, i); return l; }
+    ctl.append(rng('Spannung', 1.5, 12, 1.5, st.U, function (v) { st.U = v; }), rng('Widerstand', 100, 1000, 10, st.R, function (v) { st.R = v; }));
+    var sw = document.createElement('button'); sw.type = 'button'; sw.className = 'btn soft'; sw.textContent = 'Schalter öffnen'; sw.onclick = function () { st.on = !st.on; sw.textContent = st.on ? 'Schalter öffnen' : 'Schalter schließen'; draw(); };
+    ctl.append(sw);
+    wrap.append(fig, ctl, out); box.appendChild(wrap);
+    var dots = [], p, L, t0 = 0, phase = 0, last = 0;
+    function draw() {
+      var UF = st.led ? 2 : 0; st.I = st.on ? Math.max(0, (st.U - UF) / st.R) : 0;
+      var g = circuitFig(st); fig.innerHTML = svg(g.vb, g.body, st.led ? 'Stromkreis mit Batterie, Schalter, Vorwiderstand und LED' : 'Stromkreis mit Batterie, Schalter, Widerstand und Strommesser');
+      var mA = st.I * 1000, txt;
+      if (st.led) txt = st.on ? '<b>Stromstärke ' + mA.toLocaleString('de-DE', { maximumFractionDigits: 1 }) + ' mA</b> (I = (U − 2 V) : R)<br>' + (mA > 30 ? '<span class="eg-warn">Zu viel Strom: Diese LED würde nach kurzer Zeit kaputtgehen. Nimm einen größeren Vorwiderstand.</span>' : mA < 2 ? 'Fast kein Strom: Die LED leuchtet kaum.' : 'Die LED leuchtet. Je kleiner der Vorwiderstand, desto größer der Strom und desto heller die LED.') : 'Der Schalter ist offen: Kein Strom fließt, die LED ist aus.';
+      else txt = st.on ? '<b>I = U : R = ' + st.U.toLocaleString('de-DE') + ' V : ' + st.R + ' Ω = ' + mA.toLocaleString('de-DE', { maximumFractionDigits: 1 }) + ' mA</b><br>Mehr Spannung bedeutet mehr Strom. Mehr Widerstand bedeutet weniger Strom.' : 'Der Schalter ist offen: Der Stromkreis ist unterbrochen, es fließt kein Strom.';
+      out.innerHTML = txt;
+      var s = fig.querySelector('svg'); p = document.createElementNS('http://www.w3.org/2000/svg', 'path'); p.setAttribute('d', CPATH); p.setAttribute('fill', 'none'); p.setAttribute('stroke', 'none'); s.appendChild(p); L = p.getTotalLength();
+      var gd = s.querySelector('.dots'); dots = [];
+      for (var i = 0; i < 14; i++) { var c = document.createElementNS('http://www.w3.org/2000/svg', 'circle'); c.setAttribute('r', '5'); c.setAttribute('class', 'eg-edot'); gd.appendChild(c); dots.push(c); }
+      place();
+    }
+    function place() { dots.forEach(function (c, i) { var q = p.getPointAtLength(((phase + i / dots.length) % 1) * L); c.setAttribute('cx', q.x); c.setAttribute('cy', q.y); c.style.display = st.I > 0 ? '' : 'none'; }); }
+    function tick(ts) { if (!document.body.contains(fig)) return; if (!last) last = ts; var dt = (ts - last) / 1000; last = ts; if (!fig.closest('[hidden]')) { phase = (phase + dt * Math.min(0.5, st.I * 12)) % 1; place(); } requestAnimationFrame(tick); }
+    draw();
+    if (!RM) requestAnimationFrame(tick);
+    out.insertAdjacentHTML('afterend', '<p class="hint">Die Punkte zeigen die technische Stromrichtung von Plus nach Minus. Ihre Geschwindigkeit steht für die Stromstärke.</p>');
+  }
+
+  /* ---------------- Dunkelschaltung (Schaltplan) ---------------- */
+  function vres(x, y0, h, extra) { return '<rect class="eg-s" x="' + (x - 10) + '" y="' + y0 + '" width="20" height="' + h + '"/>' + (extra || ''); }
+  function dunkel() {
+    var b = '';
+    b += '<path class="eg-wire" d="M60 40H380M60 320H380M60 40V150M60 162V320M200 40V70M200 150V210M200 290V320M380 40V60M380 120V130M380 190V214M380 266V320M200 180H300V240H352"/>';
+    [[200, 40], [200, 320], [200, 180], [380, 40], [380, 320]].forEach(function (q) { b += '<circle class="eg-dot" cx="' + q[0] + '" cy="' + q[1] + '" r="4"/>'; });
+    b += '<path class="eg-p" d="M38 150H82"/><path class="eg-p3" d="M48 162H72"/><text class="eg-tp" x="88" y="150">+</text><text class="eg-tn" x="88" y="176">9 V</text>';
+    b += vres(200, 70, 80) + '<path class="eg-w" d="M168 110H186"/>' + AH(188, 110, 0, 9);
+    b += vres(200, 210, 80) + '<path class="eg-w2" d="M152 220L170 238M152 240L170 258"/>' + AH(170, 238, 45, 7) + AH(170, 258, 45, 7);
+    b += vres(380, 60, 60);
+    b += '<path class="eg-s" d="M364 130H396L380 160Z"/><path class="eg-w" d="M364 160H396M380 160V190"/><path class="eg-w2" d="M400 140L414 128M404 152L418 140"/>' + AH(414, 128, -40, 7) + AH(418, 140, -40, 7);
+    b += '<circle class="eg-s0" cx="368" cy="240" r="28"/><path class="eg-w" d="M352 222V258M352 230L380 214M352 250L380 266"/>' + AH(379, 265, 30, 9);
+    b += '<text class="eg-tn" x="40" y="30">+</text><text class="eg-tn" x="40" y="340">−</text>';
+    return { vb: '0 0 440 350', body: b };
+  }
+
+  /* ---------------- Steckbrett ---------------- */
+  function steckbrett() {
+    var b = '<rect class="eg-bb" x="10" y="10" width="560" height="250" rx="10"/>';
+    for (var r = 0; r < 2; r++) for (var c = 0; c < 25; c++) { b += '<rect class="eg-hole" x="' + (40 + c * 20) + '" y="' + (24 + r * 14) + '" width="7" height="7"/>'; b += '<rect class="eg-hole" x="' + (40 + c * 20) + '" y="' + (218 + r * 14) + '" width="7" height="7"/>'; }
+    for (c = 0; c < 25; c++) for (r = 0; r < 10; r++) b += '<rect class="eg-hole" x="' + (40 + c * 20) + '" y="' + (66 + r * 14 + (r > 4 ? 12 : 0)) + '" width="7" height="7"/>';
+    b += '<rect class="eg-railp" x="34" y="21" width="500" height="12" rx="3"/><rect class="eg-railm" x="34" y="35" width="500" height="12" rx="3"/>';
+    b += '<rect class="eg-col" x="134" y="62" width="15" height="68" rx="3"/><rect class="eg-col" x="134" y="142" width="15" height="68" rx="3"/>';
+    b += '<path class="eg-gap" d="M30 136H550"/>';
+    b += '<text class="eg-t" x="540" y="31">+</text><text class="eg-t" x="540" y="47">−</text>';
+    b += '<path class="eg-w2" d="M141 210V282M330 136V282"/><text class="eg-ts" x="150" y="296">5 Löcher einer Spalte sind leitend verbunden</text><text class="eg-ts" x="340" y="280">Mittelsteg trennt oben und unten</text><text class="eg-ts" x="150" y="314">Randleisten oben: Plus und Minus für die Spannungsversorgung</text>';
+    return { vb: '0 0 580 324', body: b };
+  }
+
+  /* ---------------- Löten ---------------- */
+  function joint(kind, x) {
+    x = x || 0; var pad = '<rect class="eg-pad" x="' + (x + 60) + '" y="96" width="80" height="8"/>', lead = '<rect class="eg-lead2" x="' + (x + 96) + '" y="20" width="8" height="' + (kind === 'pad' ? 70 : 120) + '"/>', s = '';
+    if (kind === 'gut') s = '<path class="eg-solder" d="M' + (x + 62) + ' 104Q' + (x + 92) + ' 106 ' + (x + 96) + ' 132H' + (x + 104) + 'Q' + (x + 108) + ' 106 ' + (x + 138) + ' 104Z"/><path class="eg-shine" d="M' + (x + 108) + ' 112Q' + (x + 114) + ' 108 ' + (x + 126) + ' 107"/>';
+    if (kind === 'kalt') s = '<ellipse class="eg-cold" cx="' + (x + 100) + '" cy="118" rx="22" ry="18"/><path class="eg-gapw" d="M' + (x + 62) + ' 106H' + (x + 78) + 'M' + (x + 122) + ' 106H' + (x + 138) + '"/>';
+    if (kind === 'viel') s = '<ellipse class="eg-solder" cx="' + (x + 100) + '" cy="124" rx="40" ry="28"/>';
+    if (kind === 'wenig') s = '<path class="eg-solder" d="M' + (x + 88) + ' 104Q' + (x + 95) + ' 105 ' + (x + 96) + ' 112H' + (x + 104) + 'Q' + (x + 105) + ' 105 ' + (x + 112) + ' 104Z"/>';
+    var board = '<rect class="eg-board" x="' + (x + 10) + '" y="70" width="180" height="26"/>';
+    return board + pad + lead + s;
+  }
+  function fehler(kind) {
+    var b = '';
+    if (kind === 'bruecke') { b += '<rect class="eg-board" x="0" y="70" width="200" height="26"/><rect class="eg-pad" x="20" y="96" width="60" height="8"/><rect class="eg-pad" x="120" y="96" width="60" height="8"/><rect class="eg-lead2" x="46" y="20" width="8" height="118"/><rect class="eg-lead2" x="146" y="20" width="8" height="118"/><path class="eg-solder" d="M22 104Q50 140 100 128Q150 140 178 104Z"/>'; }
+    else b += joint(kind, 0);
+    return svg('0 0 200 160', b, 'Lötstelle im Schnitt', 'eg-joint');
+  }
+  var STEPS = ['Ausgangslage', '1. Lötstelle erwärmen', '2. Lot zuführen', '3. Lot wegnehmen', '4. Lötkolben wegnehmen'];
+  function solderFig(k) {
+    var b = '<rect class="eg-board" x="40" y="150" width="320" height="30"/><rect class="eg-pad" x="150" y="180" width="100" height="10"/><rect class="eg-lead2" x="196" y="60" width="8" height="190"/><path class="eg-comp" d="M176 60H224V150H176Z"/>';
+    var tip = k >= 1 && k <= 3 ? 'M330 300L246 196L254 188Z' : 'M380 330L296 226L304 218Z';
+    if (k >= 2) b += k === 2 ? '<path class="eg-solder" d="M196 190Q180 192 172 190L196 214Z"/>' : '<path class="eg-solder" d="M156 190Q188 192 196 228H204Q212 192 244 190Z"/><path class="eg-shine" d="M212 200Q220 194 234 193"/>';
+    if (k >= 1 && k <= 3) b += '<circle class="eg-heat" cx="214" cy="198" r="26"/>';
+    b += '<path class="eg-iron" d="' + tip + '"/><path class="eg-ironb" d="' + (k >= 1 && k <= 3 ? 'M330 300L390 380' : 'M380 330L430 400') + '"/>';
+    var wire = k === 2 ? 'M70 330L180 206' : 'M40 360L140 246';
+    b += '<path class="eg-wiresol" d="' + wire + '"/>';
+    b += '<text class="eg-ts" x="40" y="140">Platine</text><text class="eg-ts" x="252" y="186">Lötpad</text><text class="eg-ts" x="226" y="100">Bauteil</text><text class="eg-ts" x="350" y="300">Lötspitze</text><text class="eg-ts" x="40" y="390">Lötdraht</text>';
+    return { vb: '0 0 440 410', body: b };
+  }
+  var STEP_T = ['Platine einspannen, Bauteil einstecken, Beinchen leicht umbiegen.', 'Lötspitze so an die Lötstelle halten, dass sie Lötpad und Bauteilbein gleichzeitig berührt. Beide werden heiß.', 'Lötdraht von der anderen Seite an die heiße Lötstelle halten, nicht an die Lötspitze. Das Lot schmilzt und fließt um das Bein.', 'Sobald genug Lot geflossen ist, den Lötdraht wegnehmen.', 'Lötspitze wegnehmen. Die Lötstelle nicht bewegen, bis das Lot erstarrt ist. Eine gute Lötstelle glänzt und sieht aus wie ein kleiner Vulkan.'];
+  function solder(box) {
+    var wrap = document.createElement('div'); wrap.className = 'anim'; var fig = document.createElement('div'); fig.className = 'anim-fig'; var st = document.createElement('div'); st.className = 'anim-steps'; var out = document.createElement('p'); out.className = 'anim-out'; out.setAttribute('aria-live', 'polite');
+    var k = 0, timer = 0;
+    function draw() { var g = solderFig(k); fig.innerHTML = svg(g.vb, g.body, 'Löten im Schnitt: ' + STEPS[k]); out.innerHTML = '<b>' + STEPS[k] + '</b><br>' + STEP_T[k]; [].forEach.call(st.children, function (b, i) { if (b.dataset.k != null) b.setAttribute('aria-pressed', String(+b.dataset.k === k)); }); }
+    STEPS.forEach(function (s, i) { var b = document.createElement('button'); b.type = 'button'; b.className = 'btn soft'; b.dataset.k = i; b.textContent = i ? String(i) + '.' : 'Start'; b.setAttribute('aria-label', s); b.onclick = function () { stop(); k = i; draw(); }; st.appendChild(b); });
+    var play = document.createElement('button'); play.type = 'button'; play.className = 'btn soft'; play.textContent = 'Abspielen';
+    function stop() { if (timer) clearInterval(timer); timer = 0; play.textContent = 'Abspielen'; }
+    play.onclick = function () { if (timer) { stop(); return; } play.textContent = 'Anhalten'; timer = setInterval(function () { k = (k + 1) % STEPS.length; draw(); }, 2200); };
+    if (!RM) st.appendChild(play);
+    wrap.append(fig, st, out); box.appendChild(wrap); draw();
+  }
+
+  /* ---------------- Multimeter ---------------- */
+  var POSN = [['OFF', 'aus'], ['V⎓ 2', 'V', 2], ['V⎓ 20', 'V', 20], ['V⎓ 200', 'V', 200], ['A⎓ 200m', 'A', 0.2], ['A⎓ 10', 'A', 10], ['Ω 2k', 'O', 2000], ['Ω 20k', 'O', 20000], ['Ω 200k', 'O', 200000]];
+  var PLAB = ['OFF', '2 V', '20 V', '200 V', '200 mA', '10 A', '2 kΩ', '20 kΩ', '200 kΩ'];
+  var SOCK = ['10A', 'mA', 'COM', 'VΩ'];
+  function dmmFig(pos, sock, disp, bad) {
+    var b = '<rect class="eg-dmm" x="10" y="10" width="320" height="420" rx="26"/><rect class="eg-dmmf" x="24" y="24" width="292" height="392" rx="18"/>';
+    b += '<rect class="eg-lcd' + (bad ? ' bad' : '') + '" x="66" y="44" width="208" height="70" rx="8"/><text class="eg-lcdt" x="262" y="96">' + disp + '</text>';
+    var cx = 170, cy = 236, R = 96;
+    b += '<circle class="eg-dial" cx="' + cx + '" cy="' + cy + '" r="46"/>';
+    POSN.forEach(function (p, i) { var a = (-210 + i * (240 / (POSN.length - 1))) * Math.PI / 180, x = cx + R * Math.cos(a), y = cy + R * Math.sin(a); b += '<text class="eg-dpos' + (i === pos ? ' on' : '') + '" x="' + f(x) + '" y="' + f(y + 4) + '">' + PLAB[i] + '</text>'; });
+    var a = (-210 + pos * (240 / (POSN.length - 1))) * Math.PI / 180;
+    b += '<path class="eg-knob" d="M' + f(cx + 40 * Math.cos(a)) + ' ' + f(cy + 40 * Math.sin(a)) + 'L' + f(cx + 10 * Math.cos(a + 1.6)) + ' ' + f(cy + 10 * Math.sin(a + 1.6)) + 'L' + f(cx + 10 * Math.cos(a - 1.6)) + ' ' + f(cy + 10 * Math.sin(a - 1.6)) + 'Z"/>';
+    SOCK.forEach(function (s, i) { var x = 80 + i * 60; b += '<circle class="eg-sock' + (i === 2 ? ' com' : '') + (i === sock ? ' on' : '') + '" cx="' + x + '" cy="372" r="13"/><text class="eg-dpos" x="' + x + '" y="402">' + s + '</text>'; });
+    b += '<path class="eg-cblk" d="M200 372C200 420 280 440 336 440"/>';
+    if (sock >= 0 && sock !== 2) { var x2 = 80 + sock * 60; b += '<path class="eg-cred" d="M' + x2 + ' 372C' + x2 + ' 430 280 452 340 452"/>'; }
+    return { vb: '0 0 344 460', body: b };
+  }
+  function dmmRead(sc, pos, sock, con) {
+    var P = POSN[pos], kind = P[1], rng = P[2];
+    if (kind === 'aus') return ['', 'Das Messgerät ist ausgeschaltet.', 0];
+    if (sock < 0) return ['', 'Steck die rote Messleitung in eine Buchse.', 0];
+    var fmt = function (v, r) { var d = r >= 100 ? 1 : r >= 10 ? 2 : 3; if (kind === 'A' && r < 1) { v *= 1000; d = 1; } if (kind === 'O') { v /= 1000; d = r >= 100000 ? 1 : r >= 10000 ? 2 : 3; } return v.toFixed(d).replace('.', ','); };
+    if ((kind === 'V' || kind === 'O') && SOCK[sock] !== 'VΩ') { if (con === 'p' && sc.q === 'U') return ['0,00', 'Achtung: Die rote Leitung steckt in der Strombuchse. Parallel angeschlossen entsteht ein Kurzschluss über das Messgerät, die Sicherung im Gerät kann durchbrennen.', -1]; return ['0,00', 'Die rote Leitung steckt in der falschen Buchse. Für Spannung und Widerstand gehört sie in VΩ.', -1]; }
+    if (kind === 'A' && SOCK[sock] === 'VΩ') return ['0,00', 'Für die Strommessung gehört die rote Leitung in die Buchse mA (kleine Ströme) oder 10A.', -1];
+    if (kind === 'A' && con === 'p') return ['0,00', 'Kurzschluss! Ein Strommesser hat fast keinen Widerstand. Parallel angeschlossen fließt ein sehr großer Strom durch das Gerät, die Sicherung brennt durch. Strom misst man immer in Reihe.', -1];
+    if (kind === 'A' && rng < 1 && SOCK[sock] === '10A') return ['0,00', 'Bereich und Buchse passen nicht zusammen: Für den Bereich 200 mA gehört die rote Leitung in die Buchse mA.', -1];
+    if (kind === 'A' && rng >= 1 && SOCK[sock] === 'mA') return ['0,02', 'Für den Bereich 10 A gehört die rote Leitung in die Buchse 10A. Bei kleinen Strömen ist der Bereich 200 mA genauer.', -1];
+    if (kind === 'V' && con === 's') return [fmt(9.2, rng), 'Das Messgerät liegt in Reihe: Der Stromkreis ist unterbrochen, die LED geht aus. Spannung misst man parallel zum Bauteil.', -1];
+    if (kind === 'O' && sc.q !== 'R') return ['', 'Widerstand misst man nur an einem ausgebauten Bauteil ohne Spannung. Im laufenden Stromkreis zeigt das Gerät Unsinn an oder nimmt Schaden.', -1];
+    if (kind !== { U: 'V', I: 'A', R: 'O' }[sc.q]) return ['', 'Diese Messart passt nicht zur Aufgabe.', -1];
+    if (sc.v > rng) return ['1', 'Überlauf: Die Anzeige zeigt nur eine 1. Der Messwert ist größer als der Messbereich. Wähle den nächstgrößeren Bereich.', -1];
+    var best = POSN.filter(function (q) { return q[1] === kind && q[2] >= sc.v; }).sort(function (x, y) { return x[2] - y[2]; })[0];
+    if (best && rng !== best[2]) return [fmt(sc.v, rng), 'Das Gerät misst richtig, aber ungenau. Ein kleinerer Messbereich zeigt mehr Stellen an.', 0];
+    return [fmt(sc.v, rng), 'Richtig gemessen: ' + sc.ok, 1];
+  }
+  return { svg: svg, SYM: SYM, sym: sym, resistor: resistor, bandsOf: bandsOf, fmtOhm: fmtOhm, colorTable: colorTable, E12: E12, PART: PART, circuit: circuit, dunkel: dunkel, steckbrett: steckbrett, fehler: fehler, solder: solder, dmmFig: dmmFig, dmmRead: dmmRead, POSN: POSN, SOCK: SOCK, COL: COL };
+})();
+
+</script>
+<script>
+(function(){
+"use strict";
+const VER='L';
+const CFG_W={key:'elektronik-grundlagen-v1',title:'Elektronik-Grundlagen',ch:[[0,'Start','Elektronik kennenlernen'],[1,'Grundgrößen','Spannung, Strom, Widerstand'],[2,'Bauteile','Bauteile kennenlernen'],[3,'Schaltplan','Schaltpläne lesen und aufbauen'],[4,'Löten','Löten'],[5,'Messen','Messen mit dem Multimeter'],[6,'Sicherheit','Sicherheit'],[7,VER==='L'?'Unterrichtseinheit':'Projekt',VER==='L'?'Unterrichtseinheit LED-Leuchte mit LDR':'Projekt Nachtlicht'],[8,'Selbsttest','Selbsttest'],[9,'Abgabe','Abgabe']],
+  rate:['Ich kann Spannung, Strom und Widerstand erklären und mit dem ohmschen Gesetz rechnen.','Ich kann den Farbcode eines Widerstands lesen.','Ich kann eine LED richtig einbauen und ihren Vorwiderstand berechnen.','Ich kann Schaltzeichen benennen und die Dunkelschaltung erklären.','Ich kann eine saubere Lötstelle herstellen und Lötfehler erkennen.','Ich kann Spannung, Strom und Widerstand mit dem Multimeter messen.','Ich kenne die Sicherheitsregeln beim Löten.']};
+const KEY=CFG_W.key;
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const CHECK='<svg class="i" viewBox="0 0 24 24"><path d="m5 12 4 4 10-10"/></svg>';
+function el(t,a,...k){const e=document.createElement(t);if(a)for(const n in a){const v=a[n];if(v==null||v===false)continue;if(n==='class')e.className=v;else if(n==='html')e.innerHTML=v;else if(n.startsWith('on'))e.addEventListener(n.slice(2),v);else e.setAttribute(n,v===true?'':v);}k.flat().forEach(c=>{if(c==null||c===false)return;e.append(c.nodeType?c:document.createTextNode(c));});return e;}
+function unwrap(s){const m=s.match(/viewBox="([^"]+)"[^>]*>([\s\S]*)<\/svg>/);return {vb:m[1],body:m[2]};}
+const FIGLIB={svg:EG.svg,
+  FIG:{led:()=>unwrap(EG.PART.led()),dunkel:()=>EG.dunkel()},
+  POS:{led:{anode:[66,204],kathode:[94,176],flach:[124,112],linse:[80,46]},dunkel:{batterie:[26,190],poti:[236,110],ldr:[236,250],transistor:[412,250],vorw:[410,90],led:[338,150]}}};
+
+const CH=CFG_W.ch.map(c=>c[1]),CH_L=CFG_W.ch.map(c=>c[2]),LAST=CH.length-1;
+
+/* ---------- Aufgaben ---------- */
+const T={
+e1:{type:'est',min:0,max:100,step:1,start:50,unit:'mA',reveal:'Viele übliche 5-mm-LEDs sind für etwa 20 mA ausgelegt, manche für weniger. Der genaue Wert steht im Datenblatt der LED.'},
+e2:{type:'est',min:150,max:550,step:10,start:250,unit:'°C',reveal:'Für bleifreies Lot nennt die RiSU eine Lötspitzentemperatur von etwa 390 bis 400 °C (RiSU II – 5.6, Tabelle 7).'},
+e3:{type:'est',min:0,max:240,step:5,start:120,unit:'V',reveal:'Über 60 V Gleichspannung (und über 25 V Wechselspannung) gilt eine Spannung als berührungsgefährlich. Damit dürfen Schülerinnen und Schüler nicht experimentieren (RiSU III – 7.2).'},
+t1:{type:'pair',kc:'RS22-F4',left:['Spannung','Stromstärke','Widerstand','Leistung'],right:['R, Einheit Ohm (Ω)','P, Einheit Watt (W)','U, Einheit Volt (V)','I, Einheit Ampere (A)'],ans:[2,3,0,1]},
+t2:{type:'drill',kind:'ohm',need:3,kc:'RS22-E3',help:{tip:'Schreib die Formel auf, die nach der gesuchten Größe umgestellt ist: I = U : R, R = U : I oder U = R · I. Rechne Milliampere vorher in Ampere um (20 mA = 0,02 A).',teil:'Beispiel: U = 9 V, R = 450 Ω. I = 9 V : 450 Ω = 0,02 A = 20 mA. Bei R = U : I mit I = 15 mA: erst 15 mA = 0,015 A, dann teilen.'}},
+t3:{type:'drill',kind:'farb',need:3,kc:'PT21-F',help:{tip:'Lies vom Ring weg, der am Rand sitzt. Der goldene Ring ist die Toleranz und kommt zuletzt. Die ersten zwei Ringe sind Ziffern, der dritte sagt, wie viele Nullen du anhängst.',teil:'Beispiel braun, schwarz, orange: 1 und 0 ergibt 10, orange heißt drei Nullen: 10 000 Ω = 10 kΩ. Gold als dritter Ring heißt mal 0,1.'}},
+t4:{type:'label',fig:'led',kc:'RS22-F2',aria:'Leuchtdiode mit nummerierten Stellen',marks:['anode','kathode','flach'],terms:[['Kathode (−, kurzes Bein)','kathode'],['Anode (+, langes Bein)','anode'],['Abflachung auf der Seite der Kathode','flach'],['Basis','x']]},
+t5:{type:'drill',kind:'vorw',need:2,kc:'RS22-E3',help:{tip:'Zuerst die Spannung am Vorwiderstand: Batteriespannung minus Durchlassspannung. Dann durch den Strom in Ampere teilen. In der E12-Liste nimmst du den ersten Wert, der gleich oder größer ist.',teil:'Beispiel: 12 V, blaue LED 3,2 V, 20 mA: (12 V − 3,2 V) : 0,02 A = 8,8 V : 0,02 A = 440 Ω. Nächstgrößerer E12-Wert: 470 Ω.'}},
+t6:{type:'pair',kc:'PT21-F',left:['Kondensator','Elko','LDR','Transistor','Relais'],right:['ein kleiner Basisstrom schaltet einen größeren Strom','speichert kurzzeitig elektrische Ladung','ein Elektromagnet schaltet einen getrennten Stromkreis','hat einen markierten Minus-Anschluss und muss richtig gepolt werden','Widerstand wird bei Dunkelheit groß'],ans:[1,3,4,0,2]},
+t7:{type:'figsel',kc:'PT21-F',opts:['Widerstand','LED','Kondensator','Fotowiderstand (LDR)','Transistor','Batterie','Schalter','Potentiometer'],figs:[['sym:transistor',4],['sym:kondensator',2],['sym:led',1],['sym:schalter',6],['sym:widerstand',0],['sym:ldr',3],['sym:batterie',5],['sym:poti',7]]},
+t8:{type:'label',fig:'dunkel',kc:'PT21-F',aria:'Schaltplan der Dunkelschaltung mit nummerierten Bauteilen',marks:['batterie','poti','ldr','vorw','led','transistor'],terms:[['Transistor','transistor'],['LED','led'],['Batterie','batterie'],['Fotowiderstand (LDR)','ldr'],['Vorwiderstand','vorw'],['Potentiometer','poti']]},
+t9:{type:'order',kc:'RS22-F3',items:['Es wird dunkel, der Widerstand des LDR steigt.','Am LDR fällt mehr Spannung ab, die Spannung an der Basis steigt.','Ab etwa 0,7 V fließt ein kleiner Basisstrom.','Der Transistor schaltet durch, Strom fließt von Kollektor zu Emitter.','Strom fließt durch Vorwiderstand und LED: Die LED leuchtet.'],start:[3,0,4,1,2],help:{tip:'Fang beim Licht an: Was macht der LDR, wenn es dunkel wird? Am Ende steht die LED.',teil:'Die ersten zwei Schritte: 1. Der Widerstand des LDR steigt. 2. Die Spannung an der Basis steigt.'}},
+t10:{type:'gap',kc:'RS22-E4',text:'Im Steckbrett sind die fünf Löcher einer {0} leitend verbunden. Der Mittelsteg {1} die obere und die untere Hälfte. Die langen Randleisten nutzt du für {2}. Auf einer Streifenrasterplatine verbinden {3} die Löcher einer Reihe. Wo keine Verbindung sein darf, musst du den Streifen {4}.',gaps:[[['Spalte','ganzen Platte','Hälfte'],0],[['verbindet','trennt'],1],[['Plus und Minus','den Transistor','Messgeräte'],0],[['Kupferstreifen','Kabelbinder','Lötpads'],0],[['unterbrechen','verzinnen','verlängern'],0]]},
+t11:{type:'order',kc:'RS22-E4',items:['Bauteil einstecken und die Beinchen leicht umbiegen.','Lötspitze an Lötpad und Bauteilbein halten und beide erwärmen.','Lötdraht an die heiße Lötstelle halten, bis das Lot fließt.','Lötdraht wegnehmen.','Lötspitze wegnehmen und die Lötstelle nicht bewegen, bis das Lot erstarrt ist.','Überstehendes Drahtende abschneiden.'],start:[2,5,0,4,1,3]},
+t12:{type:'figsel',kc:'RS22-E4',opts:['gute Lötstelle','kalte Lötstelle','zu viel Lot','zu wenig Lot','Lötbrücke'],figs:[['fehler:viel',2],['fehler:gut',0],['fehler:bruecke',4],['fehler:kalt',1],['fehler:wenig',3]]},
+t13:{type:'multi',kc:'RS22-E4',opts:[['vor dem Ablegen frisches Lot auf die Spitze geben',true],['die Spitze am feuchten Schwamm oder in Messingwolle abstreifen',true],['die Spitze mit Schmirgelpapier blank machen',false],['die Temperatur so hoch wie möglich stellen',false],['den Lötkolben immer in die Ablage stellen',true],['mit der Spitze Bauteile aus der Platine hebeln',false],['die Station nach der Arbeit ausschalten',true]]},
+t14:{type:'quiz',kc:'RS22-E3',qs:[
+  {q:'Um die Spannung an der LED zu messen, hältst du die Messspitzen …',o:['an die beiden Anschlüsse der LED (parallel).','in einen aufgetrennten Stromkreis (in Reihe).'],a:0,why:'Spannung misst man parallel zum Bauteil.'},
+  {q:'Du erwartest etwa 9 V. Den Messbereich stellst du auf …',o:['V= 2','V= 20','V= 200'],a:1,why:'20 V ist der kleinste Bereich, der größer als 9 V ist. Bei 2 V zeigt die Anzeige nur eine 1 (Überlauf).'},
+  {q:'Du hältst die Messspitzen bei der Strommessung parallel an die Batterie. Dann …',o:['zeigt das Gerät den Strom der Schaltung an.','entsteht ein Kurzschluss, die Sicherung im Gerät kann durchbrennen.'],a:1,why:'Der Strommesser hat fast keinen Widerstand. Strom misst man immer in Reihe.'}]},
+t15:{type:'dmm',kc:'RS22-E3',sc:[
+  {t:'Spannung der Batterie',d:'Die Batterie hat etwa 9 V. Miss ihre Spannung.',q:'U',v:9.2,ok:'Die Batterie hat 9,2 V.'},
+  {t:'Strom durch die LED',d:'Durch die LED fließen etwa 20 mA. Miss den Strom.',q:'I',v:0.0184,ok:'Durch die LED fließen 18,4 mA.'},
+  {t:'Widerstand',d:'Du hast den Vorwiderstand ausgebaut. Er hat etwa 5 kΩ. Miss seinen Widerstand.',q:'R',v:4700,ok:'Der Widerstand hat 4,7 kΩ.'}],
+  help:{tip:'Spannung: Bereich etwas größer als 9 V, rote Leitung in VΩ, parallel. Strom: Bereich mA, rote Leitung in mA, in Reihe.',teil:'Spannung: V= 20, VΩ, parallel. Für den Strom brauchst du den Bereich 200 mA. Für 4,7 kΩ ist 20 kΩ der genaueste passende Bereich.'}},
+t16:{type:'mark',kc:'PT33',parts:[['Jona bindet seine langen Haare zusammen, bevor er die Lötstation einschaltet.',false],['Ela legt den heißen Lötkolben kurz auf den Tisch, um ein Bauteil zu holen.',true],['Das Fenster ist gekippt, und Jona hält den Kopf nicht direkt über die Lötstelle.',false],['Ela bemerkt eine geschmolzene Stelle am Kabel des Lötkolbens und lötet trotzdem weiter.',true],['Jona schneidet ein Drahtende ab, ohne es festzuhalten, es fliegt quer durch den Raum.',true],['Nach dem Löten waschen beide ihre Hände.',false],['Ela schließt ihre Schaltung zum Testen an ein Handy-Ladegerät an.',true]]},
+t17:{type:'gap',kc:'PT33',text:'Lötkolben und Lötstation dürfen Schülerinnen und Schüler in Jahrgang 5/6 {0} benutzen, ab Jahrgang 7 {1}. Erlaubt ist nur {2} Lot. Für übliche Lötarbeiten reicht in der Regel {3}. Im Schülerexperiment ist eine Gleichspannung über {4} berührungsgefährlich und nicht erlaubt.',gaps:[[['teilselbstständig','selbstständig','gar nicht'],0],[['unter Aufsicht','selbstständig','nur mit Prüfung'],1],[['bleifreies','bleihaltiges','beliebiges'],0],[['die Fensterlüftung','eine Atemschutzmaske','ein Abzug wie in der Chemie'],0],[['12 V','25 V','60 V'],2]]},
+t18:{type:'drill',kind:'mix',need:4,kc:'RS22-E3',help:{tip:'Ohmsches Gesetz: U = R · I. Farbcode: Ziffer, Ziffer, Nullen. Vorwiderstand: (U_B − U_F) : I_F, dann nächstgrößerer E12-Wert.',teil:'Rechne Milliampere immer zuerst in Ampere um: 20 mA = 0,02 A, 15 mA = 0,015 A.'}},
+t19:{type:'seg',kc:'RS22-E3',cats:['Spannung','Strom','Widerstand'],items:[['Messspitzen an die beiden Pole der Batterie halten',0],['Stromkreis auftrennen und das Messgerät dazwischen einbauen',1],['Bauteil ausbauen und an beide Anschlüsse halten',2],['rote Leitung in die Buchse mA stecken',1],['Ergebnis in Ohm',2],['Ergebnis in Volt',0]]},
+t20:{type:'open',kc:'RS22-F2',min:120,checks:[['Strom zu groß',/strom|ampere|groß/i],['Durchlassspannung',/durchlass|2 ?v|u_?f|spannung/i],['Formel',/\(|:|teil|geteilt|minus|−|-/i],['E12 oder nächstgrößer',/e12|nächst|größer/i]],
+  muster:['Ohne Vorwiderstand würde ein viel zu großer Strom durch die LED fließen, und sie geht kaputt.','An der LED fallen nur etwa 2 V ab (Durchlassspannung, je nach Farbe). Den Rest der 9 V muss der Vorwiderstand aufnehmen.','Berechnung: R = (9 V − Durchlassspannung) : Strom aus dem Datenblatt, zum Beispiel (9 V − 2 V) : 0,02 A = 350 Ω.','Weil es nicht jeden Wert gibt, nimmt man den nächstgrößeren Wert aus der E12-Reihe, hier 390 Ω. So bleibt der Strom etwas kleiner.']}
+};
+const KC={'RS22-F4':'KC Technik RS 2010, S. 22: beschreiben die elektrischen Grundgrößen Strom, Spannung und Widerstand','RS22-F2':'KC Technik RS 2010, S. 22: beschreiben die elektrischen Eigenschaften von Widerständen, Leuchtdioden, Sensoren und Transistoren','RS22-F3':'KC Technik RS 2010, S. 22: beschreiben das Zusammenwirken verschiedener elektronischer Bauteile in einer Schaltung','RS22-E3':'KC Technik RS 2010, S. 22: messen Spannungen und Stromstärken und berechnen aus den Messergebnissen weitere Eigenschaften','RS22-E4':'KC Technik RS 2010, S. 22: entwerfen und stellen elektronische Schaltungen her','PT21-F':'CV Profil Technik RS 2011, S. 21: benennen Schaltzeichen; beschreiben die Eigenschaften von Widerständen, Kondensatoren und Halbleitern','PT33':'CV Profil Technik RS 2011, S. 33 (Zur Sicherheit im Technikunterricht) und RiSU 2023'};
+
+const RATE=CFG_W.rate,RATE_L=['noch nicht','mit Hilfe','meistens','sicher'];
+const OPS={'nennen':'(be)nennen: Fakten, Daten, Begriffe, Regeln ohne Erläuterung aufzählen.','benennen':'(be)nennen: Fakten, Daten, Begriffe, Regeln ohne Erläuterung aufzählen.','beschreiben':'Strukturiert und fachsprachlich angemessen Materialien vorstellen und/oder Sachverhalte darlegen.','zuordnen':'Begründet für ein Objekt eine Gruppe, eine Position oder ein Material zuweisen oder einen Sachverhalt begründet in einen Zusammenhang stellen.','ordnen':'Etwas kriteriengeleitet in eine bestimmte Systematik oder Reihenfolge bringen.','unterscheiden':'Etwas im Hinblick auf seine besonderen Merkmale erkennen und von Alternativen abgrenzen.','erklären':'Sachverhalte so darstellen, dass Bedingungen, Ursachen, Gesetzmäßigkeiten und/oder Funktionszusammenhänge verständlich werden.','ermitteln':'Einen Zusammenhang oder eine Lösung finden und das Ergebnis formulieren.','herausarbeiten':'Materialien auf bestimmte, nicht unbedingt genannte Sachverhalte hin untersuchen und Zusammenhänge herstellen.','überprüfen':'Inhalte oder Aussagen auf ihre sachliche Richtigkeit bzw. innere Logik hin untersuchen.','messen':'Fachpraktischer Operator: Größen mit geeigneten Messgeräten erfassen.','schätzen':'Keine Bewertung: Diese Schätzfrage dient nur der Einschätzung deines Vorwissens. Es gibt kein Richtig oder Falsch.'};
+
+const CHK=[['Lötplätze',['Lötstation je Lötplatz mit Ablage','Schwamm oder Messingwolle','bleifreies Lot mit Flussmittel','Seitenschneider, Pinzette, Entlötlitze oder Entlötpumpe','Fensterlüftung oder Absaugung','nicht brennbare Arbeitsunterlage']],['Messgeräte',['Multimeter je Gruppe','geprüfte Messleitungen','Ersatzsicherungen und Batterien für die Multimeter']],['Bauteilvorrat',['Widerstände der E12-Reihe','LEDs in mehreren Farben','Transistoren (z. B. BC547)','Fotowiderstände (LDR) und Potentiometer','Kondensatoren und Elkos','Steckbretter, Loch- oder Streifenrasterplatinen','Batterieclips und 9-V-Batterien oder Akkus']],['Sicherheit und Organisation',['Betriebsanweisung am Lötplatz','Einweisung der Schüler:innen dokumentiert','Netzgeräte mit Sicherheitstransformator (EN 61558-2-6) oder Batterien','Erste-Hilfe-Material für Verbrennungen erreichbar']]];
+
+/* ---------- Zustand ---------- */
+let S;try{S=JSON.parse(localStorage.getItem(KEY)||'null');}catch(e){S=null;}
+if(!S||typeof S!=='object')S={};
+S.st=S.st|0;S.a=S.a||{};S.ok=S.ok||{};S.seen=S.seen||{};S.rate=S.rate||{};S.name=S.name||'';S.muster=S.muster||{};S.chk=S.chk||{};S.help=S.help||{};
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
+
+const parts=$$('.station');
+const chOf=parts.map(p=>CFG_W.ch.findIndex(c=>c[0]===+p.dataset.ch));
+const pids=parts.map((p,pi)=>chOf[pi]+'.'+(chOf.slice(0,pi).filter(c=>c===chOf[pi]).length+1));
+let num=0;const label={},home={};
+parts.forEach((p,pi)=>{$$('.task',p).forEach(a=>{const w=$('.w',a);const n=$('.num',a);if(w){num++;n.textContent=num;const id=w.dataset.t;label[id]='Station '+pids[pi]+' · Aufgabe '+num+': '+$('h3',a).textContent;home[id]=pi;}});});
+const TASK_IDS=$$('.w[data-t]').map(w=>w.dataset.t);
+function isDone(id){const t=T[id];if(t.type==='open')return (S.a[id]||'').trim().length>=t.min;if(t.type==='est')return S.a[id]!=null;return !!S.ok[id];}
+function partDone(pi){const ids=TASK_IDS.filter(id=>home[id]===pi);if(!ids.length)return !!S.seen[pids[pi]];return ids.every(isDone);}
+
+/* Gemeinsame Aufgaben-Bausteine der Häppchen-Plattformen (aus der Motorentechnik übernommen).
+   Erwartet im umgebenden Skript: S, save(), paint(), label, el(), $, $$, CHECK, FIGLIB {POS, FIG, svg}. */
+/* ---------- Rückmeldung ---------- */
+function showFb(fb,cls,head,body,list){fb.hidden=false;fb.className='fb '+cls;const h=el('p',{class:'lvl',html:cls==='ok'?CHECK:''});h.append(head);const kids=[h];if(body)kids.push(el('p',{},body));if(list&&list.length)kids.push(el('ul',{},...list.map(x=>el('li',{},x))));fb.replaceChildren(...kids);}
+function report(id,ok,art,fb){S.ok[id]=S.ok[id]||ok;save();paint();if(window.LP)LP.result(id,ok,label[id],art,fb);}
+
+/* ---------- Widgets ---------- */
+function mkCheck(id,art,fn){const fb=el('div',{class:'fb',id:'fb-'+id,hidden:true,'aria-live':'polite'});const b=el('button',{class:'btn accent',type:'button',id:'chk-'+id},'Prüfen');b.onclick=()=>fn(fb);art.append(el('div',{class:'row'},b),fb);return fb;}
+
+function wSeg(id,t,w,art){
+  const v=S.a[id]=S.a[id]||t.items.map(()=>-1);
+  const rows=t.items.map((it,i)=>{const r=el('div',{class:'mi-row'});const seg=el('div',{class:'seg',role:'group','aria-label':it[0]});
+    t.cats.forEach((c,ci)=>{const b=el('button',{type:'button','aria-pressed':String(v[i]===ci)},c);b.onclick=()=>{v[i]=ci;$$('button',seg).forEach((x,xi)=>x.setAttribute('aria-pressed',String(xi===ci)));r.classList.remove('s-ok','s-bad');save();};seg.append(b);});
+    r.append(el('span',{},it[0]),seg);return r;});
+  w.className='mi'+(t.cats.length>2?' w2':'');w.append(...rows);
+  mkCheck(id,art,fb=>{
+    if(v.some(x=>x<0)){showFb(fb,'mid','Noch nicht fertig','Ordne zuerst alle Aussagen zu.');return;}
+    let ok=0;t.items.forEach((it,i)=>{const good=v[i]===it[1];rows[i].classList.toggle('s-ok',good);rows[i].classList.toggle('s-bad',!good);if(good)ok++;});
+    const all=ok===t.items.length;
+    if(all)showFb(fb,'ok','Alles richtig!',ok+' von '+t.items.length+' richtig zugeordnet.');
+    else showFb(fb,ok>=t.items.length*0.6?'mid':'err',ok+' von '+t.items.length+' richtig','Die rot markierten Aussagen stimmen noch nicht. Lies die Information oben noch einmal und ändere sie.');
+    report(id,all,art,fb);});
+}
+function wQuiz(id,t,w,art){
+  const v=S.a[id]=S.a[id]||t.qs.map(()=>-1);
+  const fs=t.qs.map((q,qi)=>{const f=el('fieldset',{class:'qz'},el('legend',{},q.q));q.o.forEach((o,oi)=>{const inp=el('input',{type:'radio',name:id+'-'+qi,value:oi});if(v[qi]===oi)inp.checked=true;inp.onchange=()=>{v[qi]=oi;f.classList.remove('s-ok','s-bad');save();};f.append(el('label',{},inp,o));});return f;});
+  w.className='quiz';w.append(...fs);
+  mkCheck(id,art,fb=>{
+    if(v.some(x=>x<0)){showFb(fb,'mid','Noch nicht fertig','Beantworte zuerst alle Fragen.');return;}
+    let ok=0;t.qs.forEach((q,qi)=>{const good=v[qi]===q.a;fs[qi].classList.toggle('s-ok',good);fs[qi].classList.toggle('s-bad',!good);if(good)ok++;});
+    const all=ok===t.qs.length;
+    if(all)showFb(fb,'ok','Alles richtig!',null,t.qs.map(q=>q.why));
+    else showFb(fb,ok>=t.qs.length*0.6?'mid':'err',ok+' von '+t.qs.length+' richtig','Die rot umrandeten Aufgaben stimmen noch nicht. Lies die Information oben noch einmal.');
+    report(id,all,art,fb);});
+}
+function wMulti(id,t,w,art){
+  const v=S.a[id]=S.a[id]||t.opts.map(()=>false);
+  const ls=t.opts.map((o,i)=>{const inp=el('input',{type:'checkbox'});inp.checked=!!v[i];const l=el('label',{},inp,o[0]);inp.onchange=()=>{v[i]=inp.checked;l.classList.remove('s-ok','s-bad');save();};return l;});
+  w.className='multi';w.append(...ls);
+  mkCheck(id,art,fb=>{
+    if(!v.some(Boolean)){showFb(fb,'mid','Noch nicht fertig','Wähle zuerst mindestens eine Antwort.');return;}
+    let ok=0;t.opts.forEach((o,i)=>{const good=!!v[i]===o[1];ls[i].classList.toggle('s-ok',good&&o[1]);ls[i].classList.toggle('s-bad',!good);if(good)ok++;});
+    const all=ok===t.opts.length;
+    if(all)showFb(fb,'ok','Alles richtig!','Du hast alle passenden Bauteile gefunden und nichts Falsches gewählt.');
+    else showFb(fb,'err','Noch nicht ganz','Rot markiert: Dieses Bauteil fehlt oder passt nicht. Lies die Information oben noch einmal.');
+    report(id,all,art,fb);});
+}
+function wOrder(id,t,w,art){
+  let v=S.a[id];if(!Array.isArray(v)||v.length!==t.items.length)v=S.a[id]=t.start.slice();
+  const ol=el('ol',{class:'rank'});w.append(ol);
+  function draw(){ol.replaceChildren(...v.map((ix,pos)=>{const up=el('button',{class:'mv',type:'button','aria-label':'nach oben'},'↑');const dn=el('button',{class:'mv',type:'button','aria-label':'nach unten'},'↓');up.disabled=pos===0;dn.disabled=pos===v.length-1;
+    up.onclick=()=>{[v[pos-1],v[pos]]=[v[pos],v[pos-1]];save();draw();ol.children[pos-1].querySelector('.mv').focus();};
+    dn.onclick=()=>{[v[pos+1],v[pos]]=[v[pos],v[pos+1]];save();draw();ol.children[pos+1].querySelectorAll('.mv')[1].focus();};
+    return el('li',{},el('span',{class:'pos'},String(pos+1)),el('span',{class:'lbl'},t.items[ix]),up,dn);}));}
+  draw();
+  mkCheck(id,art,fb=>{let ok=0;v.forEach((ix,pos)=>{const good=ix===pos;ol.children[pos].classList.toggle('s-ok',good);ol.children[pos].classList.toggle('s-bad',!good);if(good)ok++;});
+    const all=ok===v.length;
+    if(all)showFb(fb,'ok','Richtige Reihenfolge!',null);else showFb(fb,ok>=v.length*0.6?'mid':'err',ok+' von '+v.length+' an der richtigen Stelle','Die rot umrandeten Schritte stehen noch falsch. Überlege, was zuerst passieren muss.');
+    report(id,all,art,fb);});
+}
+function wOpen(id,t,w,art){
+  const ta=el('textarea',{id:'ta-'+id,'aria-label':'Deine Antwort'});ta.value=S.a[id]||'';
+  const qc=el('div',{class:'qc'},el('b',{},'Denk an:'),...t.checks.map(c=>el('span',{},c[0])));
+  const cnt=el('span',{class:'hint'});
+  const mb=el('button',{class:'btn soft',type:'button'},'Mit Musterlösung vergleichen');
+  const mbox=el('div',{class:'muster',hidden:true},el('h4',{},'So könnte eine Antwort aussehen'),el('ul',{},...t.muster.map(m=>el('li',{},m))),el('p',{class:'hint'},'Vergleiche: Was hast du auch? Was fehlt dir noch? Ergänze deine Antwort, wenn du magst.'));
+  function upd(){const s=ta.value;S.a[id]=s;const len=s.trim().length;[...qc.querySelectorAll('span')].forEach((sp,i)=>sp.classList.toggle('on',t.checks[i][1].test(s)));
+    cnt.textContent=len>=t.min?'Genug geschrieben ✓':'Noch '+(t.min-len)+' Zeichen';mb.disabled=len<t.min;if(S.muster[id])mbox.hidden=false;}
+  ta.oninput=()=>{upd();save();paint();};
+  mb.onclick=()=>{S.muster[id]=1;mbox.hidden=false;save();};
+  w.className='open';w.append(ta,el('div',{class:'open-foot'},qc,cnt),el('div',{class:'row'},mb),mbox);
+  if(t.ki){const note=el('p',{class:'hint',hidden:true});const cp=el('button',{class:'btn soft',type:'button'},'Für fobizz kopieren');
+    cp.onclick=async()=>{const a=ta.value.trim();note.hidden=false;if(a.length<t.min){note.textContent='Schreib zuerst deine eigene Antwort.';return;}
+      const txt=CFG_W.title+'\nAufgabe: '+$('.q',art).textContent+'\nMeine Antwort:\n'+a+'\n\nGib mir Feedback zu meiner Antwort: Habe ich die Kriterien sinnvoll genutzt und meine Empfehlung begründet? Was fehlt noch? Schreib meine Antwort nicht neu.';
+      try{await navigator.clipboard.writeText(txt);note.textContent='Kopiert! Öffne fobizz und füge den Text im Chat ein.';}catch(e){note.textContent='Kopieren hat nicht geklappt. Markiere deine Antwort und kopiere sie selbst.';}};
+    w.append(el('details',{class:'lp-kiopt'},el('summary',{},'Optional mit KI · ab AI Badge Level 1'),el('div',{},el('p',{class:'hint'},'Mit deinen KI-Kompetenzen aus Level 1 kannst du hier dein Lernen verbessern: Hol dir Feedback zu deiner eigenen Antwort, nicht die Antwort selbst.'),el('div',{class:'row'},cp,el('a',{class:'btn soft',href:'https://go.fobizz.com',target:'_blank',rel:'noopener'},'fobizz öffnen')),note)));}
+  upd();
+}
+function wGap(id,t,w,art){
+  const v=S.a[id]=S.a[id]||t.gaps.map(()=>-1);
+  const p=el('p',{class:'cloze'});const sels=[];
+  t.text.split(/\{(\d+)\}/).forEach((part,i)=>{if(i%2===0){if(part)p.append(part);return;}const gi=+part,g=t.gaps[gi];
+    const sel=el('select',{'aria-label':'Lücke '+(gi+1)},el('option',{value:'-1'},'…'),...g[0].map((o,oi)=>el('option',{value:String(oi)},o)));sel.value=String(v[gi]);
+    sel.onchange=()=>{v[gi]=+sel.value;sel.classList.remove('s-ok','s-bad');save();};sels[gi]=sel;p.append(sel);});
+  w.append(p);
+  mkCheck(id,art,fb=>{if(v.some(x=>x<0)){showFb(fb,'mid','Noch nicht fertig','Fülle zuerst alle Lücken.');return;}
+    let ok=0;t.gaps.forEach((g,gi)=>{const good=v[gi]===g[1];sels[gi].classList.toggle('s-ok',good);sels[gi].classList.toggle('s-bad',!good);if(good)ok++;});
+    const all=ok===t.gaps.length;
+    if(all)showFb(fb,'ok','Alles richtig!',null);else showFb(fb,ok>=t.gaps.length*0.6?'mid':'err',ok+' von '+t.gaps.length+' Lücken richtig','Die rot markierten Lücken stimmen noch nicht. Lies die Information oben noch einmal.');
+    report(id,all,art,fb);});
+}
+function wPair(id,t,w,art){
+  let v=S.a[id];if(!Array.isArray(v)||v.length!==t.left.length)v=S.a[id]=t.left.map(()=>-1);
+  let armed=-1;const L=[],R=[];
+  const lc=el('div',{class:'pcol'},el('h4',{},'Antippen'));const rc=el('div',{class:'pcol'},el('h4',{},'Dann passend dazu'));
+  t.left.forEach((x,i)=>{const b=el('button',{type:'button',class:'pc','aria-pressed':'false'},el('span',{class:'k on'},String(i+1)),x);b.onclick=()=>{armed=armed===i?-1:i;draw();};L.push(b);lc.append(b);});
+  t.right.forEach((x,ri)=>{const b=el('button',{type:'button',class:'pc'},el('span',{class:'k'},'–'),x);b.onclick=()=>{if(armed<0){const li=v.indexOf(ri);if(li>=0){armed=li;draw();}return;}
+      v.forEach((rr,li)=>{if(rr===ri)v[li]=-1;});v[armed]=ri;armed=-1;save();L.forEach(n=>n.classList.remove('s-ok','s-bad'));draw();};R.push(b);rc.append(b);});
+  function draw(){L.forEach((b,i)=>b.setAttribute('aria-pressed',String(i===armed)));R.forEach((b,ri)=>{const li=v.indexOf(ri);const k=b.querySelector('.k');k.textContent=li>=0?String(li+1):'–';k.classList.toggle('on',li>=0);b.setAttribute('aria-label',(li>=0?'verbunden mit '+(li+1)+': ':'')+t.right[ri]);});}
+  w.className='pairs';w.append(lc,rc);draw();
+  mkCheck(id,art,fb=>{if(v.some(x=>x<0)){showFb(fb,'mid','Noch nicht fertig','Verbinde zuerst alle Paare.');return;}
+    let ok=0;t.left.forEach((x,i)=>{const good=v[i]===t.ans[i];L[i].classList.toggle('s-ok',good);L[i].classList.toggle('s-bad',!good);if(good)ok++;});
+    const all=ok===t.left.length;
+    if(all)showFb(fb,'ok','Alle Paare richtig!',null);else showFb(fb,ok>=t.left.length*0.6?'mid':'err',ok+' von '+t.left.length+' Paaren richtig','Bei den rot umrandeten Begriffen stimmt die Verbindung noch nicht. Tippe sie an und verbinde neu.');
+    report(id,all,art,fb);});
+}
+function wMark(id,t,w,art){
+  const v=S.a[id]=S.a[id]||t.parts.map(()=>false);
+  const p=el('p',{class:'marktext'});const B=t.parts.map((x,i)=>{const b=el('button',{type:'button',class:'ms','aria-pressed':String(!!v[i])},x[0]);b.onclick=()=>{v[i]=!v[i];b.setAttribute('aria-pressed',String(v[i]));B.forEach(n=>n.classList.remove('s-ok','s-bad'));save();};p.append(b,' ');return b;});
+  w.append(p);
+  mkCheck(id,art,fb=>{if(!v.some(Boolean)){showFb(fb,'mid','Noch nicht fertig','Tippe zuerst die passenden Sätze an.');return;}
+    const need=t.parts.filter(x=>x[1]).length;let hit=0,wrong=0;
+    t.parts.forEach((x,i)=>{B[i].classList.toggle('s-ok',v[i]&&x[1]);B[i].classList.toggle('s-bad',v[i]&&!x[1]);if(v[i]&&x[1])hit++;if(v[i]&&!x[1])wrong++;});
+    const all=hit===need&&!wrong;
+    if(all)showFb(fb,'ok','Alles gefunden!',need+' von '+need+' Sätzen richtig markiert.');
+    else showFb(fb,hit>=need*0.6&&wrong<=1?'mid':'err',hit+' von '+need+' gefunden'+(wrong?', '+wrong+' falsch markiert':''),wrong?'Rot markierte Sätze passen nicht. Tippe sie noch einmal an, um die Markierung zu entfernen.':'Es fehlen noch Sätze. Lies den Text noch einmal genau.');
+    report(id,all,art,fb);});
+}
+function wNum(id,t,w,art){
+  const inp=el('input',{type:'text',inputmode:'decimal',id:'num-'+id,'aria-label':'Ergebnis in '+t.unit,autocomplete:'off'});inp.value=S.a[id]||'';
+  inp.oninput=()=>{S.a[id]=inp.value;inp.classList.remove('s-ok','s-bad');save();};
+  w.className='numin';w.append(inp,el('span',{},t.unit));
+  mkCheck(id,art,fb=>{const raw=(inp.value||'').replace(/\s|[a-zäöü]/gi,'').replace(/\.(?=\d{3}(\D|$))/g,'').replace(',','.');
+    if(!raw){showFb(fb,'mid','Noch nicht fertig','Trag zuerst dein Ergebnis ein.');return;}
+    const n=parseFloat(raw);const good=!isNaN(n)&&Math.abs(n-t.answer)<=(t.tol||0);
+    inp.classList.toggle('s-ok',good);inp.classList.toggle('s-bad',!good);
+    if(good)showFb(fb,'ok','Richtig!',t.why);else showFb(fb,'err','Noch nicht richtig','Rechne noch einmal. Lies dazu die Information oben.');
+    report(id,good,art,fb);});
+}
+/* Beschriften: Begriffe auf Nummern ziehen oder antippen */
+function wLabel(id,t,w,art){
+  let v=S.a[id];if(!Array.isArray(v)||v.length!==t.marks.length)v=S.a[id]=t.marks.map(()=>-1);
+  const pos=typeof FIGLIB.POS[t.fig]==='function'?FIGLIB.POS[t.fig](t.t):FIGLIB.POS[t.fig];
+  const g=FIGLIB.FIG[t.fig]({t:t.t});let mk='';
+  t.marks.forEach((m,i)=>{const p=pos[m];mk+='<g class="mk" data-slot="'+i+'"><circle cx="'+p[0]+'" cy="'+p[1]+'" r="15"/><text x="'+p[0]+'" y="'+(p[1]+5)+'">'+(i+1)+'</text></g>';});
+  const fig=el('div',{class:'lab-fig',html:FIGLIB.svg(g.vb,g.body+mk,t.aria)});
+  let armed=-1;
+  const chips=t.terms.map((tm,ti)=>el('button',{type:'button',class:'chip','aria-pressed':'false','data-term':ti},tm[0]));
+  const slots=t.marks.map((m,i)=>el('button',{type:'button',class:'slot','data-slot':i},el('span',{class:'k'},String(i+1)),el('span',{class:'v'})));
+  const side=el('div',{class:'lab-side'},el('div',{class:'chips',role:'group','aria-label':'Begriffe'},...chips),el('div',{class:'slots'},...slots));
+  const vb=g.vb.split(' ').map(Number);w.className='lab'+(vb[2]>vb[3]*1.3?' wide':'');w.append(fig,side);
+  function draw(){chips.forEach((c,ti)=>{c.classList.toggle('used',v.includes(ti));c.setAttribute('aria-pressed',String(ti===armed));});
+    slots.forEach((s,i)=>{const vv=s.querySelector('.v');vv.textContent=v[i]>=0?t.terms[v[i]][0]:'noch leer';vv.classList.toggle('empty',v[i]<0);s.setAttribute('aria-label','Nummer '+(i+1)+': '+(v[i]>=0?t.terms[v[i]][0]:'noch leer'));});
+    $$('.mk',fig).forEach(m=>m.classList.toggle('armed',armed>=0));}
+  function put(i,ti){v.forEach((x,j)=>{if(x===ti)v[j]=-1;});v[i]=ti;armed=-1;slots.forEach(s=>s.classList.remove('s-ok','s-bad'));save();draw();}
+  function hit(i){if(armed>=0){put(i,armed);return;}if(v[i]>=0){v[i]=-1;save();draw();}}
+  slots.forEach((s,i)=>s.onclick=()=>hit(i));
+  $$('.mk',fig).forEach(m=>m.addEventListener('click',()=>hit(+m.dataset.slot)));
+  chips.forEach((c,ti)=>{let sx=0,sy=0,drag=null,moved=false;
+    c.addEventListener('pointerdown',e=>{sx=e.clientX;sy=e.clientY;moved=false;c.setPointerCapture(e.pointerId);});
+    c.addEventListener('pointermove',e=>{if(!c.hasPointerCapture(e.pointerId))return;if(!moved&&Math.hypot(e.clientX-sx,e.clientY-sy)>8){moved=true;drag=c.cloneNode(true);drag.classList.add('ghost');document.body.append(drag);}
+      if(moved){drag.style.left=(e.clientX-30)+'px';drag.style.top=(e.clientY-22)+'px';const tg=document.elementFromPoint(e.clientX,e.clientY);const d=tg&&tg.closest('[data-slot]');$$('.drop',w).forEach(x=>x.classList.remove('drop'));if(d&&w.contains(d)){d.classList.add('drop');const twin=d.classList.contains('slot')?$('.mk[data-slot="'+d.dataset.slot+'"]',fig):slots[+d.dataset.slot];if(twin)twin.classList.add('drop');}}});
+    c.addEventListener('pointerup',e=>{if(drag){drag.remove();drag=null;}$$('.drop',w).forEach(x=>x.classList.remove('drop'));
+      if(moved){const tg=document.elementFromPoint(e.clientX,e.clientY);const d=tg&&tg.closest('[data-slot]');if(d&&w.contains(d))put(+d.dataset.slot,ti);}
+      else{armed=armed===ti?-1:ti;draw();}});
+    c.addEventListener('pointercancel',()=>{if(drag){drag.remove();drag=null;}$$('.drop',w).forEach(x=>x.classList.remove('drop'));});
+    c.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();armed=armed===ti?-1:ti;draw();}});
+    c.onclick=e=>{if(e.detail===0){/* Tastatur */}};});
+  draw();
+  mkCheck(id,art,fb=>{if(v.some(x=>x<0)){showFb(fb,'mid','Noch nicht fertig','Ordne zuerst jeder Nummer einen Begriff zu.');return;}
+    let ok=0;t.marks.forEach((m,i)=>{const good=t.terms[v[i]][1]===m;slots[i].classList.toggle('s-ok',good);slots[i].classList.toggle('s-bad',!good);if(good)ok++;});
+    const all=ok===t.marks.length;
+    if(all)showFb(fb,'ok','Alles richtig beschriftet!',null);else showFb(fb,ok>=t.marks.length*0.6?'mid':'err',ok+' von '+t.marks.length+' richtig','Die rot umrandeten Nummern stimmen noch nicht. Tippe sie an, um den Begriff zu entfernen, und versuche es neu.');
+    report(id,all,art,fb);});
+}
+/* Tabelle ausfüllen */
+function wGrid(id,t,w,art){
+  let v=S.a[id];if(!Array.isArray(v)||v.length!==t.rows.length)v=S.a[id]=t.rows.map(()=>t.cols.map(()=>-1));
+  const sels=[];
+  const tb=el('table',{class:'gt'},el('thead',{},el('tr',{},el('th',{},''),...t.cols.map(c=>el('th',{scope:'col'},c)))),
+    el('tbody',{},...t.rows.map((r,ri)=>{sels[ri]=[];return el('tr',{},el('th',{scope:'row'},r[0]),...t.cols.map((c,ci)=>{
+      const s=el('select',{'aria-label':r[0]+', '+c},el('option',{value:'-1'},'…'),...r[1].map((o,oi)=>el('option',{value:String(oi)},o)));s.value=String(v[ri][ci]);
+      s.onchange=()=>{v[ri][ci]=+s.value;s.classList.remove('s-ok','s-bad');save();};sels[ri][ci]=s;return el('td',{},s);}));})));
+  w.className='tbox';w.append(tb);
+  mkCheck(id,art,fb=>{if(v.some(r=>r.some(x=>x<0))){showFb(fb,'mid','Noch nicht fertig','Fülle zuerst alle Felder der Tabelle aus.');return;}
+    let ok=0,n=0;t.rows.forEach((r,ri)=>t.cols.forEach((c,ci)=>{n++;const good=v[ri][ci]===t.ans[ri][ci];sels[ri][ci].classList.toggle('s-ok',good);sels[ri][ci].classList.toggle('s-bad',!good);if(good)ok++;}));
+    const all=ok===n;
+    if(all)showFb(fb,'ok','Die Tabelle stimmt!',null);else showFb(fb,ok>=n*0.7?'mid':'err',ok+' von '+n+' Feldern richtig','Die rot markierten Felder stimmen noch nicht. Nutze die Animation und die Information oben.');
+    report(id,all,art,fb);});
+}
+
+
+/* ---------- Eigene Bausteine der Elektronik ---------- */
+function wEst(id,t,w,art){
+  const val=el('span',{class:'val'});const r=el('input',{type:'range',min:t.min,max:t.max,step:t.step,'aria-label':'Schätzung in '+t.unit});r.value=S.a[id]!=null?S.a[id]:t.start;
+  const rev=el('div',{class:'reveal',hidden:S.a[id]==null},el('b',{},'Zum Vergleich: '),t.reveal);
+  const b=el('button',{class:'btn accent',type:'button'},S.a[id]!=null?'Schätzung ändern':'Schätzung festlegen');
+  const upd=()=>{val.textContent=Number(r.value).toLocaleString('de-DE')+' '+t.unit;};
+  r.oninput=upd;b.onclick=()=>{S.a[id]=+r.value;rev.hidden=false;b.textContent='Schätzung ändern';save();paint();};
+  w.className='est';w.append(val,r,el('div',{class:'row'},b),rev,el('p',{class:'hint'},'Kein Richtig oder Falsch: Die Schätzfrage dient nur der Einschätzung deines Vorwissens.'));upd();
+}
+function rnd(a){return a[Math.floor(Math.random()*a.length)];}
+function numIn(s){s=String(s||'').trim().replace(/\s|Ω|ohm/gi,'').replace(',','.');let m=1;if(/k$/i.test(s)){m=1e3;s=s.slice(0,-1);}else if(/M$/.test(s)){m=1e6;s=s.slice(0,-1);}const n=parseFloat(s);return isNaN(n)?NaN:n*m;}
+function de(n,d){return Number(n).toLocaleString('de-DE',{maximumFractionDigits:d==null?3:d});}
+const LEDS=[['rote',2.0,20],['gelbe',2.1,20],['grüne',2.2,20],['blaue',3.2,20],['weiße',3.2,15]];
+function genQ(kind){
+  if(kind==='mix')kind=rnd(['ohm','farb','vorw']);
+  if(kind==='ohm'){const R=rnd([100,150,200,220,300,330,470,500]),I=rnd([5,10,15,20,25,30]),U=R*I/1000,ask=rnd(['I','U','R']);
+    return {k:'ohm',ask,U,R,I,txt:ask==='I'?'U = '+de(U)+' V, R = '+R+' Ω. Gesucht: I in mA.':ask==='U'?'R = '+R+' Ω, I = '+I+' mA. Gesucht: U in V.':'U = '+de(U)+' V, I = '+I+' mA. Gesucht: R in Ω.',ans:ask==='I'?I:ask==='U'?U:R,unit:ask==='I'?'mA':ask==='U'?'V':'Ω'};}
+  if(kind==='farb'){const v=rnd(EG.E12)*Math.pow(10,Math.floor(Math.random()*5));return {k:'farb',ohm:v,txt:'Ermittle den Wert dieses Widerstands.',ans:v,unit:'Ω'};}
+  const L=rnd(LEDS),U=rnd([5,9,12]),R=(U-L[1])/(L[2]/1000);const e12=[];[1,10,100,1000].forEach(m=>EG.E12.forEach(x=>e12.push(x*m)));const pick=e12.find(x=>x>=R-1e-9);
+  const i=e12.indexOf(pick);const opts=e12.slice(Math.max(0,i-2),i+3);
+  return {k:'vorw',U,L,R,pick,opts,txt:'Batterie '+U+' V, '+L[0]+' LED: U<sub>F</sub> = '+de(L[1])+' V, I<sub>F</sub> = '+L[2]+' mA (Datenblatt).',ans:R,unit:'Ω'};
+}
+function wDrill(id,t,w,art){
+  let st=S.a[id];if(!st||typeof st!=='object'||!st.q)st=S.a[id]={streak:0,q:genQ(t.kind)};
+  const box=el('div',{class:'dq'});const streak=el('div',{class:'streak'});
+  w.className='drill';w.append(streak,box);
+  let inp,sel;
+  function draw(){const q=st.q;streak.replaceChildren(el('span',{},'Richtig hintereinander:'),...Array.from({length:t.need},(_,i)=>el('i',{class:i<st.streak?'on':''})),el('span',{},Math.min(st.streak,t.need)+' von '+t.need));
+    box.replaceChildren();box.append(el('p',{html:'<b>'+(q.k==='ohm'?'Ohmsches Gesetz':q.k==='farb'?'Farbcode':'Vorwiderstand')+':</b> '+q.txt}));
+    if(q.k==='farb')box.append(el('div',{html:EG.resistor(q.ohm,{say:1})}));
+    inp=el('input',{type:'text',inputmode:'decimal',autocomplete:'off','aria-label':'Ergebnis in '+q.unit});inp.value=st.v||'';inp.oninput=()=>{st.v=inp.value;save();};
+    const row=el('div',{class:'row2'},el('label',{},q.k==='vorw'?'R':'Ergebnis'),inp,el('span',{},q.unit));box.append(row);
+    if(q.k==='vorw'){sel=el('select',{'aria-label':'Wert aus der E12-Reihe'},el('option',{value:''},'E12-Wert wählen …'),...q.opts.map(o=>el('option',{value:String(o)},o+' Ω')));sel.value=st.s||'';sel.onchange=()=>{st.s=sel.value;save();};box.append(el('div',{class:'row2'},el('label',{},'Gewählter Widerstand'),sel));}}
+  draw();
+  mkCheck(id,art,fb=>{const q=st.q;const n=numIn(inp.value);if(isNaN(n)||(q.k==='vorw'&&!sel.value)){showFb(fb,'mid','Noch nicht fertig',q.k==='vorw'?'Trag den berechneten Widerstand ein und wähle einen E12-Wert.':'Trag zuerst dein Ergebnis ein.');return;}
+    const good1=Math.abs(n-q.ans)<=Math.max(0.011*Math.abs(q.ans),0.005),good2=q.k!=='vorw'||+sel.value===q.pick,good=good1&&good2;
+    if(good){st.streak++;const done=st.streak>=t.need;const sol=q.k==='vorw'?'R = ('+q.U+' V − '+de(q.L[1])+' V) : '+de(q.L[2]/1000)+' A = '+de(q.R,1)+' Ω, gewählt '+q.pick+' Ω.':'Lösung: '+de(q.ans)+' '+q.unit+(q.k==='farb'?' = '+EG.fmtOhm(q.ans):'')+'.';
+      st.q=genQ(t.kind);st.v='';st.s='';save();draw();
+      if(done){showFb(fb,'ok','Geschafft!',sol+' Du hast '+t.need+' Aufgaben hintereinander richtig gelöst. Du kannst gern weiterüben.');report(id,true,art,fb);}
+      else{showFb(fb,'ok','Richtig! Weiter mit der nächsten Aufgabe.',sol);}}
+    else{st.streak=0;save();draw();inp.value=st.v||'';showFb(fb,'err','Noch nicht richtig',!good1?'Der Wert stimmt noch nicht. Rechne noch einmal'+(q.k!=='farb'?' und achte auf die Einheiten (mA in A umrechnen).':', lies die Ringe von der Seite ohne Goldring.'):'Der Widerstand stimmt, aber der E12-Wert nicht: Nimm den ersten Wert, der gleich oder größer ist.');
+      if(window.LP)LP.result(id,false,label[id],art,fb);}});
+}
+function figHtml(k){const [a,b]=k.split(':');return a==='sym'?EG.sym(b,'Schaltzeichen'):EG.fehler(b);}
+function wFigsel(id,t,w,art){
+  let v=S.a[id];if(!Array.isArray(v)||v.length!==t.figs.length)v=S.a[id]=t.figs.map(()=>-1);
+  const tiles=t.figs.map((fg,i)=>{const s=el('select',{'aria-label':'Bild '+(i+1)},el('option',{value:'-1'},'…'),...t.opts.map((o,oi)=>el('option',{value:String(oi)},o)));s.value=String(v[i]);
+    const tile=el('div',{class:'ft'},el('span',{class:'no'},'Bild '+(i+1)),el('div',{html:figHtml(fg[0])}),s);s.onchange=()=>{v[i]=+s.value;tile.classList.remove('s-ok','s-bad');save();};return tile;});
+  w.className='figsel';w.append(...tiles);
+  mkCheck(id,art,fb=>{if(v.some(x=>x<0)){showFb(fb,'mid','Noch nicht fertig','Wähle zuerst für jedes Bild einen Namen.');return;}
+    let ok=0;t.figs.forEach((fg,i)=>{const good=v[i]===fg[1];tiles[i].classList.toggle('s-ok',good);tiles[i].classList.toggle('s-bad',!good);if(good)ok++;});
+    const all=ok===t.figs.length;
+    if(all)showFb(fb,'ok','Alles richtig!',null);else showFb(fb,ok>=t.figs.length*0.6?'mid':'err',ok+' von '+t.figs.length+' richtig','Die rot umrandeten Bilder stimmen noch nicht. Vergleiche mit der Übersicht oben.');
+    report(id,all,art,fb);});
+}
+function wDmm(id,t,w,art){
+  let v=S.a[id];if(!Array.isArray(v)||v.length!==t.sc.length)v=S.a[id]=t.sc.map(()=>({pos:0,sock:-1,con:''}));
+  let cur=0;const fig=el('div',{class:'dmmfig'});const scb=el('div',{class:'sc',role:'group','aria-label':'Messung wählen'});const desc=el('p',{class:'scdesc'});
+  const pos=el('select',{id:'dmm-pos-'+id},...EG.POSN.map((p,i)=>el('option',{value:String(i)},p[0].replace('⎓','=')+(i===0?' (aus)':''))));
+  const sock=el('div',{class:'opt',role:'radiogroup','aria-label':'Buchse für die rote Leitung'});const con=el('div',{class:'opt',role:'radiogroup','aria-label':'Anschluss'});
+  ['10A','mA','VΩ'].forEach(s=>{const i=EG.SOCK.indexOf(s);const r=el('input',{type:'radio',name:'sock-'+id,value:String(i)});r.onchange=()=>{v[cur].sock=i;save();draw();};sock.append(el('label',{},r,s));});
+  [['p','parallel zum Bauteil'],['s','in Reihe (Stromkreis aufgetrennt)']].forEach(c=>{const r=el('input',{type:'radio',name:'con-'+id,value:c[0]});r.onchange=()=>{v[cur].con=c[0];save();draw();};con.append(el('label',{},r,c[1]));});
+  pos.onchange=()=>{v[cur].pos=+pos.value;save();draw();};
+  const msg=el('div',{class:'msg','aria-live':'polite'});
+  t.sc.forEach((s,i)=>{const b=el('button',{type:'button',class:'btn soft'},(i+1)+'. '+s.t);b.onclick=()=>{cur=i;draw();};scb.append(b);});
+  const ctl=el('div',{class:'ctl'},scb,desc,el('label',{class:'fbl',for:'dmm-pos-'+id},'Drehschalter'),pos,el('span',{class:'fbl'},'Rote Leitung in Buchse'),sock,el('span',{class:'fbl'},'So schließt du an'),con,msg);
+  w.className='dmmw';w.append(fig,ctl);
+  function draw(){const s=v[cur],sc=t.sc[cur];[...scb.children].forEach((b,i)=>b.setAttribute('aria-pressed',String(i===cur)));desc.textContent=sc.d;pos.value=String(s.pos);
+    $$('input',sock).forEach(r=>r.checked=+r.value===s.sock);$$('input',con).forEach(r=>r.checked=r.value===s.con);
+    const rd=s.con||EG.POSN[s.pos][1]==='aus'?EG.dmmRead(sc,s.pos,s.sock,s.con):['','Wähle, wie du das Messgerät anschließt.',0];
+    const g=EG.dmmFig(s.pos,s.sock,rd[0],rd[2]<0);fig.innerHTML=EG.svg(g.vb,g.body,'Multimeter, Anzeige '+(rd[0]||'leer'));msg.textContent=rd[1];msg.className='msg'+(rd[2]>0?' ok':rd[2]<0?' bad':'');}
+  draw();
+  mkCheck(id,art,fb=>{const res=t.sc.map((sc,i)=>EG.dmmRead(sc,v[i].pos,v[i].sock,v[i].con)[2]===1);const ok=res.filter(Boolean).length;const all=ok===t.sc.length;
+    if(all)showFb(fb,'ok','Alle drei Messungen stimmen!',null,t.sc.map(s=>s.ok));
+    else showFb(fb,ok?'mid':'err',ok+' von '+t.sc.length+' Messungen richtig','Noch nicht richtig: '+t.sc.filter((s,i)=>!res[i]).map(s=>s.t).join(', ')+'. Tippe die Messung oben an und lies die Meldung unter der Anzeige.');
+    report(id,all,art,fb);});
+}
+function addHelp(id,t,art){if(!t.help)return;const tb=el('div',{class:'hbox',hidden:!S.help[id]},el('b',{},'Tipp: '),t.help.tip);const pb=el('div',{class:'hbox',hidden:S.help[id]!==2},el('b',{},'Teillösung: '),t.help.teil);
+  const b1=el('button',{class:'btn soft',type:'button'},'Tipp anzeigen');const b2=el('button',{class:'btn soft',type:'button',hidden:!S.help[id]},'Teillösung anzeigen');
+  b1.onclick=()=>{S.help[id]=Math.max(1,S.help[id]|0);tb.hidden=false;b2.hidden=false;save();};
+  b2.onclick=()=>{S.help[id]=2;pb.hidden=false;save();if(window.LP&&LP.assist)LP.assist(id);};
+  const fb=$('.fb',art);art.insertBefore(el('div',{class:'help2'},el('div',{class:'row'},b1,b2),tb,pb),fb);}
+$$('.w[data-t]').forEach(w=>{const id=w.dataset.t,t=T[id],art=w.closest('.task');({seg:wSeg,quiz:wQuiz,multi:wMulti,order:wOrder,open:wOpen,gap:wGap,pair:wPair,mark:wMark,num:wNum,label:wLabel,grid:wGrid,est:wEst,drill:wDrill,figsel:wFigsel,dmm:wDmm})[t.type](id,t,w,art);addHelp(id,t,art);});
+
+/* Grafiken */
+$$('[data-sim]').forEach(b=>EG.circuit(b,{led:b.dataset.sim==='led'}));
+$$('[data-anim="solder"]').forEach(b=>EG.solder(b));
+$$('[data-ctable]').forEach(b=>b.innerHTML=EG.colorTable());
+$$('[data-fig]').forEach(b=>{const g=EG[b.dataset.fig]();b.innerHTML=EG.svg(g.vb,g.body,b.dataset.aria||'');});
+$$('[data-symgrid]').forEach(b=>{b.innerHTML=[['widerstand','Widerstand'],['poti','Potentiometer'],['ldr','Fotowiderstand (LDR)'],['kondensator','Kondensator'],['led','LED'],['diode','Diode'],['transistor','Transistor (NPN)'],['relais','Relais'],['batterie','Batterie'],['schalter','Schalter'],['lampe','Lampe'],['voltmeter','Spannungsmesser']].map(x=>'<figure>'+EG.sym(x[0],x[1])+'<figcaption>'+x[1]+'</figcaption></figure>').join('');});
+$$('[data-parts]').forEach(b=>{b.innerHTML=[['elko','Elektrolytkondensator','Streifen markiert Minus'],['ldr','Fotowiderstand (LDR)','Widerstand hängt vom Licht ab'],['transistor','Transistor','Anschlüsse E, B, C'],['relais','Relais','Spule und Schaltkontakt']].map(x=>'<figure>'+EG.PART[x[0]]()+'<figcaption><b>'+x[1]+'</b>'+x[2]+'</figcaption></figure>').join('');});
+$$('[data-joints]').forEach(b=>{b.innerHTML=[['gut','gute Lötstelle'],['kalt','kalte Lötstelle'],['viel','zu viel Lot'],['wenig','zu wenig Lot'],['bruecke','Lötbrücke']].map(x=>'<figure>'+EG.fehler(x[0])+'<figcaption><b>'+x[1]+'</b></figcaption></figure>').join('');});
+
+/* Checkliste */
+if($('#chk'))$('#chk').append(...CHK.map((g,gi)=>{const f=el('fieldset',{},el('legend',{},g[0]));g[1].forEach((it,ii)=>{const k=gi+'.'+ii;const c=el('input',{type:'checkbox'});c.checked=!!S.chk[k];c.onchange=()=>{S.chk[k]=c.checked;save();};f.append(el('label',{},c,it));});
+  const ta=el('textarea',{'aria-label':'Notiz zu '+g[0],placeholder:'Notiz, z. B. was fehlt'});ta.value=S.chk['n'+gi]||'';ta.oninput=()=>{S.chk['n'+gi]=ta.value.slice(0,400);save();};f.append(ta);return f;}));
+
+/* Selbsteinschätzung */
+$('#rate').append(...RATE.map((r,i)=>{const f=el('fieldset',{},el('legend',{},r));const sc=el('div',{class:'scale'});
+  RATE_L.forEach((l,li)=>{const inp=el('input',{type:'radio',name:'rate-'+i,value:li});if(S.rate[i]===li)inp.checked=true;inp.onchange=()=>{S.rate[i]=li;save();};sc.append(el('label',{},inp,l));});f.append(sc);return f;}));
+
+/* Operatoren */
+const pop=$('#pop');
+$$('.op').forEach(b=>b.addEventListener('click',e=>{const k=b.dataset.op;$('#popH').textContent='Operator: '+k;$('#popP').textContent=(OPS[k]||'')+(k==='schätzen'?'':' (Kerncurriculum AWT IGS 2024, Anhang A1)');pop.hidden=false;const r=b.getBoundingClientRect();pop.style.left=Math.max(12,Math.min(r.left+scrollX,innerWidth-352))+'px';pop.style.top=(r.bottom+scrollY+8)+'px';e.stopPropagation();}));
+$('#popX').onclick=()=>{pop.hidden=true;};
+document.addEventListener('click',e=>{if(!pop.hidden&&!pop.contains(e.target))pop.hidden=true;});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')pop.hidden=true;});
+
+/* ---------- Navigation ---------- */
+const nav=$('#nav');
+function paintNav(){const cur=chOf[S.st];nav.replaceChildren(...CH.map((c,ci)=>{const first=chOf.indexOf(ci);if(first<0)return '';const ids=parts.map((p,pi)=>pi).filter(pi=>chOf[pi]===ci);const done=ids.every(partDone);
+  const b=el('button',{class:'st-btn '+parts[first].classList[1]+(done?' done':''),type:'button'},el('span',{class:'n'},String(ci)),c,el('span',{class:'ok',html:CHECK}));if(ci===cur)b.setAttribute('aria-current','step');b.onclick=()=>go(first);return b;}));
+  const cb=nav.querySelector('[aria-current]');if(cb){const nr=nav.getBoundingClientRect(),br=cb.getBoundingClientRect();if(br.left<nr.left||br.right>nr.right)nav.scrollLeft+=br.left-nr.left-(nr.width-br.width)/2;}}
+parts.forEach((p,pi)=>{const ci=chOf[pi];p.prepend(el('div',{class:'st-head'},el('div',{},el('p',{class:'eyebrow'},'Kapitel '+ci+' · Station '+pids[pi]),el('h2',{},CH_L[ci]),el('div',{class:'teile',role:'group','aria-label':'Häppchen'}))));});
+function paintTeile(){const pi=S.st,ci=chOf[pi];const sib=parts.map((x,i)=>i).filter(i=>chOf[i]===ci);const box=$('.teile',parts[pi]);
+  box.replaceChildren(...sib.map(i=>{const b=el('button',{type:'button',class:partDone(i)?'done':''},pids[i]);if(i===pi)b.setAttribute('aria-current','step');b.onclick=()=>go(i);return b;}));}
+function go(i,scroll=true){S.st=Math.max(0,Math.min(parts.length-1,i));S.seen[pids[S.st]]=1;save();
+  parts.forEach((p,pi)=>p.hidden=pi!==S.st);
+  $('#where').textContent='Station '+pids[S.st]+' · '+(S.st+1)+' von '+parts.length;
+  $('#prev').disabled=S.st===0;$('#next').disabled=S.st===parts.length-1;$('#nextTxt').textContent=chOf[S.st+1]===LAST&&chOf[S.st]!==LAST?'Zur Abgabe':'Weiter';
+  if(chOf[S.st]===LAST)fillSum();
+  paint();if(scroll)window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'});}
+$('#prev').onclick=()=>go(S.st-1);$('#next').onclick=()=>go(S.st+1);
+function paint(){const done=TASK_IDS.filter(isDone).length;const p=Math.round(100*done/TASK_IDS.length);$('#progTxt').textContent=p+' %';$('#progBar').style.width=p+'%';paintNav();paintTeile();}
+
+/* ---------- Abgabe ---------- */
+function chkCount(){let n=0,d=0;CHK.forEach((g,gi)=>g[1].forEach((it,ii)=>{n++;if(S.chk[gi+'.'+ii])d++;}));return [d,n];}
+function fillSum(){const li=CH.slice(0,LAST).map((c,ci)=>{const ids=TASK_IDS.filter(id=>chOf[home[id]]===ci);if(!ids.length)return null;const d=ids.filter(isDone).length;return el('li',{},el('span',{},ci+' · '+c),el('b',{},d+' von '+ids.length));}).filter(Boolean);
+  if($('#chk')){const c=chkCount();li.push(el('li',{},el('span',{},'Checkliste Fachraum'),el('b',{},c[0]+' von '+c[1]+' vorhanden')));}
+  $('#sumList').replaceChildren(...li);$('#codeOut').textContent=window.LP?LP.stateCode():'(nur in der veröffentlichten Fassung)';}
+const nm=$('#abgName');nm.value=S.name;nm.oninput=()=>{S.name=nm.value.slice(0,40);save();};
+$('#codeCopy').onclick=async()=>{const n=$('#codeNote');n.hidden=false;try{await navigator.clipboard.writeText($('#codeOut').textContent);n.textContent='Kopiert. Heb den Code gut auf.';}catch(e){n.textContent='Kopieren hat nicht geklappt. Markiere den Code und kopiere ihn selbst.';}};
+$$('[data-loadcode]').forEach(b=>b.onclick=()=>{const id=b.dataset.loadcode,n=$('[data-loadnote="'+id+'"]');n.hidden=false;const o=window.LP&&LP._codeFrom($('#'+id).value||'');
+  if(!o){n.textContent='Das ist kein gültiger Sicherungscode. Kopiere ihn vollständig.';return;}
+  if(window.LP_CFG&&o.s!==LP_CFG.slug){n.textContent='Dieser Code gehört zu einer anderen Lernplattform.';return;}
+  try{Object.keys(o.ls).forEach(k=>localStorage.setItem(k,o.ls[k]));}catch(e){n.textContent='Speichern auf diesem Gerät ist nicht möglich.';return;}
+  n.textContent='Geladen. Die Seite startet neu …';setTimeout(()=>location.reload(),400);});
+const CP='€‚ƒ„…†‡ˆ‰Š‹ŒŽ‘’“”•–—˜™š›œžŸ';
+function clean(t){return String(t||'').replace(/→/g,'->').replace(/₂/g,'2').replace(/Ω/g,'Ohm').replace(/[\u{1F300}-\u{1FAFF}☀-➿️‍]/gu,'').split('').filter(ch=>{const c=ch.charCodeAt(0);return c===10||(c>=32&&c<=126)||(c>=160&&c<=255)||CP.indexOf(ch)>=0;}).join('');}
+$('#pdfBtn').onclick=()=>{const note=$('#pdfNote');note.hidden=false;
+  if(!(window.jspdf&&window.jspdf.jsPDF)){note.textContent='Das PDF-Werkzeug konnte nicht geladen werden.';return;}
+  const d=new window.jspdf.jsPDF({unit:'mm',format:'a4'}),M=18,W=210-2*M;let y=22;
+  const need=h=>{if(y+h>280){d.addPage();y=22;}};
+  const txt=(s,o={})=>{d.setFont('helvetica',o.b?'bold':'normal');d.setFontSize(o.size||10.5);const c=o.col||[20,35,47];d.setTextColor(c[0],c[1],c[2]);d.splitTextToSize(clean(s),W-(o.ind||0)).forEach(l=>{need(5.5);d.text(l,M+(o.ind||0),y);y+=(o.lh||5.2);});};
+  txt(CFG_W.title+' – mein Ergebnis',{b:1,size:17,col:[3,85,145],lh:8});
+  txt((VER==='L'?'Fortbildung für Lehrkräfte':'Technik')+' · '+(S.name?'Name: '+S.name+' · ':'')+'Stand: '+new Date().toLocaleDateString('de-DE'));y+=4;
+  const done=TASK_IDS.filter(isDone).length;txt('Bearbeitet: '+done+' von '+TASK_IDS.length+' Aufgaben',{b:1});y+=3;
+  CH.slice(0,LAST).forEach((c,ci)=>{const ids=TASK_IDS.filter(id=>chOf[home[id]]===ci);if(!ids.length)return;need(14);y+=2;txt('Kapitel '+ci+': '+c,{b:1,size:13,col:[3,85,145],lh:6.5});
+    ids.forEach(id=>{const t=T[id];const l=label[id].replace(/^Station [\d.]+ · /,'');
+      if(t.type==='open'){txt(l,{b:1});const a=(S.a[id]||'').trim();txt(a||'(noch keine Antwort)',{ind:4,col:a?[20,35,47]:[120,130,135]});if(S.muster[id])txt('Mit Musterlösung verglichen.',{ind:4,size:9,col:[86,103,107]});y+=1.5;}
+      else if(t.type==='est'){txt(l+': meine Schätzung '+(S.a[id]!=null?de(S.a[id])+' '+t.unit:'–'),{ind:0});}
+      else{const ok=!!S.ok[id];d.setFont('helvetica','bold');d.setFontSize(10.5);d.setTextColor(ok?31:194,ok?138:59,ok?76:46);need(5.5);d.text(ok?'gelöst':'offen',M,y);txt(l+(S.help[id]===2?' (mit Teillösung)':S.help[id]?' (mit Tipp)':''),{ind:16});}});});
+  if($('#chk')){need(20);y+=4;txt('Checkliste für meinen Fachraum',{b:1,size:13,col:[3,85,145],lh:6.5});CHK.forEach((g,gi)=>{txt(g[0],{b:1});g[1].forEach((it,ii)=>txt((S.chk[gi+'.'+ii]?'[x] ':'[ ] ')+it,{ind:4,size:10}));if(S.chk['n'+gi])txt('Notiz: '+S.chk['n'+gi],{ind:4,size:9.5,col:[60,72,78]});});}
+  need(20);y+=4;txt('Selbsteinschätzung',{b:1,size:13,col:[3,85,145],lh:6.5});
+  RATE.forEach((r,i)=>{const v=S.rate[i];need(6);d.setFont('helvetica','bold');d.setFontSize(10);d.setTextColor(20,35,47);d.text(clean(v==null?'–':RATE_L[v]),M,y);txt(r,{ind:26,size:10});});
+  y+=4;txt('In dieser PDF steckt dein Arbeitsstand. Über „PDF laden“ in der Lernplattform machst du damit weiter.',{size:9,col:[86,103,107]});
+  txt(CFG_W.title+' von Daniel Beyrodt (dein Technik Lehrer) · CC BY-NC-SA 4.0',{size:9,col:[86,103,107]});
+  const blob=d.output('blob'),fn=CFG_W.title.replace(/[^A-Za-zÄÖÜäöüß-]+/g,'-')+'_'+(S.name?clean(S.name).replace(/[^A-Za-z0-9ÄÖÜäöüß-]+/g,'_')+'_':'')+new Date().toISOString().slice(0,10)+'.pdf';
+  Promise.resolve(window.claude&&window.claude.use?window.claude.use('downloads'):null).then(dl=>{if(dl)return dl.save({filename:fn,data:blob});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=fn;document.body.appendChild(a);a.click();a.remove();})
+    .then(()=>{note.textContent='Gespeichert. In der Ergebnis-PDF steckt dein Arbeitsstand.';}).catch(e=>{note.textContent=e&&e.code==='declined'?'Speichern abgebrochen.':'Speichern hat nicht geklappt.';});
+};
+go(S.st,false);
+})();
+</script>
+<style>.lp-legal{font:13px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif;text-align:center;padding:20px 16px calc(96px + env(safe-area-inset-bottom,0px));opacity:.8;clear:both}.lp-legal a{color:inherit;text-decoration:underline;text-underline-offset:2px}</style><div class="lp-legal">Privates Angebot von Daniel Beyrodt · <a href="../ueber-mich/">Über mich</a> · <a href="../impressum/">Impressum</a> · <a href="../datenschutz/">Datenschutz</a></div></body></html>
