@@ -437,6 +437,18 @@ a.btn{text-decoration:none}
 .numin input{width:150px}
 .numin input.s-ok{border-color:var(--existenz)} .numin input.s-bad{border-color:var(--bad)}
 .tg tbody tr:nth-child(3){background:none;font-weight:400}
+.sortw{display:grid;gap:10px}
+.sortw .pool{border:1.5px dashed var(--line);border-radius:12px;padding:10px;background:var(--surface-2);display:grid;gap:6px}
+.sortw .pool h4,.sortw .scol h4{margin:0;font-size:13px;color:var(--muted)}
+.sortw .cards{display:flex;flex-wrap:wrap;gap:6px;min-height:20px}
+.sortw .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(128px,1fr));gap:10px}
+.sortw .scol{border:1.5px solid var(--line);border-radius:12px;padding:8px;display:grid;gap:8px;align-content:start;background:var(--surface)}
+.sortw .scol .cards{flex-direction:column;align-items:stretch}
+.sortw .sdrop{font:inherit;font-size:15px;font-weight:800;min-height:44px;border-radius:10px;border:1.5px solid var(--c);background:var(--c-soft);color:var(--c-ink);cursor:pointer;padding:6px 10px}
+.sortw.armed .sdrop{border-style:dashed;box-shadow:0 0 0 3px var(--c-soft)}
+.sortw .sc{font:inherit;font-size:15px;line-height:1.25;text-align:left;padding:8px 10px;min-height:44px;border-radius:10px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.sortw .sc[aria-pressed="true"]{outline:3px solid var(--c);outline-offset:2px}
+.sortw .sc.s-ok{border-color:var(--existenz);background:var(--existenz-soft)} .sortw .sc.s-bad{border-color:var(--bad);background:var(--bad-soft)}
 code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overflow:auto;padding:8px 10px;border-radius:10px;background:var(--surface-2)}
 </style></head><body>
 <div class="app">
@@ -512,7 +524,7 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
   </div>
   <article class="task">
     <header><span class="num"></span><h3>Grundfunktionen zuordnen</h3><button class="op" data-op="zuordnen" type="button">zuordnen</button></header>
-    <p class="q">Ordne jede Tätigkeit der passenden Grundfunktion zu.</p>
+    <p class="q">Ordne jede Tätigkeit der passenden Grundfunktion zu. Tippe zuerst eine Karte an, dann die passende Spalte.</p>
     <div class="w" data-t="u13"></div>
   </article>
 </section>
@@ -601,8 +613,8 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
     <p>Kein Brötchen soll verbrannt oder zu klein in der Tüte landen. Deshalb gibt es die <b>Qualitätskontrolle</b>. Sie prüft schon die gelieferten Zutaten, dann <b>während</b> der Produktion (Teig, Ofentemperatur) und am <b>Ende</b> (Gewicht, Farbe, Geschmack). Fehlerhafte Ware wird aussortiert, und man sucht die Ursache, damit der Fehler nicht wieder passiert.</p>
   </div>
   <article class="task">
-    <header><span class="num"></span><h3>Aussagen zur Qualitätskontrolle</h3><button class="op" data-op="überprüfen" type="button">überprüfen</button></header>
-    <p class="q">Überprüfe jede Aussage und entscheide: stimmt oder stimmt nicht.</p>
+    <header><span class="num"></span><h3>Qualitätskontrolle in der Bäckerei</h3><button class="op" data-op="beschreiben" type="button">beschreiben</button></header>
+    <p class="q">Beschreibe, wie die Bäckerei Krume die Qualität ihrer Brötchen kontrolliert und was bei einem Fehler passiert.</p>
     <div class="w" data-t="u20"></div>
   </article>
 </section>
@@ -685,7 +697,7 @@ u3:{type:'gap',text:'Die Stadtwerke versorgen die Stadt mit Wasser. Sie gehören
 u4:{type:'multi',opts:[['Sie versorgt die Menschen mit Brot und Brötchen.',true],['Sie bietet Arbeitsplätze und Ausbildungsplätze.',true],['Sie legt die Schulnoten fest.',false],['Sie zahlt Löhne an ihre Mitarbeitenden.',true],['Sie baut die Straßen im Ort.',false],['Sie zahlt Steuern an die Gemeinde.',true],['Sie beschließt Gesetze.',false]]},
 u5:{type:'open',min:60,checks:[['Arbeitsplätze',/arbeit|job|ausbild|stelle|kündig|entlass/i],['Versorgung',/brot|brötchen|einkauf|kaufen|weit|fahren|kilometer|versorg/i],['Einkommen oder Steuern',/lohn|gehalt|geld|einkommen|steuer|gemeinde/i]],
   muster:['Die 25 Mitarbeitenden verlieren ihren Arbeitsplatz und ihr Einkommen. Auch Ausbildungsplätze fallen weg.','Die Menschen müssen für frisches Brot acht Kilometer fahren. Für ältere Menschen ohne Auto ist das schwer.','Die Gemeinde bekommt weniger Steuern und hat weniger Geld, zum Beispiel für Schulen oder Straßen.','Der Ort wird weniger lebendig: Ein Treffpunkt fehlt, Lieferanten verlieren einen Kunden.']},
-u6:{type:'seg',cats:['ökonomisch','sozial','ökologisch'],items:[['Gewinn steigern',0],['faire Löhne zahlen',1],['Strom sparen',2],['Produktionskosten senken',0],['Arbeitsplätze sichern',1],['Verpackungsmüll vermeiden',2],['neue Kundschaft gewinnen',0],['Mitarbeitende weiterbilden',1],['CO₂-Ausstoß verringern',2],['Mitarbeitende am Gewinn beteiligen',1]]},
+u6:{type:'sort',cats:['ökonomisch','sozial','ökologisch'],items:[['Gewinn steigern',0],['faire Löhne zahlen',1],['Strom sparen',2],['Produktionskosten senken',0],['Arbeitsplätze sichern',1],['Verpackungsmüll vermeiden',2],['neue Kundschaft gewinnen',0],['Mitarbeitende weiterbilden',1],['CO₂-Ausstoß verringern',2],['Mitarbeitende am Gewinn beteiligen',1]]},
 u7:{type:'pair',left:['weniger Verpackungsmüll','zufriedene Mitarbeitende in der Nachtschicht','mehr Gewinn','weniger Stromverbrauch'],right:['sparsame Backöfen anschaffen','Rabatt, wenn Kund:innen ihren eigenen Beutel mitbringen','eine Filiale an einem belebten Ort eröffnen','einen Zuschlag für Nachtarbeit zahlen'],ans:[1,3,2,0]},
 u8:{type:'open',min:90,checks:[['ökonomisch',/gewinn|umsatz|kosten|kund|verkauf|preis|geld/i],['sozial',/mitarbeit|lohn|gehalt|ausbild|pause|team|arbeitspl|zuschlag|schicht/i],['ökologisch',/umwelt|strom|energie|müll|plastik|tüte|bio|regional|co2|co₂|wasser|solar/i],['Strategie',/strategie|indem|durch|damit|dafür|so dass|sodass/i]],
   muster:['Ökonomisch: mehr Kundschaft am Morgen. Strategie: einen Frühstücks-Snack zum festen Preis anbieten.','Sozial: Mitarbeitende lange halten. Strategie: Weiterbildungen bezahlen und Wünsche bei den Schichten berücksichtigen.','Ökologisch: weniger Brötchen wegwerfen. Strategie: übrig gebliebene Ware abends günstiger verkaufen oder an die Tafel spenden.']},
@@ -694,14 +706,15 @@ u10:{type:'mark',parts:[['Ein T-Shirt kostet bei FlinkFashion nur wenige Euro.',
 u11:{type:'open',min:120,checks:[['Entscheidung',/sollte|ja|nein|finde|meiner meinung|ich bin|dafür|dagegen/i],['zwei Sichtweisen',/(wirtschaft|gewinn|preis|kosten|kund).*(näher|lohn|gewerkschaft|sozial|arbeit|umwelt)|(näher|lohn|gewerkschaft|sozial|arbeit|umwelt).*(wirtschaft|gewinn|preis|kosten|kund)/is],['Begründung',/weil|denn|deshalb|daher|da /i]],
   muster:['Ich finde, FlinkFashion sollte die Löhne erhöhen.','Aus Sicht der Gewerkschafterin ist das gerecht, weil die Näherinnen von ihrem Lohn leben können müssen.','Die Wirtschaftsexpertin warnt: Werden die T-Shirts teurer, kaufen manche Kund:innen woanders, und der Gewinn sinkt.','Ich halte das für lösbar, denn der Lohn macht bei einem T-Shirt nur einen kleinen Teil des Preises aus. Viele Kund:innen zahlen etwas mehr, wenn die Kleidung fair hergestellt ist.','Wichtig: Eine gute Stellungnahme nennt deine Meinung, beide Seiten und eine Begründung. Auch „Nein“ ist möglich, wenn du es gut begründest.']},
 u12:{type:'order',items:['Frau Krume berechnet, wie viel Mehl sie braucht.','Frau Krume bestellt Mehl bei der Mühle.','In der Backstube wird der Teig geknetet.','Die Brötchen werden gebacken.','Der Fahrer bringt die Brötchen in die Filialen.','Die Verkäuferin verkauft die Brötchen.'],start:[3,0,5,2,4,1]},
-u13:{type:'seg',cats:['Beschaffung','Produktion','Absatz'],items:[['Angebote verschiedener Mühlen vergleichen',0],['Teig kneten',1],['ein Werbeplakat gestalten',2],['einen neuen Backofen kaufen',0],['Brötchen backen',1],['Brötchen an ein Café liefern',2],['eine neue Bäckerin einstellen',0],['prüfen, ob die Brötchen schön braun sind',1],['die Preise für die Filialen festlegen',2]]},
+u13:{type:'sort',cats:['Beschaffung','Produktion','Absatz'],items:[['Angebote verschiedener Mühlen vergleichen',0],['Teig kneten',1],['ein Werbeplakat gestalten',2],['einen neuen Backofen kaufen',0],['Brötchen backen',1],['Brötchen an ein Café liefern',2],['eine neue Bäckerin einstellen',0],['prüfen, ob die Brötchen schön braun sind',1],['die Preise für die Filialen festlegen',2]]},
 u14:{type:'gap',text:'Die Mühle kann drei Tage lang kein Mehl liefern. Dann steht die {0} still. In den Filialen fehlen Brötchen, deshalb sinkt der {1}. Im Sommerurlaub kaufen weniger Menschen Brötchen. Die Backstube backt weniger, und die Beschaffung bestellt {2} Mehl. Die drei Grundfunktionen {3}.',gaps:[[['Werbung','Produktion','Beschaffung'],1],[['Einkauf','Lohn','Absatz'],2],[['mehr','weniger','genauso viel'],1],[['arbeiten unabhängig voneinander','hängen voneinander ab'],1]]},
 u15:{type:'seg',cats:['Arbeit','Betriebsmittel','Werkstoffe'],items:[['Bäckerin',0],['Backofen',1],['Mehl',2],['Lieferwagen',1],['Verkäufer',0],['Hefe',2],['Teigknetmaschine',1],['Strom für die Öfen',2],['Auszubildender',0],['Backstube (Gebäude)',1]]},
 u16:{type:'pair',left:['Bedarf ermitteln','Angebote vergleichen','Bestellen','Lieferung prüfen','Lagern'],right:['Sie bestellt 40 Säcke bei der günstigsten passenden Mühle.','Sie zählt die Mehlsäcke im Lager und plant den Verbrauch der nächsten Wochen.','Die Säcke kommen trocken und sauber ins Regal.','Sie holt Preise und Lieferzeiten von drei Mühlen ein.','Sie zählt die gelieferten Säcke und prüft, ob das Mehl in Ordnung ist.'],ans:[1,3,0,4,2]},
 u17:{type:'gap',text:'Frau Krume bezahlt einen Teil des Ofens mit ihren Ersparnissen. Das ist {0}. Für den Rest nimmt sie einen Kredit bei der Bank auf. Das ist {1}. Für geliehenes Geld muss sie {2} zahlen. Ein Vorteil der Eigenfinanzierung: Es entstehen keine {3}.',gaps:[[['Fremdfinanzierung','Eigenfinanzierung'],1],[['Eigenfinanzierung','Fremdfinanzierung'],1],[['Steuern','Zinsen','Löhne'],1],[['Schulden','Kosten für Zutaten','Kunden'],0]]},
 u18:{type:'num',answer:2000,unit:'Euro',why:'5 % von 40.000 Euro sind 2.000 Euro. Zinsen sind der Preis für geliehenes Geld. Bei Eigenfinanzierung fallen sie weg.'},
 u19:{type:'seg',cats:['Einzelfertigung','Serienfertigung','Massenfertigung'],items:[['eine Hochzeitstorte nach Wunsch des Brautpaares',0],['300 Weihnachtsstollen im Dezember',1],['Millionen Packungen Toastbrot in einer Großbäckerei',2],['ein Geburtstagskuchen in Form eines Fußballs',0],['500 Berliner zu Karneval',1],['Getränkedosen in einer Abfüllanlage',2],['ein maßgeschneiderter Anzug',0],['eine Sonderserie von 1.000 Sneakern',1]]},
-u20:{type:'seg',cats:['stimmt','stimmt nicht'],items:[['Die Qualitätskontrolle sorgt dafür, dass die Kundschaft gleichbleibend gute Ware bekommt.',0],['Kontrolliert wird nur ganz am Ende, wenn die Brötchen fertig sind.',1],['Verbrannte Brötchen werden trotzdem verkauft, damit nichts verschwendet wird.',1],['Bei einem Fehler sucht man die Ursache, zum Beispiel eine falsche Ofentemperatur.',0],['Auch die gelieferten Zutaten werden geprüft.',0]]},
+u20:{type:'open',min:90,checks:[['gelieferte Zutaten',/zutat|mehl|liefer|rohstoff|milch|hefe/i],['während der Produktion',/während|teig|ofen|temperatur|backen/i],['am Ende',/ende|fertig|gewicht|farbe|geschmack|braun|größe|groß/i],['bei einem Fehler',/fehler|aussortier|ursache|wegwerf|verbrannt|nicht verkauf/i]],
+  muster:['Schon wenn die Zutaten geliefert werden, prüft die Bäckerei, ob zum Beispiel das Mehl in Ordnung ist.','Während der Produktion kontrollieren die Bäcker:innen den Teig und die Ofentemperatur.','Am Ende werden die Brötchen auf Gewicht, Farbe und Geschmack geprüft.','Verbrannte oder zu kleine Brötchen werden aussortiert. Dann sucht man die Ursache, zum Beispiel eine falsche Ofentemperatur, damit der Fehler nicht wieder passiert.']},
 u27:{type:'order',items:['Ideen für einen Pausensnack sammeln','Marktanalyse: Zielgruppe und Konkurrenz an der Schule untersuchen','Den Snack entwerfen und beim Probebacken testen','Den Preis festlegen','Den Snack mit Werbung auf den Markt bringen','Verkauf beobachten und den Snack verbessern'],start:[2,5,0,4,1,3]},
 u28:{type:'num',answer:1.08,tol:0.005,unit:'Euro',why:'Selbstkosten: 0,40 + 0,30 + 0,20 = 0,90 Euro. 20 Prozent davon sind 0,18 Euro. Verkaufspreis ohne Mehrwertsteuer: 1,08 Euro.'},
 u29:{type:'quiz',qs:[
@@ -711,7 +724,7 @@ u29:{type:'quiz',qs:[
 u30:{type:'open',min:120,checks:[['Name',/name|heißt|„/i],['Zielgruppe',/zielgruppe|schüler|kinder|familie|sportler|ältere|kund/i],['Preis mit Begründung',/(\d+[,.]?\d*\s*(€|euro))|preis/i],['Verkaufsort',/filiale|stand|wagen|online|markt|schule|kiosk|laden/i],['Werbeidee',/werbung|plakat|instagram|flyer|gutschein|aktion|social|tiktok|probier/i]],
   muster:['Name: „Power-Brezel“, eine Brezel mit Körnern und Frischkäse.','Zielgruppe: Schüler:innen und Sportler:innen aus dem Verein nebenan.','Preis: 1,80 Euro. Die Zutaten sind etwas teurer als bei einer normalen Brezel, und der Preis soll für Taschengeld noch passen.','Verkaufsort: in der Filiale an der Gesamtschule und am Wochenende am Sportplatz.','Werbeidee: Plakat am Sportplatz und eine Probier-Aktion beim Fußballturnier.']},
 u21:{type:'seg',cats:['Zielgruppe','Kundenwünsche','Konkurrenz'],items:[['Wie viele Schüler:innen kommen morgens an der Filiale vorbei?',0],['Gibt es in der Nähe schon einen Backshop?',2],['Wünschen sich die Kund:innen vegane Brötchen?',1],['Welche Preise verlangt der Kiosk gegenüber?',2],['Wie alt sind die meisten Menschen, die dort vorbeikommen?',0],['Hätten die Kund:innen gern eine Sitzecke?',1]]},
-u22:{type:'seg',cats:['Produkt','Preis','Absatzweg','Kommunikation'],items:[['neue Brötchen-Kreation „Krume-Kracher“',0],['Wochenangebot: Laugenbrezel für 50 Cent',1],['eine vierte Filiale eröffnen',2],['Werbung auf dem Lieferwagen',3],['größere Auswahl an Vollkornbrot',0],['Bonuskarte: das zehnte Brötchen gratis',1],['Brot auch im Supermarkt verkaufen',2],['Tag der offenen Tür in der Backstube',3],['Schülerpreis gegen Vorlage des Schülerausweises',1],['Verkaufswagen auf dem Wochenmarkt',2],['Trikots für die Fußball-Jugend sponsern',3],['umweltfreundliche Papiertüten mit Logo',0]],four:true},
+u22:{type:'sort',cats:['Produkt','Preis','Absatzweg','Kommunikation'],items:[['neue Brötchen-Kreation „Krume-Kracher“',0],['Wochenangebot: Laugenbrezel für 50 Cent',1],['eine vierte Filiale eröffnen',2],['Werbung auf dem Lieferwagen',3],['größere Auswahl an Vollkornbrot',0],['Bonuskarte: das zehnte Brötchen gratis',1],['Brot auch im Supermarkt verkaufen',2],['Tag der offenen Tür in der Backstube',3],['Schülerpreis gegen Vorlage des Schülerausweises',1],['Verkaufswagen auf dem Wochenmarkt',2],['Trikots für die Fußball-Jugend sponsern',3],['umweltfreundliche Papiertüten mit Logo',0]],four:true},
 u23:{type:'open',min:120,ki:true,checks:[['Produkt',/produkt|snack|brötchen|sandwich|vegan|angebot an|neue/i],['Preis',/preis|rabatt|günstig|euro|€|schüler.*ausweis|angebot|bonus/i],['Absatzweg',/filiale|verkauf|stand|wagen|pause|online|app|vorbestell|liefer|kiosk|mensa/i],['Kommunikation',/werbung|instagram|plakat|social|tiktok|flyer|sponsor|aktion|gutschein/i]],
   muster:['Produkt: ein „Pausen-Snack“, z. B. belegtes Vollkornbrötchen mit Getränk. Er ist schnell gegessen und sättigt.','Preis: Schülerpreis mit Schülerausweis. Viele Schüler:innen haben wenig Taschengeld.','Absatzweg: Vorbestellen per Zettel oder App, Abholung in der großen Pause. So gibt es keine lange Schlange.','Kommunikation: Plakat im Schulflur und eine Aktion „Probier-Woche“ mit Gutscheinen. So erfahren alle davon.']},
 u24:{type:'pair',left:['Tätigkeit','Arbeitsort','Arbeitsmittel','Arbeitszeit','körperliche Anforderung','Arbeitsschutz'],right:['in der warmen Backstube','ab drei Uhr nachts','Teig kneten, Brötchen formen und backen','hitzefeste Handschuhe und Haarnetz','Backofen, Knetmaschine und Waage','lange stehen und schwere Mehlsäcke heben'],ans:[2,0,4,1,5,3]},
@@ -732,7 +745,7 @@ const OPS={'nennen':'(be)nennen: Fakten, Daten, Begriffe, Regeln ohne Erläuteru
 let S;
 try{S=JSON.parse(localStorage.getItem(KEY)||'null');}catch(e){S=null;}
 if(!S||typeof S!=='object')S={};
-S.st=S.st|0;S.a=S.a||{};S.ok=S.ok||{};S.seen=S.seen||{};S.rate=S.rate||{};S.name=S.name||'';S.muster=S.muster||{};
+S.st=S.st|0;S.a=S.a||{};Object.keys(T).forEach(k=>{if(T[k].type==='open'&&S.a[k]!=null&&typeof S.a[k]!=='string')delete S.a[k];});S.ok=S.ok||{};S.seen=S.seen||{};S.rate=S.rate||{};S.name=S.name||'';S.muster=S.muster||{};
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
 
 const parts=$$('.station');
@@ -763,6 +776,26 @@ function wSeg(id,t,w,art){
     const all=ok===t.items.length;
     if(all)showFb(fb,'ok','Alles richtig!',ok+' von '+t.items.length+' richtig zugeordnet.');
     else showFb(fb,ok>=t.items.length*0.6?'mid':'err',ok+' von '+t.items.length+' richtig','Die rot markierten Karten stimmen noch nicht. Lies die Information oben noch einmal und ändere sie.');
+    report(id,all,art,fb);});
+}
+function wSort(id,t,w,art){
+  let v=S.a[id];if(!Array.isArray(v)||v.length!==t.items.length)v=S.a[id]=t.items.map(()=>-1);
+  let armed=-1;
+  const pool=el('div',{class:'cards'});
+  const C=t.items.map((it,i)=>{const b=el('button',{type:'button',class:'sc','aria-pressed':'false'},it[0]);b.onclick=()=>{armed=armed===i?-1:i;draw();};return b;});
+  const boxes=t.cats.map(()=>el('div',{class:'cards'}));
+  const cols=t.cats.map((c,ci)=>{const d=el('button',{type:'button',class:'sdrop'},c);d.onclick=()=>{if(armed<0)return;const i=armed;v[i]=ci;armed=-1;C.forEach(n=>n.classList.remove('s-ok','s-bad'));save();draw();C[i].focus();};
+    return el('div',{class:'scol'},d,boxes[ci]);});
+  function draw(){C.forEach((b,i)=>{b.setAttribute('aria-pressed',String(i===armed));b.setAttribute('aria-label',t.items[i][0]+(v[i]>=0?' (liegt bei '+t.cats[v[i]]+')':' (noch nicht zugeordnet)'));(v[i]>=0?boxes[v[i]]:pool).append(b);});
+    w.classList.toggle('armed',armed>=0);poolBox.hidden=v.every(x=>x>=0);}
+  const poolBox=el('div',{class:'pool'},el('h4',{},'Karten: zuerst antippen, dann die Spalte'),pool);
+  w.className='sortw';w.append(poolBox,el('div',{class:'cols'},...cols));draw();
+  mkCheck(id,art,fb=>{
+    if(v.some(x=>x<0)){showFb(fb,'mid','Noch nicht fertig','Lege zuerst alle Karten in eine Spalte.');return;}
+    let ok=0;t.items.forEach((it,i)=>{const good=v[i]===it[1];C[i].classList.toggle('s-ok',good);C[i].classList.toggle('s-bad',!good);if(good)ok++;});
+    const all=ok===t.items.length;
+    if(all)showFb(fb,'ok','Alles richtig!',ok+' von '+t.items.length+' Karten liegen in der richtigen Spalte.');
+    else showFb(fb,ok>=t.items.length*0.6?'mid':'err',ok+' von '+t.items.length+' richtig','Die rot markierten Karten liegen noch falsch. Tippe sie an und dann die richtige Spalte. Lies die Information oben noch einmal.');
     report(id,all,art,fb);});
 }
 function wQuiz(id,t,w,art){
@@ -871,7 +904,7 @@ function wNum(id,t,w,art){
     if(good)showFb(fb,'ok','Richtig!',t.why);else showFb(fb,'err','Noch nicht richtig','Rechne noch einmal. Nutze die Starthilfe.');
     report(id,good,art,fb);});
 }
-$$('.w[data-t]').forEach(w=>{const id=w.dataset.t,t=T[id],art=w.closest('.task');({seg:wSeg,quiz:wQuiz,multi:wMulti,order:wOrder,open:wOpen,gap:wGap,pair:wPair,mark:wMark,num:wNum})[t.type](id,t,w,art);});
+$$('.w[data-t]').forEach(w=>{const id=w.dataset.t,t=T[id],art=w.closest('.task');({seg:wSeg,sort:wSort,quiz:wQuiz,multi:wMulti,order:wOrder,open:wOpen,gap:wGap,pair:wPair,mark:wMark,num:wNum})[t.type](id,t,w,art);});
 
 /* Selbsteinschätzung */
 $('#rate').append(...RATE.map((r,i)=>{const f=el('fieldset',{},el('legend',{},r));const sc=el('div',{class:'scale'});

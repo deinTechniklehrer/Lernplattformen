@@ -251,8 +251,8 @@ textarea.code{font-family:var(--mono);font-size:14px;min-height:220px;white-spac
     </div>
 
     <div class="task" id="t-fit">
-      <div class="task-h"><span class="op">Ordne zu · Wähle aus</span><h3>Startklar-Check</h3></div>
-      <p>Beantworte alle sechs Fragen und prüfe dann.</p>
+      <div class="task-h"><span class="op">Ordne zu</span><h3>Startklar-Check</h3></div>
+      <p>Ordne in allen sechs Teilen das Passende zu und prüfe dann.</p>
       <div id="fitQs"></div>
       <div class="row"><button class="btn" type="button" id="chkFit">Prüfen</button></div>
       <div class="fb" id="fb-fit" aria-live="polite"></div>
@@ -272,6 +272,7 @@ textarea.code{font-family:var(--mono);font-size:14px;min-height:220px;white-spac
 
     <div class="task" id="t-idee">
       <div class="task-h"><span class="op">Beschreibe</span><h3>Name, Ziel und Anforderungen</h3></div>
+      <p>Beschreibe deine Projektidee mit Name, Ziel und Anforderungen.</p>
       <div class="idea"><p id="ideaTxt">Keine Idee? Lass dir eine Kombination vorschlagen und überlege, wofür man sie brauchen könnte.</p><button class="btn small ghost" type="button" id="ideaBtn">Kombination würfeln</button></div>
       <label class="lab" for="pName">Name deines Projekts</label>
       <input type="text" id="pName" maxlength="60" style="width:100%" placeholder="z. B. Fahrradlicht-Erinnerung">
@@ -294,7 +295,7 @@ textarea.code{font-family:var(--mono);font-size:14px;min-height:220px;white-spac
   <!-- 3 Bauteile -->
   <section class="panel" data-st="2" hidden>
     <h2>3 · Bauteile</h2>
-    <p class="lead">Lege fest, welche Bauteile du brauchst. Sensoren, Aktoren und weitere Bauteile wie Widerstände gehören alle in die Liste.</p>
+    <p class="lead">Stelle die Bauteile für dein Projekt zusammen. Sensoren, Aktoren und weitere Bauteile wie Widerstände gehören alle in die Liste.</p>
     <div class="info-box" id="info-teile">
       <h3>Info: Das gehört dazu</h3>
       <ul>
@@ -305,7 +306,7 @@ textarea.code{font-family:var(--mono);font-size:14px;min-height:220px;white-spac
       </ul>
     </div>
     <div class="task" id="t-teile">
-      <div class="task-h"><span class="op">Wähle aus</span><h3>Deine Bauteilliste</h3></div>
+      <div class="task-h"><span class="op">Stelle zusammen</span><h3>Deine Bauteilliste</h3></div>
       <div class="addrow">
         <label class="hint" for="partSel" style="flex-basis:100%">Bauteil hinzufügen</label>
         <select id="partSel"></select>
@@ -332,7 +333,7 @@ textarea.code{font-family:var(--mono);font-size:14px;min-height:220px;white-spac
       </ul>
     </div>
     <div class="task" id="t-var">
-      <div class="task-h"><span class="op">Lege fest</span><h3>Deine Variablen</h3></div>
+      <div class="task-h"><span class="op">Plane</span><h3>Deine Variablen</h3></div>
       <div class="tw"><table class="t"><thead><tr><th>Nr.</th><th>Name</th><th>Art</th><th>Beschreibung der Funktion</th><th><span class="hint">entfernen</span></th></tr></thead><tbody id="varBody"></tbody></table></div>
       <div class="row"><button class="btn small ghost" type="button" id="varAdd">+ Variable</button><button class="btn" type="button" id="chkVar">Variablen prüfen</button></div>
       <div class="fb" id="fb-var" aria-live="polite"></div>
@@ -401,16 +402,19 @@ textarea.code{font-family:var(--mono);font-size:14px;min-height:220px;white-spac
     <p class="lead">Zum Schluss schaust du auf dein Projekt zurück und speicherst die Projektmappe als PDF.</p>
     <div class="task" id="t-refl">
       <div class="task-h"><span class="op">Erläutere</span><h3>Reflexion</h3></div>
-      <fieldset class="q"><legend>Funktioniert dein Projekt so, wie du es beschrieben hast?</legend>
-        <div class="boards" id="funkt" role="group" aria-label="Funktioniert dein Projekt?">
+      <fieldset class="q"><legend>Überprüfe, ob dein Projekt so funktioniert, wie du es beschrieben hast.</legend>
+        <p class="hint"><b>Denk an:</b> Teste jede Anforderung aus Station 2 einzeln und schau, ob sie erfüllt ist.</p>
+        <div class="boards" id="funkt" role="group" aria-label="Ergebnis deiner Überprüfung">
           <button class="chip" type="button" data-f="ja">Ja</button><button class="chip" type="button" data-f="teilweise">Teilweise</button><button class="chip" type="button" data-f="nein">Nein</button>
         </div>
-        <label class="lab" for="rText">Erläutere: Was klappt, was nicht, und woran liegt es?</label>
-        <textarea id="rText" rows="3" maxlength="1200"></textarea>
+        <label class="lab" for="rText">Erläutere, was klappt, was nicht und woran es liegt.</label>
+        <p class="hint" id="rTextH"><b>Satzanfänge:</b> „Gut klappt …, weil …“ · „Nicht geklappt hat …“ · „Das liegt vermutlich an …“ <b>Denk an:</b> Verkabelung, Code oder Grenzwert als mögliche Ursache.</p>
+        <textarea id="rText" rows="3" maxlength="1200" aria-describedby="rTextH"></textarea>
       </fieldset>
-      <label class="lab" for="rVerb">Welche Verbesserungen sind möglich?</label>
-      <textarea id="rVerb" rows="3" maxlength="1200"></textarea>
-      <label class="lab" for="rZusatz">Zusatz: Was hast du schon verbessert? <span class="hint">(freiwillig)</span></label>
+      <label class="lab" for="rVerb">Entwickle eine Verbesserung.</label>
+      <p class="hint" id="rVerbH"><b>Satzanfang:</b> „Ich würde … ändern, damit …“ <b>Denk an:</b> Was würde dein Projekt im Alltag nützlicher, sicherer oder zuverlässiger machen?</p>
+      <textarea id="rVerb" rows="3" maxlength="1200" aria-describedby="rVerbH"></textarea>
+      <label class="lab" for="rZusatz">Zusatz: Beschreibe, was du schon verbessert hast. <span class="hint">(freiwillig)</span></label>
       <textarea id="rZusatz" rows="2" maxlength="800"></textarea>
     </div>
     <div class="task" id="t-self">
@@ -482,12 +486,12 @@ textarea.code{font-family:var(--mono);font-size:14px;min-height:220px;white-spac
   /* ---------- Startklar-Check ---------- */
   var SORT = [['Fotowiderstand', 's'], ['Servomotor', 'a'], ['Taster', 's'], ['Piezo-Buzzer', 'a'], ['Ultraschallsensor', 's'], ['LED', 'a']];
   var FIT = [
-    { id: 'q1', t: 'Ordne zu: Sensor oder Aktor?', sort: 1 },
-    { id: 'q2', t: 'An welchen Pin schließt du einen Fotowiderstand an, damit du verschiedene Helligkeiten messen kannst?', o: [['a', 'A0'], ['b', 'Digital 7'], ['c', 'GND']], r: 'a' },
-    { id: 'q3', t: 'Welche Werte liefert analogRead()?', o: [['a', '0 oder 1'], ['b', '0 bis 255'], ['c', '0 bis 1023']], r: 'c' },
-    { id: 'q4', t: 'Du willst eine LED langsam heller werden lassen. Was passt?', o: [['a', 'digitalWrite() an Pin 9'], ['b', 'analogWrite() an Pin 9'], ['c', 'analogWrite() an Pin 7']], r: 'b' },
-    { id: 'q5', t: 'Die Variable anzahlKlicks speichert, wie oft ein Taster gedrückt wurde. Was für eine Variable ist das?', o: [['a', 'Sensorwert'], ['b', 'Zählerwert']], r: 'b' },
-    { id: 'q6', t: 'Welche Kabelfarbe nimmst du für GND?', o: [['a', 'rot'], ['b', 'schwarz'], ['c', 'gelb']], r: 'b' }
+    { id: 'q1', t: 'Ordne jedes Bauteil als Sensor oder Aktor zu.', sort: 1 },
+    { id: 'q2', t: 'Einen Fotowiderstand schließt du an … an, damit du verschiedene Helligkeiten messen kannst.', o: [['a', 'A0'], ['b', 'Digital 7'], ['c', 'GND']], r: 'a' },
+    { id: 'q3', t: 'analogRead() liefert Werte von …', o: [['a', '0 oder 1'], ['b', '0 bis 255'], ['c', '0 bis 1023']], r: 'c' },
+    { id: 'q4', t: 'Damit eine LED langsam heller wird, nutzt du …', o: [['a', 'digitalWrite() an Pin 9'], ['b', 'analogWrite() an Pin 9'], ['c', 'analogWrite() an Pin 7']], r: 'b' },
+    { id: 'q5', t: 'Die Variable anzahlKlicks speichert, wie oft ein Taster gedrückt wurde. Sie ist ein …', o: [['a', 'Sensorwert'], ['b', 'Zählerwert']], r: 'b' },
+    { id: 'q6', t: 'Für GND nimmst du die Kabelfarbe …', o: [['a', 'rot'], ['b', 'schwarz'], ['c', 'gelb']], r: 'b' }
   ];
 
   /* ---------- Arbeitsablauf und Bewertung (aus Daniels Arbeitsmappe und Bewertungsbogen) ---------- */
@@ -985,9 +989,9 @@ textarea.code{font-family:var(--mono);font-size:14px;min-height:220px;white-spac
     head('Foto vom Aufbau');
     if (!image(IMG.foto, 120)) para('Kein Foto eingefügt.');
     head('Reflexion');
-    para('Funktioniert das Projekt so, wie es beschrieben ist? ' + ({ ja: 'Ja', teilweise: 'Teilweise', nein: 'Nein' }[S.funkt] || '–'), { bold: 1 });
+    para('Überprüft: Das Projekt funktioniert wie beschrieben: ' + ({ ja: 'Ja', teilweise: 'Teilweise', nein: 'Nein' }[S.funkt] || '–'), { bold: 1 });
     para(S.rText);
-    para('Mögliche Verbesserungen', { bold: 1, after: 0.5 }); para(S.rVerb);
+    para('Entwickelte Verbesserung', { bold: 1, after: 0.5 }); para(S.rVerb);
     if (S.rZusatz.trim()) { para('Schon verbessert', { bold: 1, after: 0.5 }); para(S.rZusatz); }
     head('Selbsteinschätzung nach den Bewertungskriterien');
     var rows = [];

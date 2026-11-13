@@ -558,6 +558,9 @@ a.btn{text-decoration:none}
 .cmp th,.cmp td{padding:8px 10px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
 .cmp thead th{background:var(--c-soft);color:var(--c-ink)}
 .brand .tlogo{height:46px;width:auto;flex:none;background:#fff;border-radius:10px;padding:4px 6px}
+.help2{display:grid;gap:6px;margin-top:4px}
+.help2 .row{gap:6px}
+.help2 .hbox{border-radius:12px;padding:10px 12px;background:var(--luxus-soft);font-size:15px}
 
 /* aus der Unternehmens-Werkstatt übernommen */
 .teile{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
@@ -758,8 +761,8 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
   </div>
   <div data-anim="zweitakt"></div>
   <article class="task">
-    <header><span class="num"></span><h3>Zweitakt oder Viertakt?</h3><button class="op" data-op="unterscheiden" type="button">unterscheiden</button></header>
-    <p class="q">Unterscheide den Zweitakt-Ottomotor vom Viertakt-Ottomotor: Ordne jede Aussage zu.</p>
+    <header><span class="num"></span><h3>Zweitakt oder Viertakt?</h3><button class="op" data-op="zuordnen" type="button">zuordnen</button></header>
+    <p class="q">Ordne jede Aussage dem Zweitakt- oder dem Viertakt-Ottomotor zu.</p>
     <div class="w" data-t="t8"></div>
   </article>
 </section>
@@ -865,7 +868,7 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
   </div>
   <article class="task">
     <header><span class="num"></span><h3>Vor- und Nachteile</h3><button class="op" data-op="vergleichen" type="button">vergleichen</button></header>
-    <p class="q">Vergleiche Vergaser und Einspritzung: Nenne für beide je einen Vorteil und einen Nachteil.</p>
+    <p class="q">Vergleiche Vergaser und Einspritzung mit je einem Vorteil und einem Nachteil.</p>
     <div class="w" data-t="t15"></div>
   </article>
 </section>
@@ -898,7 +901,7 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
   </div>
   <div data-anim="bordnetz"></div>
   <article class="task">
-    <header><span class="num"></span><h3>Wer macht was im Bordnetz?</h3><button class="op" data-op="zuordnen" type="button">zuordnen</button></header>
+    <header><span class="num"></span><h3>Aufgaben im Bordnetz</h3><button class="op" data-op="zuordnen" type="button">zuordnen</button></header>
     <p class="q">Ordne jedem Bauteil seine Aufgabe zu.</p>
     <div class="w" data-t="t18"></div>
   </article>
@@ -1536,7 +1539,7 @@ t22:{type:'multi',opts:[['Kraftstofftank',true],['Auspuff',true],['Räder',false
 t23:{type:'num',answer:98,unit:'g je Kilometer',why:'238 g − 140 g = 98 g. Das Elektroauto verursacht in dieser Studie also etwa 41 % weniger Treibhausgase als der Benziner.'},
 t24:{type:'open',min:220,ki:true,checks:[['Umwelt',/co2|co₂|klima|strom|abgas|umwelt|emission|treibhaus/i],['Energieeffizienz',/effizien|wirkungsgrad|wärme|rekuper|energie/i],['Alltag',/reichweite|laden|lade|tank|strecke|urlaub|pendel/i],['Kosten oder Rohstoffe',/kost|preis|teuer|günstig|rohstoff|lithium|kobalt|nickel|recycl|wartung/i],['Empfehlung',/empfehl|ich würde|meiner meinung|deshalb|daher|fazit|insgesamt/i]],
   muster:['Umwelt: Über das ganze Autoleben verursacht ein Elektroauto weniger Treibhausgase als ein Benziner (UBA-Studie: etwa 140 statt 238 g je km). Mit mehr Ökostrom wird es noch besser. In der Stadt stößt es keine Abgase aus.','Energieeffizienz: Der Elektromotor macht aus dem größten Teil der Energie Bewegung, der Verbrenner verliert viel als Wärme. Beim Bremsen gewinnt das E-Auto Energie zurück.','Alltag: 30 km am Tag schafft jedes Elektroauto locker, laden kann die Familie zu Hause oder bei der Arbeit. Bei den zwei Urlaubsfahrten muss sie unterwegs Pausen zum Laden einplanen, Tanken geht schneller.','Kosten und Rohstoffe: Das E-Auto ist in der Anschaffung oft teurer, braucht aber weniger Wartung. Für den Akku werden Rohstoffe wie Lithium und Kobalt abgebaut, das belastet Umwelt und Menschen in den Abbauländern. Recycling kann helfen.','Empfehlung: Ich empfehle der Familie ein Elektroauto, weil sie fast nur kurze Strecken fährt und die Vorteile bei Umwelt und Effizienz überwiegen. Die zwei Urlaubsfahrten lassen sich mit Ladepausen planen.','Deine Empfehlung darf anders ausfallen, wenn du sie gut begründest.']},
-t25:{type:'mark',parts:[['Mia und Tim warten, bis ihre Lehrkraft die Station freigibt.',false],['Tim fasst den Auspuff an, obwohl der Motor gerade noch lief.',true],['Mia bindet ihre langen Haare zusammen.',false],['Beim Messen der Batteriespannung legt Tim einen Schraubenschlüssel quer über beide Pole.',true],['Mia trägt Handschuhe, als sie den Ölpeilstab abwischt.',false],['Ein Tropfen Öl landet auf dem Boden, Tim lässt ihn liegen.',true],['Am Elektroauto zieht Mia an einem orangen Kabel, um zu sehen, wohin es führt.',true],['Nach der Station legen beide das Werkzeug zurück in den Koffer.',false]]},
+t25:{type:'mark',parts:[['Mia und Tim warten, bis ihre Lehrkraft die Station freigibt.',false],['Tim fasst den Auspuff an, obwohl der Motor gerade noch lief.',true],['Mia bindet ihre langen Haare zusammen.',false],['Beim Messen der Batteriespannung legt Tim einen Schraubenschlüssel quer über beide Pole.',true],['Mia trägt Handschuhe, als sie den Ölpeilstab abwischt.',false],['Ein Tropfen Öl landet auf dem Boden, Tim lässt ihn liegen.',true],['Am Elektroauto zieht Mia an einem orangen Kabel, um zu sehen, wohin es führt.',true],['Nach der Station legen beide das Werkzeug zurück in den Koffer.',false]],help:{tip:'Nimm dir die Regeln oben einzeln vor und such zu jeder Regel den passenden Satz. Frag dich dann: Hält sich die Person an die Regel oder nicht?',teil:'Zwei Verstöße: Tim fasst den Auspuff an, obwohl der Motor gerade noch lief (Verbrennungsgefahr). Tim legt einen Schraubenschlüssel über beide Batteriepole (Kurzschluss). Zwei weitere Verstöße findest du selbst.'}},
 t26:{type:'label',fig:'motor',t:250,aria:'Schnittbild eines Ottomotors mit weiteren nummerierten Teilen',marks:['einlasskanal','auslasskanal','brennraum','kolbenringe','kurbelgehaeuse','oelwanne'],
   terms:[['Ölwanne','oelwanne'],['Brennraum','brennraum'],['Einlasskanal','einlasskanal'],['Kurbelgehäuse','kurbelgehaeuse'],['Kolbenringe','kolbenringe'],['Auslasskanal','auslasskanal'],['Schwungrad','x']]},
 t27:{type:'pair',left:['Ein Stab wird herausgezogen, abgewischt, wieder eingesteckt und abgelesen.','Mit einer Knarre wird die Spannrolle zurückgedreht und festgesetzt.','Die Messspitzen des Multimeters berühren Plus- und Minuspol.','Ein Teil aus dem Zylinderkopf wird mit einer Messingbürste gereinigt.','Das Werkzeug knackt, sobald die eingestellte Kraft erreicht ist.'],right:['Zündkerze reinigen','Ölstand prüfen','Schraube mit Drehmoment anziehen','Batteriespannung messen','Keilrippenriemen wechseln'],ans:[1,4,3,0,2]},
@@ -1566,7 +1569,7 @@ const LZ=[
 let S;
 try{S=JSON.parse(localStorage.getItem(KEY)||'null');}catch(e){S=null;}
 if(!S||typeof S!=='object')S={};
-S.st=S.st|0;S.a=S.a||{};S.ok=S.ok||{};S.seen=S.seen||{};S.rate=S.rate||{};S.name=S.name||'';S.muster=S.muster||{};S.lz=S.lz||{};
+S.st=S.st|0;S.a=S.a||{};S.ok=S.ok||{};S.seen=S.seen||{};S.rate=S.rate||{};S.name=S.name||'';S.muster=S.muster||{};S.lz=S.lz||{};S.help=S.help||{};
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
 
 const parts=$$('.station');
@@ -1756,7 +1759,13 @@ function wGrid(id,t,w,art){
     if(all)showFb(fb,'ok','Die Tabelle stimmt!',null);else showFb(fb,ok>=n*0.7?'mid':'err',ok+' von '+n+' Feldern richtig','Die rot markierten Felder stimmen noch nicht. Nutze die Animation und die Information oben.');
     report(id,all,art,fb);});
 }
-$$('.w[data-t]').forEach(w=>{const id=w.dataset.t,t=T[id],art=w.closest('.task');({seg:wSeg,quiz:wQuiz,multi:wMulti,order:wOrder,open:wOpen,gap:wGap,pair:wPair,mark:wMark,num:wNum,label:wLabel,grid:wGrid})[t.type](id,t,w,art);});
+/* Hilfe an schwierigen Aufgaben: Tipp, dann Teillösung (wie Elektronik-Grundlagen) */
+function addHelp(id,t,art){if(!t.help)return;const tb=el('div',{class:'hbox',hidden:!S.help[id]},el('b',{},'Tipp: '),t.help.tip);const pb=el('div',{class:'hbox',hidden:S.help[id]!==2},el('b',{},'Teillösung: '),t.help.teil);
+  const b1=el('button',{class:'btn soft',type:'button'},'Tipp anzeigen');const b2=el('button',{class:'btn soft',type:'button',hidden:!S.help[id]},'Teillösung anzeigen');
+  b1.onclick=()=>{S.help[id]=Math.max(1,S.help[id]|0);tb.hidden=false;b2.hidden=false;save();};
+  b2.onclick=()=>{S.help[id]=2;pb.hidden=false;save();if(window.LP&&LP.assist)LP.assist(id);};
+  const fb=$('.fb',art);art.insertBefore(el('div',{class:'help2'},el('div',{class:'row'},b1,b2),tb,pb),fb);}
+$$('.w[data-t]').forEach(w=>{const id=w.dataset.t,t=T[id],art=w.closest('.task');({seg:wSeg,quiz:wQuiz,multi:wMulti,order:wOrder,open:wOpen,gap:wGap,pair:wPair,mark:wMark,num:wNum,label:wLabel,grid:wGrid})[t.type](id,t,w,art);addHelp(id,t,art);});
 
 /* Grafiken und Animationen */
 $$('[data-fig]').forEach(b=>{const g=MG.FIG[b.dataset.fig]({});b.innerHTML=MG.svg(g.vb,g.body,b.dataset.aria||'');});
@@ -1838,7 +1847,7 @@ $('#pdfBtn').onclick=()=>{const note=$('#pdfNote');note.hidden=false;
   CH.slice(1,LAST).forEach((c,i)=>{const ci=i+1;const ids=TASK_IDS.filter(id=>chOf[home[id]]===ci);need(14);y+=2;txt('Kapitel '+ci+': '+c,{b:1,size:13,col:[3,85,145],lh:6.5});
     ids.forEach(id=>{const t=T[id];const l=label[id].replace(/^Station [\d.]+ · /,'');
       if(t.type==='open'){txt(l,{b:1});const a=(S.a[id]||'').trim();txt(a||'(noch keine Antwort)',{ind:4,col:a?[20,35,47]:[120,130,135]});if(S.muster[id])txt('Mit Musterlösung verglichen.',{ind:4,size:9,col:[86,103,107]});y+=1.5;}
-      else{const ok=!!S.ok[id];d.setFont('helvetica','bold');d.setFontSize(10.5);d.setTextColor(ok?31:194,ok?138:59,ok?76:46);need(5.5);d.text(ok?'gelöst':'offen',M,y);txt(l,{ind:16});}});
+      else{const ok=!!S.ok[id];d.setFont('helvetica','bold');d.setFontSize(10.5);d.setTextColor(ok?31:194,ok?138:59,ok?76:46);need(5.5);d.text(ok?'gelöst':'offen',M,y);txt(l+(S.help[id]===2?' (mit Teillösung)':S.help[id]?' (mit Tipp)':''),{ind:16});}});
     if(ci===7){need(12);y+=2;txt('Laufzettel Kfz-Stationen',{b:1});LZ.forEach(s=>{const st=S.lz[s.k]||{d:false,f:{}};need(6);d.setFont('helvetica','bold');d.setFontSize(10.5);d.setTextColor(st.d?31:194,st.d?138:59,st.d?76:46);d.text(st.d?'erledigt':'offen',M,y);txt(s.t,{ind:20});
       s.f.forEach(f=>{const v=(st.f[f[1]]||'').trim();if(v)txt(f[2]+': '+v,{ind:20,size:9.5,col:[60,72,78]});});});}});
   need(20);y+=4;txt('Selbsteinschätzung',{b:1,size:13,col:[3,85,145],lh:6.5});
