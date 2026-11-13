@@ -572,9 +572,28 @@ a.btn{text-decoration:none}
 @keyframes rrspin{to{transform:rotate(360deg)}}
 .rr-windg{opacity:.55}
 @media (prefers-reduced-motion:reduce){.rr-mv,.rr-wheel.spin{animation:none}.rr-needle,.rr-bfill,.rr-bar i,.rr-track i,.rr-tcar{transition:none!important}}
-.rr-chips{display:flex;flex-wrap:wrap;gap:6px;font-size:14px}
-.rr-chip{display:inline-flex;flex-wrap:wrap;gap:4px 6px;align-items:center;padding:4px 10px;border-radius:14px;background:var(--surface-2)}
-.rr-chip i{width:18px;height:6px;border-radius:3px;background:var(--muted)}.rr-chip.air i{background:#2a6fb0}.rr-chip.roll i{background:#e07b1e}
+.rr-art{font:700 15px/1 system-ui,sans-serif;paint-order:stroke;stroke:var(--surface)!important;stroke-width:4px;stroke-linejoin:round}
+.rr-fw{border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--surface-2);min-width:0}
+.rr-fw h5{margin:0 0 6px;font-size:16px}
+.rr-fwl{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:13px;margin-bottom:8px}
+.rr-fwl span{display:inline-flex;align-items:center;gap:6px}.rr-fwl i{width:20px;height:10px;border-radius:3px}
+.rr-fwl .air i,.rr-fwbar .air{background:#2a6fb0}.rr-fwl .roll i,.rr-fwbar .roll{background:#e07b1e}
+.rr-fwg{display:grid;grid-template-columns:minmax(0,1fr);gap:12px}
+@media (min-width:760px){.rr-fwg{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);align-items:center}}
+.rr-fwb{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.rr-fwb li{display:grid;grid-template-columns:58px minmax(0,1fr) auto;grid-template-areas:"c n t" "c b b";gap:2px 10px;align-items:center;padding:6px 8px;border-radius:10px;border:2px solid transparent;opacity:.72}
+.rr-fwb li.sel{border-color:var(--c,#2a6fb0);background:var(--surface);opacity:1}
+.rr-fwb li.e{opacity:1;background:var(--surface);border-style:dashed;border-color:var(--line)}
+.rr-fwcar{grid-area:c;position:relative;display:block}.rr-fwcar svg{display:block;width:58px;height:auto}
+.rr-fwcar svg+svg{position:absolute;right:-4px;top:-8px;width:18px;color:#e0a21a;filter:drop-shadow(0 0 1px #0008)}
+.rr-fwn{grid-area:n;display:flex;flex-wrap:wrap;gap:0 8px;align-items:baseline;min-width:0;font-size:14px}.rr-fwn small{color:var(--muted);font-size:12px}
+.rr-fwt{grid-area:t;font-size:15px;white-space:nowrap}
+.rr-fwbar{grid-area:b;display:flex;height:14px;border-radius:7px;background:var(--line);overflow:hidden}
+.rr-fwbar i{display:block;height:100%;transition:width .35s ease}
+.rr-fwc{display:block;width:100%;height:auto;max-height:260px;font:11px system-ui,sans-serif;fill:var(--ink)}
+.rr-fwc path.o{stroke-width:2;opacity:.45}.rr-fwc path.s{stroke-width:4}.rr-fwc .rr-fwair{fill:#2a6fb0;opacity:.18}
+.rr-fwp{margin:8px 0 0;font-size:13px;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){.rr-fwbar i{transition:none}}
 .rr-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px 14px}
 .rr-f{display:grid;gap:6px;font-size:15px;font-weight:700;align-content:start}
 .rr-f input[type=range]{width:100%;accent-color:var(--c);min-height:40px}
@@ -1902,10 +1921,10 @@ function rrScene(o){const g=RR_GROUND[o.ug];
     <path class="rr-mv" d="M-450 172H1050" fill="none" stroke="${g[1]}" stroke-width="${g[3]}" stroke-linecap="round" stroke-dasharray="${g[2]}"/>
     ${o.ug?`<path class="rr-mv" d="M-439 161H1050" fill="none" stroke="${g[1]}" stroke-width="4" stroke-linecap="round" stroke-dasharray="3 22"/>`:''}
     <g transform="translate(140 62)">${rrCar(o.kl,true)}</g>
-    <g class="rr-arL" fill="#2a6fb0" stroke="#2a6fb0"><line y1="104" y2="104" stroke-width="9" stroke-linecap="round"/><polygon stroke="none"/></g>
-    <g class="rr-arR" fill="#e07b1e" stroke="#e07b1e"><line y1="160" y2="160" stroke-width="9" stroke-linecap="round"/><polygon stroke="none"/></g>
+    <g class="rr-arL" fill="#2a6fb0" stroke="#2a6fb0"><line y1="104" y2="104" stroke-width="9" stroke-linecap="round"/><polygon stroke="none"/><text class="rr-art" x="450" y="88" stroke="none">Luft</text></g>
+    <g class="rr-arR" fill="#e07b1e" stroke="#e07b1e"><line y1="160" y2="160" stroke-width="9" stroke-linecap="round"/><polygon stroke="none"/><text class="rr-art" x="394" y="144" stroke="none">Roll</text></g>
   </svg>`;}
-function rrArrow(g,xHead,y,F){const len=Math.max(0,Math.min(150,F*0.11)),ln=g.querySelector('line'),pg=g.querySelector('polygon');
+function rrArrow(g,xHead,y,F,lab){const len=Math.max(0,Math.min(150,F*0.11)),ln=g.querySelector('line'),pg=g.querySelector('polygon');g.querySelector('text').textContent=lab+' '+rrF(F)+' N';
   pg.setAttribute('points',`${xHead},${y} ${xHead+18},${y-12} ${xHead+18},${y+12}`);
   ln.setAttribute('x1',xHead+16);ln.setAttribute('x2',xHead+16+len);ln.style.display=len<3?'none':'';}
 const RR_TANK=`<svg class="rr-g" viewBox="0 0 120 70" aria-hidden="true"><path d="M12 60A48 48 0 0 1 108 60" fill="none" stroke="var(--line)" stroke-width="10" stroke-linecap="round"/><path d="M12 60A48 48 0 0 1 17.2 38.2" fill="none" stroke="#e2574c" stroke-width="10" stroke-linecap="round"/><g stroke="var(--surface)" stroke-width="2.5"><path d="M26.1 26.1l7 7"/><path d="M60 12v10"/><path d="M93.9 26.1l-7 7"/></g><g class="rr-needle"><path d="M60 60V20" stroke="var(--ink)" stroke-width="4" stroke-linecap="round"/></g><circle cx="60" cy="60" r="6" fill="var(--ink)"/></svg>`;
@@ -1916,6 +1935,21 @@ function rrTacho(){let t='';for(let v=0;v<=200;v+=20){const a=(-120+240*v/200)*M
     t+=`<path d="M${(80+51*s).toFixed(1)} ${(82-51*c).toFixed(1)}L${(80+58*s).toFixed(1)} ${(82-58*c).toFixed(1)}" stroke="var(--ink)" stroke-width="${v%40?1.5:2.5}"/>`;
     if(v%40===0)t+=`<text x="${(80+39*s).toFixed(1)}" y="${(82-39*c+4).toFixed(1)}" text-anchor="middle">${v}</text>`;}
   return `<svg class="rr-tacho" viewBox="0 0 160 126" aria-hidden="true"><path d="M26.3 113A62 62 0 1 1 133.7 113" fill="none" stroke="var(--line)" stroke-width="8" stroke-linecap="round"/><path class="rr-tarc" pathLength="100" d="M26.3 113A62 62 0 1 1 133.7 113" fill="none" stroke="var(--c)" stroke-width="8" stroke-linecap="round" stroke-dasharray="0 100"/>${t}<g class="rr-tneedle"><path d="M80 88V30" stroke="#e2574c" stroke-width="3.5" stroke-linecap="round"/></g><circle cx="80" cy="82" r="7" fill="var(--ink)"/><text class="rr-tnum" x="80" y="112" text-anchor="middle">100</text><text x="80" y="123" text-anchor="middle">km/h</text></svg>`;}
+/* Fahrwiderstand im Vergleich: gestapelte Balken je Auto und Kurven F(v) */
+function rrFwRows(o){const r=rrCalc(o),rows=RR_KL.map((k,ix)=>{const q=rrCalc(Object.assign({},o,{kl:ix}));return {ix,name:k[0],sub:'c<sub>w</sub> '+rrF(k[1],2)+' · A '+rrF(k[2],2)+' m² · '+rrF(k[3])+' kg',FL:q.FL,FR:q.B.FR};});
+  rows.push({ix:o.kl,e:true,name:RR_KL[o.kl][0]+' als Elektroauto',sub:''+rrF(RR_KL[o.kl][3])+' kg + Akku '+rrF(r.mA)+' kg',FL:r.FL,FR:r.E.FR});return rows;}
+function rrFwMax(o){let m=0;RR_KL.forEach((k,ix)=>{const q=rrCalc(Object.assign({},o,{kl:ix}),180);m=Math.max(m,q.B.F,q.E.F);});
+  const st=m>2000?1000:m>800?400:200;return Math.ceil(m/st)*st;}
+function rrFwChart(o,fmax){const X=v=>44+(v-30)*(266/150),Y=f=>138-118*f/fmax,vs=[];for(let v=30;v<=180;v+=5)vs.push(v);
+  let g='';const st=fmax/4;for(let i=0;i<=4;i++){const y=Y(i*st).toFixed(1);g+=`<path d="M44 ${y}H310" stroke="var(--line)" stroke-width="1"/><text x="38" y="${(+y+4).toFixed(1)}" text-anchor="end">${rrF(i*st)}</text>`;}
+  [30,60,90,120,150,180].forEach(v=>{g+=`<text x="${X(v).toFixed(1)}" y="154" text-anchor="middle">${v}</text>`;});
+  const line=(ix,cls)=>{const c=RR_CAR[ix].col;return `<path class="${cls}" d="${vs.map((v,i)=>(i?'L':'M')+X(v).toFixed(1)+' '+Y(rrCalc(Object.assign({},o,{kl:ix}),v).B.F).toFixed(1)).join('')}" fill="none" stroke="${c}"/>`;};
+  const sel=o.kl,air=`<path class="rr-fwair" d="M${X(30)} 138${vs.map(v=>'L'+X(v).toFixed(1)+' '+Y(rrCalc(o,v).FL).toFixed(1)).join('')}L${X(180)} 138Z"/>`;
+  const q=rrCalc(o),cx=X(o.v).toFixed(1);
+  return `<svg class="rr-fwc" viewBox="0 0 320 172" role="img" aria-label="Fahrwiderstand der drei Autos von 30 bis 180 km/h. Die Kurven steigen immer steiler an, weil der Luftwiderstand mit dem Quadrat der Geschwindigkeit wächst.">${g}${air}
+    ${[0,1,2].filter(i=>i!==sel).map(i=>line(i,'o')).join('')}${line(sel,'s')}
+    <path d="M${cx} 20V138" stroke="var(--ink)" stroke-width="1.5" stroke-dasharray="4 4"/><circle cx="${cx}" cy="${Y(q.B.F).toFixed(1)}" r="5" fill="${RR_CAR[sel].col}" stroke="var(--surface)" stroke-width="2"/>
+    <text x="177" y="170" text-anchor="middle">Geschwindigkeit in km/h</text><text x="6" y="12">Fahrwiderstand in N</text></svg>`;}
 const RR_CHK='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4 10-10" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 function rrUI(box){if(!box)return;S.rr=Object.assign({},RR_DEF,S.rr||{});const o=S.rr;
   const num=(k,lab,unit,step,min,max)=>{const i=el('input',{type:'number',step,min,max,id:'rr-'+k,value:o[k]});i.oninput=()=>{const v=parseFloat(String(i.value).replace(',','.'));if(!isNaN(v)&&v>=min&&v<=max){o[k]=v;save();draw();}};return el('label',{class:'rr-f',for:'rr-'+k},el('span',{},lab),el('span',{class:'rr-in'},i,el('small',{},unit)));};
@@ -1923,7 +1957,7 @@ function rrUI(box){if(!box)return;S.rr=Object.assign({},RR_DEF,S.rr||{});const o
   const vIn=el('input',{type:'range',min:30,max:180,step:10,value:o.v,id:'rr-v','aria-valuetext':o.v+' km/h'});const vOut=el('b',{class:'rr-speed'},o.v+' km/h');
   vIn.oninput=()=>{o.v=+vIn.value;vOut.textContent=o.v+' km/h';vIn.setAttribute('aria-valuetext',o.v+' km/h');save();draw();};
   const tacho=el('div',{class:'rr-tachow',html:rrTacho()});
-  const scene=el('div',{class:'rr-scene'}),chips=el('div',{class:'rr-chips','aria-live':'polite'}),tab=el('div',{class:'rr-tw'});
+  const scene=el('div',{class:'rr-scene'}),fw=el('div',{class:'rr-fw'}),tab=el('div',{class:'rr-tw'});
   const cards={},out=el('div',{class:'rr-out','aria-live':'polite'});
   ['B','D','E'].forEach(k=>{const c=cards[k]={};
     const cap0=k==='E'?o.akku:o.tank;if(o['f'+k]==null||o['f'+k]>cap0)o['f'+k]=cap0;
@@ -1945,7 +1979,7 @@ function rrUI(box){if(!box)return;S.rr=Object.assign({},RR_DEF,S.rr||{});const o
     num('etaB','Wirkungsgrad Benziner','%',1,10,60),num('etaD','Wirkungsgrad Diesel','%',1,10,60),num('etaE','Wirkungsgrad Elektroantrieb','%',1,50,100),
     num('pB','Preis Super E10','€/l',0.01,0.5,5),num('pD','Preis Diesel','€/l',0.01,0.5,5),num('pE','Strompreis','€/kWh',0.01,0.05,2)),
     el('p',{class:'src'},'Voreinstellung: Preise ADAC (Oktober 2026) und BDEW (Oktober 2026, Laden zu Hause). An der Ladesäule ist Strom meist teurer. Wirkungsgrade sind Richtwerte zum Ausprobieren.'));
-  box.append(el('div',{class:'anim rr-box'},el('h4',{class:'rr-h'},'Reichweiten- und Kostenrechner'),scene,chips,
+  box.append(el('div',{class:'anim rr-box'},el('h4',{class:'rr-h'},'Reichweiten- und Kostenrechner'),scene,fw,
     el('div',{class:'rr-grid'},seg(RR_KL,'kl','Fahrzeugklasse',ix=>'<svg viewBox="0 0 300 92">'+rrCar(ix,false)+'</svg>'),seg(RR_UG,'ug','Untergrund',ix=>'<i style="background:'+RR_GROUND[ix][0]+'"></i>'),
       el('div',{class:'rr-f rr-vbox'},el('label',{for:'rr-v'},'Geschwindigkeit: ',vOut),tacho,vIn),num('s','Fahrstrecke','km',10,1,2000)),
     el('div',{class:'row'},reset),out,adv,el('details',{class:'rr-adv'},el('summary',{},'Reichweite bei verschiedenen Geschwindigkeiten (voller Tank, voller Akku)'),tab)));
@@ -1956,10 +1990,17 @@ function rrUI(box){if(!box)return;S.rr=Object.assign({},RR_DEF,S.rr||{});const o
     tacho.querySelector('.rr-tneedle').style.transform='rotate('+(-120+240*o.v/200).toFixed(1)+'deg)';tacho.querySelector('.rr-tarc').setAttribute('stroke-dasharray',(o.v/2)+' 100');tacho.querySelector('.rr-tnum').textContent=o.v;
     if(sceneKey!==o.kl+'-'+o.ug){sceneKey=o.kl+'-'+o.ug;scene.innerHTML=rrScene(o);}
     scene.style.setProperty('--rr-t',(60/o.v).toFixed(2)+'s');scene.style.setProperty('--rr-w',Math.max(0.5,55/o.v).toFixed(2)+'s');
-    rrArrow(scene.querySelector('.rr-arL'),430,104,r.FL);rrArrow(scene.querySelector('.rr-arR'),372,160,r.B.FR);
-    chips.replaceChildren(el('span',{class:'rr-chip air'},el('i',{}),'Luftwiderstand ',el('b',{},rrF(r.FL)+' N')),
-      el('span',{class:'rr-chip roll'},el('i',{}),'Rollwiderstand ',el('b',{},rrF(r.B.FR)+' N'),' · E-Auto ',el('b',{},rrF(r.E.FR)+' N'),' (Akku '+rrF(r.mA)+' kg)'),
-      el('span',{class:'rr-chip'},'Leistung an den Rädern ',el('b',{},rrF(r.B.P,1)+' kW')));
+    rrArrow(scene.querySelector('.rr-arL'),430,104,r.FL,'Luft');rrArrow(scene.querySelector('.rr-arR'),372,160,r.B.FR,'Roll');
+    const rows=rrFwRows(o),fmax=rrFwMax(o);
+    fw.replaceChildren(el('h5',{},'Fahrwiderstand bei '+o.v+' km/h auf '+RR_UG[o.ug][0]),
+      el('div',{class:'rr-fwl','aria-hidden':'true'},el('span',{class:'air'},el('i',{}),'Luftwiderstand'),el('span',{class:'roll'},el('i',{}),'Rollwiderstand')),
+      el('div',{class:'rr-fwg'},el('ul',{class:'rr-fwb'},...rows.map(x=>{const F=x.FL+x.FR;
+        return el('li',{class:(x.ix===o.kl&&!x.e?'sel':'')+(x.e?' e':''),style:'--c:'+RR_CAR[x.ix].col,'aria-label':x.name+': Luftwiderstand '+rrF(x.FL)+' N, Rollwiderstand '+rrF(x.FR)+' N, zusammen '+rrF(F)+' N'},
+          el('span',{class:'rr-fwcar',html:'<svg viewBox="0 0 300 92" aria-hidden="true">'+rrCar(x.ix,false)+'</svg>'+(x.e?RR_IC.E:'')}),
+          el('span',{class:'rr-fwn'},el('b',{},x.name),el('small',{html:x.sub})),el('b',{class:'rr-fwt'},rrF(F)+' N'),
+          el('span',{class:'rr-fwbar','aria-hidden':'true'},el('i',{class:'air',style:'width:'+(100*x.FL/fmax).toFixed(1)+'%'}),el('i',{class:'roll',style:'width:'+(100*x.FR/fmax).toFixed(1)+'%'})));})),
+        el('div',{class:'rr-fwcw',html:rrFwChart(o,fmax)})),
+      el('p',{class:'rr-fwp'},'Luftwiderstand: wächst mit c',el('sub',{},'w'),', Stirnfläche A und dem Quadrat der Geschwindigkeit. Rollwiderstand: wächst mit der Masse und hängt vom Untergrund ab. Leistung an den Rädern: ',el('b',{},rrF(r.B.P,1)+' kW'),'.'));
     ks.forEach(k=>{const x=r[k],c=cards[k],u=k==='E'?'kWh':'l',stops=o.s<=x.r0+1e-9?0:Math.ceil((o.s-x.r0)/x.range-1e-9),lvl=Math.max(0,Math.min(1,stops?1-(o.s-x.r0-(stops-1)*x.range)/x.range:(x.r0-o.s)/x.range)),pct=Math.round(lvl*100);
       c.fOut.textContent=rrF(o['f'+k])+' '+u;c.rest.textContent=rrF(lvl*x.range)+' km';
       if(k==='E'){const f=c.g.querySelector('.rr-bfill');f.style.transform='scaleX('+Math.max(0.02,lvl).toFixed(3)+')';f.setAttribute('fill',lvl>0.5?'#2e9a5e':lvl>0.2?'#e0a21a':'#e2574c');}
