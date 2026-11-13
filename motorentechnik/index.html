@@ -562,6 +562,22 @@ a.btn{text-decoration:none}
 .help2 .row{gap:6px}
 .help2 .hbox{border-radius:12px;padding:10px 12px;background:var(--luxus-soft);font-size:15px}
 .anim-pt{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:6px;padding:6px 10px;border-radius:10px;background:var(--surface-2)}
+.formula{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:14px;background:var(--surface-2);border-radius:10px;padding:8px 10px;overflow-x:auto}
+.rr-box{gap:12px}.rr-h{margin:0;font-size:17px}
+.rr-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px 14px}
+.rr-f{display:grid;gap:6px;font-size:15px;font-weight:700}
+.rr-f input[type=range]{width:100%;accent-color:var(--c);min-height:40px}
+.rr-in{display:flex;gap:6px;align-items:center;font-weight:400}.rr-in input{width:110px;min-height:42px;font-size:16px}
+.rr-seg{display:flex;flex-wrap:wrap;gap:6px}.rr-seg .btn{min-height:40px;padding:6px 12px;font-size:15px}
+.rr-seg .btn[aria-pressed="true"]{background:var(--c);color:var(--on-accent)}
+.rr-adv>summary{cursor:pointer;font-weight:700;font-size:15px;padding:6px 0}
+.rr-out{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
+.rr-card{border:1.5px solid var(--line);border-radius:14px;padding:10px 12px;background:var(--surface);display:grid;gap:4px;font-size:15px}
+.rr-card h5{margin:0;font-size:16px}.rr-card p{margin:0}
+.rr-bar{height:8px;border-radius:99px;background:var(--surface-2);overflow:hidden}.rr-bar i{display:block;height:100%;background:var(--bad)}
+.rr-bar.rng i{background:var(--existenz)}
+.rr-zw{font-size:14px;margin:0;color:var(--muted)}
+.rr-tw{overflow-x:auto}.rr-t{border-collapse:collapse;width:100%;font-size:15px}.rr-t th,.rr-t td{padding:5px 8px;border-bottom:1px solid var(--line);text-align:left}
 
 /* aus der Unternehmens-Werkstatt übernommen */
 .teile{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
@@ -992,14 +1008,53 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
   </article>
 </section>
 
+<!-- ================= KAPITEL 6a: REICHWEITE UND KOSTEN (data-ch 10, steht in CFG_W nach Kapitel 6) ================= -->
+<section class="station c-existenz" data-ch="10" hidden>
+  <div class="info">
+    <h3>Was ein Auto auf der Straße bremst</h3>
+    <p>Beim Fahren muss der Motor zwei <b>Fahrwiderstände</b> überwinden. Der <b>Luftwiderstand</b> wächst mit dem Quadrat der Geschwindigkeit: Bei doppelter Geschwindigkeit ist er viermal so groß. Er hängt außerdem vom <b>cw-Wert</b> (Form des Autos) und von der <b>Stirnfläche A</b> ab. Der <b>Rollwiderstand</b> hängt von der <b>Masse</b> des Autos und vom <b>Untergrund</b> ab (Rollwiderstandsbeiwert c<sub>R</sub>).</p>
+    <p class="formula">F<sub>Luft</sub> = ½ · ρ · c<sub>w</sub> · A · v² &nbsp; (ρ = 1,2 kg/m³) &nbsp;·&nbsp; F<sub>Roll</sub> = c<sub>R</sub> · m · g &nbsp; (g = 9,81 m/s²)</p>
+    <p>Wie viel Energie im Tank oder im Akku steckt, ist unterschiedlich. Ein Liter Benzin enthält etwa <b>8,9 kWh</b>, ein Liter Diesel etwa <b>10 kWh</b>. Ein Verbrennungsmotor macht aber nur etwa ein Viertel bis ein Drittel davon zu Bewegung, der Rest wird Wärme. Ein Elektroantrieb ist viel effizienter. Dafür ist der <b>Akku</b> schwer: Bei 150 Wh je Kilogramm wiegt ein 50-kWh-Akku über 300 kg und erhöht den Rollwiderstand.</p>
+  </div>
+  <div class="rr" id="rr"></div>
+  <p class="src">Energiegehalt: Richtlinie 2009/28/EG, Anhang III (Ottokraftstoff 32 MJ/l = 8,9 kWh/l, Dieselkraftstoff 36 MJ/l = 10 kWh/l). Preise als Voreinstellung: ADAC, Monatsdurchschnitt Oktober 2026 (Super E10 2,114 €/l, Diesel 2,261 €/l, veröffentlicht 02.11.2026); BDEW-Strompreisanalyse Oktober 2026 (Haushalte 37,3 ct/kWh). Fahrzeugklassen, Rollwiderstandsbeiwerte und Wirkungsgrade sind Beispielwerte zum Ausprobieren.</p>
+  <article class="task">
+    <header><span class="num"></span><h3>Verbrauch des Elektroautos</h3><button class="op" data-op="ermitteln" type="button">ermitteln</button></header>
+    <p class="q">Ermittle mit dem Rechner, wie viele Kilowattstunden das Elektroauto der Mittelklasse auf 100 km bei 100 km/h auf Asphalt braucht. Tippe vorher auf „Voreinstellung“.</p>
+    <div class="w" data-t="t30"></div>
+  </article>
+  <article class="task">
+    <header><span class="num"></span><h3>Kosten mit dem Diesel</h3><button class="op" data-op="ermitteln" type="button">ermitteln</button></header>
+    <p class="q">Ermittle mit dem Rechner, was 100 km mit dem Diesel der Mittelklasse bei 130 km/h auf Asphalt kosten. Tippe vorher auf „Voreinstellung“ und stell dann die Geschwindigkeit ein.</p>
+    <div class="w" data-t="t31"></div>
+  </article>
+</section>
+
+<section class="station c-existenz" data-ch="10" hidden>
+  <div class="info">
+    <h3>Reichweite und Kosten vergleichen</h3>
+    <p>Probiere den Rechner oben aus: Ändere die Geschwindigkeit, den Untergrund, die Fahrzeugklasse und die Größe des Akkus. Beobachte, wie sich Verbrauch, Kosten und Reichweite der drei Antriebe verändern. Die Preise kannst du unter „Annahmen und Preise anpassen“ auf den aktuellen Stand bringen.</p>
+  </div>
+  <article class="task">
+    <header><span class="num"></span><h3>Wovon der Verbrauch abhängt</h3><button class="op" data-op="erklären" type="button">erklären</button></header>
+    <p class="q">Erkläre, wovon der Energiebedarf eines Autos abhängt: Wähle in jeder Lücke das passende Wort.</p>
+    <div class="w" data-t="t32"></div>
+  </article>
+  <article class="task">
+    <header><span class="num"></span><h3>Welcher Antrieb passt?</h3><button class="op" data-op="beurteilen" type="button">beurteilen</button></header>
+    <p class="q">Familie Arslan fährt an jedem Arbeitstag 40 km zur Arbeit und zurück und zweimal im Jahr 700 km in den Urlaub. Beurteile mit Werten aus dem Rechner, welcher Antrieb für die Familie am besten passt.</p>
+    <div class="w" data-t="t33"></div>
+  </article>
+</section>
+
 <!-- ================= KAPITEL 7: PRAXIS ================= -->
 <section class="station c-luxus" data-ch="7" hidden>
   <div class="info">
     <h3>Sicher arbeiten an den Kfz-Stationen</h3>
-    <div class="warn red"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 21h20Z" fill="#ffd23f" stroke="#1c1c1c" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 9v6M12 17.5v.5" stroke="#1c1c1c" stroke-width="2" stroke-linecap="round"/></svg><span><b>Arbeiten am Fahrzeug oder am Motor nur mit deiner Lehrkraft.</b> Der Motor ist aus, der Schlüssel abgezogen und der Motor abgekühlt.</span></div>
+    <div class="warn red"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 21h20Z" fill="#ffd23f" stroke="#1c1c1c" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 9v6M12 17.5v.5" stroke="#1c1c1c" stroke-width="2" stroke-linecap="round"/></svg><span><b>Arbeiten am Fahrzeug oder am Motor nur mit deiner Lehrkraft.</b> An den Stationen läuft kein Motor. Gefährlich ist das Motormodell mit Kurbel: Beim Drehen können Finger zwischen Kolben, Pleuel, Kurbelwelle oder Zahnriemen eingeklemmt werden.</span></div>
     <ul>
       <li>Fang erst an, wenn deine Lehrkraft die Station freigegeben hat.</li>
-      <li>Motorblock, Auspuff und Kühler können noch lange heiß sein. Fass sie nur an, wenn der Motor abgekühlt ist.</li>
+      <li>Am Motormodell mit Kurbel dreht immer nur eine Person, und zwar langsam. Alle anderen nehmen die Hände weg. Zeigen und anfassen erst, wenn die Kurbel stillsteht.</li>
       <li>Lange Haare zusammenbinden, Schmuck und lose Kleidung ablegen.</li>
       <li>Bei Arbeiten mit Öl Handschuhe tragen. Verschüttetes Öl sofort aufwischen, sonst rutscht jemand aus.</li>
       <li>An der Batterie nie Plus- und Minuspol mit Werkzeug verbinden: Kurzschluss und Brandgefahr.</li>
@@ -1495,7 +1550,7 @@ var MG = (function () {
 <script>
 (function(){
 "use strict";
-const CFG_W={key:'motorentechnik-v1',title:'Motorentechnik',ch:[[0,'Start','Motorentechnik kennenlernen'],[1,'Aufbau','Aufbau des Ottomotors'],[2,'Arbeitsweise','Viertakt, Zweitakt, Wankel'],[3,'Otto und Diesel','Ottomotor und Dieselmotor'],[4,'Einspritzung','Gemischbildung und Einspritzung'],[5,'Elektrik','Elektrik im Auto'],[6,'Elektroauto','Das Elektroauto'],[7,'Praxis','Kfz-Stationen'],[8,'Selbsttest','Selbsttest'],[9,'Abgabe','Abgabe']],
+const CFG_W={key:'motorentechnik-v1',title:'Motorentechnik',ch:[[0,'Start','Motorentechnik kennenlernen'],[1,'Aufbau','Aufbau des Ottomotors'],[2,'Arbeitsweise','Viertakt, Zweitakt, Wankel'],[3,'Otto und Diesel','Ottomotor und Dieselmotor'],[4,'Einspritzung','Gemischbildung und Einspritzung'],[5,'Elektrik','Elektrik im Auto'],[6,'Elektroauto','Das Elektroauto'],[10,'Reichweite','Reichweite und Kosten'],[7,'Praxis','Kfz-Stationen'],[8,'Selbsttest','Selbsttest'],[9,'Abgabe','Abgabe']],
   rate:['Ich kann die Bauteile eines Ottomotors benennen und ihre Aufgaben erklären.','Ich kann den Viertaktprozess mit Ventilstellung, Druck und Temperatur beschreiben.','Ich kann Zweitakt-, Viertakt- und Wankelmotor unterscheiden.','Ich kann Otto- und Dieselmotor vergleichen.','Ich kann erklären, wie Kraftstoff eingespritzt wird und wie das Bordnetz funktioniert.','Ich kann den Aufbau eines Elektroautos beschreiben.','Ich kann Elektroauto und Verbrenner mit Kriterien bewerten.']};
 const KEY=CFG_W.key;
 const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
@@ -1542,7 +1597,12 @@ t22:{type:'multi',opts:[['Kraftstofftank',true],['Auspuff',true],['Räder',false
 t23:{type:'num',answer:98,unit:'g je Kilometer',why:'238 g − 140 g = 98 g. Das Elektroauto verursacht in dieser Studie also etwa 41 % weniger Treibhausgase als der Benziner.'},
 t24:{type:'open',min:220,ki:true,checks:[['Umwelt',/co2|co₂|klima|strom|abgas|umwelt|emission|treibhaus/i],['Energieeffizienz',/effizien|wirkungsgrad|wärme|rekuper|energie/i],['Alltag',/reichweite|laden|lade|tank|strecke|urlaub|pendel/i],['Kosten oder Rohstoffe',/kost|preis|teuer|günstig|rohstoff|lithium|kobalt|nickel|recycl|wartung/i],['Empfehlung',/empfehl|ich würde|meiner meinung|deshalb|daher|fazit|insgesamt/i]],
   muster:['Umwelt: Über das ganze Autoleben verursacht ein Elektroauto weniger Treibhausgase als ein Benziner (UBA-Studie: etwa 140 statt 238 g je km). Mit mehr Ökostrom wird es noch besser. In der Stadt stößt es keine Abgase aus.','Energieeffizienz: Der Elektromotor macht aus dem größten Teil der Energie Bewegung, der Verbrenner verliert viel als Wärme. Beim Bremsen gewinnt das E-Auto Energie zurück.','Alltag: 30 km am Tag schafft jedes Elektroauto locker, laden kann die Familie zu Hause oder bei der Arbeit. Bei den zwei Urlaubsfahrten muss sie unterwegs Pausen zum Laden einplanen, Tanken geht schneller.','Kosten und Rohstoffe: Das E-Auto ist in der Anschaffung oft teurer, braucht aber weniger Wartung. Für den Akku werden Rohstoffe wie Lithium und Kobalt abgebaut, das belastet Umwelt und Menschen in den Abbauländern. Recycling kann helfen.','Empfehlung: Ich empfehle der Familie ein Elektroauto, weil sie fast nur kurze Strecken fährt und die Vorteile bei Umwelt und Effizienz überwiegen. Die zwei Urlaubsfahrten lassen sich mit Ladepausen planen.','Deine Empfehlung darf anders ausfallen, wenn du sie gut begründest.']},
-t25:{type:'mark',parts:[['Mia und Tim warten, bis ihre Lehrkraft die Station freigibt.',false],['Tim fasst den Auspuff an, obwohl der Motor gerade noch lief.',true],['Mia bindet ihre langen Haare zusammen.',false],['Beim Messen der Batteriespannung legt Tim einen Schraubenschlüssel quer über beide Pole.',true],['Mia trägt Handschuhe, als sie den Ölpeilstab abwischt.',false],['Ein Tropfen Öl landet auf dem Boden, Tim lässt ihn liegen.',true],['Am Elektroauto zieht Mia an einem orangen Kabel, um zu sehen, wohin es führt.',true],['Nach der Station legen beide das Werkzeug zurück in den Koffer.',false]],help:{tip:'Nimm dir die Regeln oben einzeln vor und such zu jeder Regel den passenden Satz. Frag dich dann: Hält sich die Person an die Regel oder nicht?',teil:'Zwei Verstöße: Tim fasst den Auspuff an, obwohl der Motor gerade noch lief (Verbrennungsgefahr). Tim legt einen Schraubenschlüssel über beide Batteriepole (Kurzschluss). Zwei weitere Verstöße findest du selbst.'}},
+t30:{type:'num',answer:0,tol:0.3,unit:'kWh je 100 km',why:'',help:{tip:'Tippe auf „Voreinstellung“, wähl Mittelklasse und Asphalt und stell 100 km/h ein. Lies den Verbrauch in der Spalte Elektroauto ab.',teil:'Der Wert steht in der Karte „Elektroauto“ in der Zeile „Verbrauch“. Runde auf eine Nachkommastelle.'}},
+t31:{type:'num',answer:0,tol:0.15,unit:'Euro',why:'',help:{tip:'Erst „Voreinstellung“, dann den Regler auf 130 km/h. In der Karte „Diesel“ steht die Zeile „Kosten je 100 km“.',teil:'Bei 130 km/h ist der Luftwiderstand fast 1,7-mal so groß wie bei 100 km/h. Der Diesel braucht dann rund 6 Liter auf 100 km. Multipliziere mit dem Dieselpreis.'}},
+t32:{type:'gap',text:'Der Luftwiderstand wächst mit dem {0} der Geschwindigkeit. Fährt ein Auto doppelt so schnell, ist der Luftwiderstand {1} so groß. Der Rollwiderstand hängt von der {2} des Autos und vom {3} ab. Ein größerer Akku erhöht die Reichweite, macht das Auto aber auch {4}. Ein Verbrennungsmotor macht nur etwa {5} der Energie im Kraftstoff zu Bewegung.',gaps:[[['Quadrat','Hälfte','Wurzel'],0],[['doppelt','viermal','achtmal'],1],[['Farbe','Masse','Höchstgeschwindigkeit'],1],[['Untergrund','Luftdruck','Motoröl'],0],[['leichter','schwerer','schneller'],1],[['ein Viertel bis ein Drittel','die Hälfte','neun Zehntel'],0]]},
+t33:{type:'open',min:140,checks:[['Kosten je 100 km',/kost|€|euro|preis|günstig|billig|teuer/i],['Reichweite',/reichweite|km/i],['Urlaubsfahrt und Laden',/urlaub|700|lad|tank/i],['Entscheidung mit Begründung',/weil|deshalb|darum|daher|passt|empfehle|würde/i]],
+  muster:['Für den Arbeitsweg von 40 km am Tag reicht die Reichweite aller drei Antriebe. Das Elektroauto ist im Rechner bei 100 km/h mit rund 6 Euro je 100 km am günstigsten, Diesel und Benziner kosten etwa 9 bis 12 Euro.','Bei der Urlaubsfahrt über 700 km reicht der 50-kWh-Akku bei 130 km/h nur für gut 200 km, das Elektroauto muss also zwei- bis dreimal laden. Der Diesel kommt mit einer Tankfüllung durch.','Ich würde der Familie das Elektroauto empfehlen, weil sie fast nur kurze Strecken fährt und dabei viel spart. Für die zwei Urlaubsfahrten plant sie Ladepausen ein. Wer zu Hause nicht laden kann, zahlt an der Ladesäule mehr; dann lohnt sich der Vergleich neu.']},
+t25:{type:'mark',parts:[['Mia und Tim warten, bis ihre Lehrkraft die Station freigibt.',false],['Tim dreht die Kurbel am Motormodell, während Mia mit dem Finger zeigt, wo der Kolben sitzt.',true],['Mia bindet ihre langen Haare zusammen.',false],['Beim Messen der Batteriespannung legt Tim einen Schraubenschlüssel quer über beide Pole.',true],['Mia trägt Handschuhe, als sie den Ölpeilstab abwischt.',false],['Ein Tropfen Öl landet auf dem Boden, Tim lässt ihn liegen.',true],['Am Elektroauto zieht Mia an einem orangen Kabel, um zu sehen, wohin es führt.',true],['Nach der Station legen beide das Werkzeug zurück in den Koffer.',false]],help:{tip:'Nimm dir die Regeln oben einzeln vor und such zu jeder Regel den passenden Satz. Frag dich dann: Hält sich die Person an die Regel oder nicht?',teil:'Zwei Verstöße: Tim dreht die Kurbel, während Mia mit dem Finger zwischen die bewegten Teile zeigt (Klemmgefahr). Tim legt einen Schraubenschlüssel über beide Batteriepole (Kurzschluss). Zwei weitere Verstöße findest du selbst.'}},
 t26:{type:'label',fig:'motor',t:250,aria:'Schnittbild eines Ottomotors mit weiteren nummerierten Teilen',marks:['einlasskanal','auslasskanal','brennraum','kolbenringe','kurbelgehaeuse','oelwanne'],
   terms:[['Ölwanne','oelwanne'],['Brennraum','brennraum'],['Einlasskanal','einlasskanal'],['Kurbelgehäuse','kurbelgehaeuse'],['Kolbenringe','kolbenringe'],['Auslasskanal','auslasskanal'],['Schwungrad','x']]},
 t27:{type:'pair',left:['Ein Stab wird herausgezogen, abgewischt, wieder eingesteckt und abgelesen.','Mit einer Knarre wird die Spannrolle zurückgedreht und festgesetzt.','Die Messspitzen des Multimeters berühren Plus- und Minuspol.','Ein Teil aus dem Zylinderkopf wird mit einer Messingbürste gereinigt.','Das Werkzeug knackt, sobald die eingestellte Kraft erreicht ist.'],right:['Zündkerze reinigen','Ölstand prüfen','Schraube mit Drehmoment anziehen','Batteriespannung messen','Keilrippenriemen wechseln'],ans:[1,4,3,0,2]},
@@ -1555,15 +1615,15 @@ t29:{type:'open',min:140,checks:[['Strom',/strom|kohle|gas|wind|sonne|erneuer|ö
 const RATE=CFG_W.rate;
 const RATE_L=['noch nicht','mit Hilfe','meistens','sicher'];
 
-const OPS={'nennen':'(be)nennen: Fakten, Daten, Begriffe, Regeln ohne Erläuterung aufzählen.','benennen':'(be)nennen: Fakten, Daten, Begriffe, Regeln ohne Erläuterung aufzählen.','beschreiben':'Strukturiert und fachsprachlich angemessen Materialien vorstellen und/oder Sachverhalte darlegen.','zuordnen':'Begründet für ein Objekt eine Gruppe, eine Position oder ein Material zuweisen oder einen Sachverhalt begründet in einen Zusammenhang stellen.','ordnen':'Etwas kriteriengeleitet in eine bestimmte Systematik oder Reihenfolge bringen.','unterscheiden':'Etwas im Hinblick auf seine besonderen Merkmale erkennen und von Alternativen abgrenzen.','erklären':'Sachverhalte so darstellen, dass Bedingungen, Ursachen, Gesetzmäßigkeiten und/oder Funktionszusammenhänge verständlich werden.','ermitteln':'Einen Zusammenhang oder eine Lösung finden und das Ergebnis formulieren.','herausarbeiten':'Materialien auf bestimmte, nicht unbedingt genannte Sachverhalte hin untersuchen und Zusammenhänge herstellen.','vergleichen':'Gemeinsamkeiten, Ähnlichkeiten und Unterschiede von Sachverhalten kriterienorientiert darlegen.','überprüfen':'Inhalte oder Aussagen auf ihre sachliche Richtigkeit bzw. innere Logik hin untersuchen.','Stellung nehmen':'Beurteilung mit zusätzlicher Reflexion eigener Wertmaßstäbe, die zu einem begründeten eigenen Werturteil führt.','bewerten':'Einen Gegenstand an erkennbaren Wertkategorien oder bekannten Beurteilungskriterien messen.'};
+const OPS={'beurteilen':'Den Stellenwert von Sachverhalten bestimmen, um kriterienorientiert zu einem begründeten Sachurteil zu gelangen.','nennen':'(be)nennen: Fakten, Daten, Begriffe, Regeln ohne Erläuterung aufzählen.','benennen':'(be)nennen: Fakten, Daten, Begriffe, Regeln ohne Erläuterung aufzählen.','beschreiben':'Strukturiert und fachsprachlich angemessen Materialien vorstellen und/oder Sachverhalte darlegen.','zuordnen':'Begründet für ein Objekt eine Gruppe, eine Position oder ein Material zuweisen oder einen Sachverhalt begründet in einen Zusammenhang stellen.','ordnen':'Etwas kriteriengeleitet in eine bestimmte Systematik oder Reihenfolge bringen.','unterscheiden':'Etwas im Hinblick auf seine besonderen Merkmale erkennen und von Alternativen abgrenzen.','erklären':'Sachverhalte so darstellen, dass Bedingungen, Ursachen, Gesetzmäßigkeiten und/oder Funktionszusammenhänge verständlich werden.','ermitteln':'Einen Zusammenhang oder eine Lösung finden und das Ergebnis formulieren.','herausarbeiten':'Materialien auf bestimmte, nicht unbedingt genannte Sachverhalte hin untersuchen und Zusammenhänge herstellen.','vergleichen':'Gemeinsamkeiten, Ähnlichkeiten und Unterschiede von Sachverhalten kriterienorientiert darlegen.','überprüfen':'Inhalte oder Aussagen auf ihre sachliche Richtigkeit bzw. innere Logik hin untersuchen.','Stellung nehmen':'Beurteilung mit zusätzlicher Reflexion eigener Wertmaßstäbe, die zu einem begründeten eigenen Werturteil führt.','bewerten':'Einen Gegenstand an erkennbaren Wertkategorien oder bekannten Beurteilungskriterien messen.'};
 
 /* ---------- Laufzettel (nach Daniels Stationenarbeit Kfz 11-2024, Text neu) ---------- */
 const LZ=[
- {k:'oel',ic:'oel',t:'Ölstand prüfen',w:'Motor aus und abgekühlt. Öl nicht auf die Haut bringen, Handschuhe tragen.',steps:['Zieh den Ölpeilstab (gelber Griff) aus dem Rohr.','Wisch das Öl am Ende des Stabs gründlich ab.','Steck den Stab wieder ganz in das Rohr.','Zieh ihn erneut heraus und lies den Ölstand ab. Er muss zwischen den beiden Markierungen liegen.'],f:[['radio','ok','Ist der Ölstand in Ordnung?',['ja','nein']],['text','grund','Begründung']],note:'Je nach Motor können bis zu 1 Liter Öl auf 1000 km verloren gehen. Fehlendes Öl muss nachgefüllt werden.'},
+ {k:'oel',ic:'oel',t:'Ölstand prüfen',w:'Öl nicht auf die Haut bringen, Handschuhe tragen.',steps:['Zieh den Ölpeilstab (gelber Griff) aus dem Rohr.','Wisch das Öl am Ende des Stabs gründlich ab.','Steck den Stab wieder ganz in das Rohr.','Zieh ihn erneut heraus und lies den Ölstand ab. Er muss zwischen den beiden Markierungen liegen.'],f:[['radio','ok','Ist der Ölstand in Ordnung?',['ja','nein']],['text','grund','Begründung']],note:'Je nach Motor können bis zu 1 Liter Öl auf 1000 km verloren gehen. Fehlendes Öl muss nachgefüllt werden.'},
  {k:'riemen',ic:'riemen',t:'Keilrippenriemen wechseln',w:'Die Spannrolle steht unter Federkraft. Rutscht das Werkzeug ab, kann der Riemen deine Finger einklemmen. Halte die Finger vom Riemen fern, solange er gespannt ist.',steps:['Du brauchst eine Umschaltknarre mit Steckschlüssel und eine Schraube zum Festsetzen der Spannrolle.','Setz den Steckschlüssel am Sechskant der Spannrolle an und dreh im Uhrzeigersinn.','Setz die Spannrolle mit der Schraube fest. Jetzt ist der Riemen locker.','Nimm den Riemen ab und prüf ihn auf Beschädigungen, zum Beispiel Risse.','Leg den Riemen wieder richtig auf und löse die Spannrolle vorsichtig.'],f:[['text','schaden','Diese Beschädigungen hat der Riemen']]},
  {k:'batt',ic:'batt',t:'Batteriespannung messen',w:'Kurzschluss vermeiden: Plus- und Minuspol nie mit Werkzeug verbinden. Ein Kurzschluss kann einen Brand auslösen.',steps:['Nimm die Abdeckungen der Batteriepole ab.','Stell das Multimeter auf Gleichspannung, Messbereich 20 V.','Halte die rote Messspitze an den Pluspol und die schwarze an den Minuspol.','Lies die Spannung ab und setz die Abdeckungen wieder auf.'],f:[['num','u','Gemessene Spannung in V'],['text','reicht','Reicht die Spannung zum Starten? Recherchiere und begründe.']]},
  {k:'pedal',ic:'pedal',t:'Fahrpedal auslesen',w:'Nur mit dem ausgebauten Fahrpedal arbeiten, das am Messplatz liegt.',steps:['Stell das Multimeter auf Widerstand, Messbereich 20 kΩ.','Schließ die beiden mittleren Pins des Fahrpedals mit Krokoklemmen an die Messspitzen an.','Miss den Widerstand, wenn das Pedal nicht gedrückt ist, und dann, wenn es ganz durchgedrückt ist.'],f:[['num','r0','Widerstand in Ruhe in kΩ'],['num','r1','Widerstand durchgedrückt in kΩ']],note:'Am Widerstand erkennt das Steuergerät, wie weit das Pedal gedrückt ist. Der Fuß gibt also ein elektrisches Signal und keinen Seilzug mehr.'},
- {k:'kerze',ic:'kerze',t:'Zündkerze reinigen',w:'Nur am kalten Motor. Die Zündkerze nicht verkanten, das Gewinde im Zylinderkopf ist empfindlich.',steps:['Steck Umschaltknarre, Verlängerung und Zündkerzenschlüssel zusammen.','Zieh den Stecker von der Zündkerze ab.','Löse die Zündkerze vorsichtig und dreh sie heraus.','Reinige die Elektroden mit der Messingbürste.','Dreh die Zündkerze wieder ein und zieh sie nur handfest an. Steck den Stecker wieder auf.'],f:[['text','sieht','So sah die Zündkerze aus (Farbe, Ablagerungen)']]},
+ {k:'kerze',ic:'kerze',t:'Zündkerze reinigen',w:'Die Zündkerze nicht verkanten, das Gewinde im Zylinderkopf ist empfindlich.',steps:['Steck Umschaltknarre, Verlängerung und Zündkerzenschlüssel zusammen.','Zieh den Stecker von der Zündkerze ab.','Löse die Zündkerze vorsichtig und dreh sie heraus.','Reinige die Elektroden mit der Messingbürste.','Dreh die Zündkerze wieder ein und zieh sie nur handfest an. Steck den Stecker wieder auf.'],f:[['text','sieht','So sah die Zündkerze aus (Farbe, Ablagerungen)']]},
  {k:'moment',ic:'moment',t:'Schraube mit Drehmoment anziehen',w:'Nach dem Knacken nicht weiterdrehen. Den Schlüssel nach der Arbeit immer auf 0 Nm entspannen.',steps:['Löse die Rändelschraube am Griff (nach links drehen).','Stell 40 Nm ein: Der Strich bei 40 auf der Skala muss mit der 0 am Griff übereinstimmen.','Zieh die Rändelschraube wieder fest (nach rechts drehen).','Zieh die Schraube an, bis der Kopf des Schlüssels hörbar knackt. Dann ist das Drehmoment von 40 Nm erreicht.','Entspann den Drehmomentschlüssel wieder auf 0 Nm.'],f:[['area','wo','Erkläre, bei welchen Schrauben am Auto ein Drehmomentschlüssel besonders wichtig ist.']]},
  {k:'schlag',ic:'schlag',t:'Schraube mit dem Drehschlagschrauber lösen',w:'Setz den Schrauber gerade an und greif nicht in das drehende Werkzeug. Lege den Schrauber nur ab, wenn er stillsteht.',steps:['Die Schraube am Zylinderkopf soll heraus und mit dem richtigen Drehmoment wieder eingesetzt werden.','Steck eine 19er Nuss auf den Schrauber und stell ihn auf Linkslauf (Pfeil zeigt nach hinten).','Setz den Schrauber gerade auf die Schraube und dreh sie heraus.','Dreh die Schraube danach von Hand ein und zieh sie mit dem Drehmomentschlüssel an.'],f:[]}
 ];
@@ -1762,6 +1822,51 @@ function wGrid(id,t,w,art){
     if(all)showFb(fb,'ok','Die Tabelle stimmt!',null);else showFb(fb,ok>=n*0.7?'mid':'err',ok+' von '+n+' Feldern richtig','Die rot markierten Felder stimmen noch nicht. Nutze die Animation und die Information oben.');
     report(id,all,art,fb);});
 }
+/* ---------- Reichweiten- und Kostenrechner (Daniels Modell aus den Tabellen Luft-/Rollwiderstand und E-Mobil-Akku) ---------- */
+const RR_KL=[['Sportwagen',0.36,1.98,1500],['Mittelklasse',0.30,2.19,1300],['SUV',0.40,2.42,2000]];
+const RR_UG=[['Asphalt',0.01],['Schotter',0.02],['Erdweg',0.04],['Sand',0.15]];
+const RR_DEF={kl:1,ug:0,v:100,s:100,tank:50,akku:50,ed:150,etaB:25,etaD:30,etaE:85,pB:2.114,pD:2.261,pE:0.373};
+const RR_KWHL={B:32/3.6,D:36/3.6};
+const RR_N={B:'Benziner',D:'Diesel',E:'Elektroauto'};
+function rrCalc(o,v){v=v==null?o.v:v;const k=RR_KL[o.kl],cr=RR_UG[o.ug][1],ms=v/3.6,mA=o.akku*1000/o.ed,FL=0.5*1.2*k[1]*k[2]*ms*ms,r={mA,FL};
+  ['B','D','E'].forEach(d=>{const m=k[3]+(d==='E'?mA:0),FR=cr*m*9.81,F=FL+FR,erad=F/3600,eta=o['eta'+d]/100,e=erad/eta,
+    store=d==='E'?o.akku:o.tank*RR_KWHL[d],per100=d==='E'?100*e:100*e/RR_KWHL[d],price=o['p'+d];
+    r[d]={m,FR,F,P:F*ms/1000,e,per100,cost100:per100*price,range:store/e,costS:per100*price*o.s/100};});return r;}
+const rrF=(x,n=0)=>x.toLocaleString('de-DE',{minimumFractionDigits:n,maximumFractionDigits:n});
+(function(){const d=rrCalc(Object.assign({},RR_DEF),100);T.t30.answer=Math.round(d.E.per100*10)/10;
+  T.t30.why='Bei 100 km/h braucht das Elektroauto der Mittelklasse im Rechner etwa '+rrF(d.E.per100,1)+' kWh je 100 km. Der schwere Akku erhöht den Rollwiderstand, trotzdem braucht es viel weniger Energie als ein Verbrenner.';
+  const d2=rrCalc(Object.assign({},RR_DEF),130);T.t31.answer=Math.round(d2.D.cost100*100)/100;
+  T.t31.why='Bei 130 km/h braucht der Diesel etwa '+rrF(d2.D.per100,1)+' l je 100 km. Das kostet rund '+rrF(d2.D.cost100,2)+' Euro. Bei 100 km/h wären es nur '+rrF(rrCalc(Object.assign({},RR_DEF),100).D.cost100,2)+' Euro.';})();
+function rrUI(box){if(!box)return;S.rr=Object.assign({},RR_DEF,S.rr||{});const o=S.rr;
+  const num=(k,lab,unit,step,min,max)=>{const i=el('input',{type:'number',step,min,max,id:'rr-'+k,value:o[k]});i.oninput=()=>{const v=parseFloat(String(i.value).replace(',','.'));if(!isNaN(v)&&v>=min&&v<=max){o[k]=v;save();draw();}};return el('label',{class:'rr-f',for:'rr-'+k},el('span',{},lab),el('span',{class:'rr-in'},i,el('small',{},unit)));};
+  const segBtns=(arr,k,lab)=>{const g=el('div',{class:'rr-seg',role:'group','aria-label':lab});arr.forEach((a,ix)=>{const b=el('button',{type:'button',class:'btn soft','aria-pressed':String(o[k]===ix)},a[0]);b.onclick=()=>{o[k]=ix;save();g.querySelectorAll('button').forEach((x,j)=>x.setAttribute('aria-pressed',String(j===ix)));draw();};g.append(b);});return el('div',{class:'rr-f'},el('span',{},lab),g);};
+  const vIn=el('input',{type:'range',min:30,max:180,step:10,value:o.v,id:'rr-v','aria-valuetext':o.v+' km/h'});const vOut=el('b',{},o.v+' km/h');
+  vIn.oninput=()=>{o.v=+vIn.value;vOut.textContent=o.v+' km/h';vIn.setAttribute('aria-valuetext',o.v+' km/h');save();draw();};
+  const out=el('div',{class:'rr-out','aria-live':'polite'}),zw=el('p',{class:'rr-zw'}),tab=el('div',{class:'rr-tw'});
+  const reset=el('button',{type:'button',class:'btn soft'},'Voreinstellung');reset.onclick=()=>{S.rr=Object.assign({},RR_DEF);save();box.replaceChildren();rrUI(box);};
+  const adv=el('details',{class:'rr-adv'},el('summary',{},'Annahmen und Preise anpassen'),el('div',{class:'rr-grid'},
+    num('tank','Tankinhalt','Liter',1,10,120),num('akku','Akku','kWh',1,10,150),num('ed','Energiedichte Akku','Wh/kg',10,50,500),
+    num('etaB','Wirkungsgrad Benziner','%',1,10,60),num('etaD','Wirkungsgrad Diesel','%',1,10,60),num('etaE','Wirkungsgrad Elektroantrieb','%',1,50,100),
+    num('pB','Preis Super E10','€/l',0.01,0.5,5),num('pD','Preis Diesel','€/l',0.01,0.5,5),num('pE','Strompreis','€/kWh',0.01,0.05,2)),
+    el('p',{class:'src'},'Voreinstellung: Preise ADAC (Oktober 2026) und BDEW (Oktober 2026, Laden zu Hause). An der Ladesäule ist Strom meist teurer. Wirkungsgrade sind Richtwerte zum Ausprobieren.'));
+  box.append(el('div',{class:'anim rr-box'},el('h4',{class:'rr-h'},'Reichweiten- und Kostenrechner'),
+    el('div',{class:'rr-grid'},segBtns(RR_KL,'kl','Fahrzeugklasse'),segBtns(RR_UG,'ug','Untergrund'),
+      el('label',{class:'rr-f',for:'rr-v'},el('span',{},'Geschwindigkeit: ',vOut),vIn),num('s','Fahrstrecke','km',10,1,2000)),
+    el('div',{class:'row'},reset),adv,out,zw,el('details',{class:'rr-adv'},el('summary',{},'Reichweite bei verschiedenen Geschwindigkeiten'),tab)));
+  function draw(){const r=rrCalc(o),ks=['B','D','E'],mx=Math.max(...ks.map(k=>r[k].range)),mc=Math.max(...ks.map(k=>r[k].cost100));
+    out.replaceChildren(...ks.map(k=>{const x=r[k],u=k==='E'?'kWh':'l';return el('div',{class:'rr-card rr-'+k},el('h5',{},RR_N[k]),
+      el('p',{},'Verbrauch: ',el('b',{},rrF(x.per100,1)+' '+u+' je 100 km')),
+      el('p',{},'Kosten je 100 km: ',el('b',{},rrF(x.cost100,2)+' €')),
+      el('div',{class:'rr-bar','aria-hidden':'true'},el('i',{style:'width:'+Math.round(100*x.cost100/mc)+'%'})),
+      el('p',{},'Kosten für '+rrF(o.s)+' km: ',el('b',{},rrF(x.costS,2)+' €')),
+      el('p',{},'Reichweite '+(k==='E'?'mit vollem Akku ('+rrF(o.akku)+' kWh)':'mit vollem Tank ('+rrF(o.tank)+' l)')+': ',el('b',{},rrF(x.range)+' km')),
+      el('div',{class:'rr-bar rng','aria-hidden':'true'},el('i',{style:'width:'+Math.round(100*x.range/mx)+'%'})));}));
+    zw.innerHTML='Bei '+o.v+' km/h: Luftwiderstand <b>'+rrF(r.FL)+' N</b> · Rollwiderstand Verbrenner <b>'+rrF(r.B.FR)+' N</b>, Elektroauto <b>'+rrF(r.E.FR)+' N</b> (Akku wiegt '+rrF(r.mA)+' kg) · nötige Leistung an den Rädern etwa <b>'+rrF(r.B.P,1)+' kW</b> (Verbrenner) und <b>'+rrF(r.E.P,1)+' kW</b> (Elektroauto).';
+    const vs=[30,50,80,100,130,160];tab.replaceChildren(el('table',{class:'rr-t'},el('thead',{},el('tr',{},el('th',{},'km/h'),...['B','D','E'].map(k=>el('th',{},RR_N[k])))),
+      el('tbody',{},...vs.map(v=>{const q=rrCalc(o,v);return el('tr',{},el('td',{},String(v)),...['B','D','E'].map(k=>el('td',{},rrF(q[k].range)+' km')));}))));}
+  draw();}
+rrUI(document.getElementById('rr'));
+
 /* Hilfe an schwierigen Aufgaben: Tipp, dann Teillösung (wie Elektronik-Grundlagen) */
 function addHelp(id,t,art){if(!t.help)return;const tb=el('div',{class:'hbox',hidden:!S.help[id]},el('b',{},'Tipp: '),t.help.tip);const pb=el('div',{class:'hbox',hidden:S.help[id]!==2},el('b',{},'Teillösung: '),t.help.teil);
   const b1=el('button',{class:'btn soft',type:'button'},'Tipp anzeigen');const b2=el('button',{class:'btn soft',type:'button',hidden:!S.help[id]},'Teillösung anzeigen');
