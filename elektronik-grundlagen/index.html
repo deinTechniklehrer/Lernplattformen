@@ -640,7 +640,7 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
 
     <h3>Willkommen zur Fortbildung Elektronik-Grundlagen</h3>
     <p>Diese Lernplattform bereitet dich auf den Praxistag vor und dient danach zum Nachschlagen. Du brauchst kein Vorwissen: Wir starten bei Spannung, Strom und Widerstand und kommen über Bauteile, Schaltpläne, Löten und Messen bis zu einer fertigen Unterrichtseinheit, der LED-Leuchte mit Dämmerungsschalter.</p>
-    <p>Jedes Kapitel besteht aus kurzen Häppchen. Rechenaufgaben bekommen Zufallswerte, du kannst sie also beliebig oft üben. Zu schwierigen Aufgaben gibt es einen Tipp und eine Teillösung. Am Ende speicherst du dein Ergebnis als PDF, zusammen mit einer Checkliste für deinen eigenen Fachraum.</p>
+    <p>Rechenaufgaben bekommen Zufallswerte, du kannst sie also beliebig oft üben. Zu schwierigen Aufgaben gibt es einen Tipp und eine Teillösung. Am Ende speicherst du dein Ergebnis als PDF, zusammen mit einer Checkliste für deinen eigenen Fachraum.</p>
 
 
   </div>
@@ -1052,7 +1052,7 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
 <footer class="pager">
   <div class="pager-in">
     <button class="btn soft" id="prev" type="button"><svg class="i" viewBox="0 0 24 24"><path d="M15 6l-6 6 6 6"/></svg>Zurück</button>
-    <span class="where" id="where">Station 0.1</span>
+    <span class="where" id="where">Kapitel 0</span>
     <button class="btn" id="next" type="button"><span id="nextTxt">Weiter</span><svg class="i" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
   </div>
 </footer>
@@ -1344,7 +1344,7 @@ const parts=$$('.station');
 const chOf=parts.map(p=>CFG_W.ch.findIndex(c=>c[0]===+p.dataset.ch));
 const pids=parts.map((p,pi)=>chOf[pi]+'.'+(chOf.slice(0,pi).filter(c=>c===chOf[pi]).length+1));
 let num=0;const label={},home={};
-parts.forEach((p,pi)=>{$$('.task',p).forEach(a=>{const w=$('.w',a);const n=$('.num',a);if(w){num++;n.textContent=num;const id=w.dataset.t;label[id]='Station '+pids[pi]+' · Aufgabe '+num+': '+$('h3',a).textContent;home[id]=pi;}});});
+parts.forEach((p,pi)=>{$$('.task',p).forEach(a=>{const w=$('.w',a);const n=$('.num',a);if(w){num++;n.textContent=num;const id=w.dataset.t;label[id]='Kapitel '+chOf[pi]+' · Aufgabe '+num+': '+$('h3',a).textContent;home[id]=pi;}});});
 const TASK_IDS=$$('.w[data-t]').map(w=>w.dataset.t);
 function isDone(id){const t=T[id];if(t.type==='open')return (S.a[id]||'').trim().length>=t.min;if(t.type==='est')return S.a[id]!=null;return !!S.ok[id];}
 function partDone(pi){const ids=TASK_IDS.filter(id=>home[id]===pi);if(!ids.length)return !!S.seen[pids[pi]];return ids.every(isDone);}
@@ -1644,16 +1644,21 @@ const nav=$('#nav');
 function paintNav(){const cur=chOf[S.st];nav.replaceChildren(...CH.map((c,ci)=>{const first=chOf.indexOf(ci);if(first<0)return '';const ids=parts.map((p,pi)=>pi).filter(pi=>chOf[pi]===ci);const done=ids.every(partDone);
   const b=el('button',{class:'st-btn '+parts[first].classList[1]+(done?' done':''),type:'button'},el('span',{class:'n'},String(ci)),c,el('span',{class:'ok',html:CHECK}));if(ci===cur)b.setAttribute('aria-current','step');b.onclick=()=>go(first);return b;}));
   const cb=nav.querySelector('[aria-current]');if(cb){const nr=nav.getBoundingClientRect(),br=cb.getBoundingClientRect();if(br.left<nr.left||br.right>nr.right)nav.scrollLeft+=br.left-nr.left-(nr.width-br.width)/2;}}
-parts.forEach((p,pi)=>{const ci=chOf[pi];p.prepend(el('div',{class:'st-head'},el('div',{},el('p',{class:'eyebrow'},'Kapitel '+ci+' · Station '+pids[pi]),el('h2',{},CH_L[ci]),el('div',{class:'teile',role:'group','aria-label':'Häppchen'}))));});
-function paintTeile(){const pi=S.st,ci=chOf[pi];const sib=parts.map((x,i)=>i).filter(i=>chOf[i]===ci);const box=$('.teile',parts[pi]);
-  box.replaceChildren(...sib.map(i=>{const b=el('button',{type:'button',class:partDone(i)?'done':''},pids[i]);if(i===pi)b.setAttribute('aria-current','step');b.onclick=()=>go(i);return b;}));}
-function go(i,scroll=true){S.st=Math.max(0,Math.min(parts.length-1,i));S.seen[pids[S.st]]=1;save();
-  parts.forEach((p,pi)=>p.hidden=pi!==S.st);
-  $('#where').textContent='Station '+pids[S.st]+' · '+(S.st+1)+' von '+parts.length;
-  $('#prev').disabled=S.st===0;$('#next').disabled=S.st===parts.length-1;$('#nextTxt').textContent=chOf[S.st+1]===LAST&&chOf[S.st]!==LAST?'Zur Abgabe':'Weiter';
-  if(chOf[S.st]===LAST)fillSum();
+function paintTeile(){}
+const CHI=[...new Set(chOf)];
+function chStart(ci){return chOf.indexOf(ci);}
+/* Ein Kapitel = eine Seite (seit 13.11.2026, Wunsch von Daniel): alle Abschnitte eines Kapitels stehen untereinander */
+function go(i,scroll=true){i=Math.max(0,Math.min(parts.length-1,i|0));const ci=chOf[i];S.st=chStart(ci);
+  parts.forEach((p,pi)=>{const on=chOf[pi]===ci;p.hidden=!on;if(on)S.seen[pids[pi]]=1;});save();
+  const k=CHI.indexOf(ci);
+  $('#where').textContent='Kapitel '+ci+' · '+(k+1)+' von '+CHI.length;
+  $('#prev').disabled=k===0;
+  $('#next').disabled=k===CHI.length-1;$('#nextTxt').textContent=CHI[k+1]===LAST?'Zur Abgabe':'Weiter';
+  if(ci===LAST)fillSum();
   paint();if(scroll)window.scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'});}
-$('#prev').onclick=()=>go(S.st-1);$('#next').onclick=()=>go(S.st+1);
+$('#prev').onclick=()=>{const k=CHI.indexOf(chOf[S.st]);if(k>0)go(chStart(CHI[k-1]));};
+$('#next').onclick=()=>{const k=CHI.indexOf(chOf[S.st]);if(k<CHI.length-1)go(chStart(CHI[k+1]));};
+parts.forEach((p,pi)=>{const ci=chOf[pi];if(p.querySelector('.st-head'))return;if(chStart(ci)!==pi){p.classList.add('cont');return;}p.prepend(el('div',{class:'st-head'},el('div',{},el('p',{class:'eyebrow'},'Kapitel '+ci),el('h2',{},CH_L[ci]))));});
 function paint(){const done=TASK_IDS.filter(isDone).length;const p=Math.round(100*done/TASK_IDS.length);$('#progTxt').textContent=p+' %';$('#progBar').style.width=p+'%';paintNav();paintTeile();}
 
 /* ---------- Abgabe ---------- */
@@ -1679,7 +1684,7 @@ $('#pdfBtn').onclick=()=>{const note=$('#pdfNote');note.hidden=false;
   txt((VER==='L'?'Fortbildung für Lehrkräfte':'Technik')+' · '+(S.name?'Name: '+S.name+' · ':'')+'Stand: '+new Date().toLocaleDateString('de-DE'));y+=4;
   const done=TASK_IDS.filter(isDone).length;txt('Bearbeitet: '+done+' von '+TASK_IDS.length+' Aufgaben',{b:1});y+=3;
   CH.slice(0,LAST).forEach((c,ci)=>{const ids=TASK_IDS.filter(id=>chOf[home[id]]===ci);if(!ids.length)return;need(14);y+=2;txt('Kapitel '+ci+': '+c,{b:1,size:13,col:[3,85,145],lh:6.5});
-    ids.forEach(id=>{const t=T[id];const l=label[id].replace(/^Station [\d.]+ · /,'');
+    ids.forEach(id=>{const t=T[id];const l=label[id].replace(/^Kapitel \d+ · /,'');
       if(t.type==='open'){txt(l,{b:1});const a=(S.a[id]||'').trim();txt(a||'(noch keine Antwort)',{ind:4,col:a?[20,35,47]:[120,130,135]});if(S.muster[id])txt('Mit Musterlösung verglichen.',{ind:4,size:9,col:[86,103,107]});y+=1.5;}
       else if(t.type==='est'){txt(l+': meine Schätzung '+(S.a[id]!=null?de(S.a[id])+' '+t.unit:'–'),{ind:0});}
       else{const ok=!!S.ok[id];d.setFont('helvetica','bold');d.setFontSize(10.5);d.setTextColor(ok?31:194,ok?138:59,ok?76:46);need(5.5);d.text(ok?'gelöst':'offen',M,y);txt(l+(S.help[id]===2?' (mit Teillösung)':S.help[id]?' (mit Tipp)':''),{ind:16});}});});

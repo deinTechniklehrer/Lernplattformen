@@ -117,6 +117,9 @@ label.lab{display:block;font-weight:700;font-size:15px;margin:12px 0 4px}
 /* Fragen */
 .q{margin:14px 0 0;padding:14px;border-radius:14px;border:1.5px solid var(--line)}
 .q legend{font-weight:700;padding:0 6px}
+.subt{display:grid;gap:8px;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+.subt h4{margin:0;font-size:16px;font-weight:700;line-height:1.35}
+.subt h4 label{cursor:pointer}
 .opt{display:flex;gap:10px;align-items:flex-start;padding:9px 10px;border-radius:10px;cursor:pointer}
 .opt:hover{background:var(--surface-2)}
 .opt input{width:22px;height:22px;margin:2px 0 0;flex:none;accent-color:var(--accent)}
@@ -401,19 +404,24 @@ textarea.code{font-family:var(--mono);font-size:14px;min-height:220px;white-spac
     <h2>7 · Reflexion und Projektmappe</h2>
     <p class="lead">Zum Schluss schaust du auf dein Projekt zurück und speicherst die Projektmappe als PDF.</p>
     <div class="task" id="t-refl">
-      <div class="task-h"><span class="op">Erläutere</span><h3>Reflexion</h3></div>
-      <fieldset class="q"><legend>Überprüfe, ob dein Projekt so funktioniert, wie du es beschrieben hast.</legend>
+      <div class="task-h"><h3>Reflexion</h3></div>
+      <div class="subt" role="group" aria-labelledby="rA">
+        <div class="task-h"><span class="op">Überprüfe</span><h4 id="rA">a) Überprüfe, ob dein Projekt so funktioniert, wie du es beschrieben hast.</h4></div>
         <p class="hint"><b>Denk an:</b> Teste jede Anforderung aus Station 2 einzeln und schau, ob sie erfüllt ist.</p>
         <div class="boards" id="funkt" role="group" aria-label="Ergebnis deiner Überprüfung">
           <button class="chip" type="button" data-f="ja">Ja</button><button class="chip" type="button" data-f="teilweise">Teilweise</button><button class="chip" type="button" data-f="nein">Nein</button>
         </div>
-        <label class="lab" for="rText">Erläutere, was klappt, was nicht und woran es liegt.</label>
+      </div>
+      <div class="subt">
+        <div class="task-h"><span class="op">Erläutere</span><h4><label for="rText">b) Erläutere, was klappt, was nicht und woran es liegt.</label></h4></div>
         <p class="hint" id="rTextH"><b>Satzanfänge:</b> „Gut klappt …, weil …“ · „Nicht geklappt hat …“ · „Das liegt vermutlich an …“ <b>Denk an:</b> Verkabelung, Code oder Grenzwert als mögliche Ursache.</p>
         <textarea id="rText" rows="3" maxlength="1200" aria-describedby="rTextH"></textarea>
-      </fieldset>
-      <label class="lab" for="rVerb">Entwickle eine Verbesserung.</label>
-      <p class="hint" id="rVerbH"><b>Satzanfang:</b> „Ich würde … ändern, damit …“ <b>Denk an:</b> Was würde dein Projekt im Alltag nützlicher, sicherer oder zuverlässiger machen?</p>
-      <textarea id="rVerb" rows="3" maxlength="1200" aria-describedby="rVerbH"></textarea>
+      </div>
+      <div class="subt">
+        <div class="task-h"><span class="op">Entwickle</span><h4><label for="rVerb">c) Entwickle eine Verbesserung.</label></h4></div>
+        <p class="hint" id="rVerbH"><b>Satzanfang:</b> „Ich würde … ändern, damit …“ <b>Denk an:</b> Was würde dein Projekt im Alltag nützlicher, sicherer oder zuverlässiger machen?</p>
+        <textarea id="rVerb" rows="3" maxlength="1200" aria-describedby="rVerbH"></textarea>
+      </div>
       <label class="lab" for="rZusatz">Zusatz: Beschreibe, was du schon verbessert hast. <span class="hint">(freiwillig)</span></label>
       <textarea id="rZusatz" rows="2" maxlength="800"></textarea>
     </div>
