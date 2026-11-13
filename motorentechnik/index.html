@@ -576,7 +576,7 @@ a.btn{text-decoration:none}
 .rr-chip{display:inline-flex;flex-wrap:wrap;gap:4px 6px;align-items:center;padding:4px 10px;border-radius:14px;background:var(--surface-2)}
 .rr-chip i{width:18px;height:6px;border-radius:3px;background:var(--muted)}.rr-chip.air i{background:#2a6fb0}.rr-chip.roll i{background:#e07b1e}
 .rr-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px 14px}
-.rr-f{display:grid;gap:6px;font-size:15px;font-weight:700}
+.rr-f{display:grid;gap:6px;font-size:15px;font-weight:700;align-content:start}
 .rr-f input[type=range]{width:100%;accent-color:var(--c);min-height:40px}
 .rr-speed{font-size:18px}
 .rr-in{display:flex;gap:6px;align-items:center;font-weight:400}.rr-in input{width:110px;min-height:42px;font-size:16px}
@@ -602,6 +602,24 @@ a.btn{text-decoration:none}
 .rr-tcar{position:absolute;bottom:7px;width:40px;transform:translateX(-100%);transition:left .5s ease}.rr-tcar svg{display:block;width:100%;height:auto}
 .rr-trip{border-top:1px dashed var(--line);padding-top:6px;margin-top:2px}
 .rr-tw{overflow-x:auto}.rr-t{border-collapse:collapse;width:100%;font-size:15px}.rr-t th,.rr-t td{padding:5px 8px;border-bottom:1px solid var(--line);text-align:left}
+.rr-vbox{align-content:start}.rr-tachow{width:170px;max-width:100%;justify-self:center}
+.rr-tacho{display:block;width:100%;height:auto}.rr-tacho text{font:700 10px var(--body);fill:var(--ink)}.rr-tacho .rr-tnum{font-size:17px}
+.rr-tneedle{transform-origin:80px 82px;transition:transform .3s ease}.rr-tarc{transition:stroke-dasharray .3s ease}
+.rr-fuel{display:grid;gap:2px;font-size:14px}.rr-fuel input{width:100%;accent-color:var(--c);min-height:36px}
+.rr-rest{font-size:14px}.rr-rest b{font-size:16px}
+.rr-st{display:flex;gap:8px;align-items:center;border-radius:10px;padding:6px 10px;font-size:14px}
+.rr-st.ok{background:var(--existenz-soft);color:var(--existenz-ink)}
+.rr-st.warn{background:#fde3c3;color:#5c3200;border:2px solid #e07b1e;font-size:15px;font-weight:700}
+.rr-st .n{font:800 22px var(--display);margin-right:2px}
+.rr-sti{display:inline-flex;width:24px;height:24px;flex:none}.rr-sti svg{width:100%;height:100%}.rr-st.warn .rr-sti{width:30px;height:30px}
+.rr-stripw{display:grid;gap:0;margin:0 12px}
+.rr-strip{position:relative;height:30px}
+.rr-strip::before{content:"";position:absolute;left:0;right:0;top:13px;height:4px;border-radius:4px;background:var(--line)}
+.rr-strip .a,.rr-strip .z{z-index:1;position:absolute;top:9px;width:12px;height:12px;border-radius:50%;background:var(--ink)}.rr-strip .a{left:-6px}.rr-strip .z{right:-6px}
+.rr-strip .mk{position:absolute;top:3px;width:24px;height:24px;margin-left:-12px;border-radius:50%;background:#e07b1e;color:#fff;display:grid;place-items:center;box-shadow:0 0 0 2px var(--surface)}
+.rr-strip .mk svg{width:15px;height:15px}
+.rr-stripl{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin:0 -10px}
+@media (prefers-reduced-motion:reduce){.rr-tneedle,.rr-tarc{transition:none}}
 
 /* aus der Unternehmens-Werkstatt übernommen */
 .teile{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
@@ -1894,21 +1912,32 @@ const RR_TANK=`<svg class="rr-g" viewBox="0 0 120 70" aria-hidden="true"><path d
 const RR_AKKU=`<svg class="rr-g" viewBox="0 0 120 70" aria-hidden="true"><rect x="8" y="14" width="96" height="44" rx="8" fill="none" stroke="var(--ink)" stroke-width="3.5"/><rect x="106" y="27" width="8" height="18" rx="3" fill="var(--ink)"/><rect class="rr-bfill" x="14" y="20" width="84" height="32" rx="4"/><g stroke="var(--surface)" stroke-width="2.5"><path d="M35 20v32M56 20v32M77 20v32"/></g></svg>`;
 const RR_IC={B:'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="10" height="18" rx="2" fill="currentColor"/><rect x="6" y="5.5" width="6" height="5" rx="1" fill="var(--surface)"/><path d="M14 9h2.5l2.5 3v6.5a1.6 1.6 0 0 1-3.2 0V14H14" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>',E:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2 5 13.5h5.5L9.5 22 19 9.5h-5.5Z" fill="currentColor"/></svg>'};RR_IC.D=RR_IC.B;
 const RR_STOP={B:'tanken',D:'tanken',E:'laden'};
+function rrTacho(){let t='';for(let v=0;v<=200;v+=20){const a=(-120+240*v/200)*Math.PI/180,s=Math.sin(a),c=Math.cos(a);
+    t+=`<path d="M${(80+51*s).toFixed(1)} ${(82-51*c).toFixed(1)}L${(80+58*s).toFixed(1)} ${(82-58*c).toFixed(1)}" stroke="var(--ink)" stroke-width="${v%40?1.5:2.5}"/>`;
+    if(v%40===0)t+=`<text x="${(80+39*s).toFixed(1)}" y="${(82-39*c+4).toFixed(1)}" text-anchor="middle">${v}</text>`;}
+  return `<svg class="rr-tacho" viewBox="0 0 160 126" aria-hidden="true"><path d="M26.3 113A62 62 0 1 1 133.7 113" fill="none" stroke="var(--line)" stroke-width="8" stroke-linecap="round"/><path class="rr-tarc" pathLength="100" d="M26.3 113A62 62 0 1 1 133.7 113" fill="none" stroke="var(--c)" stroke-width="8" stroke-linecap="round" stroke-dasharray="0 100"/>${t}<g class="rr-tneedle"><path d="M80 88V30" stroke="#e2574c" stroke-width="3.5" stroke-linecap="round"/></g><circle cx="80" cy="82" r="7" fill="var(--ink)"/><text class="rr-tnum" x="80" y="112" text-anchor="middle">100</text><text x="80" y="123" text-anchor="middle">km/h</text></svg>`;}
+const RR_CHK='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4 10-10" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 function rrUI(box){if(!box)return;S.rr=Object.assign({},RR_DEF,S.rr||{});const o=S.rr;
   const num=(k,lab,unit,step,min,max)=>{const i=el('input',{type:'number',step,min,max,id:'rr-'+k,value:o[k]});i.oninput=()=>{const v=parseFloat(String(i.value).replace(',','.'));if(!isNaN(v)&&v>=min&&v<=max){o[k]=v;save();draw();}};return el('label',{class:'rr-f',for:'rr-'+k},el('span',{},lab),el('span',{class:'rr-in'},i,el('small',{},unit)));};
   const seg=(arr,k,lab,pic)=>{const g=el('div',{class:'rr-seg',role:'group','aria-label':lab});arr.forEach((a,ix)=>{const b=el('button',{type:'button',class:'btn soft','aria-pressed':String(o[k]===ix)},el('span',{class:'rr-pic',html:pic(ix)}),a[0]);b.onclick=()=>{o[k]=ix;save();g.querySelectorAll('button').forEach((x,j)=>x.setAttribute('aria-pressed',String(j===ix)));draw();};g.append(b);});return el('div',{class:'rr-f'},el('span',{},lab),g);};
   const vIn=el('input',{type:'range',min:30,max:180,step:10,value:o.v,id:'rr-v','aria-valuetext':o.v+' km/h'});const vOut=el('b',{class:'rr-speed'},o.v+' km/h');
   vIn.oninput=()=>{o.v=+vIn.value;vOut.textContent=o.v+' km/h';vIn.setAttribute('aria-valuetext',o.v+' km/h');save();draw();};
+  const tacho=el('div',{class:'rr-tachow',html:rrTacho()});
   const scene=el('div',{class:'rr-scene'}),chips=el('div',{class:'rr-chips','aria-live':'polite'}),tab=el('div',{class:'rr-tw'});
   const cards={},out=el('div',{class:'rr-out','aria-live':'polite'});
   ['B','D','E'].forEach(k=>{const c=cards[k]={};
+    const cap0=k==='E'?o.akku:o.tank;if(o['f'+k]==null||o['f'+k]>cap0)o['f'+k]=cap0;
+    c.fIn=el('input',{type:'range',min:1,max:cap0,step:1,value:o['f'+k],id:'rr-f'+k});c.fOut=el('b',{});
+    c.fIn.oninput=()=>{o['f'+k]=+c.fIn.value;save();draw();};
+    c.rest=el('b',{});c.st=el('div',{class:'rr-st'});c.strip=el('div',{class:'rr-strip','aria-hidden':'true'});c.stripw=el('div',{class:'rr-stripw',hidden:true},c.strip,el('div',{class:'rr-stripl'},el('span',{},'Start'),el('span',{},'Ziel')));
     c.lv=el('b',{class:'rr-lvn'});c.lvt=el('span',{class:'rr-lvt'});c.g=el('div',{class:'rr-gauge',html:k==='E'?RR_AKKU:RR_TANK});
     c.cost=el('b',{});c.cbar=el('i',{});c.use=el('b',{});c.rng=el('b',{});c.rbar=el('i',{});c.rcar=el('span',{class:'rr-tcar'});c.trl=el('span',{});c.trip=el('b',{});
     out.append(el('div',{class:'rr-card rr-'+k},el('h5',{},el('span',{class:'rr-ic',html:RR_IC[k]}),RR_N[k]),
-      el('div',{class:'rr-top'},c.g,el('div',{class:'rr-lv'},c.lv,c.lvt)),
+      el('label',{class:'rr-fuel',for:'rr-f'+k},el('span',{},k==='E'?'Im Akku beim Start: ':'Im Tank beim Start: ',c.fOut),c.fIn),
+      el('div',{class:'rr-top'},c.g,el('div',{class:'rr-lv'},c.lv,c.lvt,el('span',{class:'rr-rest'},'Restreichweite ',c.rest))),c.st,c.stripw,
       el('div',{class:'rr-kv'},el('span',{},'Kosten je 100 km'),c.cost),el('div',{class:'rr-bar','aria-hidden':'true'},c.cbar),
       el('div',{class:'rr-kv'},el('span',{},'Verbrauch'),c.use),
-      el('div',{class:'rr-kv'},el('span',{},'Reichweite'),c.rng),el('div',{class:'rr-track','aria-hidden':'true'},c.rbar,c.rcar),
+      el('div',{class:'rr-kv'},el('span',{},'Reichweite mit dieser Füllung'),c.rng),el('div',{class:'rr-track','aria-hidden':'true'},c.rbar,c.rcar),
       el('div',{class:'rr-kv rr-trip'},c.trl,c.trip)));});
   const reset=el('button',{type:'button',class:'btn soft'},'Voreinstellung');reset.onclick=()=>{S.rr=Object.assign({},RR_DEF);save();box.replaceChildren();rrUI(box);};
   const adv=el('details',{class:'rr-adv'},el('summary',{},'Annahmen und Preise anpassen'),el('div',{class:'rr-grid'},
@@ -1918,23 +1947,29 @@ function rrUI(box){if(!box)return;S.rr=Object.assign({},RR_DEF,S.rr||{});const o
     el('p',{class:'src'},'Voreinstellung: Preise ADAC (Oktober 2026) und BDEW (Oktober 2026, Laden zu Hause). An der Ladesäule ist Strom meist teurer. Wirkungsgrade sind Richtwerte zum Ausprobieren.'));
   box.append(el('div',{class:'anim rr-box'},el('h4',{class:'rr-h'},'Reichweiten- und Kostenrechner'),scene,chips,
     el('div',{class:'rr-grid'},seg(RR_KL,'kl','Fahrzeugklasse',ix=>'<svg viewBox="0 0 300 92">'+rrCar(ix,false)+'</svg>'),seg(RR_UG,'ug','Untergrund',ix=>'<i style="background:'+RR_GROUND[ix][0]+'"></i>'),
-      el('label',{class:'rr-f',for:'rr-v'},el('span',{},'Geschwindigkeit: ',vOut),vIn),num('s','Fahrstrecke','km',10,1,2000)),
-    el('div',{class:'row'},reset),out,adv,el('details',{class:'rr-adv'},el('summary',{},'Reichweite bei verschiedenen Geschwindigkeiten'),tab)));
+      el('div',{class:'rr-f rr-vbox'},el('label',{for:'rr-v'},'Geschwindigkeit: ',vOut),tacho,vIn),num('s','Fahrstrecke','km',10,1,2000)),
+    el('div',{class:'row'},reset),out,adv,el('details',{class:'rr-adv'},el('summary',{},'Reichweite bei verschiedenen Geschwindigkeiten (voller Tank, voller Akku)'),tab)));
   let sceneKey='';
-  function draw(){const r=rrCalc(o),ks=['B','D','E'],mx=Math.max(...ks.map(k=>r[k].range)),mc=Math.max(...ks.map(k=>r[k].cost100));
+  function draw(){const r=rrCalc(o),ks=['B','D','E'],mc=Math.max(...ks.map(k=>r[k].cost100));
+    ks.forEach(k=>{const cap=k==='E'?o.akku:o.tank,c=cards[k];if(o['f'+k]==null||o['f'+k]>cap)o['f'+k]=cap;c.fIn.max=cap;c.fIn.value=o['f'+k];r[k].cap=cap;r[k].r0=r[k].range*o['f'+k]/cap;});
+    const mx=Math.max(...ks.map(k=>r[k].r0));
+    tacho.querySelector('.rr-tneedle').style.transform='rotate('+(-120+240*o.v/200).toFixed(1)+'deg)';tacho.querySelector('.rr-tarc').setAttribute('stroke-dasharray',(o.v/2)+' 100');tacho.querySelector('.rr-tnum').textContent=o.v;
     if(sceneKey!==o.kl+'-'+o.ug){sceneKey=o.kl+'-'+o.ug;scene.innerHTML=rrScene(o);}
     scene.style.setProperty('--rr-t',(60/o.v).toFixed(2)+'s');scene.style.setProperty('--rr-w',Math.max(0.5,55/o.v).toFixed(2)+'s');
     rrArrow(scene.querySelector('.rr-arL'),430,104,r.FL);rrArrow(scene.querySelector('.rr-arR'),372,160,r.B.FR);
     chips.replaceChildren(el('span',{class:'rr-chip air'},el('i',{}),'Luftwiderstand ',el('b',{},rrF(r.FL)+' N')),
       el('span',{class:'rr-chip roll'},el('i',{}),'Rollwiderstand ',el('b',{},rrF(r.B.FR)+' N'),' · E-Auto ',el('b',{},rrF(r.E.FR)+' N'),' (Akku '+rrF(r.mA)+' kg)'),
       el('span',{class:'rr-chip'},'Leistung an den Rädern ',el('b',{},rrF(r.B.P,1)+' kW')));
-    ks.forEach(k=>{const x=r[k],c=cards[k],u=k==='E'?'kWh':'l',stops=Math.max(0,Math.ceil(o.s/x.range-1e-9)-1),lvl=Math.max(0,Math.min(1,1-(o.s-stops*x.range)/x.range)),pct=Math.round(lvl*100);
+    ks.forEach(k=>{const x=r[k],c=cards[k],u=k==='E'?'kWh':'l',stops=o.s<=x.r0+1e-9?0:Math.ceil((o.s-x.r0)/x.range-1e-9),lvl=Math.max(0,Math.min(1,stops?1-(o.s-x.r0-(stops-1)*x.range)/x.range:(x.r0-o.s)/x.range)),pct=Math.round(lvl*100);
+      c.fOut.textContent=rrF(o['f'+k])+' '+u;c.rest.textContent=rrF(lvl*x.range)+' km';
       if(k==='E'){const f=c.g.querySelector('.rr-bfill');f.style.transform='scaleX('+Math.max(0.02,lvl).toFixed(3)+')';f.setAttribute('fill',lvl>0.5?'#2e9a5e':lvl>0.2?'#e0a21a':'#e2574c');}
       else c.g.querySelector('.rr-needle').style.transform='rotate('+(-90+180*lvl).toFixed(1)+'deg)';
-      c.lv.textContent=pct+' %';c.lvt.textContent=(k==='E'?'Akku':'Tank')+' nach '+rrF(o.s)+' km'+(stops?' · unterwegs '+stops+'-mal '+RR_STOP[k]:'');
+      c.lv.textContent=pct+' %';c.lvt.textContent=(k==='E'?'Akku':'Tank')+' am Ziel nach '+rrF(o.s)+' km';
+      c.st.className='rr-st '+(stops?'warn':'ok');c.st.replaceChildren(el('span',{class:'rr-sti',html:stops?RR_IC[k]:RR_CHK}),stops?el('span',{},el('b',{class:'n'},stops+' × '+RR_STOP[k]),' unterwegs'):el('span',{},'Reicht ohne '+(k==='E'?'Laden':'Tanken')));
+      c.stripw.hidden=!stops;if(stops){const n=Math.min(stops,12),mk=[];for(let i=0;i<n;i++)mk.push(el('span',{class:'mk',style:'left:'+(100*(x.r0+i*x.range)/o.s).toFixed(1)+'%',html:RR_IC[k]}));c.strip.replaceChildren(el('span',{class:'a'}),...mk,el('span',{class:'z'}));}
       c.cost.textContent=rrF(x.cost100,2)+' €';c.cbar.style.width=Math.round(100*x.cost100/mc)+'%';
       c.use.textContent=rrF(x.per100,1)+' '+u+' je 100 km';
-      c.rng.textContent=rrF(x.range)+' km';const w=Math.max(6,Math.round(100*x.range/mx));c.rbar.style.width=w+'%';c.rcar.style.left=w+'%';
+      c.rng.textContent=rrF(x.r0)+' km';const w=Math.max(6,Math.round(100*x.r0/mx));c.rbar.style.width=w+'%';c.rcar.style.left=w+'%';
       if(c.kl!==o.kl){c.kl=o.kl;c.rcar.innerHTML='<svg viewBox="0 0 300 92">'+rrCar(o.kl,false)+'</svg>';}
       c.trl.textContent='Kosten für '+rrF(o.s)+' km';c.trip.textContent=rrF(x.costS,2)+' €';});
     const vs=[30,50,80,100,130,160];tab.replaceChildren(el('table',{class:'rr-t'},el('thead',{},el('tr',{},el('th',{},'km/h'),...ks.map(k=>el('th',{},RR_N[k])))),
