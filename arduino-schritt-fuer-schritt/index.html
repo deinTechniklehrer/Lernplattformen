@@ -1,7 +1,632 @@
 <!doctype html><html><head><script>/* Lernplattformen auf GitHub Pages: Speichern ohne claude.ai */
 (function(){if(window.claude)return;var T={pdf:'application/pdf',txt:'text/plain;charset=utf-8',png:'image/png',jpg:'image/jpeg',jpeg:'image/jpeg',json:'application/json',csv:'text/csv;charset=utf-8',html:'text/html;charset=utf-8',docx:'application/vnd.openxmlformats-officedocument.wordprocessingml.document',xlsx:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',ino:'text/plain;charset=utf-8'};
 var dl={save:function(o){return new Promise(function(res,rej){try{var n=(o&&o.filename)||'datei',x=(n.split('.').pop()||'').toLowerCase(),d=o.data,b=d instanceof Blob?d:new Blob([d],{type:T[x]||'application/octet-stream'});var u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=n;a.rel='noopener';document.body.appendChild(a);a.click();setTimeout(function(){a.remove();URL.revokeObjectURL(u);},4000);res();}catch(e){rej({code:'failed',message:String(e)});}});}};
-window.claude={use:function(n){return Promise.resolve(n==='downloads'?dl:null);}};})();</script><meta property="og:type" content="website"><meta property="og:title" content="Arduino Schritt für Schritt"><meta property="og:description" content="Kleine Schaltungen in Tinkercad bauen und mit Blöcken programmieren. Jede Aufgabe ist in kleine Schritte geteilt, Tipps helfen beim Weiterkommen."><meta property="og:url" content="https://deintechniklehrer.github.io/Lernplattformen/arduino-schritt-fuer-schritt/"><meta property="og:image" content="https://deintechniklehrer.github.io/Lernplattformen/vorschau/Vorschau_Arduino_Schritt-fuer-Schritt.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="description" content="Kleine Schaltungen in Tinkercad bauen und mit Blöcken programmieren. Jede Aufgabe ist in kleine Schritte geteilt, Tipps helfen beim Weiterkommen."><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><link rel="stylesheet" href="../assets/lp-support.css"><script>window.LP_CFG={"accept": ".html,text/html", "uploadLabel": "Lernnachweis laden", "uploadTitle": "Mit gespeichertem Lernnachweis weiterarbeiten", "uploadText": "Lade den Lernnachweis (.html) hoch, den du hier gespeichert hast. Darin steckt dein Arbeitsstand. Fotos deiner Abgaben musst du danach neu hinzufügen.", "noCodeText": "In dieser Datei steckt kein Arbeitsstand. Das klappt nur mit Lernnachweisen, die ab dem 31.10.2026 gespeichert wurden. Ältere Stände lädst du mit der .json-Datei.", "pdfSection": false, "anchors": [{"sel": "#ld", "closest": ".card", "mode": "append"}], "keys": ["arduino-lernheft-basis-v1"], "slug": "arduino-schritt-fuer-schritt"};</script><script src="../assets/lp-support.js"></script></head><body>
+window.claude={use:function(n){return Promise.resolve(n==='downloads'?dl:null);}};})();</script><meta property="og:type" content="website"><meta property="og:title" content="Arduino Schritt für Schritt"><meta property="og:description" content="Kleine Schaltungen in Tinkercad bauen und mit Blöcken programmieren. Jede Aufgabe ist in kleine Schritte geteilt, Tipps helfen beim Weiterkommen."><meta property="og:url" content="https://deintechniklehrer.github.io/Lernplattformen/arduino-schritt-fuer-schritt/"><meta property="og:image" content="https://deintechniklehrer.github.io/Lernplattformen/vorschau/Vorschau_Arduino_Schritt-fuer-Schritt.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="description" content="Kleine Schaltungen in Tinkercad bauen und mit Blöcken programmieren. Jede Aufgabe ist in kleine Schritte geteilt, Tipps helfen beim Weiterkommen."><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><style>/* Grafiken Arduino-Lernheft / Schritt für Schritt (arduino-grafik.js). Pilot Grafik-Standard 13.11.2026.
+   Farben nur über Variablen, hell und dunkel. Kein color-mix() in fill/stroke. */
+:root{--ag-plus:#c8402e;--ag-minus:#2a6fb0;--ag-sig:#1f8a4c;--ag-in:#2a6fb0;--ag-pr:#0a7570;--ag-out:#d9481f;--ag-dist:#c23b3b;--ag-fb:#7046c2;
+  --ag-in-soft:#e1ecf7;--ag-pr-soft:#d6ecea;--ag-out-soft:#fbe3da;--ag-fb-soft:#ece5f8;--ag-glow:#ffcc33;--ag-blk:#ffffff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ag-plus:#ff7a68;--ag-minus:#6aa8e8;--ag-sig:#4cc27d;--ag-in:#6aa8e8;--ag-pr:#3cbdb2;--ag-out:#ff8a5c;--ag-dist:#f07171;--ag-fb:#b59cf2;
+  --ag-in-soft:#172a3d;--ag-pr-soft:#16393a;--ag-out-soft:#3d2219;--ag-fb-soft:#2a2240;--ag-glow:#ffd24d;--ag-blk:#1d292b}}
+:root[data-theme="dark"]{--ag-plus:#ff7a68;--ag-minus:#6aa8e8;--ag-sig:#4cc27d;--ag-in:#6aa8e8;--ag-pr:#3cbdb2;--ag-out:#ff8a5c;--ag-dist:#f07171;--ag-fb:#b59cf2;
+  --ag-in-soft:#172a3d;--ag-pr-soft:#16393a;--ag-out-soft:#3d2219;--ag-fb-soft:#2a2240;--ag-glow:#ffd24d;--ag-blk:#1d292b}
+
+/* Schaltzeichen aus elektronik-grafik.js: dieselben Klassen wie in elektronik.css, hier mit den Farben dieser Plattform */
+.ag .eg-w,.ag .eg-w2{fill:none;stroke:var(--ink);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.ag .eg-w2{stroke-width:2}
+.ag .eg-s{fill:var(--ag-blk);stroke:var(--ink);stroke-width:2.5;stroke-linejoin:round}
+.ag .eg-p{fill:none;stroke:var(--ink);stroke-width:3.5}
+.ag .eg-p3{fill:none;stroke:var(--ink);stroke-width:9}
+.ag .eg-ah{fill:var(--ink)}
+.ag .eg-dot{fill:var(--ink)}
+.ag .eg-dot0{fill:var(--ag-blk);stroke:var(--ink);stroke-width:2}
+.ag .eg-tp{font:700 16px var(--font);fill:var(--ink)}
+
+/* Rahmen */
+.ag{margin:4px 0 0;display:flex;flex-direction:column;gap:10px;min-width:0}
+.ag figcaption{font-size:13px;color:var(--muted)}
+.ag-svg{display:block;width:100%;height:auto;overflow:visible}
+.ag text{font-family:var(--font);fill:var(--ink)}
+.ag .ag-t{font-size:15px;font-weight:700;text-anchor:middle}
+.ag .ag-ts{font-size:14px;text-anchor:middle;fill:var(--muted)}
+.ag .ag-tsm{font-size:14px;font-weight:700;text-anchor:middle}
+.ag .ag-ttl{font-size:16px;font-weight:700;text-anchor:middle}
+.ag .ag-tm{font-size:17px;font-weight:700;text-anchor:middle}
+.ag .ag-tw{font-size:16px;font-weight:700;text-anchor:middle}
+.ag .ag-l{text-anchor:start}.ag .ag-r{text-anchor:end}
+.ag .ag-ah,.ag .ag-ahx{fill:var(--ink)}
+.ag-steps{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;justify-content:space-between}
+.ag-stepn{font-weight:700;font-size:15px;min-width:0;flex:1 1 220px}
+.ag-btns{display:flex;flex-wrap:wrap;gap:6px}
+.ag-ctl{display:flex;flex-direction:column;gap:4px;font-size:15px}
+.ag-ctl input[type=range]{width:100%;accent-color:var(--accent);min-height:28px}
+
+/* EVA */
+.ag-eva-row{display:grid;grid-template-columns:1fr 64px 1fr 64px 1fr;align-items:stretch;gap:6px}
+.ag-eva-b{border:2px solid var(--line-strong);border-radius:12px;padding:10px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;background:var(--surface)}
+.ag-eva-b svg{width:56px;height:56px}
+.ag-eva-b b{font-size:16px}.ag-eva-b>span:not(.ag-tag){font-size:14px;color:var(--muted)}
+.ag-tag{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:2px 8px;border-radius:10px}
+.ag-eva-b.in{border-color:var(--ag-in)}.ag-eva-b.in .ag-tag{background:var(--ag-in-soft);color:var(--ag-in)}
+.ag-eva-b.pr{border-color:var(--ag-pr)}.ag-eva-b.pr .ag-tag{background:var(--ag-pr-soft);color:var(--ag-pr)}
+.ag-eva-b.out{border-color:var(--ag-out)}.ag-eva-b.out .ag-tag{background:var(--ag-out-soft);color:var(--ag-out)}
+.ag-val{margin-top:auto;font-weight:700;font-size:15px;padding:3px 10px;border-radius:8px;background:var(--surface-2);border:1px solid var(--line)}
+.ag-eva-ar{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;font-size:13px;color:var(--muted)}
+.ag-eva-ar svg{width:40px;height:24px}
+.ag .ag-arl{fill:none;stroke:var(--ink);stroke-width:2.5}
+.ag .ag-ahi{fill:var(--ink)}
+.ag .ag-icb{fill:var(--ag-blk);stroke:var(--ink);stroke-width:2.5}
+.ag .ag-icl{fill:none;stroke:var(--ink);stroke-width:2.5;stroke-linecap:round}
+.ag .ag-icw{fill:var(--ink)}
+.ag-eva-b.in .ag-icf{fill:var(--ag-in)}
+.ag .ag-ict{font-size:15px;font-weight:700;text-anchor:middle;fill:var(--ag-pr)}
+.ag-icf2 path{fill:none;stroke:var(--muted);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.ag-eva.is-on .ag-icf2 path{stroke:var(--ag-in)}
+.ag-eva:not(.is-on) .ag-eva-b.out{border-style:dashed}
+@media (max-width:640px){.ag-eva-row{grid-template-columns:1fr}.ag-eva-ar{flex-direction:row;gap:8px}.ag-eva-ar svg{transform:rotate(90deg);width:28px}}
+
+/* Steuerkette / Regelkreis */
+.ag-sr-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
+.ag-sr-grid>div{min-width:0;border:1px solid var(--line);border-radius:12px;padding:8px;background:var(--surface)}
+@media (max-width:700px){.ag-sr-grid{grid-template-columns:1fr}}
+.ag-sr .ag-svg{max-width:420px;margin:0 auto}
+.ag-sr .ag-t{font-size:17px}.ag-sr .ag-ts,.ag-sr .ag-tsm{font-size:16px}.ag-sr .ag-ttl{font-size:18px}
+.ag-rel .ag-tsm,.ag-rel .ag-ts{font-size:16px}.ag-rel .ag-ttl{font-size:18px}.ag-rel .ag-tw{font-size:18px}.ag .ag-pin{font-size:15px}
+.ag-blk rect{fill:var(--ag-blk);stroke:var(--ink);stroke-width:2}
+.ag-blk.act rect{stroke:var(--ag-out)}
+.ag-blk.meas rect{stroke:var(--ag-fb)}
+.ag-flow path{fill:none;stroke:var(--ink);stroke-width:2.5}
+.ag .ag-ahf{fill:var(--ag-fb)}
+.ag-fbk path{stroke:var(--ag-fb)}
+.ag .ag-fbt{fill:var(--ag-fb);font-weight:700;text-anchor:middle}
+.ag-cmp circle{fill:var(--ag-blk);stroke:var(--ink);stroke-width:2}
+.ag-cmp path{stroke:var(--ink);stroke-width:1.5}
+.ag-node{fill:var(--ink)}
+.ag-dist path{fill:none;stroke:var(--ag-dist);stroke-width:2.5;stroke-dasharray:7 5}
+.ag .ag-ahd{fill:var(--ag-dist)}
+.ag-dist text{fill:var(--ag-dist)!important;font-weight:700}
+.ag-none rect{fill:var(--surface-2);stroke:var(--line-strong);stroke-width:1.5;stroke-dasharray:6 4}
+.ag-none .ag-x{stroke:var(--ag-dist);stroke-width:3;stroke-linecap:round}
+.ag-cap{margin:6px 0 0;font-size:15px;min-height:1.4em}
+.ag-sr [data-s]{transition:opacity .3s}
+.ag-sr.stepping [data-s]:not(.on){opacity:.28}
+.ag-sr.stepping .ag-blk.on rect{stroke-width:3.5;fill:var(--ag-pr-soft)}
+.ag-sr.stepping .ag-blk.meas.on rect{fill:var(--ag-fb-soft)}
+.ag-sr.stepping .ag-blk.act.on rect{fill:var(--ag-out-soft)}
+.ag-sr.stepping .ag-flow.on path:not(.ag-fbp){stroke-width:3.5}
+.ag-sr.stepping .ag-fbk.on .ag-fbp{stroke-width:4;stroke-dasharray:10 6;animation:agdash 1s linear infinite}
+.ag-sr.stepping .ag-none.on rect{stroke:var(--ag-dist)}
+
+/* Relais */
+.ag-rel .ag-svg{max-width:480px;margin:0 auto}
+.ag-ard rect{fill:#1f6f8b;stroke:#124a5e;stroke-width:2}
+.ag-ard text{fill:#fff!important}
+.ag-ard{cursor:pointer}
+.ag-ard:focus-visible rect{stroke:var(--accent);stroke-width:4}
+.ag-wire{fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.ag-wire.sig{stroke:var(--ag-sig)}.ag-wire.plus{stroke:var(--ag-plus)}.ag-wire.minus{stroke:var(--ag-minus)}
+.ag .ag-pin{fill:var(--ag-sig)}
+.ag-case{fill:none;stroke:var(--line-strong);stroke-width:1.5;stroke-dasharray:6 4}
+.ag-link{fill:none;stroke:var(--muted);stroke-width:2;stroke-dasharray:4 4}
+.ag-field path{fill:none;stroke:var(--ag-sig);stroke-width:1.6;stroke-dasharray:3 4;opacity:0;transition:opacity .3s}
+.ag-rel.is-on .ag-field path{opacity:1}
+.ag-lever{transform-origin:250px 176px;transition:transform .35s ease}
+.ag-rel.is-on .ag-lever{transform:rotate(21.5deg)}
+.ag-cur{opacity:0;transition:opacity .3s}
+.ag-rel.is-on .ag-cur{opacity:1}
+.ag .ag-ahs{fill:var(--ag-sig)}.ag .ag-ahp{fill:var(--ag-plus)}.ag .ag-ahm{fill:var(--ag-minus)}
+.ag-rel.is-on .ag-wire{stroke-width:4.5}
+.ag-rotor path{stroke:var(--ink);stroke-width:2.5;stroke-linecap:round}
+.ag-rotor{transform-box:fill-box;transform-origin:center}
+.ag-rel.is-on .ag-rotor{animation:agspin 1s linear infinite}
+
+/* Digital / analog */
+.ag-sig-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media (max-width:700px){.ag-sig-grid{grid-template-columns:1fr}}
+.ag-sig-p{border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--surface);display:flex;flex-direction:column;gap:8px;min-width:0}
+.ag-sig-p h4{margin:0;font-size:17px}.ag-sub{margin:-6px 0 0;color:var(--muted);font-size:14px}
+.ag-sch{max-width:260px}
+.ag-sw-on{display:none}.ag-sig.sw-on .ag-sw-on{display:inline}.ag-sig.sw-on .ag-sw-off{display:none}
+.ag-glow{fill:var(--ag-glow);opacity:0;transition:opacity .2s}
+.ag-volt{margin:0;font-weight:700;font-size:17px;color:var(--ag-sig)}
+.ag-axis{fill:none;stroke:var(--ink);stroke-width:2}
+.ag-grid{fill:none;stroke:var(--line-strong);stroke-width:1;stroke-dasharray:3 4}
+.ag-sigl{fill:none;stroke:var(--ag-sig);stroke-width:3;stroke-linejoin:round}
+.ag-nowl{stroke:var(--ag-out);stroke-width:1.5;stroke-dasharray:5 4}
+.ag-now circle{fill:var(--ag-out);stroke:var(--surface);stroke-width:2}
+.ag-now{transition:transform .25s}
+.ag-sig-p .btn{align-self:flex-start}
+
+@keyframes agspin{to{transform:rotate(360deg)}}
+@keyframes agdash{to{stroke-dashoffset:-16}}
+@media (prefers-reduced-motion:reduce){.ag *{animation:none!important;transition:none!important}}
+</style><script>/* Elektronik-Grundlagen: eigene Grafiken (SVG), selbst gezeichnet, CC BY-NC-SA 4.0 Daniel Beyrodt.
+   Schaltzeichen in Anlehnung an DIN EN 60617, Bauteile, Stromkreis-Simulation, Löten, Lötfehler, Multimeter ohne Marke.
+   Farben über CSS-Klassen (.eg-…) für hell/dunkel. */
+var EG = (function () {
+  'use strict';
+  var RM = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function f(n) { return Math.round(n * 10) / 10; }
+  function svg(vb, body, label, cls) { return '<svg class="eg' + (cls ? ' ' + cls : '') + '" viewBox="' + vb + '" role="img" aria-label="' + (label || '') + '">' + body + '</svg>'; }
+  var AH = function (x, y, a, s) { s = s || 7; var r = a * Math.PI / 180, b1 = r + 2.6, b2 = r - 2.6; return '<path class="eg-ah" d="M' + f(x) + ' ' + f(y) + 'L' + f(x + s * Math.cos(b1)) + ' ' + f(y + s * Math.sin(b1)) + 'L' + f(x + s * Math.cos(b2)) + ' ' + f(y + s * Math.sin(b2)) + 'Z"/>'; };
+
+  /* ---------------- Schaltzeichen (120 × 60, Anschlüsse bei y = 30) ---------------- */
+  var SYM = {
+    widerstand: function () { return '<path class="eg-w" d="M0 30H35M85 30H120"/><rect class="eg-s" x="35" y="20" width="50" height="20"/>'; },
+    led: function () { return '<path class="eg-w" d="M0 30H45M75 30H120M75 14V46"/><path class="eg-s" d="M45 14V46L75 30Z"/><path class="eg-w2" d="M62 12L74 0M72 16L84 4"/>' + AH(74, 0, -45, 7) + AH(84, 4, -45, 7); },
+    diode: function () { return '<path class="eg-w" d="M0 30H45M75 30H120M75 14V46"/><path class="eg-s" d="M45 14V46L75 30Z"/>'; },
+    kondensator: function () { return '<path class="eg-w" d="M0 30H54M66 30H120"/><path class="eg-p" d="M54 12V48M66 12V48"/>'; },
+    ldr: function () { return '<path class="eg-w" d="M0 30H35M85 30H120"/><rect class="eg-s" x="35" y="20" width="50" height="20"/><path class="eg-w2" d="M30 0L44 14M44 0L58 14"/>' + AH(44, 14, 45, 7) + AH(58, 14, 45, 7); },
+    poti: function () { return '<path class="eg-w" d="M0 30H35M85 30H120M60 60V44"/><rect class="eg-s" x="35" y="20" width="50" height="20"/>' + AH(60, 42, -90, 9); },
+    batterie: function () { return '<path class="eg-w" d="M0 30H55M67 30H120"/><path class="eg-p" d="M55 8V52"/><path class="eg-p3" d="M67 18V42"/><text class="eg-tp" x="44" y="12">+</text>'; },
+    schalter: function () { return '<path class="eg-w" d="M0 30H40M80 30H120M40 30L76 12"/><circle class="eg-dot" cx="40" cy="30" r="3"/><circle class="eg-dot0" cx="80" cy="30" r="3"/>'; },
+    lampe: function () { return '<path class="eg-w" d="M0 30H44M76 30H120"/><circle class="eg-s" cx="60" cy="30" r="16"/><path class="eg-w" d="M49 19L71 41M71 19L49 41"/>'; },
+    transistor: function () { return '<circle class="eg-s0" cx="62" cy="30" r="26"/><path class="eg-w" d="M0 30H50M50 14V46M50 22L78 6V0M50 38L78 54V60"/>' + AH(76, 53, 30, 9); },
+    relais: function () { return '<path class="eg-w" d="M0 30H10M40 30H50"/><rect class="eg-s" x="10" y="18" width="30" height="24"/><path class="eg-w" d="M12 40L38 20"/><path class="eg-w2" d="M40 30H70" stroke-dasharray="4 4"/><path class="eg-w" d="M62 46H76L100 32M100 46H120"/><circle class="eg-dot" cx="76" cy="46" r="3"/><circle class="eg-dot0" cx="100" cy="46" r="3"/>'; },
+    voltmeter: function () { return '<path class="eg-w" d="M0 30H44M76 30H120"/><circle class="eg-s" cx="60" cy="30" r="16"/><text class="eg-tm" x="60" y="36">V</text>'; },
+    amperemeter: function () { return '<path class="eg-w" d="M0 30H44M76 30H120"/><circle class="eg-s" cx="60" cy="30" r="16"/><text class="eg-tm" x="60" y="36">A</text>'; }
+  };
+  function sym(k, lab) { return svg('-6 -8 132 76', SYM[k](), lab || k, 'eg-sym'); }
+
+  /* ---------------- Farbcode ---------------- */
+  var COL = [['schwarz', '#1c1c1c'], ['braun', '#7a4a21'], ['rot', '#d0302a'], ['orange', '#f08a1c'], ['gelb', '#f5d000'], ['grün', '#2f9a4a'], ['blau', '#2a63c4'], ['violett', '#8a45b8'], ['grau', '#8d9399'], ['weiß', '#f4f4f4']];
+  var GOLD = ['gold', '#c9a227'], SILVER = ['silber', '#b9c0c7'];
+  var E12 = [10, 12, 15, 18, 22, 27, 33, 39, 47, 56, 68, 82];
+  function bandsOf(ohm) { var e = 0, v = ohm; while (v >= 100) { v /= 10; e++; } while (v < 10) { v *= 10; e--; } v = Math.round(v); return [COL[Math.floor(v / 10)], COL[v % 10], e >= 0 ? COL[e] : (e === -1 ? GOLD : SILVER), GOLD]; }
+  function fmtOhm(o) { var s = o >= 1e6 ? (o / 1e6) + ' MΩ' : o >= 1e3 ? (o / 1e3) + ' kΩ' : o + ' Ω'; return s.replace('.', ','); }
+  function resistor(ohm, o) {
+    o = o || {}; var b = bandsOf(ohm), body = '';
+    body += '<path class="eg-lead" d="M0 40H48M192 40H240"/>';
+    body += '<path class="eg-rbody" d="M48 26Q48 18 60 18H72Q78 24 86 24H154Q162 24 168 18H180Q192 18 192 26V54Q192 62 180 62H168Q162 56 154 56H86Q78 56 72 62H60Q48 62 48 54Z"/>';
+    [64, 92, 116, 172].forEach(function (x, i) { body += '<rect x="' + (x - 6) + '" y="' + (i === 0 || i === 3 ? 18 : 24) + '" width="' + (i === 3 ? 9 : 12) + '" height="' + (i === 0 || i === 3 ? 44 : 32) + '" fill="' + b[i][1] + '" class="eg-band"/>'; });
+    return svg('0 0 240 80', body, 'Widerstand mit Farbringen' + (o.say ? ': ' + b.map(function (x) { return x[0]; }).join(', ') : ''));
+  }
+  function colorTable() {
+    var r = '<table class="eg-ct"><thead><tr><th>Farbe</th><th>1. und 2. Ring: Ziffer</th><th>3. Ring: mal</th><th>4. Ring: Toleranz</th></tr></thead><tbody>';
+    COL.forEach(function (c, i) { r += '<tr><td><span class="sw" style="background:' + c[1] + '"></span>' + c[0] + '</td><td>' + i + '</td><td>' + (i < 7 ? (i === 0 ? '1' : '1' + '0'.repeat(i)).replace(/(\d)(?=(\d{3})+$)/g, '$1.') : '–') + '</td><td>' + (i === 1 ? '± 1 %' : i === 2 ? '± 2 %' : '') + '</td></tr>'; });
+    r += '<tr><td><span class="sw" style="background:' + GOLD[1] + '"></span>gold</td><td>–</td><td>0,1</td><td>± 5 %</td></tr><tr><td><span class="sw" style="background:' + SILVER[1] + '"></span>silber</td><td>–</td><td>0,01</td><td>± 10 %</td></tr></tbody></table>';
+    return r;
+  }
+
+  /* ---------------- Bauteile ---------------- */
+  var PART = {
+    led: function () { return svg('0 0 160 220', '<path class="eg-ledd" d="M50 40A30 30 0 0 1 110 40V110H50Z"/><rect class="eg-ledr" x="44" y="106" width="72" height="12" rx="2"/><path class="eg-ledr" d="M110 106V118H116V106Z"/><path class="eg-lead" d="M66 118V214M94 118V184"/><path class="eg-ledi" d="M66 70V100M94 60V100M66 70L94 60"/>', 'Leuchtdiode mit langem und kurzem Bein'); },
+    elko: function () { return svg('0 0 120 200', '<rect class="eg-elko" x="30" y="10" width="60" height="110" rx="10"/><rect class="eg-elkos" x="70" y="10" width="14" height="110"/><text class="eg-tw" x="77" y="50">−</text><text class="eg-tw" x="77" y="90">−</text><path class="eg-lead" d="M48 120V196M72 120V176"/>', 'Elektrolytkondensator'); },
+    ldr: function () { return svg('0 0 120 200', '<circle class="eg-ldr" cx="60" cy="56" r="44"/><path class="eg-ldrz" d="M34 36H86V46H34V56H86V66H34V76H86"/><path class="eg-lead" d="M44 98V196M76 98V196"/>', 'Fotowiderstand LDR'); },
+    transistor: function () { return svg('0 0 120 200', '<path class="eg-to92" d="M24 90V40A36 36 0 0 1 96 40V90Z"/><path class="eg-lead" d="M38 90V196M60 90V196M82 90V196"/><text class="eg-tl" x="38" y="190">E</text><text class="eg-tl" x="60" y="190">B</text><text class="eg-tl" x="82" y="190">C</text>', 'Transistor im Kunststoffgehäuse'); },
+    relais: function () { return svg('0 0 160 160', '<rect class="eg-rel" x="20" y="20" width="120" height="90" rx="6"/><path class="eg-lead" d="M40 110V150M70 110V150M100 110V150M120 110V150"/><rect class="eg-relc" x="34" y="34" width="40" height="40" rx="4"/><path class="eg-w2" d="M84 54H124" stroke-dasharray="4 4"/>', 'Relais'); },
+    widerstand: function () { return resistor(4700); }
+  };
+
+  /* ---------------- Stromkreis-Simulation ---------------- */
+  var CPATH = 'M60 60H460V250H60Z';
+  function circuitFig(st) {
+    var b = '<path class="eg-wire" d="' + CPATH + '"/>';
+    b += '<rect class="eg-bg" x="36" y="120" width="48" height="74"/>';
+    b += '<g transform="translate(60 155) rotate(-90)"><path class="eg-p" d="M-26 -22V22"/><path class="eg-p3" d="M-12 -12V12"/></g><text class="eg-t" x="94" y="152">Batterie</text><text class="eg-t" x="94" y="170">' + st.U.toLocaleString('de-DE') + ' V</text><text class="eg-tp" x="44" y="126">+</text>';
+    b += '<rect class="eg-bg" x="170" y="40" width="80" height="40"/>' + (st.on ? '<path class="eg-w" d="M170 60H250"/>' : '<path class="eg-w" d="M170 60L232 34"/>') + '<circle class="eg-dot" cx="170" cy="60" r="4"/><circle class="eg-dot0" cx="250" cy="60" r="4"/><text class="eg-t eg-c" x="210" y="26">Schalter ' + (st.on ? 'zu' : 'offen') + '</text>';
+    b += '<rect class="eg-bg" x="300" y="44" width="90" height="32"/><rect class="eg-s" x="310" y="48" width="70" height="24"/><text class="eg-t eg-c" x="345" y="100">' + (st.led ? 'Vorwiderstand ' : 'Widerstand ') + st.R + ' Ω</text>';
+    if (st.led) {
+      var glow = Math.min(1, st.I / 0.02);
+      b += '<rect class="eg-bg" x="440" y="130" width="40" height="70"/><g transform="translate(460 165) rotate(90)"><path class="eg-s" d="M-16 -16V16L16 0Z"/><path class="eg-w" d="M16 -16V16"/></g>';
+      b += '<circle cx="460" cy="165" r="34" class="eg-glow" fill-opacity="' + f(glow * 0.8) + '"/><text class="eg-t" x="490" y="170">LED</text>';
+    } else {
+      b += '<rect class="eg-bg" x="440" y="130" width="40" height="70"/><circle class="eg-s" cx="460" cy="165" r="20"/><text class="eg-tm" x="460" y="172">A</text><text class="eg-t" x="490" y="170">Strommesser</text>';
+    }
+    b += '<g class="dots"></g>';
+    return { vb: '0 0 600 290', body: b };
+  }
+  function circuit(box, o) {
+    o = o || {};
+    var st = { U: o.U || 9, R: o.R || 470, on: true, led: !!o.led, I: 0 };
+    var wrap = document.createElement('div'); wrap.className = 'anim';
+    var fig = document.createElement('div'); fig.className = 'anim-fig wide';
+    var ctl = document.createElement('div'); ctl.className = 'anim-ctl';
+    var out = document.createElement('p'); out.className = 'anim-out'; out.setAttribute('aria-live', 'polite');
+    function rng(lab, min, max, step, val, fn) { var l = document.createElement('label'); l.className = 'anim-rl'; var i = document.createElement('input'); i.type = 'range'; i.min = min; i.max = max; i.step = step; i.value = val; i.oninput = function () { fn(+i.value); draw(); }; l.append(lab, i); return l; }
+    ctl.append(rng('Spannung', 1.5, 12, 1.5, st.U, function (v) { st.U = v; }), rng('Widerstand', 100, 1000, 10, st.R, function (v) { st.R = v; }));
+    var sw = document.createElement('button'); sw.type = 'button'; sw.className = 'btn soft'; sw.textContent = 'Schalter öffnen'; sw.onclick = function () { st.on = !st.on; sw.textContent = st.on ? 'Schalter öffnen' : 'Schalter schließen'; draw(); };
+    ctl.append(sw);
+    wrap.append(fig, ctl, out); box.appendChild(wrap);
+    var dots = [], p, L, t0 = 0, phase = 0, last = 0;
+    function draw() {
+      var UF = st.led ? 2 : 0; st.I = st.on ? Math.max(0, (st.U - UF) / st.R) : 0;
+      var g = circuitFig(st); fig.innerHTML = svg(g.vb, g.body, st.led ? 'Stromkreis mit Batterie, Schalter, Vorwiderstand und LED' : 'Stromkreis mit Batterie, Schalter, Widerstand und Strommesser');
+      var mA = st.I * 1000, txt;
+      if (st.led) txt = st.on ? '<b>Stromstärke ' + mA.toLocaleString('de-DE', { maximumFractionDigits: 1 }) + ' mA</b> (I = (U − 2 V) : R)<br>' + (mA > 30 ? '<span class="eg-warn">Zu viel Strom: Diese LED würde nach kurzer Zeit kaputtgehen. Nimm einen größeren Vorwiderstand.</span>' : mA < 2 ? 'Fast kein Strom: Die LED leuchtet kaum.' : 'Die LED leuchtet. Je kleiner der Vorwiderstand, desto größer der Strom und desto heller die LED.') : 'Der Schalter ist offen: Kein Strom fließt, die LED ist aus.';
+      else txt = st.on ? '<b>I = U : R = ' + st.U.toLocaleString('de-DE') + ' V : ' + st.R + ' Ω = ' + mA.toLocaleString('de-DE', { maximumFractionDigits: 1 }) + ' mA</b><br>Mehr Spannung bedeutet mehr Strom. Mehr Widerstand bedeutet weniger Strom.' : 'Der Schalter ist offen: Der Stromkreis ist unterbrochen, es fließt kein Strom.';
+      out.innerHTML = txt;
+      var s = fig.querySelector('svg'); p = document.createElementNS('http://www.w3.org/2000/svg', 'path'); p.setAttribute('d', CPATH); p.setAttribute('fill', 'none'); p.setAttribute('stroke', 'none'); s.appendChild(p); L = p.getTotalLength();
+      var gd = s.querySelector('.dots'); dots = [];
+      for (var i = 0; i < 14; i++) { var c = document.createElementNS('http://www.w3.org/2000/svg', 'circle'); c.setAttribute('r', '5'); c.setAttribute('class', 'eg-edot'); gd.appendChild(c); dots.push(c); }
+      place();
+    }
+    function place() { dots.forEach(function (c, i) { var q = p.getPointAtLength(((phase + i / dots.length) % 1) * L); c.setAttribute('cx', q.x); c.setAttribute('cy', q.y); c.style.display = st.I > 0 ? '' : 'none'; }); }
+    function tick(ts) { if (!document.body.contains(fig)) return; if (!last) last = ts; var dt = (ts - last) / 1000; last = ts; if (!fig.closest('[hidden]')) { phase = (phase + dt * Math.min(0.5, st.I * 12)) % 1; place(); } requestAnimationFrame(tick); }
+    draw();
+    if (!RM) requestAnimationFrame(tick);
+    out.insertAdjacentHTML('afterend', '<p class="hint">Die Punkte zeigen die technische Stromrichtung von Plus nach Minus. Ihre Geschwindigkeit steht für die Stromstärke.</p>');
+  }
+
+  /* ---------------- Dunkelschaltung (Schaltplan) ---------------- */
+  function vres(x, y0, h, extra) { return '<rect class="eg-s" x="' + (x - 10) + '" y="' + y0 + '" width="20" height="' + h + '"/>' + (extra || ''); }
+  function dunkel() {
+    var b = '';
+    b += '<path class="eg-wire" d="M60 40H380M60 320H380M60 40V150M60 162V320M200 40V70M200 150V210M200 290V320M380 40V60M380 120V130M380 190V214M380 266V320M200 180H300V240H352"/>';
+    [[200, 40], [200, 320], [200, 180], [380, 40], [380, 320]].forEach(function (q) { b += '<circle class="eg-dot" cx="' + q[0] + '" cy="' + q[1] + '" r="4"/>'; });
+    b += '<path class="eg-p" d="M38 150H82"/><path class="eg-p3" d="M48 162H72"/><text class="eg-tp" x="88" y="150">+</text><text class="eg-tn" x="88" y="176">9 V</text>';
+    b += vres(200, 70, 80) + '<path class="eg-w" d="M168 110H186"/>' + AH(188, 110, 0, 9);
+    b += vres(200, 210, 80) + '<path class="eg-w2" d="M152 220L170 238M152 240L170 258"/>' + AH(170, 238, 45, 7) + AH(170, 258, 45, 7);
+    b += vres(380, 60, 60);
+    b += '<path class="eg-s" d="M364 130H396L380 160Z"/><path class="eg-w" d="M364 160H396M380 160V190"/><path class="eg-w2" d="M400 140L414 128M404 152L418 140"/>' + AH(414, 128, -40, 7) + AH(418, 140, -40, 7);
+    b += '<circle class="eg-s0" cx="368" cy="240" r="28"/><path class="eg-w" d="M352 222V258M352 230L380 214M352 250L380 266"/>' + AH(379, 265, 30, 9);
+    b += '<text class="eg-tn" x="40" y="30">+</text><text class="eg-tn" x="40" y="340">−</text>';
+    return { vb: '0 0 440 350', body: b };
+  }
+
+  /* ---------------- Steckbrett ---------------- */
+  function steckbrett() {
+    var b = '<rect class="eg-bb" x="10" y="10" width="560" height="250" rx="10"/>';
+    for (var r = 0; r < 2; r++) for (var c = 0; c < 25; c++) { b += '<rect class="eg-hole" x="' + (40 + c * 20) + '" y="' + (24 + r * 14) + '" width="7" height="7"/>'; b += '<rect class="eg-hole" x="' + (40 + c * 20) + '" y="' + (218 + r * 14) + '" width="7" height="7"/>'; }
+    for (c = 0; c < 25; c++) for (r = 0; r < 10; r++) b += '<rect class="eg-hole" x="' + (40 + c * 20) + '" y="' + (66 + r * 14 + (r > 4 ? 12 : 0)) + '" width="7" height="7"/>';
+    b += '<rect class="eg-railp" x="34" y="21" width="500" height="12" rx="3"/><rect class="eg-railm" x="34" y="35" width="500" height="12" rx="3"/>';
+    b += '<rect class="eg-col" x="134" y="62" width="15" height="68" rx="3"/><rect class="eg-col" x="134" y="142" width="15" height="68" rx="3"/>';
+    b += '<path class="eg-gap" d="M30 136H550"/>';
+    b += '<text class="eg-t" x="540" y="31">+</text><text class="eg-t" x="540" y="47">−</text>';
+    b += '<path class="eg-w2" d="M141 210V282M330 136V282"/><text class="eg-ts" x="150" y="296">5 Löcher einer Spalte sind leitend verbunden</text><text class="eg-ts" x="340" y="280">Mittelsteg trennt oben und unten</text><text class="eg-ts" x="150" y="314">Randleisten oben: Plus und Minus für die Spannungsversorgung</text>';
+    return { vb: '0 0 580 324', body: b };
+  }
+
+  /* ---------------- Löten ---------------- */
+  function joint(kind, x) {
+    x = x || 0; var pad = '<rect class="eg-pad" x="' + (x + 60) + '" y="96" width="80" height="8"/>', lead = '<rect class="eg-lead2" x="' + (x + 96) + '" y="20" width="8" height="' + (kind === 'pad' ? 70 : 120) + '"/>', s = '';
+    if (kind === 'gut') s = '<path class="eg-solder" d="M' + (x + 62) + ' 104Q' + (x + 92) + ' 106 ' + (x + 96) + ' 132H' + (x + 104) + 'Q' + (x + 108) + ' 106 ' + (x + 138) + ' 104Z"/><path class="eg-shine" d="M' + (x + 108) + ' 112Q' + (x + 114) + ' 108 ' + (x + 126) + ' 107"/>';
+    if (kind === 'kalt') s = '<ellipse class="eg-cold" cx="' + (x + 100) + '" cy="118" rx="22" ry="18"/><path class="eg-gapw" d="M' + (x + 62) + ' 106H' + (x + 78) + 'M' + (x + 122) + ' 106H' + (x + 138) + '"/>';
+    if (kind === 'viel') s = '<ellipse class="eg-solder" cx="' + (x + 100) + '" cy="124" rx="40" ry="28"/>';
+    if (kind === 'wenig') s = '<path class="eg-solder" d="M' + (x + 88) + ' 104Q' + (x + 95) + ' 105 ' + (x + 96) + ' 112H' + (x + 104) + 'Q' + (x + 105) + ' 105 ' + (x + 112) + ' 104Z"/>';
+    var board = '<rect class="eg-board" x="' + (x + 10) + '" y="70" width="180" height="26"/>';
+    return board + pad + lead + s;
+  }
+  function fehler(kind) {
+    var b = '';
+    if (kind === 'bruecke') { b += '<rect class="eg-board" x="0" y="70" width="200" height="26"/><rect class="eg-pad" x="20" y="96" width="60" height="8"/><rect class="eg-pad" x="120" y="96" width="60" height="8"/><rect class="eg-lead2" x="46" y="20" width="8" height="118"/><rect class="eg-lead2" x="146" y="20" width="8" height="118"/><path class="eg-solder" d="M22 104Q50 140 100 128Q150 140 178 104Z"/>'; }
+    else b += joint(kind, 0);
+    return svg('0 0 200 160', b, 'Lötstelle im Schnitt', 'eg-joint');
+  }
+  var STEPS = ['Ausgangslage', '1. Lötstelle erwärmen', '2. Lot zuführen', '3. Lot wegnehmen', '4. Lötkolben wegnehmen'];
+  function solderFig(k) {
+    var b = '<rect class="eg-board" x="40" y="150" width="320" height="30"/><rect class="eg-pad" x="150" y="180" width="100" height="10"/><rect class="eg-lead2" x="196" y="60" width="8" height="190"/><path class="eg-comp" d="M176 60H224V150H176Z"/>';
+    var tip = k >= 1 && k <= 3 ? 'M330 300L246 196L254 188Z' : 'M380 330L296 226L304 218Z';
+    if (k >= 2) b += k === 2 ? '<path class="eg-solder" d="M196 190Q180 192 172 190L196 214Z"/>' : '<path class="eg-solder" d="M156 190Q188 192 196 228H204Q212 192 244 190Z"/><path class="eg-shine" d="M212 200Q220 194 234 193"/>';
+    if (k >= 1 && k <= 3) b += '<circle class="eg-heat" cx="214" cy="198" r="26"/>';
+    b += '<path class="eg-iron" d="' + tip + '"/><path class="eg-ironb" d="' + (k >= 1 && k <= 3 ? 'M330 300L390 380' : 'M380 330L430 400') + '"/>';
+    var wire = k === 2 ? 'M70 330L180 206' : 'M40 360L140 246';
+    b += '<path class="eg-wiresol" d="' + wire + '"/>';
+    b += '<text class="eg-ts" x="40" y="140">Platine</text><text class="eg-ts" x="252" y="186">Lötpad</text><text class="eg-ts" x="226" y="100">Bauteil</text><text class="eg-ts" x="350" y="300">Lötspitze</text><text class="eg-ts" x="40" y="390">Lötdraht</text>';
+    return { vb: '0 0 440 410', body: b };
+  }
+  var STEP_T = ['Platine einspannen, Bauteil einstecken, Beinchen leicht umbiegen.', 'Lötspitze so an die Lötstelle halten, dass sie Lötpad und Bauteilbein gleichzeitig berührt. Beide werden heiß.', 'Lötdraht von der anderen Seite an die heiße Lötstelle halten, nicht an die Lötspitze. Das Lot schmilzt und fließt um das Bein.', 'Sobald genug Lot geflossen ist, den Lötdraht wegnehmen.', 'Lötspitze wegnehmen. Die Lötstelle nicht bewegen, bis das Lot erstarrt ist. Eine gute Lötstelle glänzt und sieht aus wie ein kleiner Vulkan.'];
+  function solder(box) {
+    var wrap = document.createElement('div'); wrap.className = 'anim'; var fig = document.createElement('div'); fig.className = 'anim-fig'; var st = document.createElement('div'); st.className = 'anim-steps'; var out = document.createElement('p'); out.className = 'anim-out'; out.setAttribute('aria-live', 'polite');
+    var k = 0, timer = 0;
+    function draw() { var g = solderFig(k); fig.innerHTML = svg(g.vb, g.body, 'Löten im Schnitt: ' + STEPS[k]); out.innerHTML = '<b>' + STEPS[k] + '</b><br>' + STEP_T[k]; [].forEach.call(st.children, function (b, i) { if (b.dataset.k != null) b.setAttribute('aria-pressed', String(+b.dataset.k === k)); }); }
+    STEPS.forEach(function (s, i) { var b = document.createElement('button'); b.type = 'button'; b.className = 'btn soft'; b.dataset.k = i; b.textContent = i ? String(i) + '.' : 'Start'; b.setAttribute('aria-label', s); b.onclick = function () { stop(); k = i; draw(); }; st.appendChild(b); });
+    var play = document.createElement('button'); play.type = 'button'; play.className = 'btn soft'; play.textContent = 'Abspielen';
+    function stop() { if (timer) clearInterval(timer); timer = 0; play.textContent = 'Abspielen'; }
+    play.onclick = function () { if (timer) { stop(); return; } play.textContent = 'Anhalten'; timer = setInterval(function () { k = (k + 1) % STEPS.length; draw(); }, 2200); };
+    if (!RM) st.appendChild(play);
+    wrap.append(fig, st, out); box.appendChild(wrap); draw();
+  }
+
+  /* ---------------- Multimeter ---------------- */
+  var POSN = [['OFF', 'aus'], ['V⎓ 2', 'V', 2], ['V⎓ 20', 'V', 20], ['V⎓ 200', 'V', 200], ['A⎓ 200m', 'A', 0.2], ['A⎓ 10', 'A', 10], ['Ω 2k', 'O', 2000], ['Ω 20k', 'O', 20000], ['Ω 200k', 'O', 200000]];
+  var PLAB = ['OFF', '2 V', '20 V', '200 V', '200 mA', '10 A', '2 kΩ', '20 kΩ', '200 kΩ'];
+  var SOCK = ['10A', 'mA', 'COM', 'VΩ'];
+  function dmmFig(pos, sock, disp, bad) {
+    var b = '<rect class="eg-dmm" x="10" y="10" width="320" height="420" rx="26"/><rect class="eg-dmmf" x="24" y="24" width="292" height="392" rx="18"/>';
+    b += '<rect class="eg-lcd' + (bad ? ' bad' : '') + '" x="66" y="44" width="208" height="70" rx="8"/><text class="eg-lcdt" x="262" y="96">' + disp + '</text>';
+    var cx = 170, cy = 236, R = 96;
+    b += '<circle class="eg-dial" cx="' + cx + '" cy="' + cy + '" r="46"/>';
+    POSN.forEach(function (p, i) { var a = (-210 + i * (240 / (POSN.length - 1))) * Math.PI / 180, x = cx + R * Math.cos(a), y = cy + R * Math.sin(a); b += '<text class="eg-dpos' + (i === pos ? ' on' : '') + '" x="' + f(x) + '" y="' + f(y + 4) + '">' + PLAB[i] + '</text>'; });
+    var a = (-210 + pos * (240 / (POSN.length - 1))) * Math.PI / 180;
+    b += '<path class="eg-knob" d="M' + f(cx + 40 * Math.cos(a)) + ' ' + f(cy + 40 * Math.sin(a)) + 'L' + f(cx + 10 * Math.cos(a + 1.6)) + ' ' + f(cy + 10 * Math.sin(a + 1.6)) + 'L' + f(cx + 10 * Math.cos(a - 1.6)) + ' ' + f(cy + 10 * Math.sin(a - 1.6)) + 'Z"/>';
+    SOCK.forEach(function (s, i) { var x = 80 + i * 60; b += '<circle class="eg-sock' + (i === 2 ? ' com' : '') + (i === sock ? ' on' : '') + '" cx="' + x + '" cy="372" r="13"/><text class="eg-dpos" x="' + x + '" y="402">' + s + '</text>'; });
+    b += '<path class="eg-cblk" d="M200 372C200 420 280 440 336 440"/>';
+    if (sock >= 0 && sock !== 2) { var x2 = 80 + sock * 60; b += '<path class="eg-cred" d="M' + x2 + ' 372C' + x2 + ' 430 280 452 340 452"/>'; }
+    return { vb: '0 0 344 460', body: b };
+  }
+  function dmmRead(sc, pos, sock, con) {
+    var P = POSN[pos], kind = P[1], rng = P[2];
+    if (kind === 'aus') return ['', 'Das Messgerät ist ausgeschaltet.', 0];
+    if (sock < 0) return ['', 'Steck die rote Messleitung in eine Buchse.', 0];
+    var fmt = function (v, r) { var d = r >= 100 ? 1 : r >= 10 ? 2 : 3; if (kind === 'A' && r < 1) { v *= 1000; d = 1; } if (kind === 'O') { v /= 1000; d = r >= 100000 ? 1 : r >= 10000 ? 2 : 3; } return v.toFixed(d).replace('.', ','); };
+    if ((kind === 'V' || kind === 'O') && SOCK[sock] !== 'VΩ') { if (con === 'p' && sc.q === 'U') return ['0,00', 'Achtung: Die rote Leitung steckt in der Strombuchse. Parallel angeschlossen entsteht ein Kurzschluss über das Messgerät, die Sicherung im Gerät kann durchbrennen.', -1]; return ['0,00', 'Die rote Leitung steckt in der falschen Buchse. Für Spannung und Widerstand gehört sie in VΩ.', -1]; }
+    if (kind === 'A' && SOCK[sock] === 'VΩ') return ['0,00', 'Für die Strommessung gehört die rote Leitung in die Buchse mA (kleine Ströme) oder 10A.', -1];
+    if (kind === 'A' && con === 'p') return ['0,00', 'Kurzschluss! Ein Strommesser hat fast keinen Widerstand. Parallel angeschlossen fließt ein sehr großer Strom durch das Gerät, die Sicherung brennt durch. Strom misst man immer in Reihe.', -1];
+    if (kind === 'A' && rng < 1 && SOCK[sock] === '10A') return ['0,00', 'Bereich und Buchse passen nicht zusammen: Für den Bereich 200 mA gehört die rote Leitung in die Buchse mA.', -1];
+    if (kind === 'A' && rng >= 1 && SOCK[sock] === 'mA') return ['0,02', 'Für den Bereich 10 A gehört die rote Leitung in die Buchse 10A. Bei kleinen Strömen ist der Bereich 200 mA genauer.', -1];
+    if (kind === 'V' && con === 's') return [fmt(9.2, rng), 'Das Messgerät liegt in Reihe: Der Stromkreis ist unterbrochen, die LED geht aus. Spannung misst man parallel zum Bauteil.', -1];
+    if (kind === 'O' && sc.q !== 'R') return ['', 'Widerstand misst man nur an einem ausgebauten Bauteil ohne Spannung. Im laufenden Stromkreis zeigt das Gerät Unsinn an oder nimmt Schaden.', -1];
+    if (kind !== { U: 'V', I: 'A', R: 'O' }[sc.q]) return ['', 'Diese Messart passt nicht zur Aufgabe.', -1];
+    if (sc.v > rng) return ['1', 'Überlauf: Die Anzeige zeigt nur eine 1. Der Messwert ist größer als der Messbereich. Wähle den nächstgrößeren Bereich.', -1];
+    var best = POSN.filter(function (q) { return q[1] === kind && q[2] >= sc.v; }).sort(function (x, y) { return x[2] - y[2]; })[0];
+    if (best && rng !== best[2]) return [fmt(sc.v, rng), 'Das Gerät misst richtig, aber ungenau. Ein kleinerer Messbereich zeigt mehr Stellen an.', 0];
+    return [fmt(sc.v, rng), 'Richtig gemessen: ' + sc.ok, 1];
+  }
+  return { svg: svg, SYM: SYM, sym: sym, resistor: resistor, bandsOf: bandsOf, fmtOhm: fmtOhm, colorTable: colorTable, E12: E12, PART: PART, circuit: circuit, dunkel: dunkel, steckbrett: steckbrett, fehler: fehler, solder: solder, dmmFig: dmmFig, dmmRead: dmmRead, POSN: POSN, SOCK: SOCK, COL: COL };
+})();
+
+/* Arduino-Lernheft und Arduino Schritt für Schritt: gemeinsame Grafiken (SVG), selbst gezeichnet, CC BY-NC-SA 4.0 Daniel Beyrodt.
+   Pilot für den Grafik-Standard (claude/grafik-standard.md, 13.11.2026).
+   Schaltzeichen aus src_tpl/elektronik-grafik.js (EG.SYM: batterie, schalter, lampe, poti), Farben in src_tpl/arduino-grafik.css.
+   Bedeutungsfarben: Plus rot, Minus blau, Steuersignal grün; Eingabe blau, Verarbeitung türkis, Ausgabe orange;
+   Störgröße rot gestrichelt, Rückführung violett. Bedeutung steht immer zusätzlich als Text an der Grafik.
+   Bedienung über einen Klick-Handler am Dokument: Die Grafiken stecken als HTML-Text in den Kapiteldaten und werden erst
+   beim Öffnen eines Kapitels eingesetzt. */
+var AG = (function () {
+  'use strict';
+  var RM = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var uid = 0;
+  function esc(t) { return String(t).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+  function ah(x, y, dir, cls) { /* Pfeilspitze an (x,y), dir: d u l r */
+    var s = 7, p = { d: [x - s, y - 10, x + s, y - 10], u: [x - s, y + 10, x + s, y + 10], r: [x - 10, y - s, x - 10, y + s], l: [x + 10, y - s, x + 10, y + s] }[dir];
+    return '<path class="' + (cls || 'ag-ah') + '" d="M' + x + ' ' + y + 'L' + p[0] + ' ' + p[1] + 'L' + p[2] + ' ' + p[3] + 'Z"/>';
+  }
+  function sym(k, tr) { return '<g transform="' + tr + '">' + EG.SYM[k]() + '</g>'; }
+
+  /* ---------------- EVA-Prinzip mit Beispiel Klimaanlage (Lernheft Kap. 4) ---------------- */
+  var IC = {
+    sensor: '<svg viewBox="0 0 64 64" aria-hidden="true"><rect class="ag-icb" x="25" y="6" width="14" height="38" rx="7"/><circle class="ag-icb" cx="32" cy="48" r="11"/><rect class="ag-icf" x="29" y="22" width="6" height="26"/><circle class="ag-icf" cx="32" cy="48" r="7"/><path class="ag-icl" d="M43 14h6M43 22h6M43 30h6"/></svg>',
+    chip: '<svg viewBox="0 0 64 64" aria-hidden="true"><path class="ag-icl" d="M20 6v8M28 6v8M36 6v8M44 6v8M20 50v8M28 50v8M36 50v8M44 50v8M6 20h8M6 28h8M6 36h8M6 44h8M50 20h8M50 28h8M50 36h8M50 44h8"/><rect class="ag-icb" x="14" y="14" width="36" height="36" rx="5"/><text class="ag-ict" x="32" y="37">µC</text></svg>',
+    cold: '<svg viewBox="0 0 64 64" aria-hidden="true"><circle class="ag-icb" cx="32" cy="32" r="27"/><g class="ag-icf2"><path d="M32 12V52M14.7 22L49.3 42M14.7 42L49.3 22M26 15l6 5 6-5M26 49l6-5 6 5M15 29l7-1-3-7M49 35l-7 1 3 7M15 35l7 1-3 7M49 29l-7-1 3-7"/></g></svg>'
+  };
+  function eva() {
+    var id = 'ag' + (++uid);
+    return '<figure class="ag ag-eva" data-ag="eva" data-t="31" id="' + id + '">' +
+      '<div class="ag-eva-row" role="img" aria-label="EVA-Prinzip am Beispiel Klimaanlage im Auto: Eingabe – ein Temperatursensor misst die Temperatur im Auto. Verarbeitung – der Mikrocontroller prüft die Bedingung wärmer als 28 °C. Ausgabe – der Klimakompressor kühlt, wenn die Bedingung erfüllt ist.">' +
+      '<div class="ag-eva-b in"><span class="ag-tag">Eingabe</span>' + IC.sensor + '<b>Sensor</b><span>Temperatursensor misst die Temperatur im Auto</span><output class="ag-val" data-v="in">31 °C</output></div>' +
+      '<div class="ag-eva-ar" aria-hidden="true"><svg viewBox="0 0 40 24"><path class="ag-arl" d="M2 12H30"/>' + ah(38, 12, 'r', 'ag-ahi') + '</svg><small>Messwert</small></div>' +
+      '<div class="ag-eva-b pr"><span class="ag-tag">Verarbeitung</span>' + IC.chip + '<b>Mikrocontroller</b><span>Programm prüft: wärmer als 28 °C?</span><output class="ag-val" data-v="pr">31 °C &gt; 28 °C → ja</output></div>' +
+      '<div class="ag-eva-ar" aria-hidden="true"><svg viewBox="0 0 40 24"><path class="ag-arl" d="M2 12H30"/>' + ah(38, 12, 'r', 'ag-ahi') + '</svg><small>Schaltsignal</small></div>' +
+      '<div class="ag-eva-b out"><span class="ag-tag">Ausgabe</span>' + IC.cold + '<b>Aktor</b><span>Klimakompressor kühlt die Luft</span><output class="ag-val" data-v="out">an</output></div>' +
+      '</div>' +
+      '<label class="ag-ctl"><span>Temperatur im Auto: <b data-v="t">31 °C</b></span><input type="range" min="16" max="40" step="1" value="31" data-ag-in="eva" aria-label="Temperatur im Auto"></label>' +
+      '<figcaption>EVA-Prinzip am Beispiel Klimaanlage im Auto. Schiebe den Regler: Der Mikrocontroller schaltet den Kompressor nur ein, wenn die Bedingung „wärmer als 28 °C“ erfüllt ist.</figcaption></figure>';
+  }
+  function evaSet(root, t) {
+    var on = t > 28;
+    root.dataset.t = t;
+    root.classList.toggle('is-on', on);
+    root.querySelector('[data-v="t"]').textContent = t + ' °C';
+    root.querySelector('[data-v="in"]').textContent = t + ' °C';
+    root.querySelector('[data-v="pr"]').textContent = t + ' °C ' + (on ? '>' : '≤') + ' 28 °C → ' + (on ? 'ja' : 'nein');
+    root.querySelector('[data-v="out"]').textContent = on ? 'an' : 'aus';
+  }
+
+  /* ---------------- Steuerkette und Regelkreis (Lernheft Kap. 5, Schritt für Schritt Kap. 5) ---------------- */
+  var SR = {
+    voll: {
+      st: { title: 'Steuerkette: Herd', w: 'Führungsgröße: Stufe 5', b1: ['Steuereinrichtung', 'Drehknopf mit Stufen'], b2: ['Stellglied', 'Heizplatte'], b3: ['Steuerstrecke', 'Topf mit Wasser'], z: ['Störgröße', 'voller Topf'], x: 'Temperatur', no: ['Keine Rückführung:', 'Niemand misst nach.'] },
+      rg: { title: 'Regelkreis: Backofen', w: 'Sollwert: 200 °C', cmp: 'Vergleich', b1: ['Regler', 'Thermostat'], b2: ['Stellglied', 'Heizstab'], b3: ['Regelstrecke', 'Backraum'], z: ['Störgröße', 'Tür auf'], x: 'Istwert', m: ['Messglied', 'Temperaturfühler'], fb: 'Rückführung' },
+      steps: [
+        ['Überblick', 'Links die Steuerkette, rechts der Regelkreis. Tippe auf „Weiter“ und vergleiche beide Schritt für Schritt.', ''],
+        ['Vorgabe', 'Du stellst Stufe 5 ein. Das ist die Führungsgröße.', 'Du stellst 200 °C ein. Das ist der Sollwert.'],
+        ['Heizen', 'Die Steuereinrichtung schaltet die Heizplatte auf Stufe 5. Sie heizt mit fester Leistung.', 'Der Regler vergleicht: Es ist noch zu kalt. Er schaltet den Heizstab ein.'],
+        ['Störung', 'Ein großer, voller Topf steht auf der Platte. Das Wasser wird langsamer warm.', 'Du öffnest die Tür. Die Temperatur im Backraum sinkt auf 180 °C.'],
+        ['Nachmessen', 'Niemand misst die Temperatur im Topf. Die Heizplatte heizt weiter wie vorher. Nachstellen musst du selbst.', 'Der Temperaturfühler misst 180 °C und meldet es zurück. Der Regler vergleicht mit 200 °C und heizt nach, bis der Sollwert wieder erreicht ist.']
+      ]
+    },
+    einfach: {
+      st: { title: 'Steuern: Herd', w: 'Du stellst ein: Stufe 5', b1: ['Drehknopf', 'gibt die Stufe vor'], b2: ['Heizplatte', 'heizt'], b3: ['Topf', 'wird warm'], z: ['Störung', 'großer Topf'], x: 'Temperatur', no: ['Niemand', 'misst nach.'] },
+      rg: { title: 'Regeln: Backofen', w: 'Du stellst ein: 200 °C', cmp: 'vergleicht', b1: ['Thermostat', 'entscheidet'], b2: ['Heizstab', 'heizt'], b3: ['Backofen innen', 'wird warm'], z: ['Störung', 'Tür auf'], x: 'Temperatur', m: ['Fühler', 'misst'], fb: 'misst nach' },
+      steps: [
+        ['Überblick', 'Links: Steuern. Rechts: Regeln. Tippe auf „Weiter“.', ''],
+        ['Einstellen', 'Du stellst Stufe 5 ein.', 'Du stellst 200 °C ein.'],
+        ['Heizen', 'Die Heizplatte heizt immer gleich stark.', 'Es ist zu kalt. Der Thermostat schaltet den Heizstab ein.'],
+        ['Störung', 'Ein großer Topf kommt drauf. Das Wasser wird langsamer warm.', 'Du machst die Tür auf. Es wird kälter.'],
+        ['Nachmessen', 'Der Herd prüft nicht, wie heiß der Topf ist. Er heizt weiter wie vorher.', 'Der Fühler misst: zu kalt. Der Ofen heizt nach, bis es wieder 200 °C sind.']
+      ]
+    }
+  };
+  /* Kästen: x 64–232 (Mitte 148), rechts Platz für Störgröße und Ausgang, links für die Rückführung.
+     Zeilen wie im Regelkreis, damit beide Bilder nebeneinander gleich hoch sind. */
+  var CX = 148, BX = 64, BW = 168;
+  function box(y, t, s, cls, st) {
+    return '<g class="ag-blk ' + (cls || '') + '" data-s="' + st + '"><rect x="' + BX + '" y="' + y + '" width="' + BW + '" height="48" rx="8"/>' +
+      '<text class="ag-t" x="' + CX + '" y="' + (y + 21) + '">' + esc(t) + '</text><text class="ag-ts" x="' + CX + '" y="' + (y + 40) + '">' + esc(s) + '</text></g>';
+  }
+  function vline(y1, y2, st, cls) { return '<g class="ag-flow ' + (cls || '') + '" data-s="' + st + '"><path d="M' + CX + ' ' + y1 + 'V' + (y2 - 9) + '"/>' + ah(CX, y2, 'd') + '</g>'; }
+  function srSvg(kind, L) {
+    var st = kind === 'st', o = st ? L.st : L.rg, h = '';
+    h += '<text class="ag-ttl" x="180" y="18">' + esc(o.title) + '</text>';
+    h += '<g class="ag-in" data-s="1"><text class="ag-t" x="' + CX + '" y="46">' + esc(o.w) + '</text></g>';
+    if (st) h += vline(54, 100, '1 2');
+    else {
+      h += vline(54, 76, '1 2 4');
+      h += '<g class="ag-cmp" data-s="2 4"><circle cx="' + CX + '" cy="88" r="12"/><path d="M' + (CX - 8.5) + ' 79.5L' + (CX + 8.5) + ' 96.5M' + (CX + 8.5) + ' 79.5L' + (CX - 8.5) + ' 96.5"/>' +
+        '<text class="ag-tsm" x="' + (CX + 18) + '" y="80">+</text><text class="ag-tsm" x="' + (CX - 22) + '" y="112">−</text><text class="ag-ts ag-l" x="' + (CX + 20) + '" y="100">' + esc(o.cmp) + '</text></g>';
+      h += vline(100, 118, '2 4');
+    }
+    var y1 = st ? 100 : 118;
+    h += box(y1, o.b1[0], o.b1[1], '', '1 2 4');
+    h += vline(y1 + 48, 186, '2 4');
+    h += box(186, o.b2[0], o.b2[1], 'act', '2 4');
+    h += vline(234, 254, '2 4');
+    h += box(254, o.b3[0], o.b3[1], 'plant', '2 3 4');
+    /* Störgröße von rechts */
+    h += '<g class="ag-dist" data-s="3"><path d="M352 278H' + (BX + BW + 9) + '"/>' + ah(BX + BW, 278, 'l', 'ag-ahd') + '<text class="ag-ts ag-r" x="354" y="266">' + esc(o.z[0]) + '</text><text class="ag-ts ag-r" x="354" y="298">' + esc(o.z[1]) + '</text></g>';
+    /* Ausgang */
+    h += '<g class="ag-flow" data-s="2 3 4"><path d="M' + CX + ' 302V322H343"/>' + ah(352, 322, 'r') + '<text class="ag-ts ag-r" x="354" y="344">' + esc(o.x) + '</text></g>';
+    if (st) {
+      h += '<g class="ag-none" data-s="4"><rect x="12" y="360" width="' + (BX + BW - 12) + '" height="52" rx="8"/><path class="ag-x" d="M28 373l14 14M42 373l-14 14"/><text class="ag-t ag-l" x="52" y="380">' + esc(o.no[0]) + '</text><text class="ag-ts ag-l" x="52" y="401">' + esc(o.no[1]) + '</text></g>';
+    } else {
+      h += '<circle class="ag-node" cx="' + CX + '" cy="322" r="4"/>';
+      h += '<g class="ag-flow ag-fbk" data-s="4"><path d="M' + CX + ' 322V354"/>' + ah(CX, 362, 'd', 'ag-ahf') + '</g>';
+      h += box(362, o.m[0], o.m[1], 'meas', '4');
+      h += '<g class="ag-flow ag-fbk" data-s="4"><path class="ag-fbp" d="M' + BX + ' 386H34V88H' + (CX - 21) + '"/>' + ah(CX - 12, 88, 'r', 'ag-ahf') + '<text class="ag-ts ag-fbt" transform="translate(23 240) rotate(-90)">' + esc(o.fb) + '</text></g>';
+    }
+    return '<svg class="ag-svg" viewBox="0 0 360 416" role="img" aria-label="' + esc(st ?
+      o.title + ': ' + o.w + ', dann ' + o.b1[0] + ', ' + o.b2[0] + ' und ' + o.b3[0] + '. Die ' + o.z[0] + ' wirkt auf die Strecke. Am Ende steht die ' + o.x + '. ' + o.no.join(' ') :
+      o.title + ': ' + o.w + ', ' + o.cmp + ', ' + o.b1[0] + ', ' + o.b2[0] + ', ' + o.b3[0] + '. Die ' + o.z[0] + ' wirkt auf die Strecke. ' + o.m[0] + ' misst und meldet zurück (' + o.fb + ').') + '">' + h + '</svg>';
+  }
+  function sr(variant) {
+    var L = SR[variant === 'einfach' ? 'einfach' : 'voll'], id = 'ag' + (++uid);
+    return '<figure class="ag ag-sr" data-ag="sr" data-v="' + (variant === 'einfach' ? 'einfach' : 'voll') + '" data-step="0" id="' + id + '">' +
+      '<div class="ag-sr-grid"><div>' + srSvg('st', L) + '<p class="ag-cap" data-c="st"></p></div><div>' + srSvg('rg', L) + '<p class="ag-cap" data-c="rg"></p></div></div>' +
+      '<div class="ag-steps"><span class="ag-stepn" aria-live="polite"></span><span class="ag-btns"><button type="button" class="btn small" data-ag-act="prev">← Zurück</button>' +
+      (RM ? '' : '<button type="button" class="btn small" data-ag-act="play">Abspielen</button>') +
+      '<button type="button" class="btn small primary" data-ag-act="next">Weiter →</button></span></div>' +
+      '<figcaption>' + (variant === 'einfach' ? 'Steuern und Regeln im Vergleich: Nur beim Regeln misst ein Fühler nach.' : 'Steuerkette (Herd) und Regelkreis (Backofen) im Vergleich. Nur der Regelkreis hat eine Rückführung: Das Messglied meldet den Istwert an den Vergleich zurück.') + '</figcaption></figure>';
+  }
+  function srSet(root, n) {
+    var L = SR[root.dataset.v], max = L.steps.length - 1;
+    n = Math.max(0, Math.min(max, n));
+    root.dataset.step = n;
+    root.classList.toggle('stepping', n > 0);
+    root.querySelectorAll('[data-s]').forEach(function (g) { g.classList.toggle('on', n > 0 && g.getAttribute('data-s').split(' ').indexOf(String(n)) >= 0); });
+    var s = L.steps[n];
+    root.querySelector('.ag-stepn').textContent = n ? 'Schritt ' + n + ' von ' + max + ': ' + s[0] : s[0];
+    var cs = root.querySelector('[data-c="st"]'), cr = root.querySelector('[data-c="rg"]');
+    cs.textContent = n ? s[1] : ''; cr.textContent = n ? s[2] : '';
+    cs.hidden = cr.hidden = !n;
+    if (!n) { cs.hidden = false; cs.textContent = s[1]; }
+    root.querySelector('[data-ag-act="prev"]').disabled = n === 0;
+    root.querySelector('[data-ag-act="next"]').disabled = n === max;
+  }
+  function srPlay(root, b) {
+    if (root._t) { clearInterval(root._t); root._t = null; b.textContent = 'Abspielen'; return; }
+    var L = SR[root.dataset.v], max = L.steps.length - 1;
+    if (+root.dataset.step >= max) srSet(root, 0);
+    b.textContent = 'Pause';
+    var tick = function () {
+      if (!root.isConnected || +root.dataset.step >= max) { clearInterval(root._t); root._t = null; b.textContent = 'Abspielen'; return; }
+      srSet(root, +root.dataset.step + 1);
+      if (+root.dataset.step >= max) { clearInterval(root._t); root._t = null; b.textContent = 'Abspielen'; }
+    };
+    tick();
+    root._t = setInterval(tick, 4500);
+  }
+
+  /* ---------------- Relais mit Steuer- und Laststromkreis (Lernheft Kap. 26) ---------------- */
+  function relais() {
+    var id = 'ag' + (++uid), h = '';
+    h += '<text class="ag-ttl ag-l" x="8" y="16">Steuerstromkreis</text><text class="ag-ttl ag-r" x="352" y="16">Laststromkreis</text>';
+    /* Arduino */
+    h += '<g class="ag-ard" data-ag-act="rel" role="button" tabindex="0" aria-label="Pin 2 umschalten"><rect x="8" y="32" width="92" height="76" rx="8"/><text class="ag-tw" x="54" y="80">Arduino</text>' +
+      '<text class="ag-tsm ag-r" x="96" y="57">Pin 2</text><text class="ag-tsm" x="54" y="101">GND</text></g>';
+    /* Steuerleitung Pin 2 → Spule → GND */
+    h += '<path class="ag-wire sig" d="M100 52H160V114"/><path class="ag-wire minus" d="M160 166V206H54V108"/>';
+    h += '<text class="ag-tsm ag-pin ag-l" x="104" y="44" data-v="pin">LOW (0 V)</text>';
+    h += '<g class="ag-cur ag-cur-s">' + ah(140, 52, 'r', 'ag-ahs') + ah(160, 96, 'd', 'ag-ahs') + ah(110, 206, 'l', 'ag-ahm') + ah(54, 150, 'u', 'ag-ahm') + '</g>';
+    /* Relais-Gehäuse (gestrichelt) mit Spule und Schließer */
+    h += '<rect class="ag-case" x="134" y="100" width="134" height="114" rx="10"/><text class="ag-ts ag-l" x="200" y="230">Relais</text>';
+    h += '<g class="ag-field"><path d="M146 122C126 132 126 148 146 158M174 122C194 132 194 148 174 158M150 112C116 126 116 154 150 168M170 112C204 126 204 154 170 168"/></g>';
+    h += '<rect class="eg-s ag-coil" x="150" y="114" width="20" height="52"/><path class="eg-w" d="M152 162L168 118"/>';
+    h += '<text class="ag-tsm ag-r" x="152" y="194">Spule</text>';
+    h += '<path class="ag-link" d="M170 140H236"/>';
+    /* Schließer: fester Kontakt oben (250,112), Drehpunkt unten (250,176) */
+    h += '<path class="ag-wire plus" d="M250 112V60H330V90"/><path class="ag-wire plus" d="M250 176V250H306"/><path class="ag-wire minus" d="M274 250H330V210"/>';
+    h += '<circle class="eg-dot0" cx="250" cy="112" r="3.5"/><circle class="eg-dot" cx="250" cy="176" r="3.5"/>';
+    h += '<g class="ag-lever"><path class="eg-w" d="M250 176L227 116"/></g>';
+    h += '<text class="ag-tsm ag-r" x="244" y="200">Schalter</text>';
+    h += sym('batterie', 'translate(360 90) rotate(90)');
+    h += '<text class="ag-ts ag-r" x="302" y="150">9 V</text>';
+    /* Motor */
+    h += '<g class="ag-motor"><circle class="eg-s" cx="290" cy="250" r="16"/><text class="ag-tm" x="290" y="256">M</text><g class="ag-rotor"><path d="M290 236V240M290 260V264M276 250H280M300 250H304"/></g></g>';
+    h += '<text class="ag-tsm" x="290" y="284">Motor</text>';
+    h += '<g class="ag-cur ag-cur-l">' + ah(286, 60, 'l', 'ag-ahp') + ah(250, 222, 'd', 'ag-ahp') + ah(312, 250, 'r', 'ag-ahm') + '</g>';
+    return '<figure class="ag ag-rel" data-ag="rel" id="' + id + '">' +
+      '<svg class="ag-svg" viewBox="0 0 360 296" role="img" aria-label="Relais mit zwei Stromkreisen. Links der Steuerstromkreis: Arduino Pin 2, Spule, GND. Rechts der Laststromkreis: 9-Volt-Batterie, Schalter des Relais, Motor. Die Spule betätigt den Schalter über ihr Magnetfeld.">' + h + '</svg>' +
+      '<div class="ag-steps"><span class="ag-stepn" aria-live="polite" data-v="txt"></span><span class="ag-btns"><button type="button" class="btn small primary" data-ag-act="rel" data-v="btn">Pin 2 auf HIGH setzen</button></span></div>' +
+      '<figcaption>Relais mit Steuerstromkreis (links, 5 V vom Arduino) und Laststromkreis (rechts, 9 V). Grün: Steuerleitung, rot: Plusleitung, blau: Minus bzw. GND. Auf dem fertigen Relais-Board sitzt zusätzlich eine kleine Verstärkerschaltung für die Spule.</figcaption></figure>';
+  }
+  function relSet(root, on) {
+    root.classList.toggle('is-on', on);
+    root.querySelector('[data-v="pin"]').textContent = on ? 'HIGH (5 V)' : 'LOW (0 V)';
+    root.querySelector('[data-v="btn"]').textContent = on ? 'Pin 2 auf LOW setzen' : 'Pin 2 auf HIGH setzen';
+    root.querySelector('[data-v="txt"]').textContent = on ? 'Pin 2 ist HIGH: Strom fließt durch die Spule. Ihr Magnetfeld schließt den Schalter. Der Motor läuft.' :
+      'Pin 2 ist LOW: Durch die Spule fließt kein Strom. Der Schalter ist offen. Der Motor steht.';
+  }
+
+  /* ---------------- Digital und analog: Schalter neben Regler (Schritt für Schritt Kap. 11) ---------------- */
+  function graph(kind) {
+    var X0 = 44, X1 = 296, Y5 = 22, Y0 = 112, h = '';
+    h += '<path class="ag-axis" d="M' + X0 + ' 12V' + Y0 + 'H' + (X1 + 4) + '"/>' + ah(X1 + 12, Y0, 'r', 'ag-ahx') + ah(X0, 6, 'u', 'ag-ahx');
+    h += '<text class="ag-tsm ag-r" x="' + (X0 - 6) + '" y="' + (Y5 + 5) + '">5 V</text><text class="ag-tsm ag-r" x="' + (X0 - 6) + '" y="' + (Y0 + 5) + '">0 V</text>';
+    h += '<path class="ag-grid" d="M' + X0 + ' ' + Y5 + 'H' + X1 + '"/>';
+    h += '<text class="ag-tsm" x="' + ((X0 + X1) / 2) + '" y="136">Zeit</text>';
+    if (kind === 'd') h += '<path class="ag-sigl" d="M44 112H80V22H132V112H164V22H232V112H262V22H296"/>';
+    else {
+      h += '<text class="ag-tsm ag-r" x="' + (X0 - 6) + '" y="72">2,5 V</text><path class="ag-grid" d="M44 67H296"/>';
+      h += '<path class="ag-sigl" d="M44 100C70 98 78 40 108 42S140 92 168 84S206 26 232 30S270 72 296 64"/>';
+    }
+    h += '<g class="ag-now"><path class="ag-nowl" d="M44 0H296"/><circle cx="296" cy="0" r="5"/></g>';
+    return '<svg class="ag-svg ag-graph" viewBox="0 0 312 142" role="img" aria-label="' + (kind === 'd' ? 'Digitales Signal: Die Spannung springt zwischen 0 V und 5 V hin und her, Zwischenwerte gibt es nicht.' : 'Analoges Signal: Die Spannung ändert sich stufenlos und kann jeden Wert zwischen 0 V und 5 V haben.') + '">' + h + '</svg>';
+  }
+  function signal() {
+    var id = 'ag' + (++uid);
+    var closed = '<path class="eg-w" d="M0 30H40M80 30H120M40 30L80 30"/><circle class="eg-dot" cx="40" cy="30" r="3"/><circle class="eg-dot" cx="80" cy="30" r="3"/>';
+    var lamp = function (x) { return '<circle class="ag-glow" cx="' + (x + 60) + '" cy="30" r="24"/>' + sym('lampe', 'translate(' + x + ' 0)'); };
+    var d = '<svg class="ag-svg ag-sch" viewBox="-6 -2 252 64" aria-hidden="true"><g class="ag-sw-off">' + EG.SYM.schalter() + '</g><g class="ag-sw-on">' + closed + '</g>' + lamp(120) + '</svg>';
+    var a = '<svg class="ag-svg ag-sch" viewBox="-6 -2 252 64" aria-hidden="true">' + EG.SYM.poti() + lamp(120) + '</svg>';
+    return '<figure class="ag ag-sig" data-ag="sig" id="' + id + '"><div class="ag-sig-grid">' +
+      '<div class="ag-sig-p dig"><h4>Schalter: digital</h4><p class="ag-sub">nur an oder aus</p>' + d +
+      '<button type="button" class="btn small" data-ag-act="sw" aria-pressed="false">Schalter: aus</button>' +
+      '<p class="ag-volt" aria-live="polite" data-v="d">NIEDRIG (0 V)</p>' + graph('d') + '</div>' +
+      '<div class="ag-sig-p ana"><h4>Regler: analog</h4><p class="ag-sub">viele Stufen</p>' + a +
+      '<label class="ag-ctl"><span>Drehregler</span><input type="range" min="0" max="5" step="0.1" value="2.5" data-ag-in="sig" aria-label="Spannung am Regler"></label>' +
+      '<p class="ag-volt" aria-live="polite" data-v="a">2,5 V</p>' + graph('a') + '</div>' +
+      '</div><figcaption>Links ein Schalter: Das Signal ist digital, es kennt nur NIEDRIG (0 V) und HOCH (5 V). Rechts ein Drehregler: Das Signal ist analog, es kann jeden Wert zwischen 0 V und 5 V haben. Unten der Verlauf über die Zeit, der Punkt zeigt den Wert jetzt.</figcaption></figure>';
+  }
+  function sigSet(root) {
+    var on = root.classList.contains('sw-on'), v = +root.querySelector('[data-ag-in="sig"]').value, Y = function (u) { return 112 - u * 18; };
+    var b = root.querySelector('[data-ag-act="sw"]');
+    b.textContent = on ? 'Schalter: an' : 'Schalter: aus'; b.setAttribute('aria-pressed', String(on));
+    root.querySelector('[data-v="d"]').textContent = on ? 'HOCH (5 V)' : 'NIEDRIG (0 V)';
+    root.querySelector('[data-v="a"]').textContent = v.toLocaleString('de-DE', { minimumFractionDigits: 1, maximumFractionDigits: 1 }) + ' V';
+    var g = root.querySelectorAll('.ag-now');
+    g[0].setAttribute('transform', 'translate(0 ' + Y(on ? 5 : 0) + ')');
+    g[1].setAttribute('transform', 'translate(0 ' + Y(v).toFixed(1) + ')');
+    var gl = root.querySelectorAll('.ag-glow');
+    gl[0].style.opacity = on ? 0.9 : 0;
+    gl[1].style.opacity = (v / 5 * 0.9).toFixed(2);
+  }
+
+  /* ---------------- Bedienung ---------------- */
+  function init(root) {
+    if (!root || root._ag) return; root._ag = 1;
+    var k = root.dataset.ag;
+    if (k === 'eva') evaSet(root, +root.dataset.t);
+    if (k === 'sr') srSet(root, 0);
+    if (k === 'rel') relSet(root, false);
+    if (k === 'sig') sigSet(root);
+  }
+  function scan() { document.querySelectorAll('[data-ag]').forEach(init); }
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest && e.target.closest('[data-ag-act]'); if (!b) return;
+    var root = b.closest('[data-ag]'); if (!root) return; init(root);
+    var a = b.dataset.agAct;
+    if (a === 'next' || a === 'prev') { if (root._t) srPlay(root, root.querySelector('[data-ag-act="play"]')); srSet(root, +root.dataset.step + (a === 'next' ? 1 : -1)); }
+    if (a === 'play') srPlay(root, b);
+    if (a === 'rel') relSet(root, !root.classList.contains('is-on'));
+    if (a === 'sw') { root.classList.toggle('sw-on'); sigSet(root); }
+  });
+  document.addEventListener('keydown', function (e) {
+    if ((e.key === 'Enter' || e.key === ' ') && e.target.matches && e.target.matches('g[data-ag-act]')) { e.preventDefault(); e.target.dispatchEvent(new MouseEvent('click', { bubbles: true })); }
+  });
+  document.addEventListener('input', function (e) {
+    var i = e.target; if (!i.dataset || !i.dataset.agIn) return;
+    var root = i.closest('[data-ag]'); init(root);
+    if (i.dataset.agIn === 'eva') evaSet(root, +i.value);
+    if (i.dataset.agIn === 'sig') sigSet(root);
+  });
+  /* Grafiken werden beim Öffnen eines Kapitels eingesetzt: Anfangszustand dann setzen */
+  var pend = 0;
+  if (window.MutationObserver) new MutationObserver(function () { if (pend) return; pend = 1; requestAnimationFrame(function () { pend = 0; scan(); }); }).observe(document.documentElement, { childList: true, subtree: true });
+  document.addEventListener('DOMContentLoaded', scan);
+
+  return { eva: eva, sr: sr, relais: relais, signal: signal };
+})();
+</script><link rel="stylesheet" href="../assets/lp-support.css"><script>window.LP_CFG={"accept": ".html,text/html", "uploadLabel": "Lernnachweis laden", "uploadTitle": "Mit gespeichertem Lernnachweis weiterarbeiten", "uploadText": "Lade den Lernnachweis (.html) hoch, den du hier gespeichert hast. Darin steckt dein Arbeitsstand. Fotos deiner Abgaben musst du danach neu hinzufügen.", "noCodeText": "In dieser Datei steckt kein Arbeitsstand. Das klappt nur mit Lernnachweisen, die ab dem 31.10.2026 gespeichert wurden. Ältere Stände lädst du mit der .json-Datei.", "pdfSection": false, "anchors": [{"sel": "#ld", "closest": ".card", "mode": "append"}], "keys": ["arduino-lernheft-basis-v1"], "slug": "arduino-schritt-fuer-schritt"};</script><script src="../assets/lp-support.js"></script></head><body>
 <title>Arduino Schritt für Schritt</title>
 <link rel="stylesheet" href="../assets/fonts/fonts.css">
 <style>[hidden]{display:none!important}
@@ -3155,6 +3780,7 @@ const BASIS = [
     { h: 'Steuern: der Herd', html: '<p>Du stellst Stufe 5 ein. Der Herd heizt immer gleich stark.</p><p>Er <b>prüft nicht</b>, wie heiß der Topf ist.</p>' },
     { h: 'Regeln: der Backofen', html: '<p>Du stellst 200 °C ein. Der Ofen <b>misst</b> die Temperatur.</p><p>Ist es zu kalt, heizt er. Ist es warm genug, hört er auf.</p>' }
   ]),
+  { k: 'info', html: AG.sr('einfach') },
   { k: 'info', html: merk('<b>Regeln</b> heißt: Das Gerät misst selbst nach und passt sich an. <b>Steuern</b> heißt: Es misst nicht nach.') },
   { k: 'ex', t: 'Steuern oder Regeln?', w: { id: 'srs', type: 'sort', cfg: { buckets: ['Steuern', 'Regeln'], items: [
     { t: 'Toaster mit Zeit-Rad', b: 0 }, { t: 'Heizung mit Thermostat', b: 1 }, { t: 'Akkuschrauber', b: 0 }, { t: 'Handy-Display wird automatisch hell', b: 1 } ] } } },
@@ -3246,6 +3872,7 @@ const BASIS = [
     { h: 'Digital = an oder aus', html: '<p>Wie ein <b>Lichtschalter</b>: nur an oder aus. Beim Arduino: HOCH (5 V) oder NIEDRIG (0 V).</p>' },
     { h: 'Analog = viele Stufen', html: '<p>Wie ein <b>Dimmer</b>: ganz dunkel, etwas hell, sehr hell … Beim Arduino: alle Werte zwischen 0 V und 5 V.</p>' }
   ]),
+  { k: 'info', html: AG.signal() },
   { k: 'ex', t: 'Sortiere', w: { id: 'da', type: 'sort', cfg: { buckets: ['digital (an/aus)', 'analog (viele Stufen)'], items: [
     { t: 'Taster', b: 0 }, { t: 'Lichtschalter', b: 0 }, { t: 'Fotowiderstand (Licht)', b: 1 }, { t: 'Drehregler', b: 1 }, { t: 'Temperatursensor', b: 1 } ] } } },
   ican(['Ich kann den Unterschied zwischen digital und analog erklären.'])
