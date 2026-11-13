@@ -564,19 +564,43 @@ a.btn{text-decoration:none}
 .anim-pt{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:6px;padding:6px 10px;border-radius:10px;background:var(--surface-2)}
 .formula{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:14px;background:var(--surface-2);border-radius:10px;padding:8px 10px;overflow-x:auto}
 .rr-box{gap:12px}.rr-h{margin:0;font-size:17px}
+.rr-scene{border-radius:14px;overflow:hidden;background:linear-gradient(var(--surface-2),var(--surface));border:1px solid var(--line);color:var(--muted)}
+.rr-svg{display:block;width:100%;height:auto;max-height:230px;overflow:visible}
+.rr-mv{animation:rrmove var(--rr-t,.6s) linear infinite}
+@keyframes rrmove{to{stroke-dashoffset:50}}
+.rr-wheel.spin{transform-box:fill-box;transform-origin:center;animation:rrspin var(--rr-w,.6s) linear infinite}
+@keyframes rrspin{to{transform:rotate(360deg)}}
+.rr-windg{opacity:.55}
+@media (prefers-reduced-motion:reduce){.rr-mv,.rr-wheel.spin{animation:none}.rr-needle,.rr-bfill,.rr-bar i,.rr-track i,.rr-tcar{transition:none!important}}
+.rr-chips{display:flex;flex-wrap:wrap;gap:6px;font-size:14px}
+.rr-chip{display:inline-flex;flex-wrap:wrap;gap:4px 6px;align-items:center;padding:4px 10px;border-radius:14px;background:var(--surface-2)}
+.rr-chip i{width:18px;height:6px;border-radius:3px;background:var(--muted)}.rr-chip.air i{background:#2a6fb0}.rr-chip.roll i{background:#e07b1e}
 .rr-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px 14px}
 .rr-f{display:grid;gap:6px;font-size:15px;font-weight:700}
 .rr-f input[type=range]{width:100%;accent-color:var(--c);min-height:40px}
+.rr-speed{font-size:18px}
 .rr-in{display:flex;gap:6px;align-items:center;font-weight:400}.rr-in input{width:110px;min-height:42px;font-size:16px}
-.rr-seg{display:flex;flex-wrap:wrap;gap:6px}.rr-seg .btn{min-height:40px;padding:6px 12px;font-size:15px}
+.rr-seg{display:flex;flex-wrap:wrap;gap:6px}.rr-seg .btn{min-height:44px;padding:6px 12px;font-size:15px;display:inline-flex;gap:8px;align-items:center}
 .rr-seg .btn[aria-pressed="true"]{background:var(--c);color:var(--on-accent)}
+.rr-pic{display:inline-flex}.rr-pic svg{width:46px;height:auto;display:block}.rr-pic i{width:20px;height:20px;border-radius:6px;border:1px solid #0004;display:block}
 .rr-adv>summary{cursor:pointer;font-weight:700;font-size:15px;padding:6px 0}
-.rr-out{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
-.rr-card{border:1.5px solid var(--line);border-radius:14px;padding:10px 12px;background:var(--surface);display:grid;gap:4px;font-size:15px}
-.rr-card h5{margin:0;font-size:16px}.rr-card p{margin:0}
-.rr-bar{height:8px;border-radius:99px;background:var(--surface-2);overflow:hidden}.rr-bar i{display:block;height:100%;background:var(--bad)}
-.rr-bar.rng i{background:var(--existenz)}
-.rr-zw{font-size:14px;margin:0;color:var(--muted)}
+.rr-out{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px}
+.rr-card{border:1.5px solid var(--line);border-radius:14px;padding:12px;background:var(--surface);display:grid;gap:6px;align-content:start}
+.rr-card h5{margin:0;font-size:17px;display:flex;gap:8px;align-items:center}
+.rr-ic{display:inline-flex;width:26px;height:26px}.rr-ic svg{width:100%;height:100%}
+.rr-B .rr-ic{color:#e08a1e}.rr-D .rr-ic{color:#7b8791}.rr-E .rr-ic{color:#2e9a5e}
+.rr-top{display:flex;gap:12px;align-items:center}
+.rr-gauge{width:104px;flex:none}.rr-g{display:block;width:100%;height:auto}
+.rr-needle{transform-origin:60px 60px;transition:transform .5s ease}
+.rr-bfill{transform-box:fill-box;transform-origin:left center;transition:transform .5s ease,fill .3s}
+.rr-lv{display:grid;gap:2px}.rr-lvn{font:800 26px var(--display);line-height:1}.rr-lvt{font-size:13px;color:var(--muted)}
+.rr-kv{display:flex;justify-content:space-between;gap:8px;align-items:baseline;font-size:14px}.rr-kv b{font-size:16px;white-space:nowrap}
+.rr-bar{height:8px;border-radius:99px;background:var(--surface-2);overflow:hidden}.rr-bar i{display:block;height:100%;background:var(--bad);transition:width .5s ease}
+.rr-track{position:relative;height:26px}
+.rr-track::before{content:"";position:absolute;left:0;right:0;bottom:3px;height:6px;border-radius:9px;background:var(--surface-2)}
+.rr-track i{position:absolute;left:0;bottom:3px;height:6px;border-radius:9px;background:var(--existenz);transition:width .5s ease}
+.rr-tcar{position:absolute;bottom:7px;width:40px;transform:translateX(-100%);transition:left .5s ease}.rr-tcar svg{display:block;width:100%;height:auto}
+.rr-trip{border-top:1px dashed var(--line);padding-top:6px;margin-top:2px}
 .rr-tw{overflow-x:auto}.rr-t{border-collapse:collapse;width:100%;font-size:15px}.rr-t th,.rr-t td{padding:5px 8px;border-bottom:1px solid var(--line);text-align:left}
 
 /* aus der Unternehmens-Werkstatt übernommen */
@@ -1012,9 +1036,16 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
 <section class="station c-existenz" data-ch="10" hidden>
   <div class="info">
     <h3>Was ein Auto auf der Straße bremst</h3>
-    <p>Beim Fahren muss der Motor zwei <b>Fahrwiderstände</b> überwinden. Der <b>Luftwiderstand</b> wächst mit dem Quadrat der Geschwindigkeit: Bei doppelter Geschwindigkeit ist er viermal so groß. Er hängt außerdem vom <b>cw-Wert</b> (Form des Autos) und von der <b>Stirnfläche A</b> ab. Der <b>Rollwiderstand</b> hängt von der <b>Masse</b> des Autos und vom <b>Untergrund</b> ab (Rollwiderstandsbeiwert c<sub>R</sub>).</p>
+    <p>Beim Fahren muss der Antrieb zwei <b>Fahrwiderstände</b> überwinden:</p>
+    <ul>
+      <li><b>Luftwiderstand:</b> Er wächst mit dem <b>Quadrat</b> der Geschwindigkeit. Doppelt so schnell heißt viermal so viel Luftwiderstand. Dazu kommen die Form des Autos (<b>c<sub>w</sub>-Wert</b>) und seine <b>Stirnfläche A</b>.</li>
+      <li><b>Rollwiderstand:</b> Er hängt von der <b>Masse</b> des Autos und vom <b>Untergrund</b> ab (Rollwiderstandsbeiwert c<sub>R</sub>).</li>
+    </ul>
     <p class="formula">F<sub>Luft</sub> = ½ · ρ · c<sub>w</sub> · A · v² &nbsp; (ρ = 1,2 kg/m³) &nbsp;·&nbsp; F<sub>Roll</sub> = c<sub>R</sub> · m · g &nbsp; (g = 9,81 m/s²)</p>
-    <p>Wie viel Energie im Tank oder im Akku steckt, ist unterschiedlich. Ein Liter Benzin enthält etwa <b>8,9 kWh</b>, ein Liter Diesel etwa <b>10 kWh</b>. Ein Verbrennungsmotor macht aber nur etwa ein Viertel bis ein Drittel davon zu Bewegung, der Rest wird Wärme. Ein Elektroantrieb ist viel effizienter. Dafür ist der <b>Akku</b> schwer: Bei 150 Wh je Kilogramm wiegt ein 50-kWh-Akku über 300 kg und erhöht den Rollwiderstand.</p>
+    <ul>
+      <li><b>Energie im Tank:</b> Ein Liter Benzin enthält etwa <b>8,9 kWh</b>, ein Liter Diesel etwa <b>10 kWh</b>. Ein Verbrennungsmotor macht davon nur etwa ein Viertel bis ein Drittel zu Bewegung, der Rest wird Wärme.</li>
+      <li><b>Energie im Akku:</b> Ein Elektroantrieb ist viel effizienter. Dafür ist der <b>Akku</b> schwer: Bei 150 Wh je Kilogramm wiegt ein 50-kWh-Akku über 300 kg und erhöht den Rollwiderstand.</li>
+    </ul>
   </div>
   <div class="rr" id="rr"></div>
   <p class="src">Energiegehalt: Richtlinie 2009/28/EG, Anhang III (Ottokraftstoff 32 MJ/l = 8,9 kWh/l, Dieselkraftstoff 36 MJ/l = 10 kWh/l). Preise als Voreinstellung: ADAC, Monatsdurchschnitt Oktober 2026 (Super E10 2,114 €/l, Diesel 2,261 €/l, veröffentlicht 02.11.2026); BDEW-Strompreisanalyse Oktober 2026 (Haushalte 37,3 ct/kWh). Fahrzeugklassen, Rollwiderstandsbeiwerte und Wirkungsgrade sind Beispielwerte zum Ausprobieren.</p>
@@ -1550,7 +1581,7 @@ var MG = (function () {
 <script>
 (function(){
 "use strict";
-const CFG_W={key:'motorentechnik-v1',title:'Motorentechnik',ch:[[0,'Start','Motorentechnik kennenlernen'],[1,'Aufbau','Aufbau des Ottomotors'],[2,'Arbeitsweise','Viertakt, Zweitakt, Wankel'],[3,'Otto und Diesel','Ottomotor und Dieselmotor'],[4,'Einspritzung','Gemischbildung und Einspritzung'],[5,'Elektrik','Elektrik im Auto'],[6,'Elektroauto','Das Elektroauto'],[10,'Reichweite','Reichweite und Kosten'],[7,'Praxis','Kfz-Stationen'],[8,'Selbsttest','Selbsttest'],[9,'Abgabe','Abgabe']],
+const CFG_W={key:'motorentechnik-v1',title:'Motorentechnik',ch:[[0,'Start','Motorentechnik kennenlernen'],[1,'Aufbau','Aufbau des Ottomotors'],[2,'Arbeitsweise','Viertakt, Zweitakt, Wankel'],[3,'Otto und Diesel','Ottomotor und Dieselmotor'],[4,'Einspritzung','Gemischbildung und Einspritzung'],[5,'Elektrik','Elektrik im Auto'],[6,'Elektroauto','Das Elektroauto'],[10,'Reichweite und Kosten','Reichweite und Kosten'],[7,'Praxis','Kfz-Stationen'],[8,'Selbsttest','Selbsttest'],[9,'Abgabe','Abgabe']],
   rate:['Ich kann die Bauteile eines Ottomotors benennen und ihre Aufgaben erklären.','Ich kann den Viertaktprozess mit Ventilstellung, Druck und Temperatur beschreiben.','Ich kann Zweitakt-, Viertakt- und Wankelmotor unterscheiden.','Ich kann Otto- und Dieselmotor vergleichen.','Ich kann erklären, wie Kraftstoff eingespritzt wird und wie das Bordnetz funktioniert.','Ich kann den Aufbau eines Elektroautos beschreiben.','Ich kann Elektroauto und Verbrenner mit Kriterien bewerten.']};
 const KEY=CFG_W.key;
 const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
@@ -1837,33 +1868,77 @@ const rrF=(x,n=0)=>x.toLocaleString('de-DE',{minimumFractionDigits:n,maximumFrac
   T.t30.why='Bei 100 km/h braucht das Elektroauto der Mittelklasse im Rechner etwa '+rrF(d.E.per100,1)+' kWh je 100 km. Der schwere Akku erhöht den Rollwiderstand, trotzdem braucht es viel weniger Energie als ein Verbrenner.';
   const d2=rrCalc(Object.assign({},RR_DEF),130);T.t31.answer=Math.round(d2.D.cost100*100)/100;
   T.t31.why='Bei 130 km/h braucht der Diesel etwa '+rrF(d2.D.per100,1)+' l je 100 km. Das kostet rund '+rrF(d2.D.cost100,2)+' Euro. Bei 100 km/h wären es nur '+rrF(rrCalc(Object.assign({},RR_DEF),100).D.cost100,2)+' Euro.';})();
+/* Grafiken des Rechners: Autos, Fahrbahn, Tankuhr und Akku-Anzeige, alles selbst gezeichnet */
+const RR_CAR=[
+ {col:'#d8483b',cy:70,r:18,wx:[70,232],body:'M14 74 L14 62 Q18 52 52 50 L104 38 Q118 32 150 32 L182 32 Q204 34 226 50 Q272 54 284 64 L286 74 Z',win:['M84 50 L112 40 Q120 37 150 37 L160 37 L160 50 Z','M166 37 L182 37 Q198 39 214 50 L166 50 Z'],light:[279,62]},
+ {col:'#2f7fbf',cy:70,r:18,wx:[72,228],body:'M18 74 L18 58 Q20 48 46 45 L92 24 Q102 18 122 18 L186 18 Q204 18 220 32 L242 46 Q274 50 280 60 L283 74 Z',win:['M72 44 L100 27 Q104 24 122 24 L148 24 L148 44 Z','M154 24 L186 24 Q200 24 214 36 L224 44 L154 44 Z'],light:[275,58]},
+ {col:'#3d9a6a',cy:68,r:20,wx:[74,228],body:'M18 72 L18 44 Q20 36 40 34 L70 12 Q76 8 92 8 L204 8 Q218 8 226 20 L242 40 Q276 44 280 54 L283 72 Z',win:['M58 36 L80 16 Q84 14 92 14 L140 14 L140 36 Z','M146 14 L202 14 Q212 14 218 22 L228 36 L146 36 Z'],light:[275,52]}];
+function rrCar(kl,spin){const c=RR_CAR[kl];
+  const wheel=x=>`<g class="rr-wheel${spin?' spin':''}"><circle cx="${x}" cy="${c.cy}" r="${c.r}" fill="#1f2528"/><circle cx="${x}" cy="${c.cy}" r="${(c.r*0.56).toFixed(1)}" fill="#c9ced2"/><path d="M${x-c.r*0.5} ${c.cy}H${x+c.r*0.5}M${x} ${c.cy-c.r*0.5}V${c.cy+c.r*0.5}" stroke="#7b858e" stroke-width="2.5"/><circle cx="${x}" cy="${c.cy}" r="3" fill="#5b6570"/></g>`;
+  return `<path d="${c.body}" fill="${c.col}"/>${c.win.map(w=>`<path d="${w}" fill="#d7ecf8"/>`).join('')}<path d="M152 ${c.cy-22}V${c.cy+2}" stroke="#0003" stroke-width="2"/><rect x="${c.light[0]-5}" y="${c.light[1]-3}" width="9" height="7" rx="2" fill="#ffe27a"/><rect x="15" y="${c.light[1]-2}" width="6" height="7" rx="2" fill="#8f1d14"/>${c.wx.map(wheel).join('')}`;}
+const RR_GROUND=[['#4a5157','#f4f6f7','28 22',4],['#8b8f92','#d9dcde','3 22',5],['#8a6a47','#b89872','3 22',5],['#e3c98a','#c9a85c','3 22',5]];
+function rrScene(o){const g=RR_GROUND[o.ug];
+  return `<svg class="rr-svg" viewBox="0 0 600 196" role="img" aria-label="${RR_KL[o.kl][0]} fährt auf ${RR_UG[o.ug][0]}. Pfeile zeigen Luftwiderstand und Rollwiderstand.">
+    <g class="rr-windg" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="20 30"><path class="rr-mv" d="M-380 34H1000"/><path class="rr-mv" d="M-418 62H1000"/><path class="rr-mv" d="M444 96H1000"/></g>
+    <rect x="-400" y="150" width="1400" height="38" fill="${g[0]}"/>
+    <path class="rr-mv" d="M-450 172H1050" fill="none" stroke="${g[1]}" stroke-width="${g[3]}" stroke-linecap="round" stroke-dasharray="${g[2]}"/>
+    ${o.ug?`<path class="rr-mv" d="M-439 161H1050" fill="none" stroke="${g[1]}" stroke-width="4" stroke-linecap="round" stroke-dasharray="3 22"/>`:''}
+    <g transform="translate(140 62)">${rrCar(o.kl,true)}</g>
+    <g class="rr-arL" fill="#2a6fb0" stroke="#2a6fb0"><line y1="104" y2="104" stroke-width="9" stroke-linecap="round"/><polygon stroke="none"/></g>
+    <g class="rr-arR" fill="#e07b1e" stroke="#e07b1e"><line y1="160" y2="160" stroke-width="9" stroke-linecap="round"/><polygon stroke="none"/></g>
+  </svg>`;}
+function rrArrow(g,xHead,y,F){const len=Math.max(0,Math.min(150,F*0.11)),ln=g.querySelector('line'),pg=g.querySelector('polygon');
+  pg.setAttribute('points',`${xHead},${y} ${xHead+18},${y-12} ${xHead+18},${y+12}`);
+  ln.setAttribute('x1',xHead+16);ln.setAttribute('x2',xHead+16+len);ln.style.display=len<3?'none':'';}
+const RR_TANK=`<svg class="rr-g" viewBox="0 0 120 70" aria-hidden="true"><path d="M12 60A48 48 0 0 1 108 60" fill="none" stroke="var(--line)" stroke-width="10" stroke-linecap="round"/><path d="M12 60A48 48 0 0 1 17.2 38.2" fill="none" stroke="#e2574c" stroke-width="10" stroke-linecap="round"/><g stroke="var(--surface)" stroke-width="2.5"><path d="M26.1 26.1l7 7"/><path d="M60 12v10"/><path d="M93.9 26.1l-7 7"/></g><g class="rr-needle"><path d="M60 60V20" stroke="var(--ink)" stroke-width="4" stroke-linecap="round"/></g><circle cx="60" cy="60" r="6" fill="var(--ink)"/></svg>`;
+const RR_AKKU=`<svg class="rr-g" viewBox="0 0 120 70" aria-hidden="true"><rect x="8" y="14" width="96" height="44" rx="8" fill="none" stroke="var(--ink)" stroke-width="3.5"/><rect x="106" y="27" width="8" height="18" rx="3" fill="var(--ink)"/><rect class="rr-bfill" x="14" y="20" width="84" height="32" rx="4"/><g stroke="var(--surface)" stroke-width="2.5"><path d="M35 20v32M56 20v32M77 20v32"/></g></svg>`;
+const RR_IC={B:'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="10" height="18" rx="2" fill="currentColor"/><rect x="6" y="5.5" width="6" height="5" rx="1" fill="var(--surface)"/><path d="M14 9h2.5l2.5 3v6.5a1.6 1.6 0 0 1-3.2 0V14H14" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>',E:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2 5 13.5h5.5L9.5 22 19 9.5h-5.5Z" fill="currentColor"/></svg>'};RR_IC.D=RR_IC.B;
+const RR_STOP={B:'tanken',D:'tanken',E:'laden'};
 function rrUI(box){if(!box)return;S.rr=Object.assign({},RR_DEF,S.rr||{});const o=S.rr;
   const num=(k,lab,unit,step,min,max)=>{const i=el('input',{type:'number',step,min,max,id:'rr-'+k,value:o[k]});i.oninput=()=>{const v=parseFloat(String(i.value).replace(',','.'));if(!isNaN(v)&&v>=min&&v<=max){o[k]=v;save();draw();}};return el('label',{class:'rr-f',for:'rr-'+k},el('span',{},lab),el('span',{class:'rr-in'},i,el('small',{},unit)));};
-  const segBtns=(arr,k,lab)=>{const g=el('div',{class:'rr-seg',role:'group','aria-label':lab});arr.forEach((a,ix)=>{const b=el('button',{type:'button',class:'btn soft','aria-pressed':String(o[k]===ix)},a[0]);b.onclick=()=>{o[k]=ix;save();g.querySelectorAll('button').forEach((x,j)=>x.setAttribute('aria-pressed',String(j===ix)));draw();};g.append(b);});return el('div',{class:'rr-f'},el('span',{},lab),g);};
-  const vIn=el('input',{type:'range',min:30,max:180,step:10,value:o.v,id:'rr-v','aria-valuetext':o.v+' km/h'});const vOut=el('b',{},o.v+' km/h');
+  const seg=(arr,k,lab,pic)=>{const g=el('div',{class:'rr-seg',role:'group','aria-label':lab});arr.forEach((a,ix)=>{const b=el('button',{type:'button',class:'btn soft','aria-pressed':String(o[k]===ix)},el('span',{class:'rr-pic',html:pic(ix)}),a[0]);b.onclick=()=>{o[k]=ix;save();g.querySelectorAll('button').forEach((x,j)=>x.setAttribute('aria-pressed',String(j===ix)));draw();};g.append(b);});return el('div',{class:'rr-f'},el('span',{},lab),g);};
+  const vIn=el('input',{type:'range',min:30,max:180,step:10,value:o.v,id:'rr-v','aria-valuetext':o.v+' km/h'});const vOut=el('b',{class:'rr-speed'},o.v+' km/h');
   vIn.oninput=()=>{o.v=+vIn.value;vOut.textContent=o.v+' km/h';vIn.setAttribute('aria-valuetext',o.v+' km/h');save();draw();};
-  const out=el('div',{class:'rr-out','aria-live':'polite'}),zw=el('p',{class:'rr-zw'}),tab=el('div',{class:'rr-tw'});
+  const scene=el('div',{class:'rr-scene'}),chips=el('div',{class:'rr-chips','aria-live':'polite'}),tab=el('div',{class:'rr-tw'});
+  const cards={},out=el('div',{class:'rr-out','aria-live':'polite'});
+  ['B','D','E'].forEach(k=>{const c=cards[k]={};
+    c.lv=el('b',{class:'rr-lvn'});c.lvt=el('span',{class:'rr-lvt'});c.g=el('div',{class:'rr-gauge',html:k==='E'?RR_AKKU:RR_TANK});
+    c.cost=el('b',{});c.cbar=el('i',{});c.use=el('b',{});c.rng=el('b',{});c.rbar=el('i',{});c.rcar=el('span',{class:'rr-tcar'});c.trl=el('span',{});c.trip=el('b',{});
+    out.append(el('div',{class:'rr-card rr-'+k},el('h5',{},el('span',{class:'rr-ic',html:RR_IC[k]}),RR_N[k]),
+      el('div',{class:'rr-top'},c.g,el('div',{class:'rr-lv'},c.lv,c.lvt)),
+      el('div',{class:'rr-kv'},el('span',{},'Kosten je 100 km'),c.cost),el('div',{class:'rr-bar','aria-hidden':'true'},c.cbar),
+      el('div',{class:'rr-kv'},el('span',{},'Verbrauch'),c.use),
+      el('div',{class:'rr-kv'},el('span',{},'Reichweite'),c.rng),el('div',{class:'rr-track','aria-hidden':'true'},c.rbar,c.rcar),
+      el('div',{class:'rr-kv rr-trip'},c.trl,c.trip)));});
   const reset=el('button',{type:'button',class:'btn soft'},'Voreinstellung');reset.onclick=()=>{S.rr=Object.assign({},RR_DEF);save();box.replaceChildren();rrUI(box);};
   const adv=el('details',{class:'rr-adv'},el('summary',{},'Annahmen und Preise anpassen'),el('div',{class:'rr-grid'},
     num('tank','Tankinhalt','Liter',1,10,120),num('akku','Akku','kWh',1,10,150),num('ed','Energiedichte Akku','Wh/kg',10,50,500),
     num('etaB','Wirkungsgrad Benziner','%',1,10,60),num('etaD','Wirkungsgrad Diesel','%',1,10,60),num('etaE','Wirkungsgrad Elektroantrieb','%',1,50,100),
     num('pB','Preis Super E10','€/l',0.01,0.5,5),num('pD','Preis Diesel','€/l',0.01,0.5,5),num('pE','Strompreis','€/kWh',0.01,0.05,2)),
     el('p',{class:'src'},'Voreinstellung: Preise ADAC (Oktober 2026) und BDEW (Oktober 2026, Laden zu Hause). An der Ladesäule ist Strom meist teurer. Wirkungsgrade sind Richtwerte zum Ausprobieren.'));
-  box.append(el('div',{class:'anim rr-box'},el('h4',{class:'rr-h'},'Reichweiten- und Kostenrechner'),
-    el('div',{class:'rr-grid'},segBtns(RR_KL,'kl','Fahrzeugklasse'),segBtns(RR_UG,'ug','Untergrund'),
+  box.append(el('div',{class:'anim rr-box'},el('h4',{class:'rr-h'},'Reichweiten- und Kostenrechner'),scene,chips,
+    el('div',{class:'rr-grid'},seg(RR_KL,'kl','Fahrzeugklasse',ix=>'<svg viewBox="0 0 300 92">'+rrCar(ix,false)+'</svg>'),seg(RR_UG,'ug','Untergrund',ix=>'<i style="background:'+RR_GROUND[ix][0]+'"></i>'),
       el('label',{class:'rr-f',for:'rr-v'},el('span',{},'Geschwindigkeit: ',vOut),vIn),num('s','Fahrstrecke','km',10,1,2000)),
-    el('div',{class:'row'},reset),adv,out,zw,el('details',{class:'rr-adv'},el('summary',{},'Reichweite bei verschiedenen Geschwindigkeiten'),tab)));
+    el('div',{class:'row'},reset),out,adv,el('details',{class:'rr-adv'},el('summary',{},'Reichweite bei verschiedenen Geschwindigkeiten'),tab)));
+  let sceneKey='';
   function draw(){const r=rrCalc(o),ks=['B','D','E'],mx=Math.max(...ks.map(k=>r[k].range)),mc=Math.max(...ks.map(k=>r[k].cost100));
-    out.replaceChildren(...ks.map(k=>{const x=r[k],u=k==='E'?'kWh':'l';return el('div',{class:'rr-card rr-'+k},el('h5',{},RR_N[k]),
-      el('p',{},'Verbrauch: ',el('b',{},rrF(x.per100,1)+' '+u+' je 100 km')),
-      el('p',{},'Kosten je 100 km: ',el('b',{},rrF(x.cost100,2)+' €')),
-      el('div',{class:'rr-bar','aria-hidden':'true'},el('i',{style:'width:'+Math.round(100*x.cost100/mc)+'%'})),
-      el('p',{},'Kosten für '+rrF(o.s)+' km: ',el('b',{},rrF(x.costS,2)+' €')),
-      el('p',{},'Reichweite '+(k==='E'?'mit vollem Akku ('+rrF(o.akku)+' kWh)':'mit vollem Tank ('+rrF(o.tank)+' l)')+': ',el('b',{},rrF(x.range)+' km')),
-      el('div',{class:'rr-bar rng','aria-hidden':'true'},el('i',{style:'width:'+Math.round(100*x.range/mx)+'%'})));}));
-    zw.innerHTML='Bei '+o.v+' km/h: Luftwiderstand <b>'+rrF(r.FL)+' N</b> · Rollwiderstand Verbrenner <b>'+rrF(r.B.FR)+' N</b>, Elektroauto <b>'+rrF(r.E.FR)+' N</b> (Akku wiegt '+rrF(r.mA)+' kg) · nötige Leistung an den Rädern etwa <b>'+rrF(r.B.P,1)+' kW</b> (Verbrenner) und <b>'+rrF(r.E.P,1)+' kW</b> (Elektroauto).';
-    const vs=[30,50,80,100,130,160];tab.replaceChildren(el('table',{class:'rr-t'},el('thead',{},el('tr',{},el('th',{},'km/h'),...['B','D','E'].map(k=>el('th',{},RR_N[k])))),
-      el('tbody',{},...vs.map(v=>{const q=rrCalc(o,v);return el('tr',{},el('td',{},String(v)),...['B','D','E'].map(k=>el('td',{},rrF(q[k].range)+' km')));}))));}
+    if(sceneKey!==o.kl+'-'+o.ug){sceneKey=o.kl+'-'+o.ug;scene.innerHTML=rrScene(o);}
+    scene.style.setProperty('--rr-t',(60/o.v).toFixed(2)+'s');scene.style.setProperty('--rr-w',Math.max(0.5,55/o.v).toFixed(2)+'s');
+    rrArrow(scene.querySelector('.rr-arL'),430,104,r.FL);rrArrow(scene.querySelector('.rr-arR'),372,160,r.B.FR);
+    chips.replaceChildren(el('span',{class:'rr-chip air'},el('i',{}),'Luftwiderstand ',el('b',{},rrF(r.FL)+' N')),
+      el('span',{class:'rr-chip roll'},el('i',{}),'Rollwiderstand ',el('b',{},rrF(r.B.FR)+' N'),' · E-Auto ',el('b',{},rrF(r.E.FR)+' N'),' (Akku '+rrF(r.mA)+' kg)'),
+      el('span',{class:'rr-chip'},'Leistung an den Rädern ',el('b',{},rrF(r.B.P,1)+' kW')));
+    ks.forEach(k=>{const x=r[k],c=cards[k],u=k==='E'?'kWh':'l',stops=Math.max(0,Math.ceil(o.s/x.range-1e-9)-1),lvl=Math.max(0,Math.min(1,1-(o.s-stops*x.range)/x.range)),pct=Math.round(lvl*100);
+      if(k==='E'){const f=c.g.querySelector('.rr-bfill');f.style.transform='scaleX('+Math.max(0.02,lvl).toFixed(3)+')';f.setAttribute('fill',lvl>0.5?'#2e9a5e':lvl>0.2?'#e0a21a':'#e2574c');}
+      else c.g.querySelector('.rr-needle').style.transform='rotate('+(-90+180*lvl).toFixed(1)+'deg)';
+      c.lv.textContent=pct+' %';c.lvt.textContent=(k==='E'?'Akku':'Tank')+' nach '+rrF(o.s)+' km'+(stops?' · unterwegs '+stops+'-mal '+RR_STOP[k]:'');
+      c.cost.textContent=rrF(x.cost100,2)+' €';c.cbar.style.width=Math.round(100*x.cost100/mc)+'%';
+      c.use.textContent=rrF(x.per100,1)+' '+u+' je 100 km';
+      c.rng.textContent=rrF(x.range)+' km';const w=Math.max(6,Math.round(100*x.range/mx));c.rbar.style.width=w+'%';c.rcar.style.left=w+'%';
+      if(c.kl!==o.kl){c.kl=o.kl;c.rcar.innerHTML='<svg viewBox="0 0 300 92">'+rrCar(o.kl,false)+'</svg>';}
+      c.trl.textContent='Kosten für '+rrF(o.s)+' km';c.trip.textContent=rrF(x.costS,2)+' €';});
+    const vs=[30,50,80,100,130,160];tab.replaceChildren(el('table',{class:'rr-t'},el('thead',{},el('tr',{},el('th',{},'km/h'),...ks.map(k=>el('th',{},RR_N[k])))),
+      el('tbody',{},...vs.map(v=>{const q=rrCalc(o,v);return el('tr',{},el('td',{},String(v)),...ks.map(k=>el('td',{},rrF(q[k].range)+' km')));}))));}
   draw();}
 rrUI(document.getElementById('rr'));
 
