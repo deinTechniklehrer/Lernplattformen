@@ -561,6 +561,7 @@ a.btn{text-decoration:none}
 .help2{display:grid;gap:6px;margin-top:4px}
 .help2 .row{gap:6px}
 .help2 .hbox{border-radius:12px;padding:10px 12px;background:var(--luxus-soft);font-size:15px}
+.anim-pt{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:6px;padding:6px 10px;border-radius:10px;background:var(--surface-2)}
 
 /* aus der Unternehmens-Werkstatt übernommen */
 .teile{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
@@ -743,7 +744,7 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
   <div class="info">
     <h3>Druck und Temperatur im Zylinder</h3>
     <p>Druck und Temperatur im Zylinder ändern sich von Takt zu Takt stark. Beim <b>Ansaugen</b> ist der Druck etwas kleiner als der Luftdruck draußen (leichter <b>Unterdruck</b>), das Gemisch ist noch kühl. Beim <b>Verdichten</b> wird das Gemisch zusammengepresst, Druck und Temperatur steigen. Bei der <b>Verbrennung</b> im Arbeitstakt erreichen Druck und Temperatur ihre höchsten Werte. Beim <b>Ausstoßen</b> sind die Abgase noch sehr heiß, ihr Druck ist aber schon stark gesunken.</p>
-    <p>Die Werte in der Tabelle sind typische Richtwerte für einen Ottomotor. Tipp: Die Animation auf der Seite davor zeigt dir die Ventilstellungen.</p>
+    <p>Die Werte sind typische Richtwerte für einen Ottomotor. Die Animation oben zeigt dir für jeden Takt die Ventilstellungen, den Druck und die Temperatur im Zylinder. Bewege den Schieberegler durch alle vier Takte und lies die Werte ab.</p>
   </div>
   <article class="task">
     <header><span class="num"></span><h3>Takttabelle</h3><button class="op" data-op="zuordnen" type="button">zuordnen</button></header>
@@ -1431,7 +1432,9 @@ var MG = (function () {
         fig: function (v) { return engine(v); },
         text: function (v) { var k = Math.floor(v / 180), li = lift(v, 0) > 0.02, le = lift(v, 540) > 0.02;
           var extra = ['Der Kolben bewegt sich nach unten und saugt Kraftstoff-Luft-Gemisch an.', 'Beide Ventile sind zu. Der Kolben bewegt sich nach oben und verdichtet das Gemisch.', v < 376 ? 'Kurz vor dem oberen Totpunkt zündet die Zündkerze das Gemisch.' : 'Die heißen Gase dehnen sich aus und drücken den Kolben nach unten.', 'Der Kolben bewegt sich nach oben und schiebt die Abgase hinaus.'][k];
-          return '<b>Kurbelwinkel ' + Math.round(v) + '° · ' + (k + 1) + '. Takt: ' + TAKT[k] + '</b><br>Einlassventil ' + (li ? 'offen' : 'geschlossen') + ', Auslassventil ' + (le ? 'offen' : 'geschlossen') + '. ' + extra; } });
+          var PT = [['0,8–0,9 bar (leichter Unterdruck)', 'etwa 100 °C'], ['bis 10–12 bar', 'bis etwa 400 °C'], ['bis 40–80 bar', 'bis etwa 2000 °C'], ['3–4 bar', 'etwa 900 °C']];
+          return '<b>Kurbelwinkel ' + Math.round(v) + '° · ' + (k + 1) + '. Takt: ' + TAKT[k] + '</b><br>Einlassventil ' + (li ? 'offen' : 'geschlossen') + ', Auslassventil ' + (le ? 'offen' : 'geschlossen') + '. ' + extra +
+            '<span class="anim-pt"><span>Druck im Zylinder: <b>' + PT[k][0] + '</b></span><span>Temperatur: <b>' + PT[k][1] + '</b></span></span>'; } });
     },
     steuer: function (box) {
       return mount(box, { max: 719, start: 0, speed: 120, label: 'Kurbelwinkel', aria: 'Zahnriemen zwischen Kurbelwelle und Nockenwelle',
