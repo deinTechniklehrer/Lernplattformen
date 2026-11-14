@@ -2,7 +2,7 @@
 <html lang="de"><head><script>/* Lernplattformen auf GitHub Pages: Speichern ohne claude.ai */
 (function(){if(window.claude)return;var T={pdf:'application/pdf',txt:'text/plain;charset=utf-8',png:'image/png',jpg:'image/jpeg',jpeg:'image/jpeg',json:'application/json',csv:'text/csv;charset=utf-8',html:'text/html;charset=utf-8',docx:'application/vnd.openxmlformats-officedocument.wordprocessingml.document',xlsx:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',ino:'text/plain;charset=utf-8'};
 var dl={save:function(o){return new Promise(function(res,rej){try{var n=(o&&o.filename)||'datei',x=(n.split('.').pop()||'').toLowerCase(),d=o.data,b=d instanceof Blob?d:new Blob([d],{type:T[x]||'application/octet-stream'});var u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=n;a.rel='noopener';document.body.appendChild(a);a.click();setTimeout(function(){a.remove();URL.revokeObjectURL(u);},4000);res();}catch(e){rej({code:'failed',message:String(e)});}});}};
-window.claude={use:function(n){return Promise.resolve(n==='downloads'?dl:null);}};})();</script><meta property="og:type" content="website"><meta property="og:title" content="Motorentechnik"><meta property="og:description" content="Verbrennungsmotor und Elektroauto: Aufbau und Viertakt mit Animationen, Zweitakt und Wankel, Otto und Diesel, Einspritzung, Bordnetz, Elektroauto mit eigener Bewertung, Rechner für Reichweite und Kosten, Umwelt mit Schätzfragen, Laufzettel für die Kfz-Stationen und Selbsttest. Technik, Jahrgang 9–10. Ergebnis als PDF."><meta property="og:url" content="https://deintechniklehrer.github.io/Lernplattformen/motorentechnik/"><meta property="og:image" content="https://deintechniklehrer.github.io/Lernplattformen/vorschau/Vorschau_Motorentechnik.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="description" content="Verbrennungsmotor und Elektroauto: Aufbau und Viertakt mit Animationen, Zweitakt und Wankel, Otto und Diesel, Einspritzung, Bordnetz, Elektroauto mit eigener Bewertung, Rechner für Reichweite und Kosten, Umwelt mit Schätzfragen, Laufzettel für die Kfz-Stationen und Selbsttest. Technik, Jahrgang 9–10. Ergebnis als PDF."><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+window.claude={use:function(n){return Promise.resolve(n==='downloads'?dl:null);}};})();</script><meta property="og:type" content="website"><meta property="og:title" content="Motorentechnik"><meta property="og:description" content="Verbrennungsmotor und Elektroauto: Aufbau und Viertakt mit Animationen, Zweitakt und Wankel, Otto und Diesel, Einspritzung, Bordnetz, Elektroauto mit eigener Bewertung, Rechner für Reichweite und Kosten, Solar-Rechner mit Speicher, Wärmepumpe und Elektroauto als Zusatzaufgabe, Umwelt mit Schätzfragen, Laufzettel für die Kfz-Stationen und Selbsttest. Technik, Jahrgang 9–10. Ergebnis als PDF."><meta property="og:url" content="https://deintechniklehrer.github.io/Lernplattformen/motorentechnik/"><meta property="og:image" content="https://deintechniklehrer.github.io/Lernplattformen/vorschau/Vorschau_Motorentechnik.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="description" content="Verbrennungsmotor und Elektroauto: Aufbau und Viertakt mit Animationen, Zweitakt und Wankel, Otto und Diesel, Einspritzung, Bordnetz, Elektroauto mit eigener Bewertung, Rechner für Reichweite und Kosten, Solar-Rechner mit Speicher, Wärmepumpe und Elektroauto als Zusatzaufgabe, Umwelt mit Schätzfragen, Laufzettel für die Kfz-Stationen und Selbsttest. Technik, Jahrgang 9–10. Ergebnis als PDF."><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Motorentechnik</title>
 <link rel="stylesheet" href="../assets/fonts/fonts.css">
 <style>
@@ -382,16 +382,19 @@ a.btn{text-decoration:none}
   --m-metal:#9aa7b1; --m-metal2:#c3ccd3; --m-metal3:#6f7d88; --m-dark:#46525c; --m-line:#2b343b; --m-bg:#f7f9fa;
   --m-mix:#5aa9e6; --m-comp:#1f6fc0; --m-fire:#ff9f1c; --m-hot:#d9542b; --m-exh:#8a7b6a; --m-water:#9fd3f0; --m-oil:#c8962a;
   --m-ceramic:#f4f1ea; --m-cu:#c97a2c; --m-green:#2e9a5e; --m-red:#c8402e; --m-blue:#2a6fb0;
+  --s-sun:#c98f00; --s-own:#2e9a5e; --s-grid:#d9542b; --s-bat:#2a6fb0; --s-feed:#e6b400; --s-gas:#8a7b6a; --s-fuel:#a8322a;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --m-metal:#7d8a95; --m-metal2:#a3aeb7; --m-metal3:#5c6872; --m-dark:#c9d2d8; --m-line:#dfe6ea; --m-bg:#1b2420;
   --m-mix:#62b2ee; --m-comp:#3d8de0; --m-fire:#ffb347; --m-hot:#f07048; --m-exh:#a8988a; --m-water:#3f7896; --m-oil:#d9a73f;
   --m-ceramic:#e8e3d8; --m-green:#53bb91; --m-red:#e27e71; --m-blue:#6fa8e2;
+  --s-sun:#f2c14e; --s-own:#53bb91; --s-grid:#f07048; --s-bat:#6fa8e2; --s-feed:#f2c14e; --s-gas:#a8988a; --s-fuel:#e27e71;
 }}
 :root[data-theme="dark"]{
   --m-metal:#7d8a95; --m-metal2:#a3aeb7; --m-metal3:#5c6872; --m-dark:#c9d2d8; --m-line:#dfe6ea; --m-bg:#1b2420;
   --m-mix:#62b2ee; --m-comp:#3d8de0; --m-fire:#ffb347; --m-hot:#f07048; --m-exh:#a8988a; --m-water:#3f7896; --m-oil:#d9a73f;
   --m-ceramic:#e8e3d8; --m-green:#53bb91; --m-red:#e27e71; --m-blue:#6fa8e2;
+  --s-sun:#f2c14e; --s-own:#53bb91; --s-grid:#f07048; --s-bat:#6fa8e2; --s-feed:#f2c14e; --s-gas:#a8988a; --s-fuel:#e27e71;
 }
 .mg{display:block;width:100%;height:auto;max-height:70vh}
 .mg *{vector-effect:non-scaling-stroke}
@@ -676,6 +679,53 @@ label.rr-cap b{display:block}
 .est-bar .real{border-radius:4px;transform:rotate(45deg)}
 .est-leg{display:flex;flex-wrap:wrap;gap:4px 18px;font-size:14px}.est-leg span{display:inline-flex;align-items:center;gap:6px}
 .est-leg i{width:12px;height:12px;border-radius:50%;flex:none}.est-leg .real i{border-radius:2px;transform:rotate(45deg)}
+
+/* Solar-Rechner (Zusatzaufgabe im Kapitel „Reichweite und Kosten“) */
+.ztag{display:block;width:fit-content;margin:0 0 2px;padding:3px 10px;border-radius:99px;background:var(--c-soft);color:var(--c-ink);font-size:13px;font-weight:700}
+.sr-box{gap:14px;--rr-cut:var(--surface)}
+.sr-house{display:flex;gap:10px;align-items:flex-start;margin:0;font-size:15px}.sr-hi{flex:none;color:var(--c)}.sr-hi svg{width:28px;height:28px;display:block}
+.sr-ctl{display:grid;gap:12px}.sr-g{display:grid;gap:6px}.sr-gl2{font-size:15px;font-weight:700}
+.sr-ctl .rr-pic{display:inline-flex}.sr-ctl .rr-pic svg{width:46px;height:20px;display:block}.sr-ctl .rr-pic svg[viewBox="0 0 24 24"]{width:22px;height:22px;color:var(--ink)}
+.sr-ci{margin:-4px 0 0}
+.sr-kpis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+@media (min-width:760px){.sr-kpis{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.sr-kpi{border-radius:14px;padding:10px 12px;background:var(--surface-2);display:grid;gap:2px;align-content:start;border-left:6px solid var(--k);min-width:0}
+.sr-kpi span{font-size:14px;color:var(--muted);font-weight:700}.sr-kpi b{font-size:22px;line-height:1.2;font-variant-numeric:tabular-nums}.sr-kpi small{font-size:13px;color:var(--muted);line-height:1.3}
+.sr-kpi.k1{--k:var(--s-own)}.sr-kpi.k2{--k:var(--s-grid)}.sr-kpi.k3{--k:var(--s-feed)}.sr-kpi.k4{--k:var(--c)}
+.sr-panel{display:grid;gap:8px;border:1px solid var(--line);border-radius:14px;padding:12px;min-width:0}
+.sr-panel h5{margin:4px 0 0;font-size:16px}
+.sr-cw{min-width:0}
+.sr-chart{display:block;width:100%;height:auto}
+.sr-chart text{font:600 14px var(--body);fill:var(--muted)}.sr-chart .sr-u{font-weight:700}
+.sr-gl{stroke:var(--line);stroke-width:1}
+.sr-own{fill:var(--s-own)}.sr-grid{fill:var(--s-grid)}.sr-selr{fill:none;stroke:var(--ink);stroke-width:2}
+.sr-b.sel text{fill:var(--ink);font-weight:800}.sr-hit{fill:transparent;cursor:pointer}
+.sr-pvl{fill:none;stroke:var(--s-sun);stroke-width:3;stroke-linejoin:round}.sr-pvd{fill:var(--s-sun);stroke:var(--surface);stroke-width:1.5}
+.sr-lg{display:inline-block;width:14px;height:14px;border-radius:4px;margin-right:6px;vertical-align:-2px;background:var(--x)}
+.sr-lg.own,.sr-bar i.own{--x:var(--s-own)}.sr-lg.grid,.sr-bar i.grid{--x:var(--s-grid)}.sr-lg.bat,.sr-bar i.bat{--x:var(--s-bat)}.sr-lg.feed,.sr-bar i.feed{--x:var(--s-feed)}
+.sr-lg.strom,.sr-bar i.strom{--x:var(--s-bat)}.sr-lg.gasb,.sr-bar i.gasb{--x:var(--s-gas)}.sr-lg.fuel,.sr-bar i.fuel{--x:var(--s-fuel)}
+.sr-lg.pv{--x:var(--s-sun);height:4px;vertical-align:3px;border-radius:2px}
+.sr-mdet{margin:0;font-size:15px}
+.sr-mg{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+@media (min-width:640px){.sr-mg{grid-template-columns:repeat(6,minmax(0,1fr))}}
+.sr-mc{font:inherit;display:grid;justify-items:center;padding:5px 2px;border-radius:10px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;min-height:48px;min-width:0}
+.sr-mc span{font-size:13px;color:var(--muted)}.sr-mc b{font-size:15px;font-variant-numeric:tabular-nums}
+.sr-mc[aria-pressed="true"]{border-color:var(--c);background:var(--c-soft)}
+.sr-bar{display:flex;height:16px;border-radius:99px;overflow:hidden;background:var(--surface-2)}
+.sr-bar i{display:block;height:100%;background:var(--x);transition:width .4s ease}
+.sr-bl{margin:0;display:flex;flex-wrap:wrap;gap:4px 14px;font-size:14px}
+.sr-cost{display:grid;gap:12px}.sr-cr{display:grid;gap:4px}
+.sr-crh{display:flex;justify-content:space-between;gap:10px;font-size:15px;align-items:baseline}.sr-crh b{font-size:17px;white-space:nowrap}
+.sr-cr.sel .sr-crh span{font-weight:700}.sr-cr small{font-size:13px;color:var(--muted)}
+.sr-flow{margin:6px 0;display:grid;gap:10px}
+.sr-fh{margin:0;display:flex;gap:8px;align-items:center;font-weight:700;font-size:15px}.sr-fh svg{width:26px;height:26px;color:var(--s-sun);flex:none}
+.sr-flow ol{list-style:none;margin:0;padding:6px 0 0 6px;display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:18px 14px}
+.sr-fs{position:relative;display:grid;grid-template-columns:auto 1fr;gap:4px 10px;align-items:start;padding:12px 10px 10px;border-radius:14px;background:var(--surface);border:1.5px solid var(--line);font-size:14px;line-height:1.35}
+.sr-fn{position:absolute;top:-11px;left:-7px;width:24px;height:24px;border-radius:50%;background:var(--c);color:var(--on-accent);font:800 14px/24px var(--body);text-align:center}
+.sr-fi svg{width:30px;height:30px;display:block}
+.sr-fs.s1 .sr-fi{color:var(--s-own)}.sr-fs.s2 .sr-fi{color:var(--s-bat)}.sr-fs.s3 .sr-fi{color:var(--c)}.sr-fs.s4 .sr-fi{color:var(--muted)}
+.sr-flow figcaption{font-size:13px;color:var(--muted)}
+@media (prefers-reduced-motion:reduce){.sr-bar i{transition:none}}
 
 /* aus der Unternehmens-Werkstatt übernommen */
 .teile{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
@@ -1149,6 +1199,46 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
     <header><span class="num"></span><h3>Der passende Antrieb für Familie Arslan</h3><button class="op" data-op="beurteilen" type="button">beurteilen</button></header>
     <p class="q">Familie Arslan fährt an jedem Arbeitstag 40 km zur Arbeit und zurück und zweimal im Jahr 700 km in den Urlaub. Beurteile mit Werten aus dem Rechner, welcher Antrieb für die Familie am besten passt.</p>
     <div class="w" data-t="t33"></div>
+  </article>
+</section>
+
+<!-- Zusatzaufgabe: Solar-Rechner (freiwillig, data-zusatz: zählt nicht zum Fortschritt) -->
+<section class="station c-existenz" data-ch="10" hidden>
+  <div class="info">
+    <p class="ztag">Zusatzaufgabe · freiwillig</p>
+    <h3>Elektroauto mit eigener Solaranlage</h3>
+    <p>Viele Familien mit Elektroauto haben eine <b>Solaranlage</b> (Photovoltaik) auf dem Dach. Sie wandelt Sonnenlicht in elektrischen Strom um. Ihre Größe gibt man in <b>Kilowatt-Peak (kWp)</b> an, das ist die Leistung bei voller Sonne. Eine Anlage mit 10 kWp auf einem Süddach erzeugt in Niedersachsen etwa <b>9.400 kWh</b> im Jahr. Nur rund ein Zehntel davon entsteht von November bis Februar.</p>
+    <ul>
+      <li><b>Eigenverbrauch:</b> Jede Kilowattstunde vom eigenen Dach, die die Familie selbst nutzt, muss sie nicht für rund 37 ct kaufen.</li>
+      <li><b>Einspeisung:</b> Was übrig bleibt, fließt ins Stromnetz. Dafür bekommt die Familie nur etwa <b>7,7 ct</b> je kWh (<b>Einspeisevergütung</b>).</li>
+      <li><b>Speicher:</b> Ein Akku im Haus hebt Solarstrom vom Mittag für den Abend und die Nacht auf.</li>
+      <li><b>Wärmepumpe:</b> Sie heizt mit Strom und holt sich Wärme aus der Außenluft. Aus 1 kWh Strom macht sie im Jahresmittel etwa 3,4 kWh Wärme (<b>Jahresarbeitszahl</b>). Den meisten Strom braucht sie im Winter, wenn die Sonne wenig liefert.</li>
+      <li><b>Autarkiegrad:</b> So viel Prozent des Stroms kommen von der eigenen Solaranlage.</li>
+    </ul>
+    <div id="srflow"></div>
+    <p><b>So rechnet der Rechner:</b> Er geht alle 8.760 Stunden eines Jahres durch. In jeder Stunde vergleicht er, wie viel Solarstrom entsteht und wie viel Haus, Wärmepumpe und Auto gerade brauchen. Grundlage sind Wetterdaten des Deutschen Wetterdienstes für Hannover und ein Standard-Verbrauchsprofil für Haushalte. Sonnige und trübe Tage wechseln sich ab. Echte Haushalte verbrauchen ungleichmäßiger als der Durchschnitt. Deshalb nutzen sie meist etwas weniger Solarstrom selbst, als der Rechner zeigt.</p>
+  </div>
+  <div id="sr"></div>
+  <p class="src">Wetter: Deutscher Wetterdienst, vieljährige Mittelwerte 1991–2020 der Sonnenscheindauer und Lufttemperatur, Station Hannover; daraus Solarertrag eigene Rechnung (Angström-Formel nach FAO 56, pvlib, 35° Süd). Haushalt: BDEW-Standardlastprofil H25 (2025). Einspeisevergütung: Bundesnetzagentur, EEG-Fördersätze für Solaranlagen auf Gebäuden bis 10 kW mit Teileinspeisung, Inbetriebnahme 01.08.–31.12.2026 (7,70 ct/kWh). Gaspreis: BDEW-Gaspreisanalyse Oktober 2026 (Einfamilienhaus, 12,23 ct/kWh). Jahresarbeitszahl: Fraunhofer ISE, Feldtest Wärmepumpen im Bestand, Presseinformation vom 20.11.2025 (Luft-Wasser-Wärmepumpen im Mittel 3,4). Strom-, Benzin- und Dieselpreis wie im Reichweitenrechner. Verbrauchswerte der Autos, Haushaltsstrom und Wärmebedarf sind Beispielwerte.</p>
+  <article class="task">
+    <header><span class="num"></span><h3>Zuzahlen im Dezember</h3><button class="op" data-op="ermitteln" type="button">ermitteln</button></header>
+    <p class="q">Ermittle mit dem Solar-Rechner, wie viel Euro die Familie im Dezember für Strom aus dem Netz zuzahlen muss. Tippe vorher auf „Voreinstellung“.</p>
+    <div class="w" data-t="t38" data-zusatz></div>
+  </article>
+  <article class="task">
+    <header><span class="num"></span><h3>Laden mit Sonnenüberschuss</h3><button class="op" data-op="ermitteln" type="button">ermitteln</button></header>
+    <p class="q">Ermittle, wie viel Euro die Familie im Jahr zusätzlich spart, wenn sie ihr Auto nur mit Sonnenüberschuss lädt statt abends. Geh von der Voreinstellung aus und ändere nur das Laden.</p>
+    <div class="w" data-t="t39" data-zusatz></div>
+  </article>
+  <article class="task">
+    <header><span class="num"></span><h3>Experimente mit dem Solar-Rechner</h3><button class="op" data-op="überprüfen" type="button">überprüfen</button></header>
+    <p class="q">Überprüfe die Aussagen mit dem Solar-Rechner: Wähle für jede Aussage „stimmt“ oder „stimmt nicht“. Geh jedes Mal von der Voreinstellung aus und ändere nur eine Einstellung.</p>
+    <div class="w" data-t="t40" data-zusatz></div>
+  </article>
+  <article class="task">
+    <header><span class="num"></span><h3>Lohnt sich die Solaranlage für Familie Arslan?</h3><button class="op" data-op="beurteilen" type="button">beurteilen</button></header>
+    <p class="q">Familie Arslan aus der Aufgabe oben fährt etwa 11.000 km im Jahr und überlegt, eine Solaranlage mit Speicher zu kaufen. Beurteile mit mindestens zwei Experimenten im Solar-Rechner, wie die Familie ihr Auto laden sollte. Nutze Werte aus dem Rechner.</p>
+    <div class="w" data-t="t41" data-zusatz></div>
   </article>
 </section>
 
@@ -1781,6 +1871,12 @@ t33:{type:'open',min:140,checks:[['Kosten je 100 km',/kost|€|euro|preis|günst
 t34:{type:'num',answer:13.8,tol:0.2,unit:'kg CO₂',why:'6 l · 2,3 kg je Liter = 13,8 kg CO₂ auf 100 km. Das sind 138 g je Kilometer.',help:{tip:'Du brauchst zwei Zahlen: den Verbrauch auf 100 km und wie viel CO₂ aus einem Liter Benzin entsteht. Die zweite Zahl steht im Kasten „CO₂ aus dem Auspuff“.',teil:'Aus einem Liter Benzin entstehen rund 2,3 kg CO₂. Rechne: 6 · 2,3 kg.'}},
 t35:{type:'gap',text:'Beim Fahren stößt ein Elektroauto {0} CO₂ aus dem Auspuff aus. Das CO₂ für seinen Strom entsteht im {1}. Die Herstellung verursacht beim Elektroauto {2} Treibhausgase als beim Benziner, vor allem wegen des {3}. Diesen Rucksack holt es beim Fahren {4}. Wie schnell das geht, hängt vor allem vom {5} ab.',gaps:[[['kein','viel','doppelt so viel'],0],[['Motor','Kraftwerk','Akku'],1],[['weniger','gleich viele','mehr'],2],[['Akkus','Getriebes','Lacks'],0],[['nie auf','nach und nach auf','sofort auf'],1],[['Strom','Reifendruck','Wetter'],0]]},
 t36:{type:'seg',cats:['stimmt','stimmt nicht'],items:[['Ein Liter Benzin verbrennt zu weniger als einem Kilogramm CO₂.',1],['Brennt der Akku eines Elektroautos, muss die Feuerwehr ihn oft stundenlang kühlen.',0],['Die Kfz-Versicherer sehen in ihren Statistiken Hinweise, dass Elektroautos häufiger brennen als Verbrenner.',1],['Aus alten Akkus lassen sich Kobalt, Nickel und Kupfer zurückgewinnen.',0],['Der Strom für Elektroautos entsteht in Deutschland schon ganz ohne CO₂.',1],['Die EU schreibt vor, wie viel Lithium aus Altbatterien zurückgewonnen werden muss.',0]]},
+t38:{type:'num',answer:0,tol:1.5,unit:'Euro',why:'',help:{tip:'Tippe auf „Voreinstellung“. Tippe dann im Diagramm auf die Säule „D“ oder unten in der Liste „Zuzahlen“ auf „Dez“.',teil:'Der Betrag steht unter dem Diagramm hinter „Zuzahlen“ und in der Liste beim Dezember. Trag ihn ohne Cent ein.'}},
+t39:{type:'num',answer:0,tol:3,unit:'Euro',why:'',help:{tip:'Lies zweimal die Energiekosten in der Zeile „Elektroauto mit Solaranlage“ ab: einmal mit „abends und nachts“, einmal mit „nur mit Sonnenüberschuss“.',teil:'Zieh den kleineren Betrag vom größeren ab. Du kannst auch die beiden Werte bei „Ersparnis im Jahr“ voneinander abziehen.'}},
+t40:{type:'seg',cats:['stimmt','stimmt nicht'],items:[['Im Dezember erzeugt die Solaranlage weniger Strom, als die Familie verbraucht.',0],['Im Juni kauft die Familie weniger als ein Viertel ihres Stroms zu.',0],['Ohne Speicher muss die Familie mehr Strom zukaufen.',0],['Mit Wärmepumpe steigt der Zukauf vor allem im Sommer.',1],['Mit dem SUV muss die Familie weniger Strom zukaufen als mit dem Kleinwagen.',1],['Lädt die Familie nur mit Sonnenüberschuss, muss sie weniger Strom zukaufen als beim Laden abends.',0]],
+  help:{tip:'Probier jede Aussage im Rechner aus: Tippe auf „Voreinstellung“, stell genau eine Sache um und vergleiche „Strom zukaufen“ oder das Diagramm.',teil:'Die Wärmepumpe braucht vor allem Strom, wenn geheizt wird. Vergleiche im Diagramm die Wintermonate und die Sommermonate mit Wärmepumpe und mit Gasheizung.'}},
+t41:{type:'open',min:160,checks:[['zwei Experimente',/abend|überschuss|tagsüber|speicher|wärmepumpe|gas/i],['Werte aus dem Rechner',/€|euro|kwh|prozent|%/i],['Wann das Auto zu Hause steht',/zu hause|daheim|homeoffice|wochenende|arbeit|tagsüber/i],['Empfehlung mit Begründung',/weil|deshalb|daher|darum|empfehl|würde/i]],
+  muster:[],help:{tip:'Stell 11.000 km ein. Vergleiche zuerst „abends und nachts“ mit „nur mit Sonnenüberschuss“, dann „mit Speicher“ und „ohne Speicher“. Schreib dir jeweils die Ersparnis im Jahr auf.',teil:'Satzanfang: „Im Rechner spart die Familie mit Solaranlage … € im Jahr. Lädt sie nur mit Sonnenüberschuss, spart sie noch … € mehr. Das klappt aber nur, wenn …“'}},
 t37:{type:'order',items:['Rohstoffe wie Lithium, Kobalt und Nickel werden abgebaut.','Aus den Rohstoffen werden Zellen gebaut und zu einem Akku zusammengesetzt.','Der Akku treibt viele Jahre lang ein Elektroauto an.','Die Leistung lässt nach. Der Akku arbeitet als Stromspeicher weiter.','Der Akku wird zerlegt, die Metalle werden zurückgewonnen.','Aus den zurückgewonnenen Metallen entstehen neue Akkus.'],start:[3,0,5,2,4,1]},
 t25:{type:'mark',parts:[['Mia und Tim warten, bis ihre Lehrkraft die Station freigibt.',false],['Tim dreht die Kurbel am Motormodell, während Mia mit dem Finger zeigt, wo der Kolben sitzt.',true],['Mia bindet ihre langen Haare zusammen.',false],['Beim Messen der Batteriespannung legt Tim einen Schraubenschlüssel quer über beide Pole.',true],['Mia trägt Handschuhe, als sie den Ölpeilstab abwischt.',false],['Ein Tropfen Öl landet auf dem Boden, Tim lässt ihn liegen.',true],['Am Elektroauto zieht Mia an einem orangen Kabel, um zu sehen, wohin es führt.',true],['Nach der Station legen beide das Werkzeug zurück in den Koffer.',false]],help:{tip:'Nimm dir die Regeln oben einzeln vor und such zu jeder Regel den passenden Satz. Frag dich dann: Hält sich die Person an die Regel oder nicht?',teil:'Zwei Verstöße: Tim dreht die Kurbel, während Mia mit dem Finger zwischen die bewegten Teile zeigt (Klemmgefahr). Tim legt einen Schraubenschlüssel über beide Batteriepole (Kurzschluss). Zwei weitere Verstöße findest du selbst.'}},
 t26:{type:'label',fig:'motor',t:250,aria:'Schnittbild eines Ottomotors mit weiteren nummerierten Teilen',marks:['einlasskanal','auslasskanal','brennraum','kolbenringe','kurbelgehaeuse','oelwanne'],
@@ -1818,9 +1914,10 @@ function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
 const parts=$$('.station');
 const chOf=parts.map(p=>CFG_W.ch.findIndex(c=>c[0]===+p.dataset.ch));
 const pids=parts.map((p,pi)=>chOf[pi]+'.'+(chOf.slice(0,pi).filter(c=>c===chOf[pi]).length+1));
-let num=0;const label={},home={};
-parts.forEach((p,pi)=>{$$('.task',p).forEach(a=>{const w=$('.w',a);const n=$('.num',a);if(w){num++;n.textContent=num;const id=w.dataset.t;label[id]='Kapitel '+chOf[pi]+' · Aufgabe '+num+': '+$('h3',a).textContent;home[id]=pi;}});});
-const TASK_IDS=$$('.w[data-t]').map(w=>w.dataset.t);
+let num=0,znum=0;const label={},home={};
+/* Zusatzaufgaben (data-zusatz) heißen Z1, Z2 …, zählen nicht zum Fortschritt und ändern die Nummern der anderen Aufgaben nicht */
+parts.forEach((p,pi)=>{$$('.task',p).forEach(a=>{const w=$('.w',a);const n=$('.num',a);if(w){const z=w.hasAttribute('data-zusatz');const id=w.dataset.t;if(z){znum++;n.textContent='Z'+znum;label[id]='Kapitel '+chOf[pi]+' · Zusatzaufgabe Z'+znum+': '+$('h3',a).textContent;}else{num++;n.textContent=num;label[id]='Kapitel '+chOf[pi]+' · Aufgabe '+num+': '+$('h3',a).textContent;}home[id]=pi;}});});
+const TASK_IDS=$$('.w[data-t]:not([data-zusatz])').map(w=>w.dataset.t),ZUSATZ_IDS=$$('.w[data-zusatz]').map(w=>w.dataset.t);
 function isDone(id){const t=T[id];if(t.type==='open')return (S.a[id]||'').trim().length>=t.min;return !!S.ok[id];}
 function partDone(pi){const ids=TASK_IDS.filter(id=>home[id]===pi);if(!ids.length)return !!S.seen[pids[pi]];return ids.every(isDone);}
 
@@ -2172,6 +2269,167 @@ function rrUI(box){if(!box)return;S.rr=Object.assign({},RR_DEF,S.rr||{});const o
       el('tbody',{},...vs.map(v=>{const q=rrCalc(o,v);return el('tr',{},el('td',{},String(v)),...ks.map(k=>el('td',{},rrF(q[k].range)+' km')));}))));}
   draw();}
 rrUI(document.getElementById('rr'));
+/* ---------- Solar-Rechner (Zusatzaufgabe im Kapitel „Reichweite und Kosten“): Einfamilienhaus mit Solaranlage, Speicher, Wärmepumpe und Elektroauto ----------
+   Läuft im Skript der Motorentechnik (braucht S, save, el, $, $$, T, rrPic, rrF, RR_DEF).
+   Daten erzeugt mit lp_build/tools/solar_profile.py:
+   SR_PV  Solarertrag in kWh je kWp und Stunde (Ortszeit) an einem durchschnittlichen Tag im Monat; aus DWD-Sonnenscheindauer 1991–2020, Station Hannover, nach Angström-Prescott (FAO 56) und pvlib, 35° Süd, Performance Ratio 0,85
+   SR_H0  Haushaltsstrom in kWh je 1000 kWh Jahresverbrauch und Stunde an einem durchschnittlichen Tag im Monat; BDEW-Standardlastprofil H25 (demandlib)
+   SR_HGT Gradtagzahl G20/15 je Monat aus den DWD-Monatsmitteln der Lufttemperatur 1991–2020, Station Hannover (vereinfacht) */
+const SR_PV=[[0,0,0,0,0,0,0,0,0.002,0.036,0.098,0.148,0.167,0.15,0.102,0.041,0.004,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0.001,0.028,0.098,0.171,0.222,0.243,0.23,0.185,0.115,0.042,0.003,0,0,0,0,0,0],[0,0,0,0,0,0,0.001,0.03,0.108,0.198,0.275,0.327,0.347,0.332,0.286,0.212,0.123,0.042,0.005,0,0,0,0,0],[0,0,0,0,0,0,0.003,0.043,0.129,0.232,0.33,0.408,0.456,0.47,0.448,0.392,0.309,0.209,0.107,0.028,0.001,0,0,0],[0,0,0,0,0,0.001,0.028,0.1,0.192,0.291,0.382,0.452,0.496,0.506,0.484,0.43,0.352,0.257,0.159,0.072,0.013,0,0,0],[0,0,0,0,0,0.004,0.046,0.119,0.206,0.299,0.383,0.45,0.492,0.504,0.485,0.438,0.366,0.279,0.186,0.101,0.033,0.002,0,0],[0,0,0,0,0,0.001,0.03,0.099,0.186,0.281,0.37,0.441,0.487,0.502,0.485,0.438,0.366,0.276,0.181,0.094,0.027,0.001,0,0],[0,0,0,0,0,0,0.005,0.055,0.144,0.247,0.346,0.426,0.476,0.492,0.472,0.417,0.335,0.234,0.132,0.046,0.004,0,0,0],[0,0,0,0,0,0,0,0.013,0.081,0.182,0.282,0.361,0.409,0.42,0.393,0.331,0.241,0.137,0.046,0.004,0,0,0,0],[0,0,0,0,0,0,0,0.001,0.031,0.112,0.2,0.267,0.301,0.297,0.258,0.187,0.104,0.034,0.002,0,0,0,0,0],[0,0,0,0,0,0,0,0.001,0.02,0.077,0.139,0.177,0.181,0.152,0.094,0.032,0.002,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0.002,0.031,0.087,0.131,0.142,0.117,0.066,0.015,0,0,0,0,0,0,0,0]];
+const SR_H0=[[0.097,0.083,0.077,0.076,0.078,0.086,0.108,0.121,0.124,0.128,0.134,0.148,0.151,0.147,0.142,0.145,0.161,0.196,0.213,0.208,0.189,0.168,0.149,0.121],[0.095,0.082,0.077,0.076,0.079,0.087,0.11,0.123,0.125,0.127,0.131,0.142,0.142,0.136,0.131,0.132,0.142,0.172,0.206,0.205,0.186,0.165,0.145,0.118],[0.086,0.075,0.071,0.07,0.073,0.082,0.099,0.11,0.114,0.117,0.121,0.132,0.132,0.127,0.122,0.123,0.13,0.149,0.176,0.186,0.171,0.151,0.133,0.106],[0.083,0.071,0.066,0.066,0.069,0.079,0.096,0.108,0.113,0.117,0.12,0.129,0.13,0.122,0.116,0.114,0.12,0.136,0.155,0.163,0.165,0.155,0.133,0.105],[0.077,0.066,0.062,0.061,0.063,0.07,0.085,0.097,0.102,0.106,0.109,0.118,0.12,0.114,0.109,0.108,0.113,0.128,0.143,0.148,0.145,0.139,0.123,0.097],[0.078,0.067,0.062,0.06,0.061,0.067,0.081,0.09,0.095,0.099,0.102,0.112,0.114,0.109,0.105,0.104,0.109,0.122,0.136,0.139,0.136,0.128,0.119,0.096],[0.078,0.068,0.063,0.061,0.063,0.067,0.079,0.088,0.094,0.098,0.102,0.112,0.114,0.108,0.104,0.104,0.109,0.121,0.134,0.137,0.133,0.127,0.118,0.096],[0.077,0.068,0.063,0.061,0.062,0.069,0.078,0.087,0.092,0.098,0.102,0.112,0.114,0.108,0.104,0.103,0.108,0.12,0.133,0.137,0.136,0.132,0.115,0.093],[0.072,0.062,0.058,0.057,0.059,0.068,0.087,0.095,0.096,0.1,0.103,0.112,0.114,0.108,0.104,0.104,0.11,0.126,0.143,0.154,0.154,0.135,0.112,0.089],[0.077,0.066,0.062,0.061,0.064,0.074,0.093,0.104,0.108,0.112,0.117,0.128,0.129,0.122,0.117,0.117,0.124,0.145,0.172,0.182,0.163,0.143,0.123,0.097],[0.082,0.07,0.067,0.066,0.069,0.077,0.1,0.113,0.116,0.118,0.122,0.135,0.137,0.132,0.128,0.132,0.15,0.185,0.198,0.191,0.173,0.153,0.133,0.106],[0.092,0.079,0.073,0.072,0.074,0.082,0.104,0.12,0.126,0.13,0.137,0.15,0.151,0.146,0.143,0.147,0.169,0.196,0.206,0.201,0.184,0.165,0.146,0.118]];
+const SR_HGT=[555, 487, 456, 315, 202, 0, 0, 0, 165, 304, 420, 527];
+const SR_DAYS=[31,28,31,30,31,30,31,31,30,31,30,31];
+const SR_MON=['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+const SR_MK=['J','F','M','A','M','J','J','A','S','O','N','D'];
+/* Autos: Akku, Verbrauch ab Wallbox mit Ladeverlusten, Vergleichsverbrauch Benziner/Diesel (Beispielwerte zum Ausprobieren). rr = Bild aus dem Reichweitenrechner */
+const SR_CAR=[{n:'Kleinwagen',rr:3,akku:40,e:16,b:6.0,d:4.8},{n:'Mittelklasse',rr:1,akku:60,e:18,b:7.0,d:5.6},{n:'SUV',rr:2,akku:80,e:21,b:8.5,d:6.8}];
+const SR_LAD=[['abends und nachts','Auto kommt um 17 Uhr heim und lädt sofort'],['tagsüber','Auto steht zu Hause, lädt ab 9 Uhr mit voller Leistung'],['nur mit Sonnenüberschuss','Auto steht zu Hause, lädt nur mit übrigem Solarstrom']];
+const SR_DEF={lad:0,car:1,km:12000,sp:1,wp:1,vgl:0,kwp:10,spk:10,hh:3800,heat:15000,jaz:3.4,eta:90,pE:RR_DEF.pE,pB:RR_DEF.pB,pD:RR_DEF.pD,pG:0.1223,pV:0.077};
+/* Wettertypen: Tagesertrag im Verhältnis zum Monatsmittel (sehr sonnig bis sehr trüb), zufällig verteilt mit festem Startwert */
+const SR_WX=[1.75,1.35,0.85,0.4,0.15];
+const SR_WALL=11,SR_MIN=1.4,SR_GOAL=0.8,SR_LOW=0.3,SR_NIGHT=0.4,SR_WW=0.15;
+function srSim(o){
+  const car=SR_CAR[o.car],cap=o.sp?o.spk:0,pmax=cap*0.5,eC=0.95,eD=0.95,eDay=o.km/365*car.e/100,hgs=SR_HGT.reduce((a,b)=>a+b,0);
+  let soc=cap*0.5,cs=car.akku*0.6,seed=20261114,night=false;
+  const rnd=()=>{seed=(seed*1103515245+12345)%2147483648;return seed/2147483648;};
+  const mon=[];
+  for(let m=0;m<12;m++){
+    const nd=SR_DAYS[m],fs=[];for(let i=0;i<nd;i++)fs.push(SR_WX[Math.floor(rnd()*SR_WX.length)]);
+    const fm=fs.reduce((a,b)=>a+b,0)/nd;   /* Wettertypen so skalieren, dass der Monat im Mittel stimmt */
+    const wpH=o.wp?((o.heat*(1-SR_WW)*SR_HGT[m]/hgs)/nd+o.heat*SR_WW/365)/o.jaz/24:0;
+    const r={pv:0,hh:0,wp:0,car:0,grid:0,feed:0,direct:0,bat:0,carSun:0};
+    for(let d=0;d<nd;d++){const f=fs[d]/fm;
+      for(let h=0;h<24;h++){
+        const pv=SR_PV[m][h]*o.kwp*f,hh=SR_H0[m][h]*o.hh/1000,goal=car.akku*SR_GOAL;let cl=0;
+        if(o.lad===0){if(h===17)cs=Math.max(0,cs-eDay);if((h>=17||h<7)&&cs<goal)cl=Math.min(SR_WALL,goal-cs);}
+        else{if(h===19)cs=Math.max(0,cs-eDay);
+          if(o.lad===1&&h>=9&&h<16&&cs<goal)cl=Math.min(SR_WALL,goal-cs);
+          if(o.lad===2){if(h===22&&cs<car.akku*SR_LOW)night=true;if(night&&(h>=22||h<7)){cl=Math.min(SR_WALL,car.akku*SR_NIGHT-cs);if(cl<=0){cl=0;night=false;}}}}
+        cs+=cl;const load=hh+wpH+cl;let net=pv-load;
+        r.pv+=pv;r.hh+=hh;r.wp+=wpH;r.car+=cl;
+        if(net>=0){r.direct+=load;let c=Math.min(net,pmax,(cap-soc)/eC);soc+=c*eC;net-=c;
+          if(o.lad===2&&h>=8&&h<18&&net>=SR_MIN&&cs<goal){const x=Math.min(net,SR_WALL,goal-cs);cs+=x;net-=x;r.car+=x;r.carSun+=x;r.direct+=x;}
+          r.feed+=net;}
+        else{const need=-net;r.direct+=pv;const x=Math.min(need,pmax,soc*eD);soc-=x/eD;r.bat+=x;r.grid+=need-x;}
+      }}
+    r.use=r.hh+r.wp+r.car;mon.push(r);}
+  const t={};['pv','hh','wp','car','grid','feed','direct','bat','use','carSun'].forEach(k=>t[k]=mon.reduce((a,r)=>a+r[k],0));
+  return {mon,t,car,eDay};}
+function srCost(o,r){
+  const car=r.car,t=r.t,gas=o.wp?0:o.heat/(o.eta/100)*o.pG,fuelL=o.km/100*(o.vgl?car.d:car.b),fuel=fuelL*(o.vgl?o.pD:o.pB);
+  const sol={strom:t.grid*o.pE,verg:t.feed*o.pV,gas,fuel:0};sol.sum=sol.strom-sol.verg+gas;
+  const ev={strom:t.use*o.pE,verg:0,gas,fuel:0};ev.sum=ev.strom+gas;
+  const vb={strom:(t.hh+t.wp)*o.pE,verg:0,gas,fuel};vb.sum=vb.strom+gas+fuel;
+  return {sol,ev,vb,fuelL};}
+const srE=x=>rrF(Math.round(x))+' €',srK=x=>rrF(Math.round(x))+' kWh';
+/* Kleine Symbole (selbst gezeichnet) */
+const SR_IC={
+ sun:'<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2.5v2.6M12 18.9v2.6M2.5 12h2.6M18.9 12h2.6M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></g></svg>',
+ pv:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h14l3 10H2Z" fill="currentColor"/><path d="M8.6 5 7.5 15M15.4 5l1.1 10M3.4 10h17.2" stroke="var(--surface)" stroke-width="1.2"/><path d="M12 15v4M8 20h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>',
+ house:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11.5 12 4l9 7.5V21H3Z" fill="currentColor"/><rect x="9.5" y="14" width="5" height="7" fill="var(--surface)"/></svg>',
+ bat:'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><rect x="9" y="2" width="6" height="2.5" rx="1" fill="currentColor"/><rect x="8" y="12" width="8" height="6" fill="currentColor"/></svg>',
+ car:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 16v-3.5l2-4.5Q5.6 7 7 7h10q1.4 0 2 1l2 4.5V16Z" fill="currentColor"/><circle cx="7" cy="16.5" r="2.4" fill="currentColor" stroke="var(--surface)" stroke-width="1.4"/><circle cx="17" cy="16.5" r="2.4" fill="currentColor" stroke="var(--surface)" stroke-width="1.4"/><path d="M6.5 11.5 7.6 9h8.8l1.1 2.5Z" fill="var(--surface)"/></svg>',
+ grid:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 7 22M12 2l5 20M8.2 9h7.6M6 6h12M9.5 15h5M7.8 22l6.7-7M16.2 22l-6.7-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>',
+ wp:'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="5" width="19" height="14" rx="2" fill="currentColor"/><circle cx="9" cy="12" r="4.4" fill="var(--surface)"/><path d="M9 12 9 8.4M9 12l3.1 1.8M9 12l-3.1 1.8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M15.5 9h3.5M15.5 12h3.5M15.5 15h3.5" stroke="var(--surface)" stroke-width="1.4"/></svg>',
+ gas:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5q5.5 6 5.5 11a5.5 5.5 0 0 1-11 0q0-3 2.4-5.6.3 2.6 2 3.2Q10 7 12 2.5Z" fill="currentColor"/></svg>'};
+/* Ablaufbild: in welcher Reihenfolge der Solarstrom verteilt wird */
+function srFlow(){const st=(ic,cls,n,h,p)=>`<li class="sr-fs ${cls}"><span class="sr-fn">${n}</span><span class="sr-fi">${SR_IC[ic]}</span><span><b>${h}</b><br>${p}</span></li>`;
+  return `<figure class="sr-flow"><p class="sr-fh">${SR_IC.sun}Der Solarstrom vom Dach geht der Reihe nach an:</p><ol aria-label="Reihenfolge, in der die Steuerung den Solarstrom verteilt">
+    ${st('house','s1','1','Haus','Haushalt, Wärmepumpe und das Auto, wenn es gerade lädt')}
+    ${st('bat','s2','2','Speicher','nimmt übrigen Strom auf, wenn er nicht voll ist')}
+    ${st('car','s3','3','Auto','nur beim Laden mit Sonnenüberschuss, ab 1,4 kW Überschuss')}
+    ${st('grid','s4','4','Netz','der Rest wird eingespeist und vergütet')}</ol>
+    <figcaption>Reihenfolge, in der die Steuerung den Solarstrom verteilt. Scheint keine Sonne, liefert zuerst der Speicher, dann das Netz.</figcaption></figure>`;}
+/* Monatsdiagramm: viewBox in Pixeln der Kachel, damit die Schrift überall 14 px groß ist */
+function srChart(r,sel,W){W=Math.max(280,Math.round(W||340));const H=Math.round(Math.min(300,Math.max(210,W*0.48))),y0=H-32,top=32;
+  const mx0=Math.max(...r.mon.map(x=>Math.max(x.use,x.pv))),st=mx0>1500?500:mx0>600?200:100,mx=Math.ceil(mx0/st)*st;
+  const L=46,sw=(W-L-4)/12,bw=Math.min(30,sw*0.64),X=i=>L+i*sw,Y=v=>y0-(y0-top)*v/mx;let g='';
+  for(let v=0;v<=mx;v+=st){const y=Y(v).toFixed(1);g+=`<path d="M${L-4} ${y}H${W}" class="sr-gl"/><text x="${L-8}" y="${(+y+5).toFixed(1)}" text-anchor="end">${rrF(v)}</text>`;}
+  let b='';r.mon.forEach((x,i)=>{const own=x.use-x.grid,x0=X(i)+(sw-bw)/2,cx=(x0+bw/2).toFixed(1);
+    b+=`<g class="sr-b${i===sel?' sel':''}"><rect class="sr-own" x="${x0.toFixed(1)}" y="${Y(own).toFixed(1)}" width="${bw.toFixed(1)}" height="${(y0-Y(own)).toFixed(1)}"/><rect class="sr-grid" x="${x0.toFixed(1)}" y="${Y(x.use).toFixed(1)}" width="${bw.toFixed(1)}" height="${(Y(own)-Y(x.use)).toFixed(1)}"/>${i===sel?`<rect class="sr-selr" x="${(x0-3).toFixed(1)}" y="${(Y(x.use)-3).toFixed(1)}" width="${(bw+6).toFixed(1)}" height="${(y0+3-Y(x.use)).toFixed(1)}" rx="4"/>`:''}
+      <text x="${cx}" y="${H-10}" text-anchor="middle">${W>=560?SR_MON[i].slice(0,3):SR_MK[i]}</text><rect class="sr-hit" data-m="${i}" x="${X(i).toFixed(1)}" y="0" width="${sw.toFixed(1)}" height="${H}"/></g>`;});
+  const P=r.mon.map((x,i)=>[(X(i)+sw/2).toFixed(1),Y(x.pv).toFixed(1)]);
+  return `<svg class="sr-chart" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="Säulendiagramm: Stromverbrauch je Monat, aufgeteilt in Strom vom eigenen Dach und Strom aus dem Netz. Die Linie zeigt den Solarstrom, den die Anlage im Monat erzeugt.">
+    <text x="2" y="12" class="sr-u">kWh</text>${g}${b}<polyline class="sr-pvl" points="${P.map(q=>q.join(',')).join(' ')}"/>${P.map(q=>`<circle class="sr-pvd" cx="${q[0]}" cy="${q[1]}" r="4"/>`).join('')}</svg>`;}
+function srUI(box){if(!box)return;S.sol=Object.assign({},SR_DEF,S.sol||{});const o=S.sol;['lad','car'].forEach(k=>{if(!(o[k]>=0&&o[k]<3))o[k]=SR_DEF[k];});
+  let sel=11,last=null,lastW=0;
+  const seg=(k,lab,opts,pic)=>{const g=el('div',{class:'rr-seg',role:'group','aria-label':lab});opts.forEach((a,ix)=>{const b=el('button',{type:'button',class:'btn soft','aria-pressed':String(o[k]===ix)},pic?el('span',{class:'rr-pic',html:pic(ix)}):null,a);
+      b.onclick=()=>{o[k]=ix;save();g.querySelectorAll('button').forEach((x,xi)=>x.setAttribute('aria-pressed',String(xi===ix)));draw();};g.append(b);});
+    return el('div',{class:'sr-g'},el('span',{class:'sr-gl2'},lab),g);};
+  const num=(k,lab,unit,step,min,max)=>{const i=el('input',{type:'number',step,min,max,id:'sr-'+k,value:o[k]});i.oninput=()=>{const v=parseFloat(String(i.value).replace(',','.'));if(!isNaN(v)&&v>=min&&v<=max){o[k]=v;save();draw();}};
+    return el('label',{class:'rr-f',for:'sr-'+k},el('span',{},lab),el('span',{class:'rr-in'},i,el('small',{},unit)));};
+  const kmIn=el('input',{type:'range',min:5000,max:30000,step:1000,value:o.km,id:'sr-km'}),kmOut=el('b',{});kmIn.oninput=()=>{o.km=+kmIn.value;save();draw();};
+  const carInfo=el('p',{class:'hint sr-ci'}),house=el('p',{class:'sr-house'});
+  const K={};const kpi=(k,lab,cls)=>{K[k]={v:el('b',{}),s:el('small',{})};return el('div',{class:'sr-kpi '+cls},el('span',{},lab),K[k].v,K[k].s);};
+  const chart=el('div',{class:'sr-cw'}),mdet=el('p',{class:'sr-mdet','aria-live':'polite'}),mgrid=el('div',{class:'sr-mg',role:'group','aria-label':'Zuzahlen je Monat'});
+  const mb=SR_MON.map((n,i)=>{const b=el('button',{type:'button',class:'sr-mc'},el('span',{},n.slice(0,3)),el('b',{}));b.onclick=()=>{sel=i;draw();};mgrid.append(b);return b;});
+  chart.onclick=e=>{const t=e.target.closest('[data-m]');if(t){sel=+t.dataset.m;draw();}};
+  const src=el('div',{class:'sr-sp'}),use=el('div',{class:'sr-sp'}),cost=el('div',{class:'sr-cost'});
+  const reset=el('button',{type:'button',class:'btn soft'},'Voreinstellung');reset.onclick=()=>{S.sol=Object.assign({},SR_DEF);save();box.replaceChildren();srUI(box);};
+  const adv=el('details',{class:'rr-adv'},el('summary',{},'Beispielhaus und Preise anpassen'),el('div',{class:'rr-grid'},
+    num('kwp','Größe der Solaranlage','kWp',1,1,30),num('spk','Größe des Speichers','kWh',1,1,30),num('hh','Haushaltsstrom im Jahr','kWh',100,1000,10000),
+    num('heat','Wärmebedarf im Jahr (Heizen und Warmwasser)','kWh',500,3000,40000),num('jaz','Jahresarbeitszahl der Wärmepumpe','',0.1,1.5,6),num('eta','Nutzungsgrad der Gasheizung','%',1,50,110),
+    num('pE','Strompreis','€/kWh',0.01,0.05,2),num('pV','Einspeisevergütung','€/kWh',0.001,0,1),num('pG','Gaspreis','€/kWh',0.01,0.01,1),
+    num('pB','Preis Super E10','€/l',0.01,0.5,5),num('pD','Preis Diesel','€/l',0.01,0.5,5)),
+    el('p',{class:'src'},'Voreinstellung: Strompreis BDEW (Oktober 2026), Benzin und Diesel ADAC (Oktober 2026) wie im Reichweitenrechner, Gaspreis BDEW (Oktober 2026), Einspeisevergütung Bundesnetzagentur (Anlagen bis 10 kWp mit Teileinspeisung, Inbetriebnahme August bis Dezember 2026), Jahresarbeitszahl Fraunhofer ISE (Mittel der Luft-Wasser-Wärmepumpen im Feldtest). Haushaltsstrom, Wärmebedarf und Nutzungsgrad sind Beispielwerte.'));
+  box.append(el('div',{class:'anim sr-box'},el('h4',{class:'rr-h'},'Solar-Rechner: Haus, Speicher und Elektroauto'),house,
+    el('div',{class:'sr-ctl'},
+      seg('lad','Laden',SR_LAD.map(a=>a[0])),
+      seg('car','Auto',SR_CAR.map(c=>c.n+' · '+c.akku+' kWh'),ix=>rrPic(SR_CAR[ix].rr)),carInfo,
+      el('label',{class:'rr-f sr-km',for:'sr-km'},el('span',{},'Fahrstrecke im Jahr: ',kmOut),kmIn),
+      seg('sp','Speicher',['ohne Speicher','mit Speicher']),
+      seg('wp','Heizung',['Gasheizung','Wärmepumpe'],ix=>ix?SR_IC.wp:SR_IC.gas),
+      seg('vgl','Vergleich mit',['Benziner','Diesel'])),
+    el('div',{class:'sr-kpis'},kpi('aut','Vom eigenen Dach','k1'),kpi('buy','Strom zukaufen','k2'),kpi('feed','Eingespeist','k3'),kpi('save','Ersparnis im Jahr','k4')),
+    el('div',{class:'sr-panel'},el('h5',{},'Strom je Monat'),
+      el('div',{class:'legend'},el('span',{},el('i',{class:'sr-lg own'}),'vom eigenen Dach'),el('span',{},el('i',{class:'sr-lg grid'}),'aus dem Netz'),el('span',{},el('i',{class:'sr-lg pv'}),'Solarstrom erzeugt')),
+      chart,mdet,el('h5',{},'Zuzahlen für Strom aus dem Netz'),mgrid),
+    el('div',{class:'sr-panel'},el('h5',{},'Woher kommt der Strom im Jahr?'),src,el('h5',{},'Wohin geht der Solarstrom?'),use),
+    el('div',{class:'sr-panel'},el('h5',{},'Energiekosten im Jahr im Vergleich'),cost,
+      el('p',{class:'src'},'Nur Kosten für Energie: Strom, Gas, Kraftstoff. Nicht eingerechnet sind der Kauf von Solaranlage, Speicher, Wallbox, Wärmepumpe und Auto, Grundgebühren, Wartung und Steuern.')),
+    el('div',{class:'row'},reset),adv));
+  const sp=(el0,parts)=>{const tot=parts.reduce((a,p)=>a+p[1],0)||1;el0.replaceChildren(el('div',{class:'sr-bar','aria-hidden':'true'},...parts.map(p=>el('i',{class:p[2],style:'width:'+(100*p[1]/tot).toFixed(1)+'%'}))),
+    el('p',{class:'sr-bl'},...parts.map(p=>el('span',{},el('i',{class:'sr-lg '+p[2]}),p[0]+' ',el('b',{},srK(p[1])),' ('+Math.round(100*p[1]/tot)+' %)'))));};
+  function draw(){const r=srSim(o),c=srCost(o,r),car=r.car,t=r.t;
+    house.innerHTML=`<span class="sr-hi">${SR_IC.house}</span><span><b>Beispielhaus:</b> Einfamilienhaus, 4 Personen, Solaranlage ${rrF(o.kwp)} kWp (Süddach, 35°)${o.sp?', Speicher '+rrF(o.spk)+' kWh':''}, Haushaltsstrom ${rrF(o.hh)} kWh im Jahr, ${o.wp?'Wärmepumpe':'Gasheizung'}, Elektroauto mit Wallbox (11 kW).</span>`;
+    carInfo.textContent=car.n+': Reichweite etwa '+rrF(Math.round(car.akku/car.e*100/10)*10)+' km · Verbrauch '+rrF(car.e)+' kWh je 100 km · zum Vergleich '+(o.vgl?'Diesel '+rrF(car.d,1):'Benziner '+rrF(car.b,1))+' l je 100 km';
+    kmIn.value=o.km;kmOut.textContent=rrF(o.km)+' km ('+rrF(o.km/365)+' km am Tag)';kmIn.setAttribute('aria-valuetext',rrF(o.km)+' Kilometer');
+    K.aut.v.textContent=Math.round(100*(1-t.grid/t.use))+' %';K.aut.s.textContent='des Stroms kommt von der eigenen Solaranlage';
+    K.buy.v.textContent=srK(t.grid);K.buy.s.textContent='kostet '+srE(c.sol.strom)+' im Jahr';
+    K.feed.v.textContent=srK(t.feed);K.feed.s.textContent='bringt '+srE(c.sol.verg)+' Vergütung';
+    const sv=Math.round(c.vb.sum)-Math.round(c.sol.sum);K.save.v.textContent=srE(sv);K.save.s.textContent='gegenüber '+(o.vgl?'Diesel':'Benziner')+' ohne Solaranlage';
+    last=r;chart.innerHTML=srChart(r,sel,chart.clientWidth);const x=r.mon[sel];
+    mdet.innerHTML=`<b>${SR_MON[sel]}:</b> ${srK(x.use)} verbraucht, davon ${srK(x.use-x.grid)} vom eigenen Dach (${Math.round(100*(1-x.grid/x.use))} %) und ${srK(x.grid)} aus dem Netz. Zuzahlen: <b>${srE(x.grid*o.pE)}</b>. Erzeugt: ${srK(x.pv)}, eingespeist: ${srK(x.feed)}.`;
+    mb.forEach((b,i)=>{b.querySelector('b').textContent=srE(r.mon[i].grid*o.pE);b.setAttribute('aria-pressed',String(i===sel));b.setAttribute('aria-label',SR_MON[i]+': '+srE(r.mon[i].grid*o.pE)+' zuzahlen');});
+    sp(src,[['direkt vom Dach',t.direct,'own'],...(o.sp?[['aus dem Speicher',t.bat,'bat']]:[]),['aus dem Netz',t.grid,'grid']]);
+    const toBat=Math.max(0,t.pv-t.feed-t.direct);
+    sp(use,[['im Haus genutzt',t.direct,'own'],...(o.sp?[['in den Speicher',toBat,'bat']]:[]),['ins Netz eingespeist',t.feed,'feed']]);
+    const rows=[[(o.vgl?'Diesel':'Benziner')+', ohne Solaranlage',c.vb],['Elektroauto, ohne Solaranlage',c.ev],['Elektroauto mit Solaranlage (deine Einstellung)',c.sol]],mx=Math.max(...rows.map(q=>q[1].strom+q[1].gas+q[1].fuel));
+    cost.replaceChildren(...rows.map((q,i)=>{const v=q[1],strom=Math.max(0,v.strom-v.verg);return el('div',{class:'sr-cr'+(i===2?' sel':'')},el('div',{class:'sr-crh'},el('span',{},q[0]),el('b',{},srE(v.sum))),
+      el('div',{class:'sr-bar','aria-hidden':'true'},el('i',{class:'strom',style:'width:'+(100*strom/mx).toFixed(1)+'%'}),el('i',{class:'gasb',style:'width:'+(100*v.gas/mx).toFixed(1)+'%'}),el('i',{class:'fuel',style:'width:'+(100*v.fuel/mx).toFixed(1)+'%'})),
+      el('small',{},'Strom '+srE(v.strom)+(v.verg?' minus Vergütung '+srE(v.verg):'')+(v.gas?' · Gas '+srE(v.gas):'')+(v.fuel?' · '+(o.vgl?'Diesel ':'Benzin ')+srE(v.fuel)+' ('+rrF(Math.round(c.fuelL))+' l)':'')));}),
+      el('p',{class:'legend'},el('span',{},el('i',{class:'sr-lg strom'}),'Strom'),el('span',{},el('i',{class:'sr-lg gasb'}),'Gas'),el('span',{},el('i',{class:'sr-lg fuel'}),'Kraftstoff')));}
+  draw();
+  /* Diagramm bei geänderter Breite neu zeichnen (Drehen des iPads) */
+  const rs=()=>{const w=chart.clientWidth;if(last&&w&&Math.abs(w-lastW)>4){lastW=w;chart.innerHTML=srChart(last,sel,w);}};
+  if(window.ResizeObserver)new ResizeObserver(rs).observe(chart);else addEventListener('resize',rs);}
+/* Antworten der Aufgaben aus dem Modell (Voreinstellung) */
+(function(){const run=p=>{const o=Object.assign({},SR_DEF,p),r=srSim(o);return {o,r,c:srCost(o,r)};};
+  const d=run({}),dec=d.r.mon[11].grid*d.o.pE;T.t38.answer=Math.round(dec);
+  T.t38.why='Im Dezember kauft die Familie in der Voreinstellung rund '+srK(d.r.mon[11].grid)+' Strom zu. Das kostet '+srE(dec)+'. Im Juni sind es nur '+srE(d.r.mon[5].grid*d.o.pE)+'.';
+  const rd=Math.round,s=run({lad:2}),diff=rd(d.c.sol.sum)-rd(s.c.sol.sum);T.t39.answer=Math.round(diff);
+  T.t39.why='Abends geladen kostet die Energie mit Solaranlage '+srE(d.c.sol.sum)+' im Jahr, mit Sonnenüberschuss geladen '+srE(s.c.sol.sum)+'. Die Familie spart also rund '+srE(diff)+' mehr, weil das Auto mehr Solarstrom tankt und weniger eingespeist wird.';
+  const ns=run({sp:0}),gw=run({wp:0}),suv=run({car:2}),kw=run({car:0}),jun=d.r.mon[5],decm=d.r.mon[11];
+  const wpW=[0,1,2,9,10,11].reduce((a,m)=>a+d.r.mon[m].grid-gw.r.mon[m].grid,0),wpS=[4,5,6,7].reduce((a,m)=>a+d.r.mon[m].grid-gw.r.mon[m].grid,0);
+  const truth=[decm.pv<decm.use,jun.grid<jun.use/4,ns.r.t.grid>d.r.t.grid,wpS>wpW,suv.r.t.grid<kw.r.t.grid,s.r.t.grid<d.r.t.grid];
+  T.t40.items.forEach((it,i)=>{it[1]=truth[i]?0:1;});
+  const A=run({km:11000}),B=run({km:11000,lad:2}),N=run({km:11000,sp:0}),aut=q=>Math.round(100*(1-q.r.t.grid/q.r.t.use));
+  T.t41.muster=['Experiment 1: Mit Solaranlage, Speicher und Laden abends zahlt die Familie im Rechner '+srE(A.c.sol.sum)+' im Jahr für Energie. Mit einem Benziner und ohne Solaranlage wären es '+srE(A.c.vb.sum)+'. Sie spart also rund '+srE(rd(A.c.vb.sum)-rd(A.c.sol.sum))+' im Jahr.',
+    'Experiment 2: Lädt sie nur mit Sonnenüberschuss, sinken die Kosten auf '+srE(B.c.sol.sum)+'. Das sind '+srE(rd(A.c.sol.sum)-rd(B.c.sol.sum))+' mehr Ersparnis. Der Anteil vom eigenen Dach steigt von '+aut(A)+' % auf '+aut(B)+' %.',
+    'Experiment 3: Ohne Speicher zahlt sie '+srE(N.c.sol.sum)+', also '+srE(rd(N.c.sol.sum)-rd(A.c.sol.sum))+' mehr als mit Speicher. Im Dezember muss sie auch mit Speicher '+srE(A.r.mon[11].grid*A.o.pE)+' zuzahlen, weil die Anlage im Winter wenig liefert.',
+    'Empfehlung: Laden mit Sonnenüberschuss lohnt sich am meisten. Das geht aber nur, wenn das Auto tagsüber zu Hause steht, zum Beispiel am Wochenende oder im Homeoffice. Fährt ein Elternteil an jedem Arbeitstag 40 km zur Arbeit, lädt die Familie unter der Woche abends und nutzt dabei den Strom aus dem Speicher. Den Kaufpreis von Anlage und Speicher hat der Rechner nicht eingerechnet. Er muss sich über die Ersparnis erst bezahlt machen.'];})();
+
+srUI(document.getElementById('sr'));{const sf=document.getElementById('srflow');if(sf)sf.innerHTML=srFlow();}
 
 /* ---------- Schätzfragen im Kapitel Umwelt: erst schätzen, dann die Zahl aus der Quelle sehen. Nicht bewertet, kein Einfluss auf die Lernenergie. ---------- */
 const EST=[
@@ -2294,7 +2552,8 @@ $('#pdfBtn').onclick=()=>{const note=$('#pdfNote');note.hidden=false;
   txt('Technik · Jahrgang 9–10 · '+(S.name?'Name: '+S.name+' · ':'')+'Stand: '+new Date().toLocaleDateString('de-DE'));y+=4;
   const done=TASK_IDS.filter(isDone).length;txt('Bearbeitet: '+done+' von '+TASK_IDS.length+' Aufgaben · Kfz-Stationen: '+lzDone()+' von '+LZ.length,{b:1});y+=3;
   CH.slice(1,LAST).forEach((c,i)=>{const ci=i+1;const ids=TASK_IDS.filter(id=>chOf[home[id]]===ci);need(14);y+=2;txt('Kapitel '+ci+': '+c,{b:1,size:13,col:[3,85,145],lh:6.5});
-    ids.forEach(id=>{const t=T[id];const l=label[id].replace(/^Kapitel \d+ · /,'');
+    const zs=ZUSATZ_IDS.filter(id=>chOf[home[id]]===ci&&isDone(id));
+    ids.concat(zs).forEach(id=>{const t=T[id];const l=label[id].replace(/^Kapitel \d+ · /,'');
       if(t.type==='open'){txt(l,{b:1});const a=(S.a[id]||'').trim();txt(a||'(noch keine Antwort)',{ind:4,col:a?[20,35,47]:[120,130,135]});if(S.muster[id])txt('Mit Musterlösung verglichen.',{ind:4,size:9,col:[86,103,107]});y+=1.5;}
       else{const ok=!!S.ok[id];d.setFont('helvetica','bold');d.setFontSize(10.5);d.setTextColor(ok?31:194,ok?138:59,ok?76:46);need(5.5);d.text(ok?'gelöst':'offen',M,y);txt(l+(S.help[id]===2?' (mit Teillösung)':S.help[id]?' (mit Tipp)':''),{ind:16});}});
     if(CFG_W.ch[ci][0]===7){need(12);y+=2;txt('Laufzettel Kfz-Stationen',{b:1});LZ.forEach(s=>{const st=S.lz[s.k]||{d:false,f:{}};need(6);d.setFont('helvetica','bold');d.setFontSize(10.5);d.setTextColor(st.d?31:194,st.d?138:59,st.d?76:46);d.text(st.d?'erledigt':'offen',M,y);txt(s.t,{ind:20});
