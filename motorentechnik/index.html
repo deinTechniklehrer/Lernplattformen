@@ -2,7 +2,7 @@
 <html lang="de"><head><script>/* Lernplattformen auf GitHub Pages: Speichern ohne claude.ai */
 (function(){if(window.claude)return;var T={pdf:'application/pdf',txt:'text/plain;charset=utf-8',png:'image/png',jpg:'image/jpeg',jpeg:'image/jpeg',json:'application/json',csv:'text/csv;charset=utf-8',html:'text/html;charset=utf-8',docx:'application/vnd.openxmlformats-officedocument.wordprocessingml.document',xlsx:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',ino:'text/plain;charset=utf-8'};
 var dl={save:function(o){return new Promise(function(res,rej){try{var n=(o&&o.filename)||'datei',x=(n.split('.').pop()||'').toLowerCase(),d=o.data,b=d instanceof Blob?d:new Blob([d],{type:T[x]||'application/octet-stream'});var u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=n;a.rel='noopener';document.body.appendChild(a);a.click();setTimeout(function(){a.remove();URL.revokeObjectURL(u);},4000);res();}catch(e){rej({code:'failed',message:String(e)});}});}};
-window.claude={use:function(n){return Promise.resolve(n==='downloads'?dl:null);}};})();</script><meta property="og:type" content="website"><meta property="og:title" content="Motorentechnik"><meta property="og:description" content="Verbrennungsmotor und Elektroauto: Aufbau und Viertakt mit Animationen, Zweitakt und Wankel, Otto und Diesel, Einspritzung, Bordnetz, Elektroauto mit eigener Bewertung, Laufzettel für die Kfz-Stationen und Selbsttest. Technik, Jahrgang 9–10. Ergebnis als PDF."><meta property="og:url" content="https://deintechniklehrer.github.io/Lernplattformen/motorentechnik/"><meta property="og:image" content="https://deintechniklehrer.github.io/Lernplattformen/vorschau/Vorschau_Motorentechnik.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="description" content="Verbrennungsmotor und Elektroauto: Aufbau und Viertakt mit Animationen, Zweitakt und Wankel, Otto und Diesel, Einspritzung, Bordnetz, Elektroauto mit eigener Bewertung, Laufzettel für die Kfz-Stationen und Selbsttest. Technik, Jahrgang 9–10. Ergebnis als PDF."><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+window.claude={use:function(n){return Promise.resolve(n==='downloads'?dl:null);}};})();</script><meta property="og:type" content="website"><meta property="og:title" content="Motorentechnik"><meta property="og:description" content="Verbrennungsmotor und Elektroauto: Aufbau und Viertakt mit Animationen, Zweitakt und Wankel, Otto und Diesel, Einspritzung, Bordnetz, Elektroauto mit eigener Bewertung, Rechner für Reichweite und Kosten, Umwelt mit Schätzfragen, Laufzettel für die Kfz-Stationen und Selbsttest. Technik, Jahrgang 9–10. Ergebnis als PDF."><meta property="og:url" content="https://deintechniklehrer.github.io/Lernplattformen/motorentechnik/"><meta property="og:image" content="https://deintechniklehrer.github.io/Lernplattformen/vorschau/Vorschau_Motorentechnik.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="description" content="Verbrennungsmotor und Elektroauto: Aufbau und Viertakt mit Animationen, Zweitakt und Wankel, Otto und Diesel, Einspritzung, Bordnetz, Elektroauto mit eigener Bewertung, Rechner für Reichweite und Kosten, Umwelt mit Schätzfragen, Laufzettel für die Kfz-Stationen und Selbsttest. Technik, Jahrgang 9–10. Ergebnis als PDF."><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Motorentechnik</title>
 <link rel="stylesheet" href="../assets/fonts/fonts.css">
 <style>
@@ -659,6 +659,24 @@ label.rr-cap b{display:block}
 .rr-stripl{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin:0 -10px}
 @media (prefers-reduced-motion:reduce){.rr-tneedle,.rr-tarc{transition:none}}
 
+/* Schätzfragen (Kapitel Umwelt) */
+.est-list{display:grid;gap:14px}
+.est-q{display:grid;gap:8px;padding:12px;border-radius:14px;background:var(--surface-2);min-width:0}
+.est-q label{display:grid;gap:2px;font-weight:700;font-size:16px;max-width:66ch}
+.est-n{font-size:13px;font-weight:700;color:var(--muted);text-transform:none}
+.est-in{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 12px;align-items:center}
+.est-in input[type=range]{width:100%;min-height:44px;accent-color:var(--c)}
+.est-v{font-size:17px;min-width:9ch;text-align:right;font-variant-numeric:tabular-nums}
+@media (max-width:480px){.est-in{grid-template-columns:minmax(0,1fr)}.est-v{text-align:left}}
+.est-res{display:grid;gap:8px}.est-res p{margin:0;max-width:66ch;font-size:15px}
+.est-bar{position:relative;height:26px;margin:4px 9px 0}
+.est-bar::before{content:"";position:absolute;left:-9px;right:-9px;top:10px;height:6px;border-radius:6px;background:var(--line)}
+.est-bar i{position:absolute;top:4px;width:18px;height:18px;margin-left:-9px;border-radius:50%;border:3px solid var(--surface-2)}
+.est-bar .you,.est-leg .you i{background:#2a6fb0}.est-bar .real,.est-leg .real i{background:#e07b1e}
+.est-bar .real{border-radius:4px;transform:rotate(45deg)}
+.est-leg{display:flex;flex-wrap:wrap;gap:4px 18px;font-size:14px}.est-leg span{display:inline-flex;align-items:center;gap:6px}
+.est-leg i{width:12px;height:12px;border-radius:50%;flex:none}.est-leg .real i{border-radius:2px;transform:rotate(45deg)}
+
 /* aus der Unternehmens-Werkstatt übernommen */
 .teile{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
 .teile button{font:inherit;font-size:13px;font-weight:700;min-width:44px;min-height:32px;padding:4px 10px;border-radius:99px;border:1.5px solid rgb(255 255 255 / .55);background:transparent;color:inherit;cursor:pointer}
@@ -747,7 +765,7 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
   <div class="info">
     <h3>Willkommen in der Motorentechnik</h3>
     <p>Die meisten Autos auf unseren Straßen fahren noch mit einem <b>Verbrennungsmotor</b>, immer mehr fahren <b>elektrisch</b>. In dieser Lernplattform findest du heraus, wie ein Verbrennungsmotor aufgebaut ist und arbeitet, was Einspritzung und Elektrik damit zu tun haben und wie ein Elektroauto funktioniert. Am Ende vergleichst du beide Antriebe und bildest dir eine eigene Meinung.</p>
-    <p>Mit „Weiter“ unten kommst du zum nächsten Kapitel. Die Animationen steuerst du mit einem Schieberegler. Die Kfz-Stationen in Kapitel 7 machst du im Technikraum zusammen mit deiner Lehrkraft. Am Ende speicherst du dein Ergebnis als PDF.</p>
+    <p>Mit „Weiter“ unten kommst du zum nächsten Kapitel. Die Animationen steuerst du mit einem Schieberegler. Die Kfz-Stationen im Kapitel „Praxis“ machst du im Technikraum zusammen mit deiner Lehrkraft. Am Ende speicherst du dein Ergebnis als PDF.</p>
   </div>
   <details class="fbox resume" id="lpUp1">
     <summary>Schon angefangen? Mit Ergebnis-PDF oder Sicherungscode weiterarbeiten</summary>
@@ -1131,6 +1149,77 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
     <header><span class="num"></span><h3>Der passende Antrieb für Familie Arslan</h3><button class="op" data-op="beurteilen" type="button">beurteilen</button></header>
     <p class="q">Familie Arslan fährt an jedem Arbeitstag 40 km zur Arbeit und zurück und zweimal im Jahr 700 km in den Urlaub. Beurteile mit Werten aus dem Rechner, welcher Antrieb für die Familie am besten passt.</p>
     <div class="w" data-t="t33"></div>
+  </article>
+</section>
+
+<!-- ================= KAPITEL 6b: UMWELT (data-ch 11, steht in CFG_W nach Reichweite und Kosten) ================= -->
+<section class="station c-existenz" data-ch="11" hidden>
+  <div class="info">
+    <h3>Wie stark belastet ein Auto die Umwelt?</h3>
+    <p>Kosten und Reichweite sind nur ein Teil des Vergleichs. Autos belasten auch die Umwelt: Sie verursachen <b>CO₂</b>, brauchen <b>Rohstoffe</b> und müssen am Ende entsorgt werden. In diesem Kapitel geht es um drei Fragen: Wie viel CO₂ entsteht? Wie oft brennt ein Auto? Was passiert mit dem alten Akku?</p>
+    <p>Schätz zuerst. Danach siehst du die Zahl aus der Quelle. Die Schätzfragen werden nicht bewertet.</p>
+  </div>
+  <div class="est" id="est"></div>
+</section>
+
+<section class="station c-existenz" data-ch="11" hidden>
+  <div class="info">
+    <h3>CO₂ beim Fahren und im ganzen Autoleben</h3>
+    <p>Wenn Benzin oder Diesel verbrennt, verbindet sich der <b>Kohlenstoff</b> im Kraftstoff mit <b>Sauerstoff</b> aus der Luft zu CO₂. Deshalb entsteht viel mehr CO₂, als der Kraftstoff selbst wiegt.</p>
+    <div class="factbox">
+      <p><b>CO₂ aus dem Auspuff:</b> Ein Liter Benzin verbrennt zu rund <b>2,3 kg</b> CO₂, ein Liter Diesel zu rund <b>2,7 kg</b>.</p>
+      <p class="src">Quelle: Umweltbundesamt, CLIMATE CHANGE 28/2022, CO₂-Emissionsfaktoren für fossile Brennstoffe, Tabelle 5, S. 30 (Super E5 2,280 kg, Super E10 2,261 kg CO₂ je Liter) und S. 37 (Diesel rund 74,0 t CO₂ je TJ; mit 36 MJ je Liter nach Richtlinie 2009/28/EG, Anhang III, sind das 2,66 kg je Liter, eigene Rechnung).</p>
+      <p><b>CO₂ aus dem Kraftwerk:</b> Beim Elektroauto entsteht das CO₂ nicht am Auto, sondern dort, wo der Strom erzeugt wird. 2025 waren es in Deutschland etwa <b>344 g</b> CO₂ je Kilowattstunde. 2023 waren es noch 379 g.</p>
+      <p class="src">Quelle: Umweltbundesamt, CLIMATE CHANGE 16/2026, Entwicklung der spezifischen Treibhausgas-Emissionen des deutschen Strommix in den Jahren 1990–2025, Tabelle 1, S. 11 (bezogen auf den Stromverbrauch, ohne Vorketten; 2025 geschätzt). Stand: März 2026.</p>
+    </div>
+    <p><b>So rechnest du:</b> Verbrauch auf 100 km mal CO₂ je Liter. Ein Diesel mit 5 l je 100 km stößt 5 · 2,7 kg = 13,5 kg CO₂ auf 100 km aus. Im Vergleich des Rechners im Kapitel „Reichweite und Kosten“ steht dieser Wert als „CO₂ beim Fahren“.</p>
+    <p>Für die <b>Klimabilanz</b> zählt das ganze Autoleben, also auch die <b>Herstellung</b>. Der Akku macht die Herstellung des Elektroautos aufwendiger: Es startet mit einem „Rucksack“. Beim Fahren verursacht es weniger Treibhausgase und holt den Rucksack nach und nach auf.</p>
+    <div class="factbox">
+      <p><b>Das ganze Autoleben:</b> Eine Studie des Forschungsinstituts ICCT hat das für Autos berechnet, die 2025 in der EU verkauft werden. Der Benziner kommt auf etwa <b>235 g</b> CO₂-Äquivalente je Kilometer, das Elektroauto auf etwa <b>63 g</b>. Die Herstellung verursacht beim Elektroauto etwa 40 % mehr Treibhausgase. Das ist laut Studie nach etwa <b>17.000 km</b> ausgeglichen.</p>
+      <p><b>Achtung, Annahmen:</b> Solche Ergebnisse hängen davon ab, womit gerechnet wird, vor allem beim Strom. Diese Studie rechnet mit dem Strom, den die EU in den nächsten 20 Jahren voraussichtlich hat. Die Studie des Umweltbundesamts aus dem Kapitel „Elektroauto“ rechnet mit einem Auto von 2020 und deutschem Strom und kommt auf 140 g statt 238 g.</p>
+      <p class="src">Quelle: International Council on Clean Transportation (ICCT), Life-cycle greenhouse gas emissions from passenger cars in the European Union: A 2025 update and key factors to consider, Juli 2025.</p>
+    </div>
+  </div>
+  <article class="task">
+    <header><span class="num"></span><h3>CO₂ auf 100 Kilometern</h3><button class="op" data-op="ermitteln" type="button">ermitteln</button></header>
+    <p class="q">Ein Benziner verbraucht 6 Liter auf 100 km. Ermittle, wie viel Kilogramm CO₂ er auf 100 km ausstößt.</p>
+    <div class="w" data-t="t34"></div>
+  </article>
+  <article class="task">
+    <header><span class="num"></span><h3>Klimabilanz über das Autoleben</h3><button class="op" data-op="erklären" type="button">erklären</button></header>
+    <p class="q">Erkläre, wie die Klimabilanz eines Elektroautos zustande kommt: Wähle in jeder Lücke das passende Wort.</p>
+    <div class="w" data-t="t35"></div>
+  </article>
+</section>
+
+<section class="station c-existenz" data-ch="11" hidden>
+  <div class="info">
+    <h3>Brände und Recycling</h3>
+    <p><b>Brennen Elektroautos öfter?</b> Brennende Elektroautos kommen oft in die Nachrichten. Die Zahlen zeigen bisher nicht, dass sie häufiger brennen als Verbrenner.</p>
+    <div class="factbox">
+      <p><b>Deutschland:</b> 2024 brannten <b>13.600</b> kaskoversicherte Pkw, Verbrenner und Elektroautos zusammen. In den Statistiken der Kfz-Versicherer gibt es <b>keine Hinweise</b>, dass Elektroautos häufiger brennen als Benziner oder Diesel.</p>
+      <p class="src">Quelle: Gesamtverband der Deutschen Versicherungswirtschaft (GDV), Brennen E-Autos wirklich öfter? Zahlen und Fakten. Stand: 03.06.2026.</p>
+      <p><b>Schweden:</b> 2024 waren <b>40</b> von rund 881.000 Elektroautos und Plug-in-Hybriden in einen Brand verwickelt, zu dem die Feuerwehr gerufen wurde. Das sind etwa 5 von 100.000. Insgesamt brannten gut 3.100 von knapp 5 Millionen Pkw. Darin sind aber auch Brandstiftungen enthalten, und die Behörde hat nicht alle Brände vollständig erfasst. Die Zahlen lassen sich deshalb nicht genau vergleichen.</p>
+      <p class="src">Quelle: Myndigheten för samhällsskydd och beredskap (MSB), Sammanställning av bränder i elfordon och eltransportmedel år 2018–2024, 30.04.2025. Anteil je 100.000: eigene Rechnung.</p>
+    </div>
+    <p>Anders ist das <b>Löschen</b>: Brennt der Akku, lässt er sich nicht wie ein normales Feuer löschen. Die Feuerwehr muss ihn oft <b>mehrere Stunden</b> lang mit viel Wasser kühlen.</p>
+    <p><b>Was passiert mit dem alten Akku?</b> Ein Akku enthält wertvolle Rohstoffe wie <b>Lithium</b>, <b>Kobalt</b>, <b>Nickel</b> und <b>Kupfer</b>. Damit sie nicht verloren gehen, gibt es zwei Wege: Lässt die Leistung eines Akkus nach, kann er noch als <b>Stromspeicher</b> weiterarbeiten. Am Ende wird er zerlegt, und die Metalle werden zurückgewonnen. Das ist <b>Recycling</b>.</p>
+    <div class="factbox">
+      <p><b>Vorgaben der EU:</b> Bis Ende 2027 müssen Recyclingbetriebe aus Altbatterien <b>90 %</b> des Kobalts, Kupfers und Nickels und <b>50 %</b> des Lithiums zurückgewinnen. Bis Ende 2031 steigen die Vorgaben auf <b>95 %</b> und <b>80 %</b>. Ab August 2031 müssen neue Akkus für Elektroautos außerdem recyceltes Material enthalten, zum Beispiel beim Kobalt mindestens 16 % und beim Lithium mindestens 6 %.</p>
+      <p class="src">Quelle: Verordnung (EU) 2023/1542 über Batterien und Altbatterien, Artikel 8 und Anhang XII Teil C, ABl. L 191 vom 28.7.2023, S. 1 (konsolidierte Fassung vom 18.07.2024).</p>
+      <p><b>Ganze Autos:</b> 2023 wurden in Deutschland <b>86,1 %</b> des Gewichts der Altfahrzeuge wiederverwendet oder recycelt.</p>
+      <p class="src">Quelle: Umweltbundesamt, Altfahrzeugverwertung und Fahrzeugverbleib. Stand: 14.01.2026.</p>
+    </div>
+  </div>
+  <article class="task">
+    <header><span class="num"></span><h3>Stimmt das?</h3><button class="op" data-op="überprüfen" type="button">überprüfen</button></header>
+    <p class="q">Überprüfe die Aussagen mit den Informationen aus diesem Kapitel: Wähle für jede Aussage „stimmt“ oder „stimmt nicht“.</p>
+    <div class="w" data-t="t36"></div>
+  </article>
+  <article class="task">
+    <header><span class="num"></span><h3>Der Weg eines Akkus</h3><button class="op" data-op="ordnen" type="button">ordnen</button></header>
+    <p class="q">Ordne die Stationen im Leben eines Akkus in die richtige Reihenfolge.</p>
+    <div class="w" data-t="t37"></div>
   </article>
 </section>
 
@@ -1637,8 +1726,8 @@ var MG = (function () {
 <script>
 (function(){
 "use strict";
-const CFG_W={key:'motorentechnik-v1',title:'Motorentechnik',ch:[[0,'Start','Motorentechnik kennenlernen'],[1,'Aufbau','Aufbau des Ottomotors'],[2,'Arbeitsweise','Viertakt, Zweitakt, Wankel'],[3,'Otto und Diesel','Ottomotor und Dieselmotor'],[4,'Einspritzung','Gemischbildung und Einspritzung'],[5,'Elektrik','Elektrik im Auto'],[6,'Elektroauto','Das Elektroauto'],[10,'Reichweite und Kosten','Reichweite und Kosten'],[7,'Praxis','Kfz-Stationen'],[8,'Selbsttest','Selbsttest'],[9,'Abgabe','Abgabe']],
-  rate:['Ich kann die Bauteile eines Ottomotors benennen und ihre Aufgaben erklären.','Ich kann den Viertaktprozess mit Ventilstellung, Druck und Temperatur beschreiben.','Ich kann Zweitakt-, Viertakt- und Wankelmotor unterscheiden.','Ich kann Otto- und Dieselmotor vergleichen.','Ich kann erklären, wie Kraftstoff eingespritzt wird und wie das Bordnetz funktioniert.','Ich kann den Aufbau eines Elektroautos beschreiben.','Ich kann Elektroauto und Verbrenner mit Kriterien bewerten.']};
+const CFG_W={key:'motorentechnik-v1',title:'Motorentechnik',ch:[[0,'Start','Motorentechnik kennenlernen'],[1,'Aufbau','Aufbau des Ottomotors'],[2,'Arbeitsweise','Viertakt, Zweitakt, Wankel'],[3,'Otto und Diesel','Ottomotor und Dieselmotor'],[4,'Einspritzung','Gemischbildung und Einspritzung'],[5,'Elektrik','Elektrik im Auto'],[6,'Elektroauto','Das Elektroauto'],[10,'Reichweite und Kosten','Reichweite und Kosten'],[11,'Umwelt','Klima, Brände und Recycling'],[7,'Praxis','Kfz-Stationen'],[8,'Selbsttest','Selbsttest'],[9,'Abgabe','Abgabe']],
+  rate:['Ich kann die Bauteile eines Ottomotors benennen und ihre Aufgaben erklären.','Ich kann den Viertaktprozess mit Ventilstellung, Druck und Temperatur beschreiben.','Ich kann Zweitakt-, Viertakt- und Wankelmotor unterscheiden.','Ich kann Otto- und Dieselmotor vergleichen.','Ich kann erklären, wie Kraftstoff eingespritzt wird und wie das Bordnetz funktioniert.','Ich kann den Aufbau eines Elektroautos beschreiben.','Ich kann Elektroauto und Verbrenner mit Kriterien bewerten.','Ich kann Umweltfolgen von Verbrenner und Elektroauto mit Zahlen einschätzen.']};
 const KEY=CFG_W.key;
 const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
 const CHECK='<svg class="i" viewBox="0 0 24 24"><path d="m5 12 4 4 10-10"/></svg>';
@@ -1689,6 +1778,10 @@ t31:{type:'num',answer:0,tol:0.15,unit:'Euro',why:'',help:{tip:'Erst „Voreinst
 t32:{type:'gap',text:'Der Luftwiderstand wächst mit dem {0} der Geschwindigkeit. Fährt ein Auto doppelt so schnell, ist der Luftwiderstand {1} so groß. Der Rollwiderstand hängt von der {2} des Autos und vom {3} ab. Ein größerer Akku erhöht die Reichweite, macht das Auto aber auch {4}. Ein Verbrennungsmotor macht nur etwa {5} der Energie im Kraftstoff zu Bewegung.',gaps:[[['Quadrat','Hälfte','Wurzel'],0],[['doppelt','viermal','achtmal'],1],[['Farbe','Masse','Höchstgeschwindigkeit'],1],[['Untergrund','Luftdruck','Motoröl'],0],[['leichter','schwerer','schneller'],1],[['ein Viertel bis ein Drittel','die Hälfte','neun Zehntel'],0]]},
 t33:{type:'open',min:140,checks:[['Kosten je 100 km',/kost|€|euro|preis|günstig|billig|teuer/i],['Reichweite',/reichweite|km/i],['Urlaubsfahrt und Laden',/urlaub|700|lad|tank/i],['Entscheidung mit Begründung',/weil|deshalb|darum|daher|passt|empfehle|würde/i]],
   muster:['Für den Arbeitsweg von 40 km am Tag reicht die Reichweite aller drei Antriebe. Das Elektroauto ist im Rechner bei 100 km/h mit rund 6 Euro je 100 km am günstigsten, Diesel und Benziner kosten etwa 9 bis 12 Euro.','Bei der Urlaubsfahrt über 700 km reicht der 50-kWh-Akku bei 130 km/h nur für gut 200 km, das Elektroauto muss also zwei- bis dreimal laden. Der Diesel kommt mit einer Tankfüllung durch.','Ich würde der Familie das Elektroauto empfehlen, weil sie fast nur kurze Strecken fährt und dabei viel spart. Für die zwei Urlaubsfahrten plant sie Ladepausen ein. Wer zu Hause nicht laden kann, zahlt an der Ladesäule mehr; dann lohnt sich der Vergleich neu.']},
+t34:{type:'num',answer:13.8,tol:0.2,unit:'kg CO₂',why:'6 l · 2,3 kg je Liter = 13,8 kg CO₂ auf 100 km. Das sind 138 g je Kilometer.',help:{tip:'Du brauchst zwei Zahlen: den Verbrauch auf 100 km und wie viel CO₂ aus einem Liter Benzin entsteht. Die zweite Zahl steht im Kasten „CO₂ aus dem Auspuff“.',teil:'Aus einem Liter Benzin entstehen rund 2,3 kg CO₂. Rechne: 6 · 2,3 kg.'}},
+t35:{type:'gap',text:'Beim Fahren stößt ein Elektroauto {0} CO₂ aus dem Auspuff aus. Das CO₂ für seinen Strom entsteht im {1}. Die Herstellung verursacht beim Elektroauto {2} Treibhausgase als beim Benziner, vor allem wegen des {3}. Diesen Rucksack holt es beim Fahren {4}. Wie schnell das geht, hängt vor allem vom {5} ab.',gaps:[[['kein','viel','doppelt so viel'],0],[['Motor','Kraftwerk','Akku'],1],[['weniger','gleich viele','mehr'],2],[['Akkus','Getriebes','Lacks'],0],[['nie auf','nach und nach auf','sofort auf'],1],[['Strom','Reifendruck','Wetter'],0]]},
+t36:{type:'seg',cats:['stimmt','stimmt nicht'],items:[['Ein Liter Benzin verbrennt zu weniger als einem Kilogramm CO₂.',1],['Brennt der Akku eines Elektroautos, muss die Feuerwehr ihn oft stundenlang kühlen.',0],['Die Kfz-Versicherer sehen in ihren Statistiken Hinweise, dass Elektroautos häufiger brennen als Verbrenner.',1],['Aus alten Akkus lassen sich Kobalt, Nickel und Kupfer zurückgewinnen.',0],['Der Strom für Elektroautos entsteht in Deutschland schon ganz ohne CO₂.',1],['Die EU schreibt vor, wie viel Lithium aus Altbatterien zurückgewonnen werden muss.',0]]},
+t37:{type:'order',items:['Rohstoffe wie Lithium, Kobalt und Nickel werden abgebaut.','Aus den Rohstoffen werden Zellen gebaut und zu einem Akku zusammengesetzt.','Der Akku treibt viele Jahre lang ein Elektroauto an.','Die Leistung lässt nach. Der Akku arbeitet als Stromspeicher weiter.','Der Akku wird zerlegt, die Metalle werden zurückgewonnen.','Aus den zurückgewonnenen Metallen entstehen neue Akkus.'],start:[3,0,5,2,4,1]},
 t25:{type:'mark',parts:[['Mia und Tim warten, bis ihre Lehrkraft die Station freigibt.',false],['Tim dreht die Kurbel am Motormodell, während Mia mit dem Finger zeigt, wo der Kolben sitzt.',true],['Mia bindet ihre langen Haare zusammen.',false],['Beim Messen der Batteriespannung legt Tim einen Schraubenschlüssel quer über beide Pole.',true],['Mia trägt Handschuhe, als sie den Ölpeilstab abwischt.',false],['Ein Tropfen Öl landet auf dem Boden, Tim lässt ihn liegen.',true],['Am Elektroauto zieht Mia an einem orangen Kabel, um zu sehen, wohin es führt.',true],['Nach der Station legen beide das Werkzeug zurück in den Koffer.',false]],help:{tip:'Nimm dir die Regeln oben einzeln vor und such zu jeder Regel den passenden Satz. Frag dich dann: Hält sich die Person an die Regel oder nicht?',teil:'Zwei Verstöße: Tim dreht die Kurbel, während Mia mit dem Finger zwischen die bewegten Teile zeigt (Klemmgefahr). Tim legt einen Schraubenschlüssel über beide Batteriepole (Kurzschluss). Zwei weitere Verstöße findest du selbst.'}},
 t26:{type:'label',fig:'motor',t:250,aria:'Schnittbild eines Ottomotors mit weiteren nummerierten Teilen',marks:['einlasskanal','auslasskanal','brennraum','kolbenringe','kurbelgehaeuse','oelwanne'],
   terms:[['Ölwanne','oelwanne'],['Brennraum','brennraum'],['Einlasskanal','einlasskanal'],['Kurbelgehäuse','kurbelgehaeuse'],['Kolbenringe','kolbenringe'],['Auslasskanal','auslasskanal'],['Schwungrad','x']]},
@@ -1916,11 +2009,13 @@ const RR_ORD=[3,1,0,2];
 const RR_UG=[['Asphalt',0.01],['Schotter',0.02],['Erdweg',0.04],['Sand',0.15]];
 const RR_DEF={kl:1,ug:0,an:0,f:100,v:100,s:100,tank:50,akku:50,ed:150,etaB:25,etaD:30,etaE:85,pB:2.114,pD:2.261,pE:0.373};
 const RR_KWHL={B:32/3.6,D:36/3.6};
+/* CO₂ beim Fahren: kg je Liter (UBA, CLIMATE CHANGE 28/2022) und kg je kWh Strom (UBA, CLIMATE CHANGE 16/2026, Strommix 2025) */
+const RR_CO2={B:2.3,D:2.7,E:0.344};
 const RR_N={B:'Benziner',D:'Diesel',E:'Elektroauto'},RR_AK=['B','D','E'],RR_AN=RR_AK.map(k=>[RR_N[k]]);
 function rrCalc(o,v){v=v==null?o.v:v;const k=RR_KL[o.kl],cr=RR_UG[o.ug][1],ms=v/3.6,mA=o.akku*1000/o.ed,FL=0.5*1.2*k[1]*k[2]*ms*ms,r={mA,FL};
   ['B','D','E'].forEach(d=>{const m=k[3]+(d==='E'?mA:0),FR=cr*m*9.81,F=FL+FR,erad=F/3600,eta=o['eta'+d]/100,e=erad/eta,
     store=d==='E'?o.akku:o.tank*RR_KWHL[d],per100=d==='E'?100*e:100*e/RR_KWHL[d],price=o['p'+d];
-    r[d]={m,FR,F,P:F*ms/1000,e,per100,cost100:per100*price,range:store/e,costS:per100*price*o.s/100};});return r;}
+    r[d]={m,FR,F,P:F*ms/1000,e,per100,cost100:per100*price,range:store/e,costS:per100*price*o.s/100,co2:per100*RR_CO2[d]*10};});return r;}
 const rrF=(x,n=0)=>x.toLocaleString('de-DE',{minimumFractionDigits:n,maximumFractionDigits:n});
 (function(){const d=rrCalc(Object.assign({},RR_DEF),100);T.t30.answer=Math.round(d.E.per100*10)/10;
   T.t30.why='Bei 100 km/h braucht das Elektroauto der Mittelklasse im Rechner etwa '+rrF(d.E.per100,1)+' kWh je 100 km. Der schwere Akku erhöht den Rollwiderstand, trotzdem braucht es viel weniger Energie als ein Verbrenner.';
@@ -2019,12 +2114,12 @@ function rrUI(box){if(!box)return;S.rr=Object.assign({},RR_DEF,S.rr||{});const o
   /* Vergleich: die drei Antriebe nebeneinander, darunter die vier Autos */
   const cards={},out=el('div',{class:'rr-out'}),cmpH=el('h5',{class:'rr-cmph'});
   RR_AK.forEach(k=>{const c=cards[k]={};
-    c.use=el('b',{});c.cost=el('b',{});c.cbar=el('i',{});c.rng=el('b',{});c.rbar=el('i',{});c.rcar=el('span',{class:'rr-tcar'});c.trl=el('span',{});c.trip=el('b',{});c.st=el('div',{class:'rr-st'});c.tag=el('span',{class:'rr-tag',hidden:true},'im Cockpit');
+    c.use=el('b',{});c.cost=el('b',{});c.cbar=el('i',{});c.rng=el('b',{});c.rbar=el('i',{});c.rcar=el('span',{class:'rr-tcar'});c.trl=el('span',{});c.trip=el('b',{});c.co2=el('b',{});c.st=el('div',{class:'rr-st'});c.tag=el('span',{class:'rr-tag',hidden:true},'im Cockpit');
     c.box=el('div',{class:'rr-card rr-'+k},el('h5',{},el('span',{class:'rr-ic',html:RR_IC[k]}),RR_N[k],c.tag),
       el('div',{class:'rr-kv'},el('span',{},'Verbrauch'),c.use),
       el('div',{class:'rr-kv'},el('span',{},'Kosten je 100 km'),c.cost),el('div',{class:'rr-bar','aria-hidden':'true'},c.cbar),
       el('div',{class:'rr-kv'},el('span',{},'Reichweite mit dieser Füllung'),c.rng),el('div',{class:'rr-track','aria-hidden':'true'},c.rbar,c.rcar),
-      c.st,el('div',{class:'rr-kv rr-trip'},c.trl,c.trip));out.append(c.box);});
+      c.st,el('div',{class:'rr-kv'},el('span',{},'CO₂ beim Fahren'),c.co2),el('div',{class:'rr-kv rr-trip'},c.trl,c.trip));out.append(c.box);});
   box.append(el('div',{class:'anim rr-box'},el('h4',{class:'rr-h'},'Reichweiten- und Kostenrechner'),
     el('div',{class:'rr-cock'},scene,
       el('div',{class:'rr-dash'},
@@ -2033,7 +2128,7 @@ function rrUI(box){if(!box)return;S.rr=Object.assign({},RR_DEF,S.rr||{});const o
         el('div',{class:'rr-inst rr-if'},fdial,el('div',{class:'rr-cap'},el('span',{class:'rr-capi'},B.fic,B.fcap),B.frest),el('label',{class:'rr-cap',for:'rr-fill'},'Beim Start ',fOut),fIn)),
       el('div',{class:'rr-ctl'},seg(RR_AN,'an','Antrieb',ix=>RR_IC[RR_AK[ix]]),seg(RR_KL,'kl','Fahrzeugklasse',rrPic,RR_ORD),seg(RR_UG,'ug','Untergrund',ix=>'<i style="background:'+RR_GROUND[ix][0]+'"></i>'),num('s','Fahrstrecke bis zum Ziel','km',10,1,2000))),
     el('div',{class:'row'},reset),adv),
-   el('div',{class:'anim rr-box rr-cmp'},el('h4',{class:'rr-h'},'Vergleich'),cmpH,out,fw,
+   el('div',{class:'anim rr-box rr-cmp'},el('h4',{class:'rr-h'},'Vergleich'),cmpH,out,el('p',{class:'src'},'CO₂ beim Fahren: gerechnet mit rund 2,3 kg CO₂ je Liter Benzin, 2,7 kg je Liter Diesel und 344 g je Kilowattstunde Strom (Strommix in Deutschland 2025). Die Herstellung von Auto, Kraftstoff und Kraftwerken ist nicht mitgerechnet. Mehr dazu im Kapitel „Umwelt“.'),fw,
     el('details',{class:'rr-adv'},el('summary',{},'Reichweite bei verschiedenen Geschwindigkeiten (voller Tank, voller Akku)'),tab)));
   const status=(st,k,stops)=>{st.className='rr-st '+(stops?'warn':'ok');st.replaceChildren(el('span',{class:'rr-sti',html:stops?RR_IC[k]:RR_CHK}),stops?el('span',{},el('b',{class:'n'},stops+' × '+RR_STOP[k]),' unterwegs'):el('span',{},'Reicht ohne '+(k==='E'?'Laden':'Tanken')));};
   let sceneKey='',picKey=-1;
@@ -2062,7 +2157,7 @@ function rrUI(box){if(!box)return;S.rr=Object.assign({},RR_DEF,S.rr||{});const o
       c.use.textContent=rrF(y.per100,1)+' '+uu+' je 100 km';c.cost.textContent=rrF(y.cost100,2)+' €';c.cbar.style.width=Math.round(100*y.cost100/mc)+'%';
       c.rng.textContent=rrF(y.r0)+' km';const w=Math.max(6,Math.round(100*y.r0/mx));c.rbar.style.width=w+'%';c.rcar.style.left=w+'%';
       if(c.kl!==o.kl){c.kl=o.kl;c.rcar.innerHTML=rrPic(o.kl);}
-      status(c.st,k,y.stops);c.trl.textContent='Kosten für '+rrF(o.s)+' km';c.trip.textContent=rrF(y.costS,2)+' €';});
+      c.co2.textContent=rrF(y.co2)+' g je km';status(c.st,k,y.stops);c.trl.textContent='Kosten für '+rrF(o.s)+' km';c.trip.textContent=rrF(y.costS,2)+' €';});
     const rows=rrFwRows(o),fmax=rrFwMax(o);
     fw.replaceChildren(el('h5',{},'Autos im Vergleich: Fahrwiderstand bei '+o.v+' km/h auf '+RR_UG[o.ug][0]),
       el('div',{class:'rr-fwl','aria-hidden':'true'},el('span',{class:'air'},el('i',{}),'Luftwiderstand'),el('span',{class:'roll'},el('i',{}),'Rollwiderstand')),
@@ -2077,6 +2172,38 @@ function rrUI(box){if(!box)return;S.rr=Object.assign({},RR_DEF,S.rr||{});const o
       el('tbody',{},...vs.map(v=>{const q=rrCalc(o,v);return el('tr',{},el('td',{},String(v)),...ks.map(k=>el('td',{},rrF(q[k].range)+' km')));}))));}
   draw();}
 rrUI(document.getElementById('rr'));
+
+/* ---------- Schätzfragen im Kapitel Umwelt: erst schätzen, dann die Zahl aus der Quelle sehen. Nicht bewertet, kein Einfluss auf die Lernenergie. ---------- */
+const EST=[
+ {id:'e1',q:'Ein Liter Benzin wiegt etwa 0,74 kg. Wie viel CO₂ entsteht, wenn er im Motor verbrennt?',max:5,step:0.1,dec:1,unit:'kg',val:2.3,
+  a:'Rund 2,3 kg CO₂. Das ist etwa dreimal so viel, wie das Benzin selbst wiegt. Der Grund: Beim Verbrennen verbindet sich der Kohlenstoff aus dem Benzin mit Sauerstoff aus der Luft.',
+  src:'Umweltbundesamt, CLIMATE CHANGE 28/2022, Tabelle 5, S. 30. Masse je Liter: eigene Rechnung aus derselben Tabelle.'},
+ {id:'e2',q:'Wie viel CO₂ entsteht in Deutschland im Durchschnitt, wenn eine Kilowattstunde Strom verbraucht wird?',max:1000,step:10,dec:0,unit:'g',val:344,
+  a:'Etwa 344 g CO₂ (Schätzung für 2025). 2023 waren es noch 379 g. Je mehr Strom aus Wind und Sonne kommt, desto kleiner wird die Zahl.',
+  src:'Umweltbundesamt, CLIMATE CHANGE 16/2026, Tabelle 1, S. 11 (ohne Vorketten). Stand: März 2026.'},
+ {id:'e3',q:'Eine Studie hat das ganze Autoleben berechnet, von der Herstellung bis zur Entsorgung. Ein Benziner, der 2025 in der EU verkauft wird, kommt auf 235 g CO₂-Äquivalente je Kilometer. Wie viel sind es beim Elektroauto?',max:300,step:5,dec:0,unit:'g je km',val:63,
+  a:'Etwa 63 g je Kilometer, also rund 73 % weniger. Das gilt für diese eine Studie. Sie rechnet mit dem Strom, den die EU in den nächsten 20 Jahren voraussichtlich hat. Mit anderen Annahmen kommen andere Zahlen heraus.',
+  src:'ICCT, Life-cycle greenhouse gas emissions from passenger cars in the European Union: A 2025 update, Juli 2025.'},
+ {id:'e4',q:'2024 fuhren in Schweden rund 881.000 Elektroautos und Plug-in-Hybride. Wie viele davon waren in einen Brand verwickelt, zu dem die Feuerwehr gerufen wurde?',max:1000,step:10,dec:0,unit:'Autos',val:40,
+  a:'40 Autos. Das sind etwa 5 von 100.000. Die Behörde hat allerdings nicht alle Brände vollständig erfasst. In Deutschland sehen die Kfz-Versicherer keine Hinweise, dass Elektroautos häufiger brennen als Verbrenner.',
+  src:'MSB (Schweden), Sammanställning av bränder i elfordon och eltransportmedel år 2018–2024, 30.04.2025; GDV, Stand 03.06.2026.'},
+ {id:'e5',q:'Aus alten Akkus sollen die Rohstoffe zurückgewonnen werden. Wie viel Prozent des Lithiums müssen Recyclingbetriebe in der EU bis Ende 2031 zurückgewinnen?',max:100,step:5,dec:0,unit:'%',val:80,
+  a:'80 %. Bis Ende 2027 sind es 50 %. Bei Kobalt, Kupfer und Nickel sind es sogar 95 % bis Ende 2031.',
+  src:'Verordnung (EU) 2023/1542, Anhang XII Teil C.'}];
+function estUI(box){if(!box)return;S.est=S.est||{};
+  const list=el('div',{class:'est-list'});
+  EST.forEach((e,i)=>{const st=S.est[e.id]||(S.est[e.id]={}),fmt=v=>rrF(+v,e.dec)+' '+e.unit,pct=v=>Math.max(0,Math.min(100,100*v/e.max));
+    const inp=el('input',{type:'range',min:0,max:e.max,step:e.step,value:st.v!=null?st.v:0,id:'est-'+e.id}),out=el('b',{class:'est-v'}),btn=el('button',{type:'button',class:'btn accent'},'Auflösen'),res=el('div',{class:'est-res','aria-live':'polite'});
+    const show=()=>{out.textContent=st.v!=null?fmt(st.v):'noch nicht geschätzt';inp.setAttribute('aria-valuetext',st.v!=null?fmt(st.v):'noch nicht geschätzt');btn.disabled=st.v==null;btn.hidden=!!st.done;inp.disabled=!!st.done;
+      if(!st.done){res.replaceChildren();return;}
+      const d=Math.abs(st.v-e.val),near=d<=Math.max(e.step,0.15*e.val),word=near?'Gut geschätzt.':st.v<e.val?'Es ist mehr, als du geschätzt hast.':'Es ist weniger, als du geschätzt hast.';
+      res.replaceChildren(el('div',{class:'est-bar','aria-hidden':'true'},el('i',{class:'you',style:'left:'+pct(st.v)+'%'}),el('i',{class:'real',style:'left:'+pct(e.val)+'%'})),
+        el('div',{class:'est-leg'},el('span',{class:'you'},el('i',{}),'Deine Schätzung: ',el('b',{},fmt(st.v))),el('span',{class:'real'},el('i',{}),'Laut Quelle: ',el('b',{},fmt(e.val)))),
+        el('p',{},el('b',{},word+' '),e.a),el('p',{class:'src'},'Quelle: '+e.src));};
+    inp.oninput=()=>{st.v=+inp.value;save();show();};btn.onclick=()=>{st.done=true;save();show();};
+    list.append(el('div',{class:'est-q'},el('label',{for:'est-'+e.id},el('span',{class:'est-n'},'Schätzfrage '+(i+1)),e.q),el('div',{class:'est-in'},inp,out),el('div',{class:'row'},btn),res));show();});
+  box.append(el('div',{class:'anim est-box'},el('h4',{class:'rr-h'},'Schätz zuerst'),list));}
+estUI(document.getElementById('est'));
 
 /* Hilfe an schwierigen Aufgaben: Tipp, dann Teillösung (wie Elektronik-Grundlagen) */
 function addHelp(id,t,art){if(!t.help)return;const tb=el('div',{class:'hbox',hidden:!S.help[id]},el('b',{},'Tipp: '),t.help.tip);const pb=el('div',{class:'hbox',hidden:S.help[id]!==2},el('b',{},'Teillösung: '),t.help.teil);
@@ -2170,7 +2297,7 @@ $('#pdfBtn').onclick=()=>{const note=$('#pdfNote');note.hidden=false;
     ids.forEach(id=>{const t=T[id];const l=label[id].replace(/^Kapitel \d+ · /,'');
       if(t.type==='open'){txt(l,{b:1});const a=(S.a[id]||'').trim();txt(a||'(noch keine Antwort)',{ind:4,col:a?[20,35,47]:[120,130,135]});if(S.muster[id])txt('Mit Musterlösung verglichen.',{ind:4,size:9,col:[86,103,107]});y+=1.5;}
       else{const ok=!!S.ok[id];d.setFont('helvetica','bold');d.setFontSize(10.5);d.setTextColor(ok?31:194,ok?138:59,ok?76:46);need(5.5);d.text(ok?'gelöst':'offen',M,y);txt(l+(S.help[id]===2?' (mit Teillösung)':S.help[id]?' (mit Tipp)':''),{ind:16});}});
-    if(ci===7){need(12);y+=2;txt('Laufzettel Kfz-Stationen',{b:1});LZ.forEach(s=>{const st=S.lz[s.k]||{d:false,f:{}};need(6);d.setFont('helvetica','bold');d.setFontSize(10.5);d.setTextColor(st.d?31:194,st.d?138:59,st.d?76:46);d.text(st.d?'erledigt':'offen',M,y);txt(s.t,{ind:20});
+    if(CFG_W.ch[ci][0]===7){need(12);y+=2;txt('Laufzettel Kfz-Stationen',{b:1});LZ.forEach(s=>{const st=S.lz[s.k]||{d:false,f:{}};need(6);d.setFont('helvetica','bold');d.setFontSize(10.5);d.setTextColor(st.d?31:194,st.d?138:59,st.d?76:46);d.text(st.d?'erledigt':'offen',M,y);txt(s.t,{ind:20});
       s.f.forEach(f=>{const v=(st.f[f[1]]||'').trim();if(v)txt(f[2]+': '+v,{ind:20,size:9.5,col:[60,72,78]});});});}});
   need(20);y+=4;txt('Selbsteinschätzung',{b:1,size:13,col:[3,85,145],lh:6.5});
   RATE.forEach((r,i)=>{const v=S.rate[i];need(6);d.setFont('helvetica','bold');d.setFontSize(10);d.setTextColor(20,35,47);d.text(clean(v==null?'–':RATE_L[v]),M,y);txt(r,{ind:26,size:10});});
