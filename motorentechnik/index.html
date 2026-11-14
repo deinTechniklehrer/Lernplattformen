@@ -1907,28 +1907,28 @@ const rrF=(x,n=0)=>x.toLocaleString('de-DE',{minimumFractionDigits:n,maximumFrac
   const d2=rrCalc(Object.assign({},RR_DEF),130);T.t31.answer=Math.round(d2.D.cost100*100)/100;
   T.t31.why='Bei 130 km/h braucht der Diesel etwa '+rrF(d2.D.per100,1)+' l je 100 km. Das kostet rund '+rrF(d2.D.cost100,2)+' Euro. Bei 100 km/h wären es nur '+rrF(rrCalc(Object.assign({},RR_DEF),100).D.cost100,2)+' Euro.';})();
 /* Grafiken des Rechners: Autos, Fahrbahn, Tankuhr und Akku-Anzeige, alles selbst gezeichnet */
-/* Piktogramme: Fahrtrichtung nach rechts, Boden bei y=88, viewBox 200x92. Fläche in der Klassenfarbe, Fenster und Fugen in --rr-cut (Hintergrund der Kachel) */
+/* Piktogramme: Front rechts (Fahrtrichtung nach rechts), Boden bei y=88. Fläche in der Klassenfarbe, Fenster, Griffe, Leuchten und Radnabe in --rr-cut (Hintergrund der Kachel). vx zentriert das Auto in der Kachel. */
 const RR_CAR=[
- {col:'#c8362b',r:13,wx:[44,156],
-  body:'M7 73 Q5 62 12 57 L50 51 Q74 35 100 32 Q124 31 142 39 L162 50 Q184 52 192 58 Q196 62 195 73 Z',
-  win:['M70 50 Q84 39 99 36 L101 50 Z','M107 36 Q124 35 137 42 L149 50 L107 50 Z'],
-  light:'M184 56 L193 60 L193 62 L186 61 Z',tail:'M7 61 L15 59 L15 62 L7 64 Z',door:'M104 36 L103 70',handle:[120,55],spoiler:'M8 57 L9 52 L24 51 L24 55 Z'},
- {col:'#2a6fb0',r:14,wx:[46,156],
-  body:'M7 74 L7 59 Q7 51 15 49 L52 46 L76 27 Q82 22 94 22 L130 22 Q140 22 148 30 L162 45 Q184 47 191 53 Q195 57 195 74 Z',
-  win:['M60 45 L80 29 Q84 26 94 26 L104 26 L104 45 Z','M110 26 L128 26 Q136 26 142 32 L152 45 L110 45 Z'],
-  light:'M184 52 L193 56 L193 59 L186 58 Z',tail:'M7 54 L15 52 L15 57 L7 58 Z',door:'M107 26 L106 72',handle:[[90,51],[124,51]]},
- {col:'#3a8a5f',r:17,wx:[46,154],
-  body:'M7 70 L7 30 Q7 19 18 19 L146 19 Q155 19 161 27 L175 42 Q191 44 194 52 L195 70 Z',
-  win:['M19 41 L19 27 Q19 24 22 24 L62 24 L62 41 Z','M68 24 L108 24 L108 41 L68 41 Z','M114 24 L144 24 Q150 24 154 30 L162 41 L114 41 Z'],
-  light:'M184 50 L194 53 L194 57 L186 56 Z',tail:'M7 27 L12 27 L12 39 L7 39 Z',door:'M65 24 L65 66 M111 24 L111 66',handle:[[88,46],[132,46]],
-  rails:'M34 15 H142 M44 15 V19 M132 15 V19'}];
+ {col:'#c8362b',r:13,wx:[46,158],vx:1,
+  body:'M11 77 Q7 77 7 71 L7.5 59 Q8 52 12 51.5 L18 52.6 Q30 51 44 47 Q66 38.5 90 37.5 Q104 37 114 42.5 L132 53 Q162 54.5 184 60 Q194 63 195 69 L195 73 Q195 77 191 77 Z',
+  win:['M52 50.6 Q68 43 88 41.6 L89.5 52.6 Q70 52.4 52 50.6 Z','M95 41.6 Q104 41.6 111 45.4 L124 53.2 L95 52.8 Z'],
+  cut:['M180 60.6 L190.5 64 Q192 66.4 189 66 L182 64.2 Z','M7.6 58 L14.5 57 L14.5 60.4 L7.6 61.6 Z'],handle:[[100,57.5]],mirror:[121.5,51.6]},
+ {col:'#2a6fb0',r:14,wx:[50,157],vx:0,
+  body:'M10 78 Q6 78 6 72 L6 62 L8 49 Q10 38 17 33 L25 26 Q28 23 34 22.5 L60 21 Q84 20 102 22.5 Q112 24 122 31 L141 43 Q166 45 186 51 Q193 54 194 62 L195 72 Q195 78 190 78 Z',
+  win:['M26 42 L34 31 Q36 29 40 28.5 L56 27.5 L52 42.6 Z','M60 27.3 L88 27 L88 44 L56.5 43 Z','M93 27 L101 27.5 Q108 28.5 115 33 L136 44.6 L93 44.6 Z'],
+  cut:['M176 54.6 L186.5 57 Q189.5 60 187 61 L178 59.6 Z','M10.5 48 L18.5 46 L20.5 54 L10.5 56 Z'],handle:[[62,49],[100,51]],mirror:[131,42]},
+ {col:'#3a8a5f',r:16,wx:[68.5,163.5],vx:15,
+  body:'M50 14 L130 14 Q133 14 135 17 L149 32.5 L186 37.6 Q190 38.2 190.5 42 L191 51.5 L193 51.5 Q195 51.5 195 53.5 L195 65 Q195 67.5 192.5 67.5 L184 67.5 L184 71 L46 71 L46 67.5 L37 67.5 Q34.6 67.5 34.6 65 L34.6 55.5 Q34.6 53 37 53 L38.6 53 L45.2 18 Q46 14 50 14 Z',
+  win:['M55.5 19 L74 19 L71.5 34 L50.5 34 Z','M79.5 19 L104 19 L104 34 L77.5 34 Z','M110 19 L128 19 L139.5 34 L110 34 Z'],
+  cut:['M184.5 43 L188 43.6 L188.6 50 L184.5 50 Z'],handle:[[80,39.5],[112,39.5]],
+  rails:'M58 9 H118 M62 9 V14 M114 9 V14'}];
 function rrCar(kl,spin){const c=RR_CAR[kl],cy=88-c.r,r=c.r,f='var(--rr-cut,#fff)';
-  const wheel=x=>{let sp='';if(spin)for(let i=0;i<5;i++){const a=i*72*Math.PI/180;sp+=`<path d="M${x} ${cy}L${(x+r*0.5*Math.sin(a)).toFixed(1)} ${(cy-r*0.5*Math.cos(a)).toFixed(1)}"/>`;}
-    return `<g class="rr-wheel${spin?' spin':''}"><circle cx="${x}" cy="${cy}" r="${r}" fill="${c.col}" stroke="${f}" stroke-width="3.5"/><circle cx="${x}" cy="${cy}" r="${(r*0.56).toFixed(1)}" fill="${f}"/>${sp?`<g stroke="${c.col}" stroke-width="${(r*0.13).toFixed(1)}" stroke-linecap="round">${sp}</g>`:''}<circle cx="${x}" cy="${cy}" r="${(r*0.26).toFixed(1)}" fill="${c.col}"/></g>`;};
-  const hs=(Array.isArray(c.handle[0])?c.handle:[c.handle]).map(h=>`<rect x="${h[0]}" y="${h[1]}" width="8" height="2.4" rx="1.2" fill="${f}"/>`).join('');
-  return `${c.rails?`<path d="${c.rails}" stroke="${c.col}" stroke-width="4" stroke-linecap="round" fill="none"/>`:''}<path d="${c.body}" fill="${c.col}"/>${c.spoiler?`<path d="${c.spoiler}" fill="${c.col}" stroke="${f}" stroke-width="1.5"/>`:''}
-   ${c.win.map(w=>`<path d="${w}" fill="${f}"/>`).join('')}<path d="${c.door}" stroke="${f}" stroke-width="1.6" fill="none"/>${hs}
-   <path d="${c.light}" fill="${f}"/><path d="${c.tail}" fill="${f}"/>${c.wx.map(wheel).join('')}`;}
+  const wheel=x=>{let sp='';if(spin)for(let i=0;i<3;i++){const a=i*120*Math.PI/180;sp+=`<path d="M${x} ${cy}L${(x+r*0.4*Math.sin(a)).toFixed(1)} ${(cy-r*0.4*Math.cos(a)).toFixed(1)}"/>`;}
+    return `<g class="rr-wheel${spin?' spin':''}"><circle cx="${x}" cy="${cy}" r="${(r+1.6).toFixed(1)}" fill="${c.col}" stroke="${f}" stroke-width="3.2"/><circle cx="${x}" cy="${cy}" r="${(r*0.42).toFixed(1)}" fill="${f}"/>${sp?`<g stroke="${c.col}" stroke-width="${(r*0.12).toFixed(1)}" stroke-linecap="round">${sp}</g>`:''}</g>`;};
+  return `${c.rails?`<path d="${c.rails}" stroke="${c.col}" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>`:''}<path d="${c.body}" fill="${c.col}"/>${c.extra?`<path d="${c.extra}" fill="${c.col}"/>`:''}
+   ${c.win.concat(c.cut).map(w=>`<path d="${w}" fill="${f}"/>`).join('')}${c.handle.map(h=>`<rect x="${h[0]}" y="${h[1]}" width="8" height="2.6" rx="1.3" fill="${f}"/>`).join('')}
+   ${c.mirror?`<ellipse cx="${c.mirror[0]}" cy="${c.mirror[1]}" rx="3.6" ry="2.6" fill="${c.col}"/>`:''}${c.wx.map(wheel).join('')}`;}
+const rrPic=kl=>`<svg viewBox="${RR_CAR[kl].vx} 4 200 86" aria-hidden="true">${rrCar(kl,false)}</svg>`;
 const RR_GROUND=[['#4a5157','#f4f6f7','28 22',4],['#8b8f92','#d9dcde','3 22',5],['#8a6a47','#b89872','3 22',5],['#e3c98a','#c9a85c','3 22',5]];
 function rrScene(o){const g=RR_GROUND[o.ug];
   return `<svg class="rr-svg" viewBox="0 0 600 196" role="img" aria-label="${RR_KL[o.kl][0]} fährt auf ${RR_UG[o.ug][0]}. Pfeile zeigen Luftwiderstand und Rollwiderstand.">
@@ -1996,7 +1996,7 @@ function rrUI(box){if(!box)return;S.rr=Object.assign({},RR_DEF,S.rr||{});const o
     num('pB','Preis Super E10','€/l',0.01,0.5,5),num('pD','Preis Diesel','€/l',0.01,0.5,5),num('pE','Strompreis','€/kWh',0.01,0.05,2)),
     el('p',{class:'src'},'Voreinstellung: Preise ADAC (Oktober 2026) und BDEW (Oktober 2026, Laden zu Hause). An der Ladesäule ist Strom meist teurer. Wirkungsgrade sind Richtwerte zum Ausprobieren.'));
   box.append(el('div',{class:'anim rr-box'},el('h4',{class:'rr-h'},'Reichweiten- und Kostenrechner'),scene,fw,
-    el('div',{class:'rr-grid'},seg(RR_KL,'kl','Fahrzeugklasse',ix=>'<svg viewBox="0 10 200 81">'+rrCar(ix,false)+'</svg>'),seg(RR_UG,'ug','Untergrund',ix=>'<i style="background:'+RR_GROUND[ix][0]+'"></i>'),
+    el('div',{class:'rr-grid'},seg(RR_KL,'kl','Fahrzeugklasse',rrPic),seg(RR_UG,'ug','Untergrund',ix=>'<i style="background:'+RR_GROUND[ix][0]+'"></i>'),
       el('div',{class:'rr-f rr-vbox'},el('label',{for:'rr-v'},'Geschwindigkeit: ',vOut),tacho,vIn),num('s','Fahrstrecke','km',10,1,2000)),
     el('div',{class:'row'},reset),out,adv,el('details',{class:'rr-adv'},el('summary',{},'Reichweite bei verschiedenen Geschwindigkeiten (voller Tank, voller Akku)'),tab)));
   let sceneKey='';
@@ -2012,7 +2012,7 @@ function rrUI(box){if(!box)return;S.rr=Object.assign({},RR_DEF,S.rr||{});const o
       el('div',{class:'rr-fwl','aria-hidden':'true'},el('span',{class:'air'},el('i',{}),'Luftwiderstand'),el('span',{class:'roll'},el('i',{}),'Rollwiderstand')),
       el('div',{class:'rr-fwg'},el('ul',{class:'rr-fwb'},...rows.map(x=>{const F=x.FL+x.FR;
         return el('li',{class:(x.ix===o.kl&&!x.e?'sel':'')+(x.e?' e':''),style:'--c:'+RR_CAR[x.ix].col,'aria-label':x.name+': Luftwiderstand '+rrF(x.FL)+' N, Rollwiderstand '+rrF(x.FR)+' N, zusammen '+rrF(F)+' N'},
-          el('span',{class:'rr-fwcar',html:'<svg viewBox="0 10 200 81" aria-hidden="true">'+rrCar(x.ix,false)+'</svg>'+(x.e?RR_IC.E:'')}),
+          el('span',{class:'rr-fwcar',html:rrPic(x.ix)+(x.e?RR_IC.E:'')}),
           el('span',{class:'rr-fwn'},el('b',{},x.name),el('small',{html:x.sub})),el('b',{class:'rr-fwt'},rrF(F)+' N'),
           el('span',{class:'rr-fwbar','aria-hidden':'true'},el('i',{class:'air',style:'width:'+(100*x.FL/fmax).toFixed(1)+'%'}),el('i',{class:'roll',style:'width:'+(100*x.FR/fmax).toFixed(1)+'%'})));})),
         el('div',{class:'rr-fwcw',html:rrFwChart(o,fmax)})),
@@ -2027,7 +2027,7 @@ function rrUI(box){if(!box)return;S.rr=Object.assign({},RR_DEF,S.rr||{});const o
       c.cost.textContent=rrF(x.cost100,2)+' €';c.cbar.style.width=Math.round(100*x.cost100/mc)+'%';
       c.use.textContent=rrF(x.per100,1)+' '+u+' je 100 km';
       c.rng.textContent=rrF(x.r0)+' km';const w=Math.max(6,Math.round(100*x.r0/mx));c.rbar.style.width=w+'%';c.rcar.style.left=w+'%';
-      if(c.kl!==o.kl){c.kl=o.kl;c.rcar.innerHTML='<svg viewBox="0 10 200 81">'+rrCar(o.kl,false)+'</svg>';}
+      if(c.kl!==o.kl){c.kl=o.kl;c.rcar.innerHTML=rrPic(o.kl);}
       c.trl.textContent='Kosten für '+rrF(o.s)+' km';c.trip.textContent=rrF(x.costS,2)+' €';});
     const vs=[30,50,80,100,130,160];tab.replaceChildren(el('table',{class:'rr-t'},el('thead',{},el('tr',{},el('th',{},'km/h'),...ks.map(k=>el('th',{},RR_N[k])))),
       el('tbody',{},...vs.map(v=>{const q=rrCalc(o,v);return el('tr',{},el('td',{},String(v)),...ks.map(k=>el('td',{},rrF(q[k].range)+' km')));}))));}
