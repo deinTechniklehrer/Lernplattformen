@@ -713,8 +713,8 @@ details.tipbox{margin-top:12px;border:1px dashed var(--line-strong);border-radiu
 .cal-fig{position:relative;max-width:520px;margin:0 auto}
 .cal-draw .bp .hl{fill:#fff;fill-opacity:0;stroke:none;pointer-events:all}
 .cal-lab,.cal-pin{position:absolute;left:var(--x);top:var(--y);transform:translate(-50%,-50%);pointer-events:none;white-space:nowrap;font:700 13px/1.25 Arial,Helvetica,sans-serif;color:#fff}
-.cal-lab{background:rgba(9,20,44,.88);border:1px solid rgba(255,255,255,.35);padding:2px 7px;border-radius:999px}
-.cal-pin{text-shadow:0 0 3px #0b1a3a,0 0 2px #0b1a3a}
+.cal-lab,.cal-pin{text-shadow:0 0 3px #0b1530,0 0 2px #0b1530,0 0 1px #0b1530}
+.cal-lab{letter-spacing:.05em}
 .nolab .cal-lab{display:none}
 @media (max-width:520px){.cal-lab,.cal-pin{left:var(--xs);top:var(--ys)}}
 .credit{font-size:12.5px;color:var(--muted);text-align:center;margin:6px 0 0}
@@ -903,89 +903,102 @@ function boardSvg(){
   return s+'</svg>';
 }
 
-/* Zeichnung des Calliope mini 2 nach einem Foto der Calliope gGmbH (CC BY-SA 4.0), ohne Logo und Schriftzug. */
+/* Eigene Zeichnung des Calliope mini 2 nach einem eigenen Foto (ohne Logo und Schriftzug). */
 let CAL_N=0;
+const CAL_PADS=[[916,424],[702,795],[284,795],[70,424],[284,68],[702,68]];
 function calDrawing(){
-  const id='calm'+(++CAL_N);
+  const id='calm'+(++CAL_N),u=k=>`url(#${id}${k})`;
   const OUT='M933.4 483.5 A247.6 247.6 0 0 0 762.2 780.2 A62 62 0 0 1 658.4 839.0 A235.0 235.0 0 0 0 327.6 839.0 A62 62 0 0 1 223.8 780.2 A247.6 247.6 0 0 0 52.6 483.5 A62 62 0 0 1 55.0 363.8 A231.8 231.8 0 0 0 223.8 83.0 A62 62 0 0 1 327.6 24.0 A235.0 235.0 0 0 0 658.4 24.0 A62 62 0 0 1 762.2 83.0 A231.8 231.8 0 0 0 931.0 363.8 A62 62 0 0 1 933.4 483.5Z';
-  const PADS=[[916,424],[702,795],[284,795],[70,424],[284,68],[702,68]];
-  const pcb='#1f43a6',pcbD='#173584',pcbL='#3159c4',blk='#16181c',blk2='#2a2e35',wht='#efefe9',whtD='#cfcfc6',gold='#e9cf6e',goldD='#c9a948',silk='#f4f6fb',metal='#d9dcdf',metalD='#a9adb2';
+  const blk='#18191d',blk2='#2b2e35',metal='#d4d7da',metalD='#9a9fa5',silk='#eef1f7',gold='#e3c766',goldD='#b8963a',smdC='#3b3f46';
   const r=(x,y,w,h,f,rx=2,extra='')=>`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="${rx}" fill="${f}" ${extra}/>`;
   const rot=(x,y,a,inner)=>`<g transform="translate(${x} ${y}) rotate(${a})">${inner}</g>`;
-  const smd=(x,y,a=0,w=16,h=8)=>rot(x,y,a,r(-w/2,-h/2,w,h,'#3a3f46',1.5)+r(-w/2,-h/2,4,h,metal,1)+r(w/2-4,-h/2,4,h,metal,1));
-  const qfn=(x,y,s,a=0)=>rot(x,y,a,r(-s/2-4,-s/2-4,s+8,s+8,metalD,3)+r(-s/2,-s/2,s,s,blk,3)+r(-s/2+5,-s/2+5,s-10,s-10,blk2,2,'opacity=".55"'));
-  let s=`<defs><mask id="${id}"><path d="${OUT}" fill="#fff"/><circle cx="497" cy="772" r="29" fill="#000"/>${PADS.map(([x,y])=>`<circle cx="${x}" cy="${y}" r="25" fill="#000"/>`).join('')}</mask>`+
-    `<radialGradient id="${id}g" cx=".45" cy=".4" r=".7"><stop offset="0" stop-color="${pcbL}"/><stop offset="1" stop-color="${pcb}"/></radialGradient></defs>`;
-  s+=`<g mask="url(#${id})"><path d="${OUT}" fill="url(#${id}g)"/>`;
-  /* Leiterbahnen (angedeutet) */
-  s+=`<g fill="none" stroke="${pcbD}" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" opacity=".9">`+
-    ['M300 300 L360 240 L360 200','M430 160 L430 210 L470 250','M560 160 L560 205','M660 250 L620 290','M230 520 L300 590 L300 650','M330 640 L420 640 L460 600','M560 600 L600 640 L640 640','M680 560 L640 520','M250 450 L330 470','M760 430 L700 430 L660 470','M380 300 L380 380','M600 420 L640 420','M420 760 L560 760','M200 300 L160 340','M800 300 L840 340','M520 600 L520 660'].map(d=>`<path d="${d}"/>`).join('')+`</g>`;
+  const smd=(x,y,a=0,w=15,h=8)=>rot(x,y,a,r(-w/2,-h/2,w,h,smdC,1.5)+r(-w/2,-h/2,4,h,metal,1)+r(w/2-4,-h/2,4,h,metal,1));
+  const sot=(x,y,a=0)=>rot(x,y,a,[-8,8].map(d=>r(d-2.5,8,5,7,metal,1)).join('')+r(-2.5,-15,5,7,metal,1)+r(-13,-9,26,18,blk,2)+r(-11,-7,22,4,'#fff',1,'opacity=".08"'));
+  const chip=(x,y,s,a=0)=>rot(x,y,a,r(-s/2-4,-s/2-4,s+8,s+8,metalD,3,'opacity=".9"')+r(-s/2,-s/2,s,s,blk,3)+r(-s/2,-s/2,s,s,u('ch'),3)+`<circle cx="${-s/2+8}" cy="${-s/2+8}" r="3" fill="#3a3d44"/>`);
+  const xtal=(x,y,w,h)=>r(x-w/2,y-h/2,w,h,'#bfc3c7',4)+r(x-w/2+4,y-h/2+4,w-8,h-8,u('me'),3);
+  const via=(x,y,rr=7)=>`<circle cx="${x}" cy="${y}" r="${rr}" fill="${u('au')}"/><circle cx="${x}" cy="${y}" r="${rr*.38}" fill="${goldD}"/>`;
+  let s=`<defs><mask id="${id}"><path d="${OUT}" fill="#fff"/><circle cx="493" cy="772" r="29" fill="#000"/>${CAL_PADS.map(([x,y])=>`<circle cx="${x}" cy="${y}" r="25" fill="#000"/>`).join('')}</mask>`+
+    `<radialGradient id="${id}pcb" cx=".42" cy=".38" r=".75"><stop offset="0" stop-color="#26407f"/><stop offset=".6" stop-color="#1e3369"/><stop offset="1" stop-color="#182a58"/></radialGradient>`+
+    `<linearGradient id="${id}au" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f1dc8a"/><stop offset=".5" stop-color="#d9b956"/><stop offset="1" stop-color="#e8cf74"/></linearGradient>`+
+    `<linearGradient id="${id}me" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f3f4f5"/><stop offset=".55" stop-color="#c9cdd1"/><stop offset="1" stop-color="#e2e5e7"/></linearGradient>`+
+    `<linearGradient id="${id}ch" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".12"/><stop offset=".5" stop-color="#fff" stop-opacity="0"/></linearGradient>`+
+    `<linearGradient id="${id}wh" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f7f3ea"/><stop offset="1" stop-color="#ddd6c8"/></linearGradient>`+
+    `<radialGradient id="${id}ca" cx=".38" cy=".35" r=".7"><stop offset="0" stop-color="#86a6d6"/><stop offset="1" stop-color="#46679c"/></radialGradient>`+
+    `<radialGradient id="${id}cb" cx=".38" cy=".35" r=".7"><stop offset="0" stop-color="#f0b2b0"/><stop offset="1" stop-color="#c96b6e"/></radialGradient>`+
+    `<filter id="${id}sh" x="-10%" y="-10%" width="120%" height="125%"><feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="#000" flood-opacity=".28"/></filter></defs>`;
+  /* Platine mit Schatten */
+  s+=`<g filter="${u('sh')}"><g mask="url(#${id})"><path d="${OUT}" fill="${u('pcb')}"/>`;
+  /* Leiterbahnen */
+  s+=`<g fill="none" stroke="#2a4590" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" opacity=".75">`+
+    ['M300 300 L355 245 L355 205','M425 165 L425 210 L460 245','M560 165 L560 205','M665 250 L625 290','M230 520 L300 590 L300 650','M330 650 L420 650 L455 615','M560 610 L600 650 L645 650','M690 560 L645 520','M245 455 L330 470','M760 430 L705 430 L665 470','M383 300 L383 385','M600 425 L640 425','M405 770 L585 770','M200 300 L160 340','M800 300 L840 340','M520 600 L520 665','M180 450 L250 520','M820 450 L760 515','M440 600 L470 630','M600 240 L600 190 L640 150','M335 250 L300 215','M690 440 L720 400','M250 640 L300 690','M720 640 L680 690'].map(d=>`<path d="${d}"/>`).join('')+
+    `<g opacity=".7">${Array.from({length:9},(_,i)=>`<path d="M${400+i*24} 450 L${400+i*24} 470 L${410+i*24} 480"/>`).join('')}</g></g>`;
+  s+=`</g><path d="${OUT}" fill="none" stroke="#14234a" stroke-width="4" mask="url(#${id})"/></g>`;
+  /* Aufdruck (Linien wie auf der Platine) */
+  s+=`<g mask="url(#${id})">`;
+  s+=`<g fill="none" stroke="${silk}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity=".85">`+
+    ['M283 420 L283 457 L262 457','M662 452 L715 452 L722 445','M388 580 L421 617 L430 617','M712 646 L700 661 L688 661','M596 63 L770 122','M446 160 L446 168 L456 168','M548 160 L548 168 L538 168'].map(d=>`<path d="${d}"/>`).join('')+`</g>`;
+  s+=`<g fill="${silk}" opacity=".9"><rect x="342" y="66" width="22" height="5" rx="2"/><rect x="626" y="64" width="22" height="5" rx="2"/><rect x="634.5" y="55.5" width="5" height="22" rx="2"/></g>`;
   s+=`</g>`;
-  /* Rand der Platine */
-  s+=`<path d="${OUT}" fill="none" stroke="${pcbD}" stroke-width="4" mask="url(#${id})"/>`;
-  /* kleine Bauteile (Deko) */
-  s+=[[470,190,90],[665,300,90],[350,345,0],[350,380,0],[430,470,0],[470,470,0],[510,470,0],[550,470,0],[590,470,0],[440,500,0],[650,470,0],[652,505,90],[700,520,0],[580,610,0],[580,640,0],[300,560,90],[330,570,0],[310,610,0],[640,600,90],[690,610,0],[260,520,45],[275,540,45],[290,555,45],[700,390,0],[720,410,0]].map(([x,y,a])=>smd(x,y,a)).join('');
-  /* Chips (Deko) */
-  s+=qfn(360,160,52)+rot(633,210,0,r(-26,-34,52,68,blk,3)+[-22,-8,6,20].map(d=>r(-34,d,8,5,metal,1)+r(26,d,8,5,metal,1)).join(''));
-  s+=rot(292,163,0,r(-22,-17,44,34,metal,4)+r(-15,-11,30,22,'#bfc3c8',3));
-  s+=rot(315,608,0,r(-17,-20,34,40,metal,4)+r(-11,-14,22,28,'#bfc3c8',3));
-  s+=rot(497,580,0,r(-14,-12,28,24,blk,2)); s+=rot(560,555,0,r(-24,-9,48,18,blk,2)+r(-24,-9,6,18,metal,1)+r(18,-9,6,18,metal,1));
-  s+=rot(650,140,-30,r(-20,-12,40,24,'#2f7a4c',3)+r(-20,-12,7,24,metal,1)+r(13,-12,7,24,metal,1));
-  s+=r(603,493,50,82,'#e2b326',3)+r(603,493,50,14,'#a87b12',3)+r(608,512,40,4,'#c1951b',1);
+  /* kleine Bauteile */
+  s+=[[465,192,90],[468,262,0],[460,300,0],[668,300,90],[695,260,90],[712,260,90],[729,260,90],[352,348,0],[352,380,0],[430,470,0],[470,470,0],[510,470,0],[550,470,0],[590,470,0],[440,500,0],[650,470,0],[652,505,90],[600,610,0],[300,560,90],[332,575,0],[440,630,90],[660,560,90],[260,520,45],[273,533,45],[286,546,45],[299,559,45],[700,395,0],[722,410,0],[640,265,90],[620,265,90],[230,640,0],[232,420,0],[315,438,0],[660,600,0]].map(([x,y,a])=>smd(x,y,a)).join('');
+  s+=sot(487,577)+sot(683,320)+sot(686,384)+sot(632,620)+rot(547,573,0,r(-24,-10,48,20,blk,2)+r(-24,-10,6,20,metal,1)+r(18,-10,6,20,metal,1));
+  /* Chips, Quarze */
+  s+=chip(365,160,54)+xtal(298,165,42,34)+xtal(317,613,30,44);
+  s+=rot(637,212,0,r(-21,-19,42,38,'#c8ccd0',3)+r(-17,-15,15,13,u('me'),2)+r(2,-15,15,13,u('me'),2)+r(-17,2,15,13,u('me'),2)+r(2,2,15,13,u('me'),2));
+  s+=rot(648,138,-55,r(-21,-12,42,24,'#3d8a5a',3)+r(-21,-12,7,24,metal,1)+r(14,-12,7,24,metal,1)+r(-10,-6,20,12,'#57a874',2));
+  s+=r(600,493,50,90,'#e0ae2a',3)+r(600,493,50,15,'#9a7012',3)+r(600,505,50,4,'#c4921c',0)+r(606,520,38,4,'#b8861a',1,'opacity=".6"')+r(606,532,30,4,'#b8861a',1,'opacity=".6"');
   /* Lötpunkte, Stiftleiste */
-  let pins='';for(let i=0;i<13;i++){const x=323+i*28.9;pins+=`<circle cx="${x.toFixed(1)}" cy="692" r="9.5" fill="${gold}"/><circle cx="${x.toFixed(1)}" cy="692" r="4" fill="${goldD}"/><circle cx="${x.toFixed(1)}" cy="722" r="9.5" fill="${gold}"/><circle cx="${x.toFixed(1)}" cy="722" r="4" fill="${goldD}"/>`;}
-  for(let i=0;i<6;i++){const x=425+i*29;pins+=`<circle cx="${x}" cy="637" r="9.5" fill="${gold}"/><circle cx="${x}" cy="637" r="4" fill="${goldD}"/>`;}
-  s+=pins+[[350,88],[350,107],[383,107],[412,107],[289,485],[667,567],[743,727],[357,322],[371,345],[386,357],[625,270]].map(([x,y])=>`<circle cx="${x}" cy="${y}" r="8" fill="${gold}"/>`).join('');
-  /* Aufdruck: Minus und Plus an den Pins, A und B */
+  let pins='';for(let i=0;i<13;i++){const x=(318+i*28.7).toFixed(1);pins+=via(x,699,10)+via(x,727,10);}
+  for(let i=0;i<6;i++)pins+=via((415+i*29).toFixed(0),641,10);
+  s+=pins+[[357,90],[343,108],[366,108],[389,108],[610,121],[735,129],[523,177],[330,223],[353,237],[371,257],[377,301],[667,370],[285,487],[663,570],[735,732]].map(([x,y])=>via(x,y,8)).join('');
   /* Bauteile mit Hotspots */
-  const PART={};
-  PART.pins=PADS.map(([x,y])=>`<circle cx="${x}" cy="${y}" r="40.5" fill="none" stroke="${gold}" stroke-width="31"/><circle cx="${x}" cy="${y}" r="55" fill="none" stroke="${goldD}" stroke-width="3"/><circle cx="${x}" cy="${y}" r="26" fill="none" stroke="${goldD}" stroke-width="3"/>`).join('');
-  PART.usb=r(442,82,90,72,metal,6)+r(436,82,102,14,metalD,4)+r(458,110,58,26,'#55595e',4)+r(466,118,42,10,metalD,2);
-  PART.reset=r(560,93,40,54,metalD,5)+r(563,96,34,48,metal,4)+`<circle cx="580" cy="120" r="13" fill="${wht}" stroke="${whtD}" stroke-width="2"/>`;
-  PART.mic=r(617,273,40,34,'#d8b04a',4)+`<circle cx="626" cy="290" r="5" fill="${blk}"/>`;
-  const grove=(x,y,a,side)=>rot(x,y,a,[-48,-17,14,45].map(d=>r(side>0?24:-44,d-4,20,8,metal,2)).join('')+r(-27,-78,54,156,wht,5)+r(-27,-78,54,156,'none',5,`stroke="${whtD}" stroke-width="3"`)+r(side>0?-17:-1,-62,18,124,whtD,3)+[-48,-17,14,45].map(d=>r(side>0?-12:4,d-4,8,8,'#8b8f93',1)).join(''));
-  PART.grove=grove(237,240,19,1)+grove(749,240,-19,-1);
-  const btn=(x,y,col,dark)=>rot(x,y,30,r(-38,-38,76,76,'#2c3036',6)+[[-31,-31],[31,-31],[-31,31],[31,31]].map(([a,b])=>`<circle cx="${a}" cy="${b}" r="5.5" fill="#0d0f12"/>`).join('')+r(-28,-28,56,56,metal,5))+`<circle cx="${x}" cy="${y}" r="21" fill="${col}"/><circle cx="${x-6}" cy="${y-6}" r="7" fill="#fff" opacity=".35"/>`;
-  PART.a=btn(179,357,'#2f7fd1')+r(212,326,48,44,silk,18)+`<path d="M226 360 L236 334 L246 360 M230 351 L242 351" stroke="${pcb}" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`;
-  PART.b=btn(810,363,'#d83a3a')+r(714,326,48,44,silk,18)+`<path d="M731 334 L731 360 L741 360 Q749 360 749 353 Q749 347 740 347 L731 347 M731 334 L739 334 Q746 334 746 340 Q746 347 739 347" stroke="${pcb}" stroke-width="4.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`;
-  PART.acc=r(260,377,50,33,blk,3)+r(266,383,6,6,'#555a61',1);
-  let leds='';const cx=[403,447,490,533,579],cy=[243,287,330,373,417];
-  cy.forEach(y=>cx.forEach(x=>{leds+=r(x-6,y-12,12,24,'#e9e9e2',2)+r(x-6,y-12,12,5,metal,1.5)+r(x-6,y+7,12,5,metal,1.5)+r(x-3,y-4,6,8,'#f2d9b8',1);}));
-  PART.matrix=r(386,222,210,212,'#000',10,'fill-opacity="0"')+leds;
-  PART.rgb=r(473,500,40,40,wht,4)+r(473,500,40,40,'none',4,`stroke="${whtD}" stroke-width="2"`)+`<circle cx="493" cy="520" r="11" fill="#c8c9cf"/><circle cx="493" cy="520" r="5" fill="#9fa3ad"/>`;
-  PART.spk=rot(785,478,10,r(-62,-62,124,124,'#3b3f46',8)+r(-56,-56,112,112,blk,6)+`<circle cx="-40" cy="0" r="5" fill="#2e3238"/>`);
-  PART.cpu=qfn(373,537,66,45);
-  PART.bat=rot(752,606,18,[-20,10].map(d=>r(-62,d,22,9,metal,2)).join('')+r(-42,-55,84,110,wht,6)+r(-42,-55,84,110,'none',6,`stroke="${whtD}" stroke-width="3"`)+r(-10,-36,34,26,whtD,3)+r(-10,8,34,26,whtD,3));
-  return {s,PART};
+  const P={};
+  P.pins=CAL_PADS.map(([x,y])=>`<circle cx="${x}" cy="${y}" r="40.5" fill="none" stroke="${u('au')}" stroke-width="31"/><circle cx="${x}" cy="${y}" r="55.5" fill="none" stroke="${goldD}" stroke-width="2.5" opacity=".7"/><circle cx="${x}" cy="${y}" r="26" fill="none" stroke="${goldD}" stroke-width="2.5"/>`).join('');
+  P.usb=r(433,84,22,14,metalD,3)+r(519,84,22,14,metalD,3)+r(440,80,94,78,u('me'),7)+r(440,80,94,78,'none',7,`stroke="${metalD}" stroke-width="2"`)+r(458,104,58,30,'#4a4e54',5)+r(466,112,42,12,'#c0c4c8',2)+r(432,140,14,16,metalD,3)+r(528,140,14,16,metalD,3);
+  P.reset=r(565,92,38,52,'#7c8187',5)+r(568,95,32,46,u('me'),4)+`<circle cx="584" cy="118" r="12" fill="#f1efe8" stroke="#bdb9b0" stroke-width="2"/>`;
+  P.mic=r(619,277,38,30,'#c99d3d',4)+r(621,279,34,26,'#e2bd5e',3)+`<circle cx="629" cy="292" r="5" fill="${blk}"/>`;
+  const grove=(x,y,a,sd)=>rot(x,y,a,[-48,-17,14,45].map(d=>r(sd>0?24:-46,d-4,22,8,u('me'),2)).join('')+r(-28,-80,56,160,u('wh'),5)+r(-28,-80,56,160,'none',5,'stroke="#c6bfb0" stroke-width="2.5"')+r(sd>0?-18:-2,-64,20,128,'#d4ccbc',3)+r(sd>0?-18:-2,-64,20,128,'none',3,'stroke="#bfb7a6" stroke-width="1.5"')+[-48,-17,14,45].map(d=>r(sd>0?-12:3,d-3,9,6,'#9ea2a6',1)).join('')+r(sd>0?-28:20,-22,8,44,'#e8e2d5',2));
+  P.grove=grove(240,250,19,1)+grove(747,250,-19,-1);
+  const btn=(x,y,cap)=>rot(x,y,30,r(-38,-38,76,76,'#2a2d33',6)+[[-31,-31],[31,-31],[-31,31],[31,31]].map(([a,b])=>`<circle cx="${a}" cy="${b}" r="6" fill="#111317"/>`).join('')+r(-29,-29,58,58,u('me'),5)+r(-29,-29,58,58,'none',5,`stroke="${metalD}" stroke-width="2"`))+`<circle cx="${x}" cy="${y+2}" r="22" fill="#000" opacity=".25"/><circle cx="${x}" cy="${y}" r="21" fill="${u(cap)}"/>`;
+  P.a=btn(177,363,'ca')+`<circle cx="241" cy="347" r="23" fill="${silk}"/><path d="M231 359 L241 334 L251 359 M235 350 L247 350" stroke="#1e3369" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`;
+  P.b=btn(807,360,'cb')+`<circle cx="742" cy="347" r="23" fill="${silk}"/><path d="M735 335 L735 359 L745 359 Q752 359 752 352.5 Q752 346.5 744 346.5 L735 346.5 M735 335 L743 335 Q749 335 749 340.5 Q749 346.5 743 346.5" stroke="#1e3369" stroke-width="4.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>`;
+  P.acc=r(258,380,52,36,blk,3)+r(258,380,52,36,u('ch'),3)+`<circle cx="266" cy="388" r="2.5" fill="#4a4e55"/>`;
+  let leds='';const cx=[405,448,491,536,580],cy=[247,289,332,375,418];
+  cy.forEach(y=>cx.forEach(x=>{leds+=r(x-5,y-10,10,20,'#ece9df',2)+r(x-5,y-10,10,4,metal,1)+r(x-5,y+6,10,4,metal,1)+r(x-2.5,y-4,5,8,'#e9a35b',1);}));
+  P.matrix=r(386,226,214,212,'#000',10,'fill-opacity="0"')+leds;
+  P.rgb=r(472,503,42,42,u('wh'),4)+r(472,503,42,42,'none',4,'stroke="#c3bcae" stroke-width="2"')+`<circle cx="493" cy="524" r="12" fill="#cfd0d6"/><circle cx="493" cy="524" r="6" fill="#9ea2ad"/><rect x="489" y="520" width="3" height="3" fill="#d24"/><rect x="494" y="520" width="3" height="3" fill="#2a4"/><rect x="491" y="525" width="3" height="3" fill="#24d"/>`;
+  P.spk=rot(783,485,5,r(-64,-64,128,128,'#41454c',8)+r(-58,-58,116,116,'#202227',6)+r(-58,-58,116,116,u('ch'),6)+r(-68,-20,6,40,metalD,2));
+  P.cpu=chip(370,543,70,45);
+  P.bat=rot(768,605,20,[-22,8].map(d=>r(-66,d,26,10,u('me'),2)).join('')+r(-42,-58,84,116,u('wh'),6)+r(-42,-58,84,116,'none',6,'stroke="#c6bfb0" stroke-width="2.5"')+r(-8,-40,32,28,'#d4ccbc',3)+r(-8,10,32,28,'#d4ccbc',3)+r(30,-58,12,116,'#e9e3d6',3));
+  return {s,P};
 }
-/* Hotspots: Markierung (.hl) je Bauteil */
 const CAL_HL={
-  pins:[[916,424],[702,795],[284,795],[70,424],[284,68],[702,68]].map(([x,y])=>`<circle class="hl" cx="${x}" cy="${y}" r="66"/>`).join(''),
-  usb:'<rect class="hl" x="424" y="70" width="126" height="96" rx="12"/>',
-  reset:'<circle class="hl" cx="580" cy="120" r="38"/>',
-  mic:'<circle class="hl" cx="637" cy="290" r="36"/>',
-  grove:'<circle class="hl" cx="237" cy="240" r="90"/><circle class="hl" cx="749" cy="240" r="90"/>',
-  a:'<circle class="hl" cx="179" cy="357" r="58"/>',
-  b:'<circle class="hl" cx="810" cy="363" r="58"/>',
-  acc:'<rect class="hl" x="246" y="363" width="78" height="61" rx="12"/>',
-  matrix:'<rect class="hl" x="380" y="218" width="222" height="220" rx="14"/>',
-  rgb:'<circle class="hl" cx="493" cy="520" r="36"/>',
-  spk:'<circle class="hl" cx="785" cy="480" r="88"/>',
-  cpu:'<circle class="hl" cx="373" cy="537" r="62"/>',
-  bat:'<circle class="hl" cx="752" cy="606" r="74"/>'
+  pins:CAL_PADS.map(([x,y])=>`<circle class="hl" cx="${x}" cy="${y}" r="66"/>`).join(''),
+  usb:'<rect class="hl" x="422" y="68" width="130" height="102" rx="12"/>',
+  reset:'<circle class="hl" cx="584" cy="118" r="38"/>',
+  mic:'<circle class="hl" cx="638" cy="292" r="34"/>',
+  grove:'<circle class="hl" cx="240" cy="250" r="92"/><circle class="hl" cx="747" cy="250" r="92"/>',
+  a:'<circle class="hl" cx="177" cy="363" r="58"/>',
+  b:'<circle class="hl" cx="807" cy="360" r="58"/>',
+  acc:'<rect class="hl" x="244" y="366" width="80" height="64" rx="12"/>',
+  matrix:'<rect class="hl" x="382" y="222" width="222" height="220" rx="14"/>',
+  rgb:'<circle class="hl" cx="493" cy="524" r="36"/>',
+  spk:'<circle class="hl" cx="783" cy="485" r="90"/>',
+  cpu:'<circle class="hl" cx="370" cy="543" r="62"/>',
+  bat:'<circle class="hl" cx="768" cy="605" r="78"/>'
 };
-/* Beschriftungen als HTML über der Grafik (bleiben auf jedem Gerät lesbar): [Bauteil, x, y] in Grafik-Koordinaten */
-const CAL_LAB=[['usb','USB',487,30],['reset','Reset',585,190],['mic','Mikrofon',650,330],['grove','A0',140,170],['grove','A1',846,170],['matrix','LED-Matrix',490,458,520,460],['acc','Lagesensor',250,448,245,425],['rgb','RGB-LED',493,580,520,588],['spk','Lautsprecher',775,515,800,548],['cpu','Prozessor',300,642,275,640],['bat','Batterie',820,660,800,672]];
-const CAL_PINLAB=[['0',112,486],['1',352,800],['2',646,796],['3',880,458],['−',344,68],['+',632,78]];
+/* Beschriftungen wie auf der Platine: [Bauteil, Text, x, y, x schmal, y schmal] in Grafik-Koordinaten */
+const CAL_LAB=[['usb','USB',487,178,450,178],['reset','RESET',600,168,600,178],['mic','MIKROFON',652,334],['grove','A0',310,278],['grove','A1',678,278],['matrix','LED-MATRIX',492,222,492,232],['acc','LAGESENSOR',190,457,200,440],['rgb','RGB-LED',493,568],['spk','LAUTSPRECHER',584,452],['cpu','PROZESSOR',496,617,440,625],['bat','BATTERIE',612,661,700,680]];
+const CAL_PINLAB=[['0',108,500],['1',354,800],['2',632,797],['3',876,481]];
 function boardFig(){
-  const {s,PART}=calDrawing();
-  const g=id=>`<g class="bp" data-p="${id}" tabindex="0" role="button" aria-label="${PARTS[id].n}">${PART[id]}${CAL_HL[id]}</g>`;
-  const svg=`<svg class="cal-svg cal-draw" viewBox="0 0 1000 870" role="group" aria-label="Zeichnung des Calliope mini 2. Tippe auf ein Bauteil.">${s}${Object.keys(PART).map(g).join('')}</svg>`;
+  const {s,P}=calDrawing();
+  const g=id=>`<g class="bp" data-p="${id}" tabindex="0" role="button" aria-label="${PARTS[id].n}">${P[id]}${CAL_HL[id]}</g>`;
+  const svg=`<svg class="cal-svg cal-draw" viewBox="0 0 1000 870" role="group" aria-label="Zeichnung des Calliope mini 2. Tippe auf ein Bauteil.">${s}${Object.keys(P).map(g).join('')}</svg>`;
   const pc=(x,y,xs=x,ys=y)=>`--x:${(x/10).toFixed(1)}%;--y:${(y/8.7).toFixed(1)}%;--xs:${(xs/10).toFixed(1)}%;--ys:${(ys/8.7).toFixed(1)}%`;
   const labs=CAL_LAB.map(([p,t,x,y,xs,ys])=>`<span class="cal-lab" data-p="${p}" style="${pc(x,y,xs,ys)}">${t}</span>`).join('')+CAL_PINLAB.map(([t,x,y])=>`<span class="cal-pin" style="${pc(x,y)}">${t}</span>`).join('');
   return `<div class="cal-fig">${svg}${labs}</div>`;
 }
-const CAL_CREDIT='Zeichnung nach einem Foto der <a href="https://github.com/calliope-mini/calliope-mini.github.io" target="_blank" rel="noopener">Calliope gGmbH</a>, Lizenz <a href="https://creativecommons.org/licenses/by-sa/4.0/deed.de" target="_blank" rel="noopener">CC BY-SA 4.0</a>. Die Zeichnung steht ebenfalls unter CC BY-SA 4.0.';
+const CAL_CREDIT='Eigene Zeichnung, Lizenz CC BY-NC-SA 4.0.';
 
 
 /* ---------- Inhalte ---------- */
