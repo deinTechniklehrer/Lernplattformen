@@ -571,8 +571,8 @@ a.btn{text-decoration:none}
 .rr-wheel.spin{transform-box:fill-box;transform-origin:center;animation:rrspin var(--rr-w,.6s) linear infinite}
 @keyframes rrspin{to{transform:rotate(360deg)}}
 .rr-windg{opacity:.55}
-@media (prefers-reduced-motion:reduce){.rr-mv,.rr-wheel.spin{animation:none}.rr-needle,.rr-bfill,.rr-bar i,.rr-track i,.rr-tcar{transition:none!important}}
-.rr-art{font:700 15px/1 system-ui,sans-serif;paint-order:stroke;stroke:var(--surface)!important;stroke-width:4px;stroke-linejoin:round}
+@media (prefers-reduced-motion:reduce){.rr-mv,.rr-wheel.spin{animation:none}.rr-tneedle,.rr-tarc,.rr-bar i,.rr-track i,.rr-tcar{transition:none!important}}
+.rr-art{font:700 15px/1 var(--body);paint-order:stroke;stroke:var(--surface)!important;stroke-width:4px;stroke-linejoin:round}
 .rr-fw{border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--surface-2);min-width:0}
 .rr-fw h5{margin:0 0 6px;font-size:16px}
 .rr-fwl{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:13px;margin-bottom:8px}
@@ -590,14 +590,13 @@ a.btn{text-decoration:none}
 .rr-fwt{grid-area:t;font-size:15px;white-space:nowrap}
 .rr-fwbar{grid-area:b;display:flex;height:14px;border-radius:7px;background:var(--line);overflow:hidden}
 .rr-fwbar i{display:block;height:100%;transition:width .35s ease}
-.rr-fwc{display:block;width:100%;height:auto;max-height:260px;font:11px system-ui,sans-serif;fill:var(--ink)}
+.rr-fwc{display:block;width:100%;height:auto;max-height:260px;font:15px var(--body);fill:var(--ink)}
 .rr-fwc path.o{stroke-width:2;opacity:.45}.rr-fwc path.s{stroke-width:4}.rr-fwc .rr-fwair{fill:#2a6fb0;opacity:.18}
 .rr-fwp{margin:8px 0 0;font-size:13px;color:var(--muted)}
 @media (prefers-reduced-motion:reduce){.rr-fwbar i{transition:none}}
 .rr-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px 14px}
 .rr-f{display:grid;gap:6px;font-size:15px;font-weight:700;align-content:start}
 .rr-f input[type=range]{width:100%;accent-color:var(--c);min-height:40px}
-.rr-speed{font-size:18px}
 .rr-in{display:flex;gap:6px;align-items:center;font-weight:400}.rr-in input{width:110px;min-height:42px;font-size:16px}
 .rr-seg{display:flex;flex-wrap:wrap;gap:6px}.rr-seg .btn{min-height:44px;padding:6px 12px;font-size:15px;display:inline-flex;gap:8px;align-items:center}
 .rr-seg .btn[aria-pressed="true"]{background:var(--c);color:var(--on-accent)}
@@ -609,11 +608,6 @@ a.btn{text-decoration:none}
 .rr-card h5{margin:0;font-size:17px;display:flex;gap:8px;align-items:center}
 .rr-ic{display:inline-flex;width:26px;height:26px}.rr-ic svg{width:100%;height:100%}
 .rr-B .rr-ic{color:#e08a1e}.rr-D .rr-ic{color:#7b8791}.rr-E .rr-ic{color:#2e9a5e}
-.rr-top{display:flex;gap:12px;align-items:center}
-.rr-gauge{width:104px;flex:none}.rr-g{display:block;width:100%;height:auto}
-.rr-needle{transform-origin:60px 60px;transition:transform .5s ease}
-.rr-bfill{transform-box:fill-box;transform-origin:left center;transition:transform .5s ease,fill .3s}
-.rr-lv{display:grid;gap:2px}.rr-lvn{font:800 26px var(--display);line-height:1}.rr-lvt{font-size:13px;color:var(--muted)}
 .rr-kv{display:flex;justify-content:space-between;gap:8px;align-items:baseline;font-size:14px}.rr-kv b{font-size:16px;white-space:nowrap}
 .rr-bar{height:8px;border-radius:99px;background:var(--surface-2);overflow:hidden}.rr-bar i{display:block;height:100%;background:var(--bad);transition:width .5s ease}
 .rr-track{position:relative;height:26px}
@@ -622,11 +616,35 @@ a.btn{text-decoration:none}
 .rr-tcar{position:absolute;bottom:7px;width:40px;transform:translateX(-100%);transition:left .5s ease}.rr-tcar svg{display:block;width:100%;height:auto}
 .rr-trip{border-top:1px dashed var(--line);padding-top:6px;margin-top:2px}
 .rr-tw{overflow-x:auto}.rr-t{border-collapse:collapse;width:100%;font-size:15px}.rr-t th,.rr-t td{padding:5px 8px;border-bottom:1px solid var(--line);text-align:left}
-.rr-vbox{align-content:start}.rr-tachow{width:170px;max-width:100%;justify-self:center}
-.rr-tacho{display:block;width:100%;height:auto}.rr-tacho text{font:700 10px var(--body);fill:var(--ink)}.rr-tacho .rr-tnum{font-size:17px}
-.rr-tneedle{transform-origin:80px 82px;transition:transform .3s ease}.rr-tarc{transition:stroke-dasharray .3s ease}
-.rr-fuel{display:grid;gap:2px;font-size:14px}.rr-fuel input{width:100%;accent-color:var(--c);min-height:36px}
-.rr-rest{font-size:14px}.rr-rest b{font-size:16px}
+.rr-tacho{display:block;width:100%;height:auto}.rr-tacho text{font:700 17.5px var(--body);fill:var(--ink)}.rr-tacho .rr-tnum{font:800 22px var(--display)}.rr-tacho .rr-tu{fill:var(--muted)}
+.rr-tneedle{transform-origin:80px 80px;transition:transform .3s ease}.rr-tarc{transition:stroke-dasharray .3s ease,stroke .3s}
+/* Cockpit: immer dunkel wie ein Armaturenbrett, unabhängig vom hellen oder dunklen Modus */
+.rr-cock{display:grid;gap:8px;padding:8px;border-radius:22px;background:#0b0f12;box-shadow:inset 0 0 0 1px #2c353d}
+.rr-cock .rr-scene{border-radius:15px 15px 6px 6px;border:0}
+.rr-dash,.rr-ctl{color-scheme:dark;--bg:#0a0e11;--surface:#151b20;--surface-2:#252e35;--ink:#EEF2F4;--muted:#A9B4BC;--line:#3A454E;--on-accent:#0F1512;--c:#53BB91;
+  --existenz:#53BB91;--existenz-soft:#1A3128;--existenz-ink:#7FD3B0;--bad:#E27E71;--rr-cut:#151b20;color:var(--ink)}
+.rr-dash{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"v f" "bc bc";gap:6px;padding:8px 6px;border-radius:6px 6px 14px 14px;background:linear-gradient(#1c232a,#0f1317)}
+@media (min-width:760px){.rr-dash{grid-template-columns:minmax(0,210px) minmax(0,1fr) minmax(0,210px);grid-template-areas:"v bc f";padding:12px;gap:12px}.rr-inst{padding:8px}}
+.rr-inst{display:flex;flex-direction:column;gap:4px;align-items:center;padding:6px 4px;border-radius:18px;background:radial-gradient(circle at 50% 32%,#222b32,#0a0d10 78%);border:2px solid #313b44;min-width:0}
+.rr-iv{grid-area:v}.rr-if{grid-area:f}
+.rr-dialw{width:100%;max-width:200px}
+.rr-inst input[type=range]{width:calc(100% - 12px);accent-color:var(--c);min-height:40px;margin-top:auto}
+.rr-cap{display:grid;justify-items:center;gap:0;font-size:13px;line-height:1.35;color:var(--muted);text-align:center}.rr-cap b{color:var(--ink);font-size:15px;white-space:nowrap}
+label.rr-cap b{display:block}
+.rr-capi{display:inline-flex;gap:4px;align-items:center}.rr-capi .rr-ic{width:18px;height:18px;color:var(--c);flex:none}
+.rr-bc{grid-area:bc;display:grid;gap:8px;align-content:start;padding:10px 12px;border-radius:16px;background:#05080a;border:2px solid #313b44;min-width:0;font-variant-numeric:tabular-nums}
+.rr-bch{display:flex;gap:10px;align-items:center;min-width:0}.rr-bch b{display:block;font-size:16px}.rr-bch small{color:var(--muted);font-size:13px}
+.rr-bcm{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 10px;padding:6px 0 8px;border-block:1px solid var(--line)}
+.rr-bcm span{flex-basis:100%;font-size:14px;color:var(--muted)}.rr-bcm b{font:800 36px var(--display);line-height:1;color:#7FE3B4}.rr-bcm small{font-size:14px;color:var(--muted)}
+.rr-bcg{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px 12px}
+.rr-bcg div{display:grid}.rr-bcg span{font-size:13px;color:var(--muted)}.rr-bcg b{font-size:17px}
+.rr-nav{display:grid;gap:6px;padding:8px 10px;border-radius:12px;background:#111a20}
+.rr-navh{display:flex;flex-wrap:wrap;justify-content:space-between;gap:2px 10px;font-size:14px}.rr-navh b{font-size:16px}
+.rr-ctl{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px 14px;padding:12px 10px;border-radius:14px;background:#12171b}
+.rr-ctl .rr-seg .rr-pic>svg[viewBox="0 0 24 24"]{width:22px;height:22px;padding:0;border:0;background:none}
+.rr-cmph{margin:0;font-size:15px}
+.rr-card.sel{border-color:var(--c)}.rr-tag{margin-left:auto;font:700 13px var(--body);padding:2px 8px;border-radius:99px;background:var(--c);color:var(--on-accent)}
+@media (max-width:700px){.rr-art{font-size:27px}}
 .rr-st{display:flex;gap:8px;align-items:center;border-radius:10px;padding:6px 10px;font-size:14px}
 .rr-st.ok{background:var(--existenz-soft);color:var(--existenz-ink)}
 .rr-st.warn{background:#fde3c3;color:#5c3200;border:2px solid #e07b1e;font-size:15px;font-weight:700}
@@ -1102,7 +1120,7 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
 <section class="station c-existenz" data-ch="10" hidden>
   <div class="info">
     <h3>Reichweite und Kosten vergleichen</h3>
-    <p>Probiere den Rechner oben aus: Ändere die Geschwindigkeit, den Untergrund, die Fahrzeugklasse und die Größe des Akkus. Beobachte, wie sich Verbrauch, Kosten und Reichweite der drei Antriebe verändern. Die Preise kannst du unter „Annahmen und Preise anpassen“ auf den aktuellen Stand bringen.</p>
+    <p>Probiere den Rechner oben aus: Ändere im Cockpit die Geschwindigkeit, den Untergrund, die Fahrzeugklasse und den Antrieb. Beobachte im Vergleich darunter, wie sich Verbrauch, Kosten und Reichweite der drei Antriebe verändern. Die Preise kannst du unter „Annahmen und Preise anpassen“ auf den aktuellen Stand bringen.</p>
   </div>
   <article class="task">
     <header><span class="num"></span><h3>Wovon der Verbrauch abhängt</h3><button class="op" data-op="erklären" type="button">erklären</button></header>
@@ -1666,8 +1684,8 @@ t22:{type:'multi',opts:[['Kraftstofftank',true],['Auspuff',true],['Räder',false
 t23:{type:'num',answer:98,unit:'g je Kilometer',why:'238 g − 140 g = 98 g. Das Elektroauto verursacht in dieser Studie also etwa 41 % weniger Treibhausgase als der Benziner.'},
 t24:{type:'open',min:220,ki:true,checks:[['Umwelt',/co2|co₂|klima|strom|abgas|umwelt|emission|treibhaus/i],['Energieeffizienz',/effizien|wirkungsgrad|wärme|rekuper|energie/i],['Alltag',/reichweite|laden|lade|tank|strecke|urlaub|pendel/i],['Kosten oder Rohstoffe',/kost|preis|teuer|günstig|rohstoff|lithium|kobalt|nickel|recycl|wartung/i],['Empfehlung',/empfehl|ich würde|meiner meinung|deshalb|daher|fazit|insgesamt/i]],
   muster:['Umwelt: Über das ganze Autoleben verursacht ein Elektroauto weniger Treibhausgase als ein Benziner (UBA-Studie: etwa 140 statt 238 g je km). Mit mehr Ökostrom wird es noch besser. In der Stadt stößt es keine Abgase aus.','Energieeffizienz: Der Elektromotor macht aus dem größten Teil der Energie Bewegung, der Verbrenner verliert viel als Wärme. Beim Bremsen gewinnt das E-Auto Energie zurück.','Alltag: 30 km am Tag schafft jedes Elektroauto locker, laden kann die Familie zu Hause oder bei der Arbeit. Bei den zwei Urlaubsfahrten muss sie unterwegs Pausen zum Laden einplanen, Tanken geht schneller.','Kosten und Rohstoffe: Das E-Auto ist in der Anschaffung oft teurer, braucht aber weniger Wartung. Für den Akku werden Rohstoffe wie Lithium und Kobalt abgebaut, das belastet Umwelt und Menschen in den Abbauländern. Recycling kann helfen.','Empfehlung: Ich empfehle der Familie ein Elektroauto, weil sie fast nur kurze Strecken fährt und die Vorteile bei Umwelt und Effizienz überwiegen. Die zwei Urlaubsfahrten lassen sich mit Ladepausen planen.','Deine Empfehlung darf anders ausfallen, wenn du sie gut begründest.']},
-t30:{type:'num',answer:0,tol:0.3,unit:'kWh je 100 km',why:'',help:{tip:'Tippe auf „Voreinstellung“, wähl Mittelklasse und Asphalt und stell 100 km/h ein. Lies den Verbrauch in der Spalte Elektroauto ab.',teil:'Der Wert steht in der Karte „Elektroauto“ in der Zeile „Verbrauch“. Runde auf eine Nachkommastelle.'}},
-t31:{type:'num',answer:0,tol:0.15,unit:'Euro',why:'',help:{tip:'Erst „Voreinstellung“, dann den Regler auf 130 km/h. In der Karte „Diesel“ steht die Zeile „Kosten je 100 km“.',teil:'Bei 130 km/h ist der Luftwiderstand fast 1,7-mal so groß wie bei 100 km/h. Der Diesel braucht dann rund 6 Liter auf 100 km. Multipliziere mit dem Dieselpreis.'}},
+t30:{type:'num',answer:0,tol:0.3,unit:'kWh je 100 km',why:'',help:{tip:'Tippe auf „Voreinstellung“, wähl Mittelklasse und Asphalt und stell 100 km/h ein. Wähl als Antrieb „Elektroauto“ und lies den Verbrauch im Bordcomputer ab.',teil:'Der Wert steht groß im Bordcomputer unter „Verbrauch“. Du findest ihn auch im Vergleich in der Karte „Elektroauto“. Runde auf eine Nachkommastelle.'}},
+t31:{type:'num',answer:0,tol:0.15,unit:'Euro',why:'',help:{tip:'Erst „Voreinstellung“, dann den Regler unter dem Tacho auf 130 km/h. Wähl als Antrieb „Diesel“. Im Bordcomputer steht „Kosten je 100 km“.',teil:'Bei 130 km/h ist der Luftwiderstand fast 1,7-mal so groß wie bei 100 km/h. Der Diesel braucht dann rund 6 Liter auf 100 km. Multipliziere mit dem Dieselpreis.'}},
 t32:{type:'gap',text:'Der Luftwiderstand wächst mit dem {0} der Geschwindigkeit. Fährt ein Auto doppelt so schnell, ist der Luftwiderstand {1} so groß. Der Rollwiderstand hängt von der {2} des Autos und vom {3} ab. Ein größerer Akku erhöht die Reichweite, macht das Auto aber auch {4}. Ein Verbrennungsmotor macht nur etwa {5} der Energie im Kraftstoff zu Bewegung.',gaps:[[['Quadrat','Hälfte','Wurzel'],0],[['doppelt','viermal','achtmal'],1],[['Farbe','Masse','Höchstgeschwindigkeit'],1],[['Untergrund','Luftdruck','Motoröl'],0],[['leichter','schwerer','schneller'],1],[['ein Viertel bis ein Drittel','die Hälfte','neun Zehntel'],0]]},
 t33:{type:'open',min:140,checks:[['Kosten je 100 km',/kost|€|euro|preis|günstig|billig|teuer/i],['Reichweite',/reichweite|km/i],['Urlaubsfahrt und Laden',/urlaub|700|lad|tank/i],['Entscheidung mit Begründung',/weil|deshalb|darum|daher|passt|empfehle|würde/i]],
   muster:['Für den Arbeitsweg von 40 km am Tag reicht die Reichweite aller drei Antriebe. Das Elektroauto ist im Rechner bei 100 km/h mit rund 6 Euro je 100 km am günstigsten, Diesel und Benziner kosten etwa 9 bis 12 Euro.','Bei der Urlaubsfahrt über 700 km reicht der 50-kWh-Akku bei 130 km/h nur für gut 200 km, das Elektroauto muss also zwei- bis dreimal laden. Der Diesel kommt mit einer Tankfüllung durch.','Ich würde der Familie das Elektroauto empfehlen, weil sie fast nur kurze Strecken fährt und dabei viel spart. Für die zwei Urlaubsfahrten plant sie Ladepausen ein. Wer zu Hause nicht laden kann, zahlt an der Ladesäule mehr; dann lohnt sich der Vergleich neu.']},
@@ -1896,9 +1914,9 @@ const RR_KL=[['Sportwagen',0.36,1.98,1500],['Mittelklasse',0.30,2.19,1300],['SUV
 /* Reihenfolge der Anzeige. Die Nummern der Klassen bleiben gleich, damit gespeicherte Arbeitsstände weiter stimmen. */
 const RR_ORD=[3,1,0,2];
 const RR_UG=[['Asphalt',0.01],['Schotter',0.02],['Erdweg',0.04],['Sand',0.15]];
-const RR_DEF={kl:1,ug:0,v:100,s:100,tank:50,akku:50,ed:150,etaB:25,etaD:30,etaE:85,pB:2.114,pD:2.261,pE:0.373};
+const RR_DEF={kl:1,ug:0,an:0,f:100,v:100,s:100,tank:50,akku:50,ed:150,etaB:25,etaD:30,etaE:85,pB:2.114,pD:2.261,pE:0.373};
 const RR_KWHL={B:32/3.6,D:36/3.6};
-const RR_N={B:'Benziner',D:'Diesel',E:'Elektroauto'};
+const RR_N={B:'Benziner',D:'Diesel',E:'Elektroauto'},RR_AK=['B','D','E'],RR_AN=RR_AK.map(k=>[RR_N[k]]);
 function rrCalc(o,v){v=v==null?o.v:v;const k=RR_KL[o.kl],cr=RR_UG[o.ug][1],ms=v/3.6,mA=o.akku*1000/o.ed,FL=0.5*1.2*k[1]*k[2]*ms*ms,r={mA,FL};
   ['B','D','E'].forEach(d=>{const m=k[3]+(d==='E'?mA:0),FR=cr*m*9.81,F=FL+FR,erad=F/3600,eta=o['eta'+d]/100,e=erad/eta,
     store=d==='E'?o.akku:o.tank*RR_KWHL[d],per100=d==='E'?100*e:100*e/RR_KWHL[d],price=o['p'+d];
@@ -1908,7 +1926,7 @@ const rrF=(x,n=0)=>x.toLocaleString('de-DE',{minimumFractionDigits:n,maximumFrac
   T.t30.why='Bei 100 km/h braucht das Elektroauto der Mittelklasse im Rechner etwa '+rrF(d.E.per100,1)+' kWh je 100 km. Der schwere Akku erhöht den Rollwiderstand, trotzdem braucht es viel weniger Energie als ein Verbrenner.';
   const d2=rrCalc(Object.assign({},RR_DEF),130);T.t31.answer=Math.round(d2.D.cost100*100)/100;
   T.t31.why='Bei 130 km/h braucht der Diesel etwa '+rrF(d2.D.per100,1)+' l je 100 km. Das kostet rund '+rrF(d2.D.cost100,2)+' Euro. Bei 100 km/h wären es nur '+rrF(rrCalc(Object.assign({},RR_DEF),100).D.cost100,2)+' Euro.';})();
-/* Grafiken des Rechners: Autos, Fahrbahn, Tankuhr und Akku-Anzeige, alles selbst gezeichnet */
+/* Grafiken des Rechners: Autos, Fahrbahn, Tacho und Füllstandsanzeige, alles selbst gezeichnet */
 /* Piktogramme: Front rechts (Fahrtrichtung nach rechts), Boden bei y=88. Fläche in der Klassenfarbe, Fenster, Griffe, Leuchten und Radnabe in --rr-cut (Hintergrund der Kachel). vx zentriert das Auto in der Kachel. */
 const RR_CAR=[
  {col:'#c8362b',r:13,wx:[46,158],vx:1,
@@ -1938,25 +1956,27 @@ const rrPic=kl=>`<svg viewBox="${RR_CAR[kl].vx} 4 200 86" aria-hidden="true">${r
 const RR_GROUND=[['#4a5157','#f4f6f7','28 22',4],['#8b8f92','#d9dcde','3 22',5],['#8a6a47','#b89872','3 22',5],['#e3c98a','#c9a85c','3 22',5]];
 function rrScene(o){const g=RR_GROUND[o.ug];
   return `<svg class="rr-svg" viewBox="0 0 600 196" role="img" aria-label="${RR_KL[o.kl][0]} fährt auf ${RR_UG[o.ug][0]}. Pfeile zeigen Luftwiderstand und Rollwiderstand.">
-    <g class="rr-windg" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="20 30"><path class="rr-mv" d="M-380 34H1000"/><path class="rr-mv" d="M-418 62H1000"/><path class="rr-mv" d="M444 96H1000"/></g>
+    <g class="rr-windg" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-dasharray="20 30"><path class="rr-mv" d="M-380 34H1000"/><path class="rr-mv" d="M-418 62H1000"/><path class="rr-mv" d="M404 96H1000"/></g>
     <rect x="-400" y="150" width="1400" height="38" fill="${g[0]}"/>
     <path class="rr-mv" d="M-450 172H1050" fill="none" stroke="${g[1]}" stroke-width="${g[3]}" stroke-linecap="round" stroke-dasharray="${g[2]}"/>
     ${o.ug?`<path class="rr-mv" d="M-439 161H1050" fill="none" stroke="${g[1]}" stroke-width="4" stroke-linecap="round" stroke-dasharray="3 22"/>`:''}
-    <g transform="translate(140 18) scale(1.5)">${rrCar(o.kl,true)}</g>
-    <g class="rr-arL" fill="#2a6fb0" stroke="#2a6fb0"><line y1="104" y2="104" stroke-width="9" stroke-linecap="round"/><polygon stroke="none"/><text class="rr-art" x="450" y="88" stroke="none">Luft</text></g>
-    <g class="rr-arR" fill="#e07b1e" stroke="#e07b1e"><line y1="160" y2="160" stroke-width="9" stroke-linecap="round"/><polygon stroke="none"/><text class="rr-art" x="394" y="144" stroke="none">Roll</text></g>
+    <g transform="translate(100 18) scale(1.5)">${rrCar(o.kl,true)}</g>
+    <g class="rr-arL" fill="#2a6fb0" stroke="#2a6fb0"><line y1="104" y2="104" stroke-width="9" stroke-linecap="round"/><polygon stroke="none"/><text class="rr-art" x="410" y="88" stroke="none">Luft</text></g>
+    <g class="rr-arR" fill="#e07b1e" stroke="#e07b1e"><line y1="160" y2="160" stroke-width="9" stroke-linecap="round"/><polygon stroke="none"/><text class="rr-art" x="380" y="144" stroke="none">Roll</text></g>
   </svg>`;}
 function rrArrow(g,xHead,y,F,lab){const len=Math.max(0,Math.min(150,F*0.11)),ln=g.querySelector('line'),pg=g.querySelector('polygon');g.querySelector('text').textContent=lab+' '+rrF(F)+' N';
   pg.setAttribute('points',`${xHead},${y} ${xHead+18},${y-12} ${xHead+18},${y+12}`);
   ln.setAttribute('x1',xHead+16);ln.setAttribute('x2',xHead+16+len);ln.style.display=len<3?'none':'';}
-const RR_TANK=`<svg class="rr-g" viewBox="0 0 120 70" aria-hidden="true"><path d="M12 60A48 48 0 0 1 108 60" fill="none" stroke="var(--line)" stroke-width="10" stroke-linecap="round"/><path d="M12 60A48 48 0 0 1 17.2 38.2" fill="none" stroke="#e2574c" stroke-width="10" stroke-linecap="round"/><g stroke="var(--surface)" stroke-width="2.5"><path d="M26.1 26.1l7 7"/><path d="M60 12v10"/><path d="M93.9 26.1l-7 7"/></g><g class="rr-needle"><path d="M60 60V20" stroke="var(--ink)" stroke-width="4" stroke-linecap="round"/></g><circle cx="60" cy="60" r="6" fill="var(--ink)"/></svg>`;
-const RR_AKKU=`<svg class="rr-g" viewBox="0 0 120 70" aria-hidden="true"><rect x="8" y="14" width="96" height="44" rx="8" fill="none" stroke="var(--ink)" stroke-width="3.5"/><rect x="106" y="27" width="8" height="18" rx="3" fill="var(--ink)"/><rect class="rr-bfill" x="14" y="20" width="84" height="32" rx="4"/><g stroke="var(--surface)" stroke-width="2.5"><path d="M35 20v32M56 20v32M77 20v32"/></g></svg>`;
 const RR_IC={B:'<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="10" height="18" rx="2" fill="currentColor"/><rect x="6" y="5.5" width="6" height="5" rx="1" fill="var(--surface)"/><path d="M14 9h2.5l2.5 3v6.5a1.6 1.6 0 0 1-3.2 0V14H14" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>',E:'<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 2 5 13.5h5.5L9.5 22 19 9.5h-5.5Z" fill="currentColor"/></svg>'};RR_IC.D=RR_IC.B;
 const RR_STOP={B:'tanken',D:'tanken',E:'laden'};
-function rrTacho(){let t='';for(let v=0;v<=200;v+=20){const a=(-120+240*v/200)*Math.PI/180,s=Math.sin(a),c=Math.cos(a);
-    t+=`<path d="M${(80+51*s).toFixed(1)} ${(82-51*c).toFixed(1)}L${(80+58*s).toFixed(1)} ${(82-58*c).toFixed(1)}" stroke="var(--ink)" stroke-width="${v%40?1.5:2.5}"/>`;
-    if(v%40===0)t+=`<text x="${(80+39*s).toFixed(1)}" y="${(82-39*c+4).toFixed(1)}" text-anchor="middle">${v}</text>`;}
-  return `<svg class="rr-tacho" viewBox="0 0 160 126" aria-hidden="true"><path d="M26.3 113A62 62 0 1 1 133.7 113" fill="none" stroke="var(--line)" stroke-width="8" stroke-linecap="round"/><path class="rr-tarc" pathLength="100" d="M26.3 113A62 62 0 1 1 133.7 113" fill="none" stroke="var(--c)" stroke-width="8" stroke-linecap="round" stroke-dasharray="0 100"/>${t}<g class="rr-tneedle"><path d="M80 88V30" stroke="#e2574c" stroke-width="3.5" stroke-linecap="round"/></g><circle cx="80" cy="82" r="7" fill="var(--ink)"/><text class="rr-tnum" x="80" y="112" text-anchor="middle">100</text><text x="80" y="123" text-anchor="middle">km/h</text></svg>`;}
+/* Rundinstrumente im Cockpit: gleiche Geometrie, Mittelpunkt 80/80, Bogen über 240 Grad */
+const RR_ARC='M26.3 111A62 62 0 1 1 133.7 111';
+function rrDial(cls,ticks,num,unit){let t='';ticks.forEach(([f,lab,big])=>{const a=(-120+240*f)*Math.PI/180,s=Math.sin(a),c=Math.cos(a);
+    t+=`<path d="M${(80+52*s).toFixed(1)} ${(80-52*c).toFixed(1)}L${(80+58*s).toFixed(1)} ${(80-58*c).toFixed(1)}" stroke="var(--ink)" stroke-width="${big?2.5:1.5}"/>`;
+    if(lab!=null)t+=`<text x="${(80+35.5*s).toFixed(1)}" y="${(80-35.5*c+6).toFixed(1)}" text-anchor="middle">${lab}</text>`;});
+  return `<svg class="rr-tacho ${cls}" viewBox="0 0 160 146" aria-hidden="true"><path d="${RR_ARC}" fill="none" stroke="var(--line)" stroke-width="8" stroke-linecap="round"/>${cls==='rr-fdial'?'<path d="M26.3 111A62 62 0 0 1 18.3 86.5" fill="none" stroke="#e2574c" stroke-width="8" stroke-linecap="round"/>':''}<path class="rr-tarc" pathLength="100" d="${RR_ARC}" fill="none" stroke="var(--c)" stroke-width="8" stroke-linecap="round" stroke-dasharray="0 100"/>${t}<g class="rr-tneedle"><path d="M80 87V27" stroke="#ff6a5c" stroke-width="3.5" stroke-linecap="round"/></g><circle cx="80" cy="80" r="7" fill="var(--ink)"/><text class="rr-tnum" x="80" y="127" text-anchor="middle">${num}</text><text class="rr-tu" x="80" y="143" text-anchor="middle">${unit}</text></svg>`;}
+function rrTacho(){const t=[];for(let v=0;v<=200;v+=10)t.push([v/200,v%50?null:v,v%50===0]);return rrDial('rr-vdial',t,'100','km/h');}
+function rrFuelDial(){return rrDial('rr-fdial',[[0,'0',1],[.25,null,0],[.5,'½',1],[.75,null,0],[1,'1',1]],'100 %','am Ziel');}
 /* Fahrwiderstand im Vergleich: gestapelte Balken je Auto und Kurven F(v) */
 function rrFwRows(o){const r=rrCalc(o),rows=RR_ORD.map(ix=>{const k=RR_KL[ix],q=rrCalc(Object.assign({},o,{kl:ix}));return {ix,name:k[0],sub:'c<sub>w</sub> '+rrF(k[1],2)+' · A '+rrF(k[2],2)+' m² · '+rrF(k[3])+' kg',FL:q.FL,FR:q.B.FR};});
   rows.push({ix:o.kl,e:true,name:RR_KL[o.kl][0]+' als Elektroauto',sub:''+rrF(RR_KL[o.kl][3])+' kg + Akku '+rrF(r.mA)+' kg',FL:r.FL,FR:r.E.FR});return rows;}
@@ -1968,53 +1988,83 @@ function rrFwChart(o,fmax){const X=v=>44+(v-30)*(266/150),Y=f=>138-118*f/fmax,vs
   const line=(ix,cls)=>{const c=RR_CAR[ix].col;return `<path class="${cls}" d="${vs.map((v,i)=>(i?'L':'M')+X(v).toFixed(1)+' '+Y(rrCalc(Object.assign({},o,{kl:ix}),v).B.F).toFixed(1)).join('')}" fill="none" stroke="${c}"/>`;};
   const sel=o.kl,air=`<path class="rr-fwair" d="M${X(30)} 138${vs.map(v=>'L'+X(v).toFixed(1)+' '+Y(rrCalc(o,v).FL).toFixed(1)).join('')}L${X(180)} 138Z"/>`;
   const q=rrCalc(o),cx=X(o.v).toFixed(1);
-  return `<svg class="rr-fwc" viewBox="0 0 320 172" role="img" aria-label="Fahrwiderstand der vier Autos von 30 bis 180 km/h. Die Kurven steigen immer steiler an, weil der Luftwiderstand mit dem Quadrat der Geschwindigkeit wächst.">${g}${air}
+  return `<svg class="rr-fwc" viewBox="0 -12 320 186" role="img" aria-label="Fahrwiderstand der vier Autos von 30 bis 180 km/h. Die Kurven steigen immer steiler an, weil der Luftwiderstand mit dem Quadrat der Geschwindigkeit wächst.">${g}${air}
     ${RR_ORD.filter(i=>i!==sel).map(i=>line(i,'o')).join('')}${line(sel,'s')}
     <path d="M${cx} 20V138" stroke="var(--ink)" stroke-width="1.5" stroke-dasharray="4 4"/><circle cx="${cx}" cy="${Y(q.B.F).toFixed(1)}" r="5" fill="${RR_CAR[sel].col}" stroke="var(--surface)" stroke-width="2"/>
-    <text x="177" y="170" text-anchor="middle">Geschwindigkeit in km/h</text><text x="6" y="12">Fahrwiderstand in N</text></svg>`;}
+    <text x="177" y="171" text-anchor="middle">Geschwindigkeit in km/h</text><text x="6" y="2">Fahrwiderstand in N</text></svg>`;}
 const RR_CHK='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4 10-10" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-function rrUI(box){if(!box)return;S.rr=Object.assign({},RR_DEF,S.rr||{});const o=S.rr;
+function rrUI(box){if(!box)return;S.rr=Object.assign({},RR_DEF,S.rr||{});const o=S.rr;if(!(o.an>=0&&o.an<3))o.an=0;if(!(o.f>=5&&o.f<=100))o.f=100;if(!RR_KL[o.kl])o.kl=1;
   const num=(k,lab,unit,step,min,max)=>{const i=el('input',{type:'number',step,min,max,id:'rr-'+k,value:o[k]});i.oninput=()=>{const v=parseFloat(String(i.value).replace(',','.'));if(!isNaN(v)&&v>=min&&v<=max){o[k]=v;save();draw();}};return el('label',{class:'rr-f',for:'rr-'+k},el('span',{},lab),el('span',{class:'rr-in'},i,el('small',{},unit)));};
   const seg=(arr,k,lab,pic,ord)=>{const g=el('div',{class:'rr-seg',role:'group','aria-label':lab});(ord||arr.map((a,i)=>i)).forEach(ix=>{const a=arr[ix],b=el('button',{type:'button',class:'btn soft','aria-pressed':String(o[k]===ix)},el('span',{class:'rr-pic',html:pic(ix)}),a[0]);b.onclick=()=>{o[k]=ix;save();g.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));draw();};g.append(b);});return el('div',{class:'rr-f'},el('span',{},lab),g);};
-  const vIn=el('input',{type:'range',min:30,max:180,step:10,value:o.v,id:'rr-v','aria-valuetext':o.v+' km/h'});const vOut=el('b',{class:'rr-speed'},o.v+' km/h');
-  vIn.oninput=()=>{o.v=+vIn.value;vOut.textContent=o.v+' km/h';vIn.setAttribute('aria-valuetext',o.v+' km/h');save();draw();};
-  const tacho=el('div',{class:'rr-tachow',html:rrTacho()});
+  /* Cockpit: Blick auf die Fahrt, Tacho, Bordcomputer, Füllstand */
+  const vIn=el('input',{type:'range',min:30,max:180,step:10,value:o.v,id:'rr-v','aria-valuetext':o.v+' km/h'});
+  vIn.oninput=()=>{o.v=+vIn.value;vIn.setAttribute('aria-valuetext',o.v+' km/h');save();draw();};
+  const fIn=el('input',{type:'range',min:5,max:100,step:5,value:o.f,id:'rr-fill'}),fOut=el('b',{});fIn.oninput=()=>{o.f=+fIn.value;save();draw();};
+  const tacho=el('div',{class:'rr-dialw',html:rrTacho()}),fdial=el('div',{class:'rr-dialw',html:rrFuelDial()});
   const scene=el('div',{class:'rr-scene'}),fw=el('div',{class:'rr-fw'}),tab=el('div',{class:'rr-tw'});
-  const cards={},out=el('div',{class:'rr-out','aria-live':'polite'});
-  ['B','D','E'].forEach(k=>{const c=cards[k]={};
-    const cap0=k==='E'?o.akku:o.tank;if(o['f'+k]==null||o['f'+k]>cap0)o['f'+k]=cap0;
-    c.fIn=el('input',{type:'range',min:1,max:cap0,step:1,value:o['f'+k],id:'rr-f'+k});c.fOut=el('b',{});
-    c.fIn.oninput=()=>{o['f'+k]=+c.fIn.value;save();draw();};
-    c.rest=el('b',{});c.st=el('div',{class:'rr-st'});c.strip=el('div',{class:'rr-strip','aria-hidden':'true'});c.stripw=el('div',{class:'rr-stripw',hidden:true},c.strip,el('div',{class:'rr-stripl'},el('span',{},'Start'),el('span',{},'Ziel')));
-    c.lv=el('b',{class:'rr-lvn'});c.lvt=el('span',{class:'rr-lvt'});c.g=el('div',{class:'rr-gauge',html:k==='E'?RR_AKKU:RR_TANK});
-    c.cost=el('b',{});c.cbar=el('i',{});c.use=el('b',{});c.rng=el('b',{});c.rbar=el('i',{});c.rcar=el('span',{class:'rr-tcar'});c.trl=el('span',{});c.trip=el('b',{});
-    out.append(el('div',{class:'rr-card rr-'+k},el('h5',{},el('span',{class:'rr-ic',html:RR_IC[k]}),RR_N[k]),
-      el('label',{class:'rr-fuel',for:'rr-f'+k},el('span',{},k==='E'?'Im Akku beim Start: ':'Im Tank beim Start: ',c.fOut),c.fIn),
-      el('div',{class:'rr-top'},c.g,el('div',{class:'rr-lv'},c.lv,c.lvt,el('span',{class:'rr-rest'},'Restreichweite ',c.rest))),c.st,c.stripw,
-      el('div',{class:'rr-kv'},el('span',{},'Kosten je 100 km'),c.cost),el('div',{class:'rr-bar','aria-hidden':'true'},c.cbar),
-      el('div',{class:'rr-kv'},el('span',{},'Verbrauch'),c.use),
-      el('div',{class:'rr-kv'},el('span',{},'Reichweite mit dieser Füllung'),c.rng),el('div',{class:'rr-track','aria-hidden':'true'},c.rbar,c.rcar),
-      el('div',{class:'rr-kv rr-trip'},c.trl,c.trip)));});
+  const B={pic:el('span',{class:'rr-pic'}),name:el('b',{}),sub:el('small',{}),use:el('b',{}),cost:el('b',{}),rng:el('b',{}),F:el('b',{}),P:el('b',{}),navh:el('span',{}),trip:el('b',{}),st:el('div',{class:'rr-st'}),strip:el('div',{class:'rr-strip','aria-hidden':'true'}),fic:el('span',{class:'rr-ic'}),fcap:el('b',{}),frest:el('span',{})};
+  B.stripw=el('div',{class:'rr-stripw',hidden:true},B.strip,el('div',{class:'rr-stripl'},el('span',{},'Start'),el('span',{},'Ziel')));
+  const kv=(l,b)=>el('div',{},el('span',{},l),b);
+  const bc=el('div',{class:'rr-bc','aria-live':'polite'},
+    el('div',{class:'rr-bch'},B.pic,el('div',{},B.name,B.sub)),
+    el('div',{class:'rr-bcm'},el('span',{},'Verbrauch'),B.use,el('small',{},'je 100 km')),
+    el('div',{class:'rr-bcg'},kv('Kosten je 100 km',B.cost),kv('Reichweite',B.rng),kv('Fahrwiderstand',B.F),kv('Leistung an den Rädern',B.P)),
+    el('div',{class:'rr-nav'},el('div',{class:'rr-navh'},B.navh,el('span',{},'Kosten der Fahrt ',B.trip)),B.st,B.stripw));
   const reset=el('button',{type:'button',class:'btn soft'},'Voreinstellung');reset.onclick=()=>{S.rr=Object.assign({},RR_DEF);save();box.replaceChildren();rrUI(box);};
   const adv=el('details',{class:'rr-adv'},el('summary',{},'Annahmen und Preise anpassen'),el('div',{class:'rr-grid'},
     num('tank','Tankinhalt','Liter',1,10,120),num('akku','Akku','kWh',1,10,150),num('ed','Energiedichte Akku','Wh/kg',10,50,500),
     num('etaB','Wirkungsgrad Benziner','%',1,10,60),num('etaD','Wirkungsgrad Diesel','%',1,10,60),num('etaE','Wirkungsgrad Elektroantrieb','%',1,50,100),
     num('pB','Preis Super E10','€/l',0.01,0.5,5),num('pD','Preis Diesel','€/l',0.01,0.5,5),num('pE','Strompreis','€/kWh',0.01,0.05,2)),
     el('p',{class:'src'},'Voreinstellung: Preise ADAC (Oktober 2026) und BDEW (Oktober 2026, Laden zu Hause). An der Ladesäule ist Strom meist teurer. Wirkungsgrade sind Richtwerte zum Ausprobieren.'));
-  box.append(el('div',{class:'anim rr-box'},el('h4',{class:'rr-h'},'Reichweiten- und Kostenrechner'),scene,fw,
-    el('div',{class:'rr-grid'},seg(RR_KL,'kl','Fahrzeugklasse',rrPic,RR_ORD),seg(RR_UG,'ug','Untergrund',ix=>'<i style="background:'+RR_GROUND[ix][0]+'"></i>'),
-      el('div',{class:'rr-f rr-vbox'},el('label',{for:'rr-v'},'Geschwindigkeit: ',vOut),tacho,vIn),num('s','Fahrstrecke','km',10,1,2000)),
-    el('div',{class:'row'},reset),out,adv,el('details',{class:'rr-adv'},el('summary',{},'Reichweite bei verschiedenen Geschwindigkeiten (voller Tank, voller Akku)'),tab)));
-  let sceneKey='';
-  function draw(){const r=rrCalc(o),ks=['B','D','E'],mc=Math.max(...ks.map(k=>r[k].cost100));
-    ks.forEach(k=>{const cap=k==='E'?o.akku:o.tank,c=cards[k];if(o['f'+k]==null||o['f'+k]>cap)o['f'+k]=cap;c.fIn.max=cap;c.fIn.value=o['f'+k];r[k].cap=cap;r[k].r0=r[k].range*o['f'+k]/cap;});
-    const mx=Math.max(...ks.map(k=>r[k].r0));
+  /* Vergleich: die drei Antriebe nebeneinander, darunter die vier Autos */
+  const cards={},out=el('div',{class:'rr-out'}),cmpH=el('h5',{class:'rr-cmph'});
+  RR_AK.forEach(k=>{const c=cards[k]={};
+    c.use=el('b',{});c.cost=el('b',{});c.cbar=el('i',{});c.rng=el('b',{});c.rbar=el('i',{});c.rcar=el('span',{class:'rr-tcar'});c.trl=el('span',{});c.trip=el('b',{});c.st=el('div',{class:'rr-st'});c.tag=el('span',{class:'rr-tag',hidden:true},'im Cockpit');
+    c.box=el('div',{class:'rr-card rr-'+k},el('h5',{},el('span',{class:'rr-ic',html:RR_IC[k]}),RR_N[k],c.tag),
+      el('div',{class:'rr-kv'},el('span',{},'Verbrauch'),c.use),
+      el('div',{class:'rr-kv'},el('span',{},'Kosten je 100 km'),c.cost),el('div',{class:'rr-bar','aria-hidden':'true'},c.cbar),
+      el('div',{class:'rr-kv'},el('span',{},'Reichweite mit dieser Füllung'),c.rng),el('div',{class:'rr-track','aria-hidden':'true'},c.rbar,c.rcar),
+      c.st,el('div',{class:'rr-kv rr-trip'},c.trl,c.trip));out.append(c.box);});
+  box.append(el('div',{class:'anim rr-box'},el('h4',{class:'rr-h'},'Reichweiten- und Kostenrechner'),
+    el('div',{class:'rr-cock'},scene,
+      el('div',{class:'rr-dash'},
+        el('div',{class:'rr-inst rr-iv'},tacho,el('label',{class:'rr-cap',for:'rr-v'},el('b',{},'Geschwindigkeit')),vIn),
+        bc,
+        el('div',{class:'rr-inst rr-if'},fdial,el('div',{class:'rr-cap'},el('span',{class:'rr-capi'},B.fic,B.fcap),B.frest),el('label',{class:'rr-cap',for:'rr-fill'},'Beim Start ',fOut),fIn)),
+      el('div',{class:'rr-ctl'},seg(RR_AN,'an','Antrieb',ix=>RR_IC[RR_AK[ix]]),seg(RR_KL,'kl','Fahrzeugklasse',rrPic,RR_ORD),seg(RR_UG,'ug','Untergrund',ix=>'<i style="background:'+RR_GROUND[ix][0]+'"></i>'),num('s','Fahrstrecke bis zum Ziel','km',10,1,2000))),
+    el('div',{class:'row'},reset),adv),
+   el('div',{class:'anim rr-box rr-cmp'},el('h4',{class:'rr-h'},'Vergleich'),cmpH,out,fw,
+    el('details',{class:'rr-adv'},el('summary',{},'Reichweite bei verschiedenen Geschwindigkeiten (voller Tank, voller Akku)'),tab)));
+  const status=(st,k,stops)=>{st.className='rr-st '+(stops?'warn':'ok');st.replaceChildren(el('span',{class:'rr-sti',html:stops?RR_IC[k]:RR_CHK}),stops?el('span',{},el('b',{class:'n'},stops+' × '+RR_STOP[k]),' unterwegs'):el('span',{},'Reicht ohne '+(k==='E'?'Laden':'Tanken')));};
+  let sceneKey='',picKey=-1;
+  function draw(){const r=rrCalc(o),ks=RR_AK,a=ks[o.an],mc=Math.max(...ks.map(k=>r[k].cost100));
+    ks.forEach(k=>{const x=r[k];x.cap=k==='E'?o.akku:o.tank;x.r0=x.range*o.f/100;x.stops=o.s<=x.r0+1e-9?0:Math.ceil((o.s-x.r0)/x.range-1e-9);
+      x.lvl=Math.max(0,Math.min(1,x.stops?1-(o.s-x.r0-(x.stops-1)*x.range)/x.range:(x.r0-o.s)/x.range));});
+    const mx=Math.max(...ks.map(k=>r[k].r0)),x=r[a],u=a==='E'?'kWh':'l';
     tacho.querySelector('.rr-tneedle').style.transform='rotate('+(-120+240*o.v/200).toFixed(1)+'deg)';tacho.querySelector('.rr-tarc').setAttribute('stroke-dasharray',(o.v/2)+' 100');tacho.querySelector('.rr-tnum').textContent=o.v;
     if(sceneKey!==o.kl+'-'+o.ug){sceneKey=o.kl+'-'+o.ug;scene.innerHTML=rrScene(o);}
     scene.style.setProperty('--rr-t',(60/o.v).toFixed(2)+'s');scene.style.setProperty('--rr-w',Math.max(0.5,55/o.v).toFixed(2)+'s');
-    rrArrow(scene.querySelector('.rr-arL'),430,104,r.FL,'Luft');rrArrow(scene.querySelector('.rr-arR'),372,160,r.B.FR,'Roll');
+    rrArrow(scene.querySelector('.rr-arL'),390,104,r.FL,'Luft');rrArrow(scene.querySelector('.rr-arR'),332,160,x.FR,'Roll');
+    /* Bordcomputer */
+    if(picKey!==o.kl){picKey=o.kl;B.pic.innerHTML=rrPic(o.kl);}
+    B.name.textContent=RR_KL[o.kl][0]+' · '+RR_N[a];B.sub.textContent=RR_UG[o.ug][0]+' · '+rrF(x.m)+' kg'+(a==='E'?' mit Akku':'');
+    B.use.textContent=rrF(x.per100,1)+' '+u;B.cost.textContent=rrF(x.cost100,2)+' €';B.rng.textContent=rrF(x.r0)+' km';B.F.textContent=rrF(x.F)+' N';B.P.textContent=rrF(x.P,1)+' kW';
+    B.navh.textContent='Ziel in '+rrF(o.s)+' km';B.trip.textContent=rrF(x.costS,2)+' €';status(B.st,a,x.stops);
+    B.stripw.hidden=!x.stops;if(x.stops){const n=Math.min(x.stops,12),mk=[];for(let i=0;i<n;i++)mk.push(el('span',{class:'mk',style:'left:'+(100*(x.r0+i*x.range)/o.s).toFixed(1)+'%',html:RR_IC[a]}));B.strip.replaceChildren(el('span',{class:'a'}),...mk,el('span',{class:'z'}));}
+    /* Füllstand */
+    fdial.querySelector('.rr-tneedle').style.transform='rotate('+(-120+240*x.lvl).toFixed(1)+'deg)';const fa=fdial.querySelector('.rr-tarc');fa.setAttribute('stroke-dasharray',(100*x.lvl).toFixed(1)+' 100');fa.setAttribute('stroke',x.lvl>0.5?'#3fbf7f':x.lvl>0.2?'#e0a21a':'#e2574c');
+    fdial.querySelector('.rr-tnum').textContent=Math.round(x.lvl*100)+' %';
+    B.fic.innerHTML=RR_IC[a];B.fcap.textContent=(a==='E'?'Akku':'Tank')+' am Ziel';B.frest.textContent='Rest '+rrF(x.lvl*x.range)+' km';
+    fIn.value=o.f;fOut.textContent=o.f+' % ('+rrF(x.cap*o.f/100)+' '+u+')';fIn.setAttribute('aria-valuetext',o.f+' Prozent');
+    /* Vergleich */
+    cmpH.textContent='Antriebe im Vergleich: '+RR_KL[o.kl][0]+', '+o.v+' km/h, '+RR_UG[o.ug][0]+', '+rrF(o.s)+' km Strecke';
+    ks.forEach(k=>{const y=r[k],c=cards[k],uu=k==='E'?'kWh':'l';c.box.classList.toggle('sel',k===a);c.tag.hidden=k!==a;
+      c.use.textContent=rrF(y.per100,1)+' '+uu+' je 100 km';c.cost.textContent=rrF(y.cost100,2)+' €';c.cbar.style.width=Math.round(100*y.cost100/mc)+'%';
+      c.rng.textContent=rrF(y.r0)+' km';const w=Math.max(6,Math.round(100*y.r0/mx));c.rbar.style.width=w+'%';c.rcar.style.left=w+'%';
+      if(c.kl!==o.kl){c.kl=o.kl;c.rcar.innerHTML=rrPic(o.kl);}
+      status(c.st,k,y.stops);c.trl.textContent='Kosten für '+rrF(o.s)+' km';c.trip.textContent=rrF(y.costS,2)+' €';});
     const rows=rrFwRows(o),fmax=rrFwMax(o);
-    fw.replaceChildren(el('h5',{},'Fahrwiderstand bei '+o.v+' km/h auf '+RR_UG[o.ug][0]),
+    fw.replaceChildren(el('h5',{},'Autos im Vergleich: Fahrwiderstand bei '+o.v+' km/h auf '+RR_UG[o.ug][0]),
       el('div',{class:'rr-fwl','aria-hidden':'true'},el('span',{class:'air'},el('i',{}),'Luftwiderstand'),el('span',{class:'roll'},el('i',{}),'Rollwiderstand')),
       el('div',{class:'rr-fwg'},el('ul',{class:'rr-fwb'},...rows.map(x=>{const F=x.FL+x.FR;
         return el('li',{class:(x.ix===o.kl&&!x.e?'sel':'')+(x.e?' e':''),style:'--c:'+RR_CAR[x.ix].col,'aria-label':x.name+': Luftwiderstand '+rrF(x.FL)+' N, Rollwiderstand '+rrF(x.FR)+' N, zusammen '+rrF(F)+' N'},
@@ -2022,19 +2072,7 @@ function rrUI(box){if(!box)return;S.rr=Object.assign({},RR_DEF,S.rr||{});const o
           el('span',{class:'rr-fwn'},el('b',{},x.name),el('small',{html:x.sub})),el('b',{class:'rr-fwt'},rrF(F)+' N'),
           el('span',{class:'rr-fwbar','aria-hidden':'true'},el('i',{class:'air',style:'width:'+(100*x.FL/fmax).toFixed(1)+'%'}),el('i',{class:'roll',style:'width:'+(100*x.FR/fmax).toFixed(1)+'%'})));})),
         el('div',{class:'rr-fwcw',html:rrFwChart(o,fmax)})),
-      el('p',{class:'rr-fwp'},'Luftwiderstand: wächst mit c',el('sub',{},'w'),', Stirnfläche A und dem Quadrat der Geschwindigkeit. Rollwiderstand: wächst mit der Masse und hängt vom Untergrund ab. Leistung an den Rädern: ',el('b',{},rrF(r.B.P,1)+' kW'),'.'));
-    ks.forEach(k=>{const x=r[k],c=cards[k],u=k==='E'?'kWh':'l',stops=o.s<=x.r0+1e-9?0:Math.ceil((o.s-x.r0)/x.range-1e-9),lvl=Math.max(0,Math.min(1,stops?1-(o.s-x.r0-(stops-1)*x.range)/x.range:(x.r0-o.s)/x.range)),pct=Math.round(lvl*100);
-      c.fOut.textContent=rrF(o['f'+k])+' '+u;c.rest.textContent=rrF(lvl*x.range)+' km';
-      if(k==='E'){const f=c.g.querySelector('.rr-bfill');f.style.transform='scaleX('+Math.max(0.02,lvl).toFixed(3)+')';f.setAttribute('fill',lvl>0.5?'#2e9a5e':lvl>0.2?'#e0a21a':'#e2574c');}
-      else c.g.querySelector('.rr-needle').style.transform='rotate('+(-90+180*lvl).toFixed(1)+'deg)';
-      c.lv.textContent=pct+' %';c.lvt.textContent=(k==='E'?'Akku':'Tank')+' am Ziel nach '+rrF(o.s)+' km';
-      c.st.className='rr-st '+(stops?'warn':'ok');c.st.replaceChildren(el('span',{class:'rr-sti',html:stops?RR_IC[k]:RR_CHK}),stops?el('span',{},el('b',{class:'n'},stops+' × '+RR_STOP[k]),' unterwegs'):el('span',{},'Reicht ohne '+(k==='E'?'Laden':'Tanken')));
-      c.stripw.hidden=!stops;if(stops){const n=Math.min(stops,12),mk=[];for(let i=0;i<n;i++)mk.push(el('span',{class:'mk',style:'left:'+(100*(x.r0+i*x.range)/o.s).toFixed(1)+'%',html:RR_IC[k]}));c.strip.replaceChildren(el('span',{class:'a'}),...mk,el('span',{class:'z'}));}
-      c.cost.textContent=rrF(x.cost100,2)+' €';c.cbar.style.width=Math.round(100*x.cost100/mc)+'%';
-      c.use.textContent=rrF(x.per100,1)+' '+u+' je 100 km';
-      c.rng.textContent=rrF(x.r0)+' km';const w=Math.max(6,Math.round(100*x.r0/mx));c.rbar.style.width=w+'%';c.rcar.style.left=w+'%';
-      if(c.kl!==o.kl){c.kl=o.kl;c.rcar.innerHTML=rrPic(o.kl);}
-      c.trl.textContent='Kosten für '+rrF(o.s)+' km';c.trip.textContent=rrF(x.costS,2)+' €';});
+      el('p',{class:'rr-fwp'},'Luftwiderstand: wächst mit c',el('sub',{},'w'),', Stirnfläche A und dem Quadrat der Geschwindigkeit. Rollwiderstand: wächst mit der Masse und hängt vom Untergrund ab.'));
     const vs=[30,50,80,100,130,160];tab.replaceChildren(el('table',{class:'rr-t'},el('thead',{},el('tr',{},el('th',{},'km/h'),...ks.map(k=>el('th',{},RR_N[k])))),
       el('tbody',{},...vs.map(v=>{const q=rrCalc(o,v);return el('tr',{},el('td',{},String(v)),...ks.map(k=>el('td',{},rrF(q[k].range)+' km')));}))));}
   draw();}
