@@ -1218,7 +1218,7 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
       <li><b>Speicher:</b> Ein Akku im Haus hebt Solarstrom vom Mittag für den Abend und die Nacht auf.</li>
       <li><b>Wärmepumpe:</b> Sie heizt mit Strom und holt sich Wärme aus der Außenluft. Aus 1 kWh Strom macht sie im Jahresmittel etwa 3,4 kWh Wärme (<b>Jahresarbeitszahl</b>). Den meisten Strom braucht sie im Winter, wenn die Sonne wenig liefert.</li>
       <li><b>Autarkiegrad:</b> So viel Prozent des Stroms kommen von der eigenen Solaranlage.</li>
-      <li><b>Amortisation:</b> Solaranlage, Speicher und Wärmepumpe kosten beim Kauf viel Geld. Bezahlt gemacht (amortisiert) hat sich der Kauf, wenn die Ersparnis aller Jahre zusammen den Kaufpreis erreicht. Dabei zählt auch, was die Familie ohne Wärmepumpe bezahlen müsste: das Gas für die Heizung und, wenn die alte Heizung kaputt ist, eine neue Gasheizung.</li>
+      <li><b>Amortisation:</b> Solaranlage, Speicher und Wärmepumpe kosten beim Kauf viel Geld. Bezahlt gemacht (amortisiert) hat sich der Kauf, wenn die Ersparnis aller Jahre zusammen den Kaufpreis erreicht. Dabei zählt auch, was die Familie ohne Wärmepumpe bezahlen müsste: das Gas für die Heizung und alle etwa 20 Jahre eine neue Gasheizung. Gas wird durch den <b>CO₂-Preis</b> teurer: Für jede Tonne CO₂ aus Heizöl, Gas, Benzin und Diesel müssen die Lieferanten bezahlen und geben das an die Kundschaft weiter. Wie hoch der CO₂-Preis ab 2028 steigt, weiß heute niemand genau. Deshalb kannst du im Rechner drei Prognosen ausprobieren.</li>
     </ul>
     <div id="srflow"></div>
     <p><b>So rechnet der Rechner:</b> Er geht alle 8.760 Stunden eines Jahres durch. In jeder Stunde vergleicht er, wie viel Solarstrom entsteht und wie viel Haus, Wärmepumpe und Auto gerade brauchen. Grundlage sind Wetterdaten des Deutschen Wetterdienstes für Hannover und ein Standard-Verbrauchsprofil für Haushalte. Sonnige und trübe Tage wechseln sich ab. Echte Haushalte verbrauchen ungleichmäßiger als der Durchschnitt. Deshalb nutzen sie meist etwas weniger Solarstrom selbst, als der Rechner zeigt.</p>
@@ -2295,7 +2295,7 @@ const SR_MK=['J','F','M','A','M','J','J','A','S','O','N','D'];
 /* Autos: Akku, Verbrauch ab Wallbox mit Ladeverlusten, Vergleichsverbrauch Benziner/Diesel (Beispielwerte zum Ausprobieren). rr = Bild aus dem Reichweitenrechner */
 const SR_CAR=[{n:'Kleinwagen',rr:3,akku:40,e:16,b:6.0,d:4.8},{n:'Mittelklasse',rr:1,akku:60,e:18,b:7.0,d:5.6},{n:'SUV',rr:2,akku:80,e:21,b:8.5,d:6.8}];
 const SR_LAD=[['abends und nachts','Auto kommt um 17 Uhr heim und lädt sofort'],['tagsüber','Auto steht zu Hause, lädt ab 9 Uhr mit voller Leistung'],['nur mit Sonnenüberschuss','Auto steht zu Hause, lädt nur mit übrigem Solarstrom']];
-const SR_DEF={lad:0,car:1,km:12000,sp:1,wp:1,vgl:0,kwp:10,spk:10,hh:3800,heat:15000,jaz:3.4,eta:90,pE:RR_DEF.pE,pB:RR_DEF.pB,pD:RR_DEF.pD,pG:0.1223,pV:0.077,pfac:100,pwp:30000,foe:46,pgas:7500,ers:1,gr:0};
+const SR_DEF={lad:0,car:1,km:12000,sp:1,wp:1,vgl:0,kwp:10,spk:10,hh:3800,heat:15000,jaz:3.4,eta:90,pE:RR_DEF.pE,pB:RR_DEF.pB,pD:RR_DEF.pD,pG:0.1223,pV:0.077,pfac:100,pwp:30000,foe:30,pgas:7500,age:20,ngas:20,nwp:20,co2:1,gr:0};
 /* Wettertypen: Tagesertrag im Verhältnis zum Monatsmittel (sehr sonnig bis sehr trüb), zufällig verteilt mit festem Startwert */
 const SR_WX=[1.75,1.35,0.85,0.4,0.15];
 const SR_WALL=11,SR_MIN=1.4,SR_GOAL=0.8,SR_LOW=0.3,SR_NIGHT=0.4,SR_WW=0.15;
@@ -2328,30 +2328,43 @@ function srSim(o){
   return {mon,t,car,eDay};}
 function srCost(o,r){
   const car=r.car,t=r.t,gas=o.wp?0:o.heat/(o.eta/100)*o.pG,fuelL=o.km/100*(o.vgl?car.d:car.b),fuel=fuelL*(o.vgl?o.pD:o.pB);
-  const sol={strom:t.grid*o.pE,verg:t.feed*o.pV,gas,fuel:0};sol.sum=sol.strom-sol.verg+gas;
+  const gk=o.wp?0:o.heat/(o.eta/100),sol={strom:t.grid*o.pE,verg:t.feed*o.pV,gas,gk,fuel:0};sol.sum=sol.strom-sol.verg+gas;
   const ev={strom:t.use*o.pE,verg:0,gas,fuel:0};ev.sum=ev.strom+gas;
   const vb={strom:(t.hh+t.wp)*o.pE,verg:0,gas,fuel};vb.sum=vb.strom+gas+fuel;
   return {sol,ev,vb,fuelL};}
 /* Kaufpreise: Verbraucherzentrale, „Was kostet eine Photovoltaikanlage?“, Stand 03.11.2026 (Durchschnitt aus 71 Angeboten, netto; für Wohnhäuser gilt der Nullsteuersatz) */
-const SR_PVP=[[6,2090],[8,1820],[9,1520],[10,1410],[12,1290],[14,1240],[16,1220],[1e9,1010]],SR_SPP=[[6,510],[8,480],[10,410],[12,390],[1e9,360]],SR_FMAX=28000,SR_Y=25;
+const SR_PVP=[[6,2090],[8,1820],[9,1520],[10,1410],[12,1290],[14,1240],[16,1220],[1e9,1010]],SR_SPP=[[6,510],[8,480],[10,410],[12,390],[1e9,360]],SR_FMAX=28000,SR_Y=30;
 const srTier=(t,x)=>t.find(q=>x<=q[0])[1];
-function srInvest(o){const f=o.pfac/100,pvk=srTier(SR_PVP,o.kwp)*f,spk=srTier(SR_SPP,o.spk)*f,wpG=o.pwp*f,wpF=Math.min(wpG,SR_FMAX)*o.foe/100,gas=o.pgas*f;
-  return {pvk,spk,pv:o.kwp*pvk,sp:o.spk*spk,wpG,wpF,gas,wp:wpG-wpF-(o.ers?gas:0)};}
-/* Energiekosten im Jahr y (1, 2, …): gekaufte Energie ändert sich um gr % im Jahr, die Einspeisevergütung bleibt fest */
-const srYear=(c,o,y)=>(c.strom+c.gas+c.fuel)*Math.pow(1+o.gr/100,y-1)-c.verg;
-function srPayYear(inv,cA,cB,o){if(inv<=0)return 0;let s=0;for(let y=1;y<=40;y++){const d=srYear(cA,o,y)-srYear(cB,o,y);if(d<=0&&y>1&&s<=0)return null;if(s+d>=inv)return y-1+(inv-s)/d;s+=d;}return null;}
-function srPay(o){const iv=srInvest(o),run=p=>{const q=Object.assign({},o,p),r=srSim(q);return srCost(q,r).sol;};
-  const c0=run({kwp:0,sp:0,wp:0}),steps=[];let prev=c0;
-  const add=(n,p,inv)=>{const c=run(p),save=srYear(prev,o,1)-srYear(c,o,1);steps.push({n,inv,save,yrs:srPayYear(inv,prev,c,o)});prev=c;};
-  add('Solaranlage '+rrF(o.kwp)+' kWp',{sp:0,wp:0},iv.pv);
-  if(o.sp)add('+ Speicher '+rrF(o.spk)+' kWh',{wp:0},iv.sp);
-  if(o.wp)add('+ Wärmepumpe statt Gasheizung',{},iv.wp);
-  const inv=steps.reduce((a,q)=>a+q.inv,0),b0=o.wp&&o.ers?iv.gas:0,s0=b0+inv,B=[b0],S=[s0];
-  for(let y=1;y<=SR_Y;y++){B.push(B[y-1]+srYear(c0,o,y));S.push(S[y-1]+srYear(prev,o,y));}
-  return {iv,steps,inv,c0,cF:prev,B,S,yrs:srPayYear(inv,c0,prev,o)};}
-const srYrs=y=>y==null?'macht sich in 40 Jahren nicht bezahlt':y<0.05?'sofort':'nach etwa '+rrF(y,1)+' Jahren';
+/* Wärmepumpe: Grundförderung (und ggf. Einkommensbonus) aus „foe“, Klimageschwindigkeitsbonus 16 % nur beim Austausch einer mindestens 20 Jahre alten Gasheizung (KfW 458), zusammen höchstens 70 % von höchstens 28.000 €. Späterer Ersatz: ohne Klimageschwindigkeitsbonus. */
+function srInvest(o){const f=o.pfac/100,pvk=srTier(SR_PVP,o.kwp)*f,spk=srTier(SR_SPP,o.spk)*f,wpG=o.pwp*f,kb=o.age>=20?16:0,fb=Math.min(wpG,SR_FMAX)/100,
+    wpF=fb*Math.min(70,o.foe+kb),wpFr=fb*Math.min(70,o.foe),gas=o.pgas*f;
+  return {pvk,spk,pv:o.kwp*pvk,sp:o.spk*spk,wpG,wpF,wpFr,kb,gas,wp:wpG-wpF,wpR:wpG-wpFr,t1:Math.max(0,o.ngas-o.age)};}
+/* CO2-Preis-Prognose für Gas: 2027 Korridor 55–65 €/t (BEHG), ab 2028 EU-ETS 2; bis 2030 linear auf den gewählten Wert, danach gleich. Jahr 1 = 2027 */
+const SR_CO2=[60,140,264],SR_CO2N=['bleibt bei 60 €','steigt auf 140 €','steigt auf 264 €'],SR_CO2KG=0.18;
+function srCo2(o,y){const cal=2026+y,x=SR_CO2[o.co2];return cal<=2027?60:cal>=2030?x:60+(x-60)*(cal-2027)/3;}
+const srGasP=(o,y)=>o.pG*Math.pow(1+o.gr/100,y-1)+(srCo2(o,y)-60)*SR_CO2KG/1000*1.19;
+/* Energiekosten im Jahr y (1 = 2027): Strom und Kraftstoff ändern sich um gr % im Jahr, Gas zusätzlich mit dem CO2-Preis, die Einspeisevergütung bleibt fest */
+const srYear=(c,o,y)=>(c.strom+c.fuel)*Math.pow(1+o.gr/100,y-1)+(c.gk||0)*srGasP(o,y)-c.verg;
+/* Aufsummierte Kosten mit Käufen zu bestimmten Jahren (ev: [[Jahr, Betrag], …]) */
+function srCum(c,o,ev){const a=[0];ev.forEach(e=>{if(e[0]===0)a[0]+=e[1];});for(let y=1;y<=SR_Y;y++){let v=a[y-1]+srYear(c,o,y);ev.forEach(e=>{if(e[0]===y)v+=e[1];});a.push(v);}return a;}
+/* erstes Jahr, in dem die teurere Variante S billiger wird als B (linear im Jahr interpoliert) */
+function srCross(B,S){if(S[0]<=B[0])return 0;for(let y=1;y<B.length;y++){const d0=B[y-1]-S[y-1],d1=B[y]-S[y];if(d1>=0)return y-1+(-d0)/(d1-d0);}return null;}
+function srGasEv(o,iv){const e=[];for(let t=iv.t1;t<=SR_Y;t+=Math.max(5,o.ngas))e.push([t,iv.gas]);return e;}
+function srWpEv(o,iv){const e=[[0,iv.wp]];for(let t=Math.max(5,o.nwp);t<=SR_Y;t+=Math.max(5,o.nwp))e.push([t,iv.wpR]);return e;}
+function srPay(o){const iv=srInvest(o),run=p=>{const q=Object.assign({},o,p),r=srSim(q);return srCost(q,r).sol;},gEv=srGasEv(o,iv);
+  const c0=run({kwp:0,sp:0,wp:0}),B=srCum(c0,o,gEv),steps=[];let prev=c0,acc=[];
+  const add=(n,p,inv,ev)=>{const c=run(p),a0=srCum(prev,o,acc.concat(gEv)),a1=srCum(c,o,acc.concat(ev,gEv));
+    steps.push({n,inv,save:srYear(prev,o,1)-srYear(c,o,1),yrs:srCross(a0,a1),gain:a0[SR_Y]-a1[SR_Y]});acc=acc.concat(ev);prev=c;};
+  add('Solaranlage '+rrF(o.kwp)+' kWp',{sp:0,wp:0},iv.pv,[[0,iv.pv]]);
+  if(o.sp)add('+ Speicher '+rrF(o.spk)+' kWh',{wp:0},iv.sp,[[0,iv.sp]]);
+  let heatEv=gEv;
+  if(o.wp){const wEv=srWpEv(o,iv).map(e=>[e[0],e[1],'heat']);const c=run({}),a0=srCum(prev,o,acc.concat(gEv)),a1=srCum(c,o,acc.concat(wEv));
+    steps.push({n:'+ Wärmepumpe statt Gasheizung',inv:iv.wp,save:srYear(prev,o,1)-srYear(c,o,1),yrs:srCross(a0,a1),gain:a0[SR_Y]-a1[SR_Y],wp:1});prev=c;heatEv=wEv;}
+  const S=srCum(prev,o,acc.concat(heatEv)),inv=steps.reduce((a,q)=>a+q.inv,0);
+  return {iv,steps,inv,c0,cF:prev,B,S,gEv,yrs:srCross(B,S),gain:B[SR_Y]-S[SR_Y]};}
+const srYrs=y=>y==null?'macht sich in '+SR_Y+' Jahren nicht bezahlt':y<0.05?'sofort':'nach etwa '+rrF(y,1)+' Jahren';
 /* Linien: aufsummierte Kosten über die Jahre */
-function srPayChart(p,W){W=Math.max(280,Math.round(W||340));const H=Math.round(Math.min(320,Math.max(240,W*0.5))),y0=H-54,top=26,L=62;
+function srPayChart(p,W){W=Math.max(280,Math.round(W||340));const H=Math.round(Math.min(320,Math.max(240,W*0.5))),y0=H-54,top=26,L=72;
   const mx0=Math.max(p.B[SR_Y],p.S[SR_Y]),st=mx0>150000?50000:mx0>60000?20000:10000,mx=Math.ceil(mx0/st)*st,X=y=>L+(W-L-10)*y/SR_Y,Y=v=>y0-(y0-top)*v/mx;let g='';
   for(let v=0;v<=mx;v+=st){const y=Y(v).toFixed(1);g+=`<path d="M${L-4} ${y}H${W}" class="sr-gl"/><text x="${L-8}" y="${(+y+5).toFixed(1)}" text-anchor="end">${rrF(v)}</text>`;}
   for(let y=0;y<=SR_Y;y+=5)g+=`<text x="${X(y).toFixed(1)}" y="${y0+22}" text-anchor="middle">${y}</text>`;
@@ -2404,14 +2417,15 @@ function srUI(box){if(!box)return;S.sol=Object.assign({},SR_DEF,S.sol||{});const
   const chart=el('div',{class:'sr-cw'}),mdet=el('p',{class:'sr-mdet','aria-live':'polite'}),mgrid=el('div',{class:'sr-mg',role:'group','aria-label':'Zuzahlen je Monat'});
   const mb=SR_MON.map((n,i)=>{const b=el('button',{type:'button',class:'sr-mc'},el('span',{},n.slice(0,3)),el('b',{}));b.onclick=()=>{sel=i;draw();};mgrid.append(b);return b;});
   chart.onclick=e=>{const t=e.target.closest('[data-m]');if(t){sel=+t.dataset.m;draw();}};
-  const PK={},pchart=el('div',{class:'sr-cw'});let lastP=null,lastPW=0;
+  const PK={},pchart=el('div',{class:'sr-cw'}),ageIn=el('input',{type:'range',min:0,max:30,step:1,value:o.age,id:'sr-age'}),ageOut=el('b',{}),gasInfo=el('p',{class:'hint'});
+  ageIn.oninput=()=>{o.age=+ageIn.value;save();draw();};let lastP=null,lastPW=0;
   const src=el('div',{class:'sr-sp'}),use=el('div',{class:'sr-sp'}),cost=el('div',{class:'sr-cost'});
   const reset=el('button',{type:'button',class:'btn soft'},'Voreinstellung');reset.onclick=()=>{S.sol=Object.assign({},SR_DEF);save();box.replaceChildren();srUI(box);};
   const adv=el('details',{class:'rr-adv'},el('summary',{},'Beispielhaus und Preise anpassen'),el('div',{class:'rr-grid'},
     num('kwp','Größe der Solaranlage','kWp',1,1,30),num('spk','Größe des Speichers','kWh',1,1,30),num('hh','Haushaltsstrom im Jahr','kWh',100,1000,10000),
     num('heat','Wärmebedarf im Jahr (Heizen und Warmwasser)','kWh',500,3000,40000),num('jaz','Jahresarbeitszahl der Wärmepumpe','',0.1,1.5,6),num('eta','Nutzungsgrad der Gasheizung','%',1,50,110),
     num('pE','Strompreis','€/kWh',0.01,0.05,2),num('pV','Einspeisevergütung','€/kWh',0.001,0,1),num('pG','Gaspreis','€/kWh',0.01,0.01,1),
-    num('pfac','Kaufpreise Solaranlage, Speicher, Heizung','% der Voreinstellung',5,20,300),num('pwp','Wärmepumpe mit Einbau','€',500,5000,80000),num('foe','Förderung der Wärmepumpe','%',1,0,80),num('pgas','Neue Gasheizung mit Einbau','€',500,0,30000),num('gr','Preisänderung bei Strom, Gas und Kraftstoff','% pro Jahr',0.5,-10,15),
+    num('pfac','Kaufpreise Solaranlage, Speicher, Heizung','% der Voreinstellung',5,20,300),num('pwp','Wärmepumpe mit Einbau','€',500,5000,80000),num('foe','Förderung der Wärmepumpe ohne Klimageschwindigkeitsbonus','%',1,0,70),num('pgas','Neue Gasheizung mit Einbau','€',500,0,30000),num('ngas','Nutzungsdauer einer Gasheizung','Jahre',1,5,40),num('nwp','Nutzungsdauer einer Wärmepumpe','Jahre',1,5,40),num('gr','Preisänderung bei Strom, Gas und Kraftstoff (ohne CO₂-Preis)','% pro Jahr',0.5,-10,15),
     num('pB','Preis Super E10','€/l',0.01,0.5,5),num('pD','Preis Diesel','€/l',0.01,0.5,5)),
     el('p',{class:'src'},'Voreinstellung: Strompreis BDEW (Oktober 2026), Benzin und Diesel ADAC (Oktober 2026) wie im Reichweitenrechner, Gaspreis BDEW (Oktober 2026), Einspeisevergütung Bundesnetzagentur (Anlagen bis 10 kWp mit Teileinspeisung, Inbetriebnahme August bis Dezember 2026), Jahresarbeitszahl Fraunhofer ISE (Mittel der Luft-Wasser-Wärmepumpen im Feldtest). Haushaltsstrom, Wärmebedarf und Nutzungsgrad sind Beispielwerte.'));
   box.append(el('div',{class:'anim sr-box'},el('h4',{class:'rr-h'},'Solar-Rechner: Haus, Speicher und Elektroauto'),house,
@@ -2431,11 +2445,12 @@ function srUI(box){if(!box)return;S.sol=Object.assign({},SR_DEF,S.sol||{});const
       el('p',{class:'src'},'Nur Kosten für Energie: Strom, Gas, Kraftstoff. Die Kaufpreise von Solaranlage, Speicher und Wärmepumpe stehen im nächsten Kasten. Nicht eingerechnet sind Wallbox, Auto, Grundgebühren, Wartung und Steuern.')),
     el('div',{class:'sr-panel'},el('h5',{},'Wann macht sich der Kauf bezahlt?'),
       el('p',{class:'hint'},'Vergleich mit einem Haus ohne Solaranlage, das mit Gas heizt. Das Elektroauto lädt dort aus dem Netz.'),
-      seg('ers','Alte Heizung muss ohnehin ersetzt werden',['nein','ja']),
+      el('label',{class:'rr-f sr-km',for:'sr-age'},el('span',{},'Alter der jetzigen Gasheizung: ',ageOut),ageIn),
+      seg('co2','CO₂-Preis für Gas bis 2030',SR_CO2N),gasInfo,
       el('div',{class:'sr-kpi k4 sr-pk'},el('span',{},'Solaranlage'+'',PK.t=el('i',{})),PK.v=el('b',{}),PK.s=el('small',{})),
       el('div',{class:'legend'},el('span',{},el('i',{class:'sr-lg pb'}),'ohne Solaranlage, mit Gasheizung'),el('span',{},el('i',{class:'sr-lg ps'}),'deine Einstellung, mit Kaufpreis')),
       pchart,PK.st=el('div',{class:'sr-cost'}),
-      el('p',{class:'src'},'Kaufpreise: Solaranlage und Speicher nach Durchschnittspreisen der Verbraucherzentrale (Stand 03.11.2026, je nach Größe), Wärmepumpe mit Einbau 30.000 € (Verbraucherzentrale Rheinland-Pfalz: meist 25.000 bis 40.000 €), Förderung KfW 458: 30 % Grundförderung und 16 % Klimageschwindigkeitsbonus beim Austausch einer alten Heizung, förderfähig höchstens 28.000 €. Neue Gasheizung mit Einbau 7.500 € (co2online: 6.000 bis 9.000 €). Gerechnet mit gleichbleibenden Preisen, ohne Kredit, Wartung und Leistungsverlust der Anlage. Weil der Rechner mit Durchschnittswerten arbeitet, fällt die Ersparnis durch den Speicher eher zu hoch aus. Fraunhofer ISE rechnet bei kleinen Solaranlagen mit 20 Jahren Nutzungsdauer.')),
+      el('p',{class:'src'},'Kaufpreise: Solaranlage und Speicher nach Durchschnittspreisen der Verbraucherzentrale (Stand 03.11.2026, je nach Größe), Wärmepumpe mit Einbau 30.000 € (Verbraucherzentrale Rheinland-Pfalz: meist 25.000 bis 40.000 €), Förderung KfW 458: 30 % Grundförderung, dazu 16 % Klimageschwindigkeitsbonus beim Austausch einer mindestens 20 Jahre alten Gasheizung, förderfähig höchstens 28.000 €. Neue Gasheizung mit Einbau 7.500 € (co2online: 6.000 bis 9.000 €). Nutzungsdauer von Gasheizung und Wärmepumpe je etwa 20 Jahre (Verbraucherzentrale Rheinland-Pfalz nach VDI 2067: Wärmeerzeuger ca. 20 Jahre); danach muss neu gekauft werden, die Wärmepumpe dann mit 30 % Förderung. CO₂-Preis: 2027 zwischen 55 und 65 € je Tonne (BEHG, Bundestag 15.10.2026), ab 2028 europäischer Emissionshandel ETS 2. Für 2030 nennen Studien sehr verschiedene Werte, zum Beispiel etwa 50 bis 84 € (EU-Kommission), 140 € (Vivid Economics) und 264 € (Rickels und andere), zusammengestellt vom Umweltbundesamt (Climate Change 09/2024, S. 26). Ab 2030 rechnet der Rechner mit gleichem CO₂-Preis. Je Kilowattstunde Gas entstehen rund 0,18 kg CO₂ (Umweltbundesamt, Climate Change 28/2022, S. 50, umgerechnet auf den Brennwert). Ohne Inflation, Kredit, Wartung, Leistungsverlust der Module und Ersatz von Wechselrichter oder Speicher. Weil der Rechner mit Durchschnittswerten arbeitet, fällt die Ersparnis durch den Speicher eher zu hoch aus. Fraunhofer ISE rechnet bei kleinen Solaranlagen mit 20 Jahren Nutzungsdauer.')),
     el('div',{class:'row'},reset),adv));
   const sp=(el0,parts)=>{const tot=parts.reduce((a,p)=>a+p[1],0)||1;el0.replaceChildren(el('div',{class:'sr-bar','aria-hidden':'true'},...parts.map(p=>el('i',{class:p[2],style:'width:'+(100*p[1]/tot).toFixed(1)+'%'}))),
     el('p',{class:'sr-bl'},...parts.map(p=>el('span',{},el('i',{class:'sr-lg '+p[2]}),p[0]+' ',el('b',{},srK(p[1])),' ('+Math.round(100*p[1]/tot)+' %)'))));};
@@ -2460,10 +2475,12 @@ function srUI(box){if(!box)return;S.sol=Object.assign({},SR_DEF,S.sol||{});const
       el('p',{class:'legend'},el('span',{},el('i',{class:'sr-lg strom'}),'Strom'),el('span',{},el('i',{class:'sr-lg gasb'}),'Gas'),el('span',{},el('i',{class:'sr-lg fuel'}),'Kraftstoff')));
     const p=srPay(o);lastP=p;PK.t.textContent=(o.sp?', Speicher':'')+(o.wp?' und Wärmepumpe':'')+' zusammen';
     PK.v.textContent=p.yrs==null?'nicht bezahlt':p.yrs<0.05?'sofort':rrF(p.yrs,1)+' Jahre';
-    PK.s.textContent='Kaufpreis '+srE(p.inv)+(o.wp?' (nach Förderung'+(o.ers?', ohne neue Gasheizung':'')+')':'')+' · spart '+srE(srYear(p.c0,o,1)-srYear(p.cF,o,1))+' im ersten Jahr';
+    PK.s.textContent='Kaufpreis heute '+srE(p.inv)+(o.wp?' (Wärmepumpe nach Förderung)':'')+' · spart '+srE(srYear(p.c0,o,1)-srYear(p.cF,o,1))+' im ersten Jahr · nach '+SR_Y+' Jahren '+(p.gain>=0?srE(p.gain)+' gespart':srE(-p.gain)+' mehr bezahlt');
+    ageIn.value=o.age;ageOut.textContent=o.age+' Jahre'+(p.iv.t1===0?' – muss jetzt ersetzt werden':' – muss in '+p.iv.t1+' Jahren ersetzt werden');ageIn.setAttribute('aria-valuetext',o.age+' Jahre');
+    gasInfo.textContent='Gaspreis mit CO₂-Preis: 2027 '+rrF(srGasP(o,1)*100,1)+' ct, 2030 '+rrF(srGasP(o,4)*100,1)+' ct je kWh'+(o.gr?' (mit '+rrF(o.gr,1)+' % Preisänderung im Jahr)':'')+'. Ohne Wärmepumpe kauft die Familie eine neue Gasheizung '+p.gEv.map(e=>e[0]?'nach '+e[0]+' Jahren':'jetzt').join(' und ')+'.';
     pchart.innerHTML=srPayChart(p,pchart.clientWidth);
     PK.st.replaceChildren(el('p',{class:'sr-mdet'},el('b',{},'Schritt für Schritt: '),'Was jedes Teil zusätzlich kostet und spart, wenn es zum vorherigen dazukommt.'),...p.steps.map(q=>el('div',{class:'sr-cr'},el('div',{class:'sr-crh'},el('span',{},q.n),el('b',{},q.yrs==null?'nicht bezahlt':q.yrs<0.05?'sofort':rrF(q.yrs,1)+' Jahre')),
-      el('small',{},'Kaufpreis '+srE(q.inv)+(q.n.indexOf('Wärmepumpe')>=0?' (Wärmepumpe '+srE(p.iv.wpG)+' minus Förderung '+srE(p.iv.wpF)+(o.ers?' minus Gasheizung '+srE(p.iv.gas):'')+')':'')+' · spart '+srE(q.save)+' im ersten Jahr · '+srYrs(q.yrs)))));}
+      el('small',{},'Kaufpreis '+srE(q.inv)+(q.wp?' (Wärmepumpe '+srE(p.iv.wpG)+' minus Förderung '+srE(p.iv.wpF)+'; dafür entfallen die Gasheizungen und das Gas)':'')+' · spart '+srE(q.save)+' im ersten Jahr · '+srYrs(q.yrs)+' · nach '+SR_Y+' Jahren '+(q.gain>=0?srE(q.gain)+' gespart':srE(-q.gain)+' mehr bezahlt')))));}
   draw();
   /* Diagramm bei geänderter Breite neu zeichnen (Drehen des iPads) */
   const rs=()=>{const w=chart.clientWidth;if(last&&w&&Math.abs(w-lastW)>4){lastW=w;chart.innerHTML=srChart(last,sel,w);}const w2=pchart.clientWidth;if(lastP&&w2&&Math.abs(w2-lastPW)>4){lastPW=w2;pchart.innerHTML=srPayChart(lastP,w2);}};
@@ -2479,7 +2496,7 @@ function srUI(box){if(!box)return;S.sol=Object.assign({},SR_DEF,S.sol||{});const
   const truth=[decm.pv<decm.use,jun.grid<jun.use/4,ns.r.t.grid>d.r.t.grid,wpS>wpW,suv.r.t.grid<kw.r.t.grid,s.r.t.grid<d.r.t.grid];
   T.t40.items.forEach((it,i)=>{it[1]=truth[i]?0:1;});
   const P=srPay(d.o);T.t42.answer=Math.round(P.yrs*10)/10;
-  T.t42.why='Solaranlage, Speicher und Wärmepumpe kosten zusammen '+srE(P.inv)+' (Wärmepumpe nach Förderung und ohne die neue Gasheizung, die sonst nötig wäre). Im ersten Jahr sparen sie '+srE(srYear(P.c0,d.o,1)-srYear(P.cF,d.o,1))+'. Nach etwa '+rrF(P.yrs,1)+' Jahren ist der Kaufpreis wieder drin.';
+  T.t42.why='Solaranlage, Speicher und Wärmepumpe kosten heute zusammen '+srE(P.inv)+' (Wärmepumpe nach Förderung). Dafür muss die Familie kein Gas und keine neuen Gasheizungen mehr kaufen. Im ersten Jahr sparen sie '+srE(srYear(P.c0,d.o,1)-srYear(P.cF,d.o,1))+'. Nach etwa '+rrF(P.yrs,1)+' Jahren ist der Kaufpreis wieder drin.';
   const A=run({km:11000}),B=run({km:11000,lad:2}),N=run({km:11000,sp:0}),aut=q=>Math.round(100*(1-q.r.t.grid/q.r.t.use));
   T.t41.muster=['Experiment 1: Mit Solaranlage, Speicher und Laden abends zahlt die Familie im Rechner '+srE(A.c.sol.sum)+' im Jahr für Energie. Mit einem Benziner und ohne Solaranlage wären es '+srE(A.c.vb.sum)+'. Sie spart also rund '+srE(rd(A.c.vb.sum)-rd(A.c.sol.sum))+' im Jahr.',
     'Experiment 2: Lädt sie nur mit Sonnenüberschuss, sinken die Kosten auf '+srE(B.c.sol.sum)+'. Das sind '+srE(rd(A.c.sol.sum)-rd(B.c.sol.sum))+' mehr Ersparnis. Der Anteil vom eigenen Dach steigt von '+aut(A)+' % auf '+aut(B)+' %.',
