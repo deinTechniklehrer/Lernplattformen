@@ -1086,7 +1086,7 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
     </ul>
   </div>
   <div class="rr" id="rr"></div>
-  <p class="src">Energiegehalt: Richtlinie 2009/28/EG, Anhang III (Ottokraftstoff 32 MJ/l = 8,9 kWh/l, Dieselkraftstoff 36 MJ/l = 10 kWh/l). Preise als Voreinstellung: ADAC, Monatsdurchschnitt Oktober 2026 (Super E10 2,114 €/l, Diesel 2,261 €/l, veröffentlicht 02.11.2026); BDEW-Strompreisanalyse Oktober 2026 (Haushalte 37,3 ct/kWh). Fahrzeugklassen, Rollwiderstandsbeiwerte und Wirkungsgrade sind Beispielwerte zum Ausprobieren.</p>
+  <p class="src">Energiegehalt: Richtlinie 2009/28/EG, Anhang III (Ottokraftstoff 32 MJ/l = 8,9 kWh/l, Dieselkraftstoff 36 MJ/l = 10 kWh/l). Preise als Voreinstellung: ADAC, Monatsdurchschnitt Oktober 2026 (Super E10 2,114 €/l, Diesel 2,261 €/l, veröffentlicht 02.11.2026); BDEW-Strompreisanalyse Oktober 2026 (Haushalte 37,3 ct/kWh). Fahrzeugklassen, Rollwiderstandsbeiwerte und Wirkungsgrade sind Beispielwerte zum Ausprobieren. Der Kleinwagen orientiert sich an Herstellerangaben aktueller Kleinwagen.</p>
   <article class="task">
     <header><span class="num"></span><h3>Verbrauch des Elektroautos</h3><button class="op" data-op="ermitteln" type="button">ermitteln</button></header>
     <p class="q">Ermittle mit dem Rechner, wie viele Kilowattstunden das Elektroauto der Mittelklasse auf 100 km bei 100 km/h auf Asphalt braucht. Tippe vorher auf „Voreinstellung“.</p>
@@ -1892,7 +1892,9 @@ function wGrid(id,t,w,art){
     report(id,all,art,fb);});
 }
 /* ---------- Reichweiten- und Kostenrechner (Daniels Modell aus den Tabellen Luft-/Rollwiderstand und E-Mobil-Akku) ---------- */
-const RR_KL=[['Sportwagen',0.36,1.98,1500],['Mittelklasse',0.30,2.19,1300],['SUV',0.40,2.42,2000]];
+const RR_KL=[['Sportwagen',0.36,1.98,1500],['Mittelklasse',0.30,2.19,1300],['SUV',0.40,2.42,2000],['Kleinwagen',0.30,2.10,1100]];
+/* Reihenfolge der Anzeige. Die Nummern der Klassen bleiben gleich, damit gespeicherte Arbeitsstände weiter stimmen. */
+const RR_ORD=[3,1,0,2];
 const RR_UG=[['Asphalt',0.01],['Schotter',0.02],['Erdweg',0.04],['Sand',0.15]];
 const RR_DEF={kl:1,ug:0,v:100,s:100,tank:50,akku:50,ed:150,etaB:25,etaD:30,etaE:85,pB:2.114,pD:2.261,pE:0.373};
 const RR_KWHL={B:32/3.6,D:36/3.6};
@@ -1921,7 +1923,11 @@ const RR_CAR=[
   body:'M50 14 L130 14 Q133 14 135 17 L149 32.5 L186 37.6 Q190 38.2 190.5 42 L191 51.5 L193 51.5 Q195 51.5 195 53.5 L195 65 Q195 67.5 192.5 67.5 L184 67.5 L184 71 L46 71 L46 67.5 L37 67.5 Q34.6 67.5 34.6 65 L34.6 55.5 Q34.6 53 37 53 L38.6 53 L45.2 18 Q46 14 50 14 Z',
   win:['M55.5 19 L74 19 L71.5 34 L50.5 34 Z','M79.5 19 L104 19 L104 34 L77.5 34 Z','M110 19 L128 19 L139.5 34 L110 34 Z'],
   cut:['M184.5 43 L188 43.6 L188.6 50 L184.5 50 Z'],handle:[[80,39.5],[112,39.5]],
-  rails:'M58 9 H118 M62 9 V14 M114 9 V14'}];
+  rails:'M58 9 H118 M62 9 V14 M114 9 V14'},
+ {col:'#8456b8',r:13.5,wx:[57,162],vx:13,
+  body:'M35 78 Q31 78 31 72 L31 58 Q32 48 37 40 L47 24 Q49 20.5 54 20 Q78 16.5 98 16.5 Q110 16.6 121 22 L158 41 Q172 43 182 47.5 Q192 52 194 61 L195 72 Q195 78 190 78 Z',
+  win:['M40 48 Q42 37 50 28 Q47.5 38 46.5 48.5 Z','M57 37 Q58 28 63 25.4 Q76 22.8 90 22.4 L91.5 40.4 Q73 40 57 37 Z','M96 22.4 Q108 22.6 118 26 Q134 33 149 43.6 L97.5 41 Z'],
+  cut:['M176 49 Q184 50 189.5 56 Q183 57 177.5 52.5 Z'],handle:[[100,47.5]],mirror:[138,41.5]}];
 function rrCar(kl,spin){const c=RR_CAR[kl],cy=88-c.r,r=c.r,f='var(--rr-cut,#fff)';
   const wheel=x=>{let sp='';if(spin)for(let i=0;i<3;i++){const a=i*120*Math.PI/180;sp+=`<path d="M${x} ${cy}L${(x+r*0.4*Math.sin(a)).toFixed(1)} ${(cy-r*0.4*Math.cos(a)).toFixed(1)}"/>`;}
     return `<g class="rr-wheel${spin?' spin':''}"><circle cx="${x}" cy="${cy}" r="${(r+1.6).toFixed(1)}" fill="${c.col}" stroke="${f}" stroke-width="3.2"/><circle cx="${x}" cy="${cy}" r="${(r*0.42).toFixed(1)}" fill="${f}"/>${sp?`<g stroke="${c.col}" stroke-width="${(r*0.12).toFixed(1)}" stroke-linecap="round">${sp}</g>`:''}</g>`;};
@@ -1952,7 +1958,7 @@ function rrTacho(){let t='';for(let v=0;v<=200;v+=20){const a=(-120+240*v/200)*M
     if(v%40===0)t+=`<text x="${(80+39*s).toFixed(1)}" y="${(82-39*c+4).toFixed(1)}" text-anchor="middle">${v}</text>`;}
   return `<svg class="rr-tacho" viewBox="0 0 160 126" aria-hidden="true"><path d="M26.3 113A62 62 0 1 1 133.7 113" fill="none" stroke="var(--line)" stroke-width="8" stroke-linecap="round"/><path class="rr-tarc" pathLength="100" d="M26.3 113A62 62 0 1 1 133.7 113" fill="none" stroke="var(--c)" stroke-width="8" stroke-linecap="round" stroke-dasharray="0 100"/>${t}<g class="rr-tneedle"><path d="M80 88V30" stroke="#e2574c" stroke-width="3.5" stroke-linecap="round"/></g><circle cx="80" cy="82" r="7" fill="var(--ink)"/><text class="rr-tnum" x="80" y="112" text-anchor="middle">100</text><text x="80" y="123" text-anchor="middle">km/h</text></svg>`;}
 /* Fahrwiderstand im Vergleich: gestapelte Balken je Auto und Kurven F(v) */
-function rrFwRows(o){const r=rrCalc(o),rows=RR_KL.map((k,ix)=>{const q=rrCalc(Object.assign({},o,{kl:ix}));return {ix,name:k[0],sub:'c<sub>w</sub> '+rrF(k[1],2)+' · A '+rrF(k[2],2)+' m² · '+rrF(k[3])+' kg',FL:q.FL,FR:q.B.FR};});
+function rrFwRows(o){const r=rrCalc(o),rows=RR_ORD.map(ix=>{const k=RR_KL[ix],q=rrCalc(Object.assign({},o,{kl:ix}));return {ix,name:k[0],sub:'c<sub>w</sub> '+rrF(k[1],2)+' · A '+rrF(k[2],2)+' m² · '+rrF(k[3])+' kg',FL:q.FL,FR:q.B.FR};});
   rows.push({ix:o.kl,e:true,name:RR_KL[o.kl][0]+' als Elektroauto',sub:''+rrF(RR_KL[o.kl][3])+' kg + Akku '+rrF(r.mA)+' kg',FL:r.FL,FR:r.E.FR});return rows;}
 function rrFwMax(o){let m=0;RR_KL.forEach((k,ix)=>{const q=rrCalc(Object.assign({},o,{kl:ix}),180);m=Math.max(m,q.B.F,q.E.F);});
   const st=m>2000?1000:m>800?400:200;return Math.ceil(m/st)*st;}
@@ -1962,14 +1968,14 @@ function rrFwChart(o,fmax){const X=v=>44+(v-30)*(266/150),Y=f=>138-118*f/fmax,vs
   const line=(ix,cls)=>{const c=RR_CAR[ix].col;return `<path class="${cls}" d="${vs.map((v,i)=>(i?'L':'M')+X(v).toFixed(1)+' '+Y(rrCalc(Object.assign({},o,{kl:ix}),v).B.F).toFixed(1)).join('')}" fill="none" stroke="${c}"/>`;};
   const sel=o.kl,air=`<path class="rr-fwair" d="M${X(30)} 138${vs.map(v=>'L'+X(v).toFixed(1)+' '+Y(rrCalc(o,v).FL).toFixed(1)).join('')}L${X(180)} 138Z"/>`;
   const q=rrCalc(o),cx=X(o.v).toFixed(1);
-  return `<svg class="rr-fwc" viewBox="0 0 320 172" role="img" aria-label="Fahrwiderstand der drei Autos von 30 bis 180 km/h. Die Kurven steigen immer steiler an, weil der Luftwiderstand mit dem Quadrat der Geschwindigkeit wächst.">${g}${air}
-    ${[0,1,2].filter(i=>i!==sel).map(i=>line(i,'o')).join('')}${line(sel,'s')}
+  return `<svg class="rr-fwc" viewBox="0 0 320 172" role="img" aria-label="Fahrwiderstand der vier Autos von 30 bis 180 km/h. Die Kurven steigen immer steiler an, weil der Luftwiderstand mit dem Quadrat der Geschwindigkeit wächst.">${g}${air}
+    ${RR_ORD.filter(i=>i!==sel).map(i=>line(i,'o')).join('')}${line(sel,'s')}
     <path d="M${cx} 20V138" stroke="var(--ink)" stroke-width="1.5" stroke-dasharray="4 4"/><circle cx="${cx}" cy="${Y(q.B.F).toFixed(1)}" r="5" fill="${RR_CAR[sel].col}" stroke="var(--surface)" stroke-width="2"/>
     <text x="177" y="170" text-anchor="middle">Geschwindigkeit in km/h</text><text x="6" y="12">Fahrwiderstand in N</text></svg>`;}
 const RR_CHK='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4 10-10" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 function rrUI(box){if(!box)return;S.rr=Object.assign({},RR_DEF,S.rr||{});const o=S.rr;
   const num=(k,lab,unit,step,min,max)=>{const i=el('input',{type:'number',step,min,max,id:'rr-'+k,value:o[k]});i.oninput=()=>{const v=parseFloat(String(i.value).replace(',','.'));if(!isNaN(v)&&v>=min&&v<=max){o[k]=v;save();draw();}};return el('label',{class:'rr-f',for:'rr-'+k},el('span',{},lab),el('span',{class:'rr-in'},i,el('small',{},unit)));};
-  const seg=(arr,k,lab,pic)=>{const g=el('div',{class:'rr-seg',role:'group','aria-label':lab});arr.forEach((a,ix)=>{const b=el('button',{type:'button',class:'btn soft','aria-pressed':String(o[k]===ix)},el('span',{class:'rr-pic',html:pic(ix)}),a[0]);b.onclick=()=>{o[k]=ix;save();g.querySelectorAll('button').forEach((x,j)=>x.setAttribute('aria-pressed',String(j===ix)));draw();};g.append(b);});return el('div',{class:'rr-f'},el('span',{},lab),g);};
+  const seg=(arr,k,lab,pic,ord)=>{const g=el('div',{class:'rr-seg',role:'group','aria-label':lab});(ord||arr.map((a,i)=>i)).forEach(ix=>{const a=arr[ix],b=el('button',{type:'button',class:'btn soft','aria-pressed':String(o[k]===ix)},el('span',{class:'rr-pic',html:pic(ix)}),a[0]);b.onclick=()=>{o[k]=ix;save();g.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));draw();};g.append(b);});return el('div',{class:'rr-f'},el('span',{},lab),g);};
   const vIn=el('input',{type:'range',min:30,max:180,step:10,value:o.v,id:'rr-v','aria-valuetext':o.v+' km/h'});const vOut=el('b',{class:'rr-speed'},o.v+' km/h');
   vIn.oninput=()=>{o.v=+vIn.value;vOut.textContent=o.v+' km/h';vIn.setAttribute('aria-valuetext',o.v+' km/h');save();draw();};
   const tacho=el('div',{class:'rr-tachow',html:rrTacho()});
@@ -1996,7 +2002,7 @@ function rrUI(box){if(!box)return;S.rr=Object.assign({},RR_DEF,S.rr||{});const o
     num('pB','Preis Super E10','€/l',0.01,0.5,5),num('pD','Preis Diesel','€/l',0.01,0.5,5),num('pE','Strompreis','€/kWh',0.01,0.05,2)),
     el('p',{class:'src'},'Voreinstellung: Preise ADAC (Oktober 2026) und BDEW (Oktober 2026, Laden zu Hause). An der Ladesäule ist Strom meist teurer. Wirkungsgrade sind Richtwerte zum Ausprobieren.'));
   box.append(el('div',{class:'anim rr-box'},el('h4',{class:'rr-h'},'Reichweiten- und Kostenrechner'),scene,fw,
-    el('div',{class:'rr-grid'},seg(RR_KL,'kl','Fahrzeugklasse',rrPic),seg(RR_UG,'ug','Untergrund',ix=>'<i style="background:'+RR_GROUND[ix][0]+'"></i>'),
+    el('div',{class:'rr-grid'},seg(RR_KL,'kl','Fahrzeugklasse',rrPic,RR_ORD),seg(RR_UG,'ug','Untergrund',ix=>'<i style="background:'+RR_GROUND[ix][0]+'"></i>'),
       el('div',{class:'rr-f rr-vbox'},el('label',{for:'rr-v'},'Geschwindigkeit: ',vOut),tacho,vIn),num('s','Fahrstrecke','km',10,1,2000)),
     el('div',{class:'row'},reset),out,adv,el('details',{class:'rr-adv'},el('summary',{},'Reichweite bei verschiedenen Geschwindigkeiten (voller Tank, voller Akku)'),tab)));
   let sceneKey='';
