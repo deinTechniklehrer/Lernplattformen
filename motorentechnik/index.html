@@ -1929,6 +1929,7 @@ let num=0,znum=0;const label={},home={};
 /* Zusatzaufgaben (data-zusatz) heißen Z1, Z2 …, zählen nicht zum Fortschritt und ändern die Nummern der anderen Aufgaben nicht */
 parts.forEach((p,pi)=>{$$('.task',p).forEach(a=>{const w=$('.w',a);const n=$('.num',a);if(w){const z=w.hasAttribute('data-zusatz');const id=w.dataset.t;if(z){znum++;n.textContent='Z'+znum;label[id]='Kapitel '+chOf[pi]+' · Zusatzaufgabe Z'+znum+': '+$('h3',a).textContent;}else{num++;n.textContent=num;label[id]='Kapitel '+chOf[pi]+' · Aufgabe '+num+': '+$('h3',a).textContent;}home[id]=pi;}});});
 const TASK_IDS=$$('.w[data-t]:not([data-zusatz])').map(w=>w.dataset.t),ZUSATZ_IDS=$$('.w[data-zusatz]').map(w=>w.dataset.t);
+window.__MT={T,TASK_IDS};/* für tools/badge_rules.py (Technik-Badges) */
 function isDone(id){const t=T[id];if(t.type==='open')return (S.a[id]||'').trim().length>=t.min;return !!S.ok[id];}
 function partDone(pi){const ids=TASK_IDS.filter(id=>home[id]===pi);if(!ids.length)return !!S.seen[pids[pi]];return ids.every(isDone);}
 

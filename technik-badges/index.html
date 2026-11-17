@@ -1,0 +1,912 @@
+<!doctype html>
+<html lang="de"><head><script>/* Lernplattformen auf GitHub Pages: Speichern ohne claude.ai */
+(function(){if(window.claude)return;var T={pdf:'application/pdf',txt:'text/plain;charset=utf-8',png:'image/png',jpg:'image/jpeg',jpeg:'image/jpeg',json:'application/json',csv:'text/csv;charset=utf-8',html:'text/html;charset=utf-8',docx:'application/vnd.openxmlformats-officedocument.wordprocessingml.document',xlsx:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',ino:'text/plain;charset=utf-8'};
+var dl={save:function(o){return new Promise(function(res,rej){try{var n=(o&&o.filename)||'datei',x=(n.split('.').pop()||'').toLowerCase(),d=o.data,b=d instanceof Blob?d:new Blob([d],{type:T[x]||'application/octet-stream'});var u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=n;a.rel='noopener';document.body.appendChild(a);a.click();setTimeout(function(){a.remove();URL.revokeObjectURL(u);},4000);res();}catch(e){rej({code:'failed',message:String(e)});}});}};
+window.claude={use:function(n){return Promise.resolve(n==='downloads'?dl:null);}};})();</script><meta property="og:type" content="website"><meta property="og:title" content="Technik-Badges"><meta property="og:description" content="Dein Badge-Pass für Maschinen, MakerSpace und Lernplattformen: Pass anlegen, Badges nach der Prüfung per QR-Code oder aus der Ergebnis-PDF von Arduino, Calliope und Motorentechnik eintragen, Pass als PDF speichern und wieder laden. Alles bleibt auf dem iPad."><meta property="og:url" content="https://deintechniklehrer.github.io/Lernplattformen/technik-badges/"><meta property="og:image" content="https://deintechniklehrer.github.io/Lernplattformen/vorschau/Vorschau_Technik-Badges.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="description" content="Dein Badge-Pass für Maschinen, MakerSpace und Lernplattformen: Pass anlegen, Badges nach der Prüfung per QR-Code oder aus der Ergebnis-PDF von Arduino, Calliope und Motorentechnik eintragen, Pass als PDF speichern und wieder laden. Alles bleibt auf dem iPad."><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Technik-Badges</title>
+<link rel="stylesheet" href="../assets/fonts/fonts.css">
+<style>
+
+:root{
+  --bg:#F3F6F2; --surface:#FFFFFF; --surface-2:#E9EFEA; --ink:#18221E; --muted:#56645D; --line:#D3DDD6;
+  --on-accent:#FFFFFF;
+  --existenz:#1F7A5C; --existenz-soft:#E1F0E9; --existenz-ink:#165C45;
+  --kultur:#2A6FB0;   --kultur-soft:#E2ECF7;   --kultur-ink:#1D568E;
+  --luxus:#B8841A;    --luxus-soft:#F6ECD6;    --luxus-ink:#7A5308;
+  --entdecken:#2A7F9E; --entdecken-soft:#DFEFF5; --entdecken-ink:#1B6380;
+  --sichern:#744690;  --sichern-soft:#EEE5F4;  --sichern-ink:#5B3175;
+  --bad:#B4483C; --bad-soft:#F6E1DE; --bad-ink:#8E3228;
+  --shadow:0 10px 30px rgb(24 34 30 / .14);
+  --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#101613; --surface:#18201C; --surface-2:#212B26; --ink:#E5ECE8; --muted:#9AA9A1; --line:#2F3B35;
+    --on-accent:#0F1512;
+    --existenz:#53BB91; --existenz-soft:#1A3128; --existenz-ink:#7FD3B0;
+    --kultur:#6FA8E2;   --kultur-soft:#1A2937;   --kultur-ink:#9CC4EE;
+    --luxus:#E2B458;    --luxus-soft:#372C15;    --luxus-ink:#EDCB86;
+    --entdecken:#5FB4D2; --entdecken-soft:#172F38; --entdecken-ink:#8FCDE3;
+    --sichern:#B690D0;  --sichern-soft:#2A2134;  --sichern-ink:#CFB2E2;
+    --bad:#E27E71; --bad-soft:#3A201C; --bad-ink:#F0A79D;
+    --shadow:0 10px 30px rgb(0 0 0 / .45);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#101613; --surface:#18201C; --surface-2:#212B26; --ink:#E5ECE8; --muted:#9AA9A1; --line:#2F3B35;
+  --on-accent:#0F1512;
+  --existenz:#53BB91; --existenz-soft:#1A3128; --existenz-ink:#7FD3B0;
+  --kultur:#6FA8E2;   --kultur-soft:#1A2937;   --kultur-ink:#9CC4EE;
+  --luxus:#E2B458;    --luxus-soft:#372C15;    --luxus-ink:#EDCB86;
+  --entdecken:#5FB4D2; --entdecken-soft:#172F38; --entdecken-ink:#8FCDE3;
+  --sichern:#B690D0;  --sichern-soft:#2A2134;  --sichern-ink:#CFB2E2;
+  --bad:#E27E71; --bad-soft:#3A201C; --bad-ink:#F0A79D;
+  --shadow:0 10px 30px rgb(0 0 0 / .45);
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55}
+.app{max-width:980px;margin:0 auto;padding-inline:16px;padding-block:20px 110px}
+h1,h2,h3,h4{font-family:var(--display);text-wrap:balance;line-height:1.15}
+.i{width:22px;height:22px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+:focus-visible{outline:3px solid var(--kultur);outline-offset:2px}
+
+/* Kopf */
+.top{display:grid;grid-template-columns:1fr minmax(170px,240px);gap:10px 24px;align-items:center}
+.brand{display:flex;gap:14px;align-items:center}
+.logo{width:48px;height:48px;flex:none}
+.brand h1{margin:0;font-weight:800;font-size:clamp(25px,4.2vw,34px);letter-spacing:-.015em}
+.brand p{margin:0;color:var(--muted);font-size:14px}
+.meter{display:grid;gap:6px}
+.meter-row{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.bar{height:10px;border-radius:99px;background:var(--surface-2);overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--existenz),var(--kultur) 55%,var(--luxus));transition:width .5s ease}
+.ki-pill{grid-column:1/-1;justify-self:start;display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;padding:5px 12px 5px 9px;border-radius:99px;background:var(--surface-2);color:var(--muted)}
+.ki-pill .i{width:16px;height:16px}
+.ki-pill.on{background:var(--sichern-soft);color:var(--sichern-ink)}
+@media (max-width:620px){.top{grid-template-columns:1fr}}
+
+/* Stationen-Navigation */
+.stations{display:flex;gap:8px;margin:18px 0 20px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
+.st-btn{flex:1 0 auto;display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-size:15px;font-weight:700;cursor:pointer;min-height:48px}
+.st-btn .n{display:grid;place-items:center;width:24px;height:24px;border-radius:8px;background:var(--c-soft);color:var(--c-ink);font-size:13px;font-variant-numeric:tabular-nums}
+.st-btn[aria-current="step"]{background:var(--c);border-color:var(--c);color:var(--on-accent)}
+.st-btn[aria-current="step"] .n{background:rgb(255 255 255 / .22);color:inherit}
+.st-btn .ok{display:none;width:18px;height:18px;color:var(--existenz)}
+.st-btn.done .ok{display:block}
+.st-btn[aria-current="step"].done .ok{color:inherit}
+
+/* Farbräume */
+.c-entdecken{--c:var(--entdecken);--c-soft:var(--entdecken-soft);--c-ink:var(--entdecken-ink)}
+.c-verstehen,.c-existenz{--c:var(--existenz);--c-soft:var(--existenz-soft);--c-ink:var(--existenz-ink)}
+.c-ordnen,.c-kultur{--c:var(--kultur);--c-soft:var(--kultur-soft);--c-ink:var(--kultur-ink)}
+.c-bewerten,.c-luxus{--c:var(--luxus);--c-soft:var(--luxus-soft);--c-ink:var(--luxus-ink)}
+.c-sichern{--c:var(--sichern);--c-soft:var(--sichern-soft);--c-ink:var(--sichern-ink)}
+
+/* Station */
+.station{display:grid;gap:16px}
+.st-head{display:flex;gap:16px;align-items:center;padding:20px 22px;border-radius:18px;background:var(--c);color:var(--on-accent)}
+.st-icon{width:58px;height:58px;flex:none;border-radius:16px;background:rgb(255 255 255 / .2);display:grid;place-items:center}
+.st-icon .i{width:32px;height:32px}
+.eyebrow{margin:0;text-transform:uppercase;letter-spacing:.09em;font-size:12px;font-weight:700;opacity:.92}
+.st-head h2{margin:2px 0 4px;font-size:clamp(23px,3.6vw,31px);font-weight:800}
+.goal{margin:0;font-size:15px}
+.lead{margin:0;max-width:65ch}
+
+.task{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;display:grid;gap:12px}
+.task>header{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.num{width:34px;height:34px;flex:none;border-radius:10px;background:var(--c);color:var(--on-accent);display:grid;place-items:center;font-family:var(--display);font-weight:800;font-variant-numeric:tabular-nums}
+.task h3{margin:0;font-size:19px;flex:1;min-width:12ch}
+.op{font:inherit;font-size:13px;font-weight:700;padding:5px 11px;border-radius:99px;border:0;background:var(--c-soft);color:var(--c-ink);cursor:pointer}
+.q{margin:0;max-width:68ch}
+.hint{margin:0;font-size:14px;color:var(--muted)}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+
+.btn{font:inherit;font-size:16px;font-weight:700;display:inline-flex;align-items:center;gap:8px;padding:10px 16px;min-height:46px;border-radius:12px;border:0;background:var(--ink);color:var(--bg);cursor:pointer}
+.btn.soft{background:var(--surface-2);color:var(--ink)}
+.btn.accent{background:var(--c);color:var(--on-accent)}
+.btn.ki{background:var(--sichern);color:var(--on-accent)}
+.btn:disabled{opacity:.55;cursor:default}
+.btn .i{width:19px;height:19px}
+
+textarea,input[type=text],input[type=number],select{font:inherit;font-size:16px;width:100%;padding:12px 14px;border-radius:12px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink)}
+textarea{min-height:112px;resize:vertical;line-height:1.5}
+select{appearance:auto;min-height:46px}
+
+/* Karten sortieren */
+.tray{display:grid;grid-template-columns:repeat(auto-fill,minmax(172px,1fr));gap:8px;padding:12px;border:2px dashed var(--line);border-radius:14px;min-height:70px}
+.tray.empty::after{content:"Alle Karten sind einsortiert. Tippe eine Karte an, um sie zu verschieben.";grid-column:1/-1;color:var(--muted);font-size:14px}
+.nc{display:flex;align-items:center;gap:9px;padding:9px 11px;min-height:50px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-size:15px;line-height:1.25;text-align:left;cursor:pointer;touch-action:manipulation;position:relative}
+.nc .e{font-size:24px;line-height:1}
+.nc[aria-pressed="true"]{outline:3px solid var(--c);outline-offset:2px;box-shadow:var(--shadow)}
+.nc .st{margin-left:auto;font-size:13px;font-weight:800;width:22px;height:22px;border-radius:99px;display:none;place-items:center;flex:none}
+.nc.s-ok{border-color:var(--existenz)} .nc.s-ok .st{display:grid;background:var(--existenz);color:var(--on-accent)}
+.nc.s-alt{border-color:var(--luxus);border-style:dashed} .nc.s-alt .st{display:grid;background:var(--luxus);color:var(--on-accent)}
+.nc.s-bad{border-color:var(--bad)} .nc.s-bad .st{display:grid;background:var(--bad);color:var(--on-accent)}
+.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media (max-width:680px){.cols{grid-template-columns:1fr}}
+.col{border-radius:14px;background:var(--c-soft);border:2px solid transparent;padding:10px;display:grid;gap:8px;align-content:start;min-height:150px;cursor:pointer;font:inherit;color:var(--ink);text-align:left}
+.col.armed{border-color:var(--c);border-style:dashed}
+.col.over{border-color:var(--c);border-style:solid}
+.col h4{margin:0;padding:9px 11px;border-radius:10px;background:var(--c);color:var(--on-accent);font-size:16px;display:flex;justify-content:space-between;gap:8px}
+.col h4 small{font-family:var(--body);font-weight:700;font-variant-numeric:tabular-nums;opacity:.9}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:14px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.dot{width:12px;height:12px;border-radius:99px;display:inline-block}
+
+/* Offene Aufgaben */
+.open{display:grid;gap:10px}
+.open-foot{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.qc{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.qc b{font-size:13px;color:var(--muted);margin-right:2px}
+.qc span{font-size:13px;padding:4px 10px;border-radius:99px;background:var(--surface-2);color:var(--muted)}
+.qc span.on{background:var(--existenz-soft);color:var(--existenz-ink)}
+.qc span.on::before{content:"✓ "}
+.fb{border-radius:14px;padding:14px 16px;background:var(--surface-2);display:grid;gap:6px}
+.fb p{margin:0;max-width:68ch}
+.fb .lvl{display:flex;align-items:center;gap:8px;font-weight:800;font-family:var(--display);font-size:17px}
+.fb .lvl .i{width:18px;height:18px}
+.fb.stark{background:var(--existenz-soft)} .fb.stark .lvl{color:var(--existenz-ink)}
+.fb.solide{background:var(--kultur-soft)} .fb.solide .lvl{color:var(--kultur-ink)}
+.fb.ausbaufaehig{background:var(--luxus-soft)} .fb.ausbaufaehig .lvl{color:var(--luxus-ink)}
+.fb.fehlt,.fb.err{background:var(--bad-soft)} .fb.fehlt .lvl,.fb.err .lvl{color:var(--bad-ink)}
+.fb .stale{font-size:13px;color:var(--muted)}
+.fb.wait .lvl{color:var(--muted)}
+.fb.ok{background:var(--existenz-soft)} .fb.ok .lvl{color:var(--existenz-ink)}
+.fb.mid{background:var(--luxus-soft)} .fb.mid .lvl{color:var(--luxus-ink)}
+.dots::after{content:"";animation:dots 1.4s steps(4) infinite}
+@keyframes dots{0%{content:""}25%{content:"."}50%{content:".."}75%{content:"..."}}
+@media (prefers-reduced-motion:reduce){.dots::after{animation:none;content:" …"}.bar i{transition:none}}
+
+/* Infotext */
+.info{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px 22px;display:grid;gap:12px}
+.info p{margin:0;max-width:66ch}
+.info h3{margin:0;font-size:21px}
+.term{font:inherit;background:none;border:0;padding:0 1px;color:var(--c-ink);font-weight:700;text-decoration:underline dotted 2px;text-underline-offset:4px;cursor:pointer}
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media (max-width:680px){.tiers{grid-template-columns:1fr}}
+.tier{border-radius:14px;padding:14px;background:var(--c-soft);border:0;text-align:left;font:inherit;color:var(--ink);cursor:pointer;display:grid;gap:4px;align-content:start;min-height:112px}
+.tier b{font-family:var(--display);font-size:18px;color:var(--c-ink)}
+.tier .tag{font-size:13px;font-weight:700;color:var(--c-ink)}
+.tier .more{display:none;font-size:15px}
+.tier[aria-expanded="true"] .more{display:block}
+.tier .tap{font-size:13px;color:var(--muted)}
+.tier[aria-expanded="true"] .tap{display:none}
+.flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:8px;align-items:stretch}
+.fstep{border-radius:14px;padding:12px 14px;background:var(--surface-2);display:grid;gap:2px;align-content:start}
+.fstep b{font-family:var(--display);font-size:18px}
+.fstep small{font-size:14px;color:var(--muted)}
+.farr{display:grid;place-items:center;font-size:13px;font-weight:700;color:var(--muted);text-align:center;max-width:110px}
+@media (max-width:680px){.flow{grid-template-columns:1fr}.farr{max-width:none}}
+
+/* Materiell / immateriell */
+.mi{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:8px}
+.mi-row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 8px 8px 12px;border-radius:12px;background:var(--surface-2);border:1.5px solid transparent}
+.mi-row.s-ok{border-color:var(--existenz)} .mi-row.s-bad{border-color:var(--bad)}
+.seg{display:inline-flex;border-radius:10px;overflow:hidden;border:1.5px solid var(--line);flex:none}
+.seg button{font:inherit;font-size:14px;font-weight:700;padding:7px 10px;border:0;background:var(--surface);color:var(--muted);cursor:pointer;min-height:38px}
+.seg button[aria-pressed="true"]{background:var(--c);color:var(--on-accent)}
+
+/* Lückentext */
+.cloze{line-height:2.4;max-width:70ch;margin:0}
+.cloze select{width:auto;display:inline-block;padding:6px 10px;min-height:40px;font-weight:700;margin:0 2px}
+.cloze select.s-ok{border-color:var(--existenz);background:var(--existenz-soft)}
+.cloze select.s-bad{border-color:var(--bad);background:var(--bad-soft)}
+
+/* Pyramide */
+.pyr-wrap{display:grid;grid-template-columns:minmax(220px,300px) 1fr;gap:18px;align-items:center}
+@media (max-width:680px){.pyr-wrap{grid-template-columns:1fr}}
+.pyr{width:100%;max-width:300px;height:auto;justify-self:center}
+.pyr polygon{cursor:pointer;stroke:var(--surface);stroke-width:4}
+.pyr .p-l{fill:var(--luxus)} .pyr .p-k{fill:var(--kultur)} .pyr .p-e{fill:var(--existenz)}
+.pyr text{fill:var(--on-accent);font-family:var(--display);font-weight:800;font-size:15px;text-anchor:middle;pointer-events:none}
+.pyr text.s{font-family:var(--body);font-weight:700;font-size:11px}
+.pyr-in{display:grid;gap:10px}
+.pyr-row{border-radius:14px;padding:10px 12px;background:var(--c-soft);display:grid;gap:8px}
+.pyr-row h4{margin:0;font-size:16px;color:var(--c-ink)}
+.pyr-row .two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media (max-width:420px){.pyr-row .two{grid-template-columns:1fr}}
+
+/* Fallbeispiel */
+.story{border-radius:16px;padding:18px 20px;background:var(--luxus-soft);display:grid;gap:12px}
+.story h3{margin:0;font-size:20px;color:var(--luxus-ink)}
+.story p{margin:0;max-width:68ch}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.price{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:12px;background:var(--surface);font-weight:700;font-size:15px}
+.price .e{font-size:20px}
+.price.wallet{background:var(--ink);color:var(--bg)}
+.budget{position:relative;height:46px;border-radius:12px;background:var(--surface-2);display:flex;overflow:visible;margin-top:24px}
+.bseg{height:100%;display:grid;place-items:center;color:var(--on-accent);font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;padding-inline:4px}
+.bseg:first-child{border-radius:12px 0 0 12px}.bseg:last-child{border-radius:0 12px 12px 0}
+.bseg.cut{background-image:repeating-linear-gradient(45deg,rgb(255 255 255 / .35) 0 6px,transparent 6px 12px)}
+.bmark{position:absolute;top:-24px;bottom:-6px;border-left:3px solid var(--ink);padding-left:6px;font-size:13px;font-weight:800;white-space:nowrap}
+.jt{display:grid;gap:8px}
+.jt-row{display:grid;grid-template-columns:1fr minmax(160px,220px);gap:10px;align-items:center;padding:8px 8px 8px 12px;border-radius:12px;background:var(--surface-2);border:1.5px solid transparent}
+.jt-row.s-ok{border-color:var(--existenz)} .jt-row.s-alt{border-color:var(--luxus);border-style:dashed} .jt-row.s-bad{border-color:var(--bad)}
+@media (max-width:480px){.jt-row{grid-template-columns:1fr}}
+.gap-in{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.gap-in input{width:120px}
+
+/* Rangfolge */
+.rank{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.rank li{display:flex;align-items:center;gap:10px;padding:10px 10px 10px 12px;border-radius:12px;background:var(--surface-2)}
+.rank .pos{width:30px;height:30px;border-radius:9px;background:var(--c);color:var(--on-accent);display:grid;place-items:center;font-weight:800;flex:none;font-variant-numeric:tabular-nums}
+.rank .e{font-size:22px}
+.rank .lbl{flex:1;font-weight:700;line-height:1.25}
+.rank .lbl small{display:block;font-weight:400;color:var(--muted);font-size:14px}
+.mv{font:inherit;width:42px;height:42px;border-radius:10px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;display:grid;place-items:center}
+.mv:disabled{opacity:.35;cursor:default}
+.think{border-radius:14px;padding:12px 14px;border:1.5px dashed var(--luxus);display:flex;gap:10px;align-items:flex-start}
+.think p{margin:0}
+.think .i{color:var(--luxus-ink);margin-top:2px}
+.scale{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+@media (max-width:560px){.scale{grid-template-columns:1fr}}
+.scale label{display:grid;place-items:center;text-align:center;gap:4px;padding:10px 6px;border-radius:12px;background:var(--surface-2);border:1.5px solid transparent;cursor:pointer;font-size:14px;font-weight:700;min-height:56px}
+.scale input{position:absolute;opacity:0;pointer-events:none}
+.scale label:has(input:checked){background:var(--c);color:var(--on-accent)}
+.scale label:has(input:focus-visible){outline:3px solid var(--kultur);outline-offset:2px}
+.bonus{border-radius:16px;padding:18px;border:2px solid var(--luxus);background:var(--surface);display:grid;gap:12px}
+.bonus h3{margin:0;font-size:19px;display:flex;gap:8px;align-items:center}
+.bonus .star{color:var(--luxus)}
+
+/* Sichern */
+.trio{display:grid;gap:10px}
+.trio-row{display:grid;grid-template-columns:52px 1fr;gap:12px;align-items:start}
+.big{width:52px;height:52px;border-radius:14px;background:var(--c);color:var(--on-accent);display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:26px}
+.trio-row .fields{display:grid;gap:8px}
+.trio-row .three{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+@media (max-width:560px){.trio-row .three{grid-template-columns:1fr}}
+.trio-row input.s-ok{border-color:var(--existenz);background:var(--existenz-soft)}
+.trio-row input.s-bad{border-color:var(--luxus)}
+.over-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px}
+.ov{border-radius:12px;padding:12px;background:var(--c-soft);display:grid;gap:4px}
+.ov b{font-family:var(--display);color:var(--c-ink)}
+.ov span{font-size:14px;color:var(--ink);font-variant-numeric:tabular-nums}
+.code{font-family:ui-monospace,Consolas,monospace;font-size:13px;min-height:90px;word-break:break-all}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:720px){.split{grid-template-columns:1fr}}
+.half{border-radius:14px;background:var(--c-soft);padding:14px;display:grid;gap:10px;align-content:start;min-width:0}
+.half h4{margin:0;font-size:17px;color:var(--c-ink)}
+
+/* Popover */
+.pop{position:absolute;z-index:60;width:min(340px,calc(100vw - 32px));background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px 16px;box-shadow:var(--shadow);display:grid;gap:6px}
+.pop h4{margin:0;font-size:18px;padding-right:34px}
+.pop p{margin:0;font-size:15px}
+.pop .x{position:absolute;top:8px;right:8px;width:34px;height:34px;border-radius:9px;border:0;background:var(--surface-2);color:var(--ink);font:inherit;font-size:18px;cursor:pointer}
+@media (max-width:560px){.pop{position:fixed;left:12px!important;right:12px;top:auto!important;bottom:calc(84px + env(safe-area-inset-bottom,0px));width:auto}}
+
+/* Blättern */
+.pager{position:fixed;left:0;right:0;bottom:0;z-index:40;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line)}
+.pager-in{max-width:980px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.pager-in .where{font-size:14px;color:var(--muted);text-align:center;font-variant-numeric:tabular-nums}
+
+/* Einkommens-Werkstatt: Ergänzungen */
+:root{--s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a;--s4:#eda100;--s5:#e87ba4;--s6:#008300;--free:#D3DDD6}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--s5:#d55181;--s6:#008300;--free:#2F3B35}}
+:root[data-theme="dark"]{--s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--s5:#d55181;--s6:#008300;--free:#2F3B35}
+.srcs{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media (max-width:620px){.srcs{grid-template-columns:1fr}}
+.srcs .tier .e{font-size:26px;line-height:1}
+.srcs .tier b{font-size:17px}
+.mi-row{flex-wrap:wrap}
+#srcSort{grid-template-columns:repeat(auto-fill,minmax(290px,1fr))}
+#srcSort .mi-row{flex-direction:column;align-items:stretch;gap:6px}
+.seg4{display:grid;grid-template-columns:repeat(4,1fr)}
+.seg4 button{padding:7px 4px;font-size:13.5px}
+.rule{border-radius:12px;padding:12px 14px;background:var(--surface-2);display:grid;gap:4px}
+.rule p{margin:0}
+.src{font-size:13px;color:var(--muted)}
+p.src{margin:0}
+.law blockquote{margin:0;padding:10px 14px;border-left:4px solid var(--sichern);background:var(--sichern-soft);border-radius:0 12px 12px 0;font-style:italic;max-width:68ch}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;max-width:420px}
+table.tg{border-collapse:collapse;width:100%;font-size:15px;font-variant-numeric:tabular-nums}
+.tg th,.tg td{padding:8px 12px;text-align:left;border-bottom:1px solid var(--line)}
+.tg th{background:var(--surface-2);font-size:13px;color:var(--muted)}
+.tg tr:last-child td{border-bottom:0}
+.tg tbody tr:nth-child(3){background:var(--c-soft);font-weight:700}
+.cases{display:grid;gap:8px}
+.case{display:grid;grid-template-columns:1fr auto;gap:6px 12px;align-items:center;padding:10px 10px 10px 14px;border-radius:12px;background:var(--surface-2);border:1.5px solid transparent}
+.case p{margin:0}
+.case .why{grid-column:1/-1;font-size:14px;color:var(--muted)}
+.case.s-ok{border-color:var(--existenz)} .case.s-bad{border-color:var(--bad)}
+@media (max-width:520px){.case{grid-template-columns:1fr}}
+.pe{font-size:20px}
+.eur{display:inline-flex;align-items:center;gap:6px}
+.eur input{width:96px}
+.jt-row .eur{justify-self:start}
+.jt-row .eur input{width:110px}
+.plan{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;align-items:start}
+@media (max-width:760px){.plan{grid-template-columns:1fr}}
+.plan-col{display:grid;gap:10px;min-width:0}
+.plan h4{margin:6px 0 0;font-size:16px;color:var(--c-ink)}
+.money{display:grid;gap:6px}
+.mrow{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 6px 6px 12px;border-radius:12px;background:var(--surface-2)}
+.ml{display:inline-flex;align-items:center;gap:8px;font-size:15px}
+.mctl{display:inline-flex;align-items:center;gap:6px}
+.mctl .mv{width:38px;height:38px;font-size:18px;font-weight:800}
+.mctl input{width:72px;text-align:right;padding:8px 10px}
+.sw{display:inline-block;width:12px;height:12px;border-radius:4px;flex:none}
+.sw.free{background:var(--free)}
+.goalrow{display:flex;gap:8px;flex-wrap:wrap}
+.goalrow input[type=text]{flex:1;min-width:150px}
+.pstat{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-radius:14px;background:var(--surface-2)}
+.pstat b{display:block;font-family:var(--display);font-size:17px}
+.pstat span{font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
+.pstat .pico{display:grid;place-items:center;width:32px;height:32px;border-radius:10px;flex:none}
+.pstat.ok{background:var(--existenz-soft)} .pstat.ok .pico{background:var(--existenz);color:var(--on-accent)}
+.pstat.mid{background:var(--luxus-soft)} .pstat.mid .pico{background:var(--luxus);color:var(--on-accent)}
+.pstat.bad{background:var(--bad-soft)} .pstat.bad .pico{background:var(--bad);color:var(--on-accent)}
+.stack{display:flex;gap:2px;height:30px;border-radius:8px;overflow:hidden;background:var(--surface)}
+.seg-b{height:100%;min-width:3px}
+.seg-b:first-child{border-radius:4px 0 0 4px}.seg-b:last-child{border-radius:0 4px 4px 0}
+.seg-b.free{background:var(--free)}
+table.legend-t{border-collapse:collapse;width:100%;font-size:15px;font-variant-numeric:tabular-nums}
+.legend-t td{padding:5px 4px;border-bottom:1px solid var(--line)}
+.legend-t td:first-child{display:flex;align-items:center;gap:8px}
+.legend-t td.v,.legend-t td.p{text-align:right;white-space:nowrap}
+.legend-t td.p{color:var(--muted);width:56px}
+.quiz{display:grid;gap:10px}
+.qz{border:1.5px solid var(--line);border-radius:12px;padding:10px 14px 12px;margin:0;display:grid;gap:6px}
+.qz legend{font-weight:700;padding:0 4px}
+.qz label{display:flex;gap:10px;align-items:center;padding:6px 8px;border-radius:9px;cursor:pointer}
+.qz label:has(input:checked){background:var(--c-soft)}
+.qz input{width:18px;height:18px;accent-color:var(--c)}
+.qz.s-ok{border-color:var(--existenz)} .qz.s-bad{border-color:var(--bad)}
+.fbox{border-radius:12px;border:1.5px dashed var(--sichern);background:var(--surface)}
+.fbox.has{border-style:solid;background:var(--sichern-soft)}
+.fbox>summary{cursor:pointer;padding:10px 14px;font-weight:700;color:var(--sichern-ink);list-style:none;display:flex;align-items:center;gap:8px}
+.fbox>summary::-webkit-details-marker{display:none}
+.fbox>summary::before{content:"";width:8px;height:8px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s}
+.fbox[open]>summary::before{transform:rotate(45deg)}
+.fbox-in{padding:0 14px 14px;display:grid;gap:10px}
+.fbl{font-size:14px;font-weight:700;color:var(--muted)}
+.fbin{min-height:80px}
+a.btn{text-decoration:none}
+.resume{background:var(--surface)}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:720px){.split{grid-template-columns:1fr}}
+.half{border-radius:14px;background:var(--c-soft);padding:14px;display:grid;gap:10px;align-content:start;min-width:0}
+.half h4{margin:0;font-size:17px;color:var(--c-ink)}
+.howto{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+@media (max-width:680px){.howto{grid-template-columns:1fr}}
+.howto div{border-radius:12px;padding:10px 12px;background:var(--sichern-soft);font-size:15px}
+.howto b{display:block;color:var(--sichern-ink);font-family:var(--display)}
+
+/* ---------- Technik-Badges ---------- */
+:root{
+  --g-werk:#9A5B00;--g-druck:#1F64A6;--g-laser:#B0362F;--g-textil:#9B3474;--g-cad:#0F716F;--g-steuer:#2B7431;--g-motor:#5546A6;--g-sammel:#7A5C00;
+  --ok:#1F7A4C;--ok-soft:#E1F1E8;--warn:#8A5A00;--warn-soft:#FBEFD5;--mono:"JetBrains Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --g-werk:#F0A64A;--g-druck:#79B1EA;--g-laser:#F08A7E;--g-textil:#E792C6;--g-cad:#55C6C3;--g-steuer:#77C47B;--g-motor:#ADA2F2;--g-sammel:#E7C65A;
+  --ok:#6CCB97;--ok-soft:#173326;--warn:#F0C065;--warn-soft:#3A2D13;}}
+:root[data-theme="dark"]{
+  --g-werk:#F0A64A;--g-druck:#79B1EA;--g-laser:#F08A7E;--g-textil:#E792C6;--g-cad:#55C6C3;--g-steuer:#77C47B;--g-motor:#ADA2F2;--g-sammel:#E7C65A;
+  --ok:#6CCB97;--ok-soft:#173326;--warn:#F0C065;--warn-soft:#3A2D13;}
+.brand .tlogo{height:46px;width:auto;flex:none;background:#fff;border-radius:10px;padding:4px 6px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px;display:grid;gap:12px;min-width:0}
+.card>h2{margin:0;font-size:clamp(21px,3.2vw,26px);font-weight:800}
+.card>h2 small{display:block;font-family:var(--body);font-weight:400;font-size:15px;color:var(--muted);margin-top:4px}
+main{display:grid;gap:18px;margin-top:18px}
+body.has-pass #sSo{order:5}body.has-pass #lk,body.has-pass .lic{order:6}
+.lead{margin:0;max-width:68ch}
+.muted{color:var(--muted)}
+.small{font-size:14px}
+/* Ablauf */
+.flow{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;counter-reset:f}
+.flow li{position:relative;display:grid;gap:6px;justify-items:center;text-align:center;padding:12px 8px 10px;border-radius:14px;background:var(--surface-2);font-size:15px;line-height:1.3}
+.flow li b{font-family:var(--display);font-size:16px}
+.flow li span{font-size:14px;color:var(--muted)}
+.flow svg{width:44px;height:44px;fill:none;stroke:var(--ink);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.flow svg .a{stroke:var(--g-steuer)}
+.flow li:not(:last-child)::after{content:"";position:absolute;right:-9px;top:34px;width:8px;height:8px;border-top:2.5px solid var(--muted);border-right:2.5px solid var(--muted);transform:rotate(45deg);z-index:1}
+@media (max-width:640px){.flow{grid-template-columns:1fr 1fr}.flow li:nth-child(2)::after{display:none}}
+.cap{margin:0;font-size:14px;color:var(--muted)}
+/* Formular */
+.form{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:10px}
+.form label{display:grid;gap:4px;font-weight:700;font-size:15px}
+@media (max-width:520px){.form{grid-template-columns:1fr}}
+.split{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:14px;align-items:start}
+@media (max-width:760px){.split{grid-template-columns:1fr}}
+.box{border-radius:14px;background:var(--surface-2);padding:14px;display:grid;gap:10px;min-width:0}
+.box h3{margin:0;font-size:18px}
+.box p{margin:0}
+.box .btn.soft{background:var(--surface);border:1.5px solid var(--line)}
+.fileb{position:relative;overflow:hidden}
+.fileb input{position:absolute;inset:0;opacity:0;cursor:pointer;font-size:0}
+.fileb:focus-within{outline:3px solid var(--kultur);outline-offset:2px}
+/* Meldungen */
+.msg{border-radius:12px;padding:12px 14px;display:grid;gap:6px;font-size:16px;border-left:5px solid var(--muted);background:var(--surface-2)}
+.msg p{margin:0}
+.msg.ok{border-color:var(--ok);background:var(--ok-soft)}
+.msg.warn{border-color:var(--warn);background:var(--warn-soft)}
+.msg.bad{border-color:var(--bad);background:var(--bad-soft)}
+.msg .row{margin-top:4px}
+/* Pass */
+.passhead{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;justify-content:space-between}
+.who{display:flex;gap:12px;align-items:center;min-width:0}
+.av{width:48px;height:48px;border-radius:14px;flex:none;display:grid;place-items:center;background:var(--g-steuer);color:var(--on-accent);font-family:var(--display);font-weight:800;font-size:22px}
+.who b{display:block;font-family:var(--display);font-size:21px;line-height:1.2;overflow-wrap:anywhere}
+.who div>span{font-size:14px;color:var(--muted)}
+.count{font-size:15px;color:var(--muted)}
+.count b{font-family:var(--display);font-size:22px;color:var(--ink)}
+.groups{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:12px}
+.grp{border:1px solid var(--line);border-radius:14px;padding:12px;display:grid;gap:10px;align-content:start;min-width:0}
+.grp h3{margin:0;font-size:16px;display:flex;align-items:center;gap:8px}
+.grp h3::before{content:"";width:12px;height:12px;border-radius:4px;background:var(--gc)}
+.badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:6px}
+.bd{display:grid;justify-items:center;text-align:center;gap:4px;padding:8px 4px;border-radius:12px;min-width:0}
+.medal{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:22px;letter-spacing:.02em;border:2.5px dashed var(--line);color:var(--muted);background:var(--surface);position:relative}
+.bd .t{font-size:14px;line-height:1.2;font-weight:700;overflow-wrap:anywhere;hyphens:auto}
+.bd .s{font-size:13px;line-height:1.25;color:var(--muted)}
+.bd.got .medal{border:3px solid var(--gc);background:var(--gc);color:var(--on-accent);box-shadow:0 0 0 3px var(--surface),0 0 0 5px var(--gc)}
+.bd.got .s{color:var(--ink)}
+.bd.got .medal{margin:3px 0 5px}
+.bd.got .medal::after{content:"✓";position:absolute;right:-4px;bottom:-4px;width:22px;height:22px;border-radius:50%;background:var(--ok);color:#fff;font-size:13px;display:grid;place-items:center;font-family:var(--body);box-shadow:0 0 0 2px var(--surface)}
+.bd.sammel .medal{border-radius:18px}
+.g-werk{--gc:var(--g-werk)}.g-druck{--gc:var(--g-druck)}.g-laser{--gc:var(--g-laser)}.g-textil{--gc:var(--g-textil)}.g-cad{--gc:var(--g-cad)}.g-steuer{--gc:var(--g-steuer)}.g-motor{--gc:var(--g-motor)}.g-sammel{--gc:var(--g-sammel)}
+/* Eintragen */
+.ways{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:760px){.ways{grid-template-columns:1fr}}
+.cam{position:relative;width:100%;max-width:420px;aspect-ratio:1;border-radius:14px;overflow:hidden;background:#000;justify-self:center}
+.cam video{width:100%;height:100%;object-fit:cover;display:block}
+.cam .frame{position:absolute;inset:16%;border:3px solid rgb(255 255 255 / .9);border-radius:16px;box-shadow:0 0 0 999px rgb(0 0 0 / .35)}
+.cam p{position:absolute;left:0;right:0;bottom:8px;margin:0;text-align:center;color:#fff;font-size:14px;text-shadow:0 1px 3px #000}
+.codein{display:flex;gap:8px}
+.codein input{font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em;min-width:0}
+/* Bestätigung */
+.ov{position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:16px;background:rgb(0 0 0 / .55)}
+.ovbox{background:var(--surface);color:var(--ink);border-radius:22px;padding:24px 20px;max-width:440px;width:100%;display:grid;gap:12px;justify-items:center;text-align:center;box-shadow:var(--shadow)}
+.ovbox .medal{width:110px;height:110px;font-size:38px}
+.ovbox h2{margin:0;font-size:26px}
+.ovbox p{margin:0}
+.when{font-family:var(--display);font-size:20px;font-weight:800}
+/* Lehrkräfte */
+details.lk{border:1px solid var(--line);border-radius:14px;background:var(--surface);padding:0}
+details.lk>summary{cursor:pointer;padding:14px 16px;font-weight:700;font-family:var(--display);font-size:18px}
+details.lk>div{padding:0 16px 16px;display:grid;gap:10px}
+details.lk p,details.lk ul{margin:0}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--surface-2);font-size:14px}
+tr:last-child td{border-bottom:0}
+.lic{font-size:14px;color:var(--muted);text-align:center;margin:8px 0 0}
+.lic a{color:inherit}
+a{color:var(--kultur-ink)}
+.danger{background:var(--bad);color:#fff}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+<script src="../assets/jspdf.umd.min.js"></script><link rel="stylesheet" href="../assets/lp-support.css"><script>window.LP_CFG={"keys": ["technik-badges-v1"], "pdfSection": false, "anchors": [], "slug": "technik-badges"};</script><script src="../assets/lp-support.js"></script>
+<script src="../assets/jsqr.min.js" defer></script>
+</head><body>
+<div class="app">
+  <header class="top">
+    <div class="brand">
+      <img class="tlogo" src="data:image/png;base64,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" alt="Logo: dein Technik Lehrer">
+      <div>
+        <h1>Technik-Badges</h1>
+        <p>Technik · Dein Badge-Pass für Maschinen, MakerSpace und Lernplattformen</p>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="card" id="sSo" aria-labelledby="h-so">
+      <h2 id="h-so">So funktioniert dein Badge-Pass</h2>
+      <p class="lead">Ein <b>Badge</b> zeigt, dass du eine Maschine sicher bedienen kannst oder eine Lernplattform abgeschlossen hast. Manche Badges brauchst du, bevor du an einer Maschine oder im MakerSpace arbeiten darfst. Alles bleibt auf deinem iPad, nichts wird an einen Server geschickt.</p>
+      <ol class="flow" aria-describedby="flowcap">
+        <li><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="10" y="5" width="28" height="38" rx="4"/><circle cx="24" cy="18" r="5"/><path d="M16 31c1.5-4 4.5-6 8-6s6.5 2 8 6"/><path class="a" d="M17 37h14"/></svg><b>1 · Pass anlegen</b><span>Name und Klasse eintragen</span></li>
+        <li><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M6 14V8a2 2 0 0 1 2-2h6M34 6h6a2 2 0 0 1 2 2v6M42 34v6a2 2 0 0 1-2 2h-6M14 42H8a2 2 0 0 1-2-2v-6"/><rect x="13" y="13" width="8" height="8"/><rect x="27" y="13" width="8" height="8"/><rect x="13" y="27" width="8" height="8"/><path class="a" d="M28 28h3v3h4M28 35h7"/></svg><b>2 · Badge holen</b><span>QR-Code nach der Prüfung oder Ergebnis-PDF</span></li>
+        <li><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M13 5h16l9 9v27a2 2 0 0 1-2 2H13a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/><path d="M29 5v9h9"/><path class="a" d="M24 21v12M19 28l5 5 5-5"/></svg><b>3 · Pass speichern</b><span>als PDF auf deinem iPad</span></li>
+        <li><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M14 42h20M24 42V30"/><rect x="12" y="18" width="24" height="12" rx="2"/><path d="M18 18V8h12v10M24 8V4"/><path class="a" d="m30 35 3 3 6-6"/></svg><b>4 · Pass zeigen</b><span>an der Maschine deiner Lehrkraft</span></li>
+      </ol>
+      <p class="cap" id="flowcap">Ablauf: Pass anlegen, Badge holen, Pass als PDF speichern und an der Maschine zeigen.</p>
+      <div class="msg warn"><p><b>Wichtig:</b> Ein Badge heißt nicht, dass du allein an die Maschine darfst. Es gilt immer, was deine Lehrkraft sagt. Verbindlich ist die Liste im Fachraum, in die deine Lehrkraft jede Prüfung einträgt.</p></div>
+    </section>
+
+    <!-- Noch kein Pass -->
+    <section class="card" id="sNew" aria-labelledby="h-new" hidden>
+      <h2 id="h-new">Pass anlegen <small>Trag deinen Namen und deine Klasse ein. Beides steht später auf deinem Pass.</small></h2>
+      <div class="split">
+        <div class="box">
+          <h3>Neuer Pass</h3>
+          <div class="form">
+            <label>Vor- und Nachname <input type="text" id="nName" maxlength="40" autocomplete="name" placeholder="z. B. Mia Schulz"></label>
+            <label>Klasse <input type="text" id="nKl" maxlength="10" autocomplete="off" placeholder="z. B. 8b"></label>
+          </div>
+          <div class="row"><button class="btn accent c-verstehen" id="nGo" type="button">Pass anlegen</button></div>
+        </div>
+        <div class="box" id="up1">
+          <h3>Schon einen Pass?</h3>
+          <p>Lade die Pass-PDF, die du hier gespeichert hast. Dann sind alle deine Badges wieder da.</p>
+          <div class="row"><label class="btn soft fileb">Pass-PDF laden<input type="file" accept=".pdf,application/pdf,.html,text/html" data-up="pass"></label></div>
+        </div>
+      </div>
+      <div id="msgNew"></div>
+    </section>
+
+    <!-- Eintragen -->
+    <section class="card" id="sAdd" aria-labelledby="h-add" hidden>
+      <h2 id="h-add">Badge eintragen</h2>
+      <div class="ways">
+        <div class="box">
+          <h3>Nach einer Prüfung</h3>
+          <p>Deine Lehrkraft nimmt die Prüfung ab und zeigt dir den QR-Code des Badges. Scanne ihn hier, während sie zuschaut.</p>
+          <div class="row"><button class="btn accent c-verstehen" id="camGo" type="button"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg><span>QR-Code scannen</span></button></div>
+          <div class="cam" id="cam" hidden><video id="vid" playsinline muted aria-label="Kamerabild zum Scannen"></video><div class="frame" aria-hidden="true"></div><p>QR-Code in den Rahmen halten</p></div>
+          <p class="small muted">Kamera streikt? Tipp den Code unter dem QR-Code ein.</p>
+          <div class="codein"><input type="text" id="codeIn" maxlength="16" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="z. B. BH-K7Q4-M9XP" aria-label="Code eintippen"><button class="btn soft" id="codeGo" type="button">Eintragen</button></div>
+        </div>
+        <div class="box">
+          <h3>Aus einer Lernplattform</h3>
+          <p>Für <b>AR</b> Arduino, <b>CA</b> Calliope und <b>MT</b> Motorentechnik: Lade die Ergebnis-PDF der Lernplattform. Bei Arduino ist es der Lernnachweis (.html).</p>
+          <div class="row"><label class="btn soft fileb">Ergebnis-PDF laden<input type="file" accept=".pdf,application/pdf,.html,text/html" data-up="any"></label></div>
+          <p class="small muted">Es zählt nur die Original-Datei, die die Lernplattform gespeichert hat. Eine aus Notability neu exportierte PDF oder ein Bildschirmfoto enthält den Arbeitsstand meist nicht.</p>
+        </div>
+      </div>
+      <div id="msgAdd" aria-live="polite"></div>
+    </section>
+
+    <!-- Pass -->
+    <section class="card" id="sPass" aria-labelledby="h-pass" hidden>
+      <div class="passhead">
+        <div class="who"><span class="av" id="pAv" aria-hidden="true">?</span><div><h2 id="h-pass" class="sr">Dein Badge-Pass</h2><b id="pName"></b><span id="pKl"></span></div></div>
+        <div class="row"><span class="count" id="pCount"></span><button class="btn soft" id="pEdit" type="button">Angaben ändern</button></div>
+      </div>
+      <div class="box" id="editBox" hidden>
+        <div class="form">
+          <label>Vor- und Nachname <input type="text" id="eName" maxlength="40" autocomplete="name"></label>
+          <label>Klasse <input type="text" id="eKl" maxlength="10" autocomplete="off"></label>
+        </div>
+        <div class="row"><button class="btn accent c-verstehen" id="eSave" type="button">Übernehmen</button><button class="btn soft" id="eCancel" type="button">Abbrechen</button></div>
+      </div>
+      <div class="groups" id="groups"></div>
+    </section>
+
+    <!-- Speichern -->
+    <section class="card" id="sSave" aria-labelledby="h-save" hidden>
+      <h2 id="h-save">Pass speichern <small>Speichere deinen Pass nach jedem neuen Badge als PDF und leg ihn in deinem Technik-Ordner ab.</small></h2>
+      <div class="split">
+        <div class="box">
+          <h3>Badge-Pass als PDF</h3>
+          <p>In der PDF steckt dein ganzer Pass. Heb die Original-PDF auf, dann kannst du sie hier jederzeit wieder laden, auch auf einem anderen Gerät.</p>
+          <div class="row"><button class="btn accent c-verstehen" id="pdfGo" type="button"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg><span>Badge-Pass als PDF speichern</span></button></div>
+        </div>
+        <div class="box" id="up2">
+          <h3>Pass-PDF laden</h3>
+          <p>Auf einem neuen Gerät oder nach dem Löschen: Lade deine gespeicherte Pass-PDF.</p>
+          <div class="row"><label class="btn soft fileb">Pass-PDF laden<input type="file" accept=".pdf,application/pdf,.html,text/html" data-up="pass"></label></div>
+        </div>
+      </div>
+      <div id="msgSave" aria-live="polite"></div>
+      <details class="lk" style="background:var(--surface-2)"><summary style="font-size:16px">Pass auf diesem Gerät löschen</summary><div>
+        <p>Löscht den Pass nur in diesem Browser. Deine gespeicherten PDFs bleiben erhalten. Speichere vorher deinen Pass als PDF.</p>
+        <div class="row"><button class="btn danger" id="delGo" type="button">Pass hier löschen</button></div>
+      </div></details>
+    </section>
+
+    <details class="lk" id="lk">
+      <summary>Hinweise für Lehrkräfte</summary>
+      <div>
+        <p>Die Seite ist ein Werkzeug ohne Konten und ohne Server. Der Pass liegt im Browser der Schüler:innen und als PDF auf ihrem iPad. Verbindlicher Nachweis bleibt die <b>Liste im Fachraum</b> (Datum, Name, Klasse, Kürzel, Unterschrift), in die du jede bestandene Prüfung einträgst. Badges aus Lernplattformen brauchen keinen Eintrag, sie kommen über die Ergebnis-PDF zurück.</p>
+        <p><b>QR-Codes:</b> Je Badge mit Prüfung gibt es einen Code, der jedes Schuljahr wechselt. Auf der Seite steht nur ein Prüfwert, nicht der Code. Früher erworbene Badges bleiben gültig, weil der Pass das Badge mit Datum speichert. Das Codeblatt bekommst du auf Anfrage bei Daniel Beyrodt. Den QR-Code kann die Schüler:in auch mit der Kamera-App scannen, dann öffnet sich diese Seite und trägt das Badge ein. Bewahre das Codeblatt bei der Liste auf und häng es nicht aus.</p>
+        <p><b>Ergebnis-PDF:</b> AR gibt es für das Arduino-Lernheft oder Arduino Schritt für Schritt, wenn alle Kapitel vollständig sind. CA gibt es, wenn alle elf Calliope-Challenges geschafft sind. MT gibt es, wenn alle Aufgaben der Motorentechnik erledigt sind (ohne Zusatzaufgaben). Passt der Name in der Ergebnis-PDF nicht zum Pass, zeigt die Seite einen Hinweis, trägt das Badge aber ein.</p>
+        <p><b>Aufbau:</b> D2 setzt D1 voraus, D3 setzt D2 voraus, L2 setzt L1 voraus, L3 setzt L2 voraus. Die Sammel-Badges erscheinen von selbst: <b>MS</b> MakerSpace mit LT, BH, BM und BU, <b>RL</b> Robotiklabor selbstständig mit L2 und D2.</p>
+        <p><b>RiSU:</b> Die Stufen sind eigene Stufen der Fachgruppe und ersetzen die Tätigkeitsbeschränkungen der RiSU nicht (RiSU 2023, I – 4.3, Tabelle 4). Zum Beispiel steht beim Lasern bis Jahrgang 8 die Lehrkraft unmittelbar daneben, auch wenn L1 im Pass steht. Transferpresse und Plotter stehen nicht in Tabelle 4, dort gilt die Gefährdungsbeurteilung der Schule.</p>
+        <div class="tw"><table><thead><tr><th>Kürzel</th><th>Badge</th><th>Inhalt</th><th>Nachweis</th></tr></thead><tbody id="lkTab"></tbody></table></div>
+      </div>
+    </details>
+    <p class="lic">Technik-Badges von Daniel Beyrodt · Lizenz <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> · QR-Scanner: jsQR (Apache 2.0, <a href="../lizenzen/">Lizenzen</a>)</p>
+  </main>
+</div>
+
+<div class="ov" id="ov" hidden role="dialog" aria-modal="true" aria-labelledby="ovT">
+  <div class="ovbox" id="ovBox"></div>
+</div>
+
+<script>
+(function(){
+'use strict';
+const KEY='technik-badges-v1', SLUG='technik-badges', SALT='deinTechniklehrer-badges|';
+const RULES={"arduino-lernheft":{"badge":"AR","kind":"ard","key":"arduino-lernheft-v1","title":"Arduino-Lernheft Tinkercad","ch":[{"id":"mc","t":"Was ist ein Mikrocontroller?","items":[{"kind":"ex","id":"q1"}]},{"id":"uno","t":"Arduino Uno und Steckbrett","items":[{"kind":"ex","id":"hs"},{"kind":"ex","id":"bb"},{"kind":"ex","id":"bbt"},{"kind":"task","id":"bb1"},{"kind":"task","id":"bb2"},{"kind":"task","id":"bb3"}]},{"id":"sa","t":"Sensoren und Aktoren","items":[{"kind":"ex","id":"mark"},{"kind":"ex","id":"sort"}]},{"id":"eva","t":"Das EVA-Prinzip","items":[{"kind":"ex","id":"evat"}]},{"id":"sr","t":"Steuern und Regeln","items":[{"kind":"ex","id":"srs"}]},{"id":"anschluss","t":"Den echten Arduino anschließen","items":[{"kind":"task","id":"esd"},{"kind":"task","id":"usb"},{"kind":"task","id":"gm"},{"kind":"task","id":"ide"},{"kind":"task","id":"board"},{"kind":"task","id":"port"}]},{"id":"tinkercad","t":"Erste Schritte mit Tinkercad","items":[{"kind":"task","id":"open"},{"kind":"task","id":"login"},{"kind":"task","id":"other"}]},{"id":"blinken","t":"Blinken: dein erstes Programm","items":[{"kind":"task","id":"b1"},{"kind":"task","id":"b2"},{"kind":"task","id":"b3"},{"kind":"ex","id":"bq"},{"kind":"task","id":"t1"},{"kind":"task","id":"t2"},{"kind":"sub","id":"sub"}]},{"id":"led","t":"Die LED richtig anschließen","items":[{"kind":"ex","id":"lq"}]},{"id":"zweiled","t":"Zwei LEDs abwechselnd","items":[{"kind":"ex","id":"zq"},{"kind":"ex","id":"cb"},{"kind":"ex","id":"pz"},{"kind":"task","id":"z1"},{"kind":"task","id":"z2"},{"kind":"task","id":"z3"},{"kind":"task","id":"z4"},{"kind":"sub","id":"sub"}]},{"id":"signale","t":"Digitale und analoge Signale","items":[{"kind":"ex","id":"da"}]},{"id":"pwm","t":"PWM: LED dimmen","items":[{"kind":"task","id":"p1"},{"kind":"sub","id":"sub"}]},{"id":"rgb","t":"Die RGB-LED","items":[{"kind":"task","id":"r1"},{"kind":"task","id":"r2"},{"kind":"sub","id":"sub"}]},{"id":"variablen","t":"Variablen","items":[{"kind":"ex","id":"vt"},{"kind":"sub","id":"sub"}]},{"id":"seriell","t":"Der serielle Monitor","items":[{"kind":"sub","id":"sub"}]},{"id":"sensoren","t":"Analoge Sensoren: der Fotowiderstand","items":[{"kind":"task","id":"s1"},{"kind":"task","id":"s2"},{"kind":"sub","id":"sub"}]},{"id":"if","t":"Bedingungen: wenn … dann … sonst","items":[{"kind":"sub","id":"sub"}]},{"id":"for","t":"Die for-Schleife","items":[{"kind":"ex","id":"endl"},{"kind":"sub","id":"sub"}]},{"id":"taster","t":"Digitale Sensoren: der Taster","items":[{"kind":"sub","id":"sub"}]},{"id":"neopixel","t":"Bibliotheken und Neopixel","items":[{"kind":"task","id":"n1"},{"kind":"task","id":"n2"},{"kind":"sub","id":"sub"}]},{"id":"servo","t":"Servomotoren","items":[{"kind":"sub","id":"sub"}]},{"id":"buzzer","t":"Töne mit dem Buzzer","items":[{"kind":"task","id":"bz1"},{"kind":"task","id":"bz2"},{"kind":"task","id":"bz3"}]},{"id":"co2","t":"CO₂-Ampel mit MQ-135","items":[{"kind":"task","id":"c1"},{"kind":"task","id":"c2"},{"kind":"task","id":"c3"}]},{"id":"fehler","t":"Fehlersuche","items":[{"kind":"task","id":"f1"},{"kind":"task","id":"f2"},{"kind":"task","id":"f3"},{"kind":"task","id":"f4"},{"kind":"task","id":"f5"},{"kind":"task","id":"f6"},{"kind":"ex","id":"fq"},{"kind":"task","id":"g1"},{"kind":"task","id":"g2"},{"kind":"task","id":"g3"},{"kind":"task","id":"g4"}]}]},"arduino-schritt-fuer-schritt":{"badge":"AR","kind":"ard","key":"arduino-lernheft-basis-v1","title":"Arduino Schritt für Schritt","ch":[{"id":"mc","t":"Was ist ein Mikrocontroller?","items":[{"kind":"ex","id":"st"},{"kind":"ex","id":"q"},{"kind":"task","id":"ic0"},{"kind":"task","id":"ic1"}]},{"id":"uno","t":"Arduino und Steckbrett","items":[{"kind":"ex","id":"st"},{"kind":"ex","id":"hs"},{"kind":"ex","id":"bb"},{"kind":"ex","id":"bbt"},{"kind":"task","id":"bb1"},{"kind":"task","id":"bb2"},{"kind":"task","id":"ic0"},{"kind":"task","id":"ic1"},{"kind":"task","id":"ic2"}]},{"id":"sa","t":"Sensor oder Aktor?","items":[{"kind":"ex","id":"st"},{"kind":"ex","id":"sort"},{"kind":"task","id":"ic0"}]},{"id":"eva","t":"Eingabe – Verarbeitung – Ausgabe","items":[{"kind":"ex","id":"st"},{"kind":"ex","id":"evat"},{"kind":"task","id":"ic0"}]},{"id":"sr","t":"Steuern oder Regeln?","items":[{"kind":"ex","id":"st"},{"kind":"ex","id":"srs"},{"kind":"task","id":"ic0"}]},{"id":"anschluss","t":"Echten Arduino anschließen","items":[{"kind":"ex","id":"st"}]},{"id":"tinkercad","t":"Tinkercad starten","items":[{"kind":"ex","id":"st"},{"kind":"task","id":"ic0"},{"kind":"task","id":"ic1"}]},{"id":"blinken","t":"Eine LED blinkt","items":[{"kind":"ex","id":"st"},{"kind":"ex","id":"q"},{"kind":"sub","id":"sub"},{"kind":"task","id":"ic0"},{"kind":"task","id":"ic1"}]},{"id":"led","t":"LED richtig einstecken","items":[{"kind":"ex","id":"st"},{"kind":"ex","id":"q"},{"kind":"task","id":"ic0"},{"kind":"task","id":"ic1"}]},{"id":"zweiled","t":"Zwei LEDs abwechselnd","items":[{"kind":"ex","id":"cb"},{"kind":"ex","id":"st"},{"kind":"ex","id":"pz"},{"kind":"sub","id":"sub"},{"kind":"task","id":"ic0"},{"kind":"task","id":"ic1"}]},{"id":"signale","t":"Digital und analog","items":[{"kind":"ex","id":"st"},{"kind":"ex","id":"da"},{"kind":"task","id":"ic0"}]},{"id":"pwm","t":"LED dimmen","items":[{"kind":"ex","id":"st"},{"kind":"sub","id":"sub"},{"kind":"task","id":"ic0"},{"kind":"task","id":"ic1"}]},{"id":"rgb","t":"Farben mischen","items":[{"kind":"ex","id":"st"},{"kind":"ex","id":"q"},{"kind":"task","id":"ic0"}]},{"id":"variablen","t":"Variablen","items":[{"kind":"ex","id":"st"},{"kind":"sub","id":"sub"},{"kind":"task","id":"ic0"},{"kind":"task","id":"ic1"}]},{"id":"seriell","t":"Der Serien-Monitor","items":[{"kind":"ex","id":"st"},{"kind":"sub","id":"sub"},{"kind":"task","id":"ic0"}]},{"id":"sensoren","t":"Licht messen","items":[{"kind":"ex","id":"st"},{"kind":"sub","id":"sub"},{"kind":"task","id":"ic0"}]},{"id":"if","t":"Wenn – dann – sonst","items":[{"kind":"ex","id":"st"},{"kind":"ex","id":"q"},{"kind":"sub","id":"sub"},{"kind":"task","id":"ic0"}]},{"id":"for","t":"Wiederholen","items":[{"kind":"ex","id":"st"},{"kind":"sub","id":"sub"},{"kind":"task","id":"ic0"}]},{"id":"taster","t":"Der Taster","items":[{"kind":"ex","id":"st"},{"kind":"sub","id":"sub"},{"kind":"task","id":"ic0"}]},{"id":"servo","t":"Der Servo-Motor","items":[{"kind":"ex","id":"st"},{"kind":"sub","id":"sub"},{"kind":"task","id":"ic0"}]},{"id":"neopixel","t":"LED-Streifen (Profi)","items":[{"kind":"ex","id":"st"},{"kind":"task","id":"ic0"}]},{"id":"buzzer","t":"Töne und Sirene","items":[{"kind":"ex","id":"st"},{"kind":"task","id":"ic0"}]},{"id":"ultraschall","t":"Abstand messen","items":[{"kind":"ex","id":"st"},{"kind":"task","id":"ic0"},{"kind":"task","id":"ic1"}]},{"id":"motor","t":"Motor vor und zurück","items":[{"kind":"ex","id":"st"},{"kind":"task","id":"ic0"}]},{"id":"co2","t":"Luft-Ampel","items":[{"kind":"ex","id":"st"},{"kind":"task","id":"ic0"}]},{"id":"relais","t":"Das Relais","items":[{"kind":"ex","id":"st"},{"kind":"task","id":"ic0"}]},{"id":"tmp36","t":"Temperatur messen","items":[{"kind":"ex","id":"st"},{"kind":"task","id":"ic0"}]},{"id":"feuchte","t":"Ist die Erde nass?","items":[{"kind":"ex","id":"st"},{"kind":"task","id":"ic0"}]},{"id":"fehler","t":"Es klappt nicht?","items":[{"kind":"task","id":"f1"},{"kind":"task","id":"f2"},{"kind":"task","id":"f3"},{"kind":"task","id":"f4"},{"kind":"task","id":"f5"},{"kind":"task","id":"f6"},{"kind":"task","id":"f7"}]}]},"calliope-challenges":{"badge":"CA","kind":"cal","key":"calliope-challenges-v1","title":"Calliope-Challenges","ch":[{"n":1,"t":"Anzeigetafel „Hitzefrei“","tasks":["c1a","c1b"]},{"n":2,"t":"Ampel","tasks":["c2a","c2b"]},{"n":3,"t":"Raketenstart","tasks":["c3a","c3b"]},{"n":4,"t":"Raketenstart mit Sound","tasks":["c4a","c4b"]},{"n":5,"t":"Thermometer","tasks":["c5a","c5b"]},{"n":6,"t":"Lärmampel","tasks":["c6a","c6b"]},{"n":7,"t":"Schrankwächter","tasks":["c7a","c7b"]},{"n":8,"t":"Hitzefrei-Melder","tasks":["c8a","c8b"]},{"n":9,"t":"Würfel","tasks":["c9a","c9b"]},{"n":10,"t":"Schere, Stein, Papier","tasks":["c10a","c10b"]},{"n":11,"t":"Liegestützzähler","tasks":["c11a","c11b"]}],"open":{"c11b":60}},"motorentechnik":{"badge":"MT","kind":"mt","key":"motorentechnik-v1","title":"Motorentechnik","tasks":["t1","t2","t3","t4","t5","t6","t7","t8","t9","t10","t11","t12","t13","t14","t15","t16","t17","t18","t19","t20","t21","t22","t23","t24","t30","t31","t32","t33","t34","t35","t36","t37","t25","t26","t27","t28","t29"],"open":{"t15":100,"t24":220,"t33":140,"t28":110,"t29":140}}};
+const HASHES={"2026/27":{"4290141d52da28e4383da611a77f30ee9480729ca3551e7149ec311183aec8f9":"BH","4c5624424c5b09c2a9f1f349a657fed3ad87cd9fa75fde8111dc0db13dc49a69":"BM","03e93b29b8fe5e76cef7902ccf318c89b018d150649029326afe304e3e239550":"BU","3851d80ff560db224efd6190ded1c3246ba2b910d1f443c970198e2bc9fc3fd0":"LT","ffae83f135328714a8a7f582bdf19e60213f4ed3a80954d42c45d5ab7198b17b":"D1","a1b0169822d6dfde715434d41729a65445f39736a159648f228594406168f494":"D2","66b608f728f02a4b7253cdf4c795b3962462ad4463c6b4e673f18ef384f95e9d":"D3","880f76249a2bb639c7fb5934def302be12e0be655b91617bbcfa4c4371752c41":"L1","e64ff0b88da4cc77903b6765cbcace9b9122a354fc33ab191ee2feaf1e7747c9":"L2","a158a42c0d5e56d3c56f4c34f176f24ca820d414718f9c7114cea3bd355a364d":"L3","8f54fdccc3376a6e3751036551a68497500d4f7d444b3ab17a993cb89bca3231":"TP","92ff22663a55846d5d4bc4e5d70cd818971154f0bce4038aaf5e8c1646fb0560":"PL","3b67d63fd8c7f905482f1ccec4ffee63d587daabf89f31a482c0098ccf117c71":"TC","f4a65bbad1ba1549ff19124c2ec6b9cd3876727288629d6207105879c94c0529":"SE","fe8601f8b77aaafa33d18e615d3883e90bda06afcdc25ad591477102f48151d5":"SM","e0ca7f942315925493760a3a2582837e10bebb27cfb423368a63e810df26ee9c":"RO","d035a99bc1bdf9296ca80d5993219f6ac9d263932af88790ce44637394700245":"MP"}};
+const GROUPS=[
+  {id:'werk',t:'Werkstatt'},{id:'druck',t:'3D-Druck'},{id:'laser',t:'Lasercutter'},{id:'textil',t:'Textil'},
+  {id:'cad',t:'3D-CAD'},{id:'steuer',t:'Steuern und Regeln'},{id:'motor',t:'Motorentechnik'},{id:'sammel',t:'Sammel-Badges'}];
+// n: p = Prüfung mit QR-Code, l = Lernplattform, a = automatisch
+const BADGES=[
+  {k:'BH',t:'Bohrmaschine Holz',g:'werk',n:'p'},{k:'BM',t:'Bohrmaschine Metall',g:'werk',n:'p'},{k:'BU',t:'Bohrmaschine UMT',g:'werk',n:'p'},{k:'LT',t:'Lötstation',g:'werk',n:'p'},
+  {k:'D1',t:'3D-Druck bedienen',g:'druck',n:'p',i:'Druck vorbereiten, starten, entnehmen'},{k:'D2',t:'3D-Druck warten',g:'druck',n:'p',i:'baut auf D1 auf',req:['D1']},{k:'D3',t:'3D-Druck reparieren',g:'druck',n:'p',i:'baut auf D2 auf',req:['D2']},
+  {k:'L1',t:'Lasercutter Stufe 1',g:'laser',n:'p',i:'Gravieren. Vor dem Start nachfragen, die Lehrkraft prüft.'},{k:'L2',t:'Lasercutter Stufe 2',g:'laser',n:'p',i:'Gravieren ohne Prüfung durch die Lehrkraft',req:['L1']},{k:'L3',t:'Lasercutter Stufe 3',g:'laser',n:'p',i:'auch Schneiden, SVG-Dateien in Inkscape bearbeiten',req:['L2']},
+  {k:'TP',t:'Transferpresse',g:'textil',n:'p'},{k:'PL',t:'Plotter',g:'textil',n:'p'},
+  {k:'TC',t:'Tinkercad',g:'cad',n:'p'},{k:'SE',t:'Solid Edge',g:'cad',n:'p'},{k:'SM',t:'SpaceMouse',g:'cad',n:'p'},
+  {k:'RO',t:'Robotik',g:'steuer',n:'p'},{k:'AR',t:'Arduino',g:'steuer',n:'l'},{k:'CA',t:'Calliope',g:'steuer',n:'l'},
+  {k:'MT',t:'Motorentechnik Theorie',g:'motor',n:'l'},{k:'MP',t:'Motorentechnik Praxis',g:'motor',n:'p'},
+  {k:'MS',t:'MakerSpace',g:'sammel',n:'a',all:['LT','BH','BM','BU'],i:'LT, BH, BM und BU'},{k:'RL',t:'Robotiklabor selbstständig',g:'sammel',n:'a',all:['L2','D2'],i:'L2 und D2'}];
+const BK={};BADGES.forEach(b=>BK[b.k]=b);
+const NW={p:'Prüfung',l:'Lernplattform',a:'automatisch'};
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const pad=n=>String(n).padStart(2,'0');
+const dStr=iso=>{const d=new Date(iso);return isNaN(d)?'':pad(d.getDate())+'.'+pad(d.getMonth()+1)+'.'+d.getFullYear();};
+const tStr=iso=>{const d=new Date(iso);return isNaN(d)?'':pad(d.getHours())+':'+pad(d.getMinutes());};
+function schoolYear(d){d=d||new Date();const y=d.getFullYear();return d.getMonth()>=7?y+'/'+pad((y+1)%100):(y-1)+'/'+pad(y%100);}
+
+/* ---------- Speicher ---------- */
+let P=null;
+try{P=JSON.parse(localStorage.getItem(KEY)||'null');}catch(e){P=null;}
+if(P&&typeof P!=='object')P=null;
+if(P){P.b=P.b||{};}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(P));return true;}catch(e){return false;}}
+function has(k){return !!(P&&P.b[k]);}
+function autoDate(b){if(!b.all.every(has))return null;return b.all.map(k=>P.b[k].d).sort().pop();}
+function got(k){const b=BK[k];return b.n==='a'?autoDate(b):(P&&P.b[k]?P.b[k].d:null);}
+
+/* ---------- Meldungen ---------- */
+function say(where,type,html,keep){const box=$(where);box.innerHTML='<div class="msg '+type+'">'+html+'</div>';if(!keep)box.firstChild.scrollIntoView({block:'nearest',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});}
+function clearMsg(where){$(where).innerHTML='';}
+
+/* ---------- Darstellung ---------- */
+function medal(b,cls){return '<span class="medal'+(cls?' '+cls:'')+'" aria-hidden="true">'+b.k+'</span>';}
+function render(){
+  const on=!!P;
+  document.body.classList.toggle('has-pass',on);$('#sNew').hidden=on;['#sPass','#sAdd','#sSave'].forEach(s=>$(s).hidden=!on);
+  if(!on)return;
+  $('#pAv').textContent=(P.name||'?').trim().charAt(0).toUpperCase()||'?';
+  $('#pName').textContent=P.name;$('#pKl').textContent=(P.kl?'Klasse '+P.kl+' · ':'')+'Pass seit '+dStr(P.created);
+  const n=BADGES.filter(b=>got(b.k)).length;$('#pCount').innerHTML='<b>'+n+'</b> von '+BADGES.length+' Badges';
+  $('#groups').innerHTML=GROUPS.map(g=>{
+    const bs=BADGES.filter(b=>b.g===g.id);
+    return '<div class="grp g-'+g.id+'"><h3>'+esc(g.t)+'</h3><div class="badges">'+bs.map(b=>{
+      const d=got(b.k),e=P.b[b.k];
+      let s=d?dStr(d)+(b.n==='a'?'':' · '+tStr(d)):(b.n==='a'?'mit '+b.i:b.req?'baut auf '+b.req.join(', ')+' auf':NW[b.n]);
+      return '<div class="bd'+(d?' got':'')+(b.n==='a'?' sammel':'')+'" role="img" aria-label="'+esc(b.k+' '+b.t+': '+(d?'erworben am '+dStr(d):'noch offen'))+'">'+medal(b)+'<span class="t">'+esc(b.t)+'</span><span class="s">'+esc(s)+'</span></div>';
+    }).join('')+'</div></div>';}).join('');
+}
+$('#lkTab').innerHTML=BADGES.map(b=>'<tr><td><b>'+b.k+'</b></td><td>'+esc(b.t)+'</td><td>'+esc(b.n==='a'?'Sammel-Badge: '+b.i:(b.i||''))+'</td><td>'+NW[b.n]+'</td></tr>').join('');
+
+/* ---------- Pass anlegen und ändern ---------- */
+$('#nGo').onclick=()=>{
+  const nm=$('#nName').value.trim().replace(/\s+/g,' '),kl=$('#nKl').value.trim();
+  if(nm.length<2){say('#msgNew','bad','<p>Trag deinen Vor- und Nachnamen ein.</p>');$('#nName').focus();return;}
+  P={v:1,name:nm,kl:kl,created:new Date().toISOString(),b:{}};
+  if(!save()){say('#msgNew','bad','<p>Speichern auf diesem Gerät ist nicht möglich (zum Beispiel im privaten Fenster). Öffne die Seite in einem normalen Fenster.</p>');P=null;return;}
+  clearMsg('#msgNew');render();
+  say('#msgAdd','ok','<p><b>Dein Pass ist angelegt.</b> Hol dir jetzt dein erstes Badge und speichere den Pass danach als PDF.</p>');
+  pendingCode();
+};
+$('#pEdit').onclick=()=>{$('#editBox').hidden=false;$('#eName').value=P.name;$('#eKl').value=P.kl||'';$('#eName').focus();};
+$('#eCancel').onclick=()=>{$('#editBox').hidden=true;};
+$('#eSave').onclick=()=>{const nm=$('#eName').value.trim().replace(/\s+/g,' ');if(nm.length<2){$('#eName').focus();return;}P.name=nm;P.kl=$('#eKl').value.trim();save();$('#editBox').hidden=true;render();};
+$('#delGo').onclick=()=>{
+  const b=$('#delGo');
+  if(b.dataset.sure!=='1'){b.dataset.sure='1';b.textContent='Wirklich löschen? Nochmal tippen';setTimeout(()=>{b.dataset.sure='';b.textContent='Pass hier löschen';},5000);return;}
+  try{localStorage.removeItem(KEY);}catch(e){}P=null;stopCam();render();say('#msgNew','ok','<p>Der Pass ist auf diesem Gerät gelöscht.</p>');
+};
+
+/* ---------- Bestätigung (für die Lehrkraft gut sichtbar) ---------- */
+let ovBack=null;
+function showOk(k,extra){
+  const b=BK[k],d=P.b[k].d;ovBack=document.activeElement;
+  $('#ovBox').className='ovbox g-'+b.g;
+  $('#ovBox').innerHTML='<div class="bd got">'+medal(b)+'</div><h2 id="ovT">'+esc(b.k+' · '+b.t)+'</h2><p class="when">'+dStr(d)+', '+tStr(d)+' Uhr</p><p>ist jetzt in deinem Pass von <b>'+esc(P.name)+'</b>.</p>'+(extra||'')+'<p class="small muted">Speichere jetzt deinen Pass als PDF.</p><button class="btn accent c-verstehen" id="ovOk" type="button">Fertig</button>';
+  $('#ov').hidden=false;$('#ovOk').focus();
+  $('#ovOk').onclick=closeOv;
+}
+function closeOv(){$('#ov').hidden=true;if(ovBack&&ovBack.focus)ovBack.focus();}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#ov').hidden)closeOv();});
+
+/* ---------- Eintragen ---------- */
+function addBadge(k,via,src){
+  const b=BK[k];
+  if(P.b[k]){return {ok:false,type:'warn',html:'<p><b>'+k+' '+esc(b.t)+'</b> steht schon in deinem Pass, seit '+dStr(P.b[k].d)+'.</p>'};}
+  const miss=(b.req||[]).filter(r=>!has(r));
+  if(miss.length)return {ok:false,type:'bad',html:'<p><b>'+k+' '+esc(b.t)+'</b> baut auf '+miss.map(m=>'<b>'+m+'</b> '+esc(BK[m].t)).join(' und ')+' auf. Das fehlt noch in deinem Pass. Lass dir zuerst '+miss.join(' und ')+' eintragen.</p>'};
+  const before=BADGES.filter(x=>x.n==='a'&&got(x.k)).map(x=>x.k);
+  P.b[k]=Object.assign({d:new Date().toISOString(),via:via,sj:schoolYear()},src||{});
+  if(!save()){delete P.b[k];return {ok:false,type:'bad',html:'<p>Speichern auf diesem Gerät ist nicht möglich.</p>'};}
+  render();
+  const neu=BADGES.filter(x=>x.n==='a'&&got(x.k)&&before.indexOf(x.k)<0);
+  return {ok:true,neu:neu};
+}
+function neuTxt(neu){return neu.length?'<p><b>Neues Sammel-Badge:</b> '+neu.map(x=>x.k+' '+esc(x.t)).join(', ')+'</p>':'';}
+
+/* ---------- Codes prüfen ---------- */
+function normCode(s){
+  s=String(s||'');const m=s.match(/[#?&]c=([A-Za-z0-9-]+)/);if(m)s=m[1];
+  return s.toUpperCase().replace(/[^A-Z0-9]/g,'');
+}
+async function sha(s){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('');}
+let busy=false;
+async function useCode(raw,via){
+  if(busy)return;busy=true;
+  try{
+    const c=normCode(raw);
+    if(c.length<6){say('#msgAdd','bad','<p>Das ist kein vollständiger Code. Ein Code sieht so aus: <b>BH-K7Q4-M9XP</b>.</p>');return;}
+    let h;try{h=await sha(SALT+c);}catch(e){say('#msgAdd','bad','<p>Dein Browser kann den Code hier nicht prüfen. Öffne die Seite über https in Safari oder Chrome.</p>');return;}
+    const sj=schoolYear();let k=null,other=null;
+    Object.keys(HASHES).forEach(y=>{if(HASHES[y][h]){if(y===sj)k=HASHES[y][h];else other={y:y,k:HASHES[y][h]};}});
+    if(!k){
+      if(other)say('#msgAdd','bad','<p>Dieser Code gehört zum Schuljahr '+esc(other.y)+' und gilt '+(other.y<sj?'nicht mehr':'noch nicht')+'. Frag deine Lehrkraft nach dem aktuellen Code.</p>');
+      else say('#msgAdd','bad','<p>Dieser Code ist nicht gültig. Prüf, ob du ihn richtig abgetippt hast, oder scanne den QR-Code noch einmal.</p>');
+      return;
+    }
+    const r=addBadge(k,via);
+    if(!r.ok){say('#msgAdd',r.type,r.html);return;}
+    $('#codeIn').value='';clearMsg('#msgAdd');
+    showOk(k,neuTxt(r.neu));
+  }finally{busy=false;}
+}
+$('#codeGo').onclick=()=>useCode($('#codeIn').value,'code');
+$('#codeIn').addEventListener('keydown',e=>{if(e.key==='Enter')useCode($('#codeIn').value,'code');});
+
+/* Code aus dem Link (QR-Code mit der Kamera-App gescannt) */
+const PK='technik-badges-code';
+function hashCode(){const m=location.hash.match(/c=([A-Za-z0-9-]+)/);if(m){try{sessionStorage.setItem(PK,m[1]);}catch(e){}history.replaceState(null,'',location.pathname+location.search);return true;}return false;}
+hashCode();
+window.addEventListener('hashchange',()=>{if(hashCode())pendingCode();});
+function pendingCode(){
+  let c=null;try{c=sessionStorage.getItem(PK);}catch(e){}
+  if(!c)return;
+  if(!P){say('#msgNew','warn','<p><b>Du hast einen QR-Code gescannt.</b> Leg zuerst deinen Pass an oder lade deine Pass-PDF. Danach wird das Badge eingetragen.</p>',true);return;}
+  try{sessionStorage.removeItem(PK);}catch(e){}
+  useCode(c,'link');
+}
+
+/* ---------- Kamera ---------- */
+let stream=null,raf=0,cv=null;
+function stopCam(){cancelAnimationFrame(raf);clearTimeout(raf);if(stream){stream.getTracks().forEach(t=>t.stop());stream=null;}$('#cam').hidden=true;$('#camGo span').textContent='QR-Code scannen';}
+$('#camGo').onclick=async()=>{
+  if(stream){stopCam();return;}
+  if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){say('#msgAdd','warn','<p>Dein Browser kann hier keine Kamera öffnen. Tipp den Code unter dem QR-Code ein.</p>');return;}
+  if(!window.jsQR){say('#msgAdd','warn','<p>Der Scanner ist noch nicht geladen. Versuch es gleich noch einmal oder tipp den Code ein.</p>');return;}
+  try{stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment',width:{ideal:1280},height:{ideal:720}},audio:false});}
+  catch(e){say('#msgAdd','warn','<p>Die Kamera ist nicht freigegeben. Erlaube den Kamerazugriff für diese Seite oder tipp den Code ein.</p>');stream=null;return;}
+  clearMsg('#msgAdd');
+  const v=$('#vid');v.srcObject=stream;$('#cam').hidden=false;$('#camGo span').textContent='Kamera stoppen';
+  try{await v.play();}catch(e){}
+  cv=cv||document.createElement('canvas');const ctx=cv.getContext('2d',{willReadFrequently:true});
+  const tick=()=>{
+    if(!stream)return;
+    if(v.readyState>=2&&v.videoWidth){
+      const s=Math.min(1,640/Math.max(v.videoWidth,v.videoHeight));cv.width=Math.round(v.videoWidth*s);cv.height=Math.round(v.videoHeight*s);
+      ctx.drawImage(v,0,0,cv.width,cv.height);
+      const img=ctx.getImageData(0,0,cv.width,cv.height),q=window.jsQR(img.data,cv.width,cv.height,{inversionAttempts:'dontInvert'});
+      if(q&&q.data){stopCam();useCode(q.data,'qr');return;}
+    }
+    raf=setTimeout(tick,180);
+  };
+  tick();
+};
+document.addEventListener('visibilitychange',()=>{if(document.hidden)stopCam();});
+
+/* ---------- Dateien lesen ---------- */
+function exSolved(r){return !!(r&&r.max&&r.best/r.max>=0.8);}
+function subDone(sb){return !!(sb&&(sb.autoOk||(sb.self&&sb.selfDone)));}
+function evalRule(r,ls){
+  let S=null;try{S=JSON.parse(ls[r.key]||'null');}catch(e){}
+  if(!S||typeof S!=='object')return null;
+  const nm=String(S.name||'').trim();
+  if(r.kind==='ard'){
+    const st=S.ch||{};let full=0,sum=0;
+    r.ch.forEach(c=>{const s=st[c.id]||{},tk=s.tasks||{},ex=s.ex||{};const d=c.items.filter(i=>i.kind==='task'?tk[i.id]:i.kind==='ex'?exSolved(ex[i.id]):subDone(s.sub)).length;sum+=Math.round(d/c.items.length*100);if(d===c.items.length)full++;});
+    return {ok:full===r.ch.length,name:nm,txt:full+' von '+r.ch.length+' Kapiteln vollständig (Fortschritt '+Math.round(sum/r.ch.length)+' %)',need:'alle Kapitel vollständig'};
+  }
+  const a=S.a||{},ok=S.ok||{},done=id=>r.open&&r.open[id]!=null?String(a[id]||'').trim().length>=r.open[id]:!!ok[id];
+  if(r.kind==='mt'){const d=r.tasks.filter(done).length;return {ok:d===r.tasks.length,name:nm,txt:d+' von '+r.tasks.length+' Aufgaben erledigt',need:'alle Aufgaben (ohne Zusatzaufgaben)'};}
+  if(r.kind==='cal'){const run=S.run||{},d=r.ch.filter(c=>run[c.n]&&c.tasks.every(done)).length;return {ok:d===r.ch.length,name:nm,txt:d+' von '+r.ch.length+' Challenges geschafft',need:'alle '+r.ch.length+' Challenges'};}
+  return null;
+}
+function nameTok(s){return String(s||'').toLowerCase().normalize('NFC').split(/[\s\-.,]+/).filter(x=>x.length>1);}
+function sameName(a,b){const A=nameTok(a),B=nameTok(b);return A.some(x=>B.indexOf(x)>=0);}
+function codeFrom(text){return window.LP&&LP._codeFrom?LP._codeFrom(text):null;}
+
+function onFile(inp){
+  const f=inp.files&&inp.files[0];inp.value='';if(!f)return;
+  const where=P?(inp.dataset.up==='pass'?'#msgSave':'#msgAdd'):'#msgNew';
+  say(where,'','<p>Datei wird gelesen …</p>',true);
+  f.arrayBuffer().then(buf=>{
+    const o=codeFrom(new TextDecoder('latin1').decode(new Uint8Array(buf)));
+    if(!o){say(where,'bad','<p>In dieser Datei steckt kein gespeicherter Stand. Das klappt nur mit der Original-Datei, die du in der Lernplattform oder hier gespeichert hast. Eine aus Notability neu exportierte PDF oder ein Bildschirmfoto enthält ihn meist nicht.</p>');return;}
+    if(o.s===SLUG)return loadPass(o,where);
+    const r=RULES[o.s];
+    if(!r){say(where,'warn','<p>Diese Datei gehört zu einer Lernplattform, die kein Badge vergibt. Badges gibt es für Arduino (Lernheft oder Schritt für Schritt), Calliope-Challenges und Motorentechnik.</p>');return;}
+    if(!P){say(where,'warn','<p>Das ist eine Ergebnis-Datei aus <b>'+esc(r.title)+'</b>. Leg zuerst deinen Pass an oder lade deine Pass-PDF, dann lade die Datei noch einmal.</p>');return;}
+    const e=evalRule(r,o.ls||{});
+    if(!e){say(where,'bad','<p>In der Datei aus '+esc(r.title)+' steckt kein lesbarer Arbeitsstand.</p>');return;}
+    const b=BK[r.badge],fd=dStr(o.d);
+    if(!e.ok){say(where,'warn','<p><b>'+esc(r.title)+'</b> (Stand '+fd+'): '+esc(e.txt)+'.</p><p>Für das Badge <b>'+b.k+' '+esc(b.t)+'</b> brauchst du '+esc(e.need)+'. Arbeite in der Lernplattform weiter und speichere danach eine neue Ergebnis-PDF.</p>');return;}
+    let hint='';
+    if(!e.name)hint='<div class="msg warn"><p>In der Ergebnis-PDF steht kein Name. Zeig deiner Lehrkraft, dass es deine Datei ist.</p></div>';
+    else if(!sameName(e.name,P.name))hint='<div class="msg warn"><p>Der Name in der Ergebnis-PDF („'+esc(e.name)+'“) passt nicht zum Namen im Pass. Das Badge ist trotzdem eingetragen. Deine Lehrkraft kann das prüfen.</p></div>';
+    const res=addBadge(r.badge,'pdf',{src:o.s,sd:o.d});
+    if(!res.ok){say(where,res.type,res.html+hint);return;}
+    clearMsg(where);
+    showOk(r.badge,'<p class="small">aus '+esc(r.title)+' · '+esc(e.txt)+' · Ergebnis-PDF vom '+fd+'</p>'+neuTxt(res.neu)+hint);
+  }).catch(()=>say(where,'bad','<p>Die Datei konnte nicht gelesen werden.</p>'));
+}
+function loadPass(o,where){
+  let np=null;try{np=JSON.parse((o.ls||{})[KEY]||'null');}catch(e){}
+  if(!np||!np.name){say(where,'bad','<p>In dieser Pass-PDF steckt kein lesbarer Pass.</p>');return;}
+  np.b=np.b||{};
+  const n=BADGES.filter(b=>b.n!=='a'&&np.b[b.k]).length;
+  const apply=()=>{P=np;if(!save()){say(where,'bad','<p>Speichern auf diesem Gerät ist nicht möglich (zum Beispiel im privaten Fenster).</p>');return;}render();say(P?'#msgSave':'#msgNew','ok','<p><b>Pass geladen:</b> '+esc(np.name)+', '+n+' Badges, gespeichert am '+dStr(o.d)+'.</p>');pendingCode();};
+  if(!P){apply();return;}
+  if(P.name===np.name&&BADGES.every(b=>!P.b[b.k]||np.b[b.k])){apply();return;}
+  say(where,'warn','<p>Gefunden: Pass von <b>'+esc(np.name)+'</b> mit '+n+' Badges vom '+dStr(o.d)+'. Der Pass auf diesem Gerät ('+esc(P.name)+') wird ersetzt.'+(P.name===np.name?' Badges, die nur hier stehen, gehen dabei verloren.':'')+'</p><div class="row"><button class="btn accent c-verstehen" type="button" data-ok>Ja, Pass laden</button></div>',true);
+  $(where+' [data-ok]').onclick=apply;
+}
+$$('input[type=file][data-up]').forEach(i=>i.addEventListener('change',()=>onFile(i)));
+
+/* ---------- PDF ---------- */
+const HEX={werk:'#9A5B00',druck:'#1F64A6',laser:'#B0362F',textil:'#9B3474',cad:'#0F716F',steuer:'#2B7431',motor:'#5546A6',sammel:'#7A5C00'};
+const CP='€‚ƒ„…†‡ˆ‰Š‹ŒŽ‘’“”•–—˜™š›œžŸ';
+function clean(t){return String(t||'').replace(/→/g,'->').replace(/−/g,'-').split('').filter(ch=>{const c=ch.charCodeAt(0);return c===10||(c>=32&&c<=126)||(c>=160&&c<=255)||CP.indexOf(ch)>=0;}).join('');}
+function rgb(h){return [1,3,5].map(i=>parseInt(h.slice(i,i+2),16));}
+function viaTxt(e){if(!e)return '';if(e.via==='pdf'){const r=RULES[e.src];return 'Ergebnis-PDF '+(r?r.title:'');}return e.via==='code'?'Prüfung (Code)':'Prüfung (QR-Code)';}
+function makePdf(){
+  if(!(window.jspdf&&window.jspdf.jsPDF)){say('#msgSave','bad','<p>Das PDF-Werkzeug konnte nicht geladen werden.</p>');return;}
+  const d=new window.jspdf.jsPDF({unit:'mm',format:'a4'}),W=210,M=16,now=new Date();
+  const txt=(s,x,y,o)=>{o=o||{};d.setFont('helvetica',o.b?'bold':'normal');d.setFontSize(o.size||10);const c=o.c||[24,34,30];d.setTextColor(c[0],c[1],c[2]);d.text(clean(s),x,y,o.al?{align:o.al}:undefined);};
+  const foot=()=>{txt('Technik-Badges · deintechniklehrer.github.io/Lernplattformen/technik-badges/ · CC BY-NC-SA 4.0 · Daniel Beyrodt',W/2,289,{size:7.5,c:[86,100,93],al:'center'});};
+  const logo=$('.tlogo');try{d.addImage(logo.src,'PNG',W-M-30,10,30,30*logo.naturalHeight/(logo.naturalWidth||1),'logo','FAST');}catch(e){}
+  txt('Badge-Pass Technik',M,20,{b:1,size:20});
+  txt(P.name,M,29,{b:1,size:14});
+  txt((P.kl?'Klasse '+P.kl+' · ':'')+'Stand: '+dStr(now.toISOString())+', '+tStr(now.toISOString())+' Uhr · '+BADGES.filter(b=>got(b.k)).length+' von '+BADGES.length+' Badges',M,35.5,{size:10,c:[86,100,93]});
+  d.setDrawColor(211,221,214);d.line(M,41,W-M,41);
+  // Raster: zwei Spalten mit Gruppen
+  const colW=(W-2*M-8)/2,r=7.5;let y0=49;
+  for(let gi=0;gi<GROUPS.length;gi+=2){
+    let hRow=0;
+    [0,1].forEach(j=>{const g=GROUPS[gi+j];if(!g)return;const x0=M+j*(colW+8),c=rgb(HEX[g.id]);
+      d.setFillColor(c[0],c[1],c[2]);d.roundedRect(x0,y0-3.2,3.2,3.2,.8,.8,'F');txt(g.t,x0+5,y0,{b:1,size:10});
+      BADGES.filter(b=>b.g===g.id).forEach((b,i)=>{const cx=x0+r+1+i*21,cy=y0+5+r,dt=got(b.k);
+        if(b.n==='a'){if(dt){d.setFillColor(c[0],c[1],c[2]);d.roundedRect(cx-r,cy-r,2*r,2*r,3,3,'F');}else{d.setDrawColor(190,198,193);d.setLineDashPattern([1,1],0);d.roundedRect(cx-r,cy-r,2*r,2*r,3,3,'S');d.setLineDashPattern([],0);}}
+        else if(dt){d.setFillColor(c[0],c[1],c[2]);d.circle(cx,cy,r,'F');}
+        else{d.setDrawColor(190,198,193);d.setLineDashPattern([1,1],0);d.circle(cx,cy,r,'S');d.setLineDashPattern([],0);}
+        txt(b.k,cx,cy+1.9,{b:1,size:12,c:dt?[255,255,255]:[160,170,165],al:'center'});
+        d.setFont('helvetica','normal');d.setFontSize(6.6);d.setTextColor(dt?24:120,dt?34:130,dt?30:125);
+        const tl=d.splitTextToSize(clean(b.t),20);tl.slice(0,2).forEach((l,li)=>d.text(l,cx,cy+r+3.2+li*2.6,{align:'center'}));
+        txt(dt?dStr(dt):'offen',cx,cy+r+3.2+Math.min(2,tl.length)*2.6+.6,{size:6.6,b:!!dt,c:dt?[31,122,76]:[150,158,154],al:'center'});
+      });
+      hRow=Math.max(hRow,5+2*r+11);
+    });
+    y0+=hRow+3;
+  }
+  // Tabelle
+  let y=y0+2;
+  txt('Eingetragene Badges',M,y,{b:1,size:12});y+=6;
+  const cols=[M,M+14,M+70,M+94,M+110];
+  const head=()=>{d.setFillColor(233,239,234);d.rect(M,y-4,W-2*M,6,'F');['Kürzel','Badge','Datum','Uhrzeit','Nachweis'].forEach((h,i)=>txt(h,cols[i]+1,y,{b:1,size:9}));y+=6;};
+  head();
+  const rows=BADGES.filter(b=>got(b.k));
+  if(!rows.length){txt('Noch kein Badge.',M+1,y,{size:9.5,c:[86,100,93]});y+=6;}
+  rows.forEach(b=>{if(y>270){foot();d.addPage();y=22;head();}
+    const e=P.b[b.k],dt=got(b.k);
+    txt(b.k,cols[0]+1,y,{b:1,size:9.5});txt(b.t,cols[1]+1,y,{size:9.5});txt(dStr(dt),cols[2]+1,y,{size:9.5});txt(b.n==='a'?'–':tStr(dt),cols[3]+1,y,{size:9.5});
+    txt(b.n==='a'?'Sammel-Badge: '+b.i:viaTxt(e),cols[4]+1,y,{size:9.5});
+    d.setDrawColor(222,229,224);d.line(M,y+2,W-M,y+2);y+=5.6;});
+  y+=3;if(y>262){foot();d.addPage();y=22;}
+  d.setFont('helvetica','normal');d.setFontSize(8.6);d.setTextColor(86,100,93);
+  ['Verbindlich ist die Liste im Fachraum. Ein Badge ersetzt nicht die Regeln der RiSU und die Aufsicht der Lehrkraft. Es gilt immer, was deine Lehrkraft sagt.',
+   'In dieser PDF steckt dein Badge-Pass. Über „Pass-PDF laden“ auf der Seite Technik-Badges holst du ihn zurück. Heb die Original-PDF auf: Eine aus Notability neu exportierte PDF oder ein Bildschirmfoto enthält den Pass meist nicht.']
+    .forEach(p=>{d.splitTextToSize(clean(p),W-2*M).forEach(l=>{d.text(l,M,y);y+=3.8;});y+=1.5;});
+  foot();
+  d.setProperties({title:clean('Badge-Pass Technik – '+P.name),author:'Technik-Badges'});
+  const blob=d.output('blob'),fn='Badge-Pass_'+clean(P.name).replace(/[^A-Za-z0-9ÄÖÜäöüß-]+/g,'_')+'_'+now.toISOString().slice(0,10)+'.pdf';
+  Promise.resolve(window.claude&&window.claude.use?window.claude.use('downloads'):null).then(dl=>{if(dl)return dl.save({filename:fn,data:blob});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=fn;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},4000);})
+    .then(()=>say('#msgSave','ok','<p><b>Gespeichert:</b> '+esc(fn)+'. Leg die PDF in deinem Technik-Ordner ab.</p>'))
+    .catch(()=>say('#msgSave','bad','<p>Die PDF konnte nicht gespeichert werden.</p>'));
+}
+$('#pdfGo').onclick=makePdf;
+window.__TB={BADGES,RULES,evalRule,normCode,schoolYear};
+
+render();pendingCode();
+})();
+</script>
+<style>.lp-legal{font:13px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif;text-align:center;padding:20px 16px calc(96px + env(safe-area-inset-bottom,0px));opacity:.8;clear:both}.lp-legal a{color:inherit;text-decoration:underline;text-underline-offset:2px}</style><div class="lp-legal">Privates Angebot von Daniel Beyrodt · <a href="../ueber-mich/">Über mich</a> · <a href="../impressum/">Impressum</a> · <a href="../datenschutz/">Datenschutz</a></div></body></html>
