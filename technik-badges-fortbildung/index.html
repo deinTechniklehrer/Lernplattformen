@@ -451,7 +451,25 @@ figure{margin:0;display:grid;gap:8px;min-width:0}
 .bd.got .s{color:var(--ink)}
 .bd.sammel .medal{border-radius:16px}
 .g-werk{--gc:var(--g-werk)}.g-druck{--gc:var(--g-druck)}.g-laser{--gc:var(--g-laser)}.g-textil{--gc:var(--g-textil)}.g-cad{--gc:var(--g-cad)}.g-steuer{--gc:var(--g-steuer)}.g-motor{--gc:var(--g-motor)}.g-sammel{--gc:var(--g-sammel)}.g-ki{--gc:var(--g-ki)}.g-probe{--gc:var(--g-probe)}
-/* Sammel-Gleichung */
+.access{border:2px solid var(--ok);border-radius:16px;padding:12px;display:grid;gap:10px;background:var(--surface);margin:0 0 12px}
+.access h3,.access h4{margin:0;font-family:var(--display);font-size:20px;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px}
+.access h3 span,.access h4 span{font-family:var(--body);font-size:14px;font-weight:600;color:var(--muted)}
+.accs{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.acc{border:2px dashed var(--line);border-radius:14px;padding:12px;display:grid;gap:8px;align-content:start}
+.acc.got{border:2px solid var(--ok);background:var(--ok-soft)}
+.acc-top{display:flex;gap:10px;align-items:center}
+.lock{width:44px;height:44px;border-radius:12px;flex:none;display:grid;place-items:center;background:var(--surface-2);color:var(--muted)}
+.lock svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.acc.got .lock{background:var(--ok);color:var(--on-accent)}
+.acc-top b{display:block;font-family:var(--display);font-size:19px;line-height:1.15}
+.acc-top div>span{font-size:14px;color:var(--muted)}
+.acc.got .acc-top div>span{color:var(--ok);font-weight:700}
+.acc p{margin:0;font-size:15px}
+.acc.open p{color:var(--muted)}
+.req{display:flex;flex-wrap:wrap;gap:6px}
+.req span{font-size:13px;font-weight:700;padding:3px 9px;border-radius:99px;border:1.5px dashed var(--line);color:var(--muted)}
+.req span.ok{border:1.5px solid var(--ok);color:var(--ok)}
+/* Access-Gleichung */
 .eq{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px}
 .eq .op{font-family:var(--display);font-weight:800;font-size:22px;color:var(--muted);background:none;padding:0;cursor:default}
 .eq .bd{padding:0}
@@ -626,6 +644,7 @@ td.c{text-align:center;font-weight:700}
 
   <div class="card" id="cPass" hidden>
     <div class="row" style="justify-content:space-between"><h3>Dein Probier-Pass: <span id="pName"></span></h3><span class="small muted" id="pCount"></span></div>
+    <div id="pAcc"></div>
     <div class="groups"><div class="grp g-probe"><h4>Probe-Badges</h4><div class="badges" id="pBadges"></div></div></div>
   </div>
 
@@ -857,13 +876,19 @@ const BADGES=[
   {k:'RO',t:'Robotik',g:'steuer',n:'p'},{k:'AR',t:'Arduino',g:'steuer',n:'l'},{k:'CA',t:'Calliope',g:'steuer',n:'l'},
   {k:'MT',t:'Motorentechnik Theorie',g:'motor',n:'l'},{k:'MP',t:'Motorentechnik Praxis',g:'motor',n:'p'},
   {k:'K1',t:'AI Badge Level 1',g:'ki',n:'l',i:'Level 1 im AI Badge erreicht'},{k:'K2',t:'AI Badge Level 2',g:'ki',n:'l',i:'Level 2 im AI Badge erreicht'},{k:'K3',t:'AI Badge Level 3',g:'ki',n:'l',i:'Level 3 im AI Badge erreicht'},
-  {k:'MS',t:'MakerSpace Access',g:'sammel',n:'a',all:['LT','BH','BM','BU'],i:'Access: LT, BH, BM und BU'},{k:'RL',t:'Robotiklabor Access',g:'sammel',n:'a',all:['L2','D2'],i:'Access: L2 und D2'}];
+  {k:'MS',t:'MakerSpace Access',g:'sammel',n:'a',all:['LT','BH','BM','BU'],i:'Access: LT, BH, BM und BU',x:'Du darfst im MakerSpace an Lötstation und Bohrmaschinen arbeiten. Eine Lehrkraft ist immer im Raum.'},{k:'RL',t:'Robotiklabor Access',g:'sammel',n:'a',all:['L2','D2'],i:'Access: L2 und D2',x:'Du darfst im Robotiklabor ohne Nachfragen selbstständig an Lasercutter und 3D-Drucker arbeiten. Eine Lehrkraft ist immer im Raum.'}];
 const BK={};BADGES.forEach(b=>BK[b.k]=b);
-const NW={p:'Prüfung',l:'Lernplattform',a:'automatisch'};
+const NW={p:'Prüfung',l:'Lernplattform',a:'Access'};
+const LOCK='<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg>';
+const OPEN='<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 7.6-1.7"/><path d="m9.5 15.5 2 2 3.5-3.5"/></svg>';
+// Access-Kasten wie im Pass der Schüler:innen: list = Access, dt(k) = Datum oder null, hv(k) = Badge vorhanden, nm(k) = Titel
+function accHtml(list,dt,hv,nm,head){return '<div class="access">'+head+'<div class="accs">'+list.map(b=>{const d=dt(b.k);
+  return '<div class="acc '+(d?'got':'open')+'"><div class="acc-top"><span class="lock">'+(d?OPEN:LOCK)+'</span><div><b>'+esc(b.t)+'</b><span>'+(d?(d===true?'freigeschaltet':'freigeschaltet am '+dStr(d)):'noch gesperrt')+'</span></div></div>'
+   +'<p>'+esc(b.x)+'</p><div class="req">'+b.all.map(k=>'<span class="'+(hv(k)?'ok':'')+'">'+k+(hv(k)?' ✓':'')+' '+esc(nm(k))+'</span>').join('')+'</div></div>';}).join('')+'</div></div>';}
 const EXAMPLE=['BH','BM','D1','L1','TC','AR','K1'];
 function medal(k){return '<span class="medal" aria-hidden="true">'+esc(k)+'</span>';}
 function bdHtml(b,got,sub){return '<div class="bd'+(got?' got':'')+(b.n==='a'?' sammel':'')+' g-'+b.g+'">'+medal(b.k)+'<span class="t">'+esc(b.t)+'</span><span class="s">'+esc(sub)+'</span></div>';}
-$('#allBadges').innerHTML=GROUPS.map(g=>'<div class="grp g-'+g.id+'"><h4>'+esc(g.t)+'</h4><div class="badges">'+BADGES.filter(b=>b.g===g.id).map(b=>bdHtml(b,EXAMPLE.indexOf(b.k)>=0,EXAMPLE.indexOf(b.k)>=0?'Beispiel: erworben':NW[b.n])).join('')+'</div></div>').join('');
+$('#allBadges').innerHTML=accHtml(BADGES.filter(b=>b.n==='a'),k=>null,k=>EXAMPLE.indexOf(k)>=0,k=>BK[k].t,'<h4>Access <span>Was die Schüler:innen mit ihren Badges dürfen · Beispiel: BH und BM erworben</span></h4>')+GROUPS.filter(g=>g.id!=='sammel').map(g=>'<div class="grp g-'+g.id+'"><h4>'+esc(g.t)+'</h4><div class="badges">'+BADGES.filter(b=>b.g===g.id).map(b=>bdHtml(b,EXAMPLE.indexOf(b.k)>=0,EXAMPLE.indexOf(b.k)>=0?'Beispiel: erworben':NW[b.n])).join('')+'</div></div>').join('');
 $('#kTab').innerHTML=BADGES.map(b=>'<tr><td><b>'+b.k+'</b></td><td>'+esc(b.t)+'</td><td>'+esc(b.i||'')+'</td><td>'+NW[b.n]+'</td></tr>').join('');
 function eq(b){return bdHtml(b,false,'').replace('class="bd ','class="bd solid ')+'<span class="op" aria-hidden="true">=</span>'+b.all.map((k,i)=>(i?'<span class="op" aria-hidden="true">+</span>':'')+bdHtml(BK[k],false,'').replace('class="bd ','class="bd solid ')).join('');}
 $('#eqMS').innerHTML=eq(BK.MS);$('#eqRL').innerHTML=eq(BK.RL);
@@ -876,7 +901,7 @@ function go(n,scroll){cur=n;$$('.station').forEach(s=>s.hidden=+s.dataset.ch!==n
 document.addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(b){go(+b.dataset.go,true);}});
 
 /* ---------- Probier-Pass (Kapitel 2) ---------- */
-const PROBE=[{k:'P1',t:'Probe-Bohrmaschine',g:'probe',n:'p'},{k:'P2',t:'Probe-Lötstation',g:'probe',n:'p'},{k:'PM',t:'Probe-MakerSpace Access',g:'probe',n:'a',all:['P1','P2'],i:'P1 und P2'},{k:'BA',t:'Badge-System ausprobiert',g:'probe',n:'f',i:'alle vier Schritte'}];
+const PROBE=[{k:'P1',t:'Probe-Bohrmaschine',g:'probe',n:'p'},{k:'P2',t:'Probe-Lötstation',g:'probe',n:'p'},{k:'PM',t:'Probe-MakerSpace Access',g:'probe',n:'a',all:['P1','P2'],i:'P1 und P2',x:'So sieht eine Erlaubnis im Pass aus. Im echten Pass steht hier, was die Schüler:in damit darf, zum Beispiel die Arbeit im MakerSpace.'},{k:'BA',t:'Badge-System ausprobiert',g:'probe',n:'f',i:'alle vier Schritte'}];
 const PK={};PROBE.forEach(b=>PK[b.k]=b);
 let S=null;
 try{S=JSON.parse(localStorage.getItem(KEY)||'null');}catch(e){S=null;}
@@ -894,8 +919,10 @@ function render(){
   const on=!!S.pass;$('#cPass').hidden=!on;$('#cGet').hidden=!on;$('#cSave').hidden=!on;
   if(!on)return;
   $('#pName').textContent=S.pass.name;
-  $('#pCount').textContent=PROBE.filter(b=>got(b.k)).length+' von '+PROBE.length+' Probe-Badges';
-  $('#pBadges').innerHTML=PROBE.map(b=>{const d=got(b.k);return bdHtml(b,!!d,d?dStr(d)+(b.n==='p'?' · '+tStr(d):''):(b.n==='a'?'mit '+b.i:b.n==='f'?'nach '+b.i:'Prüfung'));}).join('');
+  const PA=PROBE.filter(b=>b.n==='a'),PB=PROBE.filter(b=>b.n!=='a');
+  $('#pCount').textContent=PB.filter(b=>got(b.k)).length+' von '+PB.length+' Probe-Badges · '+PA.filter(b=>got(b.k)).length+' von '+PA.length+' Access';
+  $('#pAcc').innerHTML=accHtml(PA,got,has,k=>PK[k].t,'<h4>Access <span>Das darfst du mit deinen Badges</span></h4>');
+  $('#pBadges').innerHTML=PB.map(b=>{const d=got(b.k);return bdHtml(b,!!d,d?dStr(d)+(b.n==='p'?' · '+tStr(d):''):(b.n==='a'?'mit '+b.i:b.n==='f'?'nach '+b.i:'Prüfung'));}).join('');
 }
 function checkBA(){const st=steps();if(st.pass&&st.badge&&st.pdf&&st.load&&!has('BA')){S.pass.b.BA={d:new Date().toISOString(),via:'auto'};save();render();showOk('BA','<p>Du hast alle vier Schritte geschafft: Pass anlegen, Badge holen, als PDF speichern und wieder laden.</p>');return true;}return false;}
 let ovBack=null;
@@ -929,7 +956,7 @@ async function useCode(raw,via){if(busy)return;busy=true;try{
   const pmBefore=!!got('PM');
   S.pass.b[k]={d:new Date().toISOString(),via:via};if(!save()){delete S.pass.b[k];say('#msgGet','bad','<p>Speichern im Browser ist hier nicht möglich.</p>');return;}
   render();$('#codeIn').value='';clr('#msgGet');
-  showOk(k,(!pmBefore&&got('PM'))?'<p><b>Neu freigeschaltet:</b> Probe-MakerSpace Access (PM)</p>':'');
+  showOk(k,(!pmBefore&&got('PM'))?'<div class="msg ok" style="text-align:left"><p><b>Neu freigeschaltet: Probe-MakerSpace Access</b></p><p>'+esc(PK.PM.x)+'</p></div>':'');
 }finally{busy=false;}}
 $('#codeGo').onclick=()=>useCode($('#codeIn').value,'code');
 $('#codeIn').addEventListener('keydown',e=>{if(e.key==='Enter')useCode($('#codeIn').value,'code');});
@@ -985,13 +1012,21 @@ $('#pdfGo').onclick=()=>{
   txt('Probier-Pass · Badge-System',M,20,{b:1,size:19});txt(S.pass.name,M,29,{b:1,size:14});
   txt('Fortbildung für Lehrkräfte · Stand: '+dStr(now)+', '+tStr(now)+' Uhr · kein echter Badge-Pass',M,35.5,{size:10,c:[86,100,93]});
   d.setDrawColor(211,221,214);d.line(M,41,W-M,41);
-  PROBE.forEach((b,i)=>{const cx=M+12+i*30,cy=56,r=9,dt=got(b.k);
+  {const b=PK.PM,dt=got('PM'),x0=M,w=W-2*M,ln=d.splitTextToSize(clean(b.x),w-8),h=15+ln.length*3.9;
+    txt('Access – das darfst du mit deinen Badges',M,48,{b:1,size:11.5});
+    if(dt){d.setFillColor(225,241,232);d.setDrawColor(31,122,76);d.setLineWidth(.7);d.roundedRect(x0,51,w,h,3,3,'FD');d.setLineWidth(.2);}
+    else{d.setDrawColor(170,180,175);d.setLineDashPattern([1.2,1],0);d.roundedRect(x0,51,w,h,3,3,'S');d.setLineDashPattern([],0);}
+    txt(b.t,x0+4,57,{b:1,size:11,c:dt?[24,34,30]:[120,130,125]});
+    txt(dt?'freigeschaltet am '+dStr(dt):'noch gesperrt · braucht '+b.all.join(', '),x0+4,61.5,{b:!!dt,size:8.6,c:dt?[31,122,76]:[120,130,125]});
+    d.setFont('helvetica','normal');d.setFontSize(8.6);d.setTextColor(dt?24:120,dt?34:130,dt?30:125);ln.forEach((l,li)=>d.text(l,x0+4,66+li*3.9));}
+  const PY=51+15+2*3.9+16;
+  PROBE.filter(b=>b.n!=='a').forEach((b,i)=>{const cx=M+12+i*30,cy=PY,r=9,dt=got(b.k);
     if(dt){d.setFillColor(74,90,140);b.n==='p'?d.circle(cx,cy,r,'F'):d.roundedRect(cx-r,cy-r,2*r,2*r,3,3,'F');}
     else{d.setDrawColor(190,198,193);d.setLineDashPattern([1,1],0);b.n==='p'?d.circle(cx,cy,r,'S'):d.roundedRect(cx-r,cy-r,2*r,2*r,3,3,'S');d.setLineDashPattern([],0);}
     txt(b.k,cx,cy+2,{b:1,size:13,c:dt?[255,255,255]:[160,170,165],al:'center'});
     d.setFont('helvetica','normal');d.setFontSize(7);d.setTextColor(60,70,65);d.splitTextToSize(clean(b.t),26).slice(0,2).forEach((l,li)=>d.text(l,cx,cy+r+4+li*3,{align:'center'}));
     txt(dt?dStr(dt):'offen',cx,cy+r+11,{size:7,b:!!dt,c:dt?[31,122,76]:[150,158,154],al:'center'});});
-  let y=88;txt('So steckt der Pass in dieser PDF',M,y,{b:1,size:12});y+=6;
+  let y=PY+32;txt('So steckt der Pass in dieser PDF',M,y,{b:1,size:12});y+=6;
   d.setFont('helvetica','normal');d.setFontSize(9.5);d.setTextColor(24,34,30);
   ['Die Badge-Seite schreibt den ganzen Pass als Code in die Eigenschaften dieser PDF (Feld „Stichwörter“). Über „Pass-PDF laden“ liest sie ihn wieder aus.',
    'Eine aus Notability neu exportierte PDF oder ein Bildschirmfoto enthält den Code meist nicht. Die Schüler:innen heben deshalb die Original-PDF auf.',
