@@ -627,7 +627,7 @@ const GROUPS=[
   {id:'cad',t:'3D-CAD'},{id:'steuer',t:'Steuern und Regeln'},{id:'motor',t:'Motorentechnik'},{id:'ki',t:'Künstliche Intelligenz'}];
 // n: p = Prüfung mit QR-Code, l = Lernplattform, a = Access (erscheint automatisch, x = was es erlaubt)
 const BADGES=[
-  {k:'BH',t:'Bohrmaschine Holz',g:'werk',n:'p'},{k:'BM',t:'Bohrmaschine Metall',g:'werk',n:'p'},{k:'BU',t:'Bohrmaschine UMT',g:'werk',n:'p'},{k:'LT',t:'Lötstation',g:'werk',n:'p'},
+  {k:'BU',t:'Bohrmaschine UMT',g:'werk',n:'p'},{k:'BH',t:'Bohrmaschine Holz',g:'werk',n:'p'},{k:'BM',t:'Bohrmaschine Metall',g:'werk',n:'p'},{k:'LT',t:'Lötstation',g:'werk',n:'p'},
   {k:'D1',t:'3D-Druck bedienen',g:'druck',n:'p',i:'Druck vorbereiten, starten, entnehmen'},{k:'D2',t:'3D-Druck warten',g:'druck',n:'p',i:'baut auf D1 auf',req:['D1']},{k:'D3',t:'3D-Druck reparieren',g:'druck',n:'p',i:'baut auf D2 auf',req:['D2']},
   {k:'L1',t:'Lasercutter Stufe 1',g:'laser',n:'p',i:'Gravieren. Vor dem Start nachfragen, die Lehrkraft prüft.'},{k:'L2',t:'Lasercutter Stufe 2',g:'laser',n:'p',i:'Gravieren ohne Prüfung durch die Lehrkraft',req:['L1']},{k:'L3',t:'Lasercutter Stufe 3',g:'laser',n:'p',i:'auch Schneiden, SVG-Dateien in Inkscape bearbeiten',req:['L2']},
   {k:'TP',t:'Transferpresse',g:'textil',n:'p'},{k:'PL',t:'Plotter',g:'textil',n:'p'},
@@ -635,7 +635,7 @@ const BADGES=[
   {k:'RO',t:'Robotik',g:'steuer',n:'p'},{k:'AR',t:'Arduino',g:'steuer',n:'l'},{k:'CA',t:'Calliope',g:'steuer',n:'l'},
   {k:'MT',t:'Motorentechnik Theorie',g:'motor',n:'l'},{k:'MP',t:'Motorentechnik Praxis',g:'motor',n:'p'},
   {k:'K1',t:'AI Badge Level 1',g:'ki',n:'l',i:'Lernplattform AI Badge'},{k:'K2',t:'AI Badge Level 2',g:'ki',n:'l',i:'Lernplattform AI Badge'},{k:'K3',t:'AI Badge Level 3',g:'ki',n:'l',i:'Lernplattform AI Badge'},
-  {k:'MS',t:'MakerSpace Access',g:'access',n:'a',all:['LT','BH','BM','BU'],i:'LT, BH, BM und BU',x:'Du darfst im MakerSpace an Lötstation und Bohrmaschinen arbeiten. Eine Lehrkraft ist immer im Raum.'},
+  {k:'MS',t:'MakerSpace Access',g:'access',n:'a',all:['LT','BH','BM'],i:'LT, BH und BM',x:'Du darfst im MakerSpace an Lötstation und Bohrmaschinen arbeiten. Eine Lehrkraft ist immer im Raum.'},
   {k:'RL',t:'Robotiklabor Access',g:'access',n:'a',all:['L2','D2'],i:'L2 und D2',x:'Du darfst im Robotiklabor ohne Nachfragen selbstständig an Lasercutter und 3D-Drucker arbeiten. Eine Lehrkraft ist immer im Raum.'}];
 const ACC=BADGES.filter(b=>b.n==='a'),BDG=BADGES.filter(b=>b.n!=='a');
 const BK={};BADGES.forEach(b=>BK[b.k]=b);
