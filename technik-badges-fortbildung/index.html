@@ -378,16 +378,16 @@ a.btn{text-decoration:none}
 
 /* ---------- Badge-System, Fortbildung ---------- */
 :root{
-  --g-werk:#9A5B00;--g-druck:#1F64A6;--g-laser:#B0362F;--g-textil:#9B3474;--g-cad:#0F716F;--g-steuer:#2B7431;--g-motor:#5546A6;--g-sammel:#7A5C00;--g-probe:#4A5A8C;
+  --g-werk:#9A5B00;--g-druck:#1F64A6;--g-laser:#B0362F;--g-textil:#9B3474;--g-cad:#0F716F;--g-steuer:#2B7431;--g-motor:#5546A6;--g-ki:#8A3A8F;--g-sammel:#7A5C00;--g-probe:#4A5A8C;
   --lk:#1D568E;--lk-soft:#E2ECF7;--sus:#1F7A5C;--sus-soft:#E1F0E9;
   --ok:#1F7A4C;--ok-soft:#E1F1E8;--warn:#8A5A00;--warn-soft:#FBEFD5;--mono:"JetBrains Mono",ui-monospace,monospace;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --g-werk:#F0A64A;--g-druck:#79B1EA;--g-laser:#F08A7E;--g-textil:#E792C6;--g-cad:#55C6C3;--g-steuer:#77C47B;--g-motor:#ADA2F2;--g-sammel:#E7C65A;--g-probe:#A9B6E6;
+  --g-werk:#F0A64A;--g-druck:#79B1EA;--g-laser:#F08A7E;--g-textil:#E792C6;--g-cad:#55C6C3;--g-steuer:#77C47B;--g-motor:#ADA2F2;--g-ki:#DDA0E0;--g-sammel:#E7C65A;--g-probe:#A9B6E6;
   --lk:#9CC4EE;--lk-soft:#1A2937;--sus:#7FD3B0;--sus-soft:#1A3128;
   --ok:#6CCB97;--ok-soft:#173326;--warn:#F0C065;--warn-soft:#3A2D13;}}
 :root[data-theme="dark"]{
-  --g-werk:#F0A64A;--g-druck:#79B1EA;--g-laser:#F08A7E;--g-textil:#E792C6;--g-cad:#55C6C3;--g-steuer:#77C47B;--g-motor:#ADA2F2;--g-sammel:#E7C65A;--g-probe:#A9B6E6;
+  --g-werk:#F0A64A;--g-druck:#79B1EA;--g-laser:#F08A7E;--g-textil:#E792C6;--g-cad:#55C6C3;--g-steuer:#77C47B;--g-motor:#ADA2F2;--g-ki:#DDA0E0;--g-sammel:#E7C65A;--g-probe:#A9B6E6;
   --lk:#9CC4EE;--lk-soft:#1A2937;--sus:#7FD3B0;--sus-soft:#1A3128;
   --ok:#6CCB97;--ok-soft:#173326;--warn:#F0C065;--warn-soft:#3A2D13;}
 .brand .tlogo{height:46px;width:auto;flex:none;background:#fff;border-radius:10px;padding:4px 6px}
@@ -450,7 +450,7 @@ figure{margin:0;display:grid;gap:8px;min-width:0}
 .bd.got .medal::after{content:"✓";position:absolute;right:-4px;bottom:-4px;width:22px;height:22px;border-radius:50%;background:var(--ok);color:#fff;font-size:13px;display:grid;place-items:center;font-family:var(--body);box-shadow:0 0 0 2px var(--surface)}
 .bd.got .s{color:var(--ink)}
 .bd.sammel .medal{border-radius:16px}
-.g-werk{--gc:var(--g-werk)}.g-druck{--gc:var(--g-druck)}.g-laser{--gc:var(--g-laser)}.g-textil{--gc:var(--g-textil)}.g-cad{--gc:var(--g-cad)}.g-steuer{--gc:var(--g-steuer)}.g-motor{--gc:var(--g-motor)}.g-sammel{--gc:var(--g-sammel)}.g-probe{--gc:var(--g-probe)}
+.g-werk{--gc:var(--g-werk)}.g-druck{--gc:var(--g-druck)}.g-laser{--gc:var(--g-laser)}.g-textil{--gc:var(--g-textil)}.g-cad{--gc:var(--g-cad)}.g-steuer{--gc:var(--g-steuer)}.g-motor{--gc:var(--g-motor)}.g-sammel{--gc:var(--g-sammel)}.g-ki{--gc:var(--g-ki)}.g-probe{--gc:var(--g-probe)}
 /* Sammel-Gleichung */
 .eq{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px}
 .eq .op{font-family:var(--display);font-weight:800;font-size:22px;color:var(--muted);background:none;padding:0;cursor:default}
@@ -472,6 +472,9 @@ td.c{text-align:center;font-weight:700}
 @media (max-width:760px){.split{grid-template-columns:1fr}}
 .box{border-radius:14px;background:var(--surface-2);padding:14px;display:grid;gap:10px;min-width:0}
 .box h4{margin:0}
+.topup{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;justify-content:space-between;margin:-6px 0 18px;padding:10px 14px;border-radius:14px;background:var(--surface);border:1px solid var(--line)}
+.topup span{font-size:15px}
+.topup .btn.soft{background:var(--surface-2)}
 .box .btn.soft{background:var(--surface);border:1.5px solid var(--line)}
 .qrs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 @media (max-width:520px){.qrs{grid-template-columns:1fr}}
@@ -530,6 +533,8 @@ td.c{text-align:center;font-weight:700}
   </header>
 
   <nav class="stations" id="nav" aria-label="Kapitel"></nav>
+  <div class="topup"><span><b>Schon einen Probier-Pass?</b> Lade die Pass-PDF, die du in Kapitel 2 gespeichert hast.</span><label class="btn soft fileb">Pass-PDF laden<input type="file" accept=".pdf,application/pdf" data-up="top"></label></div>
+  <div id="msgTop" aria-live="polite" style="margin:-8px 0 18px"></div>
 
   <main id="main">
 
@@ -564,7 +569,7 @@ td.c{text-align:center;font-weight:700}
       </div>
       <figcaption class="cap">Ablauf einer Prüfung. Blau: Lehrkraft, grün: Schüler:in.</figcaption>
     </figure>
-    <div class="note info"><p><b>Badges aus Lernplattformen</b> (bei uns AR Arduino, CA Calliope, MT Motorentechnik Theorie) brauchen keinen QR-Code und keinen Eintrag in die Liste. Die Schüler:innen laden die Ergebnis-PDF der Lernplattform in die Badge-Seite. Ist die Einheit abgeschlossen, steht das Badge im Pass.</p></div>
+    <div class="note info"><p><b>Badges aus Lernplattformen</b> (bei uns AR Arduino, CA Calliope, MT Motorentechnik Theorie und K1 bis K3 für die Level des AI Badge) brauchen keinen QR-Code und keinen Eintrag in die Liste. Die Schüler:innen laden die Ergebnis-PDF der Lernplattform in die Badge-Seite. Ist die Einheit abgeschlossen, steht das Badge im Pass.</p></div>
   </div>
 
   <div class="card">
@@ -831,7 +836,7 @@ const dStr=iso=>{const d=new Date(iso);return isNaN(d)?'':pad(d.getDate())+'.'+p
 const tStr=iso=>{const d=new Date(iso);return isNaN(d)?'':pad(d.getHours())+':'+pad(d.getMinutes());};
 
 /* ---------- Badges der Technik-Badges (Kapitel 1) ---------- */
-const GROUPS=[{id:'werk',t:'Werkstatt'},{id:'druck',t:'3D-Druck'},{id:'laser',t:'Lasercutter'},{id:'textil',t:'Textil'},{id:'cad',t:'3D-CAD'},{id:'steuer',t:'Steuern und Regeln'},{id:'motor',t:'Motorentechnik'},{id:'sammel',t:'Sammel-Badges'}];
+const GROUPS=[{id:'werk',t:'Werkstatt'},{id:'druck',t:'3D-Druck'},{id:'laser',t:'Lasercutter'},{id:'textil',t:'Textil'},{id:'cad',t:'3D-CAD'},{id:'steuer',t:'Steuern und Regeln'},{id:'motor',t:'Motorentechnik'},{id:'ki',t:'Künstliche Intelligenz'},{id:'sammel',t:'Sammel-Badges'}];
 const BADGES=[
   {k:'BH',t:'Bohrmaschine Holz',g:'werk',n:'p'},{k:'BM',t:'Bohrmaschine Metall',g:'werk',n:'p'},{k:'BU',t:'Bohrmaschine UMT',g:'werk',n:'p'},{k:'LT',t:'Lötstation',g:'werk',n:'p'},
   {k:'D1',t:'3D-Druck bedienen',g:'druck',n:'p',i:'Druck vorbereiten, starten, entnehmen'},{k:'D2',t:'3D-Druck warten',g:'druck',n:'p',i:'baut auf D1 auf'},{k:'D3',t:'3D-Druck reparieren',g:'druck',n:'p',i:'baut auf D2 auf'},
@@ -840,10 +845,11 @@ const BADGES=[
   {k:'TC',t:'Tinkercad',g:'cad',n:'p'},{k:'SE',t:'Solid Edge',g:'cad',n:'p'},{k:'SM',t:'SpaceMouse',g:'cad',n:'p'},
   {k:'RO',t:'Robotik',g:'steuer',n:'p'},{k:'AR',t:'Arduino',g:'steuer',n:'l'},{k:'CA',t:'Calliope',g:'steuer',n:'l'},
   {k:'MT',t:'Motorentechnik Theorie',g:'motor',n:'l'},{k:'MP',t:'Motorentechnik Praxis',g:'motor',n:'p'},
+  {k:'K1',t:'AI Badge Level 1',g:'ki',n:'l',i:'Level 1 im AI Badge erreicht'},{k:'K2',t:'AI Badge Level 2',g:'ki',n:'l',i:'Level 2 im AI Badge erreicht'},{k:'K3',t:'AI Badge Level 3',g:'ki',n:'l',i:'Level 3 im AI Badge erreicht'},
   {k:'MS',t:'MakerSpace',g:'sammel',n:'a',all:['LT','BH','BM','BU'],i:'Sammel-Badge: LT, BH, BM und BU'},{k:'RL',t:'Robotiklabor selbstständig',g:'sammel',n:'a',all:['L2','D2'],i:'Sammel-Badge: L2 und D2'}];
 const BK={};BADGES.forEach(b=>BK[b.k]=b);
 const NW={p:'Prüfung',l:'Lernplattform',a:'automatisch'};
-const EXAMPLE=['BH','BM','D1','L1','TC','AR'];
+const EXAMPLE=['BH','BM','D1','L1','TC','AR','K1'];
 function medal(k){return '<span class="medal" aria-hidden="true">'+esc(k)+'</span>';}
 function bdHtml(b,got,sub){return '<div class="bd'+(got?' got':'')+(b.n==='a'?' sammel':'')+' g-'+b.g+'">'+medal(b.k)+'<span class="t">'+esc(b.t)+'</span><span class="s">'+esc(sub)+'</span></div>';}
 $('#allBadges').innerHTML=GROUPS.map(g=>'<div class="grp g-'+g.id+'"><h4>'+esc(g.t)+'</h4><div class="badges">'+BADGES.filter(b=>b.g===g.id).map(b=>bdHtml(b,EXAMPLE.indexOf(b.k)>=0,EXAMPLE.indexOf(b.k)>=0?'Beispiel: erworben':NW[b.n])).join('')+'</div></div>').join('');
@@ -941,7 +947,7 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden)stopCam();}
 
 /* Datei laden */
 $$('input[type=file][data-up]').forEach(inp=>inp.addEventListener('change',()=>{
-  const f=inp.files&&inp.files[0];inp.value='';if(!f)return;const w=S.pass?'#msgSave':'#msgNew';
+  const f=inp.files&&inp.files[0];inp.value='';if(!f)return;const top=inp.dataset.up==='top';const w=top?'#msgTop':S.pass?'#msgSave':'#msgNew';
   say(w,'','<p>Datei wird gelesen …</p>');
   f.arrayBuffer().then(buf=>{
     const o=window.LP&&LP._codeFrom?LP._codeFrom(new TextDecoder('latin1').decode(new Uint8Array(buf))):null;
@@ -951,7 +957,7 @@ $$('input[type=file][data-up]').forEach(inp=>inp.addEventListener('change',()=>{
     if(!np||!np.pass){say(w,'bad','<p>In dieser PDF steckt kein lesbarer Probier-Pass.</p>');return;}
     np.st=np.st||{};np.st.load=true;np.pass.b=np.pass.b||{};S=np;
     if(!save()){say(w,'bad','<p>Speichern im Browser ist hier nicht möglich.</p>');return;}
-    render();say('#msgSave','ok','<p><b>Probier-Pass geladen:</b> '+esc(S.pass.name)+', gespeichert am '+dStr(o.d)+' um '+tStr(o.d)+' Uhr. So holen Schüler:innen ihren Pass zurück.</p>');
+    render();if(top)go(2,false);say('#msgSave','ok','<p><b>Probier-Pass geladen:</b> '+esc(S.pass.name)+', gespeichert am '+dStr(o.d)+' um '+tStr(o.d)+' Uhr. So holen Schüler:innen ihren Pass zurück.</p>');if(top)clr('#msgTop');
     $('#cSave').scrollIntoView({block:'nearest'});checkBA();
   }).catch(()=>say(w,'bad','<p>Die Datei konnte nicht gelesen werden.</p>'));
 }));

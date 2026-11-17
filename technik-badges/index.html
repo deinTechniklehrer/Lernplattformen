@@ -378,14 +378,14 @@ a.btn{text-decoration:none}
 
 /* ---------- Technik-Badges ---------- */
 :root{
-  --g-werk:#9A5B00;--g-druck:#1F64A6;--g-laser:#B0362F;--g-textil:#9B3474;--g-cad:#0F716F;--g-steuer:#2B7431;--g-motor:#5546A6;--g-sammel:#7A5C00;
+  --g-werk:#9A5B00;--g-druck:#1F64A6;--g-laser:#B0362F;--g-textil:#9B3474;--g-cad:#0F716F;--g-steuer:#2B7431;--g-motor:#5546A6;--g-ki:#8A3A8F;--g-sammel:#7A5C00;
   --ok:#1F7A4C;--ok-soft:#E1F1E8;--warn:#8A5A00;--warn-soft:#FBEFD5;--mono:"JetBrains Mono",ui-monospace,monospace;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --g-werk:#F0A64A;--g-druck:#79B1EA;--g-laser:#F08A7E;--g-textil:#E792C6;--g-cad:#55C6C3;--g-steuer:#77C47B;--g-motor:#ADA2F2;--g-sammel:#E7C65A;
+  --g-werk:#F0A64A;--g-druck:#79B1EA;--g-laser:#F08A7E;--g-textil:#E792C6;--g-cad:#55C6C3;--g-steuer:#77C47B;--g-motor:#ADA2F2;--g-ki:#DDA0E0;--g-sammel:#E7C65A;
   --ok:#6CCB97;--ok-soft:#173326;--warn:#F0C065;--warn-soft:#3A2D13;}}
 :root[data-theme="dark"]{
-  --g-werk:#F0A64A;--g-druck:#79B1EA;--g-laser:#F08A7E;--g-textil:#E792C6;--g-cad:#55C6C3;--g-steuer:#77C47B;--g-motor:#ADA2F2;--g-sammel:#E7C65A;
+  --g-werk:#F0A64A;--g-druck:#79B1EA;--g-laser:#F08A7E;--g-textil:#E792C6;--g-cad:#55C6C3;--g-steuer:#77C47B;--g-motor:#ADA2F2;--g-ki:#DDA0E0;--g-sammel:#E7C65A;
   --ok:#6CCB97;--ok-soft:#173326;--warn:#F0C065;--warn-soft:#3A2D13;}
 .brand .tlogo{height:46px;width:auto;flex:none;background:#fff;border-radius:10px;padding:4px 6px}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px;display:grid;gap:12px;min-width:0}
@@ -415,6 +415,9 @@ body.has-pass #sSo{order:5}body.has-pass #lk,body.has-pass .lic{order:6}
 .box{border-radius:14px;background:var(--surface-2);padding:14px;display:grid;gap:10px;min-width:0}
 .box h3{margin:0;font-size:18px}
 .box p{margin:0}
+.topup{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;justify-content:space-between;margin-top:14px;padding:10px 14px;border-radius:14px;background:var(--surface);border:1px solid var(--line)}
+.topup span{font-size:15px}
+.topup .btn.soft{background:var(--surface-2)}
 .box .btn.soft{background:var(--surface);border:1.5px solid var(--line)}
 .fileb{position:relative;overflow:hidden}
 .fileb input{position:absolute;inset:0;opacity:0;cursor:pointer;font-size:0}
@@ -448,7 +451,7 @@ body.has-pass #sSo{order:5}body.has-pass #lk,body.has-pass .lic{order:6}
 .bd.got .medal{margin:3px 0 5px}
 .bd.got .medal::after{content:"✓";position:absolute;right:-4px;bottom:-4px;width:22px;height:22px;border-radius:50%;background:var(--ok);color:#fff;font-size:13px;display:grid;place-items:center;font-family:var(--body);box-shadow:0 0 0 2px var(--surface)}
 .bd.sammel .medal{border-radius:18px}
-.g-werk{--gc:var(--g-werk)}.g-druck{--gc:var(--g-druck)}.g-laser{--gc:var(--g-laser)}.g-textil{--gc:var(--g-textil)}.g-cad{--gc:var(--g-cad)}.g-steuer{--gc:var(--g-steuer)}.g-motor{--gc:var(--g-motor)}.g-sammel{--gc:var(--g-sammel)}
+.g-werk{--gc:var(--g-werk)}.g-druck{--gc:var(--g-druck)}.g-laser{--gc:var(--g-laser)}.g-textil{--gc:var(--g-textil)}.g-cad{--gc:var(--g-cad)}.g-steuer{--gc:var(--g-steuer)}.g-motor{--gc:var(--g-motor)}.g-sammel{--gc:var(--g-sammel)}.g-ki{--gc:var(--g-ki)}
 /* Eintragen */
 .ways{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 @media (max-width:760px){.ways{grid-template-columns:1fr}}
@@ -494,6 +497,8 @@ a{color:var(--kultur-ink)}
       </div>
     </div>
   </header>
+  <div class="topup" id="topUp"><span><b>Schon einen Badge-Pass?</b> Neues Gerät oder Pass gelöscht: Lade deine Pass-PDF.</span><label class="btn soft fileb">Pass-PDF laden<input type="file" accept=".pdf,application/pdf" data-up="top"></label></div>
+  <div id="msgTop" aria-live="polite" style="margin-top:10px"></div>
 
   <main>
     <section class="card" id="sSo" aria-labelledby="h-so">
@@ -512,7 +517,7 @@ a{color:var(--kultur-ink)}
     <!-- Noch kein Pass -->
     <section class="card" id="sNew" aria-labelledby="h-new" hidden>
       <h2 id="h-new">Pass anlegen <small>Trag deinen Namen und deine Klasse ein. Beides steht später auf deinem Pass.</small></h2>
-      <div class="split">
+      <div>
         <div class="box">
           <h3>Neuer Pass</h3>
           <div class="form">
@@ -520,11 +525,6 @@ a{color:var(--kultur-ink)}
             <label>Klasse <input type="text" id="nKl" maxlength="10" autocomplete="off" placeholder="z. B. 8b"></label>
           </div>
           <div class="row"><button class="btn accent c-verstehen" id="nGo" type="button">Pass anlegen</button></div>
-        </div>
-        <div class="box" id="up1">
-          <h3>Schon einen Pass?</h3>
-          <p>Lade die Pass-PDF, die du hier gespeichert hast. Dann sind alle deine Badges wieder da.</p>
-          <div class="row"><label class="btn soft fileb">Pass-PDF laden<input type="file" accept=".pdf,application/pdf,.html,text/html" data-up="pass"></label></div>
         </div>
       </div>
       <div id="msgNew"></div>
@@ -544,8 +544,8 @@ a{color:var(--kultur-ink)}
         </div>
         <div class="box">
           <h3>Aus einer Lernplattform</h3>
-          <p>Für <b>AR</b> Arduino, <b>CA</b> Calliope und <b>MT</b> Motorentechnik: Lade die Ergebnis-PDF der Lernplattform. Bei Arduino ist es der Lernnachweis (.html).</p>
-          <div class="row"><label class="btn soft fileb">Ergebnis-PDF laden<input type="file" accept=".pdf,application/pdf,.html,text/html" data-up="any"></label></div>
+          <p>Für <b>AR</b> Arduino, <b>CA</b> Calliope, <b>MT</b> Motorentechnik und <b>K1</b>–<b>K3</b> AI Badge: Lade die Ergebnis-Datei der Lernplattform. Bei Arduino ist es der Lernnachweis (.html), beim AI Badge die PDF oder das PNG.</p>
+          <div class="row"><label class="btn soft fileb">Ergebnis-Datei laden<input type="file" accept=".pdf,application/pdf,.html,text/html,.png,image/png" data-up="any"></label></div>
           <p class="small muted">Es zählt nur die Original-Datei, die die Lernplattform gespeichert hat. Eine aus Notability neu exportierte PDF oder ein Bildschirmfoto enthält den Arbeitsstand meist nicht.</p>
         </div>
       </div>
@@ -595,7 +595,7 @@ a{color:var(--kultur-ink)}
       <div>
         <p>Die Seite ist ein Werkzeug ohne Konten und ohne Server. Der Pass liegt im Browser der Schüler:innen und als PDF auf ihrem iPad. Verbindlicher Nachweis bleibt die <b>Liste im Fachraum</b> (Datum, Name, Klasse, Kürzel, Unterschrift), in die du jede bestandene Prüfung einträgst. Badges aus Lernplattformen brauchen keinen Eintrag, sie kommen über die Ergebnis-PDF zurück.</p>
         <p><b>QR-Codes:</b> Je Badge mit Prüfung gibt es einen Code, der jedes Schuljahr wechselt. Auf der Seite steht nur ein Prüfwert, nicht der Code. Früher erworbene Badges bleiben gültig, weil der Pass das Badge mit Datum speichert. Das Codeblatt bekommst du auf Anfrage bei Daniel Beyrodt. Den QR-Code kann die Schüler:in auch mit der Kamera-App scannen, dann öffnet sich diese Seite und trägt das Badge ein. Bewahre das Codeblatt bei der Liste auf und häng es nicht aus.</p>
-        <p><b>Ergebnis-PDF:</b> AR gibt es für das Arduino-Lernheft oder Arduino Schritt für Schritt, wenn alle Kapitel vollständig sind. CA gibt es, wenn alle elf Calliope-Challenges geschafft sind. MT gibt es, wenn alle Aufgaben der Motorentechnik erledigt sind (ohne Zusatzaufgaben). Passt der Name in der Ergebnis-PDF nicht zum Pass, zeigt die Seite einen Hinweis, trägt das Badge aber ein.</p>
+        <p><b>Ergebnis-PDF:</b> AR gibt es für das Arduino-Lernheft oder Arduino Schritt für Schritt, wenn alle Kapitel vollständig sind. K1, K2 und K3 gibt es für die Level 1 bis 3 des AI Badge, sobald die Plattform das Level als erreicht vermerkt hat (Stationen und Prüfung des Levels). CA gibt es, wenn alle elf Calliope-Challenges geschafft sind. MT gibt es, wenn alle Aufgaben der Motorentechnik erledigt sind (ohne Zusatzaufgaben). Passt der Name in der Ergebnis-PDF nicht zum Pass, zeigt die Seite einen Hinweis, trägt das Badge aber ein.</p>
         <p><b>Aufbau:</b> D2 setzt D1 voraus, D3 setzt D2 voraus, L2 setzt L1 voraus, L3 setzt L2 voraus. Die Sammel-Badges erscheinen von selbst: <b>MS</b> MakerSpace mit LT, BH, BM und BU, <b>RL</b> Robotiklabor selbstständig mit L2 und D2.</p>
         <p><b>RiSU:</b> Die Stufen sind eigene Stufen der Fachgruppe und ersetzen die Tätigkeitsbeschränkungen der RiSU nicht (RiSU 2023, I – 4.3, Tabelle 4). Zum Beispiel steht beim Lasern bis Jahrgang 8 die Lehrkraft unmittelbar daneben, auch wenn L1 im Pass steht. Transferpresse und Plotter stehen nicht in Tabelle 4, dort gilt die Gefährdungsbeurteilung der Schule.</p>
         <div class="tw"><table><thead><tr><th>Kürzel</th><th>Badge</th><th>Inhalt</th><th>Nachweis</th></tr></thead><tbody id="lkTab"></tbody></table></div>
@@ -617,7 +617,7 @@ const RULES={"arduino-lernheft":{"badge":"AR","kind":"ard","key":"arduino-lernhe
 const HASHES={"2026/27":{"4290141d52da28e4383da611a77f30ee9480729ca3551e7149ec311183aec8f9":"BH","4c5624424c5b09c2a9f1f349a657fed3ad87cd9fa75fde8111dc0db13dc49a69":"BM","03e93b29b8fe5e76cef7902ccf318c89b018d150649029326afe304e3e239550":"BU","3851d80ff560db224efd6190ded1c3246ba2b910d1f443c970198e2bc9fc3fd0":"LT","ffae83f135328714a8a7f582bdf19e60213f4ed3a80954d42c45d5ab7198b17b":"D1","a1b0169822d6dfde715434d41729a65445f39736a159648f228594406168f494":"D2","66b608f728f02a4b7253cdf4c795b3962462ad4463c6b4e673f18ef384f95e9d":"D3","880f76249a2bb639c7fb5934def302be12e0be655b91617bbcfa4c4371752c41":"L1","e64ff0b88da4cc77903b6765cbcace9b9122a354fc33ab191ee2feaf1e7747c9":"L2","a158a42c0d5e56d3c56f4c34f176f24ca820d414718f9c7114cea3bd355a364d":"L3","8f54fdccc3376a6e3751036551a68497500d4f7d444b3ab17a993cb89bca3231":"TP","92ff22663a55846d5d4bc4e5d70cd818971154f0bce4038aaf5e8c1646fb0560":"PL","3b67d63fd8c7f905482f1ccec4ffee63d587daabf89f31a482c0098ccf117c71":"TC","f4a65bbad1ba1549ff19124c2ec6b9cd3876727288629d6207105879c94c0529":"SE","fe8601f8b77aaafa33d18e615d3883e90bda06afcdc25ad591477102f48151d5":"SM","e0ca7f942315925493760a3a2582837e10bebb27cfb423368a63e810df26ee9c":"RO","d035a99bc1bdf9296ca80d5993219f6ac9d263932af88790ce44637394700245":"MP"}};
 const GROUPS=[
   {id:'werk',t:'Werkstatt'},{id:'druck',t:'3D-Druck'},{id:'laser',t:'Lasercutter'},{id:'textil',t:'Textil'},
-  {id:'cad',t:'3D-CAD'},{id:'steuer',t:'Steuern und Regeln'},{id:'motor',t:'Motorentechnik'},{id:'sammel',t:'Sammel-Badges'}];
+  {id:'cad',t:'3D-CAD'},{id:'steuer',t:'Steuern und Regeln'},{id:'motor',t:'Motorentechnik'},{id:'ki',t:'Künstliche Intelligenz'},{id:'sammel',t:'Sammel-Badges'}];
 // n: p = Prüfung mit QR-Code, l = Lernplattform, a = automatisch
 const BADGES=[
   {k:'BH',t:'Bohrmaschine Holz',g:'werk',n:'p'},{k:'BM',t:'Bohrmaschine Metall',g:'werk',n:'p'},{k:'BU',t:'Bohrmaschine UMT',g:'werk',n:'p'},{k:'LT',t:'Lötstation',g:'werk',n:'p'},
@@ -627,6 +627,7 @@ const BADGES=[
   {k:'TC',t:'Tinkercad',g:'cad',n:'p'},{k:'SE',t:'Solid Edge',g:'cad',n:'p'},{k:'SM',t:'SpaceMouse',g:'cad',n:'p'},
   {k:'RO',t:'Robotik',g:'steuer',n:'p'},{k:'AR',t:'Arduino',g:'steuer',n:'l'},{k:'CA',t:'Calliope',g:'steuer',n:'l'},
   {k:'MT',t:'Motorentechnik Theorie',g:'motor',n:'l'},{k:'MP',t:'Motorentechnik Praxis',g:'motor',n:'p'},
+  {k:'K1',t:'AI Badge Level 1',g:'ki',n:'l',i:'Lernplattform AI Badge'},{k:'K2',t:'AI Badge Level 2',g:'ki',n:'l',i:'Lernplattform AI Badge'},{k:'K3',t:'AI Badge Level 3',g:'ki',n:'l',i:'Lernplattform AI Badge'},
   {k:'MS',t:'MakerSpace',g:'sammel',n:'a',all:['LT','BH','BM','BU'],i:'LT, BH, BM und BU'},{k:'RL',t:'Robotiklabor selbstständig',g:'sammel',n:'a',all:['L2','D2'],i:'L2 und D2'}];
 const BK={};BADGES.forEach(b=>BK[b.k]=b);
 const NW={p:'Prüfung',l:'Lernplattform',a:'automatisch'};
@@ -808,14 +809,16 @@ function codeFrom(text){return window.LP&&LP._codeFrom?LP._codeFrom(text):null;}
 
 function onFile(inp){
   const f=inp.files&&inp.files[0];inp.value='';if(!f)return;
-  const where=P?(inp.dataset.up==='pass'?'#msgSave':'#msgAdd'):'#msgNew';
+  const where=inp.dataset.up==='top'?'#msgTop':P?(inp.dataset.up==='pass'?'#msgSave':'#msgAdd'):'#msgNew';
   say(where,'','<p>Datei wird gelesen …</p>',true);
-  f.arrayBuffer().then(buf=>{
-    const o=codeFrom(new TextDecoder('latin1').decode(new Uint8Array(buf)));
+  f.arrayBuffer().then(async buf=>{
+    const text=new TextDecoder('latin1').decode(new Uint8Array(buf));
+    const o=codeFrom(text);
+    if(!o){const ki=await kiFrom(text);if(ki)return kiFile(ki,where);}
     if(!o){say(where,'bad','<p>In dieser Datei steckt kein gespeicherter Stand. Das klappt nur mit der Original-Datei, die du in der Lernplattform oder hier gespeichert hast. Eine aus Notability neu exportierte PDF oder ein Bildschirmfoto enthält ihn meist nicht.</p>');return;}
     if(o.s===SLUG)return loadPass(o,where);
     const r=RULES[o.s];
-    if(!r){say(where,'warn','<p>Diese Datei gehört zu einer Lernplattform, die kein Badge vergibt. Badges gibt es für Arduino (Lernheft oder Schritt für Schritt), Calliope-Challenges und Motorentechnik.</p>');return;}
+    if(!r){say(where,'warn','<p>Diese Datei gehört zu einer Lernplattform, die kein Badge vergibt. Badges gibt es für Arduino (Lernheft oder Schritt für Schritt), Calliope-Challenges, Motorentechnik und das AI Badge.</p>');return;}
     if(!P){say(where,'warn','<p>Das ist eine Ergebnis-Datei aus <b>'+esc(r.title)+'</b>. Leg zuerst deinen Pass an oder lade deine Pass-PDF, dann lade die Datei noch einmal.</p>');return;}
     const e=evalRule(r,o.ls||{});
     if(!e){say(where,'bad','<p>In der Datei aus '+esc(r.title)+' steckt kein lesbarer Arbeitsstand.</p>');return;}
@@ -830,12 +833,34 @@ function onFile(inp){
     showOk(r.badge,'<p class="small">aus '+esc(r.title)+' · '+esc(e.txt)+' · Ergebnis-PDF vom '+fd+'</p>'+neuTxt(res.neu)+hint);
   }).catch(()=>say(where,'bad','<p>Die Datei konnte nicht gelesen werden.</p>'));
 }
+/* AI Badge: eigener Sicherungscode KIL1./KIL2. (in PDF-Eigenschaften oder PNG), Level erreicht = S.lvAt[n] */
+function kiBytes(t){t=t.replace(/-/g,'+').replace(/_/g,'/');while(t.length%4)t+='=';const bin=atob(t),b=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)b[i]=bin.charCodeAt(i);return b;}
+async function kiRead(c){const m=c.match(/^KI([LF])([12])\.([A-Za-z0-9_-]+)$/);if(!m)return null;if(m[1]==='F')return {other:true};
+  let b=kiBytes(m[3]);if(m[2]==='2'){if(typeof DecompressionStream!=='function')return {nodecomp:true};b=new Uint8Array(await new Response(new Blob([b]).stream().pipeThrough(new DecompressionStream('deflate-raw'))).arrayBuffer());}
+  const o=JSON.parse(new TextDecoder().decode(b));return o&&o.v===1&&o.p==='level'&&o.s?o:null;}
+async function kiFrom(text){const all=(text.match(/KI[LF][12]\.[A-Za-z0-9_-]{20,}/g)||[]).sort((a,b)=>b.length-a.length);
+  for(const c of all)for(let k=0;k<=4;k++){try{const o=await kiRead(c.slice(0,c.length-k));if(o)return o;}catch(e){}}return null;}
+function kiFile(o,where){
+  if(o.other){say(where,'warn','<p>Das ist ein Stand aus der Fassung des AI Badge für Lehrkräfte. Badges gibt es nur für die Fassung für Schüler:innen.</p>');return;}
+  if(o.nodecomp){say(where,'bad','<p>Dieser Browser kann den Code des AI Badge nicht lesen. Nimm Safari ab iPadOS 16.4 oder einen aktuellen Chrome.</p>');return;}
+  if(!P){say(where,'warn','<p>Das ist eine Ergebnis-Datei aus dem <b>AI Badge</b>. Leg zuerst deinen Pass an oder lade deine Pass-PDF, dann lade die Datei noch einmal.</p>');return;}
+  const S=o.s||{},at=S.lvAt||{},lv=[1,2,3].filter(l=>at[l]),fd=dStr(o.d);
+  if(!lv.length){say(where,'warn','<p><b>AI Badge</b> (Stand '+fd+'): Du hast noch kein Level erreicht.</p><p>Für das Badge <b>K1</b> brauchst du Level 1 mit allen Stationen und der bestandenen Prüfung. Arbeite im AI Badge weiter und speichere danach eine neue Ergebnis-Datei.</p>');return;}
+  const nm=String(S.name||'').trim();let hint='';
+  if(!nm)hint='<div class="msg warn"><p>In der Ergebnis-Datei steht kein Name. Zeig deiner Lehrkraft, dass es deine Datei ist.</p></div>';
+  else if(!sameName(nm,P.name))hint='<div class="msg warn"><p>Der Name in der Ergebnis-Datei („'+esc(nm)+'“) passt nicht zum Namen im Pass. Das Badge ist trotzdem eingetragen. Deine Lehrkraft kann das prüfen.</p></div>';
+  const added=[],had=[];let neu=[];
+  lv.forEach(l=>{const k='K'+l;if(P.b[k]){had.push(k);return;}const r=addBadge(k,'pdf',{src:'ai-badge',sd:o.d,lv:at[l]});if(r.ok){added.push(k);neu=neu.concat(r.neu);}});
+  if(!added.length){say(where,'warn','<p>'+had.map(k=>'<b>'+k+'</b>').join(', ')+' '+(had.length>1?'stehen':'steht')+' schon in deinem Pass.</p>');return;}
+  clearMsg(where);const top=added[added.length-1];
+  showOk(top,'<p class="small">aus dem AI Badge · Level '+lv.join(', ')+' erreicht · Ergebnis-Datei vom '+fd+'</p>'+(added.length>1?'<p><b>Neu im Pass:</b> '+added.join(', ')+'</p>':'')+neuTxt(neu)+hint);
+}
 function loadPass(o,where){
   let np=null;try{np=JSON.parse((o.ls||{})[KEY]||'null');}catch(e){}
   if(!np||!np.name){say(where,'bad','<p>In dieser Pass-PDF steckt kein lesbarer Pass.</p>');return;}
   np.b=np.b||{};
   const n=BADGES.filter(b=>b.n!=='a'&&np.b[b.k]).length;
-  const apply=()=>{P=np;if(!save()){say(where,'bad','<p>Speichern auf diesem Gerät ist nicht möglich (zum Beispiel im privaten Fenster).</p>');return;}render();say(P?'#msgSave':'#msgNew','ok','<p><b>Pass geladen:</b> '+esc(np.name)+', '+n+' Badges, gespeichert am '+dStr(o.d)+'.</p>');pendingCode();};
+  const apply=()=>{P=np;if(!save()){say(where,'bad','<p>Speichern auf diesem Gerät ist nicht möglich (zum Beispiel im privaten Fenster).</p>');return;}render();say(where==='#msgNew'?'#msgTop':where,'ok','<p><b>Pass geladen:</b> '+esc(np.name)+', '+n+' Badges, gespeichert am '+dStr(o.d)+'.</p>');pendingCode();};
   if(!P){apply();return;}
   if(P.name===np.name&&BADGES.every(b=>!P.b[b.k]||np.b[b.k])){apply();return;}
   say(where,'warn','<p>Gefunden: Pass von <b>'+esc(np.name)+'</b> mit '+n+' Badges vom '+dStr(o.d)+'. Der Pass auf diesem Gerät ('+esc(P.name)+') wird ersetzt.'+(P.name===np.name?' Badges, die nur hier stehen, gehen dabei verloren.':'')+'</p><div class="row"><button class="btn accent c-verstehen" type="button" data-ok>Ja, Pass laden</button></div>',true);
@@ -844,11 +869,11 @@ function loadPass(o,where){
 $$('input[type=file][data-up]').forEach(i=>i.addEventListener('change',()=>onFile(i)));
 
 /* ---------- PDF ---------- */
-const HEX={werk:'#9A5B00',druck:'#1F64A6',laser:'#B0362F',textil:'#9B3474',cad:'#0F716F',steuer:'#2B7431',motor:'#5546A6',sammel:'#7A5C00'};
+const HEX={werk:'#9A5B00',druck:'#1F64A6',laser:'#B0362F',textil:'#9B3474',cad:'#0F716F',steuer:'#2B7431',motor:'#5546A6',ki:'#8A3A8F',sammel:'#7A5C00'};
 const CP='€‚ƒ„…†‡ˆ‰Š‹ŒŽ‘’“”•–—˜™š›œžŸ';
 function clean(t){return String(t||'').replace(/→/g,'->').replace(/−/g,'-').split('').filter(ch=>{const c=ch.charCodeAt(0);return c===10||(c>=32&&c<=126)||(c>=160&&c<=255)||CP.indexOf(ch)>=0;}).join('');}
 function rgb(h){return [1,3,5].map(i=>parseInt(h.slice(i,i+2),16));}
-function viaTxt(e){if(!e)return '';if(e.via==='pdf'){const r=RULES[e.src];return 'Ergebnis-PDF '+(r?r.title:'');}return e.via==='code'?'Prüfung (Code)':'Prüfung (QR-Code)';}
+function viaTxt(e){if(!e)return '';if(e.via==='pdf'){const r=RULES[e.src];return 'Ergebnis-PDF '+(r?r.title:e.src==='ai-badge'?'AI Badge':'');}return e.via==='code'?'Prüfung (Code)':'Prüfung (QR-Code)';}
 function makePdf(){
   if(!(window.jspdf&&window.jspdf.jsPDF)){say('#msgSave','bad','<p>Das PDF-Werkzeug konnte nicht geladen werden.</p>');return;}
   const d=new window.jspdf.jsPDF({unit:'mm',format:'a4'}),W=210,M=16,now=new Date();
