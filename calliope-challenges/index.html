@@ -1479,7 +1479,7 @@ $('#pdfBtn').onclick=()=>{const note=$('#pdfNote');note.hidden=false;
     .then(()=>{note.textContent='Gespeichert. In der PDF steckt dein Arbeitsstand.';}).catch(e=>{note.textContent=e&&e.code==='declined'?'Speichern abgebrochen.':'Speichern hat nicht geklappt.';});
 };
 
-window.__CAL={CH,T,CHILI,LEVELS,PARTS,chiliSvg,chiliRow,levelBadge,boardSvg,cpOf,pad};
+window.__CAL={CH,T,CHILI,LEVELS,PARTS,chiliSvg,chiliRow,levelBadge,boardSvg,calDrawing,cpOf,pad};
 setMode(S.mode);refresh();go(S.pg,{keep:true});
 })();
 </script>
