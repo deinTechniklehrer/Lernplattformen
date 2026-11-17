@@ -540,7 +540,7 @@ td.c{text-align:center;font-weight:700}
 
 <!-- ================= KAPITEL 1 ================= -->
 <section class="station c-kultur" data-ch="1" aria-labelledby="h1k">
-  <div class="chead"><span class="n">1</span><div><h2 id="h1k">So nutzen wir das Badge-System</h2><p>Pass, QR-Code nach der Prüfung, Liste im Fachraum, Kürzel und Sammel-Badges</p></div></div>
+  <div class="chead"><span class="n">1</span><div><h2 id="h1k">So nutzen wir das Badge-System</h2><p>Pass, QR-Code nach der Prüfung, Liste im Fachraum, Kürzel und Access</p></div></div>
   <div class="card">
     <p class="lead">Schüler:innen sammeln im Technikunterricht <b>Badges</b>. Ein Badge zeigt, dass eine Einheit abgeschlossen oder eine praktische Prüfung bestanden ist. Bestimmte Badges sind Voraussetzung für die Arbeit an Maschinen und im MakerSpace. Das System läuft über mehrere Schuljahre und braucht keine gepflegte Schülerliste: Neue Schüler:innen und Klassenwechsel machen keinen Aufwand.</p>
     <figure>
@@ -580,12 +580,12 @@ td.c{text-align:center;font-weight:700}
   </div>
 
   <div class="card c-luxus">
-    <h3>Sammel-Badges</h3>
-    <p>Ein Sammel-Badge erscheint von selbst, sobald alle Voraussetzungen im Pass stehen. Es braucht keinen eigenen Code und keinen eigenen Eintrag in die Liste.</p>
+    <h3>Access: was die Badges erlauben</h3>
+    <p>Ein <b>Access</b> zeigt eine Erlaubnis, zum Beispiel für die Arbeit im MakerSpace. Es erscheint von selbst, sobald alle nötigen Badges im Pass stehen, und steht im Pass deutlich abgesetzt ganz oben, mit dem Satz, was die Schüler:in damit darf. Es braucht keinen eigenen Code und keinen eigenen Eintrag in die Liste.</p>
     <figure>
-      <div class="eq" id="eqMS" role="img" aria-label="MakerSpace MS ergibt sich aus Lötstation LT, Bohrmaschine Holz BH, Bohrmaschine Metall BM und Bohrmaschine UMT BU."></div>
-      <div class="eq" id="eqRL" role="img" aria-label="Robotiklabor selbstständig RL ergibt sich aus Lasercutter Stufe 2 L2 und 3D-Druck warten D2."></div>
-      <figcaption class="cap">Die beiden Sammel-Badges der Technik-Badges.</figcaption>
+      <div class="eq" id="eqMS" role="img" aria-label="MakerSpace Access MS ergibt sich aus Lötstation LT, Bohrmaschine Holz BH, Bohrmaschine Metall BM und Bohrmaschine UMT BU."></div>
+      <div class="eq" id="eqRL" role="img" aria-label="Robotiklabor Access RL ergibt sich aus Lasercutter Stufe 2 L2 und 3D-Druck warten D2."></div>
+      <figcaption class="cap">Die beiden Access der Technik-Badges.</figcaption>
     </figure>
     <p>Im Robotiklabor arbeiten alle Schüler:innen. RL regelt nur, wer dort ohne Nachfragen selbstständig an Lasercutter und 3D-Drucker arbeitet.</p>
     <p>Die fertige Seite für Schüler:innen findest du unter <a href="../technik-badges/" target="_blank" rel="noopener">Technik-Badges</a>.</p>
@@ -648,7 +648,7 @@ td.c{text-align:center;font-weight:700}
         <h4>Code eintippen</h4>
         <p>Streikt die Kamera, tippen die Schüler:innen den Code unter dem QR-Code ein. Groß- und Kleinschreibung und Striche sind egal.</p>
         <div class="codein"><input type="text" id="codeIn" maxlength="16" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="z. B. P2-DEMO-LOET" aria-label="Code eintippen"><button class="btn soft" id="codeGo" type="button">Eintragen</button></div>
-        <p class="small muted">Hol dir beide Probe-Badges, dann siehst du, wie das Sammel-Badge PM von selbst erscheint.</p>
+        <p class="small muted">Hol dir beide Probe-Badges, dann siehst du, wie der Probe-MakerSpace Access (PM) von selbst erscheint.</p>
       </div>
     </div>
     <div id="msgGet" aria-live="polite"></div>
@@ -689,7 +689,7 @@ td.c{text-align:center;font-weight:700}
       <li><b>QR-Codes:</b> Das Codeblatt mit den Codes für das laufende Schuljahr bekommst du auf Anfrage bei Daniel Beyrodt. Den QR-Code können die Schüler:innen in der Seite scannen oder mit der Kamera-App: Dann öffnet sich die Seite und trägt das Badge ein. Unter dem QR-Code steht der Code zum Eintippen, falls die Kamera streikt.</li>
       <li><b>Badges aus Lernplattformen:</b> AR gibt es für das Arduino-Lernheft oder Arduino Schritt für Schritt, wenn alle Kapitel vollständig sind. CA gibt es, wenn alle elf Calliope-Challenges geschafft sind. MT gibt es, wenn alle Aufgaben der Motorentechnik erledigt sind (ohne Zusatzaufgaben). K1, K2 und K3 gibt es für die Level 1 bis 3 des AI Badge, sobald die Plattform das Level als erreicht vermerkt hat (Stationen und Prüfung des Levels). Die Fassung des AI Badge für Lehrkräfte zählt nicht.</li>
       <li><b>Name:</b> Passt der Name in der Ergebnis-PDF nicht zum Namen im Pass, zeigt die Seite einen Hinweis, trägt das Badge aber ein. Schau dann kurz drauf.</li>
-      <li><b>Aufbau:</b> D2 setzt D1 voraus, D3 setzt D2 voraus, L2 setzt L1 voraus, L3 setzt L2 voraus. Die Sammel-Badges erscheinen von selbst: <b>MS</b> MakerSpace mit LT, BH, BM und BU, <b>RL</b> Robotiklabor selbstständig mit L2 und D2.</li>
+      <li><b>Aufbau:</b> D2 setzt D1 voraus, D3 setzt D2 voraus, L2 setzt L1 voraus, L3 setzt L2 voraus. Die Access erscheinen von selbst und stehen oben im Pass: <b>MS</b> MakerSpace Access mit LT, BH, BM und BU, <b>RL</b> Robotiklabor Access (selbstständig ohne Nachfragen an Lasercutter und 3D-Drucker) mit L2 und D2.</li>
     </ul>
   </div>
   <div class="card">
@@ -751,7 +751,7 @@ td.c{text-align:center;font-weight:700}
   <div class="card">
     <h3>So gehst du vor</h3>
     <ol class="steps4">
-      <li><span><b>Badges planen:</b> Lege mit deiner Fachgruppe fest, welche Badges es gibt, ihre Kürzel, was in der Prüfung zu zeigen ist und welche Sammel-Badges sich ergeben. Gleiche die Stufen mit der RiSU ab (Kapitel 3).</span></li>
+      <li><span><b>Badges planen:</b> Lege mit deiner Fachgruppe fest, welche Badges es gibt, ihre Kürzel, was in der Prüfung zu zeigen ist und welche Access (Erlaubnisse) sich daraus ergeben. Gleiche die Stufen mit der RiSU ab (Kapitel 3).</span></li>
       <li><span><b>Freigabe holen:</b> Die Schulleitung gibt den Einsatz mit Schüler:innen frei. Kläre auch, wo die Liste liegt und wer die Codes verwaltet.</span></li>
       <li><span><b>Prompt kopieren und ausfüllen:</b> Ersetze die Platzhalter in eckigen Klammern durch deine Angaben. Schreib in den Chat keine echten Namen von Schüler:innen.</span></li>
       <li><span><b>Bauen lassen und testen:</b> Claude stellt zuerst Fragen und baut dann. Teste mit erfundenen Namen auf einem Schul-iPad: Pass anlegen, Code eintippen, QR-Code scannen, PDF speichern und laden.</span></li>
@@ -847,7 +847,7 @@ const dStr=iso=>{const d=new Date(iso);return isNaN(d)?'':pad(d.getDate())+'.'+p
 const tStr=iso=>{const d=new Date(iso);return isNaN(d)?'':pad(d.getHours())+':'+pad(d.getMinutes());};
 
 /* ---------- Badges der Technik-Badges (Kapitel 1) ---------- */
-const GROUPS=[{id:'werk',t:'Werkstatt'},{id:'druck',t:'3D-Druck'},{id:'laser',t:'Lasercutter'},{id:'textil',t:'Textil'},{id:'cad',t:'3D-CAD'},{id:'steuer',t:'Steuern und Regeln'},{id:'motor',t:'Motorentechnik'},{id:'ki',t:'Künstliche Intelligenz'},{id:'sammel',t:'Sammel-Badges'}];
+const GROUPS=[{id:'werk',t:'Werkstatt'},{id:'druck',t:'3D-Druck'},{id:'laser',t:'Lasercutter'},{id:'textil',t:'Textil'},{id:'cad',t:'3D-CAD'},{id:'steuer',t:'Steuern und Regeln'},{id:'motor',t:'Motorentechnik'},{id:'ki',t:'Künstliche Intelligenz'},{id:'sammel',t:'Access'}];
 const BADGES=[
   {k:'BH',t:'Bohrmaschine Holz',g:'werk',n:'p'},{k:'BM',t:'Bohrmaschine Metall',g:'werk',n:'p'},{k:'BU',t:'Bohrmaschine UMT',g:'werk',n:'p'},{k:'LT',t:'Lötstation',g:'werk',n:'p'},
   {k:'D1',t:'3D-Druck bedienen',g:'druck',n:'p',i:'Druck vorbereiten, starten, entnehmen'},{k:'D2',t:'3D-Druck warten',g:'druck',n:'p',i:'baut auf D1 auf'},{k:'D3',t:'3D-Druck reparieren',g:'druck',n:'p',i:'baut auf D2 auf'},
@@ -857,7 +857,7 @@ const BADGES=[
   {k:'RO',t:'Robotik',g:'steuer',n:'p'},{k:'AR',t:'Arduino',g:'steuer',n:'l'},{k:'CA',t:'Calliope',g:'steuer',n:'l'},
   {k:'MT',t:'Motorentechnik Theorie',g:'motor',n:'l'},{k:'MP',t:'Motorentechnik Praxis',g:'motor',n:'p'},
   {k:'K1',t:'AI Badge Level 1',g:'ki',n:'l',i:'Level 1 im AI Badge erreicht'},{k:'K2',t:'AI Badge Level 2',g:'ki',n:'l',i:'Level 2 im AI Badge erreicht'},{k:'K3',t:'AI Badge Level 3',g:'ki',n:'l',i:'Level 3 im AI Badge erreicht'},
-  {k:'MS',t:'MakerSpace',g:'sammel',n:'a',all:['LT','BH','BM','BU'],i:'Sammel-Badge: LT, BH, BM und BU'},{k:'RL',t:'Robotiklabor selbstständig',g:'sammel',n:'a',all:['L2','D2'],i:'Sammel-Badge: L2 und D2'}];
+  {k:'MS',t:'MakerSpace Access',g:'sammel',n:'a',all:['LT','BH','BM','BU'],i:'Access: LT, BH, BM und BU'},{k:'RL',t:'Robotiklabor Access',g:'sammel',n:'a',all:['L2','D2'],i:'Access: L2 und D2'}];
 const BK={};BADGES.forEach(b=>BK[b.k]=b);
 const NW={p:'Prüfung',l:'Lernplattform',a:'automatisch'};
 const EXAMPLE=['BH','BM','D1','L1','TC','AR','K1'];
@@ -876,7 +876,7 @@ function go(n,scroll){cur=n;$$('.station').forEach(s=>s.hidden=+s.dataset.ch!==n
 document.addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(b){go(+b.dataset.go,true);}});
 
 /* ---------- Probier-Pass (Kapitel 2) ---------- */
-const PROBE=[{k:'P1',t:'Probe-Bohrmaschine',g:'probe',n:'p'},{k:'P2',t:'Probe-Lötstation',g:'probe',n:'p'},{k:'PM',t:'Probe-MakerSpace',g:'probe',n:'a',all:['P1','P2'],i:'P1 und P2'},{k:'BA',t:'Badge-System ausprobiert',g:'probe',n:'f',i:'alle vier Schritte'}];
+const PROBE=[{k:'P1',t:'Probe-Bohrmaschine',g:'probe',n:'p'},{k:'P2',t:'Probe-Lötstation',g:'probe',n:'p'},{k:'PM',t:'Probe-MakerSpace Access',g:'probe',n:'a',all:['P1','P2'],i:'P1 und P2'},{k:'BA',t:'Badge-System ausprobiert',g:'probe',n:'f',i:'alle vier Schritte'}];
 const PK={};PROBE.forEach(b=>PK[b.k]=b);
 let S=null;
 try{S=JSON.parse(localStorage.getItem(KEY)||'null');}catch(e){S=null;}
@@ -929,7 +929,7 @@ async function useCode(raw,via){if(busy)return;busy=true;try{
   const pmBefore=!!got('PM');
   S.pass.b[k]={d:new Date().toISOString(),via:via};if(!save()){delete S.pass.b[k];say('#msgGet','bad','<p>Speichern im Browser ist hier nicht möglich.</p>');return;}
   render();$('#codeIn').value='';clr('#msgGet');
-  showOk(k,(!pmBefore&&got('PM'))?'<p><b>Neues Sammel-Badge:</b> PM Probe-MakerSpace</p>':'');
+  showOk(k,(!pmBefore&&got('PM'))?'<p><b>Neu freigeschaltet:</b> Probe-MakerSpace Access (PM)</p>':'');
 }finally{busy=false;}}
 $('#codeGo').onclick=()=>useCode($('#codeIn').value,'code');
 $('#codeIn').addEventListener('keydown',e=>{if(e.key==='Enter')useCode($('#codeIn').value,'code');});
