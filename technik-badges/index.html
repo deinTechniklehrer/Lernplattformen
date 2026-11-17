@@ -590,18 +590,7 @@ a{color:var(--kultur-ink)}
       </div></details>
     </section>
 
-    <details class="lk" id="lk">
-      <summary>Hinweise für Lehrkräfte</summary>
-      <div>
-        <p>Die Seite ist ein Werkzeug ohne Konten und ohne Server. Der Pass liegt im Browser der Schüler:innen und als PDF auf ihrem iPad. Verbindlicher Nachweis bleibt die <b>Liste im Fachraum</b> (Datum, Name, Klasse, Kürzel, Unterschrift), in die du jede bestandene Prüfung einträgst. Badges aus Lernplattformen brauchen keinen Eintrag, sie kommen über die Ergebnis-PDF zurück.</p>
-        <p><b>QR-Codes:</b> Je Badge mit Prüfung gibt es einen Code, der jedes Schuljahr wechselt. Auf der Seite steht nur ein Prüfwert, nicht der Code. Früher erworbene Badges bleiben gültig, weil der Pass das Badge mit Datum speichert. Das Codeblatt bekommst du auf Anfrage bei Daniel Beyrodt. Den QR-Code kann die Schüler:in auch mit der Kamera-App scannen, dann öffnet sich diese Seite und trägt das Badge ein. Bewahre das Codeblatt bei der Liste auf und häng es nicht aus.</p>
-        <p><b>Ergebnis-PDF:</b> AR gibt es für das Arduino-Lernheft oder Arduino Schritt für Schritt, wenn alle Kapitel vollständig sind. K1, K2 und K3 gibt es für die Level 1 bis 3 des AI Badge, sobald die Plattform das Level als erreicht vermerkt hat (Stationen und Prüfung des Levels). CA gibt es, wenn alle elf Calliope-Challenges geschafft sind. MT gibt es, wenn alle Aufgaben der Motorentechnik erledigt sind (ohne Zusatzaufgaben). Passt der Name in der Ergebnis-PDF nicht zum Pass, zeigt die Seite einen Hinweis, trägt das Badge aber ein.</p>
-        <p><b>Aufbau:</b> D2 setzt D1 voraus, D3 setzt D2 voraus, L2 setzt L1 voraus, L3 setzt L2 voraus. Die Sammel-Badges erscheinen von selbst: <b>MS</b> MakerSpace mit LT, BH, BM und BU, <b>RL</b> Robotiklabor selbstständig mit L2 und D2.</p>
-        <p><b>RiSU:</b> Die Stufen sind eigene Stufen der Fachgruppe und ersetzen die Tätigkeitsbeschränkungen der RiSU nicht (RiSU 2023, I – 4.3, Tabelle 4). Zum Beispiel steht beim Lasern bis Jahrgang 8 die Lehrkraft unmittelbar daneben, auch wenn L1 im Pass steht. Transferpresse und Plotter stehen nicht in Tabelle 4, dort gilt die Gefährdungsbeurteilung der Schule.</p>
-        <div class="tw"><table><thead><tr><th>Kürzel</th><th>Badge</th><th>Inhalt</th><th>Nachweis</th></tr></thead><tbody id="lkTab"></tbody></table></div>
-      </div>
-    </details>
-    <p class="lic">Technik-Badges von Daniel Beyrodt · Lizenz <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> · QR-Scanner: jsQR (Apache 2.0, <a href="../lizenzen/">Lizenzen</a>)</p>
+    <p class="lic">Technik-Badges von Daniel Beyrodt · Lizenz <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> · QR-Scanner: jsQR (Apache 2.0, <a href="../lizenzen/">Lizenzen</a>) · Für Lehrkräfte: <a href="../technik-badges-fortbildung/">Fortbildung „Das Badge-System“</a></p>
   </main>
 </div>
 
@@ -669,7 +658,7 @@ function render(){
       return '<div class="bd'+(d?' got':'')+(b.n==='a'?' sammel':'')+'" role="img" aria-label="'+esc(b.k+' '+b.t+': '+(d?'erworben am '+dStr(d):'noch offen'))+'">'+medal(b)+'<span class="t">'+esc(b.t)+'</span><span class="s">'+esc(s)+'</span></div>';
     }).join('')+'</div></div>';}).join('');
 }
-$('#lkTab').innerHTML=BADGES.map(b=>'<tr><td><b>'+b.k+'</b></td><td>'+esc(b.t)+'</td><td>'+esc(b.n==='a'?'Sammel-Badge: '+b.i:(b.i||''))+'</td><td>'+NW[b.n]+'</td></tr>').join('');
+
 
 /* ---------- Pass anlegen und ändern ---------- */
 $('#nGo').onclick=()=>{
