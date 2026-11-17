@@ -1,0 +1,999 @@
+<!doctype html>
+<html lang="de"><head><script>/* Lernplattformen auf GitHub Pages: Speichern ohne claude.ai */
+(function(){if(window.claude)return;var T={pdf:'application/pdf',txt:'text/plain;charset=utf-8',png:'image/png',jpg:'image/jpeg',jpeg:'image/jpeg',json:'application/json',csv:'text/csv;charset=utf-8',html:'text/html;charset=utf-8',docx:'application/vnd.openxmlformats-officedocument.wordprocessingml.document',xlsx:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',ino:'text/plain;charset=utf-8'};
+var dl={save:function(o){return new Promise(function(res,rej){try{var n=(o&&o.filename)||'datei',x=(n.split('.').pop()||'').toLowerCase(),d=o.data,b=d instanceof Blob?d:new Blob([d],{type:T[x]||'application/octet-stream'});var u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=n;a.rel='noopener';document.body.appendChild(a);a.click();setTimeout(function(){a.remove();URL.revokeObjectURL(u);},4000);res();}catch(e){rej({code:'failed',message:String(e)});}});}};
+window.claude={use:function(n){return Promise.resolve(n==='downloads'?dl:null);}};})();</script><meta property="og:type" content="website"><meta property="og:title" content="Das Badge-System (Fortbildung)"><meta property="og:description" content="Fortbildung für Lehrkräfte Technik und AWT, erklärt am Badge-System selbst: Ablauf mit Pass, QR-Code und Liste im Fachraum, Probier-Pass mit Probe-Badges zum Ausprobieren, Organisation mit Codes, Datenschutz und RiSU, dazu ein Prompt, mit dem du mit Claude ein eigenes Badge-System für deine Schule baust, und zwei Wege zum Veröffentlichen."><meta property="og:url" content="https://deintechniklehrer.github.io/Lernplattformen/technik-badges-fortbildung/"><meta property="og:image" content="https://deintechniklehrer.github.io/Lernplattformen/vorschau/Vorschau_Technik-Badges-Fortbildung.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="description" content="Fortbildung für Lehrkräfte Technik und AWT, erklärt am Badge-System selbst: Ablauf mit Pass, QR-Code und Liste im Fachraum, Probier-Pass mit Probe-Badges zum Ausprobieren, Organisation mit Codes, Datenschutz und RiSU, dazu ein Prompt, mit dem du mit Claude ein eigenes Badge-System für deine Schule baust, und zwei Wege zum Veröffentlichen."><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Das Badge-System – Fortbildung</title>
+<link rel="stylesheet" href="../assets/fonts/fonts.css">
+<style>
+
+:root{
+  --bg:#F3F6F2; --surface:#FFFFFF; --surface-2:#E9EFEA; --ink:#18221E; --muted:#56645D; --line:#D3DDD6;
+  --on-accent:#FFFFFF;
+  --existenz:#1F7A5C; --existenz-soft:#E1F0E9; --existenz-ink:#165C45;
+  --kultur:#2A6FB0;   --kultur-soft:#E2ECF7;   --kultur-ink:#1D568E;
+  --luxus:#B8841A;    --luxus-soft:#F6ECD6;    --luxus-ink:#7A5308;
+  --entdecken:#2A7F9E; --entdecken-soft:#DFEFF5; --entdecken-ink:#1B6380;
+  --sichern:#744690;  --sichern-soft:#EEE5F4;  --sichern-ink:#5B3175;
+  --bad:#B4483C; --bad-soft:#F6E1DE; --bad-ink:#8E3228;
+  --shadow:0 10px 30px rgb(24 34 30 / .14);
+  --display:"Bricolage Grotesque","Segoe UI",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#101613; --surface:#18201C; --surface-2:#212B26; --ink:#E5ECE8; --muted:#9AA9A1; --line:#2F3B35;
+    --on-accent:#0F1512;
+    --existenz:#53BB91; --existenz-soft:#1A3128; --existenz-ink:#7FD3B0;
+    --kultur:#6FA8E2;   --kultur-soft:#1A2937;   --kultur-ink:#9CC4EE;
+    --luxus:#E2B458;    --luxus-soft:#372C15;    --luxus-ink:#EDCB86;
+    --entdecken:#5FB4D2; --entdecken-soft:#172F38; --entdecken-ink:#8FCDE3;
+    --sichern:#B690D0;  --sichern-soft:#2A2134;  --sichern-ink:#CFB2E2;
+    --bad:#E27E71; --bad-soft:#3A201C; --bad-ink:#F0A79D;
+    --shadow:0 10px 30px rgb(0 0 0 / .45);
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#101613; --surface:#18201C; --surface-2:#212B26; --ink:#E5ECE8; --muted:#9AA9A1; --line:#2F3B35;
+  --on-accent:#0F1512;
+  --existenz:#53BB91; --existenz-soft:#1A3128; --existenz-ink:#7FD3B0;
+  --kultur:#6FA8E2;   --kultur-soft:#1A2937;   --kultur-ink:#9CC4EE;
+  --luxus:#E2B458;    --luxus-soft:#372C15;    --luxus-ink:#EDCB86;
+  --entdecken:#5FB4D2; --entdecken-soft:#172F38; --entdecken-ink:#8FCDE3;
+  --sichern:#B690D0;  --sichern-soft:#2A2134;  --sichern-ink:#CFB2E2;
+  --bad:#E27E71; --bad-soft:#3A201C; --bad-ink:#F0A79D;
+  --shadow:0 10px 30px rgb(0 0 0 / .45);
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.55}
+.app{max-width:980px;margin:0 auto;padding-inline:16px;padding-block:20px 110px}
+h1,h2,h3,h4{font-family:var(--display);text-wrap:balance;line-height:1.15}
+.i{width:22px;height:22px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+:focus-visible{outline:3px solid var(--kultur);outline-offset:2px}
+
+/* Kopf */
+.top{display:grid;grid-template-columns:1fr minmax(170px,240px);gap:10px 24px;align-items:center}
+.brand{display:flex;gap:14px;align-items:center}
+.logo{width:48px;height:48px;flex:none}
+.brand h1{margin:0;font-weight:800;font-size:clamp(25px,4.2vw,34px);letter-spacing:-.015em}
+.brand p{margin:0;color:var(--muted);font-size:14px}
+.meter{display:grid;gap:6px}
+.meter-row{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.bar{height:10px;border-radius:99px;background:var(--surface-2);overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--existenz),var(--kultur) 55%,var(--luxus));transition:width .5s ease}
+.ki-pill{grid-column:1/-1;justify-self:start;display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;padding:5px 12px 5px 9px;border-radius:99px;background:var(--surface-2);color:var(--muted)}
+.ki-pill .i{width:16px;height:16px}
+.ki-pill.on{background:var(--sichern-soft);color:var(--sichern-ink)}
+@media (max-width:620px){.top{grid-template-columns:1fr}}
+
+/* Stationen-Navigation */
+.stations{display:flex;gap:8px;margin:18px 0 20px;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
+.st-btn{flex:1 0 auto;display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-size:15px;font-weight:700;cursor:pointer;min-height:48px}
+.st-btn .n{display:grid;place-items:center;width:24px;height:24px;border-radius:8px;background:var(--c-soft);color:var(--c-ink);font-size:13px;font-variant-numeric:tabular-nums}
+.st-btn[aria-current="step"]{background:var(--c);border-color:var(--c);color:var(--on-accent)}
+.st-btn[aria-current="step"] .n{background:rgb(255 255 255 / .22);color:inherit}
+.st-btn .ok{display:none;width:18px;height:18px;color:var(--existenz)}
+.st-btn.done .ok{display:block}
+.st-btn[aria-current="step"].done .ok{color:inherit}
+
+/* Farbräume */
+.c-entdecken{--c:var(--entdecken);--c-soft:var(--entdecken-soft);--c-ink:var(--entdecken-ink)}
+.c-verstehen,.c-existenz{--c:var(--existenz);--c-soft:var(--existenz-soft);--c-ink:var(--existenz-ink)}
+.c-ordnen,.c-kultur{--c:var(--kultur);--c-soft:var(--kultur-soft);--c-ink:var(--kultur-ink)}
+.c-bewerten,.c-luxus{--c:var(--luxus);--c-soft:var(--luxus-soft);--c-ink:var(--luxus-ink)}
+.c-sichern{--c:var(--sichern);--c-soft:var(--sichern-soft);--c-ink:var(--sichern-ink)}
+
+/* Station */
+.station{display:grid;gap:16px}
+.st-head{display:flex;gap:16px;align-items:center;padding:20px 22px;border-radius:18px;background:var(--c);color:var(--on-accent)}
+.st-icon{width:58px;height:58px;flex:none;border-radius:16px;background:rgb(255 255 255 / .2);display:grid;place-items:center}
+.st-icon .i{width:32px;height:32px}
+.eyebrow{margin:0;text-transform:uppercase;letter-spacing:.09em;font-size:12px;font-weight:700;opacity:.92}
+.st-head h2{margin:2px 0 4px;font-size:clamp(23px,3.6vw,31px);font-weight:800}
+.goal{margin:0;font-size:15px}
+.lead{margin:0;max-width:65ch}
+
+.task{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;display:grid;gap:12px}
+.task>header{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.num{width:34px;height:34px;flex:none;border-radius:10px;background:var(--c);color:var(--on-accent);display:grid;place-items:center;font-family:var(--display);font-weight:800;font-variant-numeric:tabular-nums}
+.task h3{margin:0;font-size:19px;flex:1;min-width:12ch}
+.op{font:inherit;font-size:13px;font-weight:700;padding:5px 11px;border-radius:99px;border:0;background:var(--c-soft);color:var(--c-ink);cursor:pointer}
+.q{margin:0;max-width:68ch}
+.hint{margin:0;font-size:14px;color:var(--muted)}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+
+.btn{font:inherit;font-size:16px;font-weight:700;display:inline-flex;align-items:center;gap:8px;padding:10px 16px;min-height:46px;border-radius:12px;border:0;background:var(--ink);color:var(--bg);cursor:pointer}
+.btn.soft{background:var(--surface-2);color:var(--ink)}
+.btn.accent{background:var(--c);color:var(--on-accent)}
+.btn.ki{background:var(--sichern);color:var(--on-accent)}
+.btn:disabled{opacity:.55;cursor:default}
+.btn .i{width:19px;height:19px}
+
+textarea,input[type=text],input[type=number],select{font:inherit;font-size:16px;width:100%;padding:12px 14px;border-radius:12px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink)}
+textarea{min-height:112px;resize:vertical;line-height:1.5}
+select{appearance:auto;min-height:46px}
+
+/* Karten sortieren */
+.tray{display:grid;grid-template-columns:repeat(auto-fill,minmax(172px,1fr));gap:8px;padding:12px;border:2px dashed var(--line);border-radius:14px;min-height:70px}
+.tray.empty::after{content:"Alle Karten sind einsortiert. Tippe eine Karte an, um sie zu verschieben.";grid-column:1/-1;color:var(--muted);font-size:14px}
+.nc{display:flex;align-items:center;gap:9px;padding:9px 11px;min-height:50px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-size:15px;line-height:1.25;text-align:left;cursor:pointer;touch-action:manipulation;position:relative}
+.nc .e{font-size:24px;line-height:1}
+.nc[aria-pressed="true"]{outline:3px solid var(--c);outline-offset:2px;box-shadow:var(--shadow)}
+.nc .st{margin-left:auto;font-size:13px;font-weight:800;width:22px;height:22px;border-radius:99px;display:none;place-items:center;flex:none}
+.nc.s-ok{border-color:var(--existenz)} .nc.s-ok .st{display:grid;background:var(--existenz);color:var(--on-accent)}
+.nc.s-alt{border-color:var(--luxus);border-style:dashed} .nc.s-alt .st{display:grid;background:var(--luxus);color:var(--on-accent)}
+.nc.s-bad{border-color:var(--bad)} .nc.s-bad .st{display:grid;background:var(--bad);color:var(--on-accent)}
+.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media (max-width:680px){.cols{grid-template-columns:1fr}}
+.col{border-radius:14px;background:var(--c-soft);border:2px solid transparent;padding:10px;display:grid;gap:8px;align-content:start;min-height:150px;cursor:pointer;font:inherit;color:var(--ink);text-align:left}
+.col.armed{border-color:var(--c);border-style:dashed}
+.col.over{border-color:var(--c);border-style:solid}
+.col h4{margin:0;padding:9px 11px;border-radius:10px;background:var(--c);color:var(--on-accent);font-size:16px;display:flex;justify-content:space-between;gap:8px}
+.col h4 small{font-family:var(--body);font-weight:700;font-variant-numeric:tabular-nums;opacity:.9}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:14px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.dot{width:12px;height:12px;border-radius:99px;display:inline-block}
+
+/* Offene Aufgaben */
+.open{display:grid;gap:10px}
+.open-foot{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.qc{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.qc b{font-size:13px;color:var(--muted);margin-right:2px}
+.qc span{font-size:13px;padding:4px 10px;border-radius:99px;background:var(--surface-2);color:var(--muted)}
+.qc span.on{background:var(--existenz-soft);color:var(--existenz-ink)}
+.qc span.on::before{content:"✓ "}
+.fb{border-radius:14px;padding:14px 16px;background:var(--surface-2);display:grid;gap:6px}
+.fb p{margin:0;max-width:68ch}
+.fb .lvl{display:flex;align-items:center;gap:8px;font-weight:800;font-family:var(--display);font-size:17px}
+.fb .lvl .i{width:18px;height:18px}
+.fb.stark{background:var(--existenz-soft)} .fb.stark .lvl{color:var(--existenz-ink)}
+.fb.solide{background:var(--kultur-soft)} .fb.solide .lvl{color:var(--kultur-ink)}
+.fb.ausbaufaehig{background:var(--luxus-soft)} .fb.ausbaufaehig .lvl{color:var(--luxus-ink)}
+.fb.fehlt,.fb.err{background:var(--bad-soft)} .fb.fehlt .lvl,.fb.err .lvl{color:var(--bad-ink)}
+.fb .stale{font-size:13px;color:var(--muted)}
+.fb.wait .lvl{color:var(--muted)}
+.fb.ok{background:var(--existenz-soft)} .fb.ok .lvl{color:var(--existenz-ink)}
+.fb.mid{background:var(--luxus-soft)} .fb.mid .lvl{color:var(--luxus-ink)}
+.dots::after{content:"";animation:dots 1.4s steps(4) infinite}
+@keyframes dots{0%{content:""}25%{content:"."}50%{content:".."}75%{content:"..."}}
+@media (prefers-reduced-motion:reduce){.dots::after{animation:none;content:" …"}.bar i{transition:none}}
+
+/* Infotext */
+.info{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px 22px;display:grid;gap:12px}
+.info p{margin:0;max-width:66ch}
+.info h3{margin:0;font-size:21px}
+.term{font:inherit;background:none;border:0;padding:0 1px;color:var(--c-ink);font-weight:700;text-decoration:underline dotted 2px;text-underline-offset:4px;cursor:pointer}
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media (max-width:680px){.tiers{grid-template-columns:1fr}}
+.tier{border-radius:14px;padding:14px;background:var(--c-soft);border:0;text-align:left;font:inherit;color:var(--ink);cursor:pointer;display:grid;gap:4px;align-content:start;min-height:112px}
+.tier b{font-family:var(--display);font-size:18px;color:var(--c-ink)}
+.tier .tag{font-size:13px;font-weight:700;color:var(--c-ink)}
+.tier .more{display:none;font-size:15px}
+.tier[aria-expanded="true"] .more{display:block}
+.tier .tap{font-size:13px;color:var(--muted)}
+.tier[aria-expanded="true"] .tap{display:none}
+.flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:8px;align-items:stretch}
+.fstep{border-radius:14px;padding:12px 14px;background:var(--surface-2);display:grid;gap:2px;align-content:start}
+.fstep b{font-family:var(--display);font-size:18px}
+.fstep small{font-size:14px;color:var(--muted)}
+.farr{display:grid;place-items:center;font-size:13px;font-weight:700;color:var(--muted);text-align:center;max-width:110px}
+@media (max-width:680px){.flow{grid-template-columns:1fr}.farr{max-width:none}}
+
+/* Materiell / immateriell */
+.mi{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:8px}
+.mi-row{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 8px 8px 12px;border-radius:12px;background:var(--surface-2);border:1.5px solid transparent}
+.mi-row.s-ok{border-color:var(--existenz)} .mi-row.s-bad{border-color:var(--bad)}
+.seg{display:inline-flex;border-radius:10px;overflow:hidden;border:1.5px solid var(--line);flex:none}
+.seg button{font:inherit;font-size:14px;font-weight:700;padding:7px 10px;border:0;background:var(--surface);color:var(--muted);cursor:pointer;min-height:38px}
+.seg button[aria-pressed="true"]{background:var(--c);color:var(--on-accent)}
+
+/* Lückentext */
+.cloze{line-height:2.4;max-width:70ch;margin:0}
+.cloze select{width:auto;display:inline-block;padding:6px 10px;min-height:40px;font-weight:700;margin:0 2px}
+.cloze select.s-ok{border-color:var(--existenz);background:var(--existenz-soft)}
+.cloze select.s-bad{border-color:var(--bad);background:var(--bad-soft)}
+
+/* Pyramide */
+.pyr-wrap{display:grid;grid-template-columns:minmax(220px,300px) 1fr;gap:18px;align-items:center}
+@media (max-width:680px){.pyr-wrap{grid-template-columns:1fr}}
+.pyr{width:100%;max-width:300px;height:auto;justify-self:center}
+.pyr polygon{cursor:pointer;stroke:var(--surface);stroke-width:4}
+.pyr .p-l{fill:var(--luxus)} .pyr .p-k{fill:var(--kultur)} .pyr .p-e{fill:var(--existenz)}
+.pyr text{fill:var(--on-accent);font-family:var(--display);font-weight:800;font-size:15px;text-anchor:middle;pointer-events:none}
+.pyr text.s{font-family:var(--body);font-weight:700;font-size:11px}
+.pyr-in{display:grid;gap:10px}
+.pyr-row{border-radius:14px;padding:10px 12px;background:var(--c-soft);display:grid;gap:8px}
+.pyr-row h4{margin:0;font-size:16px;color:var(--c-ink)}
+.pyr-row .two{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+@media (max-width:420px){.pyr-row .two{grid-template-columns:1fr}}
+
+/* Fallbeispiel */
+.story{border-radius:16px;padding:18px 20px;background:var(--luxus-soft);display:grid;gap:12px}
+.story h3{margin:0;font-size:20px;color:var(--luxus-ink)}
+.story p{margin:0;max-width:68ch}
+.tags{display:flex;flex-wrap:wrap;gap:8px}
+.price{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:12px;background:var(--surface);font-weight:700;font-size:15px}
+.price .e{font-size:20px}
+.price.wallet{background:var(--ink);color:var(--bg)}
+.budget{position:relative;height:46px;border-radius:12px;background:var(--surface-2);display:flex;overflow:visible;margin-top:24px}
+.bseg{height:100%;display:grid;place-items:center;color:var(--on-accent);font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;padding-inline:4px}
+.bseg:first-child{border-radius:12px 0 0 12px}.bseg:last-child{border-radius:0 12px 12px 0}
+.bseg.cut{background-image:repeating-linear-gradient(45deg,rgb(255 255 255 / .35) 0 6px,transparent 6px 12px)}
+.bmark{position:absolute;top:-24px;bottom:-6px;border-left:3px solid var(--ink);padding-left:6px;font-size:13px;font-weight:800;white-space:nowrap}
+.jt{display:grid;gap:8px}
+.jt-row{display:grid;grid-template-columns:1fr minmax(160px,220px);gap:10px;align-items:center;padding:8px 8px 8px 12px;border-radius:12px;background:var(--surface-2);border:1.5px solid transparent}
+.jt-row.s-ok{border-color:var(--existenz)} .jt-row.s-alt{border-color:var(--luxus);border-style:dashed} .jt-row.s-bad{border-color:var(--bad)}
+@media (max-width:480px){.jt-row{grid-template-columns:1fr}}
+.gap-in{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.gap-in input{width:120px}
+
+/* Rangfolge */
+.rank{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.rank li{display:flex;align-items:center;gap:10px;padding:10px 10px 10px 12px;border-radius:12px;background:var(--surface-2)}
+.rank .pos{width:30px;height:30px;border-radius:9px;background:var(--c);color:var(--on-accent);display:grid;place-items:center;font-weight:800;flex:none;font-variant-numeric:tabular-nums}
+.rank .e{font-size:22px}
+.rank .lbl{flex:1;font-weight:700;line-height:1.25}
+.rank .lbl small{display:block;font-weight:400;color:var(--muted);font-size:14px}
+.mv{font:inherit;width:42px;height:42px;border-radius:10px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;display:grid;place-items:center}
+.mv:disabled{opacity:.35;cursor:default}
+.think{border-radius:14px;padding:12px 14px;border:1.5px dashed var(--luxus);display:flex;gap:10px;align-items:flex-start}
+.think p{margin:0}
+.think .i{color:var(--luxus-ink);margin-top:2px}
+.scale{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+@media (max-width:560px){.scale{grid-template-columns:1fr}}
+.scale label{display:grid;place-items:center;text-align:center;gap:4px;padding:10px 6px;border-radius:12px;background:var(--surface-2);border:1.5px solid transparent;cursor:pointer;font-size:14px;font-weight:700;min-height:56px}
+.scale input{position:absolute;opacity:0;pointer-events:none}
+.scale label:has(input:checked){background:var(--c);color:var(--on-accent)}
+.scale label:has(input:focus-visible){outline:3px solid var(--kultur);outline-offset:2px}
+.bonus{border-radius:16px;padding:18px;border:2px solid var(--luxus);background:var(--surface);display:grid;gap:12px}
+.bonus h3{margin:0;font-size:19px;display:flex;gap:8px;align-items:center}
+.bonus .star{color:var(--luxus)}
+
+/* Sichern */
+.trio{display:grid;gap:10px}
+.trio-row{display:grid;grid-template-columns:52px 1fr;gap:12px;align-items:start}
+.big{width:52px;height:52px;border-radius:14px;background:var(--c);color:var(--on-accent);display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:26px}
+.trio-row .fields{display:grid;gap:8px}
+.trio-row .three{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+@media (max-width:560px){.trio-row .three{grid-template-columns:1fr}}
+.trio-row input.s-ok{border-color:var(--existenz);background:var(--existenz-soft)}
+.trio-row input.s-bad{border-color:var(--luxus)}
+.over-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px}
+.ov{border-radius:12px;padding:12px;background:var(--c-soft);display:grid;gap:4px}
+.ov b{font-family:var(--display);color:var(--c-ink)}
+.ov span{font-size:14px;color:var(--ink);font-variant-numeric:tabular-nums}
+.code{font-family:ui-monospace,Consolas,monospace;font-size:13px;min-height:90px;word-break:break-all}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:720px){.split{grid-template-columns:1fr}}
+.half{border-radius:14px;background:var(--c-soft);padding:14px;display:grid;gap:10px;align-content:start;min-width:0}
+.half h4{margin:0;font-size:17px;color:var(--c-ink)}
+
+/* Popover */
+.pop{position:absolute;z-index:60;width:min(340px,calc(100vw - 32px));background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px 16px 16px;box-shadow:var(--shadow);display:grid;gap:6px}
+.pop h4{margin:0;font-size:18px;padding-right:34px}
+.pop p{margin:0;font-size:15px}
+.pop .x{position:absolute;top:8px;right:8px;width:34px;height:34px;border-radius:9px;border:0;background:var(--surface-2);color:var(--ink);font:inherit;font-size:18px;cursor:pointer}
+@media (max-width:560px){.pop{position:fixed;left:12px!important;right:12px;top:auto!important;bottom:calc(84px + env(safe-area-inset-bottom,0px));width:auto}}
+
+/* Blättern */
+.pager{position:fixed;left:0;right:0;bottom:0;z-index:40;padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));background:color-mix(in srgb,var(--bg) 90%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line)}
+.pager-in{max-width:980px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.pager-in .where{font-size:14px;color:var(--muted);text-align:center;font-variant-numeric:tabular-nums}
+
+/* Einkommens-Werkstatt: Ergänzungen */
+:root{--s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a;--s4:#eda100;--s5:#e87ba4;--s6:#008300;--free:#D3DDD6}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--s5:#d55181;--s6:#008300;--free:#2F3B35}}
+:root[data-theme="dark"]{--s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--s5:#d55181;--s6:#008300;--free:#2F3B35}
+.srcs{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+@media (max-width:620px){.srcs{grid-template-columns:1fr}}
+.srcs .tier .e{font-size:26px;line-height:1}
+.srcs .tier b{font-size:17px}
+.mi-row{flex-wrap:wrap}
+#srcSort{grid-template-columns:repeat(auto-fill,minmax(290px,1fr))}
+#srcSort .mi-row{flex-direction:column;align-items:stretch;gap:6px}
+.seg4{display:grid;grid-template-columns:repeat(4,1fr)}
+.seg4 button{padding:7px 4px;font-size:13.5px}
+.rule{border-radius:12px;padding:12px 14px;background:var(--surface-2);display:grid;gap:4px}
+.rule p{margin:0}
+.src{font-size:13px;color:var(--muted)}
+p.src{margin:0}
+.law blockquote{margin:0;padding:10px 14px;border-left:4px solid var(--sichern);background:var(--sichern-soft);border-radius:0 12px 12px 0;font-style:italic;max-width:68ch}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px;max-width:420px}
+table.tg{border-collapse:collapse;width:100%;font-size:15px;font-variant-numeric:tabular-nums}
+.tg th,.tg td{padding:8px 12px;text-align:left;border-bottom:1px solid var(--line)}
+.tg th{background:var(--surface-2);font-size:13px;color:var(--muted)}
+.tg tr:last-child td{border-bottom:0}
+.tg tbody tr:nth-child(3){background:var(--c-soft);font-weight:700}
+.cases{display:grid;gap:8px}
+.case{display:grid;grid-template-columns:1fr auto;gap:6px 12px;align-items:center;padding:10px 10px 10px 14px;border-radius:12px;background:var(--surface-2);border:1.5px solid transparent}
+.case p{margin:0}
+.case .why{grid-column:1/-1;font-size:14px;color:var(--muted)}
+.case.s-ok{border-color:var(--existenz)} .case.s-bad{border-color:var(--bad)}
+@media (max-width:520px){.case{grid-template-columns:1fr}}
+.pe{font-size:20px}
+.eur{display:inline-flex;align-items:center;gap:6px}
+.eur input{width:96px}
+.jt-row .eur{justify-self:start}
+.jt-row .eur input{width:110px}
+.plan{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;align-items:start}
+@media (max-width:760px){.plan{grid-template-columns:1fr}}
+.plan-col{display:grid;gap:10px;min-width:0}
+.plan h4{margin:6px 0 0;font-size:16px;color:var(--c-ink)}
+.money{display:grid;gap:6px}
+.mrow{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:6px 6px 6px 12px;border-radius:12px;background:var(--surface-2)}
+.ml{display:inline-flex;align-items:center;gap:8px;font-size:15px}
+.mctl{display:inline-flex;align-items:center;gap:6px}
+.mctl .mv{width:38px;height:38px;font-size:18px;font-weight:800}
+.mctl input{width:72px;text-align:right;padding:8px 10px}
+.sw{display:inline-block;width:12px;height:12px;border-radius:4px;flex:none}
+.sw.free{background:var(--free)}
+.goalrow{display:flex;gap:8px;flex-wrap:wrap}
+.goalrow input[type=text]{flex:1;min-width:150px}
+.pstat{display:flex;gap:12px;align-items:flex-start;padding:12px 14px;border-radius:14px;background:var(--surface-2)}
+.pstat b{display:block;font-family:var(--display);font-size:17px}
+.pstat span{font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
+.pstat .pico{display:grid;place-items:center;width:32px;height:32px;border-radius:10px;flex:none}
+.pstat.ok{background:var(--existenz-soft)} .pstat.ok .pico{background:var(--existenz);color:var(--on-accent)}
+.pstat.mid{background:var(--luxus-soft)} .pstat.mid .pico{background:var(--luxus);color:var(--on-accent)}
+.pstat.bad{background:var(--bad-soft)} .pstat.bad .pico{background:var(--bad);color:var(--on-accent)}
+.stack{display:flex;gap:2px;height:30px;border-radius:8px;overflow:hidden;background:var(--surface)}
+.seg-b{height:100%;min-width:3px}
+.seg-b:first-child{border-radius:4px 0 0 4px}.seg-b:last-child{border-radius:0 4px 4px 0}
+.seg-b.free{background:var(--free)}
+table.legend-t{border-collapse:collapse;width:100%;font-size:15px;font-variant-numeric:tabular-nums}
+.legend-t td{padding:5px 4px;border-bottom:1px solid var(--line)}
+.legend-t td:first-child{display:flex;align-items:center;gap:8px}
+.legend-t td.v,.legend-t td.p{text-align:right;white-space:nowrap}
+.legend-t td.p{color:var(--muted);width:56px}
+.quiz{display:grid;gap:10px}
+.qz{border:1.5px solid var(--line);border-radius:12px;padding:10px 14px 12px;margin:0;display:grid;gap:6px}
+.qz legend{font-weight:700;padding:0 4px}
+.qz label{display:flex;gap:10px;align-items:center;padding:6px 8px;border-radius:9px;cursor:pointer}
+.qz label:has(input:checked){background:var(--c-soft)}
+.qz input{width:18px;height:18px;accent-color:var(--c)}
+.qz.s-ok{border-color:var(--existenz)} .qz.s-bad{border-color:var(--bad)}
+.fbox{border-radius:12px;border:1.5px dashed var(--sichern);background:var(--surface)}
+.fbox.has{border-style:solid;background:var(--sichern-soft)}
+.fbox>summary{cursor:pointer;padding:10px 14px;font-weight:700;color:var(--sichern-ink);list-style:none;display:flex;align-items:center;gap:8px}
+.fbox>summary::-webkit-details-marker{display:none}
+.fbox>summary::before{content:"";width:8px;height:8px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(-45deg);transition:transform .2s}
+.fbox[open]>summary::before{transform:rotate(45deg)}
+.fbox-in{padding:0 14px 14px;display:grid;gap:10px}
+.fbl{font-size:14px;font-weight:700;color:var(--muted)}
+.fbin{min-height:80px}
+a.btn{text-decoration:none}
+.resume{background:var(--surface)}
+.split{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media (max-width:720px){.split{grid-template-columns:1fr}}
+.half{border-radius:14px;background:var(--c-soft);padding:14px;display:grid;gap:10px;align-content:start;min-width:0}
+.half h4{margin:0;font-size:17px;color:var(--c-ink)}
+.howto{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+@media (max-width:680px){.howto{grid-template-columns:1fr}}
+.howto div{border-radius:12px;padding:10px 12px;background:var(--sichern-soft);font-size:15px}
+.howto b{display:block;color:var(--sichern-ink);font-family:var(--display)}
+
+/* ---------- Badge-System, Fortbildung ---------- */
+:root{
+  --g-werk:#9A5B00;--g-druck:#1F64A6;--g-laser:#B0362F;--g-textil:#9B3474;--g-cad:#0F716F;--g-steuer:#2B7431;--g-motor:#5546A6;--g-sammel:#7A5C00;--g-probe:#4A5A8C;
+  --lk:#1D568E;--lk-soft:#E2ECF7;--sus:#1F7A5C;--sus-soft:#E1F0E9;
+  --ok:#1F7A4C;--ok-soft:#E1F1E8;--warn:#8A5A00;--warn-soft:#FBEFD5;--mono:"JetBrains Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --g-werk:#F0A64A;--g-druck:#79B1EA;--g-laser:#F08A7E;--g-textil:#E792C6;--g-cad:#55C6C3;--g-steuer:#77C47B;--g-motor:#ADA2F2;--g-sammel:#E7C65A;--g-probe:#A9B6E6;
+  --lk:#9CC4EE;--lk-soft:#1A2937;--sus:#7FD3B0;--sus-soft:#1A3128;
+  --ok:#6CCB97;--ok-soft:#173326;--warn:#F0C065;--warn-soft:#3A2D13;}}
+:root[data-theme="dark"]{
+  --g-werk:#F0A64A;--g-druck:#79B1EA;--g-laser:#F08A7E;--g-textil:#E792C6;--g-cad:#55C6C3;--g-steuer:#77C47B;--g-motor:#ADA2F2;--g-sammel:#E7C65A;--g-probe:#A9B6E6;
+  --lk:#9CC4EE;--lk-soft:#1A2937;--sus:#7FD3B0;--sus-soft:#1A3128;
+  --ok:#6CCB97;--ok-soft:#173326;--warn:#F0C065;--warn-soft:#3A2D13;}
+.brand .tlogo{height:46px;width:auto;flex:none;background:#fff;border-radius:10px;padding:4px 6px}
+main{display:grid;gap:18px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px;display:grid;gap:12px;min-width:0}
+.card h3{margin:0;font-size:20px}
+.card h4{margin:6px 0 0;font-size:17px}
+.card p,.card ul,.card ol{margin:0}
+.card ul,.card ol{padding-left:22px;display:grid;gap:4px}
+.lead{max-width:68ch}
+.muted{color:var(--muted)}.small{font-size:14px}
+.cap{margin:0;font-size:14px;color:var(--muted)}
+.src{font-size:14px;color:var(--muted)}
+.src a,a{color:var(--kultur-ink)}
+figure{margin:0;display:grid;gap:8px;min-width:0}
+/* Kapitel-Kopf */
+.chead{display:flex;gap:14px;align-items:center;padding:18px 20px;border-radius:18px;background:var(--c);color:var(--on-accent)}
+.chead .n{width:52px;height:52px;flex:none;border-radius:14px;background:rgb(255 255 255 / .2);display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:26px}
+.chead h2{margin:0;font-size:clamp(22px,3.4vw,29px);font-weight:800}
+.chead p{margin:2px 0 0;font-size:15px}
+.navrow{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
+/* Bausteine */
+.parts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+@media (max-width:760px){.parts{grid-template-columns:1fr 1fr}}
+.part{border-radius:14px;background:var(--surface-2);padding:12px;display:grid;gap:6px;align-content:start;min-width:0}
+.part svg{width:40px;height:40px;fill:none;stroke:var(--ink);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.part b{font-family:var(--display);font-size:16px}
+.part span{font-size:14px;color:var(--muted);line-height:1.35}
+/* Ablauf in zwei Bahnen */
+.lanes{display:grid;grid-template-columns:1fr 1fr;gap:0 14px;position:relative}
+.lane-h{font-family:var(--display);font-weight:800;font-size:15px;padding:8px 12px;border-radius:10px;text-align:center}
+.lane-h.lk{background:var(--lk-soft);color:var(--lk)}.lane-h.sus{background:var(--sus-soft);color:var(--sus)}
+.stp{position:relative;margin-top:22px;border-radius:12px;padding:10px 12px 10px 48px;border:2px solid var(--rc);background:var(--surface);font-size:15px;line-height:1.35;min-height:54px;display:grid;align-content:center}
+.stp::before{content:attr(data-n);position:absolute;left:10px;top:50%;transform:translateY(-50%);width:28px;height:28px;border-radius:50%;background:var(--rc);color:var(--surface);font-weight:800;display:grid;place-items:center;font-size:15px}
+.stp b{display:block}
+.stp .rl{display:none;font-size:13px;font-weight:700;color:var(--rc)}
+.stp.lk{--rc:var(--lk);grid-column:1}.stp.sus{--rc:var(--sus);grid-column:2}
+.stp:not(:last-child)::after{content:"";position:absolute;left:23px;bottom:-21px;width:2px;height:18px;background:var(--muted)}
+.stp.nx::after{display:none}
+.arrow{grid-column:1/-1;height:0}
+@media (max-width:640px){
+  .lanes{grid-template-columns:1fr}.lane-h{display:none}
+  .stp.lk,.stp.sus{grid-column:1}.stp .rl{display:block}.stp.nx::after{display:block}
+}
+.legend2{display:flex;gap:8px 16px;flex-wrap:wrap;font-size:14px;color:var(--muted)}
+.legend2 span{display:inline-flex;gap:6px;align-items:center}
+.legend2 i{width:14px;height:14px;border-radius:4px;display:inline-block}
+/* Badges */
+.groups{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:10px}
+.grp{border:1px solid var(--line);border-radius:14px;padding:10px;display:grid;gap:8px;align-content:start;min-width:0}
+.grp h4{margin:0;font-size:15px;display:flex;align-items:center;gap:8px}
+.grp h4::before{content:"";width:12px;height:12px;border-radius:4px;background:var(--gc)}
+.badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:6px}
+.bd{display:grid;justify-items:center;text-align:center;gap:4px;padding:6px 2px;border-radius:12px;min-width:0}
+.medal{width:54px;height:54px;border-radius:50%;display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:20px;border:2.5px dashed var(--line);color:var(--muted);background:var(--surface);position:relative}
+.bd .t{font-size:14px;line-height:1.2;font-weight:700;overflow-wrap:anywhere}
+.bd .s{font-size:13px;line-height:1.25;color:var(--muted)}
+.bd.got .medal,.bd.solid .medal{border:3px solid var(--gc);background:var(--gc);color:var(--on-accent)}
+.bd.got .medal{box-shadow:0 0 0 3px var(--surface),0 0 0 5px var(--gc);margin:3px 0 5px}
+.bd.got .medal::after{content:"✓";position:absolute;right:-4px;bottom:-4px;width:22px;height:22px;border-radius:50%;background:var(--ok);color:#fff;font-size:13px;display:grid;place-items:center;font-family:var(--body);box-shadow:0 0 0 2px var(--surface)}
+.bd.got .s{color:var(--ink)}
+.bd.sammel .medal{border-radius:16px}
+.g-werk{--gc:var(--g-werk)}.g-druck{--gc:var(--g-druck)}.g-laser{--gc:var(--g-laser)}.g-textil{--gc:var(--g-textil)}.g-cad{--gc:var(--g-cad)}.g-steuer{--gc:var(--g-steuer)}.g-motor{--gc:var(--g-motor)}.g-sammel{--gc:var(--g-sammel)}.g-probe{--gc:var(--g-probe)}
+/* Sammel-Gleichung */
+.eq{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px}
+.eq .op{font-family:var(--display);font-weight:800;font-size:22px;color:var(--muted);background:none;padding:0;cursor:default}
+.eq .bd{padding:0}
+/* Tabellen */
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+table{border-collapse:collapse;width:100%;font-size:15px}
+th,td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--surface-2);font-size:14px}
+tr:last-child td{border-bottom:0}
+td.c{text-align:center;font-weight:700}
+/* Ausprobieren */
+.todo{list-style:none;padding:0!important;display:grid;gap:8px}
+.todo li{display:flex;gap:10px;align-items:center;padding:10px 12px;border-radius:12px;background:var(--surface-2);font-size:16px}
+.todo li .ck{width:26px;height:26px;border-radius:50%;flex:none;border:2.5px solid var(--muted);display:grid;place-items:center;font-weight:800;color:transparent}
+.todo li.done{background:var(--ok-soft)}
+.todo li.done .ck{border-color:var(--ok);background:var(--ok);color:#fff}
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;align-items:start}
+@media (max-width:760px){.split{grid-template-columns:1fr}}
+.box{border-radius:14px;background:var(--surface-2);padding:14px;display:grid;gap:10px;min-width:0}
+.box h4{margin:0}
+.box .btn.soft{background:var(--surface);border:1.5px solid var(--line)}
+.qrs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+@media (max-width:520px){.qrs{grid-template-columns:1fr}}
+.qr{background:#fff;color:#111;border-radius:12px;padding:10px;display:grid;justify-items:center;gap:4px;text-align:center}
+.qr svg{width:150px;height:150px}
+.qr b{font-family:var(--display);font-size:18px}
+.qr code{font-family:var(--mono);font-size:15px;font-weight:700;letter-spacing:.04em}
+.qr span{font-size:13px}
+.fileb{position:relative;overflow:hidden}
+.fileb input{position:absolute;inset:0;opacity:0;cursor:pointer;font-size:0}
+.fileb:focus-within{outline:3px solid var(--kultur);outline-offset:2px}
+.codein{display:flex;gap:8px}
+.codein input{font-family:var(--mono);text-transform:uppercase;letter-spacing:.06em;min-width:0}
+.cam{position:relative;width:100%;max-width:360px;aspect-ratio:1;border-radius:14px;overflow:hidden;background:#000;justify-self:center}
+.cam video{width:100%;height:100%;object-fit:cover;display:block}
+.cam .frame{position:absolute;inset:16%;border:3px solid rgb(255 255 255 / .9);border-radius:16px;box-shadow:0 0 0 999px rgb(0 0 0 / .35)}
+.form{display:grid;gap:4px}
+.form label{display:grid;gap:4px;font-weight:700;font-size:15px}
+.msg{border-radius:12px;padding:12px 14px;display:grid;gap:6px;font-size:16px;border-left:5px solid var(--muted);background:var(--surface-2)}
+.msg p{margin:0}
+.msg.ok{border-color:var(--ok);background:var(--ok-soft)}.msg.warn{border-color:var(--warn);background:var(--warn-soft)}.msg.bad{border-color:var(--bad);background:var(--bad-soft)}
+.note{border-radius:12px;padding:12px 14px;background:var(--warn-soft);border-left:5px solid var(--warn);display:grid;gap:6px}
+.note.info{background:var(--lk-soft);border-left-color:var(--lk)}
+.ov{position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:16px;background:rgb(0 0 0 / .55)}
+.ovbox{background:var(--surface);color:var(--ink);border-radius:22px;padding:24px 20px;max-width:440px;width:100%;display:grid;gap:12px;justify-items:center;text-align:center;box-shadow:var(--shadow)}
+.ovbox .medal{width:104px;height:104px;font-size:36px}
+.ovbox h2{margin:0;font-size:24px}.ovbox p{margin:0}
+.when{font-family:var(--display);font-size:19px;font-weight:800}
+/* Nachbauen */
+.prompt{width:100%;min-height:420px;font-family:var(--mono);font-size:14px;line-height:1.5;white-space:pre-wrap}
+.ph{background:var(--warn-soft);color:var(--warn);font-weight:700;border-radius:4px;padding:0 3px}
+.steps4{counter-reset:s;list-style:none;padding:0!important;display:grid;gap:8px}
+.steps4 li{counter-increment:s;display:grid;grid-template-columns:34px 1fr;gap:10px;align-items:start}
+.steps4 li::before{content:counter(s);width:30px;height:30px;border-radius:9px;background:var(--c);color:var(--on-accent);display:grid;place-items:center;font-weight:800;font-family:var(--display)}
+.danger{background:var(--bad);color:#fff}
+.lic{font-size:14px;color:var(--muted);text-align:center;margin:8px 0 0}
+.lic a{color:inherit}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+<script src="../assets/jspdf.umd.min.js"></script><link rel="stylesheet" href="../assets/lp-support.css"><script>window.LP_CFG={"keys": ["technik-badges-fortbildung-v1"], "pdfSection": false, "anchors": [], "slug": "technik-badges-fortbildung"};</script><script src="../assets/lp-support.js"></script>
+<script src="../assets/jsqr.min.js" defer></script>
+</head><body>
+<div class="app">
+  <header class="top">
+    <div class="brand">
+      <img class="tlogo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAggAAACTCAYAAADrwuHKAAA5x0lEQVR42u2deZxcVZn3v885t6q6O3tYEiEsEQi7som4oALjyCiyhU4CMvI6Lsz4skQYGB1nhIz6Om6QwCCCgwKydgMJiIg6ggwI7qAiSxZBIISEQPbuqrr3nOf941aH3pLc6q7qru6c7+dzP0lX3brLueee8zvPec7zQCCwfSHA+cBSwAEatgFvrwL/BUwK1SoQCAQCI51LQ8de8+1HQEuoWoFAIBAYqewPdIYOvS7bx0L1CgRGF1EogsB2xFFA0+a/bA6ipkr/FqgKn0Bc7P7JscD3QsEEAkEgBAIjkbHd/5DdDsMcMhN8OZRMNZgc+tIT+N/e2v3TMMUQCASBEAiMWHqaCmwemieACwKhKmwO8s1bL9tAIBAEQiAwovWC+nQLVFFsHjTogUBgtGNCEQQCgUAgEAgCIRAIBAKBQBAIgUAgEAgEgkAIBAKBQCAQBEIgEAgEAoEgEAKBQCAQCASBEAgEAoFAIAiEQCAQCAQCQSAEAoFAIBAIAiEQCAQCgUAQCIFAIBAIBEYuIRdDIBAIDAetrVZ495eMMXvg3DaGchbUrXYtEy7mho8VQ+GNUE657E02sv+JkMNvI5+JzaMu/rW/4/z5QSAEAoHA9sSqA0R21lOwhX2RZOv7SgRJ50rWrPo8EATCiB2SN41Hko9ic2C2LRBwyVggCIRAIBDY7lCKuDL4bVgQxAMahMFwMPsbM4w2/w2aZEhhaowX92va5v6m/6+d4n0JFxeyZUTVYc1FHwRCYHtC+n5iwOa6faXd0hkraOWz7a2YRN4on83/l7RcjM1WtoHAKMD46B2Sz1+Fy1DFbR4pb/yKwm9Gw70HgRDYnij10OYv/QG/6TVoGg8tE5GWSdA8EZrGI4WxkGuGKA8mSjvKzQJC+/l3pPT90k0AdPu36968A59AXIK4iJY2QmkDdK5HO9dC5zoorkc3rOx95HKoXoFRisPF4OKsY5B4tNx4EAiB7YnfA56u1TulDegrT78hGLpbFaIC5McgTWOhaQK0TEBaJqcConlCKiAKYyBqSi0QxjaGFUKk26i/W+evPt1cGZISlDvQ0iYorq90+uvQjrVQ3JAKgLgDyp3p/tkE0K9C9QoERhdBIAS2N4FwPfAPW91LPcSdEHeim1b3FRCQioJcUyoUmsZVhMOkihViAjSPRwrj3rBCdJnn66sOIC5Cx5p05F/p/NOR//pUBJQ2QWlTKhJczQb9fwS+H6pXIBAEQiAwUvHAucBrwJnAFAYaC6RictTiBli3YitWiBakaRxy8InIlH1T8329sDl02S/wT9yxbae32rAO+B/gokqZBgKBIBACgRFLB3Ax8HVgd2AqMK2y7Q7sCrwJmAxMBJoGdJYeVojXkI2vwtT96n5zWt5YC3HgK+W0prK9UtmWV7YVlW058EKoUoFAEAiBwGji1crWHzlgQkUkTK0Iht27iYipFevDJGB8JiuEixkSR/9tTxskwAZgbeX+VwEvV7aXKv+uAlZXLAQbABeqSyAQBEIgEEi9kFdXtsVb2GdMRSDsVBEMu3UTEbsCB1dERNaOuxb2g9QHoSc/A+6vWABWVDr/1ysCoYPtbw1nIBAIAiEQqCubKttLW/j+P4B/39x1J+XN4QTqK236CITrgZvC4woEAtUSkjUFAvVhQ4+/kvIQjNU1PU9PSuFRBAKBIBACgcZhU4+/XIm6KwTvK+fZilAJBAKBjIQphkCgPnT0+Cuptw+CpCsn+p6nIzyKQGAwaITNk8nJ2ObBlXJBIAQCgeoEQr0DJamiSQ8LgqO3JSMQCFSFEfOMxsXrMiVrUm8M9pejZdlPEAiB0SR2azVlVovhfq8phjJ1nWIQ0vgHPePFu2BBGF1DWQrTw/McYpK2838J/HJ7bVQDgZHMO4BzSJcV1qI+K7CRdHngfNJlgYO3ILg4nQKoJy7pLRDimgqE1jaLWbGn9bKfir5ZPFMRxpPGjahyjYY6VIoqsgbVFaJmqfN+KQvPf2lIak1rWx6WT7dE+ypuusAUlPGI1N48bKxRnzzi2+feMPBa6QF2tKz4Dq0L4qrKGSmjrFfxq0Wi5eLivya+6QUWfnpV3cv5IwvG29i8Q9UfIsIu6AADj/Xqs0GLiqwDXSUiy52a52lJXuSGz6yteSc55/K3q+Y+gXfbfoFNZPClW137BQ80SgNpZy34MGJPzHT9AGIi8Itc2/k/CAIhMJI5AbgVGFuHYx8JHA98kDSGQI0EgqmTJUHSMM6uRyjnIrVYxTD78v1F7RzRFR8Uz/4YM0bE1sReI12azDussEZbr3gCkXt87O+ouVhobbWRvPddqv40eOUYsHthpFmkUOcWOo+UN7YAAxcIKGDGYqOPDTTgllSEhhrrrYlXa+uCxYI8LOiPk5bxv+KGjxVrqotmzj9TYvNviOwrNl/zai/dNJBVF9NhV2rrFX9G9CGL+XG8/+onmDdv0KrcO/aXfNMnMmVzzOXRYvlpoDEEQus3J6NcSZTbA7FZxAEk5ZLx7jIXLAiBEcx44PI6iYMuDgU+C8wdwG9L6UgnfcfUxekqA2vqN9Pgk965HgYnEFrn727FfB7lDExubJoR0lVCOddhltWYSWLMMWCOsbnks9q64Fseexnt52wcdB/devmJSnSh4o/G5gR1qWCr17307eBrMG2lGVMOZ+gFRHYWMTsj5t3q48+ZzvV/ovWK73vrb+S2uSsH/ShPW3CuWHvFZuFa79wgIjmQaWLsNJAPeFeeZ57a8de0Lviux7YNrg5JgitnK3vpsnA0BkbtuUT5PfqJj7JFMQvu6/GdF/wZwjLHwMjlYGDvN9oHwUS5wW+2j2Z+P5AfwPUV6Z4Xvt5TDCLpOXoKhM6BCgQ7c/4JVuzD2NyngLG4cnrsejpaqq9Mk5QBpkiUn2fwP+XUbww8iUXrN3e1rVfcikR3i7XvQZH0XtwQZNdsVCrpyH2yOZ23iD1YotzXrLe/Nq1XnEfrJfmBHj0387IDReQrqNY3OVmPW6rck4sr9UdyYsy7xOauM+IftafNb93uHvPsy/cUkXMzPwNjwZVfcFGyoOujYEEIjGQLwmZ22O8wjjznK6gb+EhFrGXTquU88p+fxpU6uz4eAxSo3nGx2GMk4eO6j6JSK4XrfQ1Vj1xN6/wzEfvfiBTqvzxzK2IhKSM2f5QVuc/OvvxD5ds/83Q1h4hmXv52Jfo+UbQPSVyj0fcoxVcsQ8buLiZaYNyOH/at//VPtJ+ztOpDGfMPRPkxJMMZo+sNcSImOhhr2uysBTc4TS6g/cLXt4dHar35HDa/Q+Yw72JQkq9w6z+vDgIhMAqGQd1GLc1jmDj9ANQNfMRibESUb0LEbPE8A7YgdDXACHXzQUhKva0UHVRp7rSnXvY3GHstSmGIUkZvHVcGm5/unLuZky4/lruzOaFFsy57lxLdhZidh03kjFShgENs/m+sT34mp152RnLXBb/I/Pv3XhKpyvvEN9BCP5+k70eUP8sksp8/6fI53P2Z50fzY8y1LjjcIx/FZxTFJkJd+XGP6+EnE6YYAqNDLajik3jwm6uZSbTUY/TuXX3NrSL9BUmqbt715Ct3wNqrwTTXfcVFtSIhajpU8nJxpv1Pn7+Pau42xOw8ZCbu0YYrg5jdNcotjFqvODLz73bZZaII0xqq/nTp/KSM2NzbTd4sYs6Vu4zi1lCc+kuxUVPmaTRVFeyltF/YGQRCIFB/kooVoadAqGfGJjc4gSA5fy5RYe+G7FRdjEH+iVO/vsdW9zvre00mkf/G2mlBHNRg5C1mJ0Vv5ZQF07LJ4k3jQVsaNkmoKyNR/q3GJddz1iVNo/Gx2ZlXHi8m90GyDnZsDtXkx+6A1ff2MSyEtyAQqAtxH4Hg6txhxX3mfLNHUTz5yh0M+sm6X+OAB0UebH6ikfycre1mOtZ/Wmz+PcHfoIYiIcq/2Vg/n0su2XZ/kctFZFpPN5zSvYzYpvebjkkXjLrndfyCAsZfms6TZhBpIuBdyfjo0v6WhAaBEAgMkQVBu+ZC64JA0mcpU+ZETSbyx2Pzu6ANHCRWPYh+eIsd1Ylf3UXg4mA5qEeHmptpn5544mgSPiLmYk6dv89oelRmHB/B5o/MvnIhB87fktx5zq/6/TrU/kBgCAQCSmZv4gGfceCZHEX076oWLyLp0qiBblJl86MegQN4dsep/X0dFQofx+anDGj+WyS9nsHcz9Y2qM2oekDl3FXWgxGnBlXzWT51TW0jTQ60DokZ3D2pB5ubYK3MHTUtzhnfmiTov2au/2LAxWtdxJe3tEtYxRAI1I/O3iOxehoQdKACofWSvMKhUo31wObAlUuofxmk+nDOqhaRyRi78+Y17JksCGZiFPs9E3i5x3dnfn2Mlvho1RaQrs7GlUsgq1HdAFJjM0oiwAuDt6BojE+WVXV9igGa05DYOgmbl1SsOqryE0hH3Efa1zrf49Iw5LWptN6vR/yLVb4YEaotiIwHmYDNvxHXoRpcAuhsTrnsSyy8YMWItx6Uk/9LVNgr80DEROBKV3H73GVBIAQCQ08/CZvqpBAU+omWlk0g2B13FOd3yezxnI48rnPYBRQm/IXVa6q36U9ZI6yfMt7k4vcLcjlidsokEowVJenjgW478+8isntXtTTT5lAX/wHDNd77/yWR5UycWGTl+hp72MXQuWZwokMsEK9wcfRuij678+mU14WOnSKsjo+cTvMufhvoiYIcg4ly2TtVBZMT1M2hVgLBRqgrP+DZZTYbVmR/MaaMF9asylEoTIq828PDUaAnici7EJM93kjq17KD0fLxHr43olua1vm7C3r+AIIizd+6EgsEAvWibz6GuqEDnmLIxW5Hb2RsJoFgI9TFP/Htcz9Rg4suerjZtC54k9jo62TJJSOCKhP7fq4fSjvRjJ2DyUGSfNeXi3O55182jIzqJMqmYpGfXjSQCEQbK1aXXwNXRTOvONrjvik297bM9TK1zryPE65p4d6za5QETBztswYy91YENiSpZeZhLrnkm/bJyR/G+ssw0ZursSZImnNlRAsEq/wbUX7H6oIiuf/sHhSp39cktOGBwBBZEJJ6WhD6FQiZRpqKjM0+WDAAC2t56QZ+U5V5WLTntba2WRV5V+a5VxOhPn7EbdRPjxxxUKHZ16TNTu4872FPfLy65BFMxkfvPSB75gqde9ew4tbmhZg3z7s7z7/bJf54vHu+4veRzYogHEbrN5tHrDiYefn7MPasaoIi4cqPe5LrM73tgUBgqARCHS0I8cAEAoZcGp9BM51HjH2tplfuXaEqh0XfO/HRa1MF9sosEFS9GL7I/eeXtuva2X7h694n/4gmG7PF51AwucgZs3/D3tNdc5eg/mKyOlioB2QXYNdGvB3ZllNN65UHq7XfQSRfTVAkvMzrHRSpP8IUQyBQP3pNMdSxP1Lt7/h1Gh372imd1kvyYD+SjlVcpvsUE63u2YiVpquYiRl9GMAlS92YCf8bqidw5wV/5rT5PyLKtWbLVigAezXyLbkxa35gOyYvxth9t+mPoAoiLZFGuyawtKFuRBUVptnWKz6EESHxFsSquLGI2VHQQ0A/hJjJmf0ubA5Nyvf6g9b8gDu3vXsQCIHAEFkQNCnXaYJBUsesJN66BaM2w31QPmRar9i54iE/kCYcsFZEd1PkGETens08KuAT58S91EOuYPYUE2VMx2tA+BU3fKwYqmflkYr8j0Br9tqmb2roG7phXpHW+b9GzL6ZRKexaBLv3HD3ka4ceSdi0giHkQUEkYjNOV0253ghW933yTov8tn+giIFgRAIDC09Tfz1mmIQ0kBMPR2UYnovs6xJo+XARJ8UI58cuD/FG0vppZrlaSLg/Upyped6XdS07NciqPJkqJrdi1X+kvoXZGb8CLit57LXCYPC2MZUb0ptgpel8SbUxZ+n/fynsv4qCIRAYIgsCHVNf+td70BM5boIhMrIZlgwFlX3S2753JpeXf6OVVlAxLwYqma38lO3KburoIJqrtHvSdGNVaU9MSY/qh9ylIekdJ1vP+9bcH72n4XXIxAYIoHgYuqW6tm73ib2+gmEYRxNiTc399O6VzH6U0Tk9VA1u1cfo1VVS61nxrGaqcnqXjT1Mnqfr/UkpXZHci5IVeUSBEIgUD96OSmWqVsaXBf3noss0yPU8wjHRpDEv3fG/aifb7OP/lTBUQpVM7B9iD8L6l9wRT2fH1xY9YAhLHMMBOpH31DLWgcLgkhFICS9z10eFaUoBrwvI+aiLEuzAoFAlyB2ILKHabLtzP7GbkEgBAKNbEGoyxRDvxaEDlJHxZEvDkRQdRe79vMe2MJe2YWQCFgKoWoGth+R4EVsdLTx+bs45etVrdYIAiEQqK9A0B6duCq1j6Yo6KgTCJImhBLdqD7+tG+fu2DLu2r2eA8iqOrkUDUD2xWujES5I0yUu5ZPfSqzk2kQCIFA/eik20LszZ14Pdyh+q6Q6AD8yCquSupfmwcRrz65X3x8nG//zNVbHSCprK5qTKR+t1A1AyPqvahFo5GUEVs4ybx+wGey/iQ4KQYC9aMIJJvfM5+kAsHW+LUT6U8gbKrbXXWlSK5Z40dXut4Y758H94CIvcW1nfu/2RSOLs8+daMIcnComoGRQ8XqKPLGv2LS/1eb5toniJF/z8264sdx23l/CAIhEBg+SpWtCUjzz6tjcxS0+loQ6hNmWQzqk0cFeWGQjZ5DKSFmraKrBJYZGy2Ox0dLuba6TIEGntesjWS6iuTttH6zOTg8BhoaE6Eu+blRPk+kgFhVH6HarI4pIjpDMe8VMe/oVre3Xf9tbqxz5a/R2vZB2me5IBACgeGhTHcHui4LQu177f6iNNZHIBiLeP26aztvUa0PPdCSSXDPWWUdYidss5H0DozZ22KPcXBfqKKBhkUEgVeTO89/dIv7tLZZo6/8vYhchUhLplVSLkZM7m+Nf3m2h1u2Ib4DgUAdLQi9BEKdohAmfUIebMz8W0+c3XlSUKcNlvlut1cUWZJ52kOMqMoXOOGallBFA42MbquPbp/lfPt516smn0NsVUcW5FJOunxiEAiBQENYEHw6zVCPQHSDmGIQdCOpr0SGdsWD6Exa22zDlHL7LCfwi8wCwSeIzb3dNpeu4/Rv7BiqaWCk49n1KvXxA9iMCxS8A5vfx+Q5b2u7hSmGQKB+xHSPZqguW8bBgYw04uKABUKcs6ut8xsRmbhNE6VPEBMdY3XFrdI6/4rEsoSOUgeFMVr/4ny1TPu8LcQ80B/ik+xB5l0MNjfHOg7X06640ZjkwUQKL2DXb2SjSWp+Py2vJtwwL2SQDNRNJJtTFnxeJXkIJJ/Jx8knCGYusxfczO3nLwsCIRAYWhzdoyl6j7oYqcc6x3gQTopu9Wpl8nIRmZjJd1Id2FyrurjVJqymUCiirr4CIcqjbvJXPVzV7y0U4kdtSZZg7D6Z/TxcDMbuI5H9ojrFarwO39JBXl1N7yfKQ8ekdgcXhlciUC+Shef/0p42/yaiwj/0Sty2hffYg81Psq78BQdnBYEQCAwtvodAQMHXw4Kg4AYhENrnlWXWgscRe2BmV0EXk8YtkNREX+9UN2LAMHGL39900SY57fIbVfJfrMrd0buKjhMQMwGYUPs4VgbQncLrEKj7iETMl6yPT0bM5EyrGlwMYs6IZl/x38nt5z3c++vggxAI1JeOvi9kjXsg9YNe5qiqP6o+T4Sm5x6ybeuBnxKn15GUVw4sRkOd7wVx4VUI1J32855T9fMxUfZ6b2zknf8yn7omFwRCIDC09E3YVHMDgg46UJKP7Y/x8fLqPKEbjIUXrFDRr2ZvHAOB0Ycv65W48lJMxnfZxYjNHW1eL50eBEIgMJwWhJoLhEo0tb7HrS6S4qJzX1O4tuZRHoe6cVy15mp1pYew+VDzAtsnd39mrar/YnXduyL4L3DGtyYFgRAIDB094xG4MjWfsO8rEBIGEGrZx+YqktKSET0Cf2he0RN9Ahe/ONLFTiAwYKE8ueVW9fEjVS17jAp7SZzMDQIhEBg6enbUfacCBm1AwCVoT+fHhN6Wi4xWBHD/iPrOET3V0H7OUvHlOXi/MnMDGQiMJq49OxbhC3iXZB6Q+AQD53H6/H2CQAgEhkMguLjGBgRJozP2jK9Qonv8hSpw7Rc8oD7+JGgx8xxmA5Lc+c+PCu7DePcsUZ76L7MIBBoL13b+g6i/I7NITvM0TLQJlwSBEAgMg0DQpFTzPE14l0ZofINiRSQM7HB3XHAzuJmo/ytRvj6RH4dCJLTN/Y0rdhxLEt+MCGlDGYRCYDsSCU7m4ZL1md9hF4PY2VHrgvcGgRAIDLUFISlTW4UgaWwFXzuBkI4+5t7nYn03SXw1ygaiPJho5ImFe/7lZdd+3pmonqDePQB4bL6SsjqIhcAo567znkHd1ZisU22VZY/oF2ltywcvnkCgvvSKg1DjVQwCmsS9s0SWBisQAFh4/ksOPk3r5QuMYw7KhwTdH2PHDrmPgs2DlgfsUODaz/sh6H1R64J3qXMzFXecwF4Y21L3e7F5cOX+l1WINGHz2w6TIBaSpJlyR+1VjWAw+WzC1ebQOC5s8fvICmXfnD4v3eaxcOVCXcpcyKXXkPX5lLbSF2qUroqRbMdKitFWyyfWQubySeJBl48T+aZ18UfINU3D+2zFl2s+2sQrzgsCIRAYUgtCjZ0UkVR0qOstSmoXsrH9M896mEdr25dwq/ewPtlXjXuzwFSU8YjW3xNQvRE1vxpkWWnSziPAI7ReksfsuKcV2UddPF3xUw2Mpx7RZdUbVd83Ze/78DzF90mK01C/9d5CjACv0UnNA2kkXlZYyldDhs5DEwP8esu9UXktyhW4Uh7dRg+oiQH5fX30gfyGuHgNPvZZno8x5g9b2tFgn9Kk8xq8y3QsEfP4NsrnSpJytM3y1sQg8rvBv7/nv8rMBefgkr/LVB4A3ogo44ONLTBSOR74UdcfUw89mvfNuxF1A0+nbGzEhpef4/65HyYpbu7XnwfeQpWRCbtxErBoc8P1pgMx7/l07dI+mwhd+Sz+51d0//QR4OhQRQKBwKCal1AEgcAQWhBcTKYY6ZmHStLftMWmUOyBQCAIhECgsensXyDU0HgXDy7MciAQCASBEAgMPUW6TzbW2oIA4PqEPNgQij0QCASBEAg0vkDY7DCoXQKhZgYE6c+CsDEUeyAQCAIhEGhsOklDH6f4WvsgVIIv9WR9KPZAIBAEQiDQ2BR7CoSuqIc1MiEokIQphkAgUHsaKQ7CXsCeZFqMiwBPAqvCIww0OOXKVhEISe2WOHYphL4WhCAQqqD1nmW7G3Qf9ds27RjJSZQkT940c+/Q9gSCQBhCzgYuqmL/OcDt4REGGpyY7omTvOsd9bAGZwg+CINqBL3ONk1jvuZKndvc1+QiYh+HticQBMIQU+3ErI7yZzMeaKpi/zXUMnpeoG4CQV2CiNSmBqtCXAwCYTANj6qK96jPEijPIzrq255AoOEEQqAn/w+YVYUQOgn4ZSi2kWBBqPEUQ99ASWGKYSDlmOlVC9ogEARCYPiZCOxUxf75UGQNSUL3xEnqKx16LZwUJRUcSYikGAgEak9YxdC4hCmX0TM07RVNsYb5djYLjjeOHgRCIBAIAiEQGBn0yugYpzkUBovQnwUh7iNIAoFAIAiEQKAh6ejxVy0tCN6l0RnfoBwEQiAQCAIhEBiRAiGmdj4IfeIqBAtCIBAIAiEQGCH0mmIo1e7ILu4tEIp0d4oMBAKBIBACgZEiEGo0xSBSEQg9Ai91EOJhBAKBIBACgZEnENTVboCvLq7kdughEMqhyAOBQBAIgcAIEwg1syAgFYfHHitce2aPDAQCgSAQAoHtTCCI9OfPEGIgBAKBIBDCs+k9nAw0KD1zI/Qd9Q+cJCRqCgQC9SGEWm5cNgCvV7F/cExrXHouc0zKaZKlQSP9WSNCHoZAIDDqBIILj6MHFwKfq8J6EDqGkSIQamlBCJkchxytbbatQGDUCoTxwCTeSE1sBvzOwW7DWAaTKtvYyt/Vmut9ZQS/EVhb2QbbiEwBdiB7irmnqzznWOBNwATADrrNTAVesSJUNgDrg+irtwWB/qYYGlcoqkrrj1+cZDp0khc/Di3nranuXXMetUZiR9RhRdeuzbm1939wRmkI7wHE7Hf6XcuOVJNI1mtGvENsp1HZUCTacMgTe66fN0/8cD6Of1j09LhiUpjsczrBJ3HBWBnklHMO4qTsdJ8/ts+Sqt/9S1TN4luenZyMtROt6jjnNTeQ+pGTfNmp7yirro1ccW37rIPqvqrnhHt+2zIhHj85xkw0Nm4CM9g2FefRzmjDk/eeeETHSBEIk4B3AscChwN7ApMr4sAyuHnwoZxD3wP4m8p9HFTpKMeSZkQc6EviSJeXbQRWAH8Gfg48ACwbwPHmAX+fUSAkwBHAHzPsewhwLvA+YGrl2dWi7H2lDEqVTmoV8BfgCeBXwO+B1dupQOiVrClOkywhg7YkaFJsaIHQ2rZ4JwpyjFVznC5aeigwDZhglDyIVa2mDASDoipOSBJFNo0vyarZi5Y+K0b+18fJA20z9/1DPe/HJzHAlz3uS6hkvmaIPJ5EodwkybpnDlmycvbCxctQHjdR9FhS1CfaZ+21rt7P4/R7nttPVU9U9cduRPcV63dQr00Ya1WRwdRHMYhG8kKZJ95aGSRtu37c+9xU4zkWdcc9c/eyt2qzmWY84xTJGxhQ/XCaOIQ4J2xC8itn37XkGREeIuGB21r3+XPN6vYPnt3VuvyHFfcB8RyQGD9F0GavNpJBtqkighHisaWxb8vYrg+rQNgbOBtorXSuI5VDgLnAiRWxU+uyjIAWYGfgrcAZlZH0D4HLgd8MQDBlqWhZRc1HgG9VLD61xla2PDAO2KVS3qdWvn+5IphuAX7K9rVWv6MioMxmgeA9WDv4mYa4MS0Ip97x5z1yUfO5iM6xNrcrxqDeod6BV0DRqqr45pYTIDKYCJEmY80OYuz+iJysntKcRUsfQvTy207a5/663ZxI2oJXd81WRKwIBUTGidhpYszhIjLLxSVsnufmLFr2UzFyy62/u+Fh5s2rqXWhte3ZXU0hukTVn25zhbGqHnUOVY9o92o4iH4tfcaZ2qLT71i6j0bmPJw/zUS5qUiUXo94UEXRbgnNqq8fgkQi0izG7CjGHojITC/FzlmLlv4M9LK2k/d5cOBl+eRYyTVfZNWcLfloChqhLgGVimVQalLH1Dsz3J7n23qYY4BLKyPAfx7B4qBQGZE/DJxVB3GwNcYDpwMPAV+uXEumwWE1A8kM+xwBXFsncZCFXSqC6d7Kc5jF9rPyokR3J1KfpHdu7CA301/ip2EXCLMWLvlEPtf8WFTIXygiu7q4hCt14uPy5k5JVdPGdICbqke9wycxrlzElToRtGByhb8Fe9+cu5fd0Nr2+53qcoODuua0Y/ZJGVcukpQ6UVXEmOk2X/iU9/7BOYed9ZPZdy3+21pd7uz2p99pm3I/j/JNnwTGJqVOXLmEd0l6PYN8Fr023UbZyey7Fp+vOfuoLeTPAZnqyiVcqYhP4lREqh/0dfRXP0Cao1zhBGPsT2ffvezqkxY+PrHqslz43J4233x/rqnpC4pOcaUirlysT1nWzFGpPhaE/YDrSKcURjITgeuBk4b5OpqBf62U61kMvTPZZyvWjUbgSOD2imC4kIFNwWifRnvzaGNg75WSdtrSU7cPduqsu0AoAGhSgjUvQa4wOF8EE0FnH0vusDkpvveSB6Oph077uonyc/GepDi0OaNUFVcugohEheaPKnLAqXf8+bS7Tjvwrw3dQqniXYJ3CYiIiaLjPBwz5+5lN5QS/ezCmXuvGvBod9HiAwR7p7HR1KTYMay3efx9iwvjFy69yhaaP+5dPAz1w+PKRUTERoXmf2wu6YGtbU/Oap910CtZfn/yXU/tgLg7bKH58OEuy+EWCG8H2hk+x8Fadso3AR9qoGs6ldSZ76MMnRPfm4BjGvD5nAQcBnycdNqhGnqUnXpXA8c/xdgI6elflGfwzrzrSacZxgLQuQ734PzalKDvY4keNj+PKW+d9rWo0DzXlYrbHEjWu8NNih3YQvMReNd21sLnPnDDKdPXjogWSxVXLoGIiQrNH8tL6cjWtqfPap+1/+8G0iFLJ9eY5vxUVyoO621dcomap4tLr8o1t3w8KXXWzkl3gEIyKXYQNbUcrao3n3njEyfe9NFDthlgLK/mK9F2JA6g/ymGA4E7R4E4APhCg4mDLs4APjmE55tB6kzaiOxWqW8nVvm7HrZ1F5dT06QMquUgKjRj803dP21h8NMyr5NOq3Tr2F1ttp7WkheAx4fjIc5euOTvbS7/mWS4xUH3OlHqJGpqObJT4y+NuJarS+TY6EBbKNw7s/3pqi2548v2tKip6d3DLQ4Annrr4k9HhaZhFwfdqYiEY8vjWra5nPyMhUsPN1H+rEYoy+EUCBOAG4FdR8G9HQ58poGv79+AnYboXG9q8Gc1rlLvjqriN12Of5s7A/WDNMioEjW1UJjQQ0uNJfWfGJxpAj5PuqqjXnSSTte8PtQP78w7l+4MfAW0YRr/N+pFEWPsJ2bds+SwkdiIuXIJsXZqlMvfPvuup2Zk/V1rW5vFu7NpgMdxxh1/3sMYe6l3SePVj3IRwZzX2vb0vlvdz7tPmFw+r+rZnugtEC4lNfmOBi4iu0PgcLArqfPiUDBmBDyvCcB3SWM/ZGED3Rz/4s5N+LiMDMKEoKrYpmbGTulhPBPgLTW4v2eB44ArgN8BT9Zo+xOpP8cHgDuG48HFVj8ZFVp2rSwBbLCBuMfmCwUSPj1SGzIfl7G5/DQkuq617YXmTA17dPheAm9rhGfiTO7cqNC8g7rGiy+l3hM1NY8zkd2iRffMH68YoyJ/q8n2F6zW9Bpx/+Moua8305hTC72ZxdDkwxgpqwX2J3XkzELXvP5mgZAUO7otjRpgQRnL5L0P7v3x39To/p4HzgfeVhHihw5y6zrGHHpPYQwR77/xiTHq9KPeNW7j6ZIyiH6wte2FyYxQXLlIVGh5t4k6z8lWkd0RttDUNNwj3ta2JyeDzPFx465qroiok8688Yl+B1LJ+g0zRGQP77e/uG/dO6d/IQ2aMxr4AF0OYY3NWxkdvh615GzSlR5ZLAhrN7/Em9ZT3ri+quXp/Y8oHDsd9HakZ1C5Y0kD/NRs4FKxfiSD3GKGOVrlpJbmw01k9/GucaMPq3MYG73J5MqHjuQXwyUxiPzznEVPZ5nyOggZ/lx8ppB/p8nldm3k+uFdghgzvTym6YB+vze6r8kVbKNNjwwFXd7Z+wEnjKL7eu8Iuc6xlbL/K4EuxlREwrb8RzaRRmucDqmTYufrK5m4x74wiMZIk4TJex3E+N32Zt0Lizf3g8A/kfoRBHpYXDja5AqSrjPPsL8IJlfYLMYGdk4DSBpXIeMI2UZ5Ytd5CPCzQd+ztb0FZKb7Rkxq4VKPT5Kq719dgi207JwUO88CvrLVfVX3qKZDE2MxuRzq/YD9BMRGaBLnel6zea/kIshonhcxmFy+RvWjlM1hVhWTb7Kq/i30F8zOyO7pMamujlfiMQzoHkTQuJzzRobV+tslEFpJlwRWywbgQeBR4DlSk+9AZdb/AU6rwT3lSE3V1bAWuBl4DFg3gHsQ0twJfwecQnXTBtMbsN2/EvjxAMp9ErA7cDBpYKaBBtaaSeoPs24bo/C/ki7JBWDjK3+FQcYeU/Xkxoxn+rGn8MT1X+3+1TnAXaT+A4E3WrK3ZO1QxBhUKSWljjsV+ZnBrhJNqnrXVEQ8TDRi3oPwERHTkqURrpxkr0HfbhRBnHw10fhhW8U1izE5r7qDEZmuXg9B5HCbL0xR56hmdK0uQUTPOPe+xZddubUcFCKTszZjYiyq/lVXKn9L8U+o9/FAEgl4cYL4zpdWuU1vNIz+YDJ2kmIs6n1HUiq2GSs/V+dfkyqXxKiIqJHJ4vU4jJ0tQiHLIVLLo99S/dgx++tgAO10pc7/BnlY1A9oTaTaCHVex0b+L8P5eneFBx7IfP29pNMST9XoWt5Ro+OMJw11nJU1lft/rAbnvg74GqmDZFZ2ovH4PWl46MEwiXSq52LSefJq2I10RcO2RMoz3f9Y98KSmty8j8tMP66VJT+8iU2vLu9er24EPhgsPm80x7Bkt2yjJAEk8T75RPup+95Ug5PfNHvh0kex8l1cBh+btJMY9LsmYkD4Zfup+w7q/Wi997mpphyfqoaLbL6wpytnyzeVmsPt/q8Uk7cCv96KImqqQripS5K57afMuKWWteO9D2qka5ZMU++zFCwoJVTPaDt1n7trcPobZy9a+nux0fwszoWKgpqdtvBl5gBzJpfHlTvn337qjH8dDW+4Ic2zcGCVv7u/YnV4qobXUqvU02Opzmv/nhqJgy5uprqsii0NWC9yNTjGGuA20qRQA2l4skwT/amHGei5p0idoQbvh9C8wxQO/sgFvb86ALiP6pZjjlo+9VsiRSZm6YhMFKEuebz91Bk31er8RTYs0iRZKZkS5ymiWpN3TZX8YI/RfsL0V249Za9vlRJ3tIvLD9l8IfPJba5gRczR29BjURZ5IMbg43ijQWru5DrtpSUtIjIuywjeRjnUu4dvr404qBRB3O6T8rpM0wMKSv/1QzL3TYJ3MSry09HyjhtSj+pqHPo2ks4PN2rEiDzVpS9+psbn76A6x7HRvrB2PfApqjfNZ1lu+yRpGOPUgvDiMoprV1PNfOGWcOUS04+dyV4fOL0/kfBT0rwa09iOefnll3OC5rIIBDEWhKU1fdHjHUqIdGR3TJWGc0NfOHPGS5Ern+7j8vNis/VDlXj/b6tVN6qiZR9rzdvzTWOSnKK5TFMdxqLil9Ty/K5pTFGVYvYBwyDrh6QOser9ptHyjhvSueJqrQfPNPg9VTOErPX6rAMrIiUr6xj9bAK+XuVv9mTbcSyeJ/V9AaC07jXWPv8MJqqBMariYHTYJ7/Abu/8u97fjiVdjvlb4NvA8VQxTzlamFgwolqNv42p6bsWNbk9EJmSyYSNgLC+Ecvx5pkHrFDv55vMAsED7NXa1mYbuX40R0ZEq0rFWNu2uKNzbzF2cqYpMBGExqwfw0lE9Q59946yMhhL9uA8W2l9mEzqR3FJlQJl+XZS134OvFZFWU8mDZ60tUQ1ReCXdFsW+coTj7DL246ryQWrd9h8gaMuvJymiTuw5L4+1vEppCsuzgZeIZ1yewpYSpreejWpRSkmtRQ16jqprgxXrwEv1ecUCmjzyXc9Nah3bRzjKdpkvHHFt3jnPmciO8Yn257Rk3SOu2HftZyVH8bl4v/L5HTpPQI7F/MHt9Ag6b1rIchFaalF/SjTMVEMh4L5N4zJZQnQJOnQ8iUCfQRCNevwE+APo6wMLgL+bw0a2DFUvxLEA4u3k7q2mtS5L2sD0EI2/4yfkK6ASQXC4w8Td2zERlFNcgKoc9goxxH/9CV23P8I/nTL5Wxc0a+P4tTKduwWnvNImEpaT+pjcVFF8NQMVy6j6IcLknvfYI5TphPjtNlEhbGIkDVSoKqihj83asGXSq8uN9GOL4s1e6vz274XpKVF8qNGILi4BMJHCuROGmz9UKXF2PwYIHP98M4hyFME+giEahTbOmDFKCuDMQxfKOIXaezpmpq2AVQ3nWLJFir7IVKHyEmQrmR4fckf2Pngo9AaRW/ryvM+/biZTD30aP7yk9t57md3sH555hVIhqGJmDlYJgNnkk7vHE86NVQzC4KIaRIxTbU4VjVLA0UMrlQsCf43jVrw7a3vKM5atGRttuBGikCk3udHTeugCmKaRUzzYA8lKNWEmBZjcHF5vcjwJDprZAzVOSiur22jsd3zk9EyAqhCJFRjlcnSWr5MOn1R6cwdf33o7qoD2WRpwFypSGHcJA6ccx5/+81FvOfz3+HN75/N+Gl7YXOF0fSc3k0az6PmZaje1WCrzhgjUQ7Q3/pkRuNa60QUzbRgs7K/irdGRlXrMEz1w0R5EP3F7afsHaYY+rEgVNOyFam9U9/2Sgx8JxRDTbile4f24mP3c+Csc2necQrqauu4rt6laYSbxzDtnR9g2juPp7xpHZtWLWf9S8vYsPw5Ol59mc41q4g7NuBKnbyRxa4x23MRobjuNTpW9zAOHgXcNBoqRxrFUK5pnyUuvCqBPvYG7zAi3wbRUB59BUI1Qy3H6F+WN1TcSH9hPQMD4cfAMiqR8krrXucvP2vn4I9ciHMddTmhek9XcJso38zEPfZl0vT9ETHpHLH6dMmTS2j0FLG20MziH1zP7665pPvHo8J8bQtNuGLnL5rW5drDaxLo0wEWmohLHT9aOXH5faE0+hcIjuxxAywjYy610XkC+GwohpqxgTRV9Je7Plj6o5vZ6/2zaJq8c82tCH3Egno08f2OTjAGafBXRmxEP8GGRvxoyuTyuLi8StX84w0fm14Mr0mgR2eWL5CUSy+Icu5DxxyThBLp5x2iuoBHLVQ3JRHoXxycRurVH6gd3wVWdv3R+fpKnln03+n84rCh6dTCSNlGU+NfaMa7ZIVxblbbzL2fDK9H4A1FLESFZnwSPy/ozNtPnbEsFMqWBUI1TnITgXH1eqer3H+kTXU44HrS/AShQtaeV0iTTG1myY9uZvVTvxltDoSBLbb7BpsvYHJ5fFz6CS457tZTZzwUSiYA6WoFmy9gjCWJS/eU4+S4207e+7ehZLZMVBnJTs24/zjSuAn1CDhSrfAojZAyXgP8D/AtunnbB+rCVaQxEfYGcKVOfved/+DYL92MzTcNOH1soHYjN6lZ9trKsYzZHFrblUudPo4f9YartfS7Re2zZoUHvj3XD5Om2BZj01VI5dImF5cfRuSq20/a64eMgmm0oRAIzwMHVWFxeBtp9Lpas2uV+9fK+6xc2QZTM5U0iFQn6Vr/5cDTpGmwfwG8EKrakLAW+Byw2SHttWcf54/f/waHn30pruxDmzCceJ+oSFFVB/yuiYii6hSKIrIexyqQZ42Vxzz+0faTZ4RgNyMUVY1RLdWgfiSIFL1nvSCvQPwsxj6Klh+9/ZQDFoeSrk4gPAmcUMVvTqKXKbcGNFNdyGdfGZnXgm8A1wxSIPiKQCiTJrMqhao1bNxJuuzxjK4Pnv3B9xi/+z7M+OBHSUodoYSGAZsr4MrFH3hr5ubKAx8mxl7V5suJL9u4o2ndpntPPCI80NFQP/JNJHHxZl82l+TMYOpHh9q8TcRIOSm2bGqbtXtnKN3BCYRq52DeAxwDPFjD63gHML2K/TcBr2/hO1flMHFTGOGProEIcAGppWufytCE3187j6bxk9n96BNIiqFPqQVrS8t1DOOz+QKJoELcfuJe4V3bTkiKiZeo4CVj/RBPqW1WqB+NhKkIhNer+E2OdK53zxpdQwtwKdUtn3y1svVHqTKaz8pRoRqMOlYCHyO15qSqsVzkl/Mv5IVHfkjU1EKjBi0aSeyygljFlMgw4NM01v1bWtuezIeS207YaacyaCxkqR8Jih7OIKYXAvURCC9A1TGo9yd1vDuTNH77QMhVOudFwNFV/nYxWw75vIHqVmZ8APhU5XoCo4dfAJ/uLhbjjo089o3zWfKjm7D5wmbntsDAuPbsI2LUv55FIHgXY6JoP5Nv/uKJi54eF0pvO+DVhzoFWZOpfiQxxkaHz7l72edPuOe3LaHwGoOI1CS7CKg2R+5ewPdJEw49WREaG7cxehegiTRN7n7AgZVrqJbHtvLdBtKEUlmdHvOkPghnV4TSGqrLGTBQYfYYsDBUwbryfdJkZJd1mQySUie/ufJzbFj+HAefMTddL1+jpE7bIyLmOTEmk8D3icNE0cVNiT159sIlv0Z1pSJ1DVBjo0g0iZ+77dQZ3w5Pa2hpnzXLzbpr8QtizCFZ9lf1Yqz9Yksycc7shUt+i+rqutePfF5cUnqm7eQZ3wtPrH+BQKWjmjdAa8BuVJcyerD4ivViSzjgT8ARVR73sMo2VFwfBMKQML/y7zcrwgxVz9N3fpvXlvyBwz7+7+ww4y1pOuKwDLJqFP84yEcz753EWJubITaaUbslbVtR4rk85Q3rfgsEgTAsAlIeR8yJ2aqH4pMEG+UOFGsPlCGYBrT5An5D6QEgCIStCITlpJ7f54yAa34K+N029vkZ6Rx0IxOGrUMrEtYA/0W37KWr/vgYD/zrHPY96ePMOOEsmibuiItLVWeD267x8r+uXEwQibJGY/QuATc0kW2NdyCEMMvDx899XPoCiGT1HfdJDMnQ5ARU9WhYdbbl96fb/y+jOmfF4eJ6tv1A/4cQyjjQkxtIl+j2iGJZ3rSeP91yOT+9eCaLf3gjcecmokIzxkahxDIwcY+9/6TeP2Gi4MIT6MsE2/Jr79xiE4X3aaQLhOeALzX49b5Qaei3xUrgtvB4A714AHgf3QIpdbH+pWX85qp/5acXnsyTt13Bhlf+isnlsfkmxFrCqof+ufYIiRW5ViQ4fAb6qR8n7tohxlwnQXCPeIEAqQn2nga+3nlVWAZGikUkMLS8BMwC/gH4ax+hsPwv/OHGr/Hjz5zII18+m7/8rJ2OV1cgxhAVmtPVDzYidIhvUBiz6Zak1PlHmwsrGAN98eXidUmpc1mwMo08esu6GPgksAvVO/nVm1tIpxey8hzweeDq8JgD/fA94EfAPwMfJ01E9saLsGk9Lz52Py8+dj/5sROYNP0AdjroSCbv8xYm7LY3TRN2JGoew+aRkSqoR1UBrUzH64iI7CzGDkrw3PSBQzbNuuPpud67+8TYpuDsGehO+6yDXp9z55ILUH+XGGODj8/IFQgAq4BTgNuBdzbIdT5Iuqa92pr1bdKYDeeFRx3oh1cqAuFaUgfdOcBOvXcqb1zHyj89xso/patrc81jad5hCuN2mc6YKdMYO2U3mibtRGH8ZPJjJ2DzTdh8HjFRGmtBGnt6wuabKHes76MbqjlG22n7Pzj7rmUXmMhchbESREKgO7fN3Oee2QsXf97kCv8JLqwYGsECAVIz7AmkZvr/M8zXuKgywls3wN9fQOrUeFF43IEtsLgiIr8OzK4IhcO21EnGnRuJX9rI+peW9TMaN5goh4ny6cjcSMMLBBBcuY+j/6Zqj3L7qXtd3XrXYrU2+qbNF1pcOTiHB7rVj1NmfHX2nc86yeW/bHP5vAvxR0asQIB0WdjHgPuAfwcOHuJrWw18Dbic6kIn98YBF5MujfwSlVTAgUA/vEiavOsK0lwOHwbeDxxAGuBrm6j3uHKJUdA5DijXSvupM749e+Gzf/aOr9l84SgUfFKuTL0EtnuRMHPfb7TeufgPkou+avNNh6r6dFljqB8NSZaJx3bSZEp/D/wEWF/na/pLRRgcVRnR1WrB9O2VY15AGjExDo8/sAXKpKGaPwu8HTi0Ipa/DfyKdGoiGcX3fxupf8YAR4r7Plx4TY5xLvmod/HPFdlkojwmyiG2y98hrArZXmmfOeOnSbHjPT4ufkoT9wugaHLd60eoGyPBgtCdTcBNlW0/4L2k/gkHkjo0TgQKVJdwyQOdpCsN/loZ4T8APEL9Vh+8VrFIXF0ZIR4LHEma9W9H0iA6wdU20J0EeKayXV+p4zuThhrfu7JNB95U+Xw8MIY0hXlU2UbKkodXSMNTzxusgL7hY9OL6bH0pjmLnj/EJ+XjUH0nyL4q7CzKONB86A22U5Ew66CNwHda2/S70vSXw3xSOk4wR3nVfSX1AxqHai7Uj+Hl/wPC4CNGGSJInQAAAABJRU5ErkJggg==" alt="Logo: dein Technik Lehrer">
+      <div>
+        <h1>Das Badge-System</h1>
+        <p>Fortbildung für Lehrkräfte · Technik und AWT · erklärt am Badge-System selbst</p>
+      </div>
+    </div>
+    <div class="meter" aria-label="Ausprobiert">
+      <div class="meter-row"><span>Ausprobiert</span><span id="progTxt">0 von 4</span></div>
+      <div class="bar"><i id="progBar"></i></div>
+    </div>
+  </header>
+
+  <nav class="stations" id="nav" aria-label="Kapitel"></nav>
+
+  <main id="main">
+
+<!-- ================= KAPITEL 1 ================= -->
+<section class="station c-kultur" data-ch="1" aria-labelledby="h1k">
+  <div class="chead"><span class="n">1</span><div><h2 id="h1k">So nutzen wir das Badge-System</h2><p>Pass, QR-Code nach der Prüfung, Liste im Fachraum, Kürzel und Sammel-Badges</p></div></div>
+  <div class="card">
+    <p class="lead">Schüler:innen sammeln im Technikunterricht <b>Badges</b>. Ein Badge zeigt, dass eine Einheit abgeschlossen oder eine praktische Prüfung bestanden ist. Bestimmte Badges sind Voraussetzung für die Arbeit an Maschinen und im MakerSpace. Das System läuft über mehrere Schuljahre und braucht keine gepflegte Schülerliste: Neue Schüler:innen und Klassenwechsel machen keinen Aufwand.</p>
+    <figure>
+      <div class="parts" role="img" aria-label="Die vier Bausteine: Badge-Pass auf dem iPad, Badge-Seite im Browser, QR-Codes der Lehrkräfte und Liste im Fachraum.">
+        <div class="part"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="10" y="5" width="28" height="38" rx="4"/><circle cx="24" cy="18" r="5"/><path d="M16 31c1.5-4 4.5-6 8-6s6.5 2 8 6M17 37h14"/></svg><b>Badge-Pass</b><span>PDF auf dem iPad der Schüler:innen: Name, Klasse, alle Badges mit Datum</span></div>
+        <div class="part"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="5" y="9" width="38" height="28" rx="3"/><path d="M5 16h38M17 43h14M24 37v6"/><circle cx="16" cy="26" r="4"/><path d="M24 24h12M24 29h8"/></svg><b>Badge-Seite</b><span>Webseite ohne Konten und ohne Server. Liest Pass und Ergebnis-PDFs, trägt Badges ein</span></div>
+        <div class="part"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="7" y="7" width="13" height="13"/><rect x="28" y="7" width="13" height="13"/><rect x="7" y="28" width="13" height="13"/><path d="M28 28h5v5h-5zM36 36h5v5h-5zM36 28h5M28 41h5"/></svg><b>QR-Codes</b><span>Ein Code je Badge mit Prüfung. Nur die Lehrkräfte haben ihn, er wechselt jedes Schuljahr</span></div>
+        <div class="part"><svg viewBox="0 0 48 48" aria-hidden="true"><rect x="9" y="5" width="30" height="38" rx="3"/><path d="M15 14h18M15 21h18M15 28h18M15 35h10"/><path d="m29 33 3 3 5-6"/></svg><b>Liste im Fachraum</b><span>Handschriftlich je Schuljahr: Datum, Name, Klasse, Kürzel, Unterschrift. Der verbindliche Nachweis</span></div>
+      </div>
+      <figcaption class="cap">Die vier Bausteine des Badge-Systems.</figcaption>
+    </figure>
+  </div>
+
+  <div class="card">
+    <h3>Ablauf einer Prüfung</h3>
+    <figure>
+      <div class="lanes" role="img" aria-label="Ablauf in sieben Schritten: 1 Lehrkraft nimmt die Prüfung ab, 2 Lehrkraft zeigt den QR-Code, 3 Schüler:in scannt ihn auf der Badge-Seite, 4 der Pass zeigt Kürzel, Datum und Uhrzeit, 5 Lehrkraft trägt die Prüfung in die Liste ein, 6 Schüler:in speichert den Pass als PDF, 7 an der Maschine zeigt die Schüler:in den Pass und die Lehrkraft sieht, was erlaubt ist.">
+        <div class="lane-h lk">Lehrkraft</div><div class="lane-h sus">Schüler:in</div>
+        <div class="stp lk nx" data-n="1"><span class="rl">Lehrkraft</span><b>Prüfung abnehmen</b>an der Maschine, nach euren Kriterien</div>
+        <div class="stp lk nx" data-n="2" style="grid-row:3"><span class="rl">Lehrkraft</span><b>QR-Code zeigen</b>vom Codeblatt im Ordner</div>
+        <div class="stp sus nx" data-n="3" style="grid-row:4"><span class="rl">Schüler:in</span><b>QR-Code scannen</b>oder den Code eintippen, die Lehrkraft schaut zu</div>
+        <div class="stp sus nx" data-n="4" style="grid-row:5"><span class="rl">Schüler:in</span><b>Badge steht im Pass</b>mit Kürzel, Datum und Uhrzeit</div>
+        <div class="stp lk nx" data-n="5" style="grid-row:6"><span class="rl">Lehrkraft</span><b>Eintrag in die Liste</b>Datum, Name, Klasse, Kürzel, Unterschrift</div>
+        <div class="stp sus nx" data-n="6" style="grid-row:7"><span class="rl">Schüler:in</span><b>Pass als PDF speichern</b>im Technik-Ordner auf dem iPad</div>
+        <div class="stp lk" data-n="7" style="grid-row:8;grid-column:1/-1;--rc:var(--ink)"><span class="rl">beide</span><b>An der Maschine: Pass zeigen</b>Die Lehrkraft sieht mit einem Blick, was erlaubt ist.</div>
+      </div>
+      <figcaption class="cap">Ablauf einer Prüfung. Blau: Lehrkraft, grün: Schüler:in.</figcaption>
+    </figure>
+    <div class="note info"><p><b>Badges aus Lernplattformen</b> (bei uns AR Arduino, CA Calliope, MT Motorentechnik Theorie) brauchen keinen QR-Code und keinen Eintrag in die Liste. Die Schüler:innen laden die Ergebnis-PDF der Lernplattform in die Badge-Seite. Ist die Einheit abgeschlossen, steht das Badge im Pass.</p></div>
+  </div>
+
+  <div class="card">
+    <h3>Kürzel und Badges</h3>
+    <p>Jedes Badge hat ein Kürzel aus zwei Zeichen. Das Kürzel steht auf dem QR-Code, im Pass und in der Liste. Gestufte Badges bauen aufeinander auf: D2 setzt D1 voraus, L2 setzt L1 voraus. So sehen die Badges im Pass aus, erworbene farbig mit Haken:</p>
+    <div class="groups" id="allBadges"></div>
+    <div class="tw"><table><thead><tr><th>Kürzel</th><th>Badge</th><th>Inhalt</th><th>Nachweis</th></tr></thead><tbody id="kTab"></tbody></table></div>
+  </div>
+
+  <div class="card c-luxus">
+    <h3>Sammel-Badges</h3>
+    <p>Ein Sammel-Badge erscheint von selbst, sobald alle Voraussetzungen im Pass stehen. Es braucht keinen eigenen Code und keinen eigenen Eintrag in die Liste.</p>
+    <figure>
+      <div class="eq" id="eqMS" role="img" aria-label="MakerSpace MS ergibt sich aus Lötstation LT, Bohrmaschine Holz BH, Bohrmaschine Metall BM und Bohrmaschine UMT BU."></div>
+      <div class="eq" id="eqRL" role="img" aria-label="Robotiklabor selbstständig RL ergibt sich aus Lasercutter Stufe 2 L2 und 3D-Druck warten D2."></div>
+      <figcaption class="cap">Die beiden Sammel-Badges der Technik-Badges.</figcaption>
+    </figure>
+    <p>Im Robotiklabor arbeiten alle Schüler:innen. RL regelt nur, wer dort ohne Nachfragen selbstständig an Lasercutter und 3D-Drucker arbeitet.</p>
+    <p>Die fertige Seite für Schüler:innen findest du unter <a href="../technik-badges/" target="_blank" rel="noopener">Technik-Badges</a>.</p>
+  </div>
+  <div class="navrow"><span></span><button class="btn accent" type="button" data-go="2">Weiter: Selbst ausprobieren</button></div>
+</section>
+
+<!-- ================= KAPITEL 2 ================= -->
+<section class="station c-existenz" data-ch="2" aria-labelledby="h2k" hidden>
+  <div class="chead"><span class="n">2</span><div><h2 id="h2k">Selbst ausprobieren</h2><p>Probier-Pass anlegen, Probe-Badge holen, Pass als PDF speichern und wieder laden</p></div></div>
+  <div class="card">
+    <p class="lead">Hier probierst du alles aus, was deine Schüler:innen später tun. Der Probier-Pass und die Probe-Badges haben nichts mit den echten Badges zu tun. Die Probe-Codes stehen offen auf dieser Seite. Auf der echten Badge-Seite steht nur ein Prüfwert, nie der Code.</p>
+    <ul class="todo" id="todo">
+      <li data-s="pass"><span class="ck" aria-hidden="true">✓</span><span>Probier-Pass anlegen</span></li>
+      <li data-s="badge"><span class="ck" aria-hidden="true">✓</span><span>Ein Probe-Badge holen (QR-Code scannen oder Code eintippen)</span></li>
+      <li data-s="pdf"><span class="ck" aria-hidden="true">✓</span><span>Pass als PDF speichern</span></li>
+      <li data-s="load"><span class="ck" aria-hidden="true">✓</span><span>Die PDF wieder laden</span></li>
+    </ul>
+    <p class="small muted">Hast du alles geschafft, bekommst du das Badge <b>BA</b> „Badge-System ausprobiert“.</p>
+  </div>
+
+  <div class="card" id="cNew">
+    <h3>Schritt 1 · Probier-Pass anlegen</h3>
+    <div class="split">
+      <div class="box">
+        <div class="form"><label>Name auf dem Probier-Pass <input type="text" id="nName" maxlength="40" autocomplete="off" placeholder="z. B. Frau Probe"></label></div>
+        <p class="small muted">Nimm deinen eigenen oder einen erfundenen Namen. Der Pass bleibt in diesem Browser.</p>
+        <div class="row"><button class="btn accent" id="nGo" type="button">Probier-Pass anlegen</button></div>
+      </div>
+      <div class="box">
+        <h4>Schon einen Probier-Pass?</h4>
+        <p>Lade die PDF, die du hier gespeichert hast.</p>
+        <div class="row"><label class="btn soft fileb">Pass-PDF laden<input type="file" accept=".pdf,application/pdf" data-up="1"></label></div>
+      </div>
+    </div>
+    <div id="msgNew" aria-live="polite"></div>
+  </div>
+
+  <div class="card" id="cPass" hidden>
+    <div class="row" style="justify-content:space-between"><h3>Dein Probier-Pass: <span id="pName"></span></h3><span class="small muted" id="pCount"></span></div>
+    <div class="groups"><div class="grp g-probe"><h4>Probe-Badges</h4><div class="badges" id="pBadges"></div></div></div>
+  </div>
+
+  <div class="card" id="cGet" hidden>
+    <h3>Schritt 2 · Probe-Badge holen</h3>
+    <p>So läuft es nach einer Prüfung: Die Lehrkraft zeigt den QR-Code, die Schüler:in scannt ihn. Probier beide Wege aus.</p>
+    <div class="qrs">
+      <div class="qr" role="img" aria-label="QR-Code für das Probe-Badge P1 Probe-Bohrmaschine"><svg aria-hidden="true" focusable="false" width="45mm" height="45mm" version="1.1" viewBox="0 0 45 45" xmlns="http://www.w3.org/2000/svg"><path d="M2,2H3V3H2zM3,2H4V3H3zM4,2H5V3H4zM5,2H6V3H5zM6,2H7V3H6zM7,2H8V3H7zM8,2H9V3H8zM10,2H11V3H10zM11,2H12V3H11zM14,2H15V3H14zM16,2H17V3H16zM17,2H18V3H17zM19,2H20V3H19zM20,2H21V3H20zM24,2H25V3H24zM27,2H28V3H27zM28,2H29V3H28zM32,2H33V3H32zM36,2H37V3H36zM37,2H38V3H37zM38,2H39V3H38zM39,2H40V3H39zM40,2H41V3H40zM41,2H42V3H41zM42,2H43V3H42zM2,3H3V4H2zM8,3H9V4H8zM10,3H11V4H10zM17,3H18V4H17zM20,3H21V4H20zM21,3H22V4H21zM22,3H23V4H22zM23,3H24V4H23zM24,3H25V4H24zM26,3H27V4H26zM28,3H29V4H28zM30,3H31V4H30zM31,3H32V4H31zM33,3H34V4H33zM36,3H37V4H36zM42,3H43V4H42zM2,4H3V5H2zM4,4H5V5H4zM5,4H6V5H5zM6,4H7V5H6zM8,4H9V5H8zM10,4H11V5H10zM11,4H12V5H11zM13,4H14V5H13zM14,4H15V5H14zM15,4H16V5H15zM16,4H17V5H16zM18,4H19V5H18zM22,4H23V5H22zM24,4H25V5H24zM25,4H26V5H25zM26,4H27V5H26zM27,4H28V5H27zM29,4H30V5H29zM33,4H34V5H33zM36,4H37V5H36zM38,4H39V5H38zM39,4H40V5H39zM40,4H41V5H40zM42,4H43V5H42zM2,5H3V6H2zM4,5H5V6H4zM5,5H6V6H5zM6,5H7V6H6zM8,5H9V6H8zM11,5H12V6H11zM12,5H13V6H12zM13,5H14V6H13zM14,5H15V6H14zM15,5H16V6H15zM18,5H19V6H18zM20,5H21V6H20zM21,5H22V6H21zM22,5H23V6H22zM26,5H27V6H26zM28,5H29V6H28zM29,5H30V6H29zM31,5H32V6H31zM32,5H33V6H32zM34,5H35V6H34zM36,5H37V6H36zM38,5H39V6H38zM39,5H40V6H39zM40,5H41V6H40zM42,5H43V6H42zM2,6H3V7H2zM4,6H5V7H4zM5,6H6V7H5zM6,6H7V7H6zM8,6H9V7H8zM10,6H11V7H10zM14,6H15V7H14zM16,6H17V7H16zM18,6H19V7H18zM19,6H20V7H19zM21,6H22V7H21zM28,6H29V7H28zM30,6H31V7H30zM31,6H32V7H31zM32,6H33V7H32zM33,6H34V7H33zM34,6H35V7H34zM36,6H37V7H36zM38,6H39V7H38zM39,6H40V7H39zM40,6H41V7H40zM42,6H43V7H42zM2,7H3V8H2zM8,7H9V8H8zM13,7H14V8H13zM14,7H15V8H14zM19,7H20V8H19zM22,7H23V8H22zM23,7H24V8H23zM24,7H25V8H24zM25,7H26V8H25zM26,7H27V8H26zM28,7H29V8H28zM30,7H31V8H30zM31,7H32V8H31zM34,7H35V8H34zM36,7H37V8H36zM42,7H43V8H42zM2,8H3V9H2zM3,8H4V9H3zM4,8H5V9H4zM5,8H6V9H5zM6,8H7V9H6zM7,8H8V9H7zM8,8H9V9H8zM10,8H11V9H10zM12,8H13V9H12zM14,8H15V9H14zM16,8H17V9H16zM18,8H19V9H18zM20,8H21V9H20zM22,8H23V9H22zM24,8H25V9H24zM26,8H27V9H26zM28,8H29V9H28zM30,8H31V9H30zM32,8H33V9H32zM34,8H35V9H34zM36,8H37V9H36zM37,8H38V9H37zM38,8H39V9H38zM39,8H40V9H39zM40,8H41V9H40zM41,8H42V9H41zM42,8H43V9H42zM11,9H12V10H11zM16,9H17V10H16zM18,9H19V10H18zM21,9H22V10H21zM24,9H25V10H24zM27,9H28V10H27zM29,9H30V10H29zM30,9H31V10H30zM32,9H33V10H32zM2,10H3V11H2zM5,10H6V11H5zM6,10H7V11H6zM7,10H8V11H7zM8,10H9V11H8zM9,10H10V11H9zM10,10H11V11H10zM12,10H13V11H12zM13,10H14V11H13zM14,10H15V11H14zM15,10H16V11H15zM18,10H19V11H18zM19,10H20V11H19zM21,10H22V11H21zM26,10H27V11H26zM28,10H29V11H28zM30,10H31V11H30zM31,10H32V11H31zM35,10H36V11H35zM38,10H39V11H38zM40,10H41V11H40zM41,10H42V11H41zM42,10H43V11H42zM3,11H4V12H3zM6,11H7V12H6zM7,11H8V12H7zM9,11H10V12H9zM12,11H13V12H12zM13,11H14V12H13zM14,11H15V12H14zM15,11H16V12H15zM17,11H18V12H17zM19,11H20V12H19zM21,11H22V12H21zM24,11H25V12H24zM25,11H26V12H25zM28,11H29V12H28zM29,11H30V12H29zM31,11H32V12H31zM32,11H33V12H32zM33,11H34V12H33zM37,11H38V12H37zM38,11H39V12H38zM41,11H42V12H41zM2,12H3V13H2zM3,12H4V13H3zM4,12H5V13H4zM6,12H7V13H6zM7,12H8V13H7zM8,12H9V13H8zM13,12H14V13H13zM16,12H17V13H16zM17,12H18V13H17zM22,12H23V13H22zM24,12H25V13H24zM25,12H26V13H25zM28,12H29V13H28zM29,12H30V13H29zM36,12H37V13H36zM38,12H39V13H38zM40,12H41V13H40zM41,12H42V13H41zM4,13H5V14H4zM6,13H7V14H6zM9,13H10V14H9zM10,13H11V14H10zM11,13H12V14H11zM12,13H13V14H12zM13,13H14V14H13zM19,13H20V14H19zM20,13H21V14H20zM21,13H22V14H21zM24,13H25V14H24zM25,13H26V14H25zM26,13H27V14H26zM31,13H32V14H31zM33,13H34V14H33zM34,13H35V14H34zM35,13H36V14H35zM36,13H37V14H36zM37,13H38V14H37zM39,13H40V14H39zM41,13H42V14H41zM2,14H3V15H2zM3,14H4V15H3zM5,14H6V15H5zM7,14H8V15H7zM8,14H9V15H8zM9,14H10V15H9zM10,14H11V15H10zM12,14H13V15H12zM15,14H16V15H15zM16,14H17V15H16zM18,14H19V15H18zM20,14H21V15H20zM21,14H22V15H21zM22,14H23V15H22zM29,14H30V15H29zM31,14H32V15H31zM34,14H35V15H34zM36,14H37V15H36zM37,14H38V15H37zM41,14H42V15H41zM42,14H43V15H42zM2,15H3V16H2zM4,15H5V16H4zM6,15H7V16H6zM9,15H10V16H9zM10,15H11V16H10zM12,15H13V16H12zM14,15H15V16H14zM15,15H16V16H15zM16,15H17V16H16zM18,15H19V16H18zM20,15H21V16H20zM21,15H22V16H21zM23,15H24V16H23zM26,15H27V16H26zM27,15H28V16H27zM28,15H29V16H28zM30,15H31V16H30zM32,15H33V16H32zM33,15H34V16H33zM37,15H38V16H37zM38,15H39V16H38zM39,15H40V16H39zM42,15H43V16H42zM2,16H3V17H2zM3,16H4V17H3zM4,16H5V17H4zM5,16H6V17H5zM7,16H8V17H7zM8,16H9V17H8zM11,16H12V17H11zM12,16H13V17H12zM13,16H14V17H13zM14,16H15V17H14zM16,16H17V17H16zM19,16H20V17H19zM23,16H24V17H23zM24,16H25V17H24zM28,16H29V17H28zM29,16H30V17H29zM30,16H31V17H30zM33,16H34V17H33zM34,16H35V17H34zM35,16H36V17H35zM36,16H37V17H36zM37,16H38V17H37zM38,16H39V17H38zM42,16H43V17H42zM5,17H6V18H5zM7,17H8V18H7zM9,17H10V18H9zM11,17H12V18H11zM16,17H17V18H16zM17,17H18V18H17zM18,17H19V18H18zM21,17H22V18H21zM26,17H27V18H26zM28,17H29V18H28zM30,17H31V18H30zM32,17H33V18H32zM35,17H36V18H35zM37,17H38V18H37zM38,17H39V18H38zM39,17H40V18H39zM40,17H41V18H40zM41,17H42V18H41zM42,17H43V18H42zM2,18H3V19H2zM3,18H4V19H3zM4,18H5V19H4zM5,18H6V19H5zM8,18H9V19H8zM12,18H13V19H12zM14,18H15V19H14zM16,18H17V19H16zM18,18H19V19H18zM20,18H21V19H20zM21,18H22V19H21zM22,18H23V19H22zM24,18H25V19H24zM25,18H26V19H25zM26,18H27V19H26zM27,18H28V19H27zM33,18H34V19H33zM34,18H35V19H34zM35,18H36V19H35zM39,18H40V19H39zM3,19H4V20H3zM4,19H5V20H4zM5,19H6V20H5zM6,19H7V20H6zM7,19H8V20H7zM9,19H10V20H9zM10,19H11V20H10zM11,19H12V20H11zM15,19H16V20H15zM16,19H17V20H16zM18,19H19V20H18zM20,19H21V20H20zM21,19H22V20H21zM22,19H23V20H22zM24,19H25V20H24zM27,19H28V20H27zM29,19H30V20H29zM30,19H31V20H30zM32,19H33V20H32zM33,19H34V20H33zM34,19H35V20H34zM35,19H36V20H35zM38,19H39V20H38zM3,20H4V21H3zM6,20H7V21H6zM8,20H9V21H8zM9,20H10V21H9zM13,20H14V21H13zM15,20H16V21H15zM17,20H18V21H17zM18,20H19V21H18zM21,20H22V21H21zM23,20H24V21H23zM24,20H25V21H24zM25,20H26V21H25zM26,20H27V21H26zM29,20H30V21H29zM31,20H32V21H31zM33,20H34V21H33zM34,20H35V21H34zM35,20H36V21H35zM36,20H37V21H36zM37,20H38V21H37zM38,20H39V21H38zM42,20H43V21H42zM2,21H3V22H2zM3,21H4V22H3zM4,21H5V22H4zM5,21H6V22H5zM6,21H7V22H6zM10,21H11V22H10zM13,21H14V22H13zM15,21H16V22H15zM16,21H17V22H16zM18,21H19V22H18zM19,21H20V22H19zM20,21H21V22H20zM21,21H22V22H21zM24,21H25V22H24zM28,21H29V22H28zM29,21H30V22H29zM34,21H35V22H34zM36,21H37V22H36zM38,21H39V22H38zM40,21H41V22H40zM41,21H42V22H41zM42,21H43V22H42zM3,22H4V23H3zM4,22H5V23H4zM5,22H6V23H5zM8,22H9V23H8zM9,22H10V23H9zM10,22H11V23H10zM11,22H12V23H11zM13,22H14V23H13zM16,22H17V23H16zM21,22H22V23H21zM23,22H24V23H23zM24,22H25V23H24zM27,22H28V23H27zM28,22H29V23H28zM29,22H30V23H29zM30,22H31V23H30zM33,22H34V23H33zM35,22H36V23H35zM36,22H37V23H36zM39,22H40V23H39zM40,22H41V23H40zM42,22H43V23H42zM2,23H3V24H2zM3,23H4V24H3zM5,23H6V24H5zM7,23H8V24H7zM11,23H12V24H11zM14,23H15V24H14zM17,23H18V24H17zM18,23H19V24H18zM20,23H21V24H20zM21,23H22V24H21zM23,23H24V24H23zM25,23H26V24H25zM28,23H29V24H28zM29,23H30V24H29zM32,23H33V24H32zM33,23H34V24H33zM38,23H39V24H38zM39,23H40V24H39zM3,24H4V25H3zM5,24H6V25H5zM7,24H8V25H7zM8,24H9V25H8zM13,24H14V25H13zM15,24H16V25H15zM17,24H18V25H17zM18,24H19V25H18zM20,24H21V25H20zM23,24H24V25H23zM24,24H25V25H24zM25,24H26V25H25zM26,24H27V25H26zM27,24H28V25H27zM28,24H29V25H28zM29,24H30V25H29zM31,24H32V25H31zM35,24H36V25H35zM36,24H37V25H36zM38,24H39V25H38zM39,24H40V25H39zM40,24H41V25H40zM2,25H3V26H2zM4,25H5V26H4zM6,25H7V26H6zM7,25H8V26H7zM13,25H14V26H13zM14,25H15V26H14zM17,25H18V26H17zM18,25H19V26H18zM19,25H20V26H19zM20,25H21V26H20zM22,25H23V26H22zM24,25H25V26H24zM25,25H26V26H25zM28,25H29V26H28zM29,25H30V26H29zM30,25H31V26H30zM31,25H32V26H31zM35,25H36V26H35zM37,25H38V26H37zM38,25H39V26H38zM39,25H40V26H39zM5,26H6V27H5zM6,26H7V27H6zM8,26H9V27H8zM9,26H10V27H9zM13,26H14V27H13zM16,26H17V27H16zM17,26H18V27H17zM18,26H19V27H18zM20,26H21V27H20zM25,26H26V27H25zM26,26H27V27H26zM29,26H30V27H29zM34,26H35V27H34zM35,26H36V27H35zM36,26H37V27H36zM37,26H38V27H37zM40,26H41V27H40zM3,27H4V28H3zM4,27H5V28H4zM5,27H6V28H5zM9,27H10V28H9zM10,27H11V28H10zM12,27H13V28H12zM13,27H14V28H13zM15,27H16V28H15zM17,27H18V28H17zM19,27H20V28H19zM20,27H21V28H20zM23,27H24V28H23zM25,27H26V28H25zM28,27H29V28H28zM29,27H30V28H29zM30,27H31V28H30zM31,27H32V28H31zM32,27H33V28H32zM34,27H35V28H34zM36,27H37V28H36zM37,27H38V28H37zM38,27H39V28H38zM40,27H41V28H40zM42,27H43V28H42zM2,28H3V29H2zM5,28H6V29H5zM6,28H7V29H6zM8,28H9V29H8zM11,28H12V29H11zM12,28H13V29H12zM15,28H16V29H15zM19,28H20V29H19zM21,28H22V29H21zM26,28H27V29H26zM27,28H28V29H27zM28,28H29V29H28zM29,28H30V29H29zM30,28H31V29H30zM33,28H34V29H33zM34,28H35V29H34zM36,28H37V29H36zM39,28H40V29H39zM42,28H43V29H42zM2,29H3V30H2zM3,29H4V30H3zM5,29H6V30H5zM6,29H7V30H6zM7,29H8V30H7zM9,29H10V30H9zM12,29H13V30H12zM13,29H14V30H13zM14,29H15V30H14zM15,29H16V30H15zM18,29H19V30H18zM22,29H23V30H22zM25,29H26V30H25zM28,29H29V30H28zM29,29H30V30H29zM32,29H33V30H32zM33,29H34V30H33zM36,29H37V30H36zM37,29H38V30H37zM39,29H40V30H39zM40,29H41V30H40zM41,29H42V30H41zM4,30H5V31H4zM5,30H6V31H5zM8,30H9V31H8zM11,30H12V31H11zM12,30H13V31H12zM13,30H14V31H13zM14,30H15V31H14zM17,30H18V31H17zM18,30H19V31H18zM21,30H22V31H21zM24,30H25V31H24zM26,30H27V31H26zM27,30H28V31H27zM33,30H34V31H33zM34,30H35V31H34zM39,30H40V31H39zM41,30H42V31H41zM2,31H3V32H2zM3,31H4V32H3zM5,31H6V32H5zM7,31H8V32H7zM16,31H17V32H16zM17,31H18V32H17zM23,31H24V32H23zM25,31H26V32H25zM27,31H28V32H27zM31,31H32V32H31zM32,31H33V32H32zM34,31H35V32H34zM36,31H37V32H36zM38,31H39V32H38zM39,31H40V32H39zM2,32H3V33H2zM3,32H4V33H3zM4,32H5V33H4zM6,32H7V33H6zM8,32H9V33H8zM10,32H11V33H10zM12,32H13V33H12zM21,32H22V33H21zM23,32H24V33H23zM26,32H27V33H26zM29,32H30V33H29zM33,32H34V33H33zM35,32H36V33H35zM37,32H38V33H37zM38,32H39V33H38zM39,32H40V33H39zM40,32H41V33H40zM42,32H43V33H42zM2,33H3V34H2zM3,33H4V34H3zM4,33H5V34H4zM5,33H6V34H5zM6,33H7V34H6zM9,33H10V34H9zM10,33H11V34H10zM13,33H14V34H13zM14,33H15V34H14zM15,33H16V34H15zM17,33H18V34H17zM21,33H22V34H21zM22,33H23V34H22zM25,33H26V34H25zM27,33H28V34H27zM29,33H30V34H29zM30,33H31V34H30zM33,33H34V34H33zM36,33H37V34H36zM40,33H41V34H40zM2,34H3V35H2zM3,34H4V35H3zM6,34H7V35H6zM8,34H9V35H8zM13,34H14V35H13zM15,34H16V35H15zM17,34H18V35H17zM19,34H20V35H19zM20,34H21V35H20zM21,34H22V35H21zM22,34H23V35H22zM25,34H26V35H25zM28,34H29V35H28zM31,34H32V35H31zM33,34H34V35H33zM34,34H35V35H34zM35,34H36V35H35zM36,34H37V35H36zM37,34H38V35H37zM38,34H39V35H38zM39,34H40V35H39zM40,34H41V35H40zM42,34H43V35H42zM10,35H11V36H10zM13,35H14V36H13zM16,35H17V36H16zM17,35H18V36H17zM18,35H19V36H18zM20,35H21V36H20zM21,35H22V36H21zM23,35H24V36H23zM24,35H25V36H24zM25,35H26V36H25zM29,35H30V36H29zM32,35H33V36H32zM34,35H35V36H34zM38,35H39V36H38zM2,36H3V37H2zM3,36H4V37H3zM4,36H5V37H4zM5,36H6V37H5zM6,36H7V37H6zM7,36H8V37H7zM8,36H9V37H8zM10,36H11V37H10zM11,36H12V37H11zM12,36H13V37H12zM15,36H16V37H15zM17,36H18V37H17zM19,36H20V37H19zM20,36H21V37H20zM22,36H23V37H22zM24,36H25V37H24zM25,36H26V37H25zM26,36H27V37H26zM28,36H29V37H28zM29,36H30V37H29zM30,36H31V37H30zM32,36H33V37H32zM33,36H34V37H33zM34,36H35V37H34zM36,36H37V37H36zM38,36H39V37H38zM40,36H41V37H40zM2,37H3V38H2zM8,37H9V38H8zM10,37H11V38H10zM12,37H13V38H12zM13,37H14V38H13zM16,37H17V38H16zM18,37H19V38H18zM19,37H20V38H19zM22,37H23V38H22zM23,37H24V38H23zM24,37H25V38H24zM26,37H27V38H26zM28,37H29V38H28zM31,37H32V38H31zM32,37H33V38H32zM33,37H34V38H33zM34,37H35V38H34zM38,37H39V38H38zM39,37H40V38H39zM2,38H3V39H2zM4,38H5V39H4zM5,38H6V39H5zM6,38H7V39H6zM8,38H9V39H8zM10,38H11V39H10zM12,38H13V39H12zM13,38H14V39H13zM15,38H16V39H15zM17,38H18V39H17zM19,38H20V39H19zM20,38H21V39H20zM21,38H22V39H21zM22,38H23V39H22zM23,38H24V39H23zM25,38H26V39H25zM27,38H28V39H27zM28,38H29V39H28zM29,38H30V39H29zM31,38H32V39H31zM33,38H34V39H33zM34,38H35V39H34zM35,38H36V39H35zM36,38H37V39H36zM37,38H38V39H37zM38,38H39V39H38zM39,38H40V39H39zM2,39H3V40H2zM4,39H5V40H4zM5,39H6V40H5zM6,39H7V40H6zM8,39H9V40H8zM10,39H11V40H10zM12,39H13V40H12zM13,39H14V40H13zM15,39H16V40H15zM16,39H17V40H16zM17,39H18V40H17zM18,39H19V40H18zM25,39H26V40H25zM29,39H30V40H29zM30,39H31V40H30zM31,39H32V40H31zM32,39H33V40H32zM34,39H35V40H34zM37,39H38V40H37zM39,39H40V40H39zM40,39H41V40H40zM41,39H42V40H41zM2,40H3V41H2zM4,40H5V41H4zM5,40H6V41H5zM6,40H7V41H6zM8,40H9V41H8zM11,40H12V41H11zM13,40H14V41H13zM14,40H15V41H14zM16,40H17V41H16zM19,40H20V41H19zM20,40H21V41H20zM21,40H22V41H21zM23,40H24V41H23zM27,40H28V41H27zM29,40H30V41H29zM32,40H33V41H32zM34,40H35V41H34zM35,40H36V41H35zM37,40H38V41H37zM38,40H39V41H38zM39,40H40V41H39zM42,40H43V41H42zM2,41H3V42H2zM8,41H9V42H8zM11,41H12V42H11zM12,41H13V42H12zM15,41H16V42H15zM18,41H19V42H18zM19,41H20V42H19zM21,41H22V42H21zM22,41H23V42H22zM26,41H27V42H26zM28,41H29V42H28zM35,41H36V42H35zM38,41H39V42H38zM40,41H41V42H40zM42,41H43V42H42zM2,42H3V43H2zM3,42H4V43H3zM4,42H5V43H4zM5,42H6V43H5zM6,42H7V43H6zM7,42H8V43H7zM8,42H9V43H8zM10,42H11V43H10zM11,42H12V43H11zM14,42H15V43H14zM17,42H18V43H17zM22,42H23V43H22zM24,42H25V43H24zM25,42H26V43H25zM26,42H27V43H26zM27,42H28V43H27zM29,42H30V43H29zM33,42H34V43H33zM34,42H35V43H34zM35,42H36V43H35zM36,42H37V43H36zM38,42H39V43H38zM39,42H40V43H39z" id="qr-path" fill="#000000" fill-opacity="1" fill-rule="nonzero" stroke="none"/></svg><b>P1 · Probe-Bohrmaschine</b><code>P1-DEMO-BOHR</code><span>QR-Code für das Probe-Badge</span></div>
+      <div class="qr" role="img" aria-label="QR-Code für das Probe-Badge P2 Probe-Lötstation"><svg aria-hidden="true" focusable="false" width="45mm" height="45mm" version="1.1" viewBox="0 0 45 45" xmlns="http://www.w3.org/2000/svg"><path d="M2,2H3V3H2zM3,2H4V3H3zM4,2H5V3H4zM5,2H6V3H5zM6,2H7V3H6zM7,2H8V3H7zM8,2H9V3H8zM10,2H11V3H10zM11,2H12V3H11zM14,2H15V3H14zM16,2H17V3H16zM17,2H18V3H17zM19,2H20V3H19zM20,2H21V3H20zM24,2H25V3H24zM27,2H28V3H27zM28,2H29V3H28zM32,2H33V3H32zM36,2H37V3H36zM37,2H38V3H37zM38,2H39V3H38zM39,2H40V3H39zM40,2H41V3H40zM41,2H42V3H41zM42,2H43V3H42zM2,3H3V4H2zM8,3H9V4H8zM10,3H11V4H10zM11,3H12V4H11zM12,3H13V4H12zM15,3H16V4H15zM16,3H17V4H16zM17,3H18V4H17zM20,3H21V4H20zM21,3H22V4H21zM22,3H23V4H22zM23,3H24V4H23zM24,3H25V4H24zM26,3H27V4H26zM27,3H28V4H27zM30,3H31V4H30zM31,3H32V4H31zM33,3H34V4H33zM36,3H37V4H36zM42,3H43V4H42zM2,4H3V5H2zM4,4H5V5H4zM5,4H6V5H5zM6,4H7V5H6zM8,4H9V5H8zM10,4H11V5H10zM12,4H13V5H12zM13,4H14V5H13zM14,4H15V5H14zM18,4H19V5H18zM22,4H23V5H22zM24,4H25V5H24zM25,4H26V5H25zM26,4H27V5H26zM27,4H28V5H27zM29,4H30V5H29zM33,4H34V5H33zM36,4H37V5H36zM38,4H39V5H38zM39,4H40V5H39zM40,4H41V5H40zM42,4H43V5H42zM2,5H3V6H2zM4,5H5V6H4zM5,5H6V6H5zM6,5H7V6H6zM8,5H9V6H8zM13,5H14V6H13zM14,5H15V6H14zM18,5H19V6H18zM20,5H21V6H20zM21,5H22V6H21zM22,5H23V6H22zM26,5H27V6H26zM28,5H29V6H28zM29,5H30V6H29zM31,5H32V6H31zM32,5H33V6H32zM34,5H35V6H34zM36,5H37V6H36zM38,5H39V6H38zM39,5H40V6H39zM40,5H41V6H40zM42,5H43V6H42zM2,6H3V7H2zM4,6H5V7H4zM5,6H6V7H5zM6,6H7V7H6zM8,6H9V7H8zM10,6H11V7H10zM12,6H13V7H12zM14,6H15V7H14zM18,6H19V7H18zM19,6H20V7H19zM21,6H22V7H21zM28,6H29V7H28zM30,6H31V7H30zM31,6H32V7H31zM32,6H33V7H32zM33,6H34V7H33zM34,6H35V7H34zM36,6H37V7H36zM38,6H39V7H38zM39,6H40V7H39zM40,6H41V7H40zM42,6H43V7H42zM2,7H3V8H2zM8,7H9V8H8zM13,7H14V8H13zM14,7H15V8H14zM19,7H20V8H19zM22,7H23V8H22zM23,7H24V8H23zM24,7H25V8H24zM25,7H26V8H25zM26,7H27V8H26zM28,7H29V8H28zM30,7H31V8H30zM31,7H32V8H31zM34,7H35V8H34zM36,7H37V8H36zM42,7H43V8H42zM2,8H3V9H2zM3,8H4V9H3zM4,8H5V9H4zM5,8H6V9H5zM6,8H7V9H6zM7,8H8V9H7zM8,8H9V9H8zM10,8H11V9H10zM12,8H13V9H12zM14,8H15V9H14zM16,8H17V9H16zM18,8H19V9H18zM20,8H21V9H20zM22,8H23V9H22zM24,8H25V9H24zM26,8H27V9H26zM28,8H29V9H28zM30,8H31V9H30zM32,8H33V9H32zM34,8H35V9H34zM36,8H37V9H36zM37,8H38V9H37zM38,8H39V9H38zM39,8H40V9H39zM40,8H41V9H40zM41,8H42V9H41zM42,8H43V9H42zM11,9H12V10H11zM16,9H17V10H16zM18,9H19V10H18zM21,9H22V10H21zM24,9H25V10H24zM27,9H28V10H27zM29,9H30V10H29zM30,9H31V10H30zM32,9H33V10H32zM2,10H3V11H2zM5,10H6V11H5zM6,10H7V11H6zM7,10H8V11H7zM8,10H9V11H8zM9,10H10V11H9zM10,10H11V11H10zM12,10H13V11H12zM13,10H14V11H13zM14,10H15V11H14zM15,10H16V11H15zM18,10H19V11H18zM19,10H20V11H19zM21,10H22V11H21zM26,10H27V11H26zM28,10H29V11H28zM30,10H31V11H30zM31,10H32V11H31zM35,10H36V11H35zM38,10H39V11H38zM40,10H41V11H40zM41,10H42V11H41zM42,10H43V11H42zM2,11H3V12H2zM3,11H4V12H3zM7,11H8V12H7zM9,11H10V12H9zM12,11H13V12H12zM13,11H14V12H13zM14,11H15V12H14zM15,11H16V12H15zM17,11H18V12H17zM19,11H20V12H19zM21,11H22V12H21zM24,11H25V12H24zM25,11H26V12H25zM28,11H29V12H28zM29,11H30V12H29zM31,11H32V12H31zM32,11H33V12H32zM33,11H34V12H33zM37,11H38V12H37zM38,11H39V12H38zM41,11H42V12H41zM2,12H3V13H2zM4,12H5V13H4zM6,12H7V13H6zM7,12H8V13H7zM8,12H9V13H8zM13,12H14V13H13zM16,12H17V13H16zM17,12H18V13H17zM22,12H23V13H22zM24,12H25V13H24zM25,12H26V13H25zM28,12H29V13H28zM29,12H30V13H29zM36,12H37V13H36zM38,12H39V13H38zM40,12H41V13H40zM41,12H42V13H41zM4,13H5V14H4zM9,13H10V14H9zM10,13H11V14H10zM11,13H12V14H11zM12,13H13V14H12zM13,13H14V14H13zM19,13H20V14H19zM20,13H21V14H20zM21,13H22V14H21zM24,13H25V14H24zM25,13H26V14H25zM26,13H27V14H26zM31,13H32V14H31zM33,13H34V14H33zM34,13H35V14H34zM35,13H36V14H35zM36,13H37V14H36zM37,13H38V14H37zM39,13H40V14H39zM41,13H42V14H41zM2,14H3V15H2zM3,14H4V15H3zM5,14H6V15H5zM8,14H9V15H8zM9,14H10V15H9zM10,14H11V15H10zM12,14H13V15H12zM14,14H15V15H14zM15,14H16V15H15zM16,14H17V15H16zM20,14H21V15H20zM21,14H22V15H21zM22,14H23V15H22zM29,14H30V15H29zM31,14H32V15H31zM34,14H35V15H34zM36,14H37V15H36zM37,14H38V15H37zM41,14H42V15H41zM42,14H43V15H42zM2,15H3V16H2zM4,15H5V16H4zM6,15H7V16H6zM9,15H10V16H9zM10,15H11V16H10zM12,15H13V16H12zM13,15H14V16H13zM14,15H15V16H14zM15,15H16V16H15zM16,15H17V16H16zM17,15H18V16H17zM20,15H21V16H20zM21,15H22V16H21zM23,15H24V16H23zM26,15H27V16H26zM27,15H28V16H27zM28,15H29V16H28zM30,15H31V16H30zM32,15H33V16H32zM33,15H34V16H33zM37,15H38V16H37zM38,15H39V16H38zM39,15H40V16H39zM42,15H43V16H42zM2,16H3V17H2zM3,16H4V17H3zM4,16H5V17H4zM5,16H6V17H5zM7,16H8V17H7zM8,16H9V17H8zM11,16H12V17H11zM12,16H13V17H12zM13,16H14V17H13zM14,16H15V17H14zM16,16H17V17H16zM17,16H18V17H17zM18,16H19V17H18zM19,16H20V17H19zM23,16H24V17H23zM24,16H25V17H24zM28,16H29V17H28zM29,16H30V17H29zM33,16H34V17H33zM34,16H35V17H34zM35,16H36V17H35zM36,16H37V17H36zM37,16H38V17H37zM38,16H39V17H38zM42,16H43V17H42zM5,17H6V18H5zM7,17H8V18H7zM9,17H10V18H9zM11,17H12V18H11zM13,17H14V18H13zM14,17H15V18H14zM16,17H17V18H16zM18,17H19V18H18zM21,17H22V18H21zM26,17H27V18H26zM28,17H29V18H28zM32,17H33V18H32zM35,17H36V18H35zM37,17H38V18H37zM38,17H39V18H38zM39,17H40V18H39zM40,17H41V18H40zM41,17H42V18H41zM42,17H43V18H42zM2,18H3V19H2zM3,18H4V19H3zM4,18H5V19H4zM5,18H6V19H5zM8,18H9V19H8zM12,18H13V19H12zM13,18H14V19H13zM14,18H15V19H14zM16,18H17V19H16zM17,18H18V19H17zM18,18H19V19H18zM20,18H21V19H20zM21,18H22V19H21zM22,18H23V19H22zM24,18H25V19H24zM25,18H26V19H25zM26,18H27V19H26zM27,18H28V19H27zM29,18H30V19H29zM33,18H34V19H33zM34,18H35V19H34zM35,18H36V19H35zM39,18H40V19H39zM3,19H4V20H3zM4,19H5V20H4zM5,19H6V20H5zM6,19H7V20H6zM7,19H8V20H7zM9,19H10V20H9zM10,19H11V20H10zM15,19H16V20H15zM16,19H17V20H16zM18,19H19V20H18zM20,19H21V20H20zM21,19H22V20H21zM22,19H23V20H22zM24,19H25V20H24zM27,19H28V20H27zM29,19H30V20H29zM30,19H31V20H30zM32,19H33V20H32zM33,19H34V20H33zM34,19H35V20H34zM35,19H36V20H35zM38,19H39V20H38zM3,20H4V21H3zM6,20H7V21H6zM8,20H9V21H8zM9,20H10V21H9zM13,20H14V21H13zM17,20H18V21H17zM18,20H19V21H18zM21,20H22V21H21zM23,20H24V21H23zM24,20H25V21H24zM25,20H26V21H25zM26,20H27V21H26zM29,20H30V21H29zM31,20H32V21H31zM33,20H34V21H33zM34,20H35V21H34zM35,20H36V21H35zM36,20H37V21H36zM37,20H38V21H37zM38,20H39V21H38zM42,20H43V21H42zM2,21H3V22H2zM3,21H4V22H3zM4,21H5V22H4zM5,21H6V22H5zM6,21H7V22H6zM10,21H11V22H10zM11,21H12V22H11zM13,21H14V22H13zM18,21H19V22H18zM19,21H20V22H19zM20,21H21V22H20zM21,21H22V22H21zM24,21H25V22H24zM28,21H29V22H28zM29,21H30V22H29zM34,21H35V22H34zM36,21H37V22H36zM38,21H39V22H38zM40,21H41V22H40zM41,21H42V22H41zM42,21H43V22H42zM3,22H4V23H3zM4,22H5V23H4zM8,22H9V23H8zM9,22H10V23H9zM10,22H11V23H10zM11,22H12V23H11zM12,22H13V23H12zM13,22H14V23H13zM16,22H17V23H16zM21,22H22V23H21zM23,22H24V23H23zM24,22H25V23H24zM27,22H28V23H27zM28,22H29V23H28zM29,22H30V23H29zM30,22H31V23H30zM33,22H34V23H33zM35,22H36V23H35zM36,22H37V23H36zM39,22H40V23H39zM40,22H41V23H40zM42,22H43V23H42zM2,23H3V24H2zM3,23H4V24H3zM4,23H5V24H4zM5,23H6V24H5zM7,23H8V24H7zM10,23H11V24H10zM11,23H12V24H11zM14,23H15V24H14zM16,23H17V24H16zM17,23H18V24H17zM18,23H19V24H18zM20,23H21V24H20zM21,23H22V24H21zM23,23H24V24H23zM25,23H26V24H25zM28,23H29V24H28zM29,23H30V24H29zM32,23H33V24H32zM33,23H34V24H33zM38,23H39V24H38zM39,23H40V24H39zM3,24H4V25H3zM7,24H8V25H7zM8,24H9V25H8zM10,24H11V25H10zM13,24H14V25H13zM15,24H16V25H15zM17,24H18V25H17zM18,24H19V25H18zM20,24H21V25H20zM23,24H24V25H23zM24,24H25V25H24zM25,24H26V25H25zM26,24H27V25H26zM27,24H28V25H27zM28,24H29V25H28zM29,24H30V25H29zM31,24H32V25H31zM35,24H36V25H35zM36,24H37V25H36zM37,24H38V25H37zM39,24H40V25H39zM40,24H41V25H40zM2,25H3V26H2zM4,25H5V26H4zM6,25H7V26H6zM7,25H8V26H7zM9,25H10V26H9zM10,25H11V26H10zM13,25H14V26H13zM14,25H15V26H14zM17,25H18V26H17zM18,25H19V26H18zM19,25H20V26H19zM20,25H21V26H20zM22,25H23V26H22zM24,25H25V26H24zM25,25H26V26H25zM28,25H29V26H28zM29,25H30V26H29zM30,25H31V26H30zM31,25H32V26H31zM35,25H36V26H35zM37,25H38V26H37zM38,25H39V26H38zM39,25H40V26H39zM4,26H5V27H4zM5,26H6V27H5zM6,26H7V27H6zM8,26H9V27H8zM9,26H10V27H9zM13,26H14V27H13zM16,26H17V27H16zM17,26H18V27H17zM18,26H19V27H18zM20,26H21V27H20zM25,26H26V27H25zM26,26H27V27H26zM29,26H30V27H29zM34,26H35V27H34zM35,26H36V27H35zM36,26H37V27H36zM37,26H38V27H37zM40,26H41V27H40zM2,27H3V28H2zM3,27H4V28H3zM4,27H5V28H4zM5,27H6V28H5zM6,27H7V28H6zM9,27H10V28H9zM10,27H11V28H10zM12,27H13V28H12zM13,27H14V28H13zM15,27H16V28H15zM17,27H18V28H17zM19,27H20V28H19zM20,27H21V28H20zM23,27H24V28H23zM25,27H26V28H25zM28,27H29V28H28zM29,27H30V28H29zM30,27H31V28H30zM31,27H32V28H31zM32,27H33V28H32zM34,27H35V28H34zM36,27H37V28H36zM37,27H38V28H37zM38,27H39V28H38zM40,27H41V28H40zM42,27H43V28H42zM2,28H3V29H2zM3,28H4V29H3zM5,28H6V29H5zM7,28H8V29H7zM8,28H9V29H8zM11,28H12V29H11zM12,28H13V29H12zM15,28H16V29H15zM19,28H20V29H19zM21,28H22V29H21zM26,28H27V29H26zM27,28H28V29H27zM28,28H29V29H28zM29,28H30V29H29zM30,28H31V29H30zM33,28H34V29H33zM34,28H35V29H34zM36,28H37V29H36zM39,28H40V29H39zM42,28H43V29H42zM2,29H3V30H2zM3,29H4V30H3zM5,29H6V30H5zM6,29H7V30H6zM9,29H10V30H9zM12,29H13V30H12zM13,29H14V30H13zM14,29H15V30H14zM15,29H16V30H15zM18,29H19V30H18zM22,29H23V30H22zM25,29H26V30H25zM28,29H29V30H28zM29,29H30V30H29zM32,29H33V30H32zM33,29H34V30H33zM36,29H37V30H36zM37,29H38V30H37zM39,29H40V30H39zM40,29H41V30H40zM41,29H42V30H41zM4,30H5V31H4zM5,30H6V31H5zM6,30H7V31H6zM8,30H9V31H8zM11,30H12V31H11zM12,30H13V31H12zM13,30H14V31H13zM17,30H18V31H17zM21,30H22V31H21zM24,30H25V31H24zM26,30H27V31H26zM27,30H28V31H27zM33,30H34V31H33zM34,30H35V31H34zM39,30H40V31H39zM41,30H42V31H41zM2,31H3V32H2zM3,31H4V32H3zM5,31H6V32H5zM7,31H8V32H7zM13,31H14V32H13zM16,31H17V32H16zM17,31H18V32H17zM23,31H24V32H23zM25,31H26V32H25zM27,31H28V32H27zM31,31H32V32H31zM32,31H33V32H32zM34,31H35V32H34zM36,31H37V32H36zM38,31H39V32H38zM39,31H40V32H39zM2,32H3V33H2zM3,32H4V33H3zM4,32H5V33H4zM6,32H7V33H6zM8,32H9V33H8zM10,32H11V33H10zM12,32H13V33H12zM17,32H18V33H17zM21,32H22V33H21zM23,32H24V33H23zM26,32H27V33H26zM29,32H30V33H29zM33,32H34V33H33zM35,32H36V33H35zM37,32H38V33H37zM38,32H39V33H38zM39,32H40V33H39zM40,32H41V33H40zM42,32H43V33H42zM2,33H3V34H2zM3,33H4V34H3zM4,33H5V34H4zM5,33H6V34H5zM6,33H7V34H6zM9,33H10V34H9zM10,33H11V34H10zM14,33H15V34H14zM15,33H16V34H15zM18,33H19V34H18zM21,33H22V34H21zM22,33H23V34H22zM25,33H26V34H25zM27,33H28V34H27zM29,33H30V34H29zM30,33H31V34H30zM33,33H34V34H33zM36,33H37V34H36zM40,33H41V34H40zM2,34H3V35H2zM3,34H4V35H3zM6,34H7V35H6zM8,34H9V35H8zM13,34H14V35H13zM15,34H16V35H15zM19,34H20V35H19zM20,34H21V35H20zM21,34H22V35H21zM22,34H23V35H22zM25,34H26V35H25zM28,34H29V35H28zM31,34H32V35H31zM33,34H34V35H33zM34,34H35V35H34zM35,34H36V35H35zM36,34H37V35H36zM37,34H38V35H37zM38,34H39V35H38zM39,34H40V35H39zM40,34H41V35H40zM42,34H43V35H42zM10,35H11V36H10zM13,35H14V36H13zM15,35H16V36H15zM16,35H17V36H16zM17,35H18V36H17zM18,35H19V36H18zM20,35H21V36H20zM21,35H22V36H21zM23,35H24V36H23zM24,35H25V36H24zM25,35H26V36H25zM29,35H30V36H29zM31,35H32V36H31zM32,35H33V36H32zM34,35H35V36H34zM38,35H39V36H38zM2,36H3V37H2zM3,36H4V37H3zM4,36H5V37H4zM5,36H6V37H5zM6,36H7V37H6zM7,36H8V37H7zM8,36H9V37H8zM10,36H11V37H10zM11,36H12V37H11zM12,36H13V37H12zM15,36H16V37H15zM16,36H17V37H16zM17,36H18V37H17zM19,36H20V37H19zM20,36H21V37H20zM22,36H23V37H22zM24,36H25V37H24zM25,36H26V37H25zM26,36H27V37H26zM28,36H29V37H28zM29,36H30V37H29zM30,36H31V37H30zM31,36H32V37H31zM33,36H34V37H33zM34,36H35V37H34zM36,36H37V37H36zM38,36H39V37H38zM40,36H41V37H40zM2,37H3V38H2zM8,37H9V38H8zM10,37H11V38H10zM11,37H12V38H11zM12,37H13V38H12zM13,37H14V38H13zM18,37H19V38H18zM19,37H20V38H19zM22,37H23V38H22zM23,37H24V38H23zM24,37H25V38H24zM26,37H27V38H26zM28,37H29V38H28zM31,37H32V38H31zM32,37H33V38H32zM33,37H34V38H33zM34,37H35V38H34zM38,37H39V38H38zM39,37H40V38H39zM2,38H3V39H2zM4,38H5V39H4zM5,38H6V39H5zM6,38H7V39H6zM8,38H9V39H8zM10,38H11V39H10zM13,38H14V39H13zM17,38H18V39H17zM19,38H20V39H19zM20,38H21V39H20zM21,38H22V39H21zM22,38H23V39H22zM23,38H24V39H23zM25,38H26V39H25zM27,38H28V39H27zM28,38H29V39H28zM29,38H30V39H29zM31,38H32V39H31zM33,38H34V39H33zM34,38H35V39H34zM35,38H36V39H35zM36,38H37V39H36zM37,38H38V39H37zM38,38H39V39H38zM39,38H40V39H39zM2,39H3V40H2zM4,39H5V40H4zM5,39H6V40H5zM6,39H7V40H6zM8,39H9V40H8zM10,39H11V40H10zM13,39H14V40H13zM15,39H16V40H15zM17,39H18V40H17zM18,39H19V40H18zM25,39H26V40H25zM29,39H30V40H29zM30,39H31V40H30zM31,39H32V40H31zM32,39H33V40H32zM34,39H35V40H34zM37,39H38V40H37zM39,39H40V40H39zM40,39H41V40H40zM41,39H42V40H41zM2,40H3V41H2zM4,40H5V41H4zM5,40H6V41H5zM6,40H7V41H6zM8,40H9V41H8zM11,40H12V41H11zM13,40H14V41H13zM14,40H15V41H14zM16,40H17V41H16zM19,40H20V41H19zM20,40H21V41H20zM21,40H22V41H21zM23,40H24V41H23zM27,40H28V41H27zM29,40H30V41H29zM32,40H33V41H32zM34,40H35V41H34zM35,40H36V41H35zM37,40H38V41H37zM38,40H39V41H38zM39,40H40V41H39zM42,40H43V41H42zM2,41H3V42H2zM8,41H9V42H8zM11,41H12V42H11zM12,41H13V42H12zM15,41H16V42H15zM18,41H19V42H18zM19,41H20V42H19zM21,41H22V42H21zM22,41H23V42H22zM26,41H27V42H26zM28,41H29V42H28zM35,41H36V42H35zM38,41H39V42H38zM40,41H41V42H40zM42,41H43V42H42zM2,42H3V43H2zM3,42H4V43H3zM4,42H5V43H4zM5,42H6V43H5zM6,42H7V43H6zM7,42H8V43H7zM8,42H9V43H8zM10,42H11V43H10zM11,42H12V43H11zM14,42H15V43H14zM17,42H18V43H17zM22,42H23V43H22zM24,42H25V43H24zM25,42H26V43H25zM26,42H27V43H26zM27,42H28V43H27zM29,42H30V43H29zM33,42H34V43H33zM34,42H35V43H34zM35,42H36V43H35zM36,42H37V43H36zM38,42H39V43H38zM39,42H40V43H39z" id="qr-path" fill="#000000" fill-opacity="1" fill-rule="nonzero" stroke="none"/></svg><b>P2 · Probe-Lötstation</b><code>P2-DEMO-LOET</code><span>QR-Code für das Probe-Badge</span></div>
+    </div>
+    <div class="split">
+      <div class="box">
+        <h4>Mit einem zweiten Gerät scannen</h4>
+        <p>Scanne einen QR-Code mit der Kamera-App deines Handys oder iPads. Der Link öffnet diese Seite dort und trägt das Badge ein. Lege auf dem zweiten Gerät dafür zuerst einen Probier-Pass an.</p>
+        <p>Oder scanne mit der Kamera dieser Seite einen QR-Code, den ein anderes Gerät zeigt:</p>
+        <div class="row"><button class="btn accent" id="camGo" type="button"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg><span>QR-Code scannen</span></button></div>
+        <div class="cam" id="cam" hidden><video id="vid" playsinline muted aria-label="Kamerabild zum Scannen"></video><div class="frame" aria-hidden="true"></div></div>
+      </div>
+      <div class="box">
+        <h4>Code eintippen</h4>
+        <p>Streikt die Kamera, tippen die Schüler:innen den Code unter dem QR-Code ein. Groß- und Kleinschreibung und Striche sind egal.</p>
+        <div class="codein"><input type="text" id="codeIn" maxlength="16" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="z. B. P2-DEMO-LOET" aria-label="Code eintippen"><button class="btn soft" id="codeGo" type="button">Eintragen</button></div>
+        <p class="small muted">Hol dir beide Probe-Badges, dann siehst du, wie das Sammel-Badge PM von selbst erscheint.</p>
+      </div>
+    </div>
+    <div id="msgGet" aria-live="polite"></div>
+  </div>
+
+  <div class="card" id="cSave" hidden>
+    <h3>Schritt 3 und 4 · Pass speichern und wieder laden</h3>
+    <div class="split">
+      <div class="box">
+        <h4>Pass als PDF speichern</h4>
+        <p>In der PDF steckt der ganze Pass als Code in den Dateieigenschaften. Die Schüler:innen legen sie in ihrem Technik-Ordner ab.</p>
+        <div class="row"><button class="btn accent" id="pdfGo" type="button"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg><span>Probier-Pass als PDF speichern</span></button></div>
+      </div>
+      <div class="box">
+        <h4>PDF wieder laden</h4>
+        <p>So holen Schüler:innen ihren Pass zurück, zum Beispiel auf einem neuen Gerät. Wähle die gerade gespeicherte PDF.</p>
+        <div class="row"><label class="btn soft fileb">Pass-PDF laden<input type="file" accept=".pdf,application/pdf" data-up="1"></label></div>
+      </div>
+    </div>
+    <div class="note"><p><b>Gut zu wissen:</b> Eine PDF, die aus Notability neu exportiert wurde, oder ein Bildschirmfoto enthält den Code meist nicht. Die Schüler:innen heben deshalb die Original-PDF auf.</p></div>
+    <div id="msgSave" aria-live="polite"></div>
+    <details class="box" style="background:var(--surface-2)"><summary style="cursor:pointer;font-weight:700">Probier-Pass auf diesem Gerät löschen</summary>
+      <p style="margin-top:8px">Löscht den Probier-Pass in diesem Browser, damit du noch einmal von vorn beginnen kannst.</p>
+      <div class="row"><button class="btn danger" id="delGo" type="button">Probier-Pass löschen</button></div>
+    </details>
+  </div>
+  <div class="navrow"><button class="btn soft" type="button" data-go="1">Zurück</button><button class="btn accent" type="button" data-go="3">Weiter: Organisation</button></div>
+</section>
+
+<!-- ================= KAPITEL 3 ================= -->
+<section class="station c-luxus" data-ch="3" aria-labelledby="h3k" hidden>
+  <div class="chead"><span class="n">3</span><div><h2 id="h3k">Organisation an der Schule</h2><p>Codes, verlorene Pässe, die Liste, Datenschutz und die RiSU</p></div></div>
+  <div class="card">
+    <h3>Codes wechseln jedes Schuljahr</h3>
+    <ul>
+      <li>Für jedes Badge mit Prüfung gibt es einen Code, zum Beispiel <code>BH-K7Q4-M9XP</code>: Kürzel und acht zufällige Zeichen. Der QR-Code enthält ihn, darunter steht er zum Eintippen.</li>
+      <li>Die Codes wechseln am <b>1. August</b>. Codes aus einem anderen Schuljahr lehnt die Seite mit einem Hinweis ab.</li>
+      <li>Früher erworbene Badges bleiben gültig, weil der Pass das Badge mit Datum speichert und nicht den Code.</li>
+      <li>Auf der Seite steht je Code nur ein <b>Prüfwert</b> (SHA-256). Aus dem Quelltext lässt sich der Code nicht ablesen.</li>
+      <li>Das Codeblatt liegt im Ordner bei der Liste. Nicht aushängen, nicht weitergeben. Taucht ein Code in der Klasse auf, hilft die Liste: Nur was dort steht, gilt.</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>Pass verloren oder neues Gerät</h3>
+    <ol>
+      <li>Die Schüler:in lädt die zuletzt gespeicherte Pass-PDF. Dann ist alles wieder da.</li>
+      <li>Fehlt die PDF, legt sie einen neuen Pass an. Du schaust in die Liste und lässt die Codes der eingetragenen Badges noch einmal scannen.</li>
+      <li>Badges aus Lernplattformen kommen über die Ergebnis-PDFs zurück.</li>
+    </ol>
+  </div>
+  <div class="card">
+    <h3>Die Liste im Fachraum</h3>
+    <ul>
+      <li>Eine fortlaufende Liste je Schuljahr mit fünf Spalten: Datum, Name, Klasse, Kürzel, Unterschrift der Lehrkraft. Die Legende der Kürzel steht im Kopf jeder Seite.</li>
+      <li>Die Liste ist der <b>verbindliche Nachweis</b>. Der Pass auf dem iPad ist eine Kopie für die Schüler:innen.</li>
+      <li>Die Liste enthält Nachnamen. Sie bleibt im Fachraum und liegt verschlossen, nicht offen aus.</li>
+      <li>Am Ende des Schuljahres kann sie eingescannt in den Ordner der Fachgruppe auf dem Schulserver. Alte Listen werden aufbewahrt, solange die Schüler:innen an der Schule sind.</li>
+    </ul>
+    <p><a class="btn soft" href="Liste_Badges_Fachraum.pdf" download style="text-decoration:none">Vorlage Liste im Fachraum (PDF, A4)</a></p>
+  </div>
+  <div class="card">
+    <h3>Datenschutz</h3>
+    <ul>
+      <li>Pass und Ergebnis-PDFs bleiben auf dem iPad. Die Badge-Seite verarbeitet sie im Browser und sendet nichts an einen Server. Es gibt keine Konten.</li>
+      <li>Namen von Schüler:innen stehen nur im Pass und in der Liste im Fachraum, nicht in externen Diensten.</li>
+      <li>Die Seite speichert den Pass im Speicher des Browsers. Wer die Browserdaten löscht, löscht auch den Pass. Darum die PDF.</li>
+      <li>Baust du ein eigenes System, gibt die Schulleitung den Einsatz mit Schüler:innen frei (siehe Kapitel 4).</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>Badges und die RiSU</h3>
+    <p>Die Stufen des Badge-Systems sind eigene Stufen der Fachgruppe. Sie ersetzen die Tätigkeitsbeschränkungen der RiSU nicht. Für die Maschinen der Technik-Badges gilt:</p>
+    <div class="tw"><table><thead><tr><th>Maschine oder Gerät</th><th>Jg. 5/6</th><th>Jg. 7/8</th><th>ab Jg. 9</th></tr></thead><tbody>
+      <tr><td>Tisch- und Ständerbohrmaschine (elektrisch)</td><td class="c">A</td><td class="c">TS</td><td class="c">S</td></tr>
+      <tr><td>Lötkolben und Lötstation (elektrisch)</td><td class="c">TS</td><td class="c">S</td><td class="c">S</td></tr>
+      <tr><td>3D-Druck – Bedienungsanleitung beachten</td><td class="c">A</td><td class="c">TS</td><td class="c">TS</td></tr>
+      <tr><td>Laserbearbeitungsmaschinen (Lasercutter, Lasergravierer)</td><td class="c">A</td><td class="c">A</td><td class="c">TS</td></tr>
+    </tbody></table></div>
+    <p><b>A</b> unter Aufsicht: Die Lehrkraft steht unmittelbar daneben und beaufsichtigt den Vorgang. <b>TS</b> teilselbstständig: Die Schüler:in arbeitet selbstständig, befindet sich jedoch im Blickfeld der Lehrkraft. <b>S</b> selbstständig (Wortlaut in Tabelle 5). An allen Maschinen und Geräten ist eine Einweisung erforderlich.</p>
+    <div class="note"><p><b>Folge für den Lasercutter:</b> Bis Jahrgang 8 steht die Lehrkraft beim Lasern daneben, auch wenn L1 im Pass steht. L2 und L3 passen erst ab Jahrgang 9. Transferpresse und Plotter stehen nicht in Tabelle 4. Dort gilt die Gefährdungsbeurteilung der Schule.</p></div>
+    <p class="src">Quelle: RiSU – Richtlinie zur Sicherheit im Unterricht, Fassung 2023, Kapitel I – 4.3, Tabelle 4 „Tätigkeitsbeschränkungen für Schülerinnen und Schüler an Maschinen und Geräten“ und Tabelle 5 „Abkürzungen“, S. 48. Prüfe, ob dein Land eine eigene Fassung oder einen Einführungserlass hat.</p>
+  </div>
+  <div class="navrow"><button class="btn soft" type="button" data-go="2">Zurück</button><button class="btn accent" type="button" data-go="4">Weiter: Selbst nachbauen</button></div>
+</section>
+
+<!-- ================= KAPITEL 4 ================= -->
+<section class="station c-sichern" data-ch="4" aria-labelledby="h4k" hidden>
+  <div class="chead"><span class="n">4</span><div><h2 id="h4k">Für die eigene Schule nachbauen</h2><p>Mit Claude eine eigene Badge-Seite bauen und veröffentlichen</p></div></div>
+  <div class="card">
+    <h3>So gehst du vor</h3>
+    <ol class="steps4">
+      <li><span><b>Badges planen:</b> Lege mit deiner Fachgruppe fest, welche Badges es gibt, ihre Kürzel, was in der Prüfung zu zeigen ist und welche Sammel-Badges sich ergeben. Gleiche die Stufen mit der RiSU ab (Kapitel 3).</span></li>
+      <li><span><b>Freigabe holen:</b> Die Schulleitung gibt den Einsatz mit Schüler:innen frei. Kläre auch, wo die Liste liegt und wer die Codes verwaltet.</span></li>
+      <li><span><b>Prompt kopieren und ausfüllen:</b> Ersetze die Platzhalter in eckigen Klammern durch deine Angaben. Schreib in den Chat keine echten Namen von Schüler:innen.</span></li>
+      <li><span><b>Bauen lassen und testen:</b> Claude stellt zuerst Fragen und baut dann. Teste mit erfundenen Namen auf einem Schul-iPad: Pass anlegen, Code eintippen, QR-Code scannen, PDF speichern und laden.</span></li>
+      <li><span><b>Veröffentlichen</b> über einen der beiden Wege unten. Codeblatt und Liste druckst du aus und legst sie in den Ordner im Fachraum.</span></li>
+      <li><span><b>Jedes Schuljahr:</b> Lass dir im selben Chat neue Codes und ein neues Codeblatt erstellen.</span></li>
+    </ol>
+    <div class="note"><p><b>Datenschutz beim Nachbau:</b> Im Chat stehen nur Badges, Kürzel und Codes, nie Namen oder Daten von Schüler:innen. Zum Testen nimmst du erfundene Namen. Den Einsatz mit Schüler:innen gibt die Schulleitung frei.</p></div>
+  </div>
+
+  <div class="card">
+    <h3>Der Prompt zum Kopieren</h3>
+    <p>Für Claude mit der Funktion, Seiten als Artefakt zu erstellen. Die Platzhalter in eckigen Klammern ersetzt du durch deine Angaben.</p>
+    <textarea class="prompt" id="prompt" readonly aria-label="Prompt zum Kopieren">Baue mir ein Badge-System für den Unterricht an meiner Schule als eine einzelne HTML-Seite. Sie läuft ohne Server und ohne Anmeldung. Stelle mir zuerst deine offenen Fragen gebündelt und baue erst danach. Zeig mir die Seite als Artefakt, damit ich sie testen kann.
+
+MEINE ANGABEN
+- Schule und Fach: [z. B. IGS Musterstadt, Technik]
+- Geräte der Schüler:innen: [z. B. iPad mit Safari]
+- Wo ich die Seite veröffentliche: [Freigabelink in Claude ODER eigene Seite auf GitHub Pages]
+- Badges, je Zeile Kürzel, Name, Nachweis und Voraussetzung (falls es eine gibt):
+  [BH, Bohrmaschine Holz, Prüfung]
+  [LT, Lötstation, Prüfung]
+  [L1, Lasercutter Stufe 1, Prüfung]
+  [L2, Lasercutter Stufe 2, Prüfung, setzt L1 voraus]
+- Sammel-Badges, je Zeile Kürzel, Name und die Badges, aus denen es sich ergibt:
+  [MS, MakerSpace = LT + BH]
+- Schuljahr, für das die ersten Codes gelten: [z. B. 2026/27]
+
+SO SOLL ES FUNKTIONIEREN
+1. Pass anlegen: Schüler:innen tragen Name und Klasse ein. Der Pass liegt im Speicher des Browsers.
+2. Pass speichern und laden: Der Pass lässt sich als PDF (A4) speichern. Die PDF zeigt alle Badges als Raster, erworbene farbig, dazu eine Tabelle mit Kürzel, Name, Datum und Uhrzeit. In den Eigenschaften der PDF steckt der ganze Pass als Code, über „Pass-PDF laden“ kommt er zurück. Zusätzlich gibt es einen Sicherungscode zum Kopieren und Einfügen, falls das Speichern einer Datei nicht klappt.
+3. Badge nach einer Prüfung: Ich zeige einen QR-Code. Die Schüler:innen scannen ihn mit der Kamera in der Seite oder tippen den Code darunter ein. Danach zeigt die Seite groß Kürzel, Name, Datum und Uhrzeit, damit ich zusehen kann. Der Pass speichert Kürzel, Datum und Uhrzeit.
+4. Voraussetzungen: Ein Badge mit Voraussetzung lässt sich erst eintragen, wenn die Voraussetzung im Pass steht. Die Seite sagt dann, was fehlt.
+5. Sammel-Badges erscheinen von selbst, sobald ihre Voraussetzungen im Pass stehen. Sie brauchen keinen Code.
+6. Für mich als Lehrkraft erstellst du zwei PDF-Dateien hier im Chat, nicht auf der Seite:
+   - Codeblatt: je Badge mit Prüfung ein QR-Code mit Kürzel, Name, Code in Textform und Schuljahr, dazu der Hinweis „Nur für Lehrkräfte“.
+   - Liste für den Fachraum: Spalten Datum, Name, Klasse, Kürzel, Unterschrift. Im Kopf jeder Seite steht die Legende der Kürzel.
+
+REGELN
+- Alle Daten bleiben im Browser und in der Pass-Datei. Nichts geht an einen Server. Keine Tracker, keine eingebetteten fremden Seiten.
+- Codes: je Badge ein zufälliger Code aus Kürzel und acht Zeichen ohne leicht verwechselbare Zeichen (kein 0, O, 1, I, L), zum Beispiel BH-K7Q4-M9XP. Auf der Seite steht nur ein Prüfwert (SHA-256 mit festem Zusatztext), nie der Code. Groß- und Kleinschreibung und Striche spielen beim Eintippen keine Rolle.
+- Die Codes wechseln jedes Schuljahr am 1. August. Codes aus einem anderen Schuljahr lehnt die Seite mit einem verständlichen Hinweis ab. Früher erworbene Badges bleiben gültig, weil der Pass das Badge mit Datum speichert.
+- Die Seite ist auf dem Tablet gut bedienbar, hat einen hellen und einen dunklen Modus und spricht die Schüler:innen in einfacher Sprache mit „du“ an.
+- Auf der Seite steht: Ein Badge ersetzt nicht die Regeln der RiSU und die Aufsicht der Lehrkraft. Verbindlich ist die Liste im Fachraum.
+- In diesem Chat stehen keine echten Namen von Schüler:innen. Zum Testen nimmst du erfundene Namen.
+
+WENN ICH DIE SEITE ALS FREIGABELINK IN CLAUDE VERÖFFENTLICHE
+- Die Kamera ist in einem Artefakt womöglich gesperrt. Plane „Code eintippen“ als Weg, der immer funktioniert, und zeige den Kamera-Knopf nur, wenn die Kamera verfügbar ist. Der QR-Code enthält dann nur den Code als Text.
+- Eine Datei darf die Seite nicht selbst herunterladen, nur über die Download-Funktion von Claude. Prüfe, ob sie für Betrachter:innen mit dem Freigabelink angeboten wird. Wenn nicht, ist der Sicherungscode zum Kopieren der Weg, den Pass zu sichern, und die Seite erklärt das.
+- Pass-Datei laden geht über eine normale Dateiauswahl.
+
+WENN ICH DIE SEITE AUF GITHUB PAGES VERÖFFENTLICHE
+- Alles steckt in einer einzigen index.html. Bibliotheken für PDF und QR-Erkennung sind eingebettet, die Seite lädt nichts von fremden Servern.
+- Der QR-Code enthält einen Link zur Seite mit dem Code (…/#c=CODE). Dann öffnet die Kamera-App des iPads die Seite und trägt das Badge ein.
+- Codes und Codeblatt kommen nie ins Repository, nur die fertige Seite mit den Prüfwerten.
+
+ZUM SCHLUSS
+Erkläre mir in wenigen Schritten, wie ich die Seite auf meinem Weg veröffentliche, was ich dabei beachten muss und wie ich im nächsten Schuljahr neue Codes und ein neues Codeblatt bekomme.</textarea>
+    <div class="row"><button class="btn accent" id="cpGo" type="button">Prompt kopieren</button><span class="small muted" id="cpMsg" aria-live="polite"></span></div>
+  </div>
+
+  <div class="card">
+    <h3>Zwei Wege zum Veröffentlichen</h3>
+    <div class="tw"><table><thead><tr><th></th><th>Freigabelink in Claude</th><th>Eigene Seite auf GitHub Pages</th></tr></thead><tbody>
+      <tr><th>Voraussetzung</th><td>Tarif Pro, Max, Team oder Enterprise. Mit Free lassen sich neue Artefakte nicht per Link teilen.</td><td>Kostenloses GitHub-Konto. Mit GitHub Free nur aus einem öffentlichen Repository.</td></tr>
+      <tr><th>So geht es</th><td>Im Artefakt auf „Teilen“, Zugriff „Jeder mit dem Link“, Link kopieren und als QR-Code oder Kurzlink an die Schüler:innen geben.</td><td>Repository anlegen, die eine HTML-Datei als <code>index.html</code> hochladen, unter Settings → Pages veröffentlichen.</td></tr>
+      <tr><th>Wer öffnet die Seite</th><td>Die meisten Artefakte mit „Jeder mit dem Link“ öffnen sich ohne Claude-Konto. Bei Team und Enterprise ist das Teilen nach außen zunächst aus, eine Inhaberin oder ein Inhaber schaltet es frei.</td><td>Jede und jeder mit dem Link, ohne Konto.</td></tr>
+      <tr><th>Kamera zum Scannen</th><td id="tCam">wird noch geprüft</td><td>Geht über https in Safari und Chrome.</td></tr>
+      <tr><th>Pass als PDF speichern</th><td id="tDl">Nur über die Download-Freigabe von Claude, die Seite selbst darf keine Datei starten. Laut Hilfeartikel können Downloads ab der Rolle „Commenter“ genutzt werden. Ob sie mit einem Freigabelink gehen, wird noch geprüft.</td><td>Geht.</td></tr>
+      <tr><th>QR-Code mit Kamera-App</th><td>Der Link des Artefakts gibt nur einfache Sprungmarken weiter. Der QR-Code enthält deshalb nur den Code zum Eintippen.</td><td>Der QR-Code kann einen Link mit dem Code enthalten. Die Kamera-App öffnet dann die Seite und trägt das Badge ein.</td></tr>
+      <tr><th>Datenschutz</th><td>Die Seite liegt bei Anthropic. Pass-Daten bleiben trotzdem im Browser der Schüler:innen.</td><td>GitHub speichert die IP-Adresse jeder Besucherin und jedes Besuchers aus Sicherheitsgründen. Mit der Schulleitung und der oder dem Datenschutzbeauftragten klären.</td></tr>
+      <tr><th>Codes</th><td>Nur Prüfwerte auf der Seite. Codeblatt nur als eigene Datei.</td><td>Das Repository ist öffentlich, also nie Codes oder Codeblatt hochladen, nur die fertige Seite mit Prüfwerten.</td></tr>
+    </tbody></table></div>
+    <p class="src">Quellen: Claude-Hilfe, „Share artifacts“, support.claude.com/en/articles/9547008 (gelesen am 17.11.2026, Stand laut Seite „Updated this week“); Claude-Code-Dokumentation, „Share session output as artifacts“, code.claude.com/docs/en/artifacts, Abschnitte „Share an artifact“ und „Page constraints“ (gelesen am 17.11.2026); GitHub Docs, „What is GitHub Pages?“, docs.github.com (gelesen am 17.11.2026). Die Möglichkeiten hängen vom Tarif ab und ändern sich. Prüfe sie vor dem Einsatz.</p>
+  </div>
+  <div class="navrow"><button class="btn soft" type="button" data-go="3">Zurück</button><span></span></div>
+</section>
+
+    <p class="lic">Das Badge-System von Daniel Beyrodt · Lizenz <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> · QR-Scanner: jsQR (Apache 2.0, <a href="../lizenzen/">Lizenzen</a>)</p>
+  </main>
+</div>
+
+<div class="ov" id="ov" hidden role="dialog" aria-modal="true" aria-labelledby="ovT"><div class="ovbox" id="ovBox"></div></div>
+
+<script>
+(function(){
+'use strict';
+const KEY='technik-badges-fortbildung-v1',CHK='technik-badges-fortbildung-kapitel',SLUG='technik-badges-fortbildung',SALT='deinTechniklehrer-badges-probe|';
+const DEMO={"aad47351c1da9d2971fb25c7ac5ee0ecf7d336ff5f50b89f68161ccf100756a9": "P1", "bcf75bb64842fdbf49c32b8575b8145c0395156cf710f7208cfb2dd9cd870c24": "P2"};
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const pad=n=>String(n).padStart(2,'0');
+const dStr=iso=>{const d=new Date(iso);return isNaN(d)?'':pad(d.getDate())+'.'+pad(d.getMonth()+1)+'.'+d.getFullYear();};
+const tStr=iso=>{const d=new Date(iso);return isNaN(d)?'':pad(d.getHours())+':'+pad(d.getMinutes());};
+
+/* ---------- Badges der Technik-Badges (Kapitel 1) ---------- */
+const GROUPS=[{id:'werk',t:'Werkstatt'},{id:'druck',t:'3D-Druck'},{id:'laser',t:'Lasercutter'},{id:'textil',t:'Textil'},{id:'cad',t:'3D-CAD'},{id:'steuer',t:'Steuern und Regeln'},{id:'motor',t:'Motorentechnik'},{id:'sammel',t:'Sammel-Badges'}];
+const BADGES=[
+  {k:'BH',t:'Bohrmaschine Holz',g:'werk',n:'p'},{k:'BM',t:'Bohrmaschine Metall',g:'werk',n:'p'},{k:'BU',t:'Bohrmaschine UMT',g:'werk',n:'p'},{k:'LT',t:'Lötstation',g:'werk',n:'p'},
+  {k:'D1',t:'3D-Druck bedienen',g:'druck',n:'p',i:'Druck vorbereiten, starten, entnehmen'},{k:'D2',t:'3D-Druck warten',g:'druck',n:'p',i:'baut auf D1 auf'},{k:'D3',t:'3D-Druck reparieren',g:'druck',n:'p',i:'baut auf D2 auf'},
+  {k:'L1',t:'Lasercutter Stufe 1',g:'laser',n:'p',i:'Gravieren. Vor dem Start nachfragen, die Lehrkraft prüft.'},{k:'L2',t:'Lasercutter Stufe 2',g:'laser',n:'p',i:'Gravieren ohne Prüfung durch die Lehrkraft, baut auf L1 auf'},{k:'L3',t:'Lasercutter Stufe 3',g:'laser',n:'p',i:'auch Schneiden, SVG-Dateien in Inkscape bearbeiten, baut auf L2 auf'},
+  {k:'TP',t:'Transferpresse',g:'textil',n:'p'},{k:'PL',t:'Plotter',g:'textil',n:'p'},
+  {k:'TC',t:'Tinkercad',g:'cad',n:'p'},{k:'SE',t:'Solid Edge',g:'cad',n:'p'},{k:'SM',t:'SpaceMouse',g:'cad',n:'p'},
+  {k:'RO',t:'Robotik',g:'steuer',n:'p'},{k:'AR',t:'Arduino',g:'steuer',n:'l'},{k:'CA',t:'Calliope',g:'steuer',n:'l'},
+  {k:'MT',t:'Motorentechnik Theorie',g:'motor',n:'l'},{k:'MP',t:'Motorentechnik Praxis',g:'motor',n:'p'},
+  {k:'MS',t:'MakerSpace',g:'sammel',n:'a',all:['LT','BH','BM','BU'],i:'Sammel-Badge: LT, BH, BM und BU'},{k:'RL',t:'Robotiklabor selbstständig',g:'sammel',n:'a',all:['L2','D2'],i:'Sammel-Badge: L2 und D2'}];
+const BK={};BADGES.forEach(b=>BK[b.k]=b);
+const NW={p:'Prüfung',l:'Lernplattform',a:'automatisch'};
+const EXAMPLE=['BH','BM','D1','L1','TC','AR'];
+function medal(k){return '<span class="medal" aria-hidden="true">'+esc(k)+'</span>';}
+function bdHtml(b,got,sub){return '<div class="bd'+(got?' got':'')+(b.n==='a'?' sammel':'')+' g-'+b.g+'">'+medal(b.k)+'<span class="t">'+esc(b.t)+'</span><span class="s">'+esc(sub)+'</span></div>';}
+$('#allBadges').innerHTML=GROUPS.map(g=>'<div class="grp g-'+g.id+'"><h4>'+esc(g.t)+'</h4><div class="badges">'+BADGES.filter(b=>b.g===g.id).map(b=>bdHtml(b,EXAMPLE.indexOf(b.k)>=0,EXAMPLE.indexOf(b.k)>=0?'Beispiel: erworben':NW[b.n])).join('')+'</div></div>').join('');
+$('#kTab').innerHTML=BADGES.map(b=>'<tr><td><b>'+b.k+'</b></td><td>'+esc(b.t)+'</td><td>'+esc(b.i||'')+'</td><td>'+NW[b.n]+'</td></tr>').join('');
+function eq(b){return bdHtml(b,false,'').replace('class="bd ','class="bd solid ')+'<span class="op" aria-hidden="true">=</span>'+b.all.map((k,i)=>(i?'<span class="op" aria-hidden="true">+</span>':'')+bdHtml(BK[k],false,'').replace('class="bd ','class="bd solid ')).join('');}
+$('#eqMS').innerHTML=eq(BK.MS);$('#eqRL').innerHTML=eq(BK.RL);
+
+/* ---------- Kapitel ---------- */
+const CHN=['So nutzen wir es','Selbst ausprobieren','Organisation','Nachbauen'],CC=['c-kultur','c-existenz','c-luxus','c-sichern'];
+let cur=1;try{cur=Math.min(4,Math.max(1,parseInt(localStorage.getItem(CHK),10)||1));}catch(e){}
+function nav(){$('#nav').innerHTML=CHN.map((t,i)=>'<button class="st-btn '+CC[i]+'" type="button" data-go="'+(i+1)+'"'+(cur===i+1?' aria-current="step"':'')+'><span class="n">'+(i+1)+'</span>'+esc(t)+'</button>').join('');}
+function go(n,scroll){cur=n;$$('.station').forEach(s=>s.hidden=+s.dataset.ch!==n);nav();try{localStorage.setItem(CHK,String(n));}catch(e){}if(scroll)window.scrollTo({top:0,behavior:'auto'});if(n!==2)stopCam();}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(b){go(+b.dataset.go,true);}});
+
+/* ---------- Probier-Pass (Kapitel 2) ---------- */
+const PROBE=[{k:'P1',t:'Probe-Bohrmaschine',g:'probe',n:'p'},{k:'P2',t:'Probe-Lötstation',g:'probe',n:'p'},{k:'PM',t:'Probe-MakerSpace',g:'probe',n:'a',all:['P1','P2'],i:'P1 und P2'},{k:'BA',t:'Badge-System ausprobiert',g:'probe',n:'f',i:'alle vier Schritte'}];
+const PK={};PROBE.forEach(b=>PK[b.k]=b);
+let S=null;
+try{S=JSON.parse(localStorage.getItem(KEY)||'null');}catch(e){S=null;}
+if(!S||typeof S!=='object')S={pass:null,st:{}};S.st=S.st||{};if(S.pass)S.pass.b=S.pass.b||{};
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S));return true;}catch(e){return false;}}
+const has=k=>!!(S.pass&&S.pass.b[k]);
+function got(k){const b=PK[k];if(b.n==='a')return b.all.every(has)?b.all.map(x=>S.pass.b[x].d).sort().pop():null;return S.pass&&S.pass.b[k]?S.pass.b[k].d:null;}
+function steps(){return {pass:!!S.pass,badge:has('P1')||has('P2'),pdf:!!S.st.pdf,load:!!S.st.load};}
+function say(w,t,h){const b=$(w);b.innerHTML='<div class="msg '+t+'">'+h+'</div>';}
+function clr(w){$(w).innerHTML='';}
+function render(){
+  const st=steps(),n=Object.values(st).filter(Boolean).length;
+  $$('#todo li').forEach(li=>li.classList.toggle('done',!!st[li.dataset.s]));
+  $('#progTxt').textContent=n+' von 4';$('#progBar').style.width=(n*25)+'%';
+  const on=!!S.pass;$('#cPass').hidden=!on;$('#cGet').hidden=!on;$('#cSave').hidden=!on;
+  if(!on)return;
+  $('#pName').textContent=S.pass.name;
+  $('#pCount').textContent=PROBE.filter(b=>got(b.k)).length+' von '+PROBE.length+' Probe-Badges';
+  $('#pBadges').innerHTML=PROBE.map(b=>{const d=got(b.k);return bdHtml(b,!!d,d?dStr(d)+(b.n==='p'?' · '+tStr(d):''):(b.n==='a'?'mit '+b.i:b.n==='f'?'nach '+b.i:'Prüfung'));}).join('');
+}
+function checkBA(){const st=steps();if(st.pass&&st.badge&&st.pdf&&st.load&&!has('BA')){S.pass.b.BA={d:new Date().toISOString(),via:'auto'};save();render();showOk('BA','<p>Du hast alle vier Schritte geschafft: Pass anlegen, Badge holen, als PDF speichern und wieder laden.</p>');return true;}return false;}
+let ovBack=null;
+function showOk(k,extra){const b=PK[k],d=got(k);ovBack=document.activeElement;
+  $('#ovBox').className='ovbox g-'+b.g;
+  $('#ovBox').innerHTML='<div class="bd got">'+medal(b.k)+'</div><h2 id="ovT">'+esc(b.k+' · '+b.t)+'</h2><p class="when">'+dStr(d)+', '+tStr(d)+' Uhr</p><p>steht jetzt im Probier-Pass von <b>'+esc(S.pass.name)+'</b>.</p>'+(extra||'')+'<button class="btn accent c-existenz" id="ovOk" type="button">Fertig</button>';
+  $('#ov').hidden=false;$('#ovOk').focus();$('#ovOk').onclick=closeOv;}
+function closeOv(){$('#ov').hidden=true;if(ovBack&&ovBack.focus)ovBack.focus();checkBA();}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#ov').hidden)closeOv();});
+
+$('#nGo').onclick=()=>{const nm=$('#nName').value.trim().replace(/\s+/g,' ');
+  if(nm.length<2){say('#msgNew','bad','<p>Trag einen Namen für den Probier-Pass ein.</p>');$('#nName').focus();return;}
+  S={pass:{v:1,name:nm,created:new Date().toISOString(),b:{}},st:{}};
+  if(!save()){say('#msgNew','bad','<p>Speichern im Browser ist hier nicht möglich (zum Beispiel im privaten Fenster).</p>');S={pass:null,st:{}};return;}
+  clr('#msgNew');render();say('#msgGet','ok','<p><b>Dein Probier-Pass ist angelegt.</b> Hol dir jetzt ein Probe-Badge.</p>');pending();
+  $('#cGet').scrollIntoView({block:'start'});};
+$('#delGo').onclick=()=>{const b=$('#delGo');if(b.dataset.sure!=='1'){b.dataset.sure='1';b.textContent='Wirklich löschen? Nochmal tippen';setTimeout(()=>{b.dataset.sure='';b.textContent='Probier-Pass löschen';},5000);return;}
+  try{localStorage.removeItem(KEY);}catch(e){}S={pass:null,st:{}};stopCam();render();say('#msgNew','ok','<p>Der Probier-Pass ist gelöscht. Du kannst neu beginnen.</p>');};
+
+/* Codes */
+function normCode(s){s=String(s||'');const m=s.match(/[#?&]c=([A-Za-z0-9-]+)/);if(m)s=m[1];return s.toUpperCase().replace(/[^A-Z0-9]/g,'');}
+async function sha(s){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('');}
+let busy=false;
+async function useCode(raw,via){if(busy)return;busy=true;try{
+  const c=normCode(raw);
+  if(c.length<6){say('#msgGet','bad','<p>Das ist kein vollständiger Code. Ein Probe-Code sieht so aus: <b>P2-DEMO-LOET</b>.</p>');return;}
+  let h;try{h=await sha(SALT+c);}catch(e){say('#msgGet','bad','<p>Der Browser kann den Code hier nicht prüfen. Öffne die Seite über https.</p>');return;}
+  const k=DEMO[h];
+  if(!k){say('#msgGet','bad','<p>Dieser Code ist kein Probe-Code. Echte Codes der Technik-Badges funktionieren hier nicht, und Probe-Codes nicht auf der echten Seite.</p>');return;}
+  if(has(k)){say('#msgGet','warn','<p><b>'+k+' '+esc(PK[k].t)+'</b> steht schon im Probier-Pass. Probier den anderen Code.</p>');return;}
+  const pmBefore=!!got('PM');
+  S.pass.b[k]={d:new Date().toISOString(),via:via};if(!save()){delete S.pass.b[k];say('#msgGet','bad','<p>Speichern im Browser ist hier nicht möglich.</p>');return;}
+  render();$('#codeIn').value='';clr('#msgGet');
+  showOk(k,(!pmBefore&&got('PM'))?'<p><b>Neues Sammel-Badge:</b> PM Probe-MakerSpace</p>':'');
+}finally{busy=false;}}
+$('#codeGo').onclick=()=>useCode($('#codeIn').value,'code');
+$('#codeIn').addEventListener('keydown',e=>{if(e.key==='Enter')useCode($('#codeIn').value,'code');});
+const PEND='technik-badges-fortbildung-code';
+function hashCode(){const m=location.hash.match(/c=([A-Za-z0-9-]+)/);if(m){try{sessionStorage.setItem(PEND,m[1]);}catch(e){}history.replaceState(null,'',location.pathname+location.search);return true;}return false;}
+function pending(){let c=null;try{c=sessionStorage.getItem(PEND);}catch(e){}if(!c)return;go(2,false);
+  if(!S.pass){say('#msgNew','warn','<p><b>Du hast einen Probe-QR-Code gescannt.</b> Leg zuerst einen Probier-Pass an. Danach wird das Probe-Badge eingetragen.</p>');return;}
+  try{sessionStorage.removeItem(PEND);}catch(e){}useCode(c,'link');}
+window.addEventListener('hashchange',()=>{if(hashCode())pending();});
+
+/* Kamera */
+let stream=null,tmr=0,cv=null;
+function stopCam(){clearTimeout(tmr);if(stream){stream.getTracks().forEach(t=>t.stop());stream=null;}const c=$('#cam');if(c)c.hidden=true;const s=$('#camGo span');if(s)s.textContent='QR-Code scannen';}
+$('#camGo').onclick=async()=>{
+  if(stream){stopCam();return;}
+  if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){say('#msgGet','warn','<p>Dieser Browser kann hier keine Kamera öffnen. Tipp den Code ein.</p>');return;}
+  if(!window.jsQR){say('#msgGet','warn','<p>Der Scanner ist noch nicht geladen. Versuch es gleich noch einmal.</p>');return;}
+  try{stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'},audio:false});}
+  catch(e){stream=null;say('#msgGet','warn','<p>Die Kamera ist nicht freigegeben oder nicht vorhanden. Tipp den Code ein.</p>');return;}
+  clr('#msgGet');const v=$('#vid');v.srcObject=stream;$('#cam').hidden=false;$('#camGo span').textContent='Kamera stoppen';try{await v.play();}catch(e){}
+  cv=cv||document.createElement('canvas');const ctx=cv.getContext('2d',{willReadFrequently:true});
+  const tick=()=>{if(!stream)return;if(v.readyState>=2&&v.videoWidth){const s=Math.min(1,640/Math.max(v.videoWidth,v.videoHeight));cv.width=Math.round(v.videoWidth*s);cv.height=Math.round(v.videoHeight*s);ctx.drawImage(v,0,0,cv.width,cv.height);
+    const img=ctx.getImageData(0,0,cv.width,cv.height),q=window.jsQR(img.data,cv.width,cv.height,{inversionAttempts:'dontInvert'});if(q&&q.data){stopCam();useCode(q.data,'qr');return;}}
+    tmr=setTimeout(tick,180);};tick();};
+document.addEventListener('visibilitychange',()=>{if(document.hidden)stopCam();});
+
+/* Datei laden */
+$$('input[type=file][data-up]').forEach(inp=>inp.addEventListener('change',()=>{
+  const f=inp.files&&inp.files[0];inp.value='';if(!f)return;const w=S.pass?'#msgSave':'#msgNew';
+  say(w,'','<p>Datei wird gelesen …</p>');
+  f.arrayBuffer().then(buf=>{
+    const o=window.LP&&LP._codeFrom?LP._codeFrom(new TextDecoder('latin1').decode(new Uint8Array(buf))):null;
+    if(!o){say(w,'bad','<p>In dieser Datei steckt kein Probier-Pass. Das klappt nur mit der Original-PDF, die du hier gespeichert hast.</p>');return;}
+    if(o.s!==SLUG){say(w,'warn','<p>Diese Datei gehört zu einer anderen Seite'+(o.s==='technik-badges'?' (echter Badge-Pass der Technik-Badges)':'')+'. Hier lädst du nur den Probier-Pass.</p>');return;}
+    let np=null;try{np=JSON.parse((o.ls||{})[KEY]||'null');}catch(e){}
+    if(!np||!np.pass){say(w,'bad','<p>In dieser PDF steckt kein lesbarer Probier-Pass.</p>');return;}
+    np.st=np.st||{};np.st.load=true;np.pass.b=np.pass.b||{};S=np;
+    if(!save()){say(w,'bad','<p>Speichern im Browser ist hier nicht möglich.</p>');return;}
+    render();say('#msgSave','ok','<p><b>Probier-Pass geladen:</b> '+esc(S.pass.name)+', gespeichert am '+dStr(o.d)+' um '+tStr(o.d)+' Uhr. So holen Schüler:innen ihren Pass zurück.</p>');
+    $('#cSave').scrollIntoView({block:'nearest'});checkBA();
+  }).catch(()=>say(w,'bad','<p>Die Datei konnte nicht gelesen werden.</p>'));
+}));
+
+/* PDF */
+const CP='€‚ƒ„…†‡ˆ‰Š‹ŒŽ‘’“”•–—˜™š›œžŸ';
+function clean(t){return String(t||'').replace(/→/g,'->').split('').filter(ch=>{const c=ch.charCodeAt(0);return c===10||(c>=32&&c<=126)||(c>=160&&c<=255)||CP.indexOf(ch)>=0;}).join('');}
+$('#pdfGo').onclick=()=>{
+  if(!(window.jspdf&&window.jspdf.jsPDF)){say('#msgSave','bad','<p>Das PDF-Werkzeug konnte nicht geladen werden.</p>');return;}
+  S.st.pdf=true;save();render();
+  const d=new window.jspdf.jsPDF({unit:'mm',format:'a4'}),W=210,M=16,now=new Date().toISOString();
+  const txt=(s,x,y,o)=>{o=o||{};d.setFont('helvetica',o.b?'bold':'normal');d.setFontSize(o.size||10);const c=o.c||[24,34,30];d.setTextColor(c[0],c[1],c[2]);d.text(clean(s),x,y,o.al?{align:o.al}:undefined);};
+  const logo=$('.tlogo');try{d.addImage(logo.src,'PNG',W-M-30,10,30,30*logo.naturalHeight/(logo.naturalWidth||1),'logo','FAST');}catch(e){}
+  txt('Probier-Pass · Badge-System',M,20,{b:1,size:19});txt(S.pass.name,M,29,{b:1,size:14});
+  txt('Fortbildung für Lehrkräfte · Stand: '+dStr(now)+', '+tStr(now)+' Uhr · kein echter Badge-Pass',M,35.5,{size:10,c:[86,100,93]});
+  d.setDrawColor(211,221,214);d.line(M,41,W-M,41);
+  PROBE.forEach((b,i)=>{const cx=M+12+i*30,cy=56,r=9,dt=got(b.k);
+    if(dt){d.setFillColor(74,90,140);b.n==='p'?d.circle(cx,cy,r,'F'):d.roundedRect(cx-r,cy-r,2*r,2*r,3,3,'F');}
+    else{d.setDrawColor(190,198,193);d.setLineDashPattern([1,1],0);b.n==='p'?d.circle(cx,cy,r,'S'):d.roundedRect(cx-r,cy-r,2*r,2*r,3,3,'S');d.setLineDashPattern([],0);}
+    txt(b.k,cx,cy+2,{b:1,size:13,c:dt?[255,255,255]:[160,170,165],al:'center'});
+    d.setFont('helvetica','normal');d.setFontSize(7);d.setTextColor(60,70,65);d.splitTextToSize(clean(b.t),26).slice(0,2).forEach((l,li)=>d.text(l,cx,cy+r+4+li*3,{align:'center'}));
+    txt(dt?dStr(dt):'offen',cx,cy+r+11,{size:7,b:!!dt,c:dt?[31,122,76]:[150,158,154],al:'center'});});
+  let y=88;txt('So steckt der Pass in dieser PDF',M,y,{b:1,size:12});y+=6;
+  d.setFont('helvetica','normal');d.setFontSize(9.5);d.setTextColor(24,34,30);
+  ['Die Badge-Seite schreibt den ganzen Pass als Code in die Eigenschaften dieser PDF (Feld „Stichwörter“). Über „Pass-PDF laden“ liest sie ihn wieder aus.',
+   'Eine aus Notability neu exportierte PDF oder ein Bildschirmfoto enthält den Code meist nicht. Die Schüler:innen heben deshalb die Original-PDF auf.',
+   'Verbindlich ist im echten System die Liste im Fachraum. Ein Badge ersetzt nicht die Regeln der RiSU und die Aufsicht der Lehrkraft.']
+   .forEach(p=>{d.splitTextToSize(clean(p),W-2*M).forEach(l=>{d.text(l,M,y);y+=4.6;});y+=2;});
+  txt('Das Badge-System · deintechniklehrer.github.io/Lernplattformen/technik-badges-fortbildung/ · CC BY-NC-SA 4.0 · Daniel Beyrodt',W/2,289,{size:7.5,c:[86,100,93],al:'center'});
+  d.setProperties({title:clean('Probier-Pass – '+S.pass.name),author:'Das Badge-System'});
+  const blob=d.output('blob'),fn='Probier-Pass_'+clean(S.pass.name).replace(/[^A-Za-z0-9ÄÖÜäöüß-]+/g,'_')+'_'+now.slice(0,10)+'.pdf';
+  Promise.resolve(window.claude&&window.claude.use?window.claude.use('downloads'):null).then(dl=>{if(dl)return dl.save({filename:fn,data:blob});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=fn;document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},4000);})
+    .then(()=>say('#msgSave','ok','<p><b>Gespeichert:</b> '+esc(fn)+'. Lade sie jetzt rechts wieder.</p>'))
+    .catch(()=>say('#msgSave','bad','<p>Die PDF konnte nicht gespeichert werden.</p>'));
+};
+
+/* Prompt kopieren */
+$('#cpGo').onclick=async()=>{const t=$('#prompt');try{await navigator.clipboard.writeText(t.value);$('#cpMsg').textContent='Kopiert. Füge ihn in einen neuen Chat mit Claude ein.';}
+  catch(e){t.focus();t.select();$('#cpMsg').textContent='Der Text ist markiert. Kopiere ihn mit Kopieren im Menü.';}};
+
+window.__TBF={PROBE,normCode};
+nav();const hc=hashCode();go(hc?2:cur,false);render();pending();
+})();
+</script>
+<style>.lp-legal{font:13px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif;text-align:center;padding:20px 16px calc(96px + env(safe-area-inset-bottom,0px));opacity:.8;clear:both}.lp-legal a{color:inherit;text-decoration:underline;text-underline-offset:2px}</style><div class="lp-legal">Privates Angebot von Daniel Beyrodt · <a href="../ueber-mich/">Über mich</a> · <a href="../impressum/">Impressum</a> · <a href="../datenschutz/">Datenschutz</a></div></body></html>
