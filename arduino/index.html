@@ -102,7 +102,7 @@ function card(it){
     el('a',{class:'cov',href:it.url,target:it.same?null:'_blank',rel:'noopener','aria-label':it.title+' öffnen'},el('img',{src:COV[it.cover],alt:'',loading:'lazy'})),
     el('div',{class:'bd'},
       el('h3',null,it.title),it.neu?el('p',{class:'neu'},el('b',null,'Neu'),' · '+"Noch in der fachlichen Überprüfung. Kleine Fehler sind möglich, Hinweise gern über das Kontaktformular."):null,el('p',null,it.desc),
-      el('div',{class:'meta'},it.jg?el('span',{class:'jg'},it.jg):null,el('span',null,'aktualisiert '+it.updated)),
+      el('div',{class:'meta'},it.jg?el('span',{class:'jg'},it.jg):null,it.n?el('span',{class:'jg'},it.n):null,el('span',null,'aktualisiert '+it.updated)),
       it.extra.length?el('div',{class:'extra'},it.extra.map(x=>el('div',null,el('a',{href:x.url,target:'_blank',rel:'noopener'},x.label)))):null,
       el('div',{class:'acts'},el('a',{class:'btn',href:it.url,target:it.same?null:'_blank',rel:'noopener'},it.btn||'Öffnen'),el('button',{class:'btn ghost',type:'button',onclick:()=>copy(it.url,field)},'Link kopieren'),dl?el('button',{class:'btn ghost',type:'button',onclick:()=>saveCover(it)},'Vorschaubild'):null),
       field));
