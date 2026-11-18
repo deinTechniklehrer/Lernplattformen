@@ -721,6 +721,13 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
 .bauchk input{margin-top:3px;width:20px;height:20px;flex:none;accent-color:var(--accent)}
 .meta2{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
 
+/* Bestückungsplan übertragen (Folienstift) */
+.lg-mark{fill:none;stroke:#7b3fa0;stroke-width:3}
+.lg-mkt{font-family:var(--body);font-size:20px;font-weight:700;fill:#7b3fa0;paint-order:stroke;stroke:var(--lg-pcb);stroke-width:5px}
+:root[data-theme="dark"] .lg-mark{stroke:#c99be6}:root[data-theme="dark"] .lg-mkt{fill:#c99be6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .lg-mark{stroke:#c99be6}:root:not([data-theme="light"]) .lg-mkt{fill:#c99be6}}
+.lg-boardfig .lg-mkt{font-size:26px}
+
 </style></head><body>
 <div class="app">
   <header class="top">
@@ -891,6 +898,7 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
     <ul>
       <li>Die Bauteile steckst du von <b>oben</b> (Bauteilseite) durch die Löcher. Gelötet wird <b>unten</b> auf dem Kupfer.</li>
       <li>Die Bahnen zählst du von oben: <b>B1, B2 …</b> Die Löcher zählst du von links: <b>L1, L2 …</b> So heißt zum Beispiel „B5/L3“: Bahn 5, Loch 3.</li>
+      <li>Bevor du lötest, <b>überträgst du den Bestückungsplan</b> auf die Platine: Mit einem feinen Folienstift markierst du auf der Bauteilseite, wohin jedes Bauteil kommt. So steckst du beim Löten nichts falsch.</li>
       <li>Du lötest erst die <b>flachen Bauteile</b> ein, dann die höheren. So liegt die Platine beim Löten eben auf dem Tisch.</li>
     </ul>
     <div class="tipbox"><h4>Sicher löten</h4><ul>
@@ -1432,6 +1440,15 @@ var LG = (function () {
     if (hl) { var bx = bbox(p); s = '<rect class="lg-hl" x="' + bx[0] + '" y="' + bx[1] + '" width="' + bx[2] + '" height="' + bx[3] + '" rx="10"/>' + s; }
     return sol + s;
   }
+  /* Bestückungsplan übertragen: Folienstift-Markierung der Löcher und Name des Bauteils */
+  function legsOf(p) { var r = p.r; return p.k === 'bat' ? [[p.c, r[0]], [p.c, r[1]]] : p.k === 'tr' ? r.map(function (q) { return [p.c, q]; }) : [[p.c, r[0]], [p.c, r[r.length - 1]]]; }
+  function markSvg(p) {
+    var lg = legsOf(p), m = lg.map(function (q) { return '<circle class="lg-mark" cx="' + cx(q[0]) + '" cy="' + cy(q[1]) + '" r="11"/>'; }).join('');
+    var lab = p.k === 'bat' ? '' : p.k === 'tr' ? 'T1' : (p.lab || '');
+    if (p.k === 'bat') m += txt(cx(p.c) + 15, cy(lg[0][1]) - 10, '+', 'lg-mkt') + txt(cx(p.c) + 15, cy(lg[1][1]) - 10, '−', 'lg-mkt');
+    else if (lab) m += txt(cx(lg[0][0]) + 14, cy(lg[0][1]) - 12, lab, 'lg-mkt');
+    return m;
+  }
   var LAYW = 0, NOLAB = false;
   function bbox(p) {
     var c = cx(p.c), r = p.r, top = cy(r[0]), bot = cy(r[r.length - 1]);
@@ -1448,6 +1465,7 @@ var LG = (function () {
       for (var c = 1; c <= L.cols; c++) b += '<circle class="lg-hole" cx="' + cx(c) + '" cy="' + cy(r) + '" r="5"/>';
     }
     for (c = 1; c <= L.cols; c++) b += txt(cx(c), Y0 - 18, 'L' + c, 'lg-ts', 'middle');
+    if (marks) L.parts.slice(n).forEach(function (p) { b += markSvg(p); });  /* Markierungen nur für noch nicht eingesetzte Bauteile */
     L.parts.slice(0, n).forEach(function (p, i) { b += partSvg(p, hlLast && i === n - 1); });
     return { vb: '0 0 ' + (X0 + W + 56) + ' ' + (Y0 + H + 24), body: b };
   }
@@ -1456,18 +1474,19 @@ var LG = (function () {
   var BOARD_POS = { N: { r2: [cx(3) - 26, cy(3)], r1: [cx(8) - 26, cy(4)], t1: [cx(6) + 30, cy(7)], led: [cx(4), cy(4) - 6], ldr: [cx(9), cy(6)] },
     A: { r3: [cx(10) - 26, cy(4)], r1: [cx(7), cy(4) - 6], t1: [cx(6), cy(7)], ldr: [cx(8) + 34, cy(5) + 2], sum: [cx(3) + 60, cy(2)] } };
   function steps(box, v) {
-    var L = LAY[v], n = 0, N = L.parts.length + 1;
+    var L = LAY[v], n = 0, N = L.parts.length + 2;  /* 0 Start, 1 Bestückungsplan übertragen, dann je ein Bauteil, zuletzt Sichtprüfung */
     var fig = document.createElement('div'); fig.className = 'lg-boardfig';
     var nav = document.createElement('div'); nav.className = 'row lg-stepnav';
     nav.innerHTML = '<button class="btn soft" type="button" data-d="-1">Zurück</button><span class="lg-cnt" aria-live="polite"></span><button class="btn" type="button" data-d="1">Weiter</button>';
     var tx = document.createElement('p'); tx.className = 'lg-steptxt'; tx.setAttribute('aria-live', 'polite');
     box.append(fig, nav, tx);
     function draw() {
-      var g = boardBody(v, Math.min(n, L.parts.length), n > 0 && n <= L.parts.length);
+      var k = Math.max(0, Math.min(n - 1, L.parts.length)), g = boardBody(v, k, n > 1 && n <= L.parts.length + 1, n >= 1);
       fig.innerHTML = svg(g.vb, g.body, 'Bestückungsplan, Schritt ' + n + ' von ' + (N - 1), 'lg-board');
       nav.querySelector('.lg-cnt').textContent = n === 0 ? 'Start' : n < N ? 'Schritt ' + n + ' von ' + (N - 1) : 'Fertig';
       tx.innerHTML = n === 0 ? 'Die leere Platine von der <b>Bauteilseite</b>: Die Kupferbahnen liegen unten, hier sind sie durchscheinend gezeichnet. Bahnen von oben gezählt (B1, B2 …), Löcher von links (L1, L2 …). Leg die Platine so vor dich, wie du sie hier siehst.'
-        : n < N ? '<b>Schritt ' + n + ':</b> ' + esc(L.parts[n - 1].t)
+        : n === 1 ? '<b>Schritt 1: Bestückungsplan übertragen.</b> Bevor du lötest, überträgst du den Plan auf die Platine: Markiere mit einem feinen Folienstift auf der Bauteilseite die Löcher, in die die Beine der Bauteile kommen, und schreib den Namen daneben (zum Beispiel R1). Für den Batteriehalter markierst du + und −. Vergleiche danach jede Markierung noch einmal mit dem Plan.'
+        : n < N ? '<b>Schritt ' + n + ':</b> ' + esc(L.parts[n - 2].t)
         : '<b>Sichtprüfung:</b> Schau mit der Lupe auf die Unterseite. Jede Lötstelle glänzt und hat die Form eines kleinen Kegels. Zwischen zwei Bahnen darf kein Lot hängen. Erst dann legst du die Batterien ein und testest.';
       nav.querySelector('[data-d="-1"]').disabled = n === 0; nav.querySelector('[data-d="1"]').disabled = n === N;
     }
@@ -1517,7 +1536,7 @@ t4:{type:'gap',kc:'RS22-F3',text:'Im Hellen ist der Widerstand des LDR {0}. Die 
 t5:{type:'crit',need:6,kc:'RS16-A',opts:[['Die LED geht an, wenn ich den LDR mit der Hand abdecke.',true],['Das Nachtlicht sieht schön aus.',false],['Die LED ist aus, wenn das Zimmerlicht an ist.',true],['Die LED wechselt im Dunkeln die Farben.',true],['Die Schaltung ist gut gelötet.',false],['Die Schaltung läuft mit 4,5 V aus drei AA-Batterien.',true],['Alle Lötstellen glänzen, es gibt keine Lötbrücke.',true],['Die LED leuchtet irgendwie.',false],['Die Platine ist höchstens 8 Bahnen × 10 Löcher groß.',true],['Kein Bauteil wackelt, wenn ich die Platine vorsichtig schüttle.',true],['Das Nachtlicht gefällt allen in der Klasse.',false],['Kein Drahtende steht unten mehr als 2 mm über.',true]],help:{tip:'Frag dich bei jeder Anforderung: Kann ich das mit Ja oder Nein beantworten oder messen? Wörter wie „schön“, „gut“ oder „irgendwie“ kann jede Person anders verstehen.',teil:'Vier Anforderungen sind nicht überprüfbar: „sieht schön aus“, „gut gelötet“, „leuchtet irgendwie“ und „gefällt allen“. Aus den übrigen wählst du sechs.'}},
 t6:{type:'bom',kc:'RS16-M',rows:[['Widerstand 47 kΩ (gelb-violett-orange)',1],['Widerstand 100 Ω (braun-schwarz-braun)',1],['Widerstand 10 kΩ (braun-schwarz-orange)',0],['Transistor BC547',1],['Fotowiderstand (LDR)',1],['LED mit Farbwechsel, 5 mm',1],['Taster',0],['Elektrolytkondensator (Elko)',0],['Potentiometer',0],['Batteriehalter für 3 × AA',1],['Batterie AA (Mignon), 1,5 V',3],['Streifenrasterplatine 8 Bahnen × 10 Löcher',1]],why:'Im Schaltplan stehen R1 47 kΩ, R2 100 Ω, der Transistor, der LDR und die LED. Dazu kommen der Batteriehalter mit drei AA-Batterien und die Platine. Taster, Elko und Potentiometer brauchst du nicht.',help:{tip:'Zähle im Schaltplan in Kapitel 2 jedes Schaltzeichen. Lies bei den Widerständen den Wert ab. Denk an die Batterien: 3 × 1,5 V = 4,5 V.',teil:'Von jedem Bauteil im Schaltplan brauchst du genau eins. Nur eine Zeile bekommt eine Zahl größer als 1.'}},
 t8:{type:'label',fig:'board',kc:'RS22-E4',aria:'Fertig bestückte Platine des Nachtlichts mit nummerierten Bauteilen',marks:['r2','r1','t1','led','ldr'],terms:[['Transistor BC547','t1'],['R1 47 kΩ','r1'],['Fotowiderstand (LDR)','ldr'],['LED mit Farbwechsel','led'],['R2 100 Ω','r2'],['Kondensator','x']],help:{tip:'Die beiden Widerstände unterscheidest du an den Farbringen: gelb-violett-orange ist 47 kΩ, braun-schwarz-braun ist 100 Ω. Der LDR hat oben eine Zickzack-Linie.',teil:'Nummer 1 sitzt in Loch 3 zwischen Bahn 1 und Bahn 5. Das ist R2.'}},
-t9:{type:'order',kc:'RS16-P',items:['Bauteile nach der Stückliste bereitlegen und prüfen.','Lötkolben in die Ablage legen und aufheizen lassen.','Die flachen Bauteile einlöten: R2 und R1.','Den Transistor einlöten, flache Seite nach links.','Die LED einlöten, das lange Bein in Bahn 5.','Den LDR einlöten.','Den Batteriehalter anlöten: Rot an Bahn 1, Schwarz an Bahn 8.','Sichtprüfung mit der Lupe: keine Lötbrücken, alle Lötstellen glänzen.','Batterien einlegen und im Dunkeln testen.'],start:[2,0,7,4,1,8,3,6,5]},
+t9:{type:'order',kc:'RS16-P',items:['Bauteile nach der Stückliste bereitlegen und prüfen.','Den Bestückungsplan mit Folienstift auf die Platine übertragen.','Lötkolben in die Ablage legen und aufheizen lassen.','Die flachen Bauteile einlöten: R2 und R1.','Den Transistor einlöten, flache Seite nach links.','Die LED einlöten, das lange Bein in Bahn 5.','Den LDR einlöten.','Den Batteriehalter anlöten: Rot an Bahn 1, Schwarz an Bahn 8.','Sichtprüfung mit der Lupe: keine Lötbrücken, alle Lötstellen glänzen.','Batterien einlegen und im Dunkeln testen.'],start:[2,0,8,4,1,9,3,7,6,5]},
 t10:{type:'pair',kc:'RS16-U',left:['Die LED bleibt immer aus. Das kurze Bein der LED steckt in Bahn 5.','Die LED leuchtet immer, auch im Hellen.','Die LED bleibt aus, obwohl sie richtig herum steckt und du den LDR abdeckst.','Die LED leuchtet im Dunkeln nur schwach.','Gar nichts passiert, auch im Dunkeln nicht.'],right:['Der Transistor ist verdreht eingelötet.','Die Batterien sind leer oder falsch eingelegt.','Die LED ist verpolt.','Ein Bein des LDR ist nicht angelötet.','Lötbrücke zwischen Bahn 7 und Bahn 8.'],ans:[2,3,4,0,1]},
 t11:{type:'mark',kc:'RS22-E4',parts:[['Ben lötet zuerst die beiden Widerstände ein.',false],['Den Transistor steckt er mit der flachen Seite nach rechts ein.',true],['Er hält den Lötkolben eine halbe Minute an das Bein des Transistors, damit es besser hält.',true],['Das lange Bein der LED steckt er in Bahn 5.',false],['Zwischendurch legt er den heißen Lötkolben auf den Tisch.',true],['Vor dem Test schaut er mit der Lupe nach Lötbrücken.',false],['Die Batterien legt er schon vor dem Löten ein, damit er gleich testen kann.',true]],help:{tip:'Vergleiche Bens Sätze mit dem Bestückungsplan und den Regeln zum sicheren Löten: Wie steht der Transistor? Wie lange erhitzt man eine Lötstelle? Wohin gehört der Lötkolben?',teil:'Ein Fehler steckt im Satz über den Transistor: Die flache Seite zeigt nach links. Es sind noch drei weitere Fehler.'}},
 t12:{type:'open',kc:'RS16-U',min:100,checks:[['LDR nicht oder schlecht angelötet',/ldr|fotowid|kalt|angelötet|lötstelle/i],['Lötbrücke',/brücke|bahn|verbunden|lot/i],['Vorgehen: Batterien raus, Lupe, nachlöten',/lupe|nachlöt|entlöt|prüf|vergleich|anschau|batterie/i]],help:{tip:'Schau in die Tabelle oben: Welche Fehler führen dazu, dass die LED immer leuchtet? Denk an die Basis: Was passiert, wenn der LDR fehlt oder die Basis eine Verbindung bekommt, die sie nicht haben soll?',teil:'Satzanfang: „Wenn ein Bein des LDR nicht angelötet ist, zieht R1 die Basis immer nach oben. Dann …“'},
@@ -1526,7 +1545,7 @@ t13:{type:'seg',kc:'RS22-F3',cats:['stimmt','stimmt nicht'],items:[['Wird es dun
 t14:{type:'open',kc:'RS22-F3',min:120,checks:[['LDR wird im Dunkeln groß',/ldr|fotowid/i],['Basis über 0,7 V oder Strom in die Basis',/basis/i],['Transistor leitet und schaltet die LED',/transistor.*(leit|schalt|an)|leit/i]],help:{tip:'Geh die Wirkungskette aus Kapitel 2 durch: dunkel, LDR, Spannung an der Basis, Transistor, LED.',teil:'Satzanfang: „Wird es dunkel, wird der Widerstand des LDR groß. Dadurch …“'},
   muster:['Wird es dunkel, wird der Widerstand des LDR groß.','Im Spannungsteiler aus R1 und LDR liegt dann mehr Spannung am LDR und damit an der Basis. Steigt sie über etwa 0,7 V, fließt über R1 ein kleiner Strom in die Basis.','Der Transistor leitet dann zwischen Kollektor und Emitter. Strom fließt von Plus über R2 und die LED zu Minus, und die LED leuchtet.','Wird es hell, wird der LDR klein, die Basis sinkt unter 0,7 V, und der Transistor sperrt wieder.']}
 };
-const BAU=['Alle Bauteile nach der Stückliste bereitgelegt.','R2 (braun-schwarz-braun) sitzt in Loch 3, R1 (gelb-violett-orange) in Loch 8.','Der Transistor steht richtig: flache Seite nach links, C in Bahn 6.','Das lange Bein der LED steckt in Bahn 5.','Der LDR steckt in Loch 9 zwischen Bahn 7 und Bahn 8.','Batteriehalter: Rot an Bahn 1, Schwarz an Bahn 8.','Alle Lötstellen glänzen und sehen aus wie kleine Kegel.','Zwischen den Bahnen hängt kein Lot (keine Lötbrücke).','Die Drahtenden sind kurz abgeschnitten.','Erst danach Batterien eingelegt und getestet.'];
+const BAU=['Alle Bauteile nach der Stückliste bereitgelegt.','Bestückungsplan mit Folienstift auf die Platine übertragen und mit dem Plan verglichen.','R2 (braun-schwarz-braun) sitzt in Loch 3, R1 (gelb-violett-orange) in Loch 8.','Der Transistor steht richtig: flache Seite nach links, C in Bahn 6.','Das lange Bein der LED steckt in Bahn 5.','Der LDR steckt in Loch 9 zwischen Bahn 7 und Bahn 8.','Batteriehalter: Rot an Bahn 1, Schwarz an Bahn 8.','Alle Lötstellen glänzen und sehen aus wie kleine Kegel.','Zwischen den Bahnen hängt kein Lot (keine Lötbrücke).','Die Drahtenden sind kurz abgeschnitten.','Erst danach Batterien eingelegt und getestet.'];
 Object.assign(T,TV);
 const KC={'RS16-A':'KC Technik RS 2010, S. 16 (Planen, Konstruieren und Herstellen): erstellen einen Anforderungskatalog','RS16-M':'KC Technik RS 2010, S. 16 (Planen, Konstruieren und Herstellen): erstellen Materiallisten','RS16-P':'KC Technik RS 2010, S. 16 (Planen, Konstruieren und Herstellen): planen einen Arbeitsablauf','RS16-U':'KC Technik RS 2010, S. 16 (Planen, Konstruieren und Herstellen): überprüfen die Teillösungen hinsichtlich der technischen Anforderungen','RS22-F2':'KC Technik RS 2010, S. 22: beschreiben die elektrischen Eigenschaften von Widerständen, Leuchtdioden, Sensoren und Transistoren','RS22-F3':'KC Technik RS 2010, S. 22: beschreiben das Zusammenwirken verschiedener elektronischer Bauteile in einer Schaltung','RS22-E4':'KC Technik RS 2010, S. 22: entwerfen und stellen elektronische Schaltungen her','PT21-F':'CV Profil Technik RS 2011, S. 21: benennen Schaltzeichen; beschreiben die Eigenschaften von Widerständen, Kondensatoren und Halbleitern'};
 
@@ -1876,6 +1895,7 @@ $('#pdfBtn').onclick=()=>{const note=$('#pdfNote');note.hidden=false;
   const ord=Array.isArray(S.a.t9)&&S.a.t9.length===T.t9.items.length?S.a.t9:T.t9.start;ord.forEach((k,n)=>txt((n+1)+'. '+T.t9.items[k],{ind:0}));
   /* 4 Bestückungsplan */
   head('4 Bestückungsplan (Bauteilseite, Bahnen B von oben, Löcher L von links)');
+  txt('Zuerst den Bestückungsplan mit Folienstift auf die Bauteilseite übertragen: Löcher markieren, Namen daneben schreiben.',{size:10,b:1});
   LG.LAY[VER].parts.forEach((p,n)=>txt((n+1)+'. '+p.t,{ind:0,size:10}));
   /* 5 Checkliste */
   head('5 Checkliste beim Bauen');
