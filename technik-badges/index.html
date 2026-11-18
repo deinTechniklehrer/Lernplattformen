@@ -468,6 +468,10 @@ body.has-pass #sSo{order:5}body.has-pass #lk,body.has-pass .lic{order:6}
 .req{display:flex;flex-wrap:wrap;gap:6px}
 .req span{font-size:13px;font-weight:700;padding:3px 9px;border-radius:99px;border:1.5px dashed var(--line);color:var(--muted)}
 .req span.ok{border:1.5px solid var(--ok);color:var(--ok)}
+.acc .plus{border-top:1.5px dashed var(--line);padding-top:8px;display:grid;gap:6px}
+.acc .plus b{font-size:14px}.acc .plus.on b{color:var(--ok)}
+.acc .plus p{margin:0;font-size:14px}
+
 .g-werk{--gc:var(--g-werk)}.g-druck{--gc:var(--g-druck)}.g-laser{--gc:var(--g-laser)}.g-textil{--gc:var(--g-textil)}.g-cad{--gc:var(--g-cad)}.g-steuer{--gc:var(--g-steuer)}.g-motor{--gc:var(--g-motor)}.g-sammel{--gc:var(--g-sammel)}.g-ki{--gc:var(--g-ki)}
 /* Eintragen */
 .ways{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
@@ -636,7 +640,7 @@ const BADGES=[
   {k:'MT',t:'Motorentechnik Theorie',g:'motor',n:'l'},{k:'MP',t:'Motorentechnik Praxis',g:'motor',n:'p'},
   {k:'K1',t:'AI Badge Level 1',g:'ki',n:'l',i:'Lernplattform AI Badge'},{k:'K2',t:'AI Badge Level 2',g:'ki',n:'l',i:'Lernplattform AI Badge'},{k:'K3',t:'AI Badge Level 3',g:'ki',n:'l',i:'Lernplattform AI Badge'},
   {k:'MS',t:'MakerSpace Access',g:'access',n:'a',all:['LT','BH','BM'],i:'LT, BH und BM',x:'Du darfst im MakerSpace an Lötstation und Bohrmaschinen arbeiten. Eine Lehrkraft ist immer im Raum.'},
-  {k:'RL',t:'Robotiklabor Access',g:'access',n:'a',all:['L2','D2'],i:'L2 und D2',x:'Du darfst im Robotiklabor ohne Nachfragen selbstständig an Lasercutter und 3D-Drucker arbeiten. Eine Lehrkraft ist immer im Raum.'}];
+  {k:'RL',t:'Robotiklabor Access',g:'access',n:'a',all:['L2','D2'],i:'L2 und D2',x:'Du darfst im Robotiklabor ohne Nachfragen selbstständig an Lasercutter und 3D-Drucker arbeiten. Eine Lehrkraft ist immer im Raum.',plus:{all:['PL','TP'],x:'Hast du auch PL und TP, darfst du dort genauso den Plotter und die Transferpresse nutzen.'}}];
 const ACC=BADGES.filter(b=>b.n==='a'),BDG=BADGES.filter(b=>b.n!=='a');
 const BK={};BADGES.forEach(b=>BK[b.k]=b);
 const NW={p:'Prüfung',l:'Lernplattform',a:'Access'};
@@ -674,7 +678,8 @@ function render(){
   const OPEN='<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 7.6-1.7"/><path d="m9.5 15.5 2 2 3.5-3.5"/></svg>';
   $('#access').innerHTML='<h3 id="h-acc">Access <span>Das darfst du mit deinen Badges</span></h3><div class="accs">'+ACC.map(b=>{const d=got(b.k);
     return '<div class="acc '+(d?'got':'open')+'"><div class="acc-top"><span class="lock">'+(d?OPEN:LOCK)+'</span><div><b>'+esc(b.t)+'</b><span>'+(d?'freigeschaltet am '+dStr(d):'noch gesperrt')+'</span></div></div>'
-      +'<p>'+esc(b.x)+'</p><div class="req" aria-label="Dafür brauchst du">'+b.all.map(k=>'<span class="'+(has(k)?'ok':'')+'">'+k+(has(k)?' ✓':'')+' '+esc(BK[k].t)+'</span>').join('')+'</div></div>';}).join('')+'</div>';
+      +'<p>'+esc(b.x)+'</p><div class="req" aria-label="Dafür brauchst du">'+b.all.map(k=>'<span class="'+(has(k)?'ok':'')+'">'+k+(has(k)?' ✓':'')+' '+esc(BK[k].t)+'</span>').join('')+'</div>'
+      +(b.plus?(()=>{const on=d&&b.plus.all.every(has);return '<div class="plus'+(on?' on':'')+'"><b>'+(on?'Zusatz freigeschaltet':'Zusatz noch gesperrt')+'</b><p>'+esc(b.plus.x)+'</p><div class="req" aria-label="Dafür brauchst du zusätzlich">'+b.plus.all.map(k=>'<span class="'+(has(k)?'ok':'')+'">'+k+(has(k)?' ✓':'')+' '+esc(BK[k].t)+'</span>').join('')+'</div></div>';})():'')+'</div>';}).join('')+'</div>';
   $('#groups').innerHTML=GROUPS.map(g=>{
     const bs=BADGES.filter(b=>b.g===g.id);
     return '<div class="grp g-'+g.id+'"><h3>'+esc(g.t)+'</h3><div class="badges">'+bs.map(b=>{
@@ -901,7 +906,8 @@ function makePdf(){
   const colW=(W-2*M-8)/2,r=7.5;
   // Access: was die Badges erlauben, deutlich abgesetzt
   txt('Access – das darfst du mit deinen Badges',M,48,{b:1,size:11.5});
-  let ah=0;const al=ACC.map(b=>d.splitTextToSize(clean(b.x),colW-8));al.forEach(l=>{ah=Math.max(ah,14+l.length*3.9);});
+  const plusOn=b=>!!(b.plus&&got(b.k)&&b.plus.all.every(has));
+  let ah=0;const al=ACC.map(b=>d.splitTextToSize(clean(b.x+(b.plus?' '+(plusOn(b)?'Zusatz freigeschaltet. ':'Zusatz noch gesperrt (braucht '+b.plus.all.join(', ')+'). ')+b.plus.x.replace(/^Zusatz: /,''):'')),colW-8));al.forEach(l=>{ah=Math.max(ah,14+l.length*3.9);});
   ACC.forEach((b,j)=>{const x0=M+j*(colW+8),y=51,dt=got(b.k);
     if(dt){d.setFillColor(225,241,232);d.setDrawColor(31,122,76);d.setLineWidth(.7);d.roundedRect(x0,y,colW,ah,3,3,'FD');d.setLineWidth(.2);}
     else{d.setDrawColor(170,180,175);d.setLineDashPattern([1.2,1],0);d.roundedRect(x0,y,colW,ah,3,3,'S');d.setLineDashPattern([],0);}

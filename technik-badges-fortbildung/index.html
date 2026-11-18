@@ -469,6 +469,10 @@ figure{margin:0;display:grid;gap:8px;min-width:0}
 .req{display:flex;flex-wrap:wrap;gap:6px}
 .req span{font-size:13px;font-weight:700;padding:3px 9px;border-radius:99px;border:1.5px dashed var(--line);color:var(--muted)}
 .req span.ok{border:1.5px solid var(--ok);color:var(--ok)}
+.acc .plus{border-top:1.5px dashed var(--line);padding-top:8px;display:grid;gap:6px}
+.acc .plus b{font-size:14px}.acc .plus.on b{color:var(--ok)}
+.acc .plus p{margin:0;font-size:14px}
+
 /* Access-Gleichung */
 .eq{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px}
 .eq .op{font-family:var(--display);font-weight:800;font-size:22px;color:var(--muted);background:none;padding:0;cursor:default}
@@ -605,7 +609,7 @@ td.c{text-align:center;font-weight:700}
       <div class="eq" id="eqRL" role="img" aria-label="Robotiklabor Access RL ergibt sich aus Lasercutter Stufe 2 L2 und 3D-Druck warten D2."></div>
       <figcaption class="cap">Die beiden Access der Technik-Badges.</figcaption>
     </figure>
-    <p>Im Robotiklabor arbeiten alle Schüler:innen. RL regelt nur, wer dort ohne Nachfragen selbstständig an Lasercutter und 3D-Drucker arbeitet.</p>
+    <p>Im Robotiklabor arbeiten alle Schüler:innen. RL regelt nur, wer dort ohne Nachfragen selbstständig an Lasercutter und 3D-Drucker arbeitet. <b>Zusatz:</b> Wer zum Robotiklabor Access auch PL (Plotter) und TP (Transferpresse) hat, darf dort genauso Plotter und Transferpresse nutzen. Der Zusatz steht im Pass im Kasten des Robotiklabor Access.</p>
     <p>Die fertige Seite für Schüler:innen findest du unter <a href="../technik-badges/" target="_blank" rel="noopener">Technik-Badges</a>.</p>
   </div>
   <div class="navrow"><span></span><button class="btn accent" type="button" data-go="2">Weiter: Selbst ausprobieren</button></div>
@@ -708,7 +712,7 @@ td.c{text-align:center;font-weight:700}
       <li><b>QR-Codes:</b> Das Codeblatt mit den Codes für das laufende Schuljahr bekommst du auf Anfrage bei Daniel Beyrodt. Den QR-Code können die Schüler:innen in der Seite scannen oder mit der Kamera-App: Dann öffnet sich die Seite und trägt das Badge ein. Unter dem QR-Code steht der Code zum Eintippen, falls die Kamera streikt.</li>
       <li><b>Badges aus Lernplattformen:</b> AR gibt es für das Arduino-Lernheft oder Arduino Schritt für Schritt, wenn alle Kapitel vollständig sind. CA gibt es, wenn alle elf Calliope-Challenges geschafft sind. MT gibt es, wenn alle Aufgaben der Motorentechnik erledigt sind (ohne Zusatzaufgaben). K1, K2 und K3 gibt es für die Level 1 bis 3 des AI Badge, sobald die Plattform das Level als erreicht vermerkt hat (Stationen und Prüfung des Levels). Die Fassung des AI Badge für Lehrkräfte zählt nicht.</li>
       <li><b>Name:</b> Passt der Name in der Ergebnis-PDF nicht zum Namen im Pass, zeigt die Seite einen Hinweis, trägt das Badge aber ein. Schau dann kurz drauf.</li>
-      <li><b>Aufbau:</b> D2 setzt D1 voraus, D3 setzt D2 voraus, L2 setzt L1 voraus, L3 setzt L2 voraus. Die Access erscheinen von selbst und stehen oben im Pass: <b>MS</b> MakerSpace Access mit LT, BH und BM, <b>RL</b> Robotiklabor Access (selbstständig ohne Nachfragen an Lasercutter und 3D-Drucker) mit L2 und D2.</li>
+      <li><b>Aufbau:</b> D2 setzt D1 voraus, D3 setzt D2 voraus, L2 setzt L1 voraus, L3 setzt L2 voraus. Die Access erscheinen von selbst und stehen oben im Pass: <b>MS</b> MakerSpace Access mit LT, BH und BM, <b>RL</b> Robotiklabor Access (selbstständig ohne Nachfragen an Lasercutter und 3D-Drucker) mit L2 und D2. Als Zusatz zum Robotiklabor Access dürfen Schüler:innen, die auch PL und TP haben, dort genauso Plotter und Transferpresse nutzen.</li>
     </ul>
   </div>
   <div class="card">
@@ -876,7 +880,7 @@ const BADGES=[
   {k:'RO',t:'Robotik',g:'steuer',n:'p'},{k:'AR',t:'Arduino',g:'steuer',n:'l'},{k:'CA',t:'Calliope',g:'steuer',n:'l'},
   {k:'MT',t:'Motorentechnik Theorie',g:'motor',n:'l'},{k:'MP',t:'Motorentechnik Praxis',g:'motor',n:'p'},
   {k:'K1',t:'AI Badge Level 1',g:'ki',n:'l',i:'Level 1 im AI Badge erreicht'},{k:'K2',t:'AI Badge Level 2',g:'ki',n:'l',i:'Level 2 im AI Badge erreicht'},{k:'K3',t:'AI Badge Level 3',g:'ki',n:'l',i:'Level 3 im AI Badge erreicht'},
-  {k:'MS',t:'MakerSpace Access',g:'sammel',n:'a',all:['LT','BH','BM'],i:'Access: LT, BH und BM',x:'Du darfst im MakerSpace an Lötstation und Bohrmaschinen arbeiten. Eine Lehrkraft ist immer im Raum.'},{k:'RL',t:'Robotiklabor Access',g:'sammel',n:'a',all:['L2','D2'],i:'Access: L2 und D2',x:'Du darfst im Robotiklabor ohne Nachfragen selbstständig an Lasercutter und 3D-Drucker arbeiten. Eine Lehrkraft ist immer im Raum.'}];
+  {k:'MS',t:'MakerSpace Access',g:'sammel',n:'a',all:['LT','BH','BM'],i:'Access: LT, BH und BM',x:'Du darfst im MakerSpace an Lötstation und Bohrmaschinen arbeiten. Eine Lehrkraft ist immer im Raum.'},{k:'RL',t:'Robotiklabor Access',g:'sammel',n:'a',all:['L2','D2'],i:'Access: L2 und D2',x:'Du darfst im Robotiklabor ohne Nachfragen selbstständig an Lasercutter und 3D-Drucker arbeiten. Eine Lehrkraft ist immer im Raum.',plus:{all:['PL','TP'],x:'Hast du auch PL und TP, darfst du dort genauso den Plotter und die Transferpresse nutzen.'}}];
 const BK={};BADGES.forEach(b=>BK[b.k]=b);
 const NW={p:'Prüfung',l:'Lernplattform',a:'Access'};
 const LOCK='<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg>';
@@ -884,7 +888,8 @@ const OPEN='<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4.5" y="10.5" w
 // Access-Kasten wie im Pass der Schüler:innen: list = Access, dt(k) = Datum oder null, hv(k) = Badge vorhanden, nm(k) = Titel
 function accHtml(list,dt,hv,nm,head){return '<div class="access">'+head+'<div class="accs">'+list.map(b=>{const d=dt(b.k);
   return '<div class="acc '+(d?'got':'open')+'"><div class="acc-top"><span class="lock">'+(d?OPEN:LOCK)+'</span><div><b>'+esc(b.t)+'</b><span>'+(d?(d===true?'freigeschaltet':'freigeschaltet am '+dStr(d)):'noch gesperrt')+'</span></div></div>'
-   +'<p>'+esc(b.x)+'</p><div class="req">'+b.all.map(k=>'<span class="'+(hv(k)?'ok':'')+'">'+k+(hv(k)?' ✓':'')+' '+esc(nm(k))+'</span>').join('')+'</div></div>';}).join('')+'</div></div>';}
+   +'<p>'+esc(b.x)+'</p><div class="req">'+b.all.map(k=>'<span class="'+(hv(k)?'ok':'')+'">'+k+(hv(k)?' ✓':'')+' '+esc(nm(k))+'</span>').join('')+'</div>'
+   +(b.plus?(()=>{const on=d&&b.plus.all.every(hv);return '<div class="plus'+(on?' on':'')+'"><b>'+(on?'Zusatz freigeschaltet':'Zusatz noch gesperrt')+'</b><p>'+esc(b.plus.x)+'</p><div class="req">'+b.plus.all.map(k=>'<span class="'+(hv(k)?'ok':'')+'">'+k+(hv(k)?' ✓':'')+' '+esc(nm(k))+'</span>').join('')+'</div></div>';})():'')+'</div>';}).join('')+'</div></div>';}
 const EXAMPLE=['BH','BM','D1','L1','TC','AR','K1'];
 function medal(k){return '<span class="medal" aria-hidden="true">'+esc(k)+'</span>';}
 function bdHtml(b,got,sub){return '<div class="bd'+(got?' got':'')+(b.n==='a'?' sammel':'')+' g-'+b.g+'">'+medal(b.k)+'<span class="t">'+esc(b.t)+'</span><span class="s">'+esc(sub)+'</span></div>';}
