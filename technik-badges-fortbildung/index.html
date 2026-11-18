@@ -535,6 +535,7 @@ td.c{text-align:center;font-weight:700}
 .lic{font-size:14px;color:var(--muted);text-align:center;margin:8px 0 0}
 .lic a{color:inherit}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+.dl{display:grid;gap:10px}.dli{display:grid;gap:8px;padding:12px 14px;border:1.5px solid var(--line);border-radius:12px;background:var(--surface)}.dli p{margin:4px 0 0}.dli .row{display:flex;flex-wrap:wrap;gap:8px}.dli .btn{text-decoration:none}
 </style>
 <script src="../assets/jspdf.umd.min.js"></script><link rel="stylesheet" href="../assets/lp-support.css"><script>window.LP_CFG={"keys": ["technik-badges-fortbildung-v1"], "pdfSection": false, "anchors": [], "slug": "technik-badges-fortbildung"};</script><script src="../assets/lp-support.js"></script>
 <script src="../assets/jsqr.min.js" defer></script>
@@ -709,7 +710,7 @@ td.c{text-align:center;font-weight:700}
     <div class="note info"><p>Die Seite <a href="../technik-badges/" target="_blank" rel="noopener">Technik-Badges</a> ist für die Schüler:innen gedacht. Dort steht nur, was sie selbst brauchen. Die Hinweise für dich als Lehrkraft stehen deshalb hier: wie die Seite Badges vergibt, woher die Codes kommen und wann ein Badge aus einer Lernplattform zählt.</p></div>
     <ul>
       <li>Die Seite ist ein Werkzeug ohne Konten und ohne Server. Der Pass liegt im Browser der Schüler:innen und als PDF auf ihrem iPad. Verbindlicher Nachweis bleibt die <b>Liste im Fachraum</b>, in die du jede bestandene Prüfung einträgst.</li>
-      <li><b>QR-Codes:</b> Das Codeblatt mit den Codes für das laufende Schuljahr bekommst du auf Anfrage bei Daniel Beyrodt. Den QR-Code können die Schüler:innen in der Seite scannen oder mit der Kamera-App: Dann öffnet sich die Seite und trägt das Badge ein. Unter dem QR-Code steht der Code zum Eintippen, falls die Kamera streikt.</li>
+      <li><b>QR-Codes:</b> Das Codeblatt mit den Codes für das laufende Schuljahr findest du unten unter <a href="#download">Zum Herunterladen</a>, geschützt mit dem Passwort für Lehrkräfte. Den QR-Code können die Schüler:innen in der Seite scannen oder mit der Kamera-App: Dann öffnet sich die Seite und trägt das Badge ein. Unter dem QR-Code steht der Code zum Eintippen, falls die Kamera streikt.</li>
       <li><b>Badges aus Lernplattformen:</b> AR gibt es für das Arduino-Lernheft oder Arduino Schritt für Schritt, wenn alle Kapitel vollständig sind. CA gibt es, wenn alle elf Calliope-Challenges geschafft sind. MT gibt es, wenn alle Aufgaben der Motorentechnik erledigt sind (ohne Zusatzaufgaben). K1, K2 und K3 gibt es für die Level 1 bis 3 des AI Badge, sobald die Plattform das Level als erreicht vermerkt hat (Stationen und Prüfung des Levels). Die Fassung des AI Badge für Lehrkräfte zählt nicht.</li>
       <li><b>Name:</b> Passt der Name in der Ergebnis-PDF nicht zum Namen im Pass, zeigt die Seite einen Hinweis, trägt das Badge aber ein. Schau dann kurz drauf.</li>
       <li><b>Aufbau:</b> D2 setzt D1 voraus, D3 setzt D2 voraus, L2 setzt L1 voraus, L3 setzt L2 voraus. Die Access erscheinen von selbst und stehen oben im Pass: <b>MS</b> MakerSpace Access mit LT, BH und BM, <b>RL</b> Robotiklabor Access (selbstständig ohne Nachfragen an Lasercutter und 3D-Drucker) mit L2 und D2. Als Zusatz zum Robotiklabor Access dürfen Schüler:innen, die auch PL und TP haben, dort genauso Plotter und Transferpresse nutzen.</li>
@@ -741,7 +742,7 @@ td.c{text-align:center;font-weight:700}
       <li>Die Liste enthält Nachnamen. Sie bleibt im Fachraum und liegt verschlossen, nicht offen aus.</li>
       <li>Am Ende des Schuljahres kann sie eingescannt in den Ordner der Fachgruppe auf dem Schulserver. Alte Listen werden aufbewahrt, solange die Schüler:innen an der Schule sind.</li>
     </ul>
-    <p><a class="btn soft" href="Liste_Badges_Fachraum.pdf" download style="text-decoration:none">Vorlage Liste im Fachraum (PDF, A4)</a></p>
+    <p>Die Vorlage zum Drucken und als Word-Datei steht unten unter <a href="#download">Zum Herunterladen</a>.</p>
   </div>
   <div class="card">
     <h3>Datenschutz</h3>
@@ -764,6 +765,19 @@ td.c{text-align:center;font-weight:700}
     <p><b>A</b> unter Aufsicht: Die Lehrkraft steht unmittelbar daneben und beaufsichtigt den Vorgang. <b>TS</b> teilselbstständig: Die Schüler:in arbeitet selbstständig, befindet sich jedoch im Blickfeld der Lehrkraft. <b>S</b> selbstständig (Wortlaut in Tabelle 5). An allen Maschinen und Geräten ist eine Einweisung erforderlich.</p>
     <div class="note"><p><b>Folge für den Lasercutter:</b> Bis Jahrgang 8 steht die Lehrkraft beim Lasern daneben, auch wenn L1 im Pass steht. L2 und L3 passen erst ab Jahrgang 9. Transferpresse und Plotter stehen nicht in Tabelle 4. Dort gilt die Gefährdungsbeurteilung der Schule.</p></div>
     <p class="src">Quelle: RiSU – Richtlinie zur Sicherheit im Unterricht, Fassung 2023, Kapitel I – 4.3, Tabelle 4 „Tätigkeitsbeschränkungen für Schülerinnen und Schüler an Maschinen und Geräten“ und Tabelle 5 „Abkürzungen“, S. 48. Prüfe, ob dein Land eine eigene Fassung oder einen Einführungserlass hat.</p>
+  </div>
+  <div class="card" id="download">
+    <h3>Zum Herunterladen</h3>
+    <p>Alle drei Dateien entstehen beim Bauen der Seite aus denselben Daten wie die Badge-Seite. Kommt ein Badge dazu, sind sie automatisch aktuell.</p>
+    <div class="dl">
+      <div class="dli"><div><b>Liste für den Fachraum</b><p>Eine A4-Seite mit Kopf (Schuljahr, Seite), Legende der Kürzel mit Prüfung, Hinweis auf die Badges ohne Eintrag und Tabelle mit Datum, Name, Klasse, Kürzel und Unterschrift. Die Word-Datei kannst du für deine Schule anpassen.</p></div>
+        <div class="row"><a class="btn soft" href="Liste_Badges_Fachraum.pdf" download>PDF zum Drucken</a><a class="btn soft" href="Liste_Badges_Fachraum.docx" download>Word-Datei</a></div></div>
+      <div class="dli"><div><b>Übersicht der Kürzel</b><p>Alle Badges mit Kürzel, Name, Inhalt und Nachweis, dazu die beiden Access mit Voraussetzungen und dem Satz, was sie erlauben.</p></div>
+        <div class="row"><a class="btn soft" href="Technik-Badges_Kuerzel.pdf" download>PDF</a></div></div>
+      <div class="dli"><div><b>QR-Codeblatt des laufenden Schuljahres</b><p>Ein QR-Code mit Code zum Eintippen je Badge mit Prüfung. Geschützt mit dem Passwort für Lehrkräfte. Nicht aushängen und nicht an Schüler:innen weitergeben.</p>
+        <p>Die Codes gelten für alle Schulen, die dieses Badge-System nutzen. Verbindlich ist an jeder Schule nur die eigene Liste im Fachraum. Wer eigene Codes möchte, baut das System nach (Kapitel 4) und erzeugt sie selbst.</p></div>
+        <div class="row"><a class="btn soft" href="codeblatt/" target="_blank" rel="noopener">Codeblatt öffnen (Passwort)</a></div></div>
+    </div>
   </div>
   <div class="navrow"><button class="btn soft" type="button" data-go="2">Zurück</button><button class="btn accent" type="button" data-go="4">Weiter: Selbst nachbauen</button></div>
 </section>
