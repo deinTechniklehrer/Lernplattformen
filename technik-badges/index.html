@@ -469,7 +469,7 @@ body.has-pass #sSo{order:5}body.has-pass #lk,body.has-pass .lic{order:6}
 .req span{font-size:13px;font-weight:700;padding:3px 9px;border-radius:99px;border:1.5px dashed var(--line);color:var(--muted)}
 .req span.ok{border:1.5px solid var(--ok);color:var(--ok)}
 .acc .plus{border-top:1.5px dashed var(--line);padding-top:8px;display:grid;gap:6px}
-.acc .plus b{font-size:14px}.acc .plus.on b{color:var(--ok)}
+.acc .plus-top b{display:block;font-size:15px}.acc .plus-top span{font-size:14px;color:var(--muted)}.acc .plus.on .plus-top span{color:var(--ok);font-weight:700}
 .acc .plus p{margin:0;font-size:14px}
 
 .g-werk{--gc:var(--g-werk)}.g-druck{--gc:var(--g-druck)}.g-laser{--gc:var(--g-laser)}.g-textil{--gc:var(--g-textil)}.g-cad{--gc:var(--g-cad)}.g-steuer{--gc:var(--g-steuer)}.g-motor{--gc:var(--g-motor)}.g-sammel{--gc:var(--g-sammel)}.g-ki{--gc:var(--g-ki)}
@@ -679,7 +679,7 @@ function render(){
   $('#access').innerHTML='<h3 id="h-acc">Access <span>Das darfst du mit deinen Badges</span></h3><div class="accs">'+ACC.map(b=>{const d=got(b.k);
     return '<div class="acc '+(d?'got':'open')+'"><div class="acc-top"><span class="lock">'+(d?OPEN:LOCK)+'</span><div><b>'+esc(b.t)+'</b><span>'+(d?'freigeschaltet am '+dStr(d):'noch gesperrt')+'</span></div></div>'
       +'<p>'+esc(b.x)+'</p><div class="req" aria-label="Dafür brauchst du">'+b.all.map(k=>'<span class="'+(has(k)?'ok':'')+'">'+k+(has(k)?' ✓':'')+' '+esc(BK[k].t)+'</span>').join('')+'</div>'
-      +(b.plus?(()=>{const on=d&&b.plus.all.every(has);return '<div class="plus'+(on?' on':'')+'"><b>'+(on?'Zusatz freigeschaltet':'Zusatz noch gesperrt')+'</b><p>'+esc(b.plus.x)+'</p><div class="req" aria-label="Dafür brauchst du zusätzlich">'+b.plus.all.map(k=>'<span class="'+(has(k)?'ok':'')+'">'+k+(has(k)?' ✓':'')+' '+esc(BK[k].t)+'</span>').join('')+'</div></div>';})():'')+'</div>';}).join('')+'</div>';
+      +(b.plus?(()=>{const on=d&&b.plus.all.every(has);return '<div class="plus'+(on?' on':'')+'"><div class="plus-top"><b>Zusatz '+esc(b.plus.all.map(k=>BK[k].t).join(' & '))+'</b><span>'+(on?'freigeschaltet':'noch gesperrt')+'</span></div><p>'+esc(b.plus.x)+'</p><div class="req" aria-label="Dafür brauchst du zusätzlich">'+b.plus.all.map(k=>'<span class="'+(has(k)?'ok':'')+'">'+k+(has(k)?' ✓':'')+' '+esc(BK[k].t)+'</span>').join('')+'</div></div>';})():'')+'</div>';}).join('')+'</div>';
   $('#groups').innerHTML=GROUPS.map(g=>{
     const bs=BADGES.filter(b=>b.g===g.id);
     return '<div class="grp g-'+g.id+'"><h3>'+esc(g.t)+'</h3><div class="badges">'+bs.map(b=>{
@@ -907,7 +907,7 @@ function makePdf(){
   // Access: was die Badges erlauben, deutlich abgesetzt
   txt('Access – das darfst du mit deinen Badges',M,48,{b:1,size:11.5});
   const plusOn=b=>!!(b.plus&&got(b.k)&&b.plus.all.every(has));
-  let ah=0;const al=ACC.map(b=>d.splitTextToSize(clean(b.x+(b.plus?' '+(plusOn(b)?'Zusatz freigeschaltet. ':'Zusatz noch gesperrt (braucht '+b.plus.all.join(', ')+'). ')+b.plus.x.replace(/^Zusatz: /,''):'')),colW-8));al.forEach(l=>{ah=Math.max(ah,14+l.length*3.9);});
+  let ah=0;const al=ACC.map(b=>d.splitTextToSize(clean(b.x+(b.plus?' '+'Zusatz '+b.plus.all.map(k=>BK[k].t).join(' & ')+': '+(plusOn(b)?'freigeschaltet. ':'noch gesperrt (braucht '+b.plus.all.join(', ')+'). ')+b.plus.x.replace(/^Zusatz: /,''):'')),colW-8));al.forEach(l=>{ah=Math.max(ah,14+l.length*3.9);});
   ACC.forEach((b,j)=>{const x0=M+j*(colW+8),y=51,dt=got(b.k);
     if(dt){d.setFillColor(225,241,232);d.setDrawColor(31,122,76);d.setLineWidth(.7);d.roundedRect(x0,y,colW,ah,3,3,'FD');d.setLineWidth(.2);}
     else{d.setDrawColor(170,180,175);d.setLineDashPattern([1.2,1],0);d.roundedRect(x0,y,colW,ah,3,3,'S');d.setLineDashPattern([],0);}

@@ -470,7 +470,7 @@ figure{margin:0;display:grid;gap:8px;min-width:0}
 .req span{font-size:13px;font-weight:700;padding:3px 9px;border-radius:99px;border:1.5px dashed var(--line);color:var(--muted)}
 .req span.ok{border:1.5px solid var(--ok);color:var(--ok)}
 .acc .plus{border-top:1.5px dashed var(--line);padding-top:8px;display:grid;gap:6px}
-.acc .plus b{font-size:14px}.acc .plus.on b{color:var(--ok)}
+.acc .plus-top b{display:block;font-size:15px}.acc .plus-top span{font-size:14px;color:var(--muted)}.acc .plus.on .plus-top span{color:var(--ok);font-weight:700}
 .acc .plus p{margin:0;font-size:14px}
 
 /* Access-Gleichung */
@@ -903,7 +903,7 @@ const OPEN='<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4.5" y="10.5" w
 function accHtml(list,dt,hv,nm,head){return '<div class="access">'+head+'<div class="accs">'+list.map(b=>{const d=dt(b.k);
   return '<div class="acc '+(d?'got':'open')+'"><div class="acc-top"><span class="lock">'+(d?OPEN:LOCK)+'</span><div><b>'+esc(b.t)+'</b><span>'+(d?(d===true?'freigeschaltet':'freigeschaltet am '+dStr(d)):'noch gesperrt')+'</span></div></div>'
    +'<p>'+esc(b.x)+'</p><div class="req">'+b.all.map(k=>'<span class="'+(hv(k)?'ok':'')+'">'+k+(hv(k)?' ✓':'')+' '+esc(nm(k))+'</span>').join('')+'</div>'
-   +(b.plus?(()=>{const on=d&&b.plus.all.every(hv);return '<div class="plus'+(on?' on':'')+'"><b>'+(on?'Zusatz freigeschaltet':'Zusatz noch gesperrt')+'</b><p>'+esc(b.plus.x)+'</p><div class="req">'+b.plus.all.map(k=>'<span class="'+(hv(k)?'ok':'')+'">'+k+(hv(k)?' ✓':'')+' '+esc(nm(k))+'</span>').join('')+'</div></div>';})():'')+'</div>';}).join('')+'</div></div>';}
+   +(b.plus?(()=>{const on=d&&b.plus.all.every(hv);return '<div class="plus'+(on?' on':'')+'"><div class="plus-top"><b>Zusatz '+esc(b.plus.all.map(k=>BK[k].t).join(' & '))+'</b><span>'+(on?'freigeschaltet':'noch gesperrt')+'</span></div><p>'+esc(b.plus.x)+'</p><div class="req">'+b.plus.all.map(k=>'<span class="'+(hv(k)?'ok':'')+'">'+k+(hv(k)?' ✓':'')+' '+esc(nm(k))+'</span>').join('')+'</div></div>';})():'')+'</div>';}).join('')+'</div></div>';}
 const EXAMPLE=['BH','BM','D1','L1','TC','AR','K1'];
 function medal(k){return '<span class="medal" aria-hidden="true">'+esc(k)+'</span>';}
 function bdHtml(b,got,sub){return '<div class="bd'+(got?' got':'')+(b.n==='a'?' sammel':'')+' g-'+b.g+'">'+medal(b.k)+'<span class="t">'+esc(b.t)+'</span><span class="s">'+esc(sub)+'</span></div>';}
