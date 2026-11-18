@@ -523,6 +523,12 @@ td.c{text-align:center;font-weight:700}
 .ov{position:fixed;inset:0;z-index:50;display:grid;place-items:center;padding:16px;background:rgb(0 0 0 / .55)}
 .ovbox{background:var(--surface);color:var(--ink);border-radius:22px;padding:24px 20px;max-width:440px;width:100%;display:grid;gap:12px;justify-items:center;text-align:center;box-shadow:var(--shadow)}
 .ovbox .medal{width:104px;height:104px;font-size:36px}
+.medal .bi{width:28px;height:28px;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;--bi-bg:var(--surface)}
+.medal .mk{font-size:12px;line-height:1;margin-top:1px}
+.medal:has(.bi){grid-template-rows:auto auto;align-content:center;gap:0}
+.bd.got .medal .bi,.bd.solid .medal .bi{--bi-bg:var(--gc)}
+.ovbox .medal .bi{width:58px;height:58px}.ovbox .medal .mk{font-size:20px}
+
 .ovbox h2{margin:0;font-size:24px}.ovbox p{margin:0}
 .when{font-family:var(--display);font-size:19px;font-weight:800}
 /* Nachbauen */
@@ -905,7 +911,40 @@ function accHtml(list,dt,hv,nm,head){return '<div class="access">'+head+'<div cl
    +'<p>'+esc(b.x)+'</p><div class="req">'+b.all.map(k=>'<span class="'+(hv(k)?'ok':'')+'">'+k+(hv(k)?' ✓':'')+' '+esc(nm(k))+'</span>').join('')+'</div>'
    +(b.plus?(()=>{const on=d&&b.plus.all.every(hv);return '<div class="plus'+(on?' on':'')+'"><div class="plus-top"><b>Zusatz '+esc(b.plus.all.map(k=>BK[k].t).join(' & '))+'</b><span>'+(on?'freigeschaltet':'noch gesperrt')+'</span></div><p>'+esc(b.plus.x)+'</p><div class="req">'+b.plus.all.map(k=>'<span class="'+(hv(k)?'ok':'')+'">'+k+(hv(k)?' ✓':'')+' '+esc(nm(k))+'</span>').join('')+'</div></div>';})():'')+'</div>';}).join('')+'</div></div>';}
 const EXAMPLE=['BH','BM','D1','L1','TC','AR','K1'];
-function medal(k){return '<span class="medal" aria-hidden="true">'+esc(k)+'</span>';}
+/* Symbole der Technik-Badges, selbst gezeichnet (CC BY-NC-SA 4.0), viewBox 0 0 48 48, Linien in currentColor.
+   Stand 18.11.2026. Eingebaut über den Platzhalter BICON in Technik-Badges und Fortbildung, PDF-Downloads über make_badges_fortbildung.py. */
+var BICON = (function () {
+  function lv(n) { return '<circle cx="39" cy="39" r="8" fill="currentColor" stroke="none"/><text x="39" y="43.2" text-anchor="middle" font-size="12" font-weight="700" font-family="Arial,sans-serif" fill="var(--bi-bg,#fff)" stroke="none">' + n + '</text>'; }
+  var drill = '<path d="M9 42h26M13 42V9"/><rect x="13" y="7" width="22" height="10" rx="2"/><path d="M35 11h6M27 17v5"/><rect x="24.5" y="22" width="5" height="5" rx="1"/><path d="M27 27v6"/>';
+  var printer = '<rect x="7" y="5" width="34" height="37" rx="2"/><path d="M7 13h34"/><path d="M20 13v5l4 5 4-5v-5"/><path d="M11 37h26"/><path d="M18 37v-6h12v6M18 34h12"/>';
+  var laser = '<rect x="14" y="5" width="20" height="10" rx="2"/><path d="M21 15h6l-3 5z"/><path d="M24 20v13" stroke-dasharray="3 2"/><path d="M7 37h34"/><path d="M24 33l-4-4M24 33l4-4M24 33h-6M24 33h6"/>';
+  var spark = '<path d="M22 8c1 8 4 11 12 12-8 1-11 4-12 12-1-8-4-11-12-12 8-1 11-4 12-12z"/><path d="M36 6c.4 3 1.6 4.2 4.6 4.6-3 .4-4.2 1.6-4.6 4.6-.4-3-1.6-4.2-4.6-4.6 3-.4 4.2-1.6 4.6-4.6z"/>';
+  var key = function (extra) { return '<circle cx="15" cy="24" r="8"/><circle cx="15" cy="24" r="2.5"/><path d="M23 24h18M35 24v6M40 24v4"/>' + (extra || ''); };
+  return {
+    BU: drill + '<path d="M17 39h20"/><rect x="23.5" y="34" width="7" height="5" rx="1"/>',
+    BH: drill + '<rect x="6" y="33" width="38" height="6" rx="1"/><path d="M9 36h8M21 36h3M28 36h10"/>',
+    BM: drill + '<rect x="15" y="35" width="24" height="4"/><path d="M23 34c-3 0-5-3-3-5s4 0 2 2M31 34c3 0 5-3 3-5s-4 0-2 2M14 29l-2.5-2M40 29l2.5-2M16 24l-2-1M38 24l2-1"/>',
+    LT: '<rect x="3" y="26" width="23" height="16" rx="2"/><rect x="6.5" y="29.5" width="10" height="5.5" rx="1"/><circle cx="21" cy="33" r="3"/><path d="M8 39h6"/><path d="M29 42h15"/><path d="M33 42l3-6M41 42l-3-6"/><path d="M33 37l8-12M37 39.5l8-12M35 34.5l3.6 2.4M37.2 31.2l3.6 2.4M39.4 27.9l3.6 2.4"/><path d="M43 26.5l3-5" stroke-width="5"/><path d="M46 21.5c-1-6-8-8-14-4s-6 9-6 9"/>',
+    D1: printer + lv(1), D2: printer + lv(2), D3: printer + lv(3),
+    L1: laser + lv(1), L2: laser + lv(2), L3: laser + lv(3),
+    TP: '<rect x="8" y="35" width="32" height="5" rx="1"/><rect x="10" y="20" width="28" height="6" rx="1"/><path d="M36 20l6-12M24 20v-6h12"/><path d="M15 30c1.5 1-1.5 2 0 3M24 30c1.5 1-1.5 2 0 3M33 30c1.5 1-1.5 2 0 3"/>',
+    PL: '<path d="M5 12h38"/><rect x="17" y="8" width="14" height="10" rx="2"/><path d="M24 18v5l-1.5 2"/><rect x="8" y="27" width="32" height="14" rx="1"/><path d="M14 36c3-6 6-6 8 0s5 6 8 0" stroke-dasharray="2.5 2"/>',
+    TC: '<path d="M24 7l15 8v17l-15 9-15-9V15z"/><path d="M9 15l15 9 15-9M24 24v17"/>',
+    SE: '<path d="M22 9l15 8v14l-15 9-15-9V17z"/><path d="M7 17l15 9 15-9M22 26v14"/><ellipse cx="22" cy="17" rx="5" ry="2.6"/><path d="M40 20v18M38 22l2-2 2 2M38 36l2 2 2-2"/>',
+    SM: '<path d="M7 34c0 4 34 4 34 0v-3c0-4-34-4-34 0z"/><ellipse cx="24" cy="18" rx="10" ry="3.5"/><path d="M14 18v9c0 3 20 3 20 0v-9"/><path d="M8 14c2-5 7-8 10-8M40 14c-2-5-7-8-10-8M16 6l2 0 0 2M32 6l-2 0 0 2"/>',
+    RO: '<path d="M4 43h20v-4H22v-3c0-2-1.5-3-3.5-3H9.5C7.5 33 6 34 6 36v3H4z"/><path d="M12 31L16 12" stroke-width="4.5"/><circle cx="12" cy="31" r="4"/><circle cx="16" cy="11" r="4"/><path d="M19 12.5l11 6" stroke-width="4.5"/><path d="M30 18.5l3 5" stroke-width="3.5"/><path d="M33 23.5l-2.5 4.5M33 23.5l4.5 3"/><path d="M31 31h3.5a2.3 2.3 0 1 1 4.6 0H43v3.5a2.3 2.3 0 1 1 0 4.6V43H31z"/>',
+    AR: '<rect x="8" y="12" width="34" height="24" rx="2"/><rect x="4" y="16" width="6" height="7" rx="1"/><rect x="21" y="20" width="12" height="9" rx="1"/><path d="M14 15h1M18 15h1M22 15h1M26 15h1M30 15h1M34 15h1M18 33h1M22 33h1M26 33h1M30 33h1"/>',
+    CA: '<path d="M12 9Q24 13 36 9Q34 18 43 24Q34 30 36 39Q24 35 12 39Q14 30 5 24Q14 18 12 9z"/><circle cx="12" cy="9" r="3.3"/><circle cx="36" cy="9" r="3.3"/><circle cx="43" cy="24" r="3.3"/><circle cx="36" cy="39" r="3.3"/><circle cx="12" cy="39" r="3.3"/><circle cx="5" cy="24" r="3.3"/><path d="M19 18.5h.01M21.75 18.5h.01M24.5 18.5h.01M27.25 18.5h.01M30 18.5h.01M19 21.25h.01M21.75 21.25h.01M24.5 21.25h.01M27.25 21.25h.01M30 21.25h.01M19 24h.01M21.75 24h.01M24.5 24h.01M27.25 24h.01M30 24h.01M19 26.75h.01M21.75 26.75h.01M24.5 26.75h.01M27.25 26.75h.01M30 26.75h.01M19 29.5h.01M21.75 29.5h.01M24.5 29.5h.01M27.25 29.5h.01M30 29.5h.01" stroke-width="2.1"/><circle cx="13.5" cy="24" r="1.9"/><circle cx="35.5" cy="24" r="1.9"/><rect x="21" y="11" width="6" height="3" rx=".8"/>',
+    MT: '<rect x="15" y="7" width="18" height="13" rx="2"/><path d="M15 11h18M15 14h18M24 20v11"/><circle cx="24" cy="36" r="6"/><circle cx="24" cy="36" r="1.5"/>',
+    MP: '<rect x="8" y="9" width="14" height="10" rx="2"/><path d="M8 12h14M15 19v8"/><circle cx="15" cy="31" r="4.5"/><path d="M41 11a6 6 0 0 1-8 7L22 29a3 3 0 1 1-4-4l11-11a6 6 0 0 1 7-8l-4 4 1 3 3 1z"/>',
+    K1: spark + lv(1), K2: spark + lv(2), K3: spark + lv(3),
+    MS: key('<path d="M10 9h10M15 9v6"/>'),
+    RL: key('<path d="M9 8l6 4 6-4"/>')
+  };
+})();
+
+function medalIn(k){return (typeof BICON!=='undefined'&&BICON[k])?'<svg class="bi" viewBox="0 0 48 48">'+BICON[k]+'</svg><span class="mk">'+esc(k)+'</span>':esc(k);}
+function medal(k){return '<span class="medal" aria-hidden="true">'+medalIn(k)+'</span>';}
 function bdHtml(b,got,sub){return '<div class="bd'+(got?' got':'')+(b.n==='a'?' sammel':'')+' g-'+b.g+'">'+medal(b.k)+'<span class="t">'+esc(b.t)+'</span><span class="s">'+esc(sub)+'</span></div>';}
 $('#allBadges').innerHTML=accHtml(BADGES.filter(b=>b.n==='a'),k=>null,k=>EXAMPLE.indexOf(k)>=0,k=>BK[k].t,'<h4>Access <span>Was die Schüler:innen mit ihren Badges dürfen · Beispiel: BH und BM erworben</span></h4>')+GROUPS.filter(g=>g.id!=='sammel').map(g=>'<div class="grp g-'+g.id+'"><h4>'+esc(g.t)+'</h4><div class="badges">'+BADGES.filter(b=>b.g===g.id).map(b=>bdHtml(b,EXAMPLE.indexOf(b.k)>=0,EXAMPLE.indexOf(b.k)>=0?'Beispiel: erworben':NW[b.n])).join('')+'</div></div>').join('');
 $('#kTab').innerHTML=BADGES.map(b=>'<tr><td><b>'+b.k+'</b></td><td>'+esc(b.t)+'</td><td>'+esc(b.i||'')+'</td><td>'+NW[b.n]+'</td></tr>').join('');
