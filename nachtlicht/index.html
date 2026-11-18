@@ -739,6 +739,36 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
 [data-lg="emptyboard"] .lg-board{max-width:560px;margin:8px auto 0}
 .lg-dim{stroke:var(--lg-ink);stroke-width:2;fill:none}.lg-dimh{fill:var(--lg-ink)}.lg-tdim{font-family:var(--body);font-size:32px;font-weight:800;fill:var(--lg-ink)}
 [data-lg="emptyboard"] .lg-ts{font-size:30px}
+.lg-freea{fill:#8d8d8d;fill-opacity:.38}.lg-freex{stroke:var(--lg-ink);stroke-width:3;fill:none}
+.lg-mark0{fill:var(--lg-ink)}.lg-hole0{fill:var(--lg-pcb)}
+.lg-ledc{stroke:var(--lg-ink);stroke-width:2.5}.lg-ledcr{stroke:var(--lg-ink);stroke-width:3}
+.lg-ledg{fill:#2f9a4a}.lg-ledo{fill:#f08a1c}.lg-ledy{fill:#f5d000}
+path.lg-ledg,path.lg-ledo,path.lg-ledy{stroke:var(--lg-ink);stroke-width:3}
+.lg-ledg:not(.lit):not(.lg-ledc),.lg-ledo:not(.lit):not(.lg-ledc),.lg-ledy:not(.lit):not(.lg-ledc){fill:var(--lg-bg)}
+.lg-glg{fill:#5fd08f}.lg-glo{fill:#ffb15c}.lg-gly{fill:#ffe45c}
+.lg-litze{stroke:#2f9a4a;stroke-width:5;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.lg-bat9{fill:#3a3f44;stroke:var(--lg-ink);stroke-width:2}
+.lg-ledbody{fill:#f3f6f8;stroke:var(--lg-ink);stroke-width:3}
+.formel{font-size:1.15rem;font-weight:700;margin:6px 0 10px}
+.rv{display:grid;gap:10px}.rvr{display:grid;gap:6px;padding:10px 12px;border:1.5px solid var(--line);border-radius:12px;background:var(--surface)}
+.rvr.s-ok{border-color:var(--ok)}.rvr.s-bad{border-color:var(--bad)}.rvr .rvd{color:var(--muted);font-size:.95rem}
+.rvr label{display:flex;align-items:center;gap:8px;flex-wrap:wrap}.rvr input{width:7.5em;font:inherit;padding:6px 8px;border:1.5px solid var(--line);border-radius:8px;background:var(--bg);color:inherit}
+.mess{display:grid;gap:0;border:1.5px solid var(--line);border-radius:12px;overflow:hidden}
+.mr{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr) minmax(0,1fr) 34px;gap:8px;align-items:center;padding:8px 10px;border-top:1px solid var(--line)}
+.mr.mh{border-top:0;background:var(--surface)}.mr .soll{color:var(--muted)}
+.mr input[type=text]{width:100%;min-width:0;font:inherit;padding:6px 8px;border:1.5px solid var(--line);border-radius:8px;background:var(--bg);color:inherit}
+.mr input[type=checkbox]{width:22px;height:22px;accent-color:var(--accent)}
+@media (max-width:520px){.mr{grid-template-columns:minmax(0,1fr) 34px}.mr .soll,.mr input[type=text]{grid-column:1}.mr input[type=checkbox]{grid-row:1;grid-column:2}.mr.mh b:nth-child(2),.mr.mh b:nth-child(3){display:none}}
+.lg-boardfig:has(.lg-freea),[data-lg="emptyboard"]:has(.lg-freea),.lab-fig:has(.lg-freea){overflow-x:auto;-webkit-overflow-scrolling:touch}
+.lg-boardfig:has(.lg-freea) svg{min-width:900px}[data-lg="emptyboard"]:has(.lg-freea) .lg-board{min-width:760px;max-width:none}
+.lab.wide .lab-fig:has(.lg-freea){max-width:none}.lab-fig:has(.lg-freea) svg{min-width:720px}
+.lg-boardfig:has(.lg-freea){max-width:none}.lg-boardfig:has(.lg-freea) svg{width:100%}
+.lg-planfig:has(.lg-ledg){max-width:820px;overflow-x:auto}.lg-planfig:has(.lg-ledg) svg{min-width:640px;width:100%}
+.station>.info,.station>.task{min-width:0}
+.lg-boardfig:has(.lg-freea),.lg-planfig:has(.lg-ledg),[data-lg="emptyboard"]:has(.lg-freea),.lab-fig:has(.lg-freea){max-width:100%}
+.station{min-width:0;max-width:100%}main{min-width:0}
+.station .info>*,.station .task>*{min-width:0}
+.lg-cuout{stroke:var(--lg-ink);stroke-width:2;stroke-dasharray:4 4;fill:none}.lg-cubox{fill:none;stroke:var(--lg-ink);stroke-width:2}
 /* Baustein Gefährdungsbeurteilung (gfb.js), seit 18.11.2026. Nutzt die .crit-Liste der Löten-Vorlage bzw. eigene Regeln unten. */
 :root{--gfb-u:#c23b2e;--gfb-a:#1f8a4c;--gfb-m:#1f63a8;--gfb-mbg:#e8f1fb;--gfb-icbg:#eef3f6;--gfb-icl:#a9b8bf;--gfb-ink:#22303a}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--gfb-u:#ff8a7e;--gfb-a:#5fd08f;--gfb-m:#8cc0f2;--gfb-mbg:#16304a;--gfb-icbg:#e9eef1;--gfb-icl:#e9eef1;--gfb-ink:#1b2730}}
@@ -950,7 +980,7 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
       <li><span class="szi" data-sz="brille" title="Augenschutz benutzen"></span><span>Trag beim Löten und beim Abschneiden der Drahtenden eine <b>Schutzbrille</b>. Halte das Drahtende beim Abschneiden mit dem <b>Finger fest</b>, damit es nicht wegfliegt.</span></li>
       <li><span class="szi" data-sz="ghs07 haende" title="Achtung, Hände waschen"></span><span>Flussmittel kann die Haut reizen und eine Allergie auslösen. Fass es <b>nicht mit den Fingern</b> an. Lotreste und Drahtenden kommen in den Behälter <b>„Elektronik-Abfall“</b>. Nach dem Löten <b>wäschst du dir die Hände</b> gründlich mit Seife.</span></li>
       <li><span class="szi" data-sz="elektro" title="Warnung vor elektrischer Spannung"></span><span>Die Lötstation hängt am Stromnetz (230 V). Sieh dir vor dem Einschalten <b>Leitungen und Stecker</b> genau an und führ das <b>Kabel nicht an der Lötstelle vorbei</b>. Ist etwas beschädigt, <b>schaltest du die Lötstation aus und meldest es</b> deiner Lehrkraft.</span></li>
-      <li><span class="szi"></span><span>Die Batterien legst du erst ein, wenn alles gelötet und geprüft ist.</span></li>
+      <li><span class="szi"></span><span>Die Batterie schließt du erst an, wenn alles gelötet und geprüft ist.</span></li>
     </ul><p class="src">Regeln nach den Betriebsanweisungen „Elektro-Lötstation“ und „Elektroniklot“ und nach der Richtlinie zur Sicherheit im Unterricht (RiSU 2023). Die Betriebsanweisungen deiner Schule hängen im Fachraum.</p></div>
     <h3>So lötest du eine Lötstelle</h3>
     <ol>
@@ -1029,7 +1059,7 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
 <section class="station c-sichern" data-ch="7" hidden>
   <div class="info">
     <h3>Selbsttest</h3>
-    <p>Im Selbsttest gibt es keine neuen Informationen. Wenn du hängst, schau in den Kapiteln 1, 2 und 5 nach.</p>
+    <p>Im Selbsttest gibt es keine neuen Informationen. Wenn du hängst, schau in den Kapiteln 1, 2, 5 und 6 nach.</p>
   </div>
   <article class="task">
     <header><span class="num"></span><h3>Alles verstanden?</h3><button class="op" data-op="überprüfen" type="button">überprüfen</button></header>
@@ -1060,7 +1090,7 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
 <section class="station c-sichern" data-ch="8" hidden>
   <article class="task">
     <header><span class="num">✓</span><h3>Deine Planungsmappe</h3></header>
-    <p class="q">Die Ergebnis-PDF enthält deinen Anforderungskatalog mit Bewertung, die Stückliste, deinen Arbeitsablauf, den Bestückungsplan, die Checkliste und deinen Aufgabenstand.</p>
+    <p class="q">Die Ergebnis-PDF enthält deinen Anforderungskatalog mit Bewertung, die Stückliste, deinen Arbeitsablauf, deine Gefährdungsbeurteilung, den Bestückungsplan, die Checkliste und deinen Aufgabenstand.</p>
     <ul class="sumlist" id="sumList"></ul>
     <div class="meta2">
       <div><label class="fbl" for="abgName">Dein Vorname</label><input type="text" id="abgName" autocomplete="off" placeholder="z. B. Lea"></div>
@@ -1321,9 +1351,9 @@ var EG = (function () {
   return { svg: svg, SYM: SYM, sym: sym, resistor: resistor, bandsOf: bandsOf, fmtOhm: fmtOhm, colorTable: colorTable, E12: E12, PART: PART, circuit: circuit, dunkel: dunkel, steckbrett: steckbrett, fehler: fehler, solder: solder, dmmFig: dmmFig, dmmRead: dmmRead, POSN: POSN, SOCK: SOCK, COL: COL };
 })();
 
-/* Löten auf Streifenraster (Nachtlicht, Schubladen-Alarm): eigene Grafiken (SVG), selbst gezeichnet, CC BY-NC-SA 4.0 Daniel Beyrodt.
+/* Löten auf Streifenraster (Nachtlicht, Schubladen-Alarm, Dunkelschaltung/LED-Tischleuchte): eigene Grafiken (SVG), selbst gezeichnet, CC BY-NC-SA 4.0 Daniel Beyrodt.
    Schaltzeichen in Anlehnung an DIN EN 60617. Farben über CSS-Klassen (.lg-…) in loeten.css für hell und dunkel.
-   LG.plan(v)      Schaltplan (v = 'N' Nachtlicht, 'A' Schubladen-Alarm)
+   LG.plan(v)      Schaltplan (v = 'N' Nachtlicht, 'A' Schubladen-Alarm, 'D' Dunkelschaltung mit drei LEDs)
    LG.sim(box, v)  Schaltplan mit Helligkeitsregler: Widerstand des LDR, Spannung an der Basis, Transistor, LED bzw. Summer
    LG.parts(v)     die Bauteile mit Beschriftung
    LG.bcFig()      BC547 mit nummerierten Beinen (Beschriftungsaufgabe), LG.BC_POS
@@ -1353,11 +1383,31 @@ var LG = (function () {
   function summerSym(x, y, cls) { /* Anschluss + oben (y), − unten (y+56) */
     return '<path class="lg-sym ' + (cls || '') + '" d="M' + (x - 22) + ' ' + (y + 12) + 'H' + (x + 22) + 'V' + (y + 44) + 'H' + (x - 22) + 'Z"/><path class="lg-w" d="M' + x + ' ' + y + 'V' + (y + 12) + 'M' + x + ' ' + (y + 44) + 'V' + (y + 56) + '"/><path class="lg-w2" d="M' + (x + 30) + ' ' + (y + 18) + 'Q' + (x + 38) + ' ' + (y + 28) + ' ' + (x + 30) + ' ' + (y + 38) + 'M' + (x + 38) + ' ' + (y + 12) + 'Q' + (x + 50) + ' ' + (y + 28) + ' ' + (x + 38) + ' ' + (y + 44) + '"/>' +
       txt(x + 8, y + 2, '+', 'lg-tb') + txt(x - 32, y + 30, 'Summer', 'lg-tb', 'end') + txt(x - 32, y + 56, 'aktiv', 'lg-ts', 'end'); }
-  function battery(x, y) { /* Pluspol oben bei y, Minuspol unten bei y+40 */
-    return '<path class="lg-p" d="M' + (x - 24) + ' ' + y + 'H' + (x + 24) + '"/><path class="lg-p3" d="M' + (x - 12) + ' ' + (y + 14) + 'H' + (x + 12) + '"/>' + txt(x + 32, y + 6, '+', 'lg-tb') + txt(x + 32, y + 36, '4,5 V', 'lg-ts'); }
+  function battery(x, y, u) { /* Pluspol oben bei y, Minuspol unten bei y+40 */
+    return '<path class="lg-p" d="M' + (x - 24) + ' ' + y + 'H' + (x + 24) + '"/><path class="lg-p3" d="M' + (x - 12) + ' ' + (y + 14) + 'H' + (x + 12) + '"/>' + txt(x + 32, y + 6, '+', 'lg-tb') + txt(x + 32, y + 36, u || '4,5 V', 'lg-ts'); }
+  function hres(x, y, w, lab, val, cls) { return '<rect class="lg-sym' + (cls ? ' ' + cls : '') + '" x="' + x + '" y="' + (y - 13) + '" width="' + w + '" height="26"/>' + txt(x + w / 2, y - 22, lab + ' ' + val, 'lg-tb', 'middle'); }
   /* st: {on: Anteil 0…1 (Transistor leitet), path: Stromwege hervorheben} */
   function planBody(v, st) {
     st = st || { on: 0 }; var on = st.on, b = '', hot = on > 0.04 ? ' lg-hot' : '';
+    if (v === 'D') {
+      var LX = [470, 600, 730], LCOL = ['g', 'o', 'y'], LNM = ['grün', 'orange', 'gelb'], RV = [['R3', '150 Ω'], ['R4', '220 Ω'], ['R5', '150 Ω']];
+      b += '<path class="lg-wire" d="M70 50H330M400 50H730M70 420H420M70 50V200M70 240V420M200 50V80M200 180V300M200 300V320M200 400V420M200 300H240M330 300H380M420 210V250M420 350V420M420 210H730"/>';
+      LX.forEach(function (x) { b += '<path class="lg-wire" d="M' + x + ' 50V70M' + x + ' 130V150M' + x + ' 182V210"/>'; });
+      b += '<path class="lg-wire lg-cur' + hot + '" d="M400 50H730' + LX.map(function (x) { return 'M' + x + ' 50V70M' + x + ' 130V150M' + x + ' 182V210'; }).join('') + 'M420 210H730M420 210V250M420 350V420M70 420H420M70 240V420M70 50V200M70 50H330"/>';
+      [[200, 50], [200, 420], [200, 300], [470, 50], [600, 50], [420, 420], [470, 210], [600, 210]].forEach(function (q) { b += '<circle class="lg-dot" cx="' + q[0] + '" cy="' + q[1] + '" r="5"/>'; });
+      /* Schalter S1 (geschlossen) */
+      b += '<circle class="lg-dot" cx="330" cy="50" r="5"/><circle class="lg-dot" cx="400" cy="50" r="5"/><path class="lg-w" d="M330 50L398 46"/>' + txt(365, 30, 'S1', 'lg-tb', 'middle');
+      b += battery(70, 206, '9 V');
+      b += vres(200, 80, 100, 'R1', '22 kΩ');
+      b += ldrSym(200, 320, 80, 'LDR');
+      b += hres(240, 300, 90, 'R2', '1,5 kΩ');
+      LX.forEach(function (x, i) { b += '<rect class="lg-sym" x="' + (x - 13) + '" y="70" width="26" height="60"/>' + txt(x + 20, 96, RV[i][0], 'lg-tb') + txt(x + 20, 120, RV[i][1], 'lg-ts');
+        b += '<path class="lg-sym lg-led' + LCOL[i] + (on > 0.04 ? ' lit' : '') + '" d="M' + (x - 16) + ' 150H' + (x + 16) + 'L' + x + ' 182Z"/><path class="lg-w" d="M' + (x - 16) + ' 182H' + (x + 16) + '"/><path class="lg-w2" d="M' + (x + 20) + ' 158L' + (x + 34) + ' 146M' + (x + 22) + ' 170L' + (x + 36) + ' 158"/>' + ah(x + 35, 145, -40, 8) + ah(x + 37, 157, -40, 8) + txt(x, 240, LNM[i], 'lg-ts', 'middle');
+        if (on > 0.04) b += '<circle class="lg-glow lg-gl' + LCOL[i] + '" cx="' + x + '" cy="166" r="30" fill-opacity="' + f(Math.min(0.8, on)) + '"/>'; });
+      b += npn(420, 300);
+      b += txt(40, 40, '+', 'lg-tb') + txt(40, 438, '−', 'lg-tb');
+      return { vb: '0 0 850 450', body: b };
+    }
     if (v === 'N') {
       b += '<path class="lg-wire" d="M70 50H430M70 360H430M70 50V290M70 330V360M220 50V80M220 160V180M220 180V200M220 280V360M220 200H340M430 50V70M430 130V150M430 190V240M430 340V360"/>';
       b += '<path class="lg-wire lg-cur' + hot + '" d="M430 50V70M430 130V150M430 190V240M430 340V360"/>';
@@ -1385,13 +1435,14 @@ var LG = (function () {
     b += txt(40, 40, '+', 'lg-tb') + txt(40, 418, '−', 'lg-tb');
     return { vb: '0 0 600 430', body: b };
   }
-  function plan(v) { var g = planBody(v); return svg(g.vb, g.body, v === 'N' ? 'Schaltplan Nachtlicht: R1 47 kΩ und Fotowiderstand als Spannungsteiler an der Basis von T1 BC547, LED mit Farbwechsel und R2 100 Ω am Kollektor, Batterie 4,5 V' : 'Schaltplan Schubladen-Alarm: R3 1 kΩ, Fotowiderstand und R1 10 kΩ als Spannungsteiler an der Basis von T1 BC547, aktiver Summer am Kollektor, Batterie 4,5 V', 'lg-plan'); }
+  function plan(v) { var g = planBody(v); return svg(g.vb, g.body, v === 'D' ? 'Schaltplan Dunkelschaltung der LED-Tischleuchte: Batterie 9 V und Schalter S1, R1 22 kΩ und Fotowiderstand als Spannungsteiler, R2 1,5 kΩ zur Basis von T1 BC547, drei LEDs grün, orange und gelb mit den Vorwiderständen R3 150 Ω, R4 220 Ω und R5 150 Ω parallel am Kollektor' : v === 'N' ? 'Schaltplan Nachtlicht: R1 47 kΩ und Fotowiderstand als Spannungsteiler an der Basis von T1 BC547, LED mit Farbwechsel und R2 100 Ω am Kollektor, Batterie 4,5 V' : 'Schaltplan Schubladen-Alarm: R3 1 kΩ, Fotowiderstand und R1 10 kΩ als Spannungsteiler an der Basis von T1 BC547, aktiver Summer am Kollektor, Batterie 4,5 V', 'lg-plan'); }
 
   /* Berechnung: Helligkeit 0 (dunkel) … 100 (hell) → Widerstand des LDR 1 MΩ … 1 kΩ (logarithmisch) */
   function ldrOf(h) { return Math.pow(10, 6 - 3 * h / 100); }
   function calc(v, h) {
     var R = ldrOf(h), U = 4.5, Vbe = 0.65, beta = 200, Ib, Vopen, Imax;
-    if (v === 'N') { Vopen = U * R / (47000 + R); Ib = (U - Vbe) / 47000 - Vbe / R; Imax = 0.014; }
+    if (v === 'D') { U = 9; var Vth = U * R / (22000 + R), Rth = 22000 * R / (22000 + R); Vopen = Vth; Ib = (Vth - Vbe) / (Rth + 1500); Imax = 0.1; }
+    else if (v === 'N') { Vopen = U * R / (47000 + R); Ib = (U - Vbe) / 47000 - Vbe / R; Imax = 0.014; }
     else { Vopen = U * 10000 / (11000 + R); Ib = (U - Vbe) / (1000 + R) - Vbe / 10000; Imax = 0.025; }
     var Vb = Math.min(Vopen, Ib > 0 ? 0.68 : Vopen), Ic = Ib > 0 ? Math.min(beta * Ib, Imax) : 0;
     return { R: R, Vb: Vb, on: Ic / Imax, Ic: Ic };
@@ -1401,14 +1452,14 @@ var LG = (function () {
     var fig = document.createElement('div'); fig.className = 'lg-planfig';
     var ctl = document.createElement('div'); ctl.className = 'lg-sim';
     var id = 'lgh-' + v + '-' + Math.random().toString(36).slice(2, 7);
-    ctl.innerHTML = '<label class="lg-sl" for="' + id + '"><span>dunkel</span><input id="' + id + '" type="range" min="0" max="100" step="1" value="' + (v === 'N' ? 80 : 10) + '" aria-label="Helligkeit am Fotowiderstand"><span>hell</span></label><div class="lg-read" aria-live="polite"></div>';
+    ctl.innerHTML = '<label class="lg-sl" for="' + id + '"><span>dunkel</span><input id="' + id + '" type="range" min="0" max="100" step="1" value="' + (v === 'N' ? 80 : v === 'D' ? 97 : 10) + '" aria-label="Helligkeit am Fotowiderstand"><span>hell</span></label><div class="lg-read" aria-live="polite"></div>';
     box.append(fig, ctl);
     var inp = ctl.querySelector('input'), rd = ctl.querySelector('.lg-read');
     function draw() {
       var c = calc(v, +inp.value), g = planBody(v, { on: c.on });
       fig.innerHTML = svg(g.vb, g.body, plan(v).match(/aria-label="([^"]*)"/)[1], 'lg-plan');
       var st = c.on > 0.9 ? 'leitet' : c.on > 0.04 ? 'leitet nur ein bisschen' : 'sperrt';
-      var out = v === 'N' ? (c.on > 0.9 ? 'Die LED leuchtet und wechselt die Farben.' : c.on > 0.04 ? 'Die LED glimmt schwach.' : 'Die LED ist aus.') : (c.on > 0.9 ? 'Der Summer piept.' : c.on > 0.04 ? 'Der Summer piept leise oder knackt.' : 'Der Summer ist still.');
+      var out = v === 'D' ? (c.on > 0.9 ? 'Die drei LEDs leuchten hell.' : c.on > 0.04 ? 'Die LEDs leuchten schwach.' : 'Die LEDs sind aus.') : v === 'N' ? (c.on > 0.9 ? 'Die LED leuchtet und wechselt die Farben.' : c.on > 0.04 ? 'Die LED glimmt schwach.' : 'Die LED ist aus.') : (c.on > 0.9 ? 'Der Summer piept.' : c.on > 0.04 ? 'Der Summer piept leise oder knackt.' : 'Der Summer ist still.');
       rd.innerHTML = '<span><b>Fotowiderstand:</b> ' + fmtR(c.R) + '</span><span><b>Spannung an der Basis:</b> ' + c.Vb.toFixed(2).replace('.', ',') + ' V</span><span><b>Transistor:</b> ' + st + '</span><span class="lg-out' + (c.on > 0.9 ? ' on' : '') + '">' + out + '</span>';
     }
     inp.addEventListener('input', draw); draw();
@@ -1428,7 +1479,10 @@ var LG = (function () {
     b += '<g transform="translate(20 ' + y0 + ')"><circle class="lg-ldr" cx="50" cy="50" r="40"/><path class="lg-ldrz" d="M26 32H74V42H26V52H74V62H26V70H74"/><path class="lg-lead" d="M38 88V170M62 88V170"/>' + txt(50, 200, 'Fotowiderstand', 'lg-tb', 'middle') + txt(50, 224, 'LDR', 'lg-ts', 'middle') + '</g>';
     /* BC547 */
     b += '<g transform="translate(180 ' + y0 + ')"><path class="lg-to92" d="M14 92V44A38 38 0 0 1 90 44V92Z"/>' + txt(52, 72, 'BC547', 'lg-tw', 'middle') + '<path class="lg-lead" d="M28 92V170M52 92V170M76 92V170"/>' + txt(28, 196, 'C', 'lg-tb', 'middle') + txt(52, 196, 'B', 'lg-tb', 'middle') + txt(76, 196, 'E', 'lg-tb', 'middle') + txt(52, 224, 'flache Seite zu dir', 'lg-ts', 'middle') + '</g>';
-    if (v === 'N') {
+    if (v === 'D') {
+      /* LED (klar, leuchtet grün, orange oder gelb) */
+      b += '<g transform="translate(340 ' + y0 + ')"><path class="lg-ledbody" d="M20 40A30 30 0 0 1 80 40V100H20Z"/><rect class="lg-ledr" x="14" y="98" width="72" height="12" rx="2"/><path class="lg-lead" d="M36 110V180M64 110V160"/>' + txt(36, 204, '+', 'lg-tb', 'middle') + txt(64, 184, '−', 'lg-tb', 'middle') + txt(50, 224, 'LED', 'lg-ts', 'middle') + '</g>';
+    } else if (v === 'N') {
       /* LED mit Farbwechsel */
       b += '<g transform="translate(340 ' + y0 + ')"><path class="lg-rainbow" d="M20 40A30 30 0 0 1 80 40V100H20Z"/><rect class="lg-ledr" x="14" y="98" width="72" height="12" rx="2"/><path class="lg-lead" d="M36 110V180M64 110V160"/>' + txt(36, 204, '+', 'lg-tb', 'middle') + txt(64, 184, '−', 'lg-tb', 'middle') + txt(50, 224, 'LED mit Farbwechsel', 'lg-ts', 'middle') + '</g>';
     } else {
@@ -1437,14 +1491,14 @@ var LG = (function () {
     }
     /* Widerstand */
     b += '<g transform="translate(490 ' + y0 + ')">' + '<path class="lg-lead" d="M10 90H140"/>' + '<rect class="lg-rbody" x="38" y="72" width="74" height="36" rx="12"/>';
-    var bb = bands(v === 'N' ? 47000 : 10000);
+    var bb = bands(v === 'N' ? 47000 : v === 'D' ? 22000 : 10000);
     [48, 62, 76, 100].forEach(function (x, i) { b += '<rect x="' + x + '" y="72" width="7" height="36" fill="' + bb[i] + '" class="lg-band"/>'; });
-    b += txt(75, 200, 'Widerstand', 'lg-tb', 'middle') + txt(75, 224, v === 'N' ? 'R1 47 kΩ' : 'R1 10 kΩ', 'lg-ts', 'middle') + '</g>';
+    b += txt(75, 200, 'Widerstand', 'lg-tb', 'middle') + txt(75, 224, v === 'N' ? 'R1 47 kΩ' : v === 'D' ? 'R1 22 kΩ' : 'R1 10 kΩ', 'lg-ts', 'middle') + '</g>';
     return { vb: '0 0 650 270', body: b };
   }
   function parts(v) { /* je Bauteil ein eigenes Bild, damit die Schrift auch auf dem Smartphone groß genug bleibt (2 Spalten) */
     var g = partsFig(v).body.split('<g transform="translate(').slice(1), cxs = [50, 52, 50, 75],
-      al = v === 'N' ? ['Fotowiderstand (LDR)', 'Transistor BC547, Beine C, B, E von links, flache Seite zu dir', 'LED mit Farbwechsel, langes Bein an Plus', 'Widerstand mit Farbringen'] : ['Fotowiderstand (LDR)', 'Transistor BC547, Beine C, B, E von links, flache Seite zu dir', 'aktiver Summer, Plus-Bein markiert', 'Widerstand mit Farbringen'];
+      al = v === 'D' ? ['Fotowiderstand (LDR)', 'Transistor BC547, Beine C, B, E von links, flache Seite zu dir', 'LED, langes Bein (Anode) an Plus', 'Widerstand mit Farbringen'] : v === 'N' ? ['Fotowiderstand (LDR)', 'Transistor BC547, Beine C, B, E von links, flache Seite zu dir', 'LED mit Farbwechsel, langes Bein an Plus', 'Widerstand mit Farbringen'] : ['Fotowiderstand (LDR)', 'Transistor BC547, Beine C, B, E von links, flache Seite zu dir', 'aktiver Summer, Plus-Bein markiert', 'Widerstand mit Farbringen'];
     return '<div class="lg-partsgrid">' + g.map(function (q, i) { var body = q.slice(q.indexOf('>') + 1).replace(/<\/g>$/, ''); return svg((cxs[i] - 120) + ' 20 240 220', body, al[i], 'lg-part'); }).join('') + '</div>'; }
   function bcFig() { return { vb: '0 -40 200 290', body: '<path class="lg-to92" d="M44 100V52A56 56 0 0 1 156 52V100Z"/>' + txt(100, 84, 'BC547', 'lg-tw', 'middle') + '<path class="lg-lead" d="M64 100V230M100 100V230M136 100V230"/>' + txt(100, -14, 'flache Seite zu dir', 'lg-ts', 'middle') } }
   var BC_POS = { c: [64, 214], b: [100, 214], e: [136, 214] };
@@ -1471,6 +1525,22 @@ var LG = (function () {
         { id: 'ldr', k: 'ldr', c: 8, r: [5, 7], lab: 'LDR', t: 'LDR stehend in Loch 8: ein Bein in Bahn 5, das andere in Bahn 7. Bahn 6 dazwischen bleibt frei. Die lichtempfindliche Seite zeigt nach oben.' },
         { id: 'sum', k: 'sum', c: 3, r: [1, 4], lab: 'Summer', t: 'Summer in Loch 3: das Bein mit + in Bahn 1, das andere in Bahn 4. Prüfe vorher den Abstand der Beine (meist 3 Löcher). Falsch herum bleibt er still. Das größte Bauteil kommt zuletzt.' },
         { id: 'bat', k: 'bat', c: 11, r: [1, 6], side: 'r', lab: 'Batterie', t: 'Batteriehalter mit Schalter: rotes Kabel (+) in Bahn 1, schwarzes Kabel (−) in Bahn 6, beide in Loch 11. Batterien erst nach der Sichtprüfung einlegen.' }
+      ] },
+    /* Dunkelschaltung (LED-Tischleuchte): Lage wie im Bestückungsplan der Unterrichtseinheit (23 Löcher × 12 Bahnen, Bauteilseite).
+       Bereich ab Loch 19 (Kreuz) bleibt frei von Bauteilen, die Ecke B12/L23 trägt die Markierung (0-Punkt). Nach jeder Gruppe folgt eine Teststation (test). */
+    D: { cols: 23, rows: 12, free: 19, mark0: [23, 12], labR: 1, step: 2, nets: { 3: '+9 V', 6: 'Spannungsteiler', 7: 'LED grün', 8: 'LED orange', 9: 'LED gelb', 10: 'Kollektor', 11: 'Basis', 12: 'GND (0 V)' },
+      parts: [
+        { id: 'r3', k: 'res', c: 3, r: [3, 7], ohm: 150, lab: 'R3', t: 'R3 (150 Ω, braun-grün-braun), Vorwiderstand der grünen LED, liegend in Loch 3: von Bahn 3 nach Bahn 7.' },
+        { id: 'r4', k: 'res', c: 10, r: [3, 8], ohm: 220, lab: 'R4', t: 'R4 (220 Ω, rot-rot-braun), Vorwiderstand der orangen LED, liegend in Loch 10: von Bahn 3 nach Bahn 8.' },
+        { id: 'r5', k: 'res', c: 17, r: [3, 9], ohm: 150, lab: 'R5', test: 1, t: 'R5 (150 Ω, braun-grün-braun), Vorwiderstand der gelben LED, liegend in Loch 17: von Bahn 3 nach Bahn 9.' },
+        { id: 'r1', k: 'res', c: 6, r: [3, 6], ohm: 22000, lab: 'R1', t: 'R1 (22 kΩ, rot-rot-orange) liegend in Loch 6: von Bahn 3 nach Bahn 6.' },
+        { id: 'r2', k: 'res', c: 7, r: [6, 11], ohm: 1500, lab: 'R2', test: 2, t: 'R2 (1,5 kΩ, braun-grün-rot) liegend in Loch 7: von Bahn 6 nach Bahn 11.' },
+        { id: 't1', k: 'tr', c: 12, r: [10, 11, 12], lab: 'T1', test: 3, t: 'T1 (BC547) senkrecht in Loch 12: C in Bahn 10, B in Bahn 11, E in Bahn 12. Die flache Seite zeigt nach links. Zügig löten, damit der Transistor nicht zu heiß wird.' },
+        { id: 'led1', k: 'ledc', col: 'g', c: 2, r: [7, 10], lab: 'LED grün', t: 'LED grün in Loch 2: die Anode (langes Bein, +) in Bahn 7, die Kathode in Bahn 10. Hol dir immer nur eine LED, damit du die Farben nicht verwechselst. Die LEDs stehen höher als der Transistor: Biege die Anode zuerst rechtwinklig ab und miss an der Platine, wo du sie wieder nach unten biegst.' },
+        { id: 'led2', k: 'ledc', col: 'o', c: 9, r: [8, 10], lab: 'LED orange', t: 'LED orange in Loch 9: Anode in Bahn 8, Kathode in Bahn 10. Achte auf die Polung.' },
+        { id: 'led3', k: 'ledc', col: 'y', c: 16, r: [9, 10], lab: 'LED gelb', test: 4, t: 'LED gelb in Loch 16: Anode in Bahn 9, Kathode in Bahn 10. Achte auf die Polung.' },
+        { id: 'ldr', k: 'ldrw', c: 1, r: [6, 12], lab: 'LDR', test: 5, t: 'Steckbrücken für den LDR: Teile eine Steckbrücke, isoliere die beiden Enden ab, verdrille und verzinne sie. Löte sie in Loch 1 an Bahn 6 und Bahn 12. Steck den LDR danach in die Steckkontakte. Der LDR hat keine Richtung.' },
+        { id: 'bat', k: 'batsw', c: 19, r: [3, 12], lab: 'Batterie', t: 'Batterieclip und Schalter S1: rotes Kabel (+) über den Schalter in Bahn 3, schwarzes Kabel (−) in Bahn 12, beide in Loch 19. Die 9-V-Batterie schließt du erst nach der Sichtprüfung an.' }
       ] }
   };
   function partSvg(p, hl) {
@@ -1484,18 +1554,27 @@ var LG = (function () {
     else if (p.k === 'bat') { var cc = cx(p.c), ya = cy(r[0]), yb = cy(r[1]);
       if (p.side === 'l') s += '<path class="lg-red" d="M' + cc + ' ' + ya + 'L' + (X0 - 20) + ' ' + (ya - 40) + 'H8"/><path class="lg-blk" d="M' + cc + ' ' + yb + 'L' + (X0 - 20) + ' ' + (yb + 36) + 'H8"/>' + txt(12, ya - 48, '+', 'lg-tb') + txt(12, yb + 30, '−', 'lg-tb');
       else { var ed = X0 + LAYW + 44; s += '<path class="lg-red" d="M' + cc + ' ' + ya + 'H' + ed + '"/><path class="lg-blk" d="M' + cc + ' ' + yb + 'H' + ed + '"/>' + txt(ed - 4, ya - 12, '+', 'lg-tb', 'end') + txt(ed - 4, yb - 12, '−', 'lg-tb', 'end'); } }
+    else if (p.k === 'ledc') { var ya = cy(r[0]), yk = cy(r[1]), ym = yk - 24;
+      s += '<path class="lg-lead" d="M' + c + ' ' + ya + 'V' + (ym - 14) + 'M' + c + ' ' + (ym + 14) + 'V' + yk + '"/><circle class="lg-ledc lg-led' + p.col + '" cx="' + c + '" cy="' + ym + '" r="17"/><path class="lg-ledcr" d="M' + (c - 17) + ' ' + (ym + 8) + 'H' + (c + 17) + '"/>' + lt(c + 22, ya + 8, '+', 'lg-tb'); }
+    else if (p.k === 'ldrw') { var y6 = cy(r[0]), y12 = cy(r[1]), xl = X0 - 30, yb = Y0 + LAY.D.rows * P + 60;
+      s += '<path class="lg-litze" d="M' + c + ' ' + y6 + 'H' + xl + 'V' + (yb - 26) + '"/><path class="lg-litze" d="M' + c + ' ' + y12 + 'H' + (xl + 14) + 'V' + (yb - 26) + '"/>' +
+        '<circle class="lg-ldr" cx="' + (xl + 7) + '" cy="' + yb + '" r="22"/><path class="lg-ldrz" d="M' + (xl - 6) + ' ' + (yb - 11) + 'H' + (xl + 20) + 'V' + (yb - 4) + 'H' + (xl - 6) + 'V' + (yb + 3) + 'H' + (xl + 20) + 'V' + (yb + 10) + 'H' + (xl - 6) + '"/>' + lt(xl + 38, yb + 8, 'LDR', 'lg-tb'); }
+    else if (p.k === 'batsw') { var xr = cx(c), y3 = cy(r[0]), y12b = cy(r[1]), top = Y0 - 50, xb = X0 + LAY.D.cols * P + 130;
+      s += '<path class="lg-red" d="M' + xr + ' ' + y3 + 'V' + top + 'H' + (xb - 70) + 'M' + (xb - 36) + ' ' + top + 'H' + xb + 'V' + (Y0 + 40) + '"/><circle class="lg-dot" cx="' + (xb - 70) + '" cy="' + top + '" r="5"/><circle class="lg-dot" cx="' + (xb - 36) + '" cy="' + top + '" r="5"/><path class="lg-w" d="M' + (xb - 70) + ' ' + top + 'L' + (xb - 38) + ' ' + (top - 4) + '"/>' + lt(xb - 53, top - 14, 'S1', 'lg-tb', 'middle') +
+        '<path class="lg-blk" d="M' + xr + ' ' + y12b + 'V' + (Y0 + LAY.D.rows * P + 34) + 'H' + (xb + 30) + 'V' + (Y0 + 200) + '"/>' +
+        '<rect class="lg-bat9" x="' + (xb - 20) + '" y="' + (Y0 + 40) + '" width="70" height="160" rx="6"/>' + lt(xb + 15, Y0 + 130, '9 V', 'lg-tw', 'middle') + lt(xb - 4, Y0 + 66, '+', 'lg-tw', 'middle'); }
     /* Lötpunkte */
-    var legs = p.k === 'bat' ? [[p.c, r[0]], [p.c, r[1]]] : p.k === 'tr' ? r.map(function (q) { return [p.c, q]; }) : [[p.c, r[0]], [p.c, r[r.length - 1]]];
+    var legs = p.k === 'bat' || p.k === 'batsw' || p.k === 'ldrw' ? [[p.c, r[0]], [p.c, r[1]]] : p.k === 'tr' ? r.map(function (q) { return [p.c, q]; }) : [[p.c, r[0]], [p.c, r[r.length - 1]]];
     var sol = legs.map(function (q) { return '<circle class="lg-sol" cx="' + cx(q[0]) + '" cy="' + cy(q[1]) + '" r="7"/>'; }).join('');
     if (hl) { var bx = bbox(p); s = '<rect class="lg-hl" x="' + bx[0] + '" y="' + bx[1] + '" width="' + bx[2] + '" height="' + bx[3] + '" rx="10"/>' + s; }
     return sol + s;
   }
   /* Bestückungsplan übertragen: Folienstift-Markierung der Löcher und Name des Bauteils */
-  function legsOf(p) { var r = p.r; return p.k === 'bat' ? [[p.c, r[0]], [p.c, r[1]]] : p.k === 'tr' ? r.map(function (q) { return [p.c, q]; }) : [[p.c, r[0]], [p.c, r[r.length - 1]]]; }
+  function legsOf(p) { var r = p.r; return p.k === 'bat' || p.k === 'batsw' || p.k === 'ldrw' ? [[p.c, r[0]], [p.c, r[1]]] : p.k === 'tr' ? r.map(function (q) { return [p.c, q]; }) : [[p.c, r[0]], [p.c, r[r.length - 1]]]; }
   function markSvg(p) {
     var lg = legsOf(p), m = lg.map(function (q) { return '<circle class="lg-mark" cx="' + cx(q[0]) + '" cy="' + cy(q[1]) + '" r="11"/>'; }).join('');
-    var lab = p.k === 'bat' ? '' : p.k === 'tr' ? 'T1' : (p.lab || '');
-    if (p.k === 'bat') m += txt(cx(p.c) + 15, cy(lg[0][1]) - 10, '+', 'lg-mkt') + txt(cx(p.c) + 15, cy(lg[1][1]) - 10, '−', 'lg-mkt');
+    var lab = p.k === 'bat' || p.k === 'batsw' ? '' : p.k === 'tr' ? 'T1' : p.k === 'ledc' ? '+' : (p.lab || '');
+    if (p.k === 'bat' || p.k === 'batsw') m += txt(cx(p.c) + 15, cy(lg[0][1]) - 10, '+', 'lg-mkt') + txt(cx(p.c) + 15, cy(lg[1][1]) - 10, '−', 'lg-mkt');
     else if (lab) m += txt(cx(lg[0][0]) + 14, cy(lg[0][1]) - 12, lab, 'lg-mkt');
     return m;
   }
@@ -1503,6 +1582,9 @@ var LG = (function () {
   function bbox(p) {
     var c = cx(p.c), r = p.r, top = cy(r[0]), bot = cy(r[r.length - 1]);
     if (p.k === 'sum') return [c - 100, (top + bot) / 2 - 100, 200, 200];
+    if (p.k === 'ldrw') return [X0 - 66, top - 22, c - X0 + 80, Y0 + LAY.D.rows * P + 90 - top];
+    if (p.k === 'batsw') return [c - 14, Y0 - 70, X0 + LAY.D.cols * P + 220 - c, LAY.D.rows * P + 120];
+    if (p.k === 'ledc') return [c - 26, top - 20, 52, bot - top + 40];
     if (p.k === 'bat') return p.side === 'l' ? [2, top - 50, c + 12, bot - top + 94] : [c - 14, top - 22, X0 + LAYW + 50 - c + 14, bot - top + 44];
     return [c - 30, top - 26, 90, bot - top + 52];
   }
@@ -1511,12 +1593,15 @@ var LG = (function () {
     b += '<rect class="lg-pcb" x="' + (X0 - 8) + '" y="' + (Y0 - 8) + '" width="' + (W + 16) + '" height="' + (H + 16) + '" rx="6"/>';
     for (var r = 1; r <= L.rows; r++) {
       b += '<rect class="lg-strip' + (L.nets[r] ? '' : ' free') + '" x="' + (X0 + 2) + '" y="' + (cy(r) - 14) + '" width="' + (W - 4) + '" height="28" rx="5"/>';
-      b += txt(X0 - 14, cy(r) + 7, 'B' + r, 'lg-ts', 'end');
+      b += L.labR ? txt(X0 + W + 14, cy(r) + 7, 'B' + r, 'lg-ts') : txt(X0 - 14, cy(r) + 7, 'B' + r, 'lg-ts', 'end');
       for (var c = 1; c <= L.cols; c++) b += '<circle class="lg-hole" cx="' + cx(c) + '" cy="' + cy(r) + '" r="5"/>';
     }
-    for (c = 1; c <= L.cols; c++) b += txt(cx(c), Y0 - 18, 'L' + c, 'lg-ts', 'middle');
+    for (c = 1; c <= L.cols; c += (L.step || 1)) b += txt(cx(c), Y0 - 18, 'L' + c, 'lg-ts', 'middle');
+    if (L.free) { var xf = X0 + (L.free - 1) * P - 6; b += '<rect class="lg-freea" x="' + xf + '" y="' + (Y0 - 6) + '" width="' + (X0 + W + 6 - xf) + '" height="' + (H + 12) + '"/><path class="lg-freex" d="M' + xf + ' ' + (Y0 - 6) + 'L' + (X0 + W + 6) + ' ' + (Y0 + H + 6) + 'M' + (X0 + W + 6) + ' ' + (Y0 - 6) + 'L' + xf + ' ' + (Y0 + H + 6) + '"/>'; }
+    if (L.mark0) b += '<rect class="lg-mark0" x="' + (cx(L.mark0[0]) - 17) + '" y="' + (cy(L.mark0[1]) - 17) + '" width="34" height="34" rx="3"/><circle class="lg-hole0" cx="' + cx(L.mark0[0]) + '" cy="' + cy(L.mark0[1]) + '" r="6"/>';
     if (marks) L.parts.slice(n).forEach(function (p) { b += markSvg(p); });  /* Markierungen nur für noch nicht eingesetzte Bauteile */
     L.parts.slice(0, n).forEach(function (p, i) { b += partSvg(p, hlLast && i === n - 1); });
+    if (L.labR) return { vb: '0 -30 ' + (X0 + W + 260) + ' ' + (Y0 + H + 150), body: b, vbBoard: '20 20 ' + (X0 + W + 50) + ' ' + (Y0 + H - 4) };
     return { vb: '0 0 ' + (X0 + W + 56) + ' ' + (Y0 + H + 24), body: b };
   }
   function board(v, n) { var g = boardBody(v, n == null ? 99 : n, false); return svg(g.vb, g.body, 'Streifenraster von der Bauteilseite', 'lg-board'); }
@@ -1532,6 +1617,8 @@ var LG = (function () {
       for (var c = 1; c <= L.cols; c++) b += '<circle class="lg-hole" cx="' + cx(c) + '" cy="' + cy(r) + '" r="5"/>';
     }
     for (c = 1; c <= L.cols; c += 2) b += txt(cx(c), y1 - 12, 'L' + c, 'lg-ts', 'middle');  /* jede zweite Nummer, sonst stoßen L10 und L11 zusammen */
+    if (L.free) { var xf = X0 + (L.free - 1) * P - 6; b += '<rect class="lg-freea" x="' + xf + '" y="' + (y1 + 4) + '" width="' + (x2 - 4 - xf) + '" height="' + (y2 - y1 - 8) + '"/><path class="lg-freex" d="M' + xf + ' ' + (y1 + 4) + 'L' + (x2 - 4) + ' ' + (y2 - 4) + 'M' + (x2 - 4) + ' ' + (y1 + 4) + 'L' + xf + ' ' + (y2 - 4) + '"/>'; }
+    if (L.mark0) b += '<rect class="lg-mark0" x="' + (cx(L.mark0[0]) - 17) + '" y="' + (cy(L.mark0[1]) - 17) + '" width="34" height="34" rx="3"/><circle class="lg-hole0" cx="' + cx(L.mark0[0]) + '" cy="' + cy(L.mark0[1]) + '" r="6"/>';
     var ar = function (xa, ya, xb, yb) { return '<path class="lg-dim" d="M' + xa + ' ' + ya + 'L' + xb + ' ' + yb + '"/>'; };
     var dy = y2 + 34, dx = x2 + 34;  /* Maßlinien */
     /* Breite */
@@ -1545,9 +1632,29 @@ var LG = (function () {
     b = defs + b.replace(/lg-dim lg-dima"/g, 'lg-dim lg-dima" marker-start="url(#lgAr' + v + ')" marker-end="url(#lgAr' + v + ')"');
     return svg('0 0 ' + (dx + 64) + ' ' + (dy + 50), b, 'Leere Streifenrasterplatine mit ' + L.rows + ' Bahnen und je ' + L.cols + ' Löchern, etwa ' + mm(L.cols + 1) + ' mm breit und ' + mm(L.rows + 1) + ' mm hoch', 'lg-board lg-dims');
   }
-  function boardFig(v, nolab) { NOLAB = !!nolab; var g = boardBody(v, 99, false); NOLAB = false; return g; }
+  /* Kupferseite (gespiegelt): Bahnen, Lötpunkte und Lage der Bauteile von unten gesehen, z. B. für die Schablone */
+  function copper(v) {
+    var L = LAY[v], W = L.cols * P, H = L.rows * P, b = '', mx = function (c) { return cx(L.cols + 1 - c); };
+    b += '<rect class="lg-pcb" x="' + (X0 - 8) + '" y="' + (Y0 - 8) + '" width="' + (W + 16) + '" height="' + (H + 16) + '" rx="6"/>';
+    for (var r = 1; r <= L.rows; r++) {
+      b += '<rect class="lg-strip under" x="' + (X0 + 2) + '" y="' + (cy(r) - 14) + '" width="' + (W - 4) + '" height="28" rx="5"/>';
+      b += txt(X0 + W + 14, cy(r) + 7, 'B' + r, 'lg-ts');
+      for (var c = 1; c <= L.cols; c++) b += '<circle class="lg-hole" cx="' + cx(c) + '" cy="' + cy(r) + '" r="5"/>';
+    }
+    for (c = 1; c <= L.cols; c += (L.step || 1)) b += txt(mx(c), Y0 - 18, 'L' + c, 'lg-ts', 'middle');
+    if (L.free) { var xf2 = X0 + (L.cols - L.free + 1) * P + 6; b += '<rect class="lg-freea" x="' + (X0 - 6) + '" y="' + (Y0 - 6) + '" width="' + (xf2 - X0 + 6) + '" height="' + (H + 12) + '"/><path class="lg-freex" d="M' + (X0 - 6) + ' ' + (Y0 - 6) + 'L' + xf2 + ' ' + (Y0 + H + 6) + 'M' + xf2 + ' ' + (Y0 - 6) + 'L' + (X0 - 6) + ' ' + (Y0 + H + 6) + '"/>'; }
+    if (L.mark0) b += '<rect class="lg-mark0" x="' + (mx(L.mark0[0]) - 17) + '" y="' + (cy(L.mark0[1]) - 17) + '" width="34" height="34" rx="3"/><circle class="lg-hole0" cx="' + mx(L.mark0[0]) + '" cy="' + cy(L.mark0[1]) + '" r="6"/>';
+    L.parts.forEach(function (p) { var lg = legsOf(p), pts = lg.map(function (q) { return [mx(q[0]), cy(q[1])]; });
+      if (p.k === 'res' || p.k === 'ledc') { var mid = (pts[0][1] + pts[1][1]) / 2; b += '<path class="lg-cuout" d="M' + pts[0][0] + ' ' + pts[0][1] + 'V' + pts[1][1] + '"/><rect class="lg-cubox" x="' + (pts[0][0] - 12) + '" y="' + (mid - 28) + '" width="24" height="56" rx="6"/>'; }
+      pts.forEach(function (q) { b += '<circle class="lg-sol" cx="' + q[0] + '" cy="' + q[1] + '" r="9"/>'; });
+      var lab = p.k === 'tr' ? 'T1' : p.k === 'batsw' ? '+ / −' : p.k === 'ldrw' ? 'LDR' : p.k === 'ledc' ? p.lab.replace('LED ', '') : p.lab;
+      b += txt(pts[0][0] + 16, (pts[0][1] + pts[pts.length - 1][1]) / 2 + 8, lab, 'lg-tb'); });
+    return svg('0 0 ' + (X0 + W + 70) + ' ' + (Y0 + H + 30), b, 'Kupferseite (gespiegelt) mit Lötpunkten', 'lg-board');
+  }
+  function boardFig(v, nolab) { NOLAB = !!nolab; var g = boardBody(v, 99, false); NOLAB = false; if (g.vbBoard) g.vb = g.vbBoard; return g; }
   var BOARD_POS = { N: { r2: [cx(3) - 26, cy(3)], r1: [cx(8) - 26, cy(4)], t1: [cx(6) + 30, cy(7)], led: [cx(4), cy(4) - 6], ldr: [cx(9), cy(6)] },
-    A: { r3: [cx(10) - 26, cy(4)], r1: [cx(7), cy(4) - 6], t1: [cx(6), cy(7)], ldr: [cx(8) + 34, cy(5) + 2], sum: [cx(3) + 60, cy(2)] } };
+    A: { r3: [cx(10) - 26, cy(4)], r1: [cx(7), cy(4) - 6], t1: [cx(6), cy(7)], ldr: [cx(8) + 34, cy(5) + 2], sum: [cx(3) + 60, cy(2)] },
+    D: { r1: [cx(6) - 26, cy(4.5)], r2: [cx(7) + 26, cy(8.5)], t1: [cx(12) + 34, cy(11)], led1: [cx(2) + 30, cy(9.4)], r4: [cx(10) - 26, cy(5.5)] } };
   function steps(box, v) {
     var L = LAY[v], n = 0, N = L.parts.length + 2;  /* 0 Start, 1 Bestückungsplan übertragen, dann je ein Bauteil, zuletzt Sichtprüfung */
     var fig = document.createElement('div'); fig.className = 'lg-boardfig';
@@ -1560,9 +1667,9 @@ var LG = (function () {
       fig.innerHTML = svg(g.vb, g.body, 'Bestückungsplan, Schritt ' + n + ' von ' + (N - 1), 'lg-board');
       nav.querySelector('.lg-cnt').textContent = n === 0 ? 'Start' : n < N ? 'Schritt ' + n + ' von ' + (N - 1) : 'Fertig';
       tx.innerHTML = n === 0 ? 'Die leere Platine von der <b>Bauteilseite</b>: Die Kupferbahnen liegen unten, hier sind sie durchscheinend gezeichnet. Bahnen von oben gezählt (B1, B2 …), Löcher von links (L1, L2 …). Leg die Platine so vor dich, wie du sie hier siehst.'
-        : n === 1 ? '<b>Schritt 1: Bestückungsplan übertragen.</b> Bevor du lötest, überträgst du den Plan auf die Platine: Markiere mit einem feinen Folienstift auf der Bauteilseite die Löcher, in die die Beine der Bauteile kommen, und schreib den Namen daneben (zum Beispiel R1). Für den Batteriehalter markierst du + und −. Vergleiche danach jede Markierung noch einmal mit dem Plan.'
-        : n < N ? '<b>Schritt ' + n + ':</b> ' + esc(L.parts[n - 2].t)
-        : '<b>Sichtprüfung:</b> Schau mit der Lupe auf die Unterseite. Jede Lötstelle glänzt und hat die Form eines kleinen Kegels. Zwischen zwei Bahnen darf kein Lot hängen. Erst dann legst du die Batterien ein und testest.';
+        : n === 1 ? '<b>Schritt 1: Bestückungsplan übertragen.</b> Bevor du lötest, überträgst du den Plan auf die Platine: Markiere mit einem feinen Folienstift auf der Bauteilseite die Löcher, in die die Beine der Bauteile kommen, und schreib den Namen daneben (zum Beispiel R1). Für das Batteriekabel markierst du + und −. Vergleiche danach jede Markierung noch einmal mit dem Plan.' + (L.free ? ' Den Bereich mit dem Kreuz lässt du frei, und die Ecke mit dem 0-Punkt markierst du schwarz. Kontrolliere deine Zeichnung danach mit der Schablone.' : '')
+        : n < N ? '<b>Schritt ' + n + ':</b> ' + esc(L.parts[n - 2].t) + (L.parts[n - 2].test ? '<br><b>Teststation ' + L.parts[n - 2].test + ':</b> Prüfe deine Platine jetzt an Teststation ' + L.parts[n - 2].test + '. Klappt der Test, hakst du ihn in der Checkliste ab. Klappt er nicht, nimm dir die Hilfekarte „Teststation meldet Fehler“.' : '')
+        : '<b>Sichtprüfung:</b> Schau mit der Lupe auf die Unterseite. Jede Lötstelle glänzt und hat die Form eines kleinen Kegels. Zwischen zwei Bahnen darf kein Lot hängen. Erst dann schließt du die Batterie an und testest.';
       nav.querySelector('[data-d="-1"]').disabled = n === 0; nav.querySelector('[data-d="1"]').disabled = n === N;
     }
     nav.addEventListener('click', function (e) { var d = e.target.closest('[data-d]'); if (!d) return; n = Math.max(0, Math.min(N, n + (+d.dataset.d))); draw(); });
@@ -1576,7 +1683,7 @@ var LG = (function () {
     b += '<path class="lg-warnl" d="M184 65H326"/>' + txt(334, 72, 'Lötbrücke', 'lg-tb');
     return svg('0 0 460 130', b, 'Lötbrücke: Lot verbindet zwei benachbarte Kupferbahnen auf der Unterseite', 'lg-small');
   }
-  return { plan: plan, planBody: planBody, sim: sim, calc: calc, parts: parts, bcFig: bcFig, BC_POS: BC_POS, board: board, boardDims: boardDims, mm: mm, boardFig: boardFig, BOARD_POS: BOARD_POS, steps: steps, bruecke: bruecke, LAY: LAY };
+  return { plan: plan, planBody: planBody, sim: sim, calc: calc, parts: parts, bcFig: bcFig, BC_POS: BC_POS, board: board, copper: copper, boardDims: boardDims, mm: mm, boardFig: boardFig, BOARD_POS: BOARD_POS, steps: steps, bruecke: bruecke, LAY: LAY };
 })();
 
 /* Sicherheitszeichen aus dem Tech-Board (Repo Unterrichtsboard, tech-board/index.html, TB_RULES/TB_HAZ).
@@ -1617,7 +1724,7 @@ t15:{type:'gfb',kc:'S11-S',ba:'Betriebsanweisungen KGS Gronau: Elektro-Lötstati
   ['griff','Den Lötkolben nur am Griff anfassen','p','Nur der Griff bleibt kühl. Die Spitze ist über 300 °C heiß.','Wo fasst du den Lötkolben an?'],
   ['papier','Ordnung am Arbeitsplatz halten, Papier und Stoff wegräumen','p','Auf einem aufgeräumten Platz stößt du nicht an die heiße Spitze, und nichts kann anbrennen.','Wie sieht dein Arbeitsplatz aus?'],
   ['finger','Mit dem Finger kurz prüfen, ob die Spitze schon heiß ist','f','Damit verbrennst du dich. Ob die Spitze heiß ist, siehst du daran, dass Lötdraht an der Spitze schmilzt.']]},
- {t:'Stromschlag durch die Batterien der Schaltung',sz:'elektro',ok:false,why:'Drei AA-Batterien haben zusammen 4,5 V. Diese Spannung ist für deinen Körper ungefährlich. Gefährlich ist die Netzspannung von 230 V an der Lötstation.'},
+ {t:'Stromschlag durch die Batterien der Schaltung',sz:'elektro',ok:false,why:'Die Batterie deiner Schaltung hat höchstens 9 V. Diese Spannung ist für deinen Körper ungefährlich. Gefährlich ist die Netzspannung von 230 V an der Lötstation.'},
  {t:'Gesundheitsschädliche Lot- und Flussmitteldämpfe einatmen',sz:'ghs08',ok:true,m:[
   ['gehoer','Gehörschutz tragen','f','Gehörschutz schützt die Ohren, nicht die Atemwege.'],
   ['lueften','Das Fenster auf Kipp stellen (lüften)','p','Frische Luft verdünnt die Dämpfe.','Wie kommen die Dämpfe aus dem Raum?'],
@@ -1666,15 +1773,15 @@ t14:{type:'open',kc:'RS22-F3',min:120,checks:[['LDR wird im Dunkeln groß',/ldr|
 };
 const BAU=['Alle Bauteile nach der Stückliste bereitgelegt.','Bestückungsplan mit Folienstift auf die Platine übertragen und mit dem Plan verglichen.','R2 (braun-schwarz-braun) sitzt in Loch 3, R1 (gelb-violett-orange) in Loch 8.','Der Transistor steht richtig: flache Seite nach links, C in Bahn 6.','Das lange Bein der LED steckt in Bahn 5.','Der LDR steckt in Loch 9 zwischen Bahn 7 und Bahn 8.','Batteriehalter: Rot an Bahn 1, Schwarz an Bahn 8.','Alle Lötstellen glänzen und sehen aus wie kleine Kegel.','Zwischen den Bahnen hängt kein Lot (keine Lötbrücke).','Die Drahtenden sind kurz abgeschnitten.','Erst danach Batterien eingelegt und getestet.'];
 Object.assign(T,TV);
-const KC={'RS16-A':'KC Technik RS 2010, S. 16 (Planen, Konstruieren und Herstellen): erstellen einen Anforderungskatalog','RS16-M':'KC Technik RS 2010, S. 16 (Planen, Konstruieren und Herstellen): erstellen Materiallisten','RS16-P':'KC Technik RS 2010, S. 16 (Planen, Konstruieren und Herstellen): planen einen Arbeitsablauf','RS16-U':'KC Technik RS 2010, S. 16 (Planen, Konstruieren und Herstellen): überprüfen die Teillösungen hinsichtlich der technischen Anforderungen','RS22-F2':'KC Technik RS 2010, S. 22: beschreiben die elektrischen Eigenschaften von Widerständen, Leuchtdioden, Sensoren und Transistoren','RS22-F3':'KC Technik RS 2010, S. 22: beschreiben das Zusammenwirken verschiedener elektronischer Bauteile in einer Schaltung','RS22-E4':'KC Technik RS 2010, S. 22: entwerfen und stellen elektronische Schaltungen her','PT21-F':'CV Profil Technik RS 2011, S. 21: benennen Schaltzeichen; beschreiben die Eigenschaften von Widerständen, Kondensatoren und Halbleitern','S11-S':'KC Technik RS 2010, S. 11 (Zur Sicherheit im Technikunterricht): Sicherheitsbewusstsein und Bereitschaft zur Verhütung von Gefahren und Unfällen; RiSU 2023 (Gefährdungsbeurteilung)'};
+const KC={'RS16-A':'KC Technik RS 2010, S. 16 (Planen, Konstruieren und Herstellen): erstellen einen Anforderungskatalog','RS16-M':'KC Technik RS 2010, S. 16 (Planen, Konstruieren und Herstellen): erstellen Materiallisten','RS16-P':'KC Technik RS 2010, S. 16 (Planen, Konstruieren und Herstellen): planen einen Arbeitsablauf','RS16-U':'KC Technik RS 2010, S. 16 (Planen, Konstruieren und Herstellen): überprüfen die Teillösungen hinsichtlich der technischen Anforderungen','RS22-F2':'KC Technik RS 2010, S. 22: beschreiben die elektrischen Eigenschaften von Widerständen, Leuchtdioden, Sensoren und Transistoren','RS22-F3':'KC Technik RS 2010, S. 22: beschreiben das Zusammenwirken verschiedener elektronischer Bauteile in einer Schaltung','RS22-E4':'KC Technik RS 2010, S. 22: entwerfen und stellen elektronische Schaltungen her','PT21-F':'CV Profil Technik RS 2011, S. 21: benennen Schaltzeichen; beschreiben die Eigenschaften von Widerständen, Kondensatoren und Halbleitern','RS22-E3':'KC Technik RS 2010, S. 22: messen Spannungen und Stromstärken und berechnen aus den Messergebnissen weitere Eigenschaften','S11-S':'KC Technik RS 2010, S. 11 (Zur Sicherheit im Technikunterricht): Sicherheitsbewusstsein und Bereitschaft zur Verhütung von Gefahren und Unfällen; RiSU 2023 (Gefährdungsbeurteilung)'};
 
 const RATE=CFG_W.rate,RATE_L=['noch nicht','mit Hilfe','meistens','sicher'];
-const OPS={'nennen':'(be)nennen: Fakten, Daten, Begriffe, Regeln ohne Erläuterung aufzählen.','benennen':'(be)nennen: Fakten, Daten, Begriffe, Regeln ohne Erläuterung aufzählen.','beschreiben':'Strukturiert und fachsprachlich angemessen Materialien vorstellen und/oder Sachverhalte darlegen.','zuordnen':'Begründet für ein Objekt eine Gruppe, eine Position oder ein Material zuweisen oder einen Sachverhalt begründet in einen Zusammenhang stellen.','ordnen':'Etwas kriteriengeleitet in eine bestimmte Systematik oder Reihenfolge bringen.','erklären':'Sachverhalte so darstellen, dass Bedingungen, Ursachen, Gesetzmäßigkeiten und/oder Funktionszusammenhänge verständlich werden.','ermitteln':'Einen Zusammenhang oder eine Lösung finden und das Ergebnis formulieren.','überprüfen':'Inhalte oder Aussagen auf ihre sachliche Richtigkeit bzw. innere Logik hin untersuchen.','erstellen':'Fachpraktischer Operator: einen Sachverhalt, ein Produkt oder einen Plan nach Vorgaben ausarbeiten, z. B. eine Liste, einen Katalog oder einen Ablauf.','schätzen':'Keine Bewertung: Diese Schätzfrage dient nur der Einschätzung deines Vorwissens. Es gibt kein Richtig oder Falsch.'};
+const OPS={'berechnen':'Ergebnisse von einem Ansatz ausgehend durch Rechenoperationen gewinnen (KC Technik RS 2010, Anhang).','nennen':'(be)nennen: Fakten, Daten, Begriffe, Regeln ohne Erläuterung aufzählen.','benennen':'(be)nennen: Fakten, Daten, Begriffe, Regeln ohne Erläuterung aufzählen.','beschreiben':'Strukturiert und fachsprachlich angemessen Materialien vorstellen und/oder Sachverhalte darlegen.','zuordnen':'Begründet für ein Objekt eine Gruppe, eine Position oder ein Material zuweisen oder einen Sachverhalt begründet in einen Zusammenhang stellen.','ordnen':'Etwas kriteriengeleitet in eine bestimmte Systematik oder Reihenfolge bringen.','erklären':'Sachverhalte so darstellen, dass Bedingungen, Ursachen, Gesetzmäßigkeiten und/oder Funktionszusammenhänge verständlich werden.','ermitteln':'Einen Zusammenhang oder eine Lösung finden und das Ergebnis formulieren.','überprüfen':'Inhalte oder Aussagen auf ihre sachliche Richtigkeit bzw. innere Logik hin untersuchen.','erstellen':'Fachpraktischer Operator: einen Sachverhalt, ein Produkt oder einen Plan nach Vorgaben ausarbeiten, z. B. eine Liste, einen Katalog oder einen Ablauf.','schätzen':'Keine Bewertung: Diese Schätzfrage dient nur der Einschätzung deines Vorwissens. Es gibt kein Richtig oder Falsch.'};
 
 /* ---------- Zustand ---------- */
 let S;try{S=JSON.parse(localStorage.getItem(KEY)||'null');}catch(e){S=null;}
 if(!S||typeof S!=='object')S={};
-S.st=S.st|0;S.a=S.a||{};S.ok=S.ok||{};S.seen=S.seen||{};S.rate=S.rate||{};S.name=S.name||'';S.kl=S.kl||'';S.muster=S.muster||{};S.help=S.help||{};S.bew=S.bew||{};S.bau=S.bau||{};
+S.st=S.st|0;S.a=S.a||{};S.ok=S.ok||{};S.seen=S.seen||{};S.rate=S.rate||{};S.name=S.name||'';S.kl=S.kl||'';S.muster=S.muster||{};S.help=S.help||{};S.bew=S.bew||{};S.bau=S.bau||{};S.mess=S.mess||{};
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
 
 const parts=$$('.station');
@@ -2083,6 +2190,29 @@ function wBom(id,t,w,art){
     if(all)showFb(fb,'ok','Deine Stückliste stimmt!',t.why);else showFb(fb,ok>=rows.length*0.7?'mid':'err',ok+' von '+rows.length+' richtig','Die rot umrandeten Zeilen stimmen noch nicht. Vergleiche mit dem Schaltplan in Kapitel 2.');
     report(id,all,art,fb);});
 }
+/* Vorwiderstände berechnen: je LED berechneter Wert und Wert nach E12 */
+function wRv(id,t,w,art){
+  let v=S.a[id];if(!Array.isArray(v)||v.length!==t.rows.length)v=S.a[id]=t.rows.map(()=>['','']);
+  const ex=r=>(t.U-r[1])/r[2];
+  const rows=t.rows.map((r,i)=>{const a=el('input',{type:'text',inputmode:'decimal',autocomplete:'off','aria-label':r[0]+': berechneter Vorwiderstand in Ohm'});a.value=v[i][0];
+    const b=el('input',{type:'text',inputmode:'decimal',autocomplete:'off','aria-label':r[0]+': Wert nach E12 in Ohm'});b.value=v[i][1];
+    const row=el('div',{class:'rvr'},el('b',{},r[0]),el('span',{class:'rvd'},'U'+'\u2009=\u2009'+de(t.U)+' V · U',el('sub',{},'F'),' = '+r[1].toFixed(1).replace('.',',')+' V · I',el('sub',{},'F'),' = '+de(r[2]*1000)+' mA'),
+      el('label',{},'berechnet ',a,' Ω'),el('label',{},'nach E12 ',b,' Ω'));
+    a.oninput=()=>{v[i][0]=a.value;row.classList.remove('s-ok','s-bad');save();};b.oninput=()=>{v[i][1]=b.value;row.classList.remove('s-ok','s-bad');save();};return row;});
+  w.className='rv';w.append(...rows);
+  mkCheck(id,art,fb=>{if(v.some(x=>!String(x[0]).trim()||!String(x[1]).trim())){showFb(fb,'mid','Noch nicht fertig','Trag bei jeder LED beide Werte ein.');return;}
+    let ok=0;const msg=[];rows.forEach((row,i)=>{const r=t.rows[i],e=ex(r),a=numIn(v[i][0]),b=numIn(v[i][1]);const g1=Math.abs(a-e)<=1.05,g2=b===r[3];row.classList.toggle('s-ok',g1&&g2);row.classList.toggle('s-bad',!(g1&&g2));if(g1&&g2)ok++;else if(!g1)msg.push(r[0]+': Die Rechnung stimmt noch nicht.');else msg.push(r[0]+': Rechnung richtig, aber nimm aus der E12-Reihe den nächstgrößeren Wert.');});
+    const all=ok===rows.length;
+    if(all)showFb(fb,'ok','Alle Vorwiderstände stimmen!',t.rows.map(r=>r[0]+': ('+de(t.U)+' V − '+r[1].toFixed(1).replace('.',',')+' V) : '+de(r[2])+' A = '+de(ex(r),1)+' Ω, nach E12 '+r[3]+' Ω.').join(' '));
+    else showFb(fb,ok?'mid':'err',ok+' von '+rows.length+' richtig','',msg);
+    report(id,all,art,fb);});
+}
+/* Messprotokoll (ohne Wertung, kommt in die Planungsmappe) */
+function paintMess(){const box=$('#mess');if(!box||typeof MESS==='undefined')return;
+  box.replaceChildren(el('div',{class:'mr mh'},el('b',{},'Messung'),el('b',{},'Soll'),el('b',{},'Ist (Messung)'),el('b',{},'ok')),...MESS.map((m,i)=>{const k=String(i);const r=S.mess[k]||(S.mess[k]={v:'',ok:false});
+    const inp=el('input',{type:'text',autocomplete:'off','aria-label':'Messwert: '+m[0]});inp.value=r.v;inp.oninput=()=>{r.v=inp.value.slice(0,24);save();};
+    const c=el('input',{type:'checkbox','aria-label':'Wert passt: '+m[0]});c.checked=!!r.ok;c.onchange=()=>{r.ok=c.checked;save();};
+    return el('div',{class:'mr'},el('span',{},m[0]),el('span',{class:'soll'},m[1]),inp,c);}));}
 function addHelp(id,t,art){if(!t.help)return;const tb=el('div',{class:'hbox',hidden:!S.help[id]},el('b',{},'Tipp: '),t.help.tip);const pb=el('div',{class:'hbox',hidden:S.help[id]!==2},el('b',{},'Teillösung: '),t.help.teil);
   const b1=el('button',{class:'btn soft',type:'button'},'Tipp anzeigen');const b2=el('button',{class:'btn soft',type:'button',hidden:!S.help[id]},'Teillösung anzeigen');
   b1.onclick=()=>{S.help[id]=Math.max(1,S.help[id]|0);tb.hidden=false;b2.hidden=false;save();};
@@ -2097,8 +2227,8 @@ function paintBew(){const box=$('#bew');if(!box)return;const cs=crits();
   const tb=el('tbody');cs.forEach(([i,txt])=>{const tr=el('tr',{},el('td',{},txt));BEW_COLS.forEach((c,ci)=>{const k=i+'.'+ci;const s=el('select',{'aria-label':c+': '+txt},...BEW_V.map(x=>el('option',{value:x[0]},x[1])));s.value=S.bew[k]||'';s.onchange=()=>{S.bew[k]=s.value;save();};tr.append(el('td',{},s));});tb.append(tr);});
   box.replaceChildren(el('table',{},el('thead',{},el('tr',{},el('th',{},'Anforderung'),...BEW_COLS.map(c=>el('th',{},c)))),tb),el('p',{class:'hint'},'+ erfüllt · o teilweise erfüllt · − nicht erfüllt. M1 bis M3: drei Mitschüler:innen testen dein Produkt.'));}
 
-$$('.w[data-t]').forEach(w=>{const id=w.dataset.t,t=T[id],art=w.closest('.task');({seg:wSeg,quiz:wQuiz,multi:wMulti,order:wOrder,open:wOpen,gap:wGap,pair:wPair,mark:wMark,num:wNum,label:wLabel,grid:wGrid,est:wEst,drill:wDrill,crit:wCrit,bom:wBom,gfb:wGfb})[t.type](id,t,w,art);addHelp(id,t,art);});
-paintBew();
+$$('.w[data-t]').forEach(w=>{const id=w.dataset.t,t=T[id],art=w.closest('.task');({seg:wSeg,quiz:wQuiz,multi:wMulti,order:wOrder,open:wOpen,gap:wGap,pair:wPair,mark:wMark,num:wNum,label:wLabel,grid:wGrid,est:wEst,drill:wDrill,crit:wCrit,bom:wBom,gfb:wGfb,rv:wRv})[t.type](id,t,w,art);addHelp(id,t,art);});
+paintBew();paintMess();
 
 /* Grafiken */
 /* Sicherheitszeichen (ISO 7010 aus dem Tech-Board) */
@@ -2142,6 +2272,7 @@ function paint(){const done=TASK_IDS.filter(isDone).length;const p=Math.round(10
 /* ---------- Abgabe ---------- */
 function fillSum(){const li=CH.slice(0,LAST).map((c,ci)=>{const ids=TASK_IDS.filter(id=>chOf[home[id]]===ci);if(!ids.length)return null;const d=ids.filter(isDone).length;return el('li',{},el('span',{},ci+' · '+c),el('b',{},d+' von '+ids.length));}).filter(Boolean);
   li.push(el('li',{},el('span',{},'Checkliste beim Bauen'),el('b',{},BAU.filter((x,i)=>S.bau[i]).length+' von '+BAU.length)));
+  if(typeof MESS!=='undefined')li.push(el('li',{},el('span',{},'Messprotokoll'),el('b',{},MESS.filter((m,i)=>S.mess[i]&&String(S.mess[i].v).trim()).length+' von '+MESS.length)));
   $('#sumList').replaceChildren(...li);$('#codeOut').textContent=window.LP?LP.stateCode():'(nur in der veröffentlichten Fassung)';}
 const nm=$('#abgName');nm.value=S.name;nm.oninput=()=>{S.name=nm.value.slice(0,40);save();};
 const kl=$('#abgKl');kl.value=S.kl;kl.oninput=()=>{S.kl=kl.value.slice(0,12);save();};
@@ -2183,9 +2314,10 @@ $('#pdfBtn').onclick=()=>{const note=$('#pdfNote');note.hidden=false;
   txt('Zuerst den Bestückungsplan mit Folienstift auf die Bauteilseite übertragen: Löcher markieren, Namen daneben schreiben.',{size:10,b:1});
   LG.LAY[VER].parts.forEach((p,n)=>txt((n+1)+'. '+p.t,{ind:0,size:10}));
   /* 5 Checkliste */
-  head('6 Checkliste beim Bauen');
+  head(typeof MESS!=='undefined'?'6 Checkliste mit Teststationen':'6 Checkliste beim Bauen');
   BAU.forEach((it,i)=>txt((S.bau[i]?'[x] ':'[ ] ')+it,{size:10}));
   /* 6 Aufgabenstand */
+  if(typeof MESS!=='undefined'){head('Messprotokoll');MESS.forEach((m,i)=>{const r=S.mess[i]||{};txt((r.ok?'[x] ':'[ ] ')+m[0]+': Soll '+m[1]+' · Ist '+(String(r.v||'').trim()||'___'),{size:10});});}
   head('7 Aufgabenstand');
   const done=TASK_IDS.filter(isDone).length;txt('Bearbeitet: '+done+' von '+TASK_IDS.length+' Aufgaben',{b:1});
   CH.slice(0,LAST).forEach((c,ci)=>{const ids=TASK_IDS.filter(id=>chOf[home[id]]===ci);if(!ids.length)return;need(12);y+=1.5;txt('Kapitel '+ci+': '+c,{b:1});
