@@ -1,7 +1,7 @@
 <!doctype html><html><head><script>/* Lernplattformen auf GitHub Pages: Speichern ohne claude.ai */
 (function(){if(window.claude)return;var T={pdf:'application/pdf',txt:'text/plain;charset=utf-8',png:'image/png',jpg:'image/jpeg',jpeg:'image/jpeg',json:'application/json',csv:'text/csv;charset=utf-8',html:'text/html;charset=utf-8',docx:'application/vnd.openxmlformats-officedocument.wordprocessingml.document',xlsx:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',ino:'text/plain;charset=utf-8'};
 var dl={save:function(o){return new Promise(function(res,rej){try{var n=(o&&o.filename)||'datei',x=(n.split('.').pop()||'').toLowerCase(),d=o.data,b=d instanceof Blob?d:new Blob([d],{type:T[x]||'application/octet-stream'});var u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=n;a.rel='noopener';document.body.appendChild(a);a.click();setTimeout(function(){a.remove();URL.revokeObjectURL(u);},4000);res();}catch(e){rej({code:'failed',message:String(e)});}});}};
-window.claude={use:function(n){return Promise.resolve(n==='downloads'?dl:null);}};})();</script><meta property="og:type" content="website"><meta property="og:title" content="Arduino-Lernheft Tinkercad"><meta property="og:description" content="Mikrocontroller verstehen und in Tinkercad eigene Steuerungen und Regelungen programmieren – mit Blöcken oder Text-Code. Ein echter Arduino ist nicht nötig."><meta property="og:url" content="https://deintechniklehrer.github.io/Lernplattformen/arduino-lernheft/"><meta property="og:image" content="https://deintechniklehrer.github.io/Lernplattformen/vorschau/Vorschau_Arduino-Lernheft.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="description" content="Mikrocontroller verstehen und in Tinkercad eigene Steuerungen und Regelungen programmieren – mit Blöcken oder Text-Code. Ein echter Arduino ist nicht nötig."><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><style>/* Grafiken Arduino-Lernheft / Schritt für Schritt (arduino-grafik.js). Pilot Grafik-Standard 13.11.2026.
+window.claude={use:function(n){return Promise.resolve(n==='downloads'?dl:null);}};})();</script><meta property="og:type" content="website"><meta property="og:title" content="Arduino-Lernheft Tinkercad"><meta property="og:description" content="Mikrocontroller verstehen und in Tinkercad eigene Steuerungen und Regelungen programmieren – mit Blöcken oder Text-Code. Ein echter Arduino ist nicht nötig."><meta property="og:url" content="https://deintechniklehrer.github.io/Lernplattformen/arduino-lernheft/"><meta property="og:image" content="https://deintechniklehrer.github.io/Lernplattformen/vorschau/Vorschau_Arduino-Lernheft.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="description" content="Mikrocontroller verstehen und in Tinkercad eigene Steuerungen und Regelungen programmieren – mit Blöcken oder Text-Code. Ein echter Arduino ist nicht nötig."><script>try{var t=localStorage.getItem('lp-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><link rel="stylesheet" href="../assets/lp-shell.css"><script src="../assets/lp-shell.js"></script><style>/* Grafiken Arduino-Lernheft / Schritt für Schritt (arduino-grafik.js). Pilot Grafik-Standard 13.11.2026.
    Farben nur über Variablen, hell und dunkel. Kein color-mix() in fill/stroke. */
 :root{--ag-plus:#c8402e;--ag-minus:#2a6fb0;--ag-sig:#1f8a4c;--ag-in:#2a6fb0;--ag-pr:#0a7570;--ag-out:#d9481f;--ag-dist:#c23b3b;--ag-fb:#7046c2;
   --ag-in-soft:#e1ecf7;--ag-pr-soft:#d6ecea;--ag-out-soft:#fbe3da;--ag-fb-soft:#ece5f8;--ag-glow:#ffcc33;--ag-blk:#ffffff}
@@ -3903,4 +3903,30 @@ if (document.readyState === 'loading') document.addEventListener('DOMContentLoad
 
 </script>
 
-</body></html>
+<script>/* lp-shell-Adapter: Arduino-Lernheft und Arduino Schritt für Schritt (gemeinsame Bauart, Kapitel in CH, Gruppen in MODULES). */
+(function () {
+  function start() {
+    var top = document.querySelector('.topbar');
+    if (!top || typeof CH === 'undefined') return setTimeout(start, 50);
+    var G0 = 'Start & Abgabe';
+    LPShell.init({
+      bodyClass: 'lps-ardu',
+      chapters: function () {
+        var out = [{ id: 'start', label: 'Start', group: G0, done: 0, total: 0 }];
+        CH.forEach(function (c) {
+          var it = chItems(c), m = MODULES.filter(function (x) { return x.id === c.mod; })[0];
+          out.push({ id: 'k-' + c.id, label: c.title, group: m ? m.t : '', total: it.length, done: Math.round(chProgress(c) * it.length / 100) });
+        });
+        if (typeof TEST !== 'undefined' && TEST.length) out.push({ id: 'test', label: 'Abschlusstest', group: G0, done: 0, total: 0 });
+        out.push({ id: 'export', label: 'Lernnachweis & Export', group: G0, done: 0, total: 0 });
+        return out;
+      },
+      current: function () { return location.hash.slice(1) || 'start'; },
+      go: function (id) { go(id); },
+      mountBar: function (b) { document.querySelector('.topbar').after(b); },
+      mountTools: function (t) { var sp = document.querySelector('.topbar .spacer'); sp.after(t); }
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
+})();
+</script></body></html>
