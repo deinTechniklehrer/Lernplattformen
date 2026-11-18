@@ -769,6 +769,7 @@ path.lg-ledg,path.lg-ledo,path.lg-ledy{stroke:var(--lg-ink);stroke-width:3}
 .station{min-width:0;max-width:100%}main{min-width:0}
 .station .info>*,.station .task>*{min-width:0}
 .lg-cuout{stroke:var(--lg-ink);stroke-width:2;stroke-dasharray:4 4;fill:none}.lg-cubox{fill:none;stroke:var(--lg-ink);stroke-width:2}
+.info .cap{font-size:.92rem;line-height:1.45;color:var(--muted);margin:4px 0 12px}
 /* Baustein Gefährdungsbeurteilung (gfb.js), seit 18.11.2026. Nutzt die .crit-Liste der Löten-Vorlage bzw. eigene Regeln unten. */
 :root{--gfb-u:#c23b2e;--gfb-a:#1f8a4c;--gfb-m:#1f63a8;--gfb-mbg:#e8f1fb;--gfb-icbg:#eef3f6;--gfb-icl:#a9b8bf;--gfb-ink:#22303a}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--gfb-u:#ff8a7e;--gfb-a:#5fd08f;--gfb-m:#8cc0f2;--gfb-mbg:#16304a;--gfb-icbg:#e9eef1;--gfb-icl:#e9eef1;--gfb-ink:#1b2730}}
@@ -861,6 +862,7 @@ path.lg-ledg,path.lg-ledo,path.lg-ledy{stroke:var(--lg-ink);stroke-width:3}
   <div class="info">
     <h3>Die Bauteile</h3>
     <div data-lg="parts"></div>
+    <p class="cap">Die <b>Bauteile</b> der Schaltung, so wie sie in der Bauteilkiste liegen, mit Anschlüssen und Werten.</p>
     <ul>
       <li>Der <b>Fotowiderstand</b> heißt kurz <b>LDR</b> (light dependent resistor). Sein Widerstand hängt vom Licht ab: Im Hellen ist er <b>klein</b> (wenige Kiloohm), im Dunkeln ist er <b>groß</b> (bis etwa 1 MΩ). Der LDR hat <b>keine Richtung</b>, du kannst ihn beliebig herum einlöten.</li>
       <li>Der <b>Transistor BC547</b> ist hier ein <b>elektronischer Schalter</b>. Er hat drei Beine: <b>Kollektor (C)</b>, <b>Basis (B)</b> und <b>Emitter (E)</b>. Hältst du ihn mit der <b>flachen Seite zu dir</b> und den Beinen nach unten, liegen sie von links nach rechts in der Reihenfolge <b>C – B – E</b>.</li>
@@ -895,6 +897,7 @@ path.lg-ledg,path.lg-ledo,path.lg-ledy{stroke:var(--lg-ink);stroke-width:3}
     </ul>
     <p>Probier es aus: Schieb den Regler zwischen dunkel und hell. Der rote Weg zeigt, wo der große Strom fließt.</p>
     <div data-lg="sim"></div>
+    <p class="cap"><b>Schaltplan</b> mit Helligkeitsregler: Rot ist der Weg des großen Stroms über Kollektor und Emitter. Die Werte unter dem Regler sind berechnet.</p>
   </div>
   <article class="task">
     <header><span class="num"></span><h3>Die Wirkungskette</h3><button class="op" data-op="ordnen" type="button">ordnen</button></header>
@@ -1003,6 +1006,7 @@ path.lg-ledg,path.lg-ledo,path.lg-ledy{stroke:var(--lg-ink);stroke-width:3}
     <h3>Bestückung Schritt für Schritt</h3>
     <p>Die Grafik zeigt die Platine von der <b>Bauteilseite</b>. Geh mit „Weiter“ Bauteil für Bauteil durch. Das neue Bauteil ist gelb umrandet.</p>
     <div data-lg="steps"></div>
+    <p class="cap"><b>Bestückung</b> von der Bauteilseite: Bahnen heißen B, Löcher L. Gelb umrandet ist das Bauteil, das du in diesem Schritt einsetzt.</p>
   </div>
   <article class="task">
     <header><span class="num"></span><h3>Bauteile auf der Platine</h3><button class="op" data-op="benennen" type="button">benennen</button></header>
@@ -1010,8 +1014,8 @@ path.lg-ledg,path.lg-ledo,path.lg-ledy{stroke:var(--lg-ink);stroke-width:3}
     <div class="w" data-t="t8"></div>
   </article>
   <article class="task">
-    <header><span class="num"></span><h3>Dein Arbeitsablauf</h3><button class="op" data-op="ordnen" type="button">ordnen</button></header>
-    <p class="q">Plane deinen Arbeitsablauf: Ordne die Arbeitsschritte in eine sinnvolle Reihenfolge. Der Ablauf kommt in deine Planungsmappe.</p>
+    <header><span class="num"></span><h3>Dein Arbeitsablauf</h3><button class="op" data-op="planen" type="button">planen</button></header>
+    <p class="q">Plane deinen Arbeitsablauf: Zieh die Arbeitsschritte in eine sinnvolle Reihenfolge. Der Ablauf kommt in deine Planungsmappe.</p>
     <div class="w" data-t="t9"></div>
   </article>
   <article class="task">
@@ -1045,7 +1049,7 @@ path.lg-ledg,path.lg-ledo,path.lg-ledy{stroke:var(--lg-ink);stroke-width:3}
     <div class="w" data-t="t10"></div>
   </article>
   <article class="task">
-    <header><span class="num"></span><h3>Was lief schief?</h3><button class="op" data-op="überprüfen" type="button">überprüfen</button></header>
+    <header><span class="num"></span><h3>Fehler im Lötbericht</h3><button class="op" data-op="überprüfen" type="button">überprüfen</button></header>
     <p class="q">Ella beschreibt, wie sie ihren Schubladen-Alarm gelötet hat. Überprüfe ihre Beschreibung und tippe alle Sätze an, in denen ein Fehler steckt.</p>
     <div class="w" data-t="t11"></div>
   </article>
@@ -1377,10 +1381,10 @@ var LG = (function () {
   function ldrSym(x, y, h, lab, cls) { return vres(x, y, h, lab, '', cls) + '<path class="lg-w2" d="M' + (x + 50) + ' ' + (y + 14) + 'L' + (x + 24) + ' ' + (y + 30) + 'M' + (x + 50) + ' ' + (y + 38) + 'L' + (x + 24) + ' ' + (y + 54) + '"/>' + ah(x + 22, y + 31, 149, 9) + ah(x + 22, y + 55, 149, 9); }
   function npn(x, y) { /* Basis links bei (x-40,y), Kollektor oben (x,y-50), Emitter unten (x,y+50) */
     return '<circle class="lg-tr0" cx="' + (x - 12) + '" cy="' + y + '" r="30"/><path class="lg-w" d="M' + (x - 40) + ' ' + y + 'H' + (x - 24) + 'M' + (x - 24) + ' ' + (y - 18) + 'V' + (y + 18) + 'M' + (x - 24) + ' ' + (y - 8) + 'L' + x + ' ' + (y - 28) + 'V' + (y - 50) + 'M' + (x - 24) + ' ' + (y + 8) + 'L' + x + ' ' + (y + 28) + 'V' + (y + 50) + '"/>' + ah(x - 1, y + 27, 40, 10) +
-      txt(x + 10, y - 30, 'C', 'lg-ts') + txt(x - 52, y - 8, 'B', 'lg-ts') + txt(x + 10, y + 44, 'E', 'lg-ts') + txt(x + 26, y + 8, 'T1', 'lg-tb') + txt(x + 26, y + 30, 'BC547', 'lg-ts'); }
-  function ledSym(x, y, cls, lab, val) { /* Anode oben (y), Kathode unten (y+40) */
+      txt(x + 10, y - 30, 'C', 'lg-ts') + txt(x - 44, y - 14, 'B', 'lg-ts', 'end') + txt(x + 10, y + 46, 'E', 'lg-ts') + txt(x + 32, y - 6, 'T1', 'lg-tb') + txt(x + 32, y + 18, 'BC547', 'lg-ts'); }
+  function ledSym(x, y, cls, lab, val, right) { /* Anode oben (y), Kathode unten (y+40); right: Beschriftung rechts */
     return '<path class="lg-sym ' + (cls || '') + '" d="M' + (x - 16) + ' ' + y + 'H' + (x + 16) + 'L' + x + ' ' + (y + 32) + 'Z"/><path class="lg-w" d="M' + (x - 16) + ' ' + (y + 32) + 'H' + (x + 16) + '"/><path class="lg-w2" d="M' + (x + 20) + ' ' + (y + 8) + 'L' + (x + 34) + ' ' + (y - 4) + 'M' + (x + 22) + ' ' + (y + 20) + 'L' + (x + 36) + ' ' + (y + 8) + '"/>' + ah(x + 35, y - 5, -40, 8) + ah(x + 37, y + 7, -40, 8) +
-      txt(x - 44, y + 4, lab, 'lg-tb', 'end') + (val ? txt(x - 44, y + 30, val, 'lg-ts', 'end') : ''); }
+      (right ? txt(x + 44, y + 14, lab, 'lg-tb') + (val ? val.split('\n').map(function (q, i) { return txt(x + 44, y + 40 + 26 * i, q, 'lg-ts'); }).join('') : '') : txt(x - 44, y + 4, lab, 'lg-tb', 'end') + (val ? txt(x - 44, y + 30, val, 'lg-ts', 'end') : '')); }
   function summerSym(x, y, cls) { /* Anschluss + oben (y), − unten (y+56) */
     return '<path class="lg-sym ' + (cls || '') + '" d="M' + (x - 22) + ' ' + (y + 12) + 'H' + (x + 22) + 'V' + (y + 44) + 'H' + (x - 22) + 'Z"/><path class="lg-w" d="M' + x + ' ' + y + 'V' + (y + 12) + 'M' + x + ' ' + (y + 44) + 'V' + (y + 56) + '"/><path class="lg-w2" d="M' + (x + 30) + ' ' + (y + 18) + 'Q' + (x + 38) + ' ' + (y + 28) + ' ' + (x + 30) + ' ' + (y + 38) + 'M' + (x + 38) + ' ' + (y + 12) + 'Q' + (x + 50) + ' ' + (y + 28) + ' ' + (x + 38) + ' ' + (y + 44) + '"/>' +
       txt(x + 8, y + 2, '+', 'lg-tb') + txt(x - 32, y + 30, 'Summer', 'lg-tb', 'end') + txt(x - 32, y + 56, 'aktiv', 'lg-ts', 'end'); }
@@ -1410,20 +1414,20 @@ var LG = (function () {
       return { vb: '0 0 850 450', body: b };
     }
     if (v === 'N') {
-      b += '<path class="lg-wire" d="M70 50H430M70 360H430M70 50V290M70 330V360M220 50V80M220 160V180M220 180V200M220 280V360M220 200H340M430 50V70M430 130V150M430 190V240M430 340V360"/>';
+      b += '<path class="lg-wire" d="M70 50H430M70 360H430M70 50V290M70 330V360M220 50V80M220 160V180M220 180V200M220 280V360M220 200H340V290H390M430 50V70M430 130V150M430 190V240M430 340V360"/>';
       b += '<path class="lg-wire lg-cur' + hot + '" d="M430 50V70M430 130V150M430 190V240M430 340V360"/>';
       [[220, 50], [220, 360], [220, 200], [430, 50], [430, 360]].forEach(function (q) { b += '<circle class="lg-dot" cx="' + q[0] + '" cy="' + q[1] + '" r="5"/>'; });
       b += battery(70, 296);
       b += vres(220, 80, 80, 'R1', '47 kΩ');
       b += ldrSym(220, 200, 80, 'LDR');
       b += vres(430, 70, 60, 'R2', '100 Ω');
-      b += ledSym(430, 150, 'lg-led' + (on > 0.04 ? ' lit' : ''), 'LED', 'Farbwechsel');
+      b += ledSym(430, 150, 'lg-led' + (on > 0.04 ? ' lit' : ''), 'LED', 'Farb-\nwechsel', true);
       if (on > 0.04) b += '<circle class="lg-glow" cx="430" cy="166" r="34" fill-opacity="' + f(Math.min(0.85, on)) + '"/>';
       b += npn(430, 290);
       b += txt(40, 40, '+', 'lg-tb') + txt(40, 378, '−', 'lg-tb');
-      return { vb: '0 0 560 390', body: b };
+      return { vb: '0 0 596 390', body: b };
     }
-    b += '<path class="lg-wire" d="M70 50H430M70 400H430M70 50V200M70 240V400M220 50V70M220 120V140M220 210V240M220 240V250M220 330V400M220 240H340M430 50V150M430 206V280M430 380V400"/>';
+    b += '<path class="lg-wire" d="M70 50H430M70 400H430M70 50V200M70 240V400M220 50V70M220 120V140M220 210V240M220 240V250M220 330V400M220 240H340V330H390M430 50V150M430 206V280M430 380V400"/>';
     b += '<path class="lg-wire lg-cur' + hot + '" d="M430 50V150M430 206V280M430 380V400"/>';
     [[220, 50], [220, 400], [220, 240], [430, 50], [430, 400]].forEach(function (q) { b += '<circle class="lg-dot" cx="' + q[0] + '" cy="' + q[1] + '" r="5"/>'; });
     b += battery(70, 206);
@@ -1777,7 +1781,7 @@ Object.assign(T,TV);
 const KC={'RS16-A':'KC Technik RS 2010, S. 16 (Planen, Konstruieren und Herstellen): erstellen einen Anforderungskatalog','RS16-M':'KC Technik RS 2010, S. 16 (Planen, Konstruieren und Herstellen): erstellen Materiallisten','RS16-P':'KC Technik RS 2010, S. 16 (Planen, Konstruieren und Herstellen): planen einen Arbeitsablauf','RS16-U':'KC Technik RS 2010, S. 16 (Planen, Konstruieren und Herstellen): überprüfen die Teillösungen hinsichtlich der technischen Anforderungen','RS22-F2':'KC Technik RS 2010, S. 22: beschreiben die elektrischen Eigenschaften von Widerständen, Leuchtdioden, Sensoren und Transistoren','RS22-F3':'KC Technik RS 2010, S. 22: beschreiben das Zusammenwirken verschiedener elektronischer Bauteile in einer Schaltung','RS22-E4':'KC Technik RS 2010, S. 22: entwerfen und stellen elektronische Schaltungen her','PT21-F':'CV Profil Technik RS 2011, S. 21: benennen Schaltzeichen; beschreiben die Eigenschaften von Widerständen, Kondensatoren und Halbleitern','RS22-E3':'KC Technik RS 2010, S. 22: messen Spannungen und Stromstärken und berechnen aus den Messergebnissen weitere Eigenschaften','S11-S':'KC Technik RS 2010, S. 11 (Zur Sicherheit im Technikunterricht): Sicherheitsbewusstsein und Bereitschaft zur Verhütung von Gefahren und Unfällen; RiSU 2023 (Gefährdungsbeurteilung)'};
 
 const RATE=CFG_W.rate,RATE_L=['noch nicht','mit Hilfe','meistens','sicher'];
-const OPS={'berechnen':'Ergebnisse von einem Ansatz ausgehend durch Rechenoperationen gewinnen (KC Technik RS 2010, Anhang).','nennen':'(be)nennen: Fakten, Daten, Begriffe, Regeln ohne Erläuterung aufzählen.','benennen':'(be)nennen: Fakten, Daten, Begriffe, Regeln ohne Erläuterung aufzählen.','beschreiben':'Strukturiert und fachsprachlich angemessen Materialien vorstellen und/oder Sachverhalte darlegen.','zuordnen':'Begründet für ein Objekt eine Gruppe, eine Position oder ein Material zuweisen oder einen Sachverhalt begründet in einen Zusammenhang stellen.','ordnen':'Etwas kriteriengeleitet in eine bestimmte Systematik oder Reihenfolge bringen.','erklären':'Sachverhalte so darstellen, dass Bedingungen, Ursachen, Gesetzmäßigkeiten und/oder Funktionszusammenhänge verständlich werden.','ermitteln':'Einen Zusammenhang oder eine Lösung finden und das Ergebnis formulieren.','überprüfen':'Inhalte oder Aussagen auf ihre sachliche Richtigkeit bzw. innere Logik hin untersuchen.','erstellen':'Fachpraktischer Operator: einen Sachverhalt, ein Produkt oder einen Plan nach Vorgaben ausarbeiten, z. B. eine Liste, einen Katalog oder einen Ablauf.','schätzen':'Keine Bewertung: Diese Schätzfrage dient nur der Einschätzung deines Vorwissens. Es gibt kein Richtig oder Falsch.'};
+const OPS={'planen':'Entwicklung des Herstellungsweges eines Produktes.','berechnen':'Ergebnisse von einem Ansatz ausgehend durch Rechenoperationen gewinnen (KC Technik RS 2010, Anhang).','nennen':'(be)nennen: Fakten, Daten, Begriffe, Regeln ohne Erläuterung aufzählen.','benennen':'(be)nennen: Fakten, Daten, Begriffe, Regeln ohne Erläuterung aufzählen.','beschreiben':'Strukturiert und fachsprachlich angemessen Materialien vorstellen und/oder Sachverhalte darlegen.','zuordnen':'Begründet für ein Objekt eine Gruppe, eine Position oder ein Material zuweisen oder einen Sachverhalt begründet in einen Zusammenhang stellen.','ordnen':'Etwas kriteriengeleitet in eine bestimmte Systematik oder Reihenfolge bringen.','erklären':'Sachverhalte so darstellen, dass Bedingungen, Ursachen, Gesetzmäßigkeiten und/oder Funktionszusammenhänge verständlich werden.','ermitteln':'Einen Zusammenhang oder eine Lösung finden und das Ergebnis formulieren.','überprüfen':'Inhalte oder Aussagen auf ihre sachliche Richtigkeit bzw. innere Logik hin untersuchen.','erstellen':'Fachpraktischer Operator: einen Sachverhalt, ein Produkt oder einen Plan nach Vorgaben ausarbeiten, z. B. eine Liste, einen Katalog oder einen Ablauf.','schätzen':'Keine Bewertung: Diese Schätzfrage dient nur der Einschätzung deines Vorwissens. Es gibt kein Richtig oder Falsch.'};
 
 /* ---------- Zustand ---------- */
 let S;try{S=JSON.parse(localStorage.getItem(KEY)||'null');}catch(e){S=null;}
@@ -2245,7 +2249,7 @@ $('#rate').append(...RATE.map((r,i)=>{const f=el('fieldset',{},el('legend',{},r)
 
 /* Operatoren */
 const pop=$('#pop');
-$$('.op').forEach(b=>b.addEventListener('click',e=>{const k=b.dataset.op;$('#popH').textContent='Operator: '+k;$('#popP').textContent=(OPS[k]||'')+(k==='schätzen'||k==='erstellen'?'':' (Kerncurriculum AWT IGS 2024, Anhang A1)');pop.hidden=false;const r=b.getBoundingClientRect();pop.style.left=Math.max(12,Math.min(r.left+scrollX,innerWidth-352))+'px';pop.style.top=(r.bottom+scrollY+8)+'px';e.stopPropagation();}));
+$$('.op').forEach(b=>b.addEventListener('click',e=>{const k=b.dataset.op;$('#popH').textContent='Operator: '+k;$('#popP').textContent=(OPS[k]||'')+(k==='schätzen'||k==='erstellen'||/\((KC|Kerncurriculum) /.test(OPS[k]||'')?'':' (Kerncurriculum AWT IGS 2024, Anhang A1)');pop.hidden=false;const r=b.getBoundingClientRect();pop.style.left=Math.max(12,Math.min(r.left+scrollX,innerWidth-352))+'px';pop.style.top=(r.bottom+scrollY+8)+'px';e.stopPropagation();}));
 $('#popX').onclick=()=>{pop.hidden=true;};
 document.addEventListener('click',e=>{if(!pop.hidden&&!pop.contains(e.target))pop.hidden=true;});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')pop.hidden=true;});
