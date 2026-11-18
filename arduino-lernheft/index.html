@@ -3912,13 +3912,13 @@ if (document.readyState === 'loading') document.addEventListener('DOMContentLoad
     LPShell.init({
       bodyClass: 'lps-ardu',
       chapters: function () {
-        var out = [{ id: 'start', label: 'Start', group: G0, done: 0, total: 0 }];
+        var out = [{ id: 'start', label: 'Start', group: G0, num: '0', done: 0, total: 0 }];
         CH.forEach(function (c) {
           var it = chItems(c), m = MODULES.filter(function (x) { return x.id === c.mod; })[0];
           out.push({ id: 'k-' + c.id, label: c.title, group: m ? m.t : '', total: it.length, done: Math.round(chProgress(c) * it.length / 100) });
         });
-        if (typeof TEST !== 'undefined' && TEST.length) out.push({ id: 'test', label: 'Abschlusstest', group: G0, done: 0, total: 0 });
-        out.push({ id: 'export', label: 'Lernnachweis & Export', group: G0, done: 0, total: 0 });
+        if (typeof TEST !== 'undefined' && TEST.length) out.push({ id: 'test', label: 'Abschlusstest', group: G0, num: 'T', done: 0, total: 0 });
+        out.push({ id: 'export', label: 'Lernnachweis & Export', group: G0, num: 'E', done: 0, total: 0 });
         return out;
       },
       current: function () { return location.hash.slice(1) || 'start'; },
