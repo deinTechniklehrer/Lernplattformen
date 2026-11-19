@@ -2203,7 +2203,7 @@ const TERMS={
   prompt:['Prompt','Die Anfrage oder Anweisung, die du der KI schreibst. Je genauer der Prompt, desto besser passt die Antwort.']
 };
 const QM=[
-  {q:'VW macht etwa achtmal so viel Umsatz wie OpenAI. Trotzdem ist OpenAI viel mehr wert. Warum?',o:['Weil OpenAI mehr Autos verkauft.','Weil Investoren darauf wetten, dass KI-Firmen in Zukunft riesige Gewinne machen.','Weil der Wert einer Firma immer genau dem Umsatz entspricht.'],a:1,why:'Der Firmenwert ist eine Wette auf die Zukunft. Ob sie aufgeht, weiß niemand.'},
+  {q:'VW macht etwa achtmal so viel Umsatz wie OpenAI. Trotzdem ist OpenAI viel mehr wert. Warum?',o:['Weil der Firmenwert angibt, wie viele Menschen die Produkte einer Firma nutzen.','Weil Investoren darauf wetten, dass KI-Firmen in Zukunft riesige Gewinne machen.','Weil der Firmenwert zeigt, wie viel eine Firma im letzten Jahr eingenommen hat.'],a:1,why:'Der Firmenwert ist eine Wette auf die Zukunft. Ob sie aufgeht, weiß niemand.'},
   {q:'Zwei Chatbots von verschiedenen Firmen antworten auf dieselbe politische Frage ganz unterschiedlich. Was erklärt das am besten?',o:['Einer der beiden Chatbots ist kaputt.','Chatbots bilden sich eine eigene politische Meinung.','Trainingsdaten und Regeln unterscheiden sich. Firmen und Staaten prägen, was ein Modell sagt.'],a:2,why:'Wer das Modell baut und wer ihm Regeln gibt, bestimmt mit, was Millionen Menschen lesen.'},
   {q:'Warum ist es ein Problem für die Demokratie, wenn wenige Firmen die stärksten KIs besitzen?',o:['Sie bestimmen mit, was Milliarden Menschen lesen und sehen, ohne gewählt zu sein.','Weil Firmen grundsätzlich keine Steuern zahlen.','Das ist kein Problem, Firmen sind immer neutral.'],a:0,why:'In einer Demokratie sollen Menschen mitentscheiden, die man wählen und abwählen kann.'},
   {q:'Auf dieser Plattform steht: „Sie wurde mit Claude von Anthropic erstellt.“ Warum ist dieser Hinweis wichtig?',o:['Er ist Werbung für Anthropic.','So kannst du einschätzen, ob jemand ein Interesse an einer bestimmten Darstellung haben könnte.','Das schreibt das Urheberrecht vor.'],a:1,why:'Wer Interessen offenlegt, macht es dir leichter, Aussagen einzuordnen.'}
@@ -2537,9 +2537,9 @@ const MD=[
 const EXAMS={
  1:[
   {q:'Wie erzeugt ein Sprachmodell seine Antwort?',o:['Es schlägt in einem Lexikon nach.','Es berechnet Wort für Wort, welches Wort wahrscheinlich als Nächstes passt.','Es denkt nach wie ein Mensch.'],a:1},
-  {q:'Was ist eine Halluzination bei KI?',o:['Eine erfundene Antwort, die überzeugend klingt.','Ein Fehler im Bildschirm.','Wenn die KI zu langsam antwortet.'],a:0},
+  {q:'Was ist eine Halluzination bei KI?',o:['Eine erfundene Antwort, die überzeugend klingt.','Eine absichtliche Lüge, mit der die KI täuschen will.','Eine Antwort, die bei jedem Versuch anders lautet.'],a:0},
   {q:'Wie hängen KI und maschinelles Lernen zusammen?',o:['Maschinelles Lernen ist ein Teil von KI: Programme lernen Muster aus vielen Beispielen.','Das ist dasselbe wie ein Taschenrechner.','KI ist ein Teil von maschinellem Lernen.'],a:0},
-  {q:'Warum siehst du in einer App immer mehr Videos zum selben Thema?',o:['Weil es keine anderen Videos gibt','Weil eine KI aus deinem Verhalten lernt und dir mehr davon zeigt','Weil deine Freund:innen das so eingestellt haben'],a:1},
+  {q:'Warum siehst du in einer App immer mehr Videos zum selben Thema?',o:['Weil die App allen Nutzer:innen dieselben beliebten Videos zeigt','Weil eine KI aus deinem Verhalten lernt und dir mehr davon zeigt','Weil Mitarbeitende der App die Videos einzeln für dich aussuchen'],a:1},
   {q:'Die KI nennt dir Jahreszahlen für dein Referat. Was tust du?',o:['Ich übernehme sie direkt.','Ich prüfe sie mit einer zweiten Quelle.','Ich frage die KI, ob sie sicher ist.'],a:1},
   {q:'Wofür ist KI nicht geeignet?',o:['Ideen für ein Referat sammeln','Entscheiden, wer in einem Streit recht hat','Rechtschreibfehler finden'],a:1},
   {q:'Welcher Prompt nutzt KI als Werkzeug?',o:['„Mach meine Hausaufgabe.“','„Gib mir einen Tipp für den ersten Schritt, aber nicht die Lösung.“','„Schreib mir eine Zusammenfassung zum Abgeben.“'],a:1},
@@ -2553,21 +2553,21 @@ const EXAMS={
   {q:'Eine KI-Antwort ist zur Hälfte richtig, zwei Sätze sind falsch. Was tust du?',o:['Übernehmen, das meiste stimmt ja','Überarbeiten: die falschen Sätze prüfen und korrigieren','Ungeprüft abgeben'],a:1},
   {q:'Was bedeutet RSI (rekursive Selbstverbesserung)?',o:['Eine KI hilft, eine bessere KI zu bauen, und das immer wieder.','Eine KI repariert kaputte Computer.','Menschen verbessern mit KI ihre Rechtschreibung.'],a:0},
   {q:'Was passiert, wenn eine KI immer wieder nur aus ihren eigenen Texten lernt, ohne dass jemand prüft?',o:['Sie wird schlechter, seltenes Wissen geht verloren.','Sie wird immer klüger.','Gar nichts.'],a:0},
-  {q:'Was bedeutet False Balance?',o:['Zwei Seiten werden gleich gewichtet dargestellt, obwohl sie unterschiedlich schwer wiegen.','Eine Waage ist kaputt.','Man nennt nur Nachteile.'],a:0},
+  {q:'Was bedeutet False Balance?',o:['Zwei Seiten wirken gleich wichtig, obwohl eine viel schwerer wiegt.','Eine Seite wird weggelassen, damit die andere überzeugender wirkt.','Chancen und Risiken werden nach ihrem Gewicht sorgfältig abgewogen.'],a:0},
   {q:'Was meint „digitaler Kolonialismus“ bei KI?',o:['KI-Firmen bauen Rechenzentren in Europa.','Menschen in ärmeren Ländern machen schlecht bezahlte Arbeit für die KI, die Gewinne gehen an Konzerne in reichen Ländern.','Kinder benutzen zu viel KI.'],a:1},
   {q:'Was macht einen Prompt meistens besser?',o:['Möglichst kurz, ohne Zusammenhang','Kontext geben und offen fragen','Immer nur Ja-Nein-Fragen stellen'],a:1},
-  {q:'Du schreibst ein Referat mit KI-Hilfe. Was solltest du auf jeden Fall selbst machen?',o:['Entscheiden, was wichtig ist, und die Fakten prüfen','Gar nichts, die KI kann alles','Nur den Namen auf das Deckblatt schreiben'],a:0},
+  {q:'Du schreibst ein Referat mit KI-Hilfe. Welche Aufgabe kann dir die KI nicht abnehmen?',o:['Entscheiden, was wichtig ist, und die Fakten prüfen','Den Text so umformulieren, dass er flüssig klingt','Eine Gliederung mit Überschriften vorschlagen'],a:0},
   {q:'Warum kann eine KI Vorurteile haben?',o:['Weil sie Muster aus ihren Trainingsdaten übernimmt, auch Vorurteile.','Weil sie eine eigene Meinung hat.','KI kann keine Vorurteile haben.'],a:0}
  ],
  3:[
   {q:'Jemand sagt: „Meine p(doom) liegt bei 10 %.“ Was bedeutet das?',o:['Die Person schätzt, wie wahrscheinlich eine KI-Katastrophe für die Menschheit ist. Das ist eine Vermutung, keine Messung.','Die Person hat ausgerechnet, dass die Menschheit sicher untergeht.','10 % aller KI-Programme sind gefährlich.'],a:0},
-  {q:'OpenAI macht viel weniger Umsatz als VW, ist aber viel mehr wert. Was zeigt das?',o:['OpenAI verkauft mehr Autos.','Investoren wetten auf künftige Gewinne. Ob das aufgeht, ist offen.','Umsatz und Wert sind immer gleich.'],a:1},
+  {q:'OpenAI macht viel weniger Umsatz als VW, ist aber viel mehr wert. Was zeigt das?',o:['Der Firmenwert zeigt, wie viele Menschen die Produkte nutzen.','Investoren wetten auf künftige Gewinne. Ob das aufgeht, ist offen.','Der Firmenwert zeigt, wie viel Geld die Firma schon verdient hat.'],a:1},
   {q:'Welche Aussage über Macht bei KI stimmt?',o:['Jede Schule kann leicht eine eigene Spitzen-KI bauen.','Staaten besitzen alle großen KI-Modelle.','Die stärksten KIs gehören wenigen Firmen mit viel Geld, Daten und Einfluss.'],a:2},
-  {q:'In der Studie aus der Türkei schadete die Tutor-KI kaum. Warum?',o:['Sie gab Tipps statt fertiger Lösungen.','Sie war teurer.','Sie hat gar nicht geantwortet.'],a:0},
+  {q:'In der Studie aus der Türkei schadete die Tutor-KI kaum. Warum?',o:['Sie gab Tipps statt fertiger Lösungen.','Sie erklärte die fertige Lösung sehr genau.','Sie durfte auch in der Prüfung helfen.'],a:0},
   {q:'Was ist eine Anweisung (System-Prompt) in einem KI-System?',o:['Ein hochgeladenes Arbeitsblatt','Eine feste Regel, die für jedes Gespräch gilt','Der Zugriff auf deinen Kalender'],a:1},
   {q:'Ein KI-Chef sagt, KI werde bald fast alle Krankheiten heilen. Was solltest du mitdenken?',o:['Chefs sagen immer die Wahrheit.','Die Aussage ist sicher gelogen.','Er verdient an KI und hat ein Interesse an hoffnungsvollen Bildern. Falsch ist die Aussage dadurch nicht automatisch.'],a:2},
-  {q:'Warum bauen Forschende immer neue, schwerere Tests (Benchmarks) für KI?',o:['Weil KI die alten Tests fast vollständig löst','Weil die alten Tests verloren gingen','Weil KI immer schlechter wird'],a:0},
-  {q:'Was spricht dafür, dass der KI-Fortschritt abflachen könnte?',o:['KI kann schon alles.','Gute Trainingsdaten werden knapp, Strom und Rechenzentren sind teuer.','Niemand nutzt KI.'],a:1},
+  {q:'Warum bauen Forschende immer neue, schwerere Tests (Benchmarks) für KI?',o:['Weil KI die alten Tests fast vollständig löst','Weil die alten Tests für KI viel zu schwer waren','Weil jede neue KI einen eigenen Test bekommen muss'],a:0},
+  {q:'Was spricht dafür, dass der KI-Fortschritt abflachen könnte?',o:['KI hilft, bessere KI zu bauen, der Fortschritt treibt sich selbst an.','Gute Trainingsdaten werden knapp, Strom und Rechenzentren sind teuer.','Die Länge der Aufgaben, die KI schafft, verdoppelt sich alle paar Monate.'],a:1},
   {q:'Ein Rechenzentrum in einer trockenen Gegend verbraucht viel Kühlwasser. Welche Dimensionen sind betroffen?',o:['Nur die ökologische','Nur die individuelle','Die ökologische und die soziale, weil auch Menschen vor Ort Wasser fehlt'],a:2},
   {q:'Was hilft gegen False Balance, wenn du Chancen und Risiken von KI abwägst?',o:['Für jede Seite gleich viele Punkte sammeln','Jeden Punkt gewichten: Wie viele sind betroffen, wie schlimm, schon heute, umkehrbar?','Nur die Chancen aufschreiben'],a:1}
  ]
