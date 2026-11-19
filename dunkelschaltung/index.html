@@ -775,6 +775,16 @@ path.lg-ledg,path.lg-ledo,path.lg-ledy{stroke:var(--lg-ink);stroke-width:3}
 .lg-pdfboard .lg-tb{paint-order:stroke;stroke:var(--lg-pcb);stroke-width:6px;stroke-linejoin:round}
 
 .lg-rsthint{display:block;margin-top:10px}.lg-rstfig{display:block;max-width:340px;width:100%;margin:6px 0 0}.lg-rstfig .lg-ts{font-size:17px}.lg-rstfig .lg-tb{font-size:22px}
+
+/* Lötbrücken finden */
+.lg-bridgefig{max-width:560px}.lg-bl{cursor:pointer;outline:none}
+.lg-blob{fill:#c9ced3;stroke:#7d868e;stroke-width:1.5}.lg-blobh{fill:#fff;opacity:.7}.lg-wire{fill:#8a6f45}
+.lg-stub{fill:none;stroke:#8a6f45;stroke-width:5;stroke-linecap:round;pointer-events:none}
+.lg-blsel{fill:none;stroke:transparent;stroke-width:4}
+.lg-bl[aria-pressed="true"] .lg-blsel{stroke:#1f6fd1;stroke-dasharray:6 4}.lg-bl[aria-pressed="true"] .lg-blob{fill:#a9c7ef}
+.lg-bl.s-ok .lg-blob{fill:#9fd8a8;stroke:#2f8a46}.lg-bl.s-bad .lg-blob{fill:#f3a9a0;stroke:#c0392b}.lg-bl.s-miss .lg-blsel{stroke:#d08a00;stroke-dasharray:3 3}
+.lg-bl:focus-visible .lg-blsel{stroke:var(--ink,#222);stroke-dasharray:none}
+.bridgew .note{font-size:15px;margin:6px 0 0}
 /* Baustein Gefährdungsbeurteilung (gfb.js), seit 18.11.2026. Nutzt die .crit-Liste der Löten-Vorlage bzw. eigene Regeln unten. */
 :root{--gfb-u:#c23b2e;--gfb-a:#1f8a4c;--gfb-m:#1f63a8;--gfb-mbg:#e8f1fb;--gfb-icbg:#eef3f6;--gfb-icl:#a9b8bf;--gfb-ink:#22303a}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--gfb-u:#ff8a7e;--gfb-a:#5fd08f;--gfb-m:#8cc0f2;--gfb-mbg:#16304a;--gfb-icbg:#e9eef1;--gfb-icl:#e9eef1;--gfb-ink:#1b2730}}
@@ -1096,18 +1106,15 @@ path.lg-ledg,path.lg-ledo,path.lg-ledy{stroke:var(--lg-ink);stroke-width:3}
     <p>Bei der Fehlersuche ziehst du immer zuerst die Batterie ab. Dann schaust du mit der Lupe auf die Unterseite und vergleichst jedes Bauteil mit dem Bestückungsplan.</p>
     <div data-lg="bruecke"></div>
     <p class="cap">Eine <b>Lötbrücke</b>: Das Lot verbindet zwei Bahnen, die nicht verbunden sein dürfen. Du entfernst sie, indem du das Lot mit der Lötspitze wieder aufschmilzt und mit Entlötlitze aufsaugst.</p>
-    <div class="lg-data"><table>
-      <thead><tr><th>Was du siehst</th><th>Mögliche Ursache</th></tr></thead>
-      <tbody>
-        <tr><td>Das Multimeter zeigt bei der Widerstandsmessung „OL“ an.</td><td><b>Unterbrechung:</b> Ein Bein ist nicht angelötet, oder die Messspitze berührt das Kupfer nicht.</td></tr>
-        <tr><td>Der gemessene Widerstand weicht stark vom Sollwert ab.</td><td>Ein <b>falscher Widerstand</b> ist eingelötet (Farbringe verwechselt), oder eine <b>Lötbrücke</b> verbindet zwei Bahnen.</td></tr>
-        <tr><td>Eine leuchtende LED zeigt eine zu hohe Spannung (zum Beispiel 4 V an der gelben LED).</td><td>Die <b>LEDs sind vertauscht</b>: An dieser Stelle steckt die grüne LED.</td></tr>
-        <tr><td>Keine LED leuchtet, das Multimeter zeigt 0,00 mA.</td><td>Der <b>Stromkreis ist unterbrochen</b>: Batterie leer, Schalter aus oder ein Kabel des Batterieclips nicht angelötet.</td></tr>
-        <tr><td>Der Messwert schwankt stark.</td><td><b>Wackelkontakt:</b> eine kalte Lötstelle, oder die Messspitzen sitzen nicht fest.</td></tr>
-        <tr><td>Eine LED bleibt dunkel, die anderen leuchten.</td><td>Diese LED ist <b>verpolt</b>, oder ihr Vorwiderstand ist nicht angelötet.</td></tr>
-        <tr><td>Die LEDs leuchten immer, auch im Hellen.</td><td>Der <b>LDR steckt nicht</b> in den Steckkontakten oder ein Litzenende ist nicht angelötet. Dann liegt die Basis immer über 0,7 V.</td></tr>
-      </tbody></table></div>
+    <p>Mit dem Multimeter findest du Fehler, die man nicht sieht. Dazu musst du die Anzeige deuten. Zeigt das Gerät bei der Widerstandsmessung <b>„OL“</b> (Overload), ist der Widerstand größer als der Messbereich. Praktisch heißt das: Es gibt keine Verbindung, irgendwo ist der Weg <b>unterbrochen</b>, etwa durch ein nicht angelötetes Bein oder eine Messspitze, die das Kupfer nicht berührt. Ein Wert, der stark vom Sollwert abweicht, hat meist einen von zwei Gründen: Es steckt ein anderes Bauteil als geplant (Farbringe verwechselt), oder eine <b>Lötbrücke</b> schafft einen zusätzlichen Weg zu einer anderen Bahn.</p>
+    <p>Jede LED-Farbe hat ihre eigene <b>Durchlassspannung</b>. Misst du an einer Stelle eine Spannung, die nicht zur Farbe passt, die dort hingehört, steckt dort vermutlich eine LED einer anderen Farbe: Die <b>LEDs sind vertauscht</b>. Fließt überhaupt kein Strom und das Gerät zeigt 0,00 mA, ist der <b>Stromkreis unterbrochen</b>: Batterie leer, Schalter aus oder ein Kabel des Batterieclips nicht angelötet. Springt der Messwert hin und her, ist die Verbindung mal da und mal weg. Das ist ein <b>Wackelkontakt</b>, oft eine kalte Lötstelle, manchmal auch nur eine locker gehaltene Messspitze.</p>
+    <p>Bleibt nur eine LED dunkel, ist sie verpolt oder ihr Vorwiderstand ist nicht angelötet. Leuchten alle LEDs auch im Hellen, steckt der LDR nicht in den Steckkontakten oder ein Litzenende ist lose. Dann liegt die Basis immer über 0,7 V.</p>
   </div>
+  <article class="task">
+    <header><span class="num"></span><h3>Lötbrücken finden</h3><button class="op" data-op="untersuchen" type="button">untersuchen</button></header>
+    <p class="q">Untersuche die Lötseite dieser Platine. Tippe alle Lötstellen an, an denen eine Lötbrücke entsteht.</p>
+    <div class="w" data-t="tb"></div>
+  </article>
   <article class="task">
     <header><span class="num"></span><h3>Fehler und Ursache</h3><button class="op" data-op="zuordnen" type="button">zuordnen</button></header>
     <p class="q">Ordne jedem Fehlerbild die passende Ursache zu.</p>
@@ -1763,6 +1770,38 @@ var LG = (function () {
       b += txt(pts[0][0] + 16, (pts[0][1] + pts[pts.length - 1][1]) / 2 + 8, lab, 'lg-tb'); });
     return svg('0 0 ' + (X0 + W + 70) + ' ' + (Y0 + H + 30), b, 'Kupferseite (gespiegelt) mit Lötpunkten', 'lg-board');
   }
+  /* Lötseite mit Lötklecksen zum Antippen (Aufgabe „Lötbrücken finden“, seit 19.11.2026).
+     spec.faults: {k:'b', leg:[L,B], dir:±1} Lot läuft über die Lücke auf die Nachbarbahn;
+                  {k:'f', leg:[L,B], from:[L2,B2]} abgeschnittenes Drahtende des Nachbarbauteils (from) ragt auf die Bahn von leg und steckt im Lot.
+     spec.big: [[L,B] …] dicker Klecks, berührt aber nichts (keine Brücke).
+     Gibt {svg, blobs:[{c,r}], faults:[[Index …] …]} zurück; jede Lötstelle ist ein <g class="lg-bl" data-i>. */
+  function bridgeFig(v, spec) {
+    var L = LAY[v], W = L.cols * P, H = L.rows * P, b = '', mx = function (c) { return cx(L.cols + 1 - c); };
+    b += '<rect class="lg-pcb" x="' + (X0 - 8) + '" y="' + (Y0 - 8) + '" width="' + (W + 16) + '" height="' + (H + 16) + '" rx="6"/>';
+    for (var r = 1; r <= L.rows; r++) {
+      b += '<rect class="lg-strip under" x="' + (X0 + 2) + '" y="' + (cy(r) - 14) + '" width="' + (W - 4) + '" height="28" rx="5"/>';
+      b += txt(X0 + W + 14, cy(r) + 7, 'B' + r, 'lg-ts');
+      for (var c = 1; c <= L.cols; c++) b += '<circle class="lg-hole" cx="' + cx(c) + '" cy="' + cy(r) + '" r="5"/>';
+    }
+    for (c = 1; c <= L.cols; c += (L.step || 1)) b += txt(mx(c), Y0 - 18, 'L' + c, 'lg-ts', 'middle');
+    if (L.free) { var xf2 = X0 + (L.cols - L.free + 1) * P + 6; b += '<rect class="lg-freea" x="' + (X0 - 6) + '" y="' + (Y0 - 6) + '" width="' + (xf2 - X0 + 6) + '" height="' + (H + 12) + '"/>'; }
+    if (L.mark0) b += '<rect class="lg-mark0" x="' + (mx(L.mark0[0]) - 17) + '" y="' + (cy(L.mark0[1]) - 17) + '" width="34" height="34" rx="3"/><circle class="lg-hole0" cx="' + mx(L.mark0[0]) + '" cy="' + cy(L.mark0[1]) + '" r="6"/>';
+    var blobs = [], key = function (q) { return q[0] + ',' + q[1]; }, idx = {};
+    L.parts.forEach(function (p) { legsOf(p).forEach(function (q) { if (idx[key(q)] == null) { idx[key(q)] = blobs.length; blobs.push({ c: q[0], r: q[1] }); } }); });
+    var fx = {}, faults = [];
+    (spec.faults || []).forEach(function (f) { var i = idx[key(f.leg)]; fx[i] = f; var ids = [i], nb = f.k === 'f' ? f.from : [f.leg[0], f.leg[1] + f.dir]; if (idx[key(nb)] != null) ids.push(idx[key(nb)]); faults.push(ids); });
+    var big = {}; (spec.big || []).forEach(function (q) { big[idx[key(q)]] = 1; });
+    var stubs = '';
+    blobs.forEach(function (q, i) { var f = fx[i], x = mx(q.c), y = cy(q.r), g = '';
+      if (f && f.k === 'b') { var y2 = y + f.dir * (P - 4); g += '<path class="lg-blob" d="M' + (x - 11) + ' ' + y + 'C' + (x - 13) + ' ' + ((y + y2) / 2) + ' ' + (x - 7) + ' ' + y2 + ' ' + x + ' ' + y2 + 'C' + (x + 7) + ' ' + y2 + ' ' + (x + 13) + ' ' + ((y + y2) / 2) + ' ' + (x + 11) + ' ' + y + 'A11 11 0 0 0 ' + (x - 11) + ' ' + y + 'Z"/>'; }
+      else g += '<circle class="lg-blob" cx="' + x + '" cy="' + y + '" r="' + (big[i] ? 15 : f ? 12 : 10) + '"/>';
+      g += '<circle class="lg-blobh" cx="' + (x - 3) + '" cy="' + (y - 4) + '" r="3"/><circle class="lg-wire" cx="' + x + '" cy="' + y + '" r="3"/>';
+      if (f && f.k === 'f') { var xs = mx(f.from[0]), ys = cy(f.from[1]), ex = x + (xs - x) * 0.3, ey = y + (ys - y) * 0.3; stubs += '<path class="lg-stub" d="M' + xs + ' ' + ys + 'L' + ex + ' ' + ey + '"/>'; }
+      b += '<g class="lg-bl" data-i="' + i + '" role="button" tabindex="0" aria-pressed="false" aria-label="Lötstelle Bahn ' + q.r + ', Loch ' + q.c + '">' + g + '<circle class="lg-blsel" cx="' + x + '" cy="' + y + '" r="' + (f && f.k === 'b' ? 0 : 19) + '"/></g>';
+    });
+    b += stubs;
+    return { svg: svg('0 0 ' + (X0 + W + 70) + ' ' + (Y0 + H + 30), b, 'Lötseite der Platine (gespiegelt) mit Lötstellen zum Antippen', 'lg-board lg-bridgefig'), blobs: blobs, faults: faults };
+  }
   function boardFig(v, nolab) { NOLAB = !!nolab; var g = boardBody(v, 99, false); NOLAB = false; if (g.vbBoard) g.vb = g.vbBoard; return g; }
   var BOARD_POS = { N: { r2: [cx(3) - 26, cy(3)], r1: [cx(8) - 26, cy(4)], t1: [cx(6) + 30, cy(7)], led: [cx(4), cy(4) - 6], ldr: [cx(9), cy(6)] },
     A: { r3: [cx(10) - 26, cy(4)], r1: [cx(7), cy(4) - 6], t1: [cx(6), cy(7)], ldr: [cx(8) + 34, cy(5) + 2], sum: [cx(3) + 60, cy(2)] },
@@ -1810,7 +1849,7 @@ var LG = (function () {
     b += '<path class="lg-warnl" d="M184 65H326"/>' + txt(334, 72, 'Lötbrücke', 'lg-tb');
     return svg('0 0 460 130', b, 'Lötbrücke: Lot verbindet zwei benachbarte Kupferbahnen auf der Unterseite', 'lg-small');
   }
-  return { plan: plan, picto: picto, planBody: planBody, sim: sim, calc: calc, parts: parts, bcFig: bcFig, BC_POS: BC_POS, board: board, copper: copper, boardDims: boardDims, mm: mm, boardFig: boardFig, BOARD_POS: BOARD_POS, steps: steps, bruecke: bruecke, rstFig: rstFig, LAY: LAY };
+  return { plan: plan, picto: picto, planBody: planBody, sim: sim, calc: calc, parts: parts, bcFig: bcFig, BC_POS: BC_POS, board: board, copper: copper, boardDims: boardDims, mm: mm, boardFig: boardFig, BOARD_POS: BOARD_POS, steps: steps, bruecke: bruecke, rstFig: rstFig, bridgeFig: bridgeFig, LAY: LAY };
 })();
 
 /* Sicherheitszeichen aus dem Tech-Board (Repo Unterrichtsboard, tech-board/index.html, TB_RULES/TB_HAZ).
@@ -1893,6 +1932,7 @@ t6:{type:'bom',kc:'RS16-M',rows:[['LED grün, 5 mm',1],['LED orange, 5 mm',1],['
 t8:{type:'label',fig:'board',kc:'RS22-E4',aria:'Fertig bestückte Platine der LED-Tischleuchte mit nummerierten Bauteilen',marks:['r1','r2','t1','led1','r4'],terms:[['Transistor BC547','t1'],['R2 1,5 kΩ','r2'],['LED grün','led1'],['R1 22 kΩ','r1'],['R4 220 Ω (Vorwiderstand orange)','r4'],['Kondensator','x']],help:{tip:'Die Widerstände unterscheidest du an den Farbringen: rot-rot-orange ist 22 kΩ, braun-grün-rot ist 1,5 kΩ, rot-rot-braun ist 220 Ω.',teil:'Nummer 1 sitzt in Loch 6 zwischen Bahn 3 und Bahn 6. Das ist R1.'}},
 t9:{type:'order',kc:'RS16-P',items:['Anforderungen aufstellen.','Den Schaltplan untersuchen (vorgegeben).','Die Stückliste anfertigen.','Den Ablaufplan anfertigen.','Den Bestückungsplan lesen (vorgegeben).','Den Bestückungsplan mit Folienstift übertragen und mit der Schablone kontrollieren.','Die Platine durch Ritzbrechen zuschneiden.','Die Bauteile löten und nach jeder Gruppe an der Teststation prüfen.','Die Platine mit dem Multimeter testen und bewerten.','Das Werkstück in Betrieb nehmen.','Das Werkstück mit dem Anforderungskatalog bewerten.'],start:[2,0,8,4,1,10,3,7,6,5,9]},
 t18:{type:'order',kc:'RS22-E4',items:['Fenster auf Kipp stellen.','Sichtkontrolle: Ist die Lötstation einsatzbereit, sind Kabel und Stecker heil?','Die Lötfahnen (Beine) des Bauteils abbiegen.','Das Bauteil auf die Platine setzen.','Die Lötfahnen auf der Kupferseite um 45° abbiegen.','Die Lötstation einschalten (350 °C).','Die Lötstelle erhitzen.','Lot zuführen.','Das Lot fließen lassen.','Die Lötstelle erkalten lassen.','Die überschüssigen Lötfahnen mit dem Seitenschneider entfernen.','Sichtkontrolle der Lötstelle durchführen.','Die Lötstation ausschalten und den Arbeitsplatz aufräumen.'],start:[4,1,7,0,11,2,9,5,12,3,8,6,10]},
+tb:{type:'bridge',kc:'RS22-E4',faults:[{k:'b',leg:[16,9],dir:1},{k:'f',leg:[12,12],from:[12,11]},{k:'b',leg:[6,6],dir:1}],big:[[19,3]],why:'An der gelben LED läuft das Lot von Bahn 9 auf Bahn 10, an R1 von Bahn 6 auf Bahn 7. Am Transistor steckt das abgeschnittene Basisbein im Lot des Emitters (Bahn 11 und 12). Der dicke Klecks am Batteriekabel ist unschön, berührt aber keine Nachbarbahn.',help:{tip:'Prüf jede Lötstelle: Bleibt das Lot auf seiner Kupferbahn? Steckt ein abgeschnittenes Drahtende in einer fremden Lötstelle? Ein dicker Klecks allein ist noch keine Brücke.',teil:'Auf dieser Platine sind es drei Lötbrücken, eine davon entsteht durch ein Drahtende.'}},
 t10:{type:'pair',kc:'RS16-U',left:['Das Multimeter zeigt bei der Widerstandsmessung „OL“ an.','Der gemessene Widerstand weicht stark vom Sollwert ab.','Eine leuchtende LED zeigt eine zu hohe Spannung.','Keine LED leuchtet, das Multimeter zeigt 0,00 mA.','Der Messwert schwankt stark.'],right:['Wackelkontakt, zum Beispiel eine kalte Lötstelle.','Unterbrechung: Ein Bein ist nicht angelötet.','Die LEDs sind vertauscht.','Ein falscher Widerstand ist eingelötet oder eine Lötbrücke verbindet zwei Bahnen.','Der Stromkreis ist unterbrochen, zum Beispiel ist der Schalter aus.'],ans:[1,3,2,4,0]},
 t11:{type:'mark',kc:'RS22-E4',parts:[['Mia holt sich alle drei LEDs auf einmal von der Materialstation.',true],['Sie lötet zuerst die Vorwiderstände ein und geht dann zu Teststation 1.',false],['Den Transistor steckt sie mit der flachen Seite nach rechts ein.',true],['Die LEDs biegt sie so, dass sie höher stehen als der Transistor.',false],['Die Anode der orangen LED steckt sie in Bahn 10.',true],['Die Enden der Steckbrücke verdrillt und verzinnt sie.',false],['Als Teststation 3 einen Fehler meldet, lötet sie einfach weiter.',true]],help:{tip:'Vergleiche Mias Sätze mit dem Bestückungsplan, der Hilfekarte „Leuchtdioden setzen“ und dem Arbeitsablauf mit Teststationen.',teil:'Ein Fehler steckt im Satz über die LEDs von der Materialstation: Man holt sich immer nur eine. Es sind noch drei weitere Fehler.'}},
 t12:{type:'open',kc:'RS16-U',min:100,checks:[['Transistor falsch oder verdreht eingelötet',/transistor|verdreh|flach|kollektor|emitter|basis/i],['LEDs verpolt oder Kathode nicht an Bahn 10',/verpol|anode|kathode|richtung|polung|herum/i],['Vorgehen: Sichtkontrolle, Schablone, Multimeter',/sicht|schablone|multimeter|mess|lupe|teststation|hilfekarte/i]],help:{tip:'Test 1 und Test 2 sind bestanden, also stimmen die Widerstände. Was kommt danach? Denk an den Transistor und an die LEDs. Die Hilfekarte „Teststation meldet Fehler“ zeigt das Vorgehen.',teil:'Satzanfang: „Vielleicht ist der Transistor verdreht: Die flache Seite muss nach links zeigen. Oder …“'},
@@ -1907,7 +1947,7 @@ Object.assign(T,TV);
 const KC={'RS16-A':'KC Technik RS 2010, S. 16 (Planen, Konstruieren und Herstellen): erstellen einen Anforderungskatalog','RS16-M':'KC Technik RS 2010, S. 16 (Planen, Konstruieren und Herstellen): erstellen Materiallisten','RS16-P':'KC Technik RS 2010, S. 16 (Planen, Konstruieren und Herstellen): planen einen Arbeitsablauf','RS16-U':'KC Technik RS 2010, S. 16 (Planen, Konstruieren und Herstellen): überprüfen die Teillösungen hinsichtlich der technischen Anforderungen','RS22-F2':'KC Technik RS 2010, S. 22: beschreiben die elektrischen Eigenschaften von Widerständen, Leuchtdioden, Sensoren und Transistoren','RS22-F3':'KC Technik RS 2010, S. 22: beschreiben das Zusammenwirken verschiedener elektronischer Bauteile in einer Schaltung','RS22-E4':'KC Technik RS 2010, S. 22: entwerfen und stellen elektronische Schaltungen her','PT21-F':'CV Profil Technik RS 2011, S. 21: benennen Schaltzeichen; beschreiben die Eigenschaften von Widerständen, Kondensatoren und Halbleitern','RS22-E3':'KC Technik RS 2010, S. 22: messen Spannungen und Stromstärken und berechnen aus den Messergebnissen weitere Eigenschaften','S11-S':'KC Technik RS 2010, S. 11 (Zur Sicherheit im Technikunterricht): Sicherheitsbewusstsein und Bereitschaft zur Verhütung von Gefahren und Unfällen; RiSU 2023 (Gefährdungsbeurteilung)'};
 
 const RATE=CFG_W.rate,RATE_L=['noch nicht','mit Hilfe','meistens','sicher'];
-const OPS={'planen':'Entwicklung des Herstellungsweges eines Produktes.','berechnen':'Ergebnisse von einem Ansatz ausgehend durch Rechenoperationen gewinnen (KC Technik RS 2010, Anhang).','nennen':'(be)nennen: Fakten, Daten, Begriffe, Regeln ohne Erläuterung aufzählen.','benennen':'(be)nennen: Fakten, Daten, Begriffe, Regeln ohne Erläuterung aufzählen.','beschreiben':'Strukturiert und fachsprachlich angemessen Materialien vorstellen und/oder Sachverhalte darlegen.','zuordnen':'Begründet für ein Objekt eine Gruppe, eine Position oder ein Material zuweisen oder einen Sachverhalt begründet in einen Zusammenhang stellen.','ordnen':'Etwas kriteriengeleitet in eine bestimmte Systematik oder Reihenfolge bringen.','erklären':'Sachverhalte so darstellen, dass Bedingungen, Ursachen, Gesetzmäßigkeiten und/oder Funktionszusammenhänge verständlich werden.','ermitteln':'Einen Zusammenhang oder eine Lösung finden und das Ergebnis formulieren.','überprüfen':'Inhalte oder Aussagen auf ihre sachliche Richtigkeit bzw. innere Logik hin untersuchen.','erstellen':'Fachpraktischer Operator: einen Sachverhalt, ein Produkt oder einen Plan nach Vorgaben ausarbeiten, z. B. eine Liste, einen Katalog oder einen Ablauf.','schätzen':'Keine Bewertung: Diese Schätzfrage dient nur der Einschätzung deines Vorwissens. Es gibt kein Richtig oder Falsch.'};
+const OPS={'untersuchen':'analysieren/untersuchen: Materialien, Sachverhalte oder Räume beschreiben, kriterienorientiert oder aspektgeleitet erschließen und strukturiert darstellen (KC AWT IGS 2024, Anhang A1).','planen':'Entwicklung des Herstellungsweges eines Produktes.','berechnen':'Ergebnisse von einem Ansatz ausgehend durch Rechenoperationen gewinnen (KC Technik RS 2010, Anhang).','nennen':'(be)nennen: Fakten, Daten, Begriffe, Regeln ohne Erläuterung aufzählen.','benennen':'(be)nennen: Fakten, Daten, Begriffe, Regeln ohne Erläuterung aufzählen.','beschreiben':'Strukturiert und fachsprachlich angemessen Materialien vorstellen und/oder Sachverhalte darlegen.','zuordnen':'Begründet für ein Objekt eine Gruppe, eine Position oder ein Material zuweisen oder einen Sachverhalt begründet in einen Zusammenhang stellen.','ordnen':'Etwas kriteriengeleitet in eine bestimmte Systematik oder Reihenfolge bringen.','erklären':'Sachverhalte so darstellen, dass Bedingungen, Ursachen, Gesetzmäßigkeiten und/oder Funktionszusammenhänge verständlich werden.','ermitteln':'Einen Zusammenhang oder eine Lösung finden und das Ergebnis formulieren.','überprüfen':'Inhalte oder Aussagen auf ihre sachliche Richtigkeit bzw. innere Logik hin untersuchen.','erstellen':'Fachpraktischer Operator: einen Sachverhalt, ein Produkt oder einen Plan nach Vorgaben ausarbeiten, z. B. eine Liste, einen Katalog oder einen Ablauf.','schätzen':'Keine Bewertung: Diese Schätzfrage dient nur der Einschätzung deines Vorwissens. Es gibt kein Richtig oder Falsch.'};
 
 /* ---------- Zustand ---------- */
 let S;try{S=JSON.parse(localStorage.getItem(KEY)||'null');}catch(e){S=null;}
@@ -2309,6 +2349,25 @@ function wCrit(id,t,w,art){
     else showFb(fb,'err',bad+(bad===1?' Anforderung ist':' Anforderungen sind')+' nicht überprüfbar','Frag dich bei den rot umrandeten: Wie würde ich das testen oder messen? Wenn du das nicht sagen kannst, tausch sie aus.');
     report(id,!bad,art,fb);});
 }
+/* Lötbrücken finden: Lötstellen auf der Lötseite antippen (seit 19.11.2026) */
+function wBridge(id,t,w,art){
+  let v=S.a[id];if(!Array.isArray(v))v=S.a[id]=[];
+  const g=LG.bridgeFig(VER,t);w.className='bridgew';w.innerHTML='<div class="lg-boardfig">'+g.svg+'</div>';
+  const cnt=el('p',{class:'note','aria-live':'polite'});w.append(cnt);
+  const els=[...w.querySelectorAll('.lg-bl')],inF=new Set(g.faults.flat());
+  function paint(){els.forEach(e=>e.setAttribute('aria-pressed',String(v.includes(+e.dataset.i))));cnt.textContent=v.length+(v.length===1?' Lötstelle':' Lötstellen')+' markiert';}
+  els.forEach(e=>{const tog=()=>{const i=+e.dataset.i,k=v.indexOf(i);if(k<0)v.push(i);else v.splice(k,1);els.forEach(x=>x.classList.remove('s-ok','s-bad'));save();paint();};
+    e.addEventListener('click',tog);e.addEventListener('keydown',ev=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();tog();}});});
+  paint();
+  mkCheck(id,art,fb=>{if(!v.length){showFb(fb,'mid','Noch nicht fertig','Tippe die Lötstellen an, an denen eine Lötbrücke entsteht.');return;}
+    const wrong=v.filter(i=>!inF.has(i)),miss=g.faults.filter(f=>!f.some(i=>v.includes(i))).length;
+    els.forEach(e=>{const i=+e.dataset.i,on=v.includes(i);e.classList.toggle('s-ok',on&&inF.has(i));e.classList.toggle('s-bad',on&&!inF.has(i));});
+    const all=!wrong.length&&!miss,parts=[];
+    if(wrong.length)parts.push((wrong.length===1?'Eine rot markierte Lötstelle ist':wrong.length+' rot markierte Lötstellen sind')+' in Ordnung: Das Lot bleibt auf seiner Bahn.');
+    if(miss)parts.push(miss===1?'Eine Lötbrücke hast du noch nicht gefunden.':miss+' Lötbrücken hast du noch nicht gefunden.');
+    if(all)showFb(fb,'ok','Alle Lötbrücken gefunden!',t.why);else showFb(fb,'err','Noch nicht alle Lötbrücken richtig','Schau dir jede Lötstelle noch einmal mit der Lupe an.',parts);
+    report(id,all,art,fb);});
+}
 /* Stückliste: Anzahl je Bauteil */
 function wBom(id,t,w,art){
   let v=S.a[id];if(!Array.isArray(v)||v.length!==t.rows.length)v=S.a[id]=t.rows.map(()=>'');
@@ -2358,7 +2417,7 @@ function paintBew(){const box=$('#bew');if(!box)return;const cs=crits();
   const tb=el('tbody');cs.forEach(([i,txt])=>{const tr=el('tr',{},el('td',{},txt));BEW_COLS.forEach((c,ci)=>{const k=i+'.'+ci;const s=el('select',{'aria-label':c+': '+txt},...BEW_V.map(x=>el('option',{value:x[0]},x[1])));s.value=S.bew[k]||'';s.onchange=()=>{S.bew[k]=s.value;save();};tr.append(el('td',{},s));});tb.append(tr);});
   box.replaceChildren(el('table',{},el('thead',{},el('tr',{},el('th',{},'Anforderung'),...BEW_COLS.map(c=>el('th',{},c)))),tb),el('p',{class:'hint'},'+ erfüllt · o teilweise erfüllt · − nicht erfüllt. M1 bis M3: drei Mitschüler:innen testen dein Produkt.'));}
 
-$$('.w[data-t]').forEach(w=>{const id=w.dataset.t,t=T[id],art=w.closest('.task');({seg:wSeg,quiz:wQuiz,multi:wMulti,order:wOrder,open:wOpen,gap:wGap,pair:wPair,mark:wMark,num:wNum,label:wLabel,grid:wGrid,est:wEst,drill:wDrill,crit:wCrit,bom:wBom,gfb:wGfb,rv:wRv})[t.type](id,t,w,art);addHelp(id,t,art);});
+$$('.w[data-t]').forEach(w=>{const id=w.dataset.t,t=T[id],art=w.closest('.task');({seg:wSeg,quiz:wQuiz,multi:wMulti,order:wOrder,open:wOpen,gap:wGap,pair:wPair,mark:wMark,num:wNum,label:wLabel,grid:wGrid,est:wEst,drill:wDrill,crit:wCrit,bom:wBom,gfb:wGfb,rv:wRv,bridge:wBridge})[t.type](id,t,w,art);addHelp(id,t,art);});
 paintBew();paintMess();
 
 /* Grafiken */

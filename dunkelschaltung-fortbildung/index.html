@@ -531,6 +531,16 @@ path.lg-ledg,path.lg-ledo,path.lg-ledy{stroke:var(--lg-ink);stroke-width:3}
 
 .lg-rsthint{display:block;margin-top:10px}.lg-rstfig{display:block;max-width:340px;width:100%;margin:6px 0 0}.lg-rstfig .lg-ts{font-size:17px}.lg-rstfig .lg-tb{font-size:22px}
 
+/* Lötbrücken finden */
+.lg-bridgefig{max-width:560px}.lg-bl{cursor:pointer;outline:none}
+.lg-blob{fill:#c9ced3;stroke:#7d868e;stroke-width:1.5}.lg-blobh{fill:#fff;opacity:.7}.lg-wire{fill:#8a6f45}
+.lg-stub{fill:none;stroke:#8a6f45;stroke-width:5;stroke-linecap:round;pointer-events:none}
+.lg-blsel{fill:none;stroke:transparent;stroke-width:4}
+.lg-bl[aria-pressed="true"] .lg-blsel{stroke:#1f6fd1;stroke-dasharray:6 4}.lg-bl[aria-pressed="true"] .lg-blob{fill:#a9c7ef}
+.lg-bl.s-ok .lg-blob{fill:#9fd8a8;stroke:#2f8a46}.lg-bl.s-bad .lg-blob{fill:#f3a9a0;stroke:#c0392b}.lg-bl.s-miss .lg-blsel{stroke:#d08a00;stroke-dasharray:3 3}
+.lg-bl:focus-visible .lg-blsel{stroke:var(--ink,#222);stroke-dasharray:none}
+.bridgew .note{font-size:15px;margin:6px 0 0}
+
 /* ---------- Dunkelschaltung, Fortbildung ---------- */
 :root{--lk:#1D568E;--lk-soft:#E2ECF7;--warn:#8A5A00;--warn-soft:#FBEFD5}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--lk:#9CC4EE;--lk-soft:#1A2937;--warn:#F0C065;--warn-soft:#3A2D13}}
@@ -1068,6 +1078,38 @@ var LG = (function () {
       b += txt(pts[0][0] + 16, (pts[0][1] + pts[pts.length - 1][1]) / 2 + 8, lab, 'lg-tb'); });
     return svg('0 0 ' + (X0 + W + 70) + ' ' + (Y0 + H + 30), b, 'Kupferseite (gespiegelt) mit Lötpunkten', 'lg-board');
   }
+  /* Lötseite mit Lötklecksen zum Antippen (Aufgabe „Lötbrücken finden“, seit 19.11.2026).
+     spec.faults: {k:'b', leg:[L,B], dir:±1} Lot läuft über die Lücke auf die Nachbarbahn;
+                  {k:'f', leg:[L,B], from:[L2,B2]} abgeschnittenes Drahtende des Nachbarbauteils (from) ragt auf die Bahn von leg und steckt im Lot.
+     spec.big: [[L,B] …] dicker Klecks, berührt aber nichts (keine Brücke).
+     Gibt {svg, blobs:[{c,r}], faults:[[Index …] …]} zurück; jede Lötstelle ist ein <g class="lg-bl" data-i>. */
+  function bridgeFig(v, spec) {
+    var L = LAY[v], W = L.cols * P, H = L.rows * P, b = '', mx = function (c) { return cx(L.cols + 1 - c); };
+    b += '<rect class="lg-pcb" x="' + (X0 - 8) + '" y="' + (Y0 - 8) + '" width="' + (W + 16) + '" height="' + (H + 16) + '" rx="6"/>';
+    for (var r = 1; r <= L.rows; r++) {
+      b += '<rect class="lg-strip under" x="' + (X0 + 2) + '" y="' + (cy(r) - 14) + '" width="' + (W - 4) + '" height="28" rx="5"/>';
+      b += txt(X0 + W + 14, cy(r) + 7, 'B' + r, 'lg-ts');
+      for (var c = 1; c <= L.cols; c++) b += '<circle class="lg-hole" cx="' + cx(c) + '" cy="' + cy(r) + '" r="5"/>';
+    }
+    for (c = 1; c <= L.cols; c += (L.step || 1)) b += txt(mx(c), Y0 - 18, 'L' + c, 'lg-ts', 'middle');
+    if (L.free) { var xf2 = X0 + (L.cols - L.free + 1) * P + 6; b += '<rect class="lg-freea" x="' + (X0 - 6) + '" y="' + (Y0 - 6) + '" width="' + (xf2 - X0 + 6) + '" height="' + (H + 12) + '"/>'; }
+    if (L.mark0) b += '<rect class="lg-mark0" x="' + (mx(L.mark0[0]) - 17) + '" y="' + (cy(L.mark0[1]) - 17) + '" width="34" height="34" rx="3"/><circle class="lg-hole0" cx="' + mx(L.mark0[0]) + '" cy="' + cy(L.mark0[1]) + '" r="6"/>';
+    var blobs = [], key = function (q) { return q[0] + ',' + q[1]; }, idx = {};
+    L.parts.forEach(function (p) { legsOf(p).forEach(function (q) { if (idx[key(q)] == null) { idx[key(q)] = blobs.length; blobs.push({ c: q[0], r: q[1] }); } }); });
+    var fx = {}, faults = [];
+    (spec.faults || []).forEach(function (f) { var i = idx[key(f.leg)]; fx[i] = f; var ids = [i], nb = f.k === 'f' ? f.from : [f.leg[0], f.leg[1] + f.dir]; if (idx[key(nb)] != null) ids.push(idx[key(nb)]); faults.push(ids); });
+    var big = {}; (spec.big || []).forEach(function (q) { big[idx[key(q)]] = 1; });
+    var stubs = '';
+    blobs.forEach(function (q, i) { var f = fx[i], x = mx(q.c), y = cy(q.r), g = '';
+      if (f && f.k === 'b') { var y2 = y + f.dir * (P - 4); g += '<path class="lg-blob" d="M' + (x - 11) + ' ' + y + 'C' + (x - 13) + ' ' + ((y + y2) / 2) + ' ' + (x - 7) + ' ' + y2 + ' ' + x + ' ' + y2 + 'C' + (x + 7) + ' ' + y2 + ' ' + (x + 13) + ' ' + ((y + y2) / 2) + ' ' + (x + 11) + ' ' + y + 'A11 11 0 0 0 ' + (x - 11) + ' ' + y + 'Z"/>'; }
+      else g += '<circle class="lg-blob" cx="' + x + '" cy="' + y + '" r="' + (big[i] ? 15 : f ? 12 : 10) + '"/>';
+      g += '<circle class="lg-blobh" cx="' + (x - 3) + '" cy="' + (y - 4) + '" r="3"/><circle class="lg-wire" cx="' + x + '" cy="' + y + '" r="3"/>';
+      if (f && f.k === 'f') { var xs = mx(f.from[0]), ys = cy(f.from[1]), ex = x + (xs - x) * 0.3, ey = y + (ys - y) * 0.3; stubs += '<path class="lg-stub" d="M' + xs + ' ' + ys + 'L' + ex + ' ' + ey + '"/>'; }
+      b += '<g class="lg-bl" data-i="' + i + '" role="button" tabindex="0" aria-pressed="false" aria-label="Lötstelle Bahn ' + q.r + ', Loch ' + q.c + '">' + g + '<circle class="lg-blsel" cx="' + x + '" cy="' + y + '" r="' + (f && f.k === 'b' ? 0 : 19) + '"/></g>';
+    });
+    b += stubs;
+    return { svg: svg('0 0 ' + (X0 + W + 70) + ' ' + (Y0 + H + 30), b, 'Lötseite der Platine (gespiegelt) mit Lötstellen zum Antippen', 'lg-board lg-bridgefig'), blobs: blobs, faults: faults };
+  }
   function boardFig(v, nolab) { NOLAB = !!nolab; var g = boardBody(v, 99, false); NOLAB = false; if (g.vbBoard) g.vb = g.vbBoard; return g; }
   var BOARD_POS = { N: { r2: [cx(3) - 26, cy(3)], r1: [cx(8) - 26, cy(4)], t1: [cx(6) + 30, cy(7)], led: [cx(4), cy(4) - 6], ldr: [cx(9), cy(6)] },
     A: { r3: [cx(10) - 26, cy(4)], r1: [cx(7), cy(4) - 6], t1: [cx(6), cy(7)], ldr: [cx(8) + 34, cy(5) + 2], sum: [cx(3) + 60, cy(2)] },
@@ -1115,7 +1157,7 @@ var LG = (function () {
     b += '<path class="lg-warnl" d="M184 65H326"/>' + txt(334, 72, 'Lötbrücke', 'lg-tb');
     return svg('0 0 460 130', b, 'Lötbrücke: Lot verbindet zwei benachbarte Kupferbahnen auf der Unterseite', 'lg-small');
   }
-  return { plan: plan, picto: picto, planBody: planBody, sim: sim, calc: calc, parts: parts, bcFig: bcFig, BC_POS: BC_POS, board: board, copper: copper, boardDims: boardDims, mm: mm, boardFig: boardFig, BOARD_POS: BOARD_POS, steps: steps, bruecke: bruecke, rstFig: rstFig, LAY: LAY };
+  return { plan: plan, picto: picto, planBody: planBody, sim: sim, calc: calc, parts: parts, bcFig: bcFig, BC_POS: BC_POS, board: board, copper: copper, boardDims: boardDims, mm: mm, boardFig: boardFig, BOARD_POS: BOARD_POS, steps: steps, bruecke: bruecke, rstFig: rstFig, bridgeFig: bridgeFig, LAY: LAY };
 })();
 
 /* Sicherheitszeichen aus dem Tech-Board (Repo Unterrichtsboard, tech-board/index.html, TB_RULES/TB_HAZ).

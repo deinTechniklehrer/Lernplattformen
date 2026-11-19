@@ -775,6 +775,16 @@ path.lg-ledg,path.lg-ledo,path.lg-ledy{stroke:var(--lg-ink);stroke-width:3}
 .lg-pdfboard .lg-tb{paint-order:stroke;stroke:var(--lg-pcb);stroke-width:6px;stroke-linejoin:round}
 
 .lg-rsthint{display:block;margin-top:10px}.lg-rstfig{display:block;max-width:340px;width:100%;margin:6px 0 0}.lg-rstfig .lg-ts{font-size:17px}.lg-rstfig .lg-tb{font-size:22px}
+
+/* Lötbrücken finden */
+.lg-bridgefig{max-width:560px}.lg-bl{cursor:pointer;outline:none}
+.lg-blob{fill:#c9ced3;stroke:#7d868e;stroke-width:1.5}.lg-blobh{fill:#fff;opacity:.7}.lg-wire{fill:#8a6f45}
+.lg-stub{fill:none;stroke:#8a6f45;stroke-width:5;stroke-linecap:round;pointer-events:none}
+.lg-blsel{fill:none;stroke:transparent;stroke-width:4}
+.lg-bl[aria-pressed="true"] .lg-blsel{stroke:#1f6fd1;stroke-dasharray:6 4}.lg-bl[aria-pressed="true"] .lg-blob{fill:#a9c7ef}
+.lg-bl.s-ok .lg-blob{fill:#9fd8a8;stroke:#2f8a46}.lg-bl.s-bad .lg-blob{fill:#f3a9a0;stroke:#c0392b}.lg-bl.s-miss .lg-blsel{stroke:#d08a00;stroke-dasharray:3 3}
+.lg-bl:focus-visible .lg-blsel{stroke:var(--ink,#222);stroke-dasharray:none}
+.bridgew .note{font-size:15px;margin:6px 0 0}
 /* Baustein Gefährdungsbeurteilung (gfb.js), seit 18.11.2026. Nutzt die .crit-Liste der Löten-Vorlage bzw. eigene Regeln unten. */
 :root{--gfb-u:#c23b2e;--gfb-a:#1f8a4c;--gfb-m:#1f63a8;--gfb-mbg:#e8f1fb;--gfb-icbg:#eef3f6;--gfb-icl:#a9b8bf;--gfb-ink:#22303a}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--gfb-u:#ff8a7e;--gfb-a:#5fd08f;--gfb-m:#8cc0f2;--gfb-mbg:#16304a;--gfb-icbg:#e9eef1;--gfb-icl:#e9eef1;--gfb-ink:#1b2730}}
@@ -1037,17 +1047,15 @@ path.lg-ledg,path.lg-ledo,path.lg-ledy{stroke:var(--lg-ink);stroke-width:3}
     <p>Klappt etwas nicht, ziehst du zuerst die Batterie ab. Dann schaust du mit der Lupe auf die Unterseite und vergleichst jedes Bauteil mit dem Bestückungsplan.</p>
     <div data-lg="bruecke"></div>
     <p class="cap">Eine <b>Lötbrücke</b>: Das Lot verbindet zwei Bahnen, die nicht verbunden sein dürfen. Du entfernst sie, indem du das Lot mit der Lötspitze wieder aufschmilzt und mit Entlötlitze aufsaugst.</p>
-    <div class="lg-data"><table>
-      <thead><tr><th>Was du siehst</th><th>Mögliche Ursache</th></tr></thead>
-      <tbody>
-        <tr><td>Gar nichts passiert, auch bei hellem Licht nicht.</td><td>Batterie leer, Batterieclip nicht richtig aufgesteckt, Schalter aus oder ein Kabel ist nicht angelötet.</td></tr>
-        <tr><td>Der Summer bleibt still. Sein <b>Plus-Bein</b> steckt in Bahn 4.</td><td>Der Summer ist <b>verpolt</b> eingelötet.</td></tr>
-        <tr><td>Der Summer bleibt still, auch bei Taschenlampenlicht, obwohl alle Bauteile richtig stecken.</td><td><b>Lötbrücke</b> zwischen Bahn 5 und Bahn 6: Die Basis liegt dann immer an GND.</td></tr>
-        <tr><td>Der Summer piept <b>dauernd</b>, auch im Dunkeln.</td><td><b>Lötbrücke</b> zwischen Bahn 4 und Bahn 5: Kollektor und Basis sind verbunden.</td></tr>
-        <tr><td>Der Summer piept nur <b>leise</b>, auch bei hellem Licht.</td><td>Der <b>Transistor ist verdreht</b>: Kollektor und Emitter sind vertauscht.</td></tr>
-        <tr><td>Der Alarm piept schon in der geschlossenen Schublade.</td><td>Es fällt etwas Licht hinein. <b>R1 ist zu groß</b> für deine Schublade, nimm 2,2 kΩ.</td></tr>
-      </tbody></table></div>
+    <p>Bevor du suchst, hilft es zu wissen, was ein Fehler in der Schaltung bewirkt. Merk dir dazu die Aufgabe der Bahnen: Bahn 1 führt +9 V, Bahn 4 ist der <b>Kollektor</b>, Bahn 5 die <b>Basis</b> des Transistors und Bahn 6 ist <b>GND</b> (Minus). In Bahn 7 treffen sich LDR und R3.</p>
+    <p>Eine <b>Lötbrücke</b> verbindet zwei Bahnen fest miteinander. Liegt die Basis über eine Brücke dauerhaft an GND, kommt sie nie auf 0,7 V, und der Transistor bleibt gesperrt, wie hell es auch wird. Verbindet eine Brücke dagegen Kollektor und Basis, bekommt die Basis über den Summer immer Strom: Der Transistor leitet ständig.</p>
+    <p>Ein aktiver <b>Summer</b> arbeitet nur in einer Richtung. Sein Plus-Bein gehört an die Bahn mit +9 V, falsch herum bleibt er stumm. Ist der <b>Transistor verdreht</b>, sind Kollektor und Emitter vertauscht, er schaltet nur schwach durch. <b>R1</b> bestimmt, wie empfindlich der Alarm ist: Je größer R1, desto weniger Licht reicht zum Auslösen. In einer Schublade, durch deren Ritzen etwas Licht fällt, kann ein großer R1 deshalb schon zu viel sein; dann hilft 2,2 kΩ. Bleibt die ganze Schaltung tot, fehlt die Energie: Batterie leer, Schalter aus oder ein Kabel nicht angelötet.</p>
   </div>
+  <article class="task">
+    <header><span class="num"></span><h3>Lötbrücken finden</h3><button class="op" data-op="untersuchen" type="button">untersuchen</button></header>
+    <p class="q">Untersuche die Lötseite dieser Platine. Tippe alle Lötstellen an, an denen eine Lötbrücke entsteht.</p>
+    <div class="w" data-t="tb"></div>
+  </article>
   <article class="task">
     <header><span class="num"></span><h3>Fehler und Ursache</h3><button class="op" data-op="zuordnen" type="button">zuordnen</button></header>
     <p class="q">Ordne jedem Fehlerbild die passende Ursache zu.</p>
@@ -1685,6 +1693,38 @@ var LG = (function () {
       b += txt(pts[0][0] + 16, (pts[0][1] + pts[pts.length - 1][1]) / 2 + 8, lab, 'lg-tb'); });
     return svg('0 0 ' + (X0 + W + 70) + ' ' + (Y0 + H + 30), b, 'Kupferseite (gespiegelt) mit Lötpunkten', 'lg-board');
   }
+  /* Lötseite mit Lötklecksen zum Antippen (Aufgabe „Lötbrücken finden“, seit 19.11.2026).
+     spec.faults: {k:'b', leg:[L,B], dir:±1} Lot läuft über die Lücke auf die Nachbarbahn;
+                  {k:'f', leg:[L,B], from:[L2,B2]} abgeschnittenes Drahtende des Nachbarbauteils (from) ragt auf die Bahn von leg und steckt im Lot.
+     spec.big: [[L,B] …] dicker Klecks, berührt aber nichts (keine Brücke).
+     Gibt {svg, blobs:[{c,r}], faults:[[Index …] …]} zurück; jede Lötstelle ist ein <g class="lg-bl" data-i>. */
+  function bridgeFig(v, spec) {
+    var L = LAY[v], W = L.cols * P, H = L.rows * P, b = '', mx = function (c) { return cx(L.cols + 1 - c); };
+    b += '<rect class="lg-pcb" x="' + (X0 - 8) + '" y="' + (Y0 - 8) + '" width="' + (W + 16) + '" height="' + (H + 16) + '" rx="6"/>';
+    for (var r = 1; r <= L.rows; r++) {
+      b += '<rect class="lg-strip under" x="' + (X0 + 2) + '" y="' + (cy(r) - 14) + '" width="' + (W - 4) + '" height="28" rx="5"/>';
+      b += txt(X0 + W + 14, cy(r) + 7, 'B' + r, 'lg-ts');
+      for (var c = 1; c <= L.cols; c++) b += '<circle class="lg-hole" cx="' + cx(c) + '" cy="' + cy(r) + '" r="5"/>';
+    }
+    for (c = 1; c <= L.cols; c += (L.step || 1)) b += txt(mx(c), Y0 - 18, 'L' + c, 'lg-ts', 'middle');
+    if (L.free) { var xf2 = X0 + (L.cols - L.free + 1) * P + 6; b += '<rect class="lg-freea" x="' + (X0 - 6) + '" y="' + (Y0 - 6) + '" width="' + (xf2 - X0 + 6) + '" height="' + (H + 12) + '"/>'; }
+    if (L.mark0) b += '<rect class="lg-mark0" x="' + (mx(L.mark0[0]) - 17) + '" y="' + (cy(L.mark0[1]) - 17) + '" width="34" height="34" rx="3"/><circle class="lg-hole0" cx="' + mx(L.mark0[0]) + '" cy="' + cy(L.mark0[1]) + '" r="6"/>';
+    var blobs = [], key = function (q) { return q[0] + ',' + q[1]; }, idx = {};
+    L.parts.forEach(function (p) { legsOf(p).forEach(function (q) { if (idx[key(q)] == null) { idx[key(q)] = blobs.length; blobs.push({ c: q[0], r: q[1] }); } }); });
+    var fx = {}, faults = [];
+    (spec.faults || []).forEach(function (f) { var i = idx[key(f.leg)]; fx[i] = f; var ids = [i], nb = f.k === 'f' ? f.from : [f.leg[0], f.leg[1] + f.dir]; if (idx[key(nb)] != null) ids.push(idx[key(nb)]); faults.push(ids); });
+    var big = {}; (spec.big || []).forEach(function (q) { big[idx[key(q)]] = 1; });
+    var stubs = '';
+    blobs.forEach(function (q, i) { var f = fx[i], x = mx(q.c), y = cy(q.r), g = '';
+      if (f && f.k === 'b') { var y2 = y + f.dir * (P - 4); g += '<path class="lg-blob" d="M' + (x - 11) + ' ' + y + 'C' + (x - 13) + ' ' + ((y + y2) / 2) + ' ' + (x - 7) + ' ' + y2 + ' ' + x + ' ' + y2 + 'C' + (x + 7) + ' ' + y2 + ' ' + (x + 13) + ' ' + ((y + y2) / 2) + ' ' + (x + 11) + ' ' + y + 'A11 11 0 0 0 ' + (x - 11) + ' ' + y + 'Z"/>'; }
+      else g += '<circle class="lg-blob" cx="' + x + '" cy="' + y + '" r="' + (big[i] ? 15 : f ? 12 : 10) + '"/>';
+      g += '<circle class="lg-blobh" cx="' + (x - 3) + '" cy="' + (y - 4) + '" r="3"/><circle class="lg-wire" cx="' + x + '" cy="' + y + '" r="3"/>';
+      if (f && f.k === 'f') { var xs = mx(f.from[0]), ys = cy(f.from[1]), ex = x + (xs - x) * 0.3, ey = y + (ys - y) * 0.3; stubs += '<path class="lg-stub" d="M' + xs + ' ' + ys + 'L' + ex + ' ' + ey + '"/>'; }
+      b += '<g class="lg-bl" data-i="' + i + '" role="button" tabindex="0" aria-pressed="false" aria-label="Lötstelle Bahn ' + q.r + ', Loch ' + q.c + '">' + g + '<circle class="lg-blsel" cx="' + x + '" cy="' + y + '" r="' + (f && f.k === 'b' ? 0 : 19) + '"/></g>';
+    });
+    b += stubs;
+    return { svg: svg('0 0 ' + (X0 + W + 70) + ' ' + (Y0 + H + 30), b, 'Lötseite der Platine (gespiegelt) mit Lötstellen zum Antippen', 'lg-board lg-bridgefig'), blobs: blobs, faults: faults };
+  }
   function boardFig(v, nolab) { NOLAB = !!nolab; var g = boardBody(v, 99, false); NOLAB = false; if (g.vbBoard) g.vb = g.vbBoard; return g; }
   var BOARD_POS = { N: { r2: [cx(3) - 26, cy(3)], r1: [cx(8) - 26, cy(4)], t1: [cx(6) + 30, cy(7)], led: [cx(4), cy(4) - 6], ldr: [cx(9), cy(6)] },
     A: { r3: [cx(10) - 26, cy(4)], r1: [cx(7), cy(4) - 6], t1: [cx(6), cy(7)], ldr: [cx(8) + 34, cy(5) + 2], sum: [cx(3) + 60, cy(2)] },
@@ -1732,7 +1772,7 @@ var LG = (function () {
     b += '<path class="lg-warnl" d="M184 65H326"/>' + txt(334, 72, 'Lötbrücke', 'lg-tb');
     return svg('0 0 460 130', b, 'Lötbrücke: Lot verbindet zwei benachbarte Kupferbahnen auf der Unterseite', 'lg-small');
   }
-  return { plan: plan, picto: picto, planBody: planBody, sim: sim, calc: calc, parts: parts, bcFig: bcFig, BC_POS: BC_POS, board: board, copper: copper, boardDims: boardDims, mm: mm, boardFig: boardFig, BOARD_POS: BOARD_POS, steps: steps, bruecke: bruecke, rstFig: rstFig, LAY: LAY };
+  return { plan: plan, picto: picto, planBody: planBody, sim: sim, calc: calc, parts: parts, bcFig: bcFig, BC_POS: BC_POS, board: board, copper: copper, boardDims: boardDims, mm: mm, boardFig: boardFig, BOARD_POS: BOARD_POS, steps: steps, bruecke: bruecke, rstFig: rstFig, bridgeFig: bridgeFig, LAY: LAY };
 })();
 
 /* Sicherheitszeichen aus dem Tech-Board (Repo Unterrichtsboard, tech-board/index.html, TB_RULES/TB_HAZ).
@@ -1812,6 +1852,7 @@ t5:{type:'crit',need:6,kc:'RS16-A',opts:[['Der Summer piept, sobald Licht auf de
 t6:{type:'bom',kc:'RS16-M',rows:[['Widerstand 4,7 kΩ (gelb-violett-rot)',1],['Widerstand 1 kΩ (braun-schwarz-rot)',1],['Widerstand 10 kΩ (braun-schwarz-orange)',0],['Transistor BC547',1],['Fotowiderstand (LDR)',1],['Aktiver Summer für 9 V',1],['LED',0],['Taster',0],['Schalter',1],['Batterieclip für 9-V-Block',1],['9-V-Batterie (Block)',1],['Batteriehalter für 3 × AA',0],['Streifenrasterplatine 7 Bahnen × 11 Löcher (etwa 30,5 × 20,3 mm)',1]],why:'Im Schaltplan stehen R1 4,7 kΩ, R3 1 kΩ, der Transistor, der LDR, der Summer und der Schalter S1. Dazu kommen die 9-V-Batterie mit Batterieclip und die Platine. 10 kΩ, LED, Taster und einen Batteriehalter für AA-Batterien brauchst du nicht.',help:{tip:'Zähle im Schaltplan in Kapitel 2 jedes Schaltzeichen, auch den Schalter. Lies bei den Widerständen den Wert ab. Denk an die Stromversorgung: Die Schaltung läuft mit einer 9-V-Batterie.',teil:'Von jedem Bauteil, das du brauchst, nimmst du genau eins. Die 9-V-Batterie braucht einen Batterieclip.'}},
 t8:{type:'label',fig:'board',kc:'RS22-E4',aria:'Fertig bestückte Platine des Schubladen-Alarms mit nummerierten Bauteilen',marks:['r3','r1','t1','ldr','sum'],terms:[['Transistor BC547','t1'],['Summer','sum'],['R1 4,7 kΩ','r1'],['Fotowiderstand (LDR)','ldr'],['R3 1 kΩ','r3'],['LED','x']],help:{tip:'R3 liegt flach auf der Platine, R1 steht aufrecht. Der LDR hat oben eine Zickzack-Linie. Das größte Bauteil ist der Summer.',teil:'Nummer 1 liegt in Loch 10 zwischen Bahn 1 und Bahn 7. Das ist R3.'}},
 t9:{type:'order',kc:'RS16-P',items:['Bauteile nach der Stückliste bereitlegen und prüfen.','Den Bestückungsplan mit Folienstift auf die Platine übertragen.','Lötkolben in die Ablage legen und aufheizen lassen.','Das flache Bauteil zuerst einlöten: R3.','R1 stehend einlöten.','Den Transistor einlöten, flache Seite nach links.','Den LDR einlöten, Bahn 6 dazwischen bleibt frei.','Den Summer einlöten, Plus-Bein in Bahn 1.','Den Batterieclip mit Schalter anlöten: Rot über den Schalter an Bahn 1, Schwarz an Bahn 6.','Sichtprüfung mit der Lupe: keine Lötbrücken, alle Lötstellen glänzen.','Die 9-V-Batterie anschließen und mit Licht testen.'],start:[2,0,9,4,1,10,3,8,7,6,5]},
+tb:{type:'bridge',kc:'RS22-E4',faults:[{k:'f',leg:[6,4],from:[6,5]},{k:'b',leg:[8,7],dir:-1},{k:'b',leg:[7,5],dir:1}],big:[[3,1]],why:'Am Transistor steckt das abgeschnittene Basisbein im Lot des Kollektors (Bahn 4 und 5). Am LDR läuft das Lot von Bahn 7 auf Bahn 6, an R1 von Bahn 5 auf Bahn 6. Der dicke Klecks am Summer ist unschön, berührt aber keine Nachbarbahn.',help:{tip:'Prüf jede Lötstelle: Bleibt das Lot auf seiner Kupferbahn? Steckt ein abgeschnittenes Drahtende in einer fremden Lötstelle? Ein dicker Klecks allein ist noch keine Brücke.',teil:'Auf dieser Platine sind es drei Lötbrücken, eine davon entsteht durch ein Drahtende.'}},
 t10:{type:'pair',kc:'RS16-U',left:['Der Summer bleibt still. Sein Plus-Bein steckt in Bahn 4.','Der Summer piept dauernd, auch im Dunkeln.','Der Summer bleibt still, auch bei Taschenlampenlicht, obwohl alle Bauteile richtig stecken.','Der Summer piept nur leise, auch bei hellem Licht.','Der Alarm piept schon in der geschlossenen Schublade.'],right:['Der Transistor ist verdreht eingelötet.','R1 ist zu groß für diese Schublade.','Der Summer ist verpolt.','Lötbrücke zwischen Bahn 4 und Bahn 5.','Lötbrücke zwischen Bahn 5 und Bahn 6.'],ans:[2,3,4,0,1]},
 t11:{type:'mark',kc:'RS22-E4',parts:[['Ella lötet zuerst R3 ein, weil er am flachsten ist.',false],['Den LDR steckt sie in Bahn 5 und Bahn 6.',true],['Das Plus-Bein des Summers steckt sie in Bahn 1.',false],['Sie hält den Lötkolben eine halbe Minute an das Bein des Transistors, damit es besser hält.',true],['Den Transistor steckt sie mit der flachen Seite nach links ein.',false],['Zwischendurch legt sie den heißen Lötkolben auf den Tisch.',true],['Die Batterie schließt sie schon vor dem Löten an, damit sie gleich testen kann.',true]],help:{tip:'Vergleiche Ellas Sätze mit dem Bestückungsplan und den Regeln zum sicheren Löten: Wo steckt der LDR? Wie lange erhitzt man eine Lötstelle? Wohin gehört der Lötkolben?',teil:'Ein Fehler steckt im Satz über den LDR: Er gehört in Bahn 5 und Bahn 7. Es sind noch drei weitere Fehler.'}},
 t12:{type:'open',kc:'RS16-U',min:100,checks:[['Summer verpolt',/summer|verpol|plus|richtung/i],['Transistor verdreht oder Lötbrücke Basis an GND',/transistor|verdreh|brücke|bahn 5|bahn 6|basis/i],['Vorgehen: Batterie ab, Lupe, nachlöten',/lupe|nachlöt|entlöt|prüf|vergleich|anschau|batterie/i]],help:{tip:'Schau in die Tabelle oben: Welche Fehler führen dazu, dass der Summer nie piept? Denk an die Richtung der Bauteile und an Lötbrücken an der Basis.',teil:'Satzanfang: „Vielleicht ist der Summer verpolt: Sein Plus-Bein steckt nicht in Bahn 1, sondern …“'},
@@ -1825,7 +1866,7 @@ Object.assign(T,TV);
 const KC={'RS16-A':'KC Technik RS 2010, S. 16 (Planen, Konstruieren und Herstellen): erstellen einen Anforderungskatalog','RS16-M':'KC Technik RS 2010, S. 16 (Planen, Konstruieren und Herstellen): erstellen Materiallisten','RS16-P':'KC Technik RS 2010, S. 16 (Planen, Konstruieren und Herstellen): planen einen Arbeitsablauf','RS16-U':'KC Technik RS 2010, S. 16 (Planen, Konstruieren und Herstellen): überprüfen die Teillösungen hinsichtlich der technischen Anforderungen','RS22-F2':'KC Technik RS 2010, S. 22: beschreiben die elektrischen Eigenschaften von Widerständen, Leuchtdioden, Sensoren und Transistoren','RS22-F3':'KC Technik RS 2010, S. 22: beschreiben das Zusammenwirken verschiedener elektronischer Bauteile in einer Schaltung','RS22-E4':'KC Technik RS 2010, S. 22: entwerfen und stellen elektronische Schaltungen her','PT21-F':'CV Profil Technik RS 2011, S. 21: benennen Schaltzeichen; beschreiben die Eigenschaften von Widerständen, Kondensatoren und Halbleitern','RS22-E3':'KC Technik RS 2010, S. 22: messen Spannungen und Stromstärken und berechnen aus den Messergebnissen weitere Eigenschaften','S11-S':'KC Technik RS 2010, S. 11 (Zur Sicherheit im Technikunterricht): Sicherheitsbewusstsein und Bereitschaft zur Verhütung von Gefahren und Unfällen; RiSU 2023 (Gefährdungsbeurteilung)'};
 
 const RATE=CFG_W.rate,RATE_L=['noch nicht','mit Hilfe','meistens','sicher'];
-const OPS={'planen':'Entwicklung des Herstellungsweges eines Produktes.','berechnen':'Ergebnisse von einem Ansatz ausgehend durch Rechenoperationen gewinnen (KC Technik RS 2010, Anhang).','nennen':'(be)nennen: Fakten, Daten, Begriffe, Regeln ohne Erläuterung aufzählen.','benennen':'(be)nennen: Fakten, Daten, Begriffe, Regeln ohne Erläuterung aufzählen.','beschreiben':'Strukturiert und fachsprachlich angemessen Materialien vorstellen und/oder Sachverhalte darlegen.','zuordnen':'Begründet für ein Objekt eine Gruppe, eine Position oder ein Material zuweisen oder einen Sachverhalt begründet in einen Zusammenhang stellen.','ordnen':'Etwas kriteriengeleitet in eine bestimmte Systematik oder Reihenfolge bringen.','erklären':'Sachverhalte so darstellen, dass Bedingungen, Ursachen, Gesetzmäßigkeiten und/oder Funktionszusammenhänge verständlich werden.','ermitteln':'Einen Zusammenhang oder eine Lösung finden und das Ergebnis formulieren.','überprüfen':'Inhalte oder Aussagen auf ihre sachliche Richtigkeit bzw. innere Logik hin untersuchen.','erstellen':'Fachpraktischer Operator: einen Sachverhalt, ein Produkt oder einen Plan nach Vorgaben ausarbeiten, z. B. eine Liste, einen Katalog oder einen Ablauf.','schätzen':'Keine Bewertung: Diese Schätzfrage dient nur der Einschätzung deines Vorwissens. Es gibt kein Richtig oder Falsch.'};
+const OPS={'untersuchen':'analysieren/untersuchen: Materialien, Sachverhalte oder Räume beschreiben, kriterienorientiert oder aspektgeleitet erschließen und strukturiert darstellen (KC AWT IGS 2024, Anhang A1).','planen':'Entwicklung des Herstellungsweges eines Produktes.','berechnen':'Ergebnisse von einem Ansatz ausgehend durch Rechenoperationen gewinnen (KC Technik RS 2010, Anhang).','nennen':'(be)nennen: Fakten, Daten, Begriffe, Regeln ohne Erläuterung aufzählen.','benennen':'(be)nennen: Fakten, Daten, Begriffe, Regeln ohne Erläuterung aufzählen.','beschreiben':'Strukturiert und fachsprachlich angemessen Materialien vorstellen und/oder Sachverhalte darlegen.','zuordnen':'Begründet für ein Objekt eine Gruppe, eine Position oder ein Material zuweisen oder einen Sachverhalt begründet in einen Zusammenhang stellen.','ordnen':'Etwas kriteriengeleitet in eine bestimmte Systematik oder Reihenfolge bringen.','erklären':'Sachverhalte so darstellen, dass Bedingungen, Ursachen, Gesetzmäßigkeiten und/oder Funktionszusammenhänge verständlich werden.','ermitteln':'Einen Zusammenhang oder eine Lösung finden und das Ergebnis formulieren.','überprüfen':'Inhalte oder Aussagen auf ihre sachliche Richtigkeit bzw. innere Logik hin untersuchen.','erstellen':'Fachpraktischer Operator: einen Sachverhalt, ein Produkt oder einen Plan nach Vorgaben ausarbeiten, z. B. eine Liste, einen Katalog oder einen Ablauf.','schätzen':'Keine Bewertung: Diese Schätzfrage dient nur der Einschätzung deines Vorwissens. Es gibt kein Richtig oder Falsch.'};
 
 /* ---------- Zustand ---------- */
 let S;try{S=JSON.parse(localStorage.getItem(KEY)||'null');}catch(e){S=null;}
@@ -2227,6 +2268,25 @@ function wCrit(id,t,w,art){
     else showFb(fb,'err',bad+(bad===1?' Anforderung ist':' Anforderungen sind')+' nicht überprüfbar','Frag dich bei den rot umrandeten: Wie würde ich das testen oder messen? Wenn du das nicht sagen kannst, tausch sie aus.');
     report(id,!bad,art,fb);});
 }
+/* Lötbrücken finden: Lötstellen auf der Lötseite antippen (seit 19.11.2026) */
+function wBridge(id,t,w,art){
+  let v=S.a[id];if(!Array.isArray(v))v=S.a[id]=[];
+  const g=LG.bridgeFig(VER,t);w.className='bridgew';w.innerHTML='<div class="lg-boardfig">'+g.svg+'</div>';
+  const cnt=el('p',{class:'note','aria-live':'polite'});w.append(cnt);
+  const els=[...w.querySelectorAll('.lg-bl')],inF=new Set(g.faults.flat());
+  function paint(){els.forEach(e=>e.setAttribute('aria-pressed',String(v.includes(+e.dataset.i))));cnt.textContent=v.length+(v.length===1?' Lötstelle':' Lötstellen')+' markiert';}
+  els.forEach(e=>{const tog=()=>{const i=+e.dataset.i,k=v.indexOf(i);if(k<0)v.push(i);else v.splice(k,1);els.forEach(x=>x.classList.remove('s-ok','s-bad'));save();paint();};
+    e.addEventListener('click',tog);e.addEventListener('keydown',ev=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();tog();}});});
+  paint();
+  mkCheck(id,art,fb=>{if(!v.length){showFb(fb,'mid','Noch nicht fertig','Tippe die Lötstellen an, an denen eine Lötbrücke entsteht.');return;}
+    const wrong=v.filter(i=>!inF.has(i)),miss=g.faults.filter(f=>!f.some(i=>v.includes(i))).length;
+    els.forEach(e=>{const i=+e.dataset.i,on=v.includes(i);e.classList.toggle('s-ok',on&&inF.has(i));e.classList.toggle('s-bad',on&&!inF.has(i));});
+    const all=!wrong.length&&!miss,parts=[];
+    if(wrong.length)parts.push((wrong.length===1?'Eine rot markierte Lötstelle ist':wrong.length+' rot markierte Lötstellen sind')+' in Ordnung: Das Lot bleibt auf seiner Bahn.');
+    if(miss)parts.push(miss===1?'Eine Lötbrücke hast du noch nicht gefunden.':miss+' Lötbrücken hast du noch nicht gefunden.');
+    if(all)showFb(fb,'ok','Alle Lötbrücken gefunden!',t.why);else showFb(fb,'err','Noch nicht alle Lötbrücken richtig','Schau dir jede Lötstelle noch einmal mit der Lupe an.',parts);
+    report(id,all,art,fb);});
+}
 /* Stückliste: Anzahl je Bauteil */
 function wBom(id,t,w,art){
   let v=S.a[id];if(!Array.isArray(v)||v.length!==t.rows.length)v=S.a[id]=t.rows.map(()=>'');
@@ -2276,7 +2336,7 @@ function paintBew(){const box=$('#bew');if(!box)return;const cs=crits();
   const tb=el('tbody');cs.forEach(([i,txt])=>{const tr=el('tr',{},el('td',{},txt));BEW_COLS.forEach((c,ci)=>{const k=i+'.'+ci;const s=el('select',{'aria-label':c+': '+txt},...BEW_V.map(x=>el('option',{value:x[0]},x[1])));s.value=S.bew[k]||'';s.onchange=()=>{S.bew[k]=s.value;save();};tr.append(el('td',{},s));});tb.append(tr);});
   box.replaceChildren(el('table',{},el('thead',{},el('tr',{},el('th',{},'Anforderung'),...BEW_COLS.map(c=>el('th',{},c)))),tb),el('p',{class:'hint'},'+ erfüllt · o teilweise erfüllt · − nicht erfüllt. M1 bis M3: drei Mitschüler:innen testen dein Produkt.'));}
 
-$$('.w[data-t]').forEach(w=>{const id=w.dataset.t,t=T[id],art=w.closest('.task');({seg:wSeg,quiz:wQuiz,multi:wMulti,order:wOrder,open:wOpen,gap:wGap,pair:wPair,mark:wMark,num:wNum,label:wLabel,grid:wGrid,est:wEst,drill:wDrill,crit:wCrit,bom:wBom,gfb:wGfb,rv:wRv})[t.type](id,t,w,art);addHelp(id,t,art);});
+$$('.w[data-t]').forEach(w=>{const id=w.dataset.t,t=T[id],art=w.closest('.task');({seg:wSeg,quiz:wQuiz,multi:wMulti,order:wOrder,open:wOpen,gap:wGap,pair:wPair,mark:wMark,num:wNum,label:wLabel,grid:wGrid,est:wEst,drill:wDrill,crit:wCrit,bom:wBom,gfb:wGfb,rv:wRv,bridge:wBridge})[t.type](id,t,w,art);addHelp(id,t,art);});
 paintBew();paintMess();
 
 /* Grafiken */

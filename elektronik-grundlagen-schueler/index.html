@@ -787,12 +787,14 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
 <section class="station c-luxus" data-ch="3" hidden>
   <div class="info">
     <h3>Schaltzeichen</h3>
-    <p>Im Schaltplan zeichnet man Bauteile nicht als Bild, sondern als genormtes <b>Schaltzeichen</b> (nach DIN EN 60617). Die Linien sind Leitungen, ein dicker Punkt ist eine Verbindung (Knoten).</p>
-    <div class="symgrid" data-symgrid></div>
+    <p>Im Schaltplan zeichnet man Bauteile nicht als Bild, sondern als genormtes <b>Schaltzeichen</b> (nach DIN EN 60617). Die Linien sind Leitungen, ein dicker Punkt ist eine Verbindung (Knoten). Ein Schaltzeichen darf im Plan gedreht liegen, waagerecht, senkrecht oder auf dem Kopf. Du erkennst es deshalb an seiner Form, nicht an seiner Lage.</p>
+    <p>Viele Zeichen bauen aufeinander auf. Der Grundbaustein ist ein schmales <b>Rechteck</b> in der Leitung. Steht es allein, ist es ein fester <b>Widerstand</b>. Zeigt ein Pfeil von der Seite genau auf die Mitte des Rechtecks, lässt sich der Widerstand verstellen: Das ist das <b>Potentiometer</b>, der Pfeil steht für seinen Schleifer. Zeigen dagegen zwei kleine Pfeile schräg von außen auf das Rechteck, fällt Licht darauf. Dann ist es ein <b>Fotowiderstand (LDR)</b>.</p>
+    <p>Ähnlich ist es beim <b>Dreieck mit einem Querstrich</b> an der Spitze. Dieses Zeichen allein ist eine <b>Diode</b>, der Strom fließt in Richtung der Spitze. Gehen zwei kleine Pfeile vom Zeichen weg nach außen, sendet das Bauteil Licht aus: eine Leuchtdiode (<b>LED</b>). Achte also auf die Richtung der kleinen Pfeile. Zum Bauteil hin heißt: Es empfängt Licht. Vom Bauteil weg heißt: Es sendet Licht.</p>
+    <p><b>Zwei Striche quer zur Leitung</b> können zwei Bauteile sein. Sind beide gleich lang, ist es ein <b>Kondensator</b>. Ist ein Strich lang und dünn und der andere kurz und dick, ist es eine <b>Batterie</b>; der lange Strich ist der Pluspol. Ein <b>Kreis mit drei Anschlüssen</b>, von denen einer einen Pfeil trägt, ist ein <b>Transistor</b> (NPN). Der Pfeil sitzt am Emitter und zeigt nach außen. Ein Kreis mit zwei Anschlüssen und einem Kreuz darin ist eine <b>Lampe</b>, steht ein V darin, ist es ein <b>Spannungsmesser</b>. Eine Leitung mit einer Lücke, über der ein Strich schräg absteht, ist ein offener <b>Schalter</b>. Ein Rechteck mit Schrägstrich und einer gestrichelten Linie zu einem Kontakt ist ein <b>Relais</b>.</p>
   </div>
   <article class="task">
     <header><span class="num"></span><h3>Schaltzeichen erkennen</h3><button class="op" data-op="zuordnen" type="button">zuordnen</button></header>
-    <p class="q">Ordne jedem Schaltzeichen den richtigen Namen zu.</p>
+    <p class="q">Ordne jedem Schaltzeichen den richtigen Namen zu. Manche Zeichen sind gedreht, ein Name bleibt übrig.</p>
     <div class="w" data-t="t7"></div>
   </article>
 </section>
@@ -1277,7 +1279,7 @@ t3:{type:'drill',kind:'farb',need:3,kc:'PT21-F',help:{tip:'Lies vom Ring weg, de
 t4:{type:'label',fig:'led',kc:'RS22-F2',aria:'Leuchtdiode mit nummerierten Stellen',marks:['anode','kathode','flach'],terms:[['Kathode (−, kurzes Bein)','kathode'],['Anode (+, langes Bein)','anode'],['Abflachung auf der Seite der Kathode','flach'],['Basis','x']]},
 t5:{type:'drill',kind:'vorw',need:2,kc:'RS22-E3',help:{tip:'Zuerst die Spannung am Vorwiderstand: Batteriespannung minus Durchlassspannung. Dann durch den Strom in Ampere teilen. In der E12-Liste nimmst du den ersten Wert, der gleich oder größer ist.',teil:'Beispiel: 12 V, blaue LED 3,2 V, 20 mA: (12 V − 3,2 V) : 0,02 A = 8,8 V : 0,02 A = 440 Ω. Nächstgrößerer E12-Wert: 470 Ω.'}},
 t6:{type:'pair',kc:'PT21-F',left:['Kondensator','Elko','LDR','Transistor','Relais'],right:['ein kleiner Basisstrom schaltet einen größeren Strom','speichert kurzzeitig elektrische Ladung','ein Elektromagnet schaltet einen getrennten Stromkreis','hat einen markierten Minus-Anschluss und muss richtig gepolt werden','Widerstand wird bei Dunkelheit groß'],ans:[1,3,4,0,2]},
-t7:{type:'figsel',kc:'PT21-F',opts:['Widerstand','LED','Kondensator','Fotowiderstand (LDR)','Transistor','Batterie','Schalter','Potentiometer'],figs:[['sym:transistor',4],['sym:kondensator',2],['sym:led',1],['sym:schalter',6],['sym:widerstand',0],['sym:ldr',3],['sym:batterie',5],['sym:poti',7]]},
+t7:{type:'figsel',kc:'PT21-F',opts:['Widerstand','LED','Diode','Kondensator','Fotowiderstand (LDR)','Transistor','Batterie','Schalter','Potentiometer'],figs:[['sym:poti:90',8],['sym:led:180',1],['sym:kondensator:90',3],['sym:diode:0',2],['sym:ldr:180',4],['sym:batterie:270',6],['sym:widerstand:90',0],['sym:transistor:0',5]],help:{tip:'Schau zuerst auf die Grundform: Rechteck, Dreieck mit Querstrich, zwei Striche quer oder Kreis. Dann auf die Extras: Gibt es einen Pfeil zur Mitte, kleine Pfeile zum Bauteil hin oder vom Bauteil weg, sind die Striche gleich lang? Dreh ein gedrehtes Zeichen im Kopf zurück.',teilHtml:'Hier sind die Zeichen waagerecht mit Namen:<div class="symgrid" data-symgrid></div>'}},
 t8:{type:'label',fig:'dunkel',kc:'PT21-F',aria:'Schaltplan der Dunkelschaltung mit nummerierten Bauteilen',marks:['batterie','poti','ldr','vorw','led','transistor'],terms:[['Transistor','transistor'],['LED','led'],['Batterie','batterie'],['Fotowiderstand (LDR)','ldr'],['Vorwiderstand','vorw'],['Potentiometer','poti']]},
 t9:{type:'order',kc:'RS22-F3',items:['Es wird dunkel, der Widerstand des LDR steigt.','Am LDR fällt mehr Spannung ab, die Spannung an der Basis steigt.','Ab etwa 0,7 V fließt ein kleiner Basisstrom.','Der Transistor schaltet durch, Strom fließt von Kollektor zu Emitter.','Strom fließt durch Vorwiderstand und LED: Die LED leuchtet.'],start:[3,0,4,1,2],help:{tip:'Fang beim Licht an: Was macht der LDR, wenn es dunkel wird? Am Ende steht die LED.',teil:'Die ersten zwei Schritte: 1. Der Widerstand des LDR steigt. 2. Die Spannung an der Basis steigt.'}},
 t10:{type:'gap',kc:'RS22-E4',text:'Im Steckbrett sind die fünf Löcher einer {0} leitend verbunden. Der Mittelsteg {1} die obere und die untere Hälfte. Die langen Randleisten nutzt du für {2}. Auf einer Streifenrasterplatine verbinden {3} die Löcher einer Reihe. Wo keine Verbindung sein darf, musst du den Streifen {4}.',gaps:[[['Spalte','ganzen Platte','Hälfte'],0],[['verbindet','trennt'],1],[['Plus und Minus','den Transistor','Messgeräte'],0],[['Kupferstreifen','Kabelbinder','Lötpads'],0],[['unterbrechen','verzinnen','verlängern'],0]]},
@@ -1287,7 +1289,7 @@ t13:{type:'multi',kc:'RS22-E4',opts:[['vor dem Ablegen frisches Lot auf die Spit
 t14:{type:'quiz',kc:'RS22-E3',qs:[
   {q:'Um die Spannung an der LED zu messen, hältst du die Messspitzen …',o:['an die beiden Anschlüsse der LED (parallel).','in einen aufgetrennten Stromkreis (in Reihe).'],a:0,why:'Spannung misst man parallel zum Bauteil.'},
   {q:'Du erwartest etwa 9 V. Den Messbereich stellst du auf …',o:['V= 2','V= 20','V= 200'],a:1,why:'20 V ist der kleinste Bereich, der größer als 9 V ist. Bei 2 V zeigt die Anzeige nur eine 1 (Überlauf).'},
-  {q:'Du hältst die Messspitzen bei der Strommessung parallel an die Batterie. Dann …',o:['zeigt das Gerät den Strom der Schaltung an.','entsteht ein Kurzschluss, die Sicherung im Gerät kann durchbrennen.'],a:1,why:'Der Strommesser hat fast keinen Widerstand. Strom misst man immer in Reihe.'}]},
+  {q:'Du hältst die Messspitzen bei der Strommessung parallel an die Batterie. Dann …',o:['zeigt das Gerät den Strom an, der durch die Schaltung fließt.','entsteht ein Kurzschluss, die Sicherung im Gerät kann durchbrennen.','zeigt das Gerät nur die Hälfte des Stroms an, der Rest fließt vorbei.'],a:1,why:'Der Strommesser hat fast keinen Widerstand. Strom misst man immer in Reihe.'}]},
 t15:{type:'dmm',kc:'RS22-E3',sc:[
   {t:'Spannung der Batterie',d:'Die Batterie hat etwa 9 V. Miss ihre Spannung.',q:'U',v:9.2,ok:'Die Batterie hat 9,2 V.'},
   {t:'Strom durch die LED',d:'Durch die LED fließen etwa 20 mA. Miss den Strom.',q:'I',v:0.0184,ok:'Durch die LED fließen 18,4 mA.'},
@@ -1547,7 +1549,7 @@ function wDrill(id,t,w,art){
     else{st.streak=0;save();draw();inp.value=st.v||'';showFb(fb,'err','Noch nicht richtig',!good1?'Der Wert stimmt noch nicht. Rechne noch einmal'+(q.k!=='farb'?' und achte auf die Einheiten (mA in A umrechnen).':', lies die Ringe von der Seite ohne Goldring.'):'Der Widerstand stimmt, aber der E12-Wert nicht: Nimm den ersten Wert, der gleich oder größer ist.');
       if(window.LP)LP.result(id,false,label[id],art,fb);}});
 }
-function figHtml(k){const [a,b]=k.split(':');return a==='sym'?EG.sym(b,'Schaltzeichen'):EG.fehler(b);}
+function figHtml(k){const [a,b,c]=k.split(':');if(a!=='sym')return EG.fehler(b);return c?EG.svg('-16 -40 152 140','<g transform="rotate('+c+' 60 30)">'+EG.SYM[b]()+'</g>','Schaltzeichen','eg-sym'):EG.sym(b,'Schaltzeichen');}
 function wFigsel(id,t,w,art){
   let v=S.a[id];if(!Array.isArray(v)||v.length!==t.figs.length)v=S.a[id]=t.figs.map(()=>-1);
   const tiles=t.figs.map((fg,i)=>{const s=el('select',{'aria-label':'Bild '+(i+1)},el('option',{value:'-1'},'…'),...t.opts.map((o,oi)=>el('option',{value:String(oi)},o)));s.value=String(v[i]);
@@ -1627,12 +1629,13 @@ function lkBox(id,t,art){const kc=t.kc&&KC[t.kc]?KC[t.kc]:'';
       kc?el('p',{},el('b',{},'Kerncurriculum: '),kc):el('p',{},el('b',{},'Kerncurriculum: '),'Schätzfrage zum Einstieg, keine eigene Kompetenz.'),
       el('p',{},el('b',{},'Sicherheit nach RiSU: '),lkRisu(id))));
   art.append(box);}
-function addHelp(id,t,art){if(!t.help)return;const tb=el('div',{class:'hbox',hidden:!S.help[id]},el('b',{},'Tipp: '),t.help.tip);const pb=el('div',{class:'hbox',hidden:S.help[id]!==2},el('b',{},'Teillösung: '),t.help.teil);
+function addHelp(id,t,art){if(!t.help)return;const tb=el('div',{class:'hbox',hidden:!S.help[id]},el('b',{},'Tipp: '),t.help.tip);const pb=el('div',{class:'hbox',hidden:S.help[id]!==2},el('b',{},'Teillösung: '),t.help.teil||'');if(t.help.teilHtml)pb.insertAdjacentHTML('beforeend',t.help.teilHtml);
   const b1=el('button',{class:'btn soft',type:'button'},'Tipp anzeigen');const b2=el('button',{class:'btn soft',type:'button',hidden:!S.help[id]},'Teillösung anzeigen');
   b1.onclick=()=>{S.help[id]=Math.max(1,S.help[id]|0);tb.hidden=false;b2.hidden=false;save();};
   b2.onclick=()=>{S.help[id]=2;pb.hidden=false;save();if(window.LP&&LP.assist)LP.assist(id);};
   const fb=$('.fb',art);art.insertBefore(el('div',{class:'help2'},el('div',{class:'row'},b1,b2),tb,pb),fb);}
 $$('.w[data-t]').forEach(w=>{const id=w.dataset.t,t=T[id],art=w.closest('.task');({seg:wSeg,quiz:wQuiz,multi:wMulti,order:wOrder,open:wOpen,gap:wGap,pair:wPair,mark:wMark,num:wNum,label:wLabel,grid:wGrid,est:wEst,drill:wDrill,figsel:wFigsel,dmm:wDmm})[t.type](id,t,w,art);addHelp(id,t,art);if(VER==='L')lkBox(id,t,art);});
+$$('[data-symgrid]').forEach(b=>{b.innerHTML=[['widerstand','Widerstand'],['poti','Potentiometer'],['ldr','Fotowiderstand (LDR)'],['kondensator','Kondensator'],['led','LED'],['diode','Diode'],['transistor','Transistor (NPN)'],['relais','Relais'],['batterie','Batterie'],['schalter','Schalter'],['lampe','Lampe'],['voltmeter','Spannungsmesser']].map(x=>'<figure>'+EG.sym(x[0],x[1])+'<figcaption>'+x[1]+'</figcaption></figure>').join('');});
 $$('[data-risu]').forEach(x=>{x.textContent=RISU[x.dataset.risu];});
 
 /* Grafiken */
@@ -1640,7 +1643,6 @@ $$('[data-sim]').forEach(b=>EG.circuit(b,{led:b.dataset.sim==='led'}));
 $$('[data-anim="solder"]').forEach(b=>EG.solder(b));
 $$('[data-ctable]').forEach(b=>b.innerHTML=EG.colorTable());
 $$('[data-fig]').forEach(b=>{const g=EG[b.dataset.fig]();b.innerHTML=EG.svg(g.vb,g.body,b.dataset.aria||'');});
-$$('[data-symgrid]').forEach(b=>{b.innerHTML=[['widerstand','Widerstand'],['poti','Potentiometer'],['ldr','Fotowiderstand (LDR)'],['kondensator','Kondensator'],['led','LED'],['diode','Diode'],['transistor','Transistor (NPN)'],['relais','Relais'],['batterie','Batterie'],['schalter','Schalter'],['lampe','Lampe'],['voltmeter','Spannungsmesser']].map(x=>'<figure>'+EG.sym(x[0],x[1])+'<figcaption>'+x[1]+'</figcaption></figure>').join('');});
 $$('[data-parts]').forEach(b=>{b.innerHTML=[['elko','Elektrolytkondensator','Streifen markiert Minus'],['ldr','Fotowiderstand (LDR)','Widerstand hängt vom Licht ab'],['transistor','Transistor','Anschlüsse E, B, C'],['relais','Relais','Spule und Schaltkontakt']].map(x=>'<figure>'+EG.PART[x[0]]()+'<figcaption><b>'+x[1]+'</b>'+x[2]+'</figcaption></figure>').join('');});
 $$('[data-joints]').forEach(b=>{b.innerHTML=[['gut','gute Lötstelle'],['kalt','kalte Lötstelle'],['viel','zu viel Lot'],['wenig','zu wenig Lot'],['bruecke','Lötbrücke']].map(x=>'<figure>'+EG.fehler(x[0])+'<figcaption><b>'+x[1]+'</b></figcaption></figure>').join('');});
 

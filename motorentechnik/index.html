@@ -731,6 +731,8 @@ label.rr-cap b{display:block}
 .sr-lg.pb{--x:var(--s-grid);height:4px;vertical-align:3px;border-radius:2px}.sr-lg.ps{--x:var(--s-own);height:4px;vertical-align:3px;border-radius:2px}
 .sr-pk span i{font-style:normal}.sr-pk b{font-size:26px}
 
+.mg-kn{fill:var(--surface,#fff);stroke:var(--ink);stroke-width:2}.mg-knt{fill:var(--ink);font-family:var(--body);font-weight:800;font-size:26px;text-anchor:middle}.mg-tc3{fill:var(--ink);font-family:var(--body);font-weight:700;font-size:22px;text-anchor:middle}
+
 /* aus der Unternehmens-Werkstatt übernommen */
 .teile{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
 .teile button{font:inherit;font-size:13px;font-weight:700;min-width:44px;min-height:32px;padding:4px 10px;border-radius:99px;border:1.5px solid rgb(255 255 255 / .55);background:transparent;color:inherit;cursor:pointer}
@@ -995,12 +997,13 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
     <h3>Vom Vergaser zur Einspritzung</h3>
     <p>Früher mischte ein <b>Vergaser</b> Kraftstoff und Luft. Die angesaugte Luft strömt durch eine Engstelle, wird dort schneller und reißt Kraftstoff mit. Das Gemisch entsteht also vor dem Zylinder. Ein Vergaser ist einfach und billig, dosiert den Kraftstoff aber ungenau. Das kostet Kraftstoff und erzeugt mehr Schadstoffe.</p>
     <p>Heute regelt ein elektronisches <b>Steuergerät</b> die <b>Einspritzung</b> sehr genau. Bei der <b>Saugrohreinspritzung</b> spritzt ein Einspritzventil den Kraftstoff vor das Einlassventil. Das Gemisch bildet sich außerhalb des Zylinders (<b>äußere Gemischbildung</b>). Bei der <b>Direkteinspritzung</b> spritzt ein <b>Injektor</b> den Kraftstoff direkt in den Brennraum (<b>innere Gemischbildung</b>).</p>
-    <p>Dieselmotoren arbeiten immer mit Direkteinspritzung, meistens mit <b>Common Rail</b>: Eine Hochdruckpumpe presst den Kraftstoff in ein gemeinsames Rohr, das <b>Rail</b>. Es dient als Speicher. Von dort bekommen alle Injektoren Kraftstoff unter sehr hohem Druck.</p>
+    <p>Dieselmotoren arbeiten immer mit Direkteinspritzung, meistens mit <b>Common Rail</b> („gemeinsame Leitung“). Das Herzstück ist ein dickwandiges Rohr, das <b>Rail</b>. Es dient als Speicher: In ihm steht der Kraftstoff ständig unter einem Druck von weit über 1000 bar. Aus dem Rail führen kurze Leitungen zu den <b>Injektoren</b>, einer je Zylinder. Sie ragen in den <b>Brennraum</b>, und das Steuergerät öffnet sie für Bruchteile einer Sekunde.</p>
+    <p>Den hohen Druck im Rail erzeugt die <b>Hochdruckpumpe</b>, die der Motor antreibt. Sie arbeitet mit sehr engen Spalten und würde schon durch feine Schmutzkörner beschädigt. Deshalb muss der Kraftstoff vorher einen <b>Kraftstofffilter</b> durchlaufen, der Schmutz und Wasser zurückhält. Von allein kommt der Kraftstoff aber nicht bis dorthin: Eine <b>Vorförderpumpe</b>, oft elektrisch und direkt im <b>Tank</b>, saugt ihn an und drückt ihn mit geringem Druck durch die Leitung nach vorn in den Motorraum.</p>
   </div>
   <div data-anim="kraftstoff"></div>
   <article class="task">
     <header><span class="num"></span><h3>Der Weg des Kraftstoffs</h3><button class="op" data-op="ordnen" type="button">ordnen</button></header>
-    <p class="q">Ordne die Stationen des Kraftstoffs bei der Common-Rail-Einspritzung vom Tank bis in den Brennraum.</p>
+    <p class="q">Ordne die Stationen des Kraftstoffs bei der Common-Rail-Einspritzung vom Tank bis in den Brennraum. Die Grafik zeigt den Weg, die Namen der Stationen A bis G findest du im Text.</p>
     <div class="w" data-t="t12"></div>
   </article>
 </section>
@@ -1055,8 +1058,8 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
     <div class="w" data-t="t16"></div>
   </article>
   <article class="task">
-    <header><span class="num"></span><h3>Dicke Kabel</h3><button class="op" data-op="erklären" type="button">erklären</button></header>
-    <p class="q">Erkläre, warum im Auto dicke Kabel nötig sind: Wähle in jeder Lücke das passende Wort.</p>
+    <header><span class="num"></span><h3>12 Volt und 230 Volt im Vergleich</h3><button class="op" data-op="erklären" type="button">erklären</button></header>
+    <p class="q">Erkläre am Beispiel einer Standheizung mit 600 W, wie Spannung, Strom und Kabel im Auto zusammenhängen: Wähle in jeder Lücke das Passende.</p>
     <div class="w" data-t="t17"></div>
   </article>
 </section>
@@ -1694,18 +1697,19 @@ var MG = (function () {
 
   /* ---------------- Kraftstoffweg (Common Rail, schematisch) ---------------- */
   var KPATH = 'M70 250H150V170H240V110H330V70H470V150';
-  function kraftstoff() {
+  function kraftstoff() {  /* Stationen nur mit Buchstaben, nicht in der Reihenfolge des Wegs: Die Namen stehen im Infotext (Regel „nicht zu leicht“, 19.11.2026) */
     var b = '';
     b += '<path class="mg-line" d="' + KPATH + '"/>';
-    var bx = function (x, y, w, h, t, cls) { return '<rect class="' + (cls || 'mg-cbox') + '" x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" rx="8"/><text class="mg-tc2" x="' + (x + w / 2) + '" y="' + (y + h + 18) + '">' + t + '</text>'; };
-    b += bx(20, 222, 90, 56, 'Tank', 'mg-tank');
-    b += bx(124, 228, 52, 44, 'Vorförderpumpe') + bx(214, 150, 52, 40, 'Filter') + bx(304, 90, 52, 40, 'Hochdruckpumpe');
-    b += '<rect class="mg-rail" x="400" y="56" width="150" height="28" rx="14"/><text class="mg-tc2" x="475" y="46">Rail (Speicher)</text>';
-    b += '<rect class="mg-inj" x="462" y="94" width="16" height="56" rx="4"/><path class="mg-spray" d="M466 154l-8 12M470 156v14M474 154l8 12"/>';
-    b += '<path class="mg-cyl2" d="M430 150V230H510V150"/><text class="mg-tc2" x="470" y="250">Brennraum</text>';
-    b += '<rect class="mg-ecu" x="560" y="150" width="40" height="34" rx="6"/><path class="mg-sig" d="M560 166H486V122"/><text class="mg-tc2" x="580" y="204">Steuer-</text><text class="mg-tc2" x="580" y="220">gerät</text>';
+    var tag = function (x, y, t) { return '<circle class="mg-kn" cx="' + x + '" cy="' + y + '" r="20"/><text class="mg-knt" x="' + x + '" y="' + (y + 9) + '">' + t + '</text>'; };
+    var bx = function (x, y, w, h, t, cls) { return '<rect class="' + (cls || 'mg-cbox') + '" x="' + x + '" y="' + y + '" width="' + w + '" height="' + h + '" rx="8"/>' + tag(x + w / 2, y + h + 26, t); };
+    b += bx(20, 222, 90, 56, 'C', 'mg-tank');
+    b += bx(124, 228, 52, 44, 'F') + bx(214, 150, 52, 40, 'A') + bx(304, 90, 52, 40, 'E');
+    b += '<rect class="mg-rail" x="400" y="56" width="150" height="28" rx="14"/>' + tag(576, 70, 'B');
+    b += '<rect class="mg-inj" x="462" y="94" width="16" height="56" rx="4"/><path class="mg-spray" d="M466 154l-8 12M470 156v14M474 154l8 12"/>' + tag(506, 112, 'G');
+    b += '<path class="mg-cyl2" d="M430 150V230H510V150"/>' + tag(470, 258, 'D');
+    b += '<rect class="mg-ecu" x="560" y="150" width="40" height="34" rx="6"/><path class="mg-sig" d="M560 166H486V122"/><text class="mg-tc3" x="580" y="212">Steuer-</text><text class="mg-tc3" x="580" y="236">gerät</text>';
     b += '<g class="kdots"></g>';
-    return { vb: '0 0 620 310', body: b };
+    return { vb: '0 0 624 340', body: b };
   }
 
   /* ---------------- Laufzettel-Symbole (eigene, einfache Zeichnungen) ---------------- */
@@ -1788,7 +1792,7 @@ var MG = (function () {
         text: function (v, g) { return '<b>Exzenterwelle ' + Math.round(v) + '° · Läufer ' + Math.round(v / 3) + '°</b><br>' + g.ph.map(function (p, k) { return 'Kammer ' + String.fromCharCode(65 + k) + ': ' + TAKT[p]; }).join(' · ') + '<br>Die Exzenterwelle dreht sich dreimal, während der Läufer sich einmal dreht.'; } });
     },
     kraftstoff: function (box) {
-      var g = kraftstoff(); box.innerHTML = '<div class="anim"><div class="anim-fig">' + svg(g.vb, g.body, 'Weg des Kraftstoffs vom Tank bis in den Brennraum') + '</div><p class="anim-out">' + (RM ? 'Der Kraftstoff fließt vom Tank über Vorförderpumpe, Filter und Hochdruckpumpe in das Rail. Der Injektor spritzt ihn in den Brennraum.' : 'Die Punkte zeigen den Weg des Kraftstoffs. Das Steuergerät (gestrichelte Linie) bestimmt, wann und wie lange der Injektor öffnet.') + '</p></div>';
+      var g = kraftstoff(); box.innerHTML = '<div class="anim"><div class="anim-fig">' + svg(g.vb, g.body, 'Weg des Kraftstoffs bei der Common-Rail-Einspritzung, Stationen mit den Buchstaben A bis G') + '</div><p class="anim-out">' + (RM ? 'Die Linie zeigt den Weg des Kraftstoffs. Welche Station welcher Buchstabe ist, steht im Text darüber.' : 'Die Punkte zeigen den Weg des Kraftstoffs. Welche Station welcher Buchstabe ist, steht im Text darüber. Das Steuergerät (gestrichelte Linie) bestimmt, wann und wie lange der Injektor öffnet.') + '</p></div>';
       if (RM) return;
       var s = box.querySelector('svg'), p = document.createElementNS('http://www.w3.org/2000/svg', 'path'); p.setAttribute('d', KPATH); var L = p.getTotalLength();
       var gd = box.querySelector('.kdots'), dots = [];
@@ -1856,14 +1860,14 @@ t11:{type:'quiz',qs:[
   {q:'Für einen Lkw, der jeden Tag weite Strecken mit schwerer Ladung fährt, passt besser …',o:['ein Dieselmotor.','ein Ottomotor.'],a:0,why:'Der Dieselmotor ist sparsam und zieht schon bei niedriger Drehzahl kräftig. Auf langen Fahrten kann sich der Rußpartikelfilter freibrennen.'},
   {q:'Für ein kleines Auto, das fast nur kurze Strecken in der Stadt fährt, passt besser …',o:['ein Dieselmotor.','ein Ottomotor.'],a:1,why:'Auf kurzen Strecken wird der Motor nicht richtig heiß, der Rußpartikelfilter eines Diesels setzt sich zu. Der Ottomotor ist leichter und günstiger.'},
   {q:'Bei gleicher Fahrstrecke verbraucht mehr Kraftstoff …',o:['der Dieselmotor.','der Ottomotor.'],a:1,why:'Der Dieselmotor nutzt die Energie im Kraftstoff besser und verbraucht deshalb weniger.'}]},
-t12:{type:'order',items:['Tank','Vorförderpumpe','Kraftstofffilter','Hochdruckpumpe','Rail (Speicher)','Injektor','Brennraum'],start:[4,0,6,2,5,1,3]},
+t12:{type:'order',items:['Tank','Vorförderpumpe','Kraftstofffilter','Hochdruckpumpe','Rail (Speicher)','Injektor','Brennraum'],start:[4,0,6,2,5,1,3],help:{tip:'Geh den Text rückwärts durch: Er beginnt beim Injektor und beim Rail und erklärt dann, woher der Kraftstoff kommt. Schreib dir zu jedem Buchstaben in der Grafik den Namen auf.',teil:'Die ersten drei Stationen: Tank → Vorförderpumpe → Kraftstofffilter.'}},
 t13:{type:'label',fig:'injektor',aria:'Schnittbild eines Magnetinjektors mit nummerierten Teilen',marks:['anschluss','ruecklauf','spule','anker','kugel','drossel','zulauf','nadel'],
   terms:[['Zulauf','zulauf'],['Spule','spule'],['Düsennadel','nadel'],['elektrischer Anschluss','anschluss'],['Drossel','drossel'],['Kugelventil','kugel'],['Rücklauf','ruecklauf'],['Anker','anker']]},
 t14:{type:'mark',parts:[['Die Spule wird stromlos und lässt den Anker los.',false],['Das Steuergerät schickt Strom an den elektrischen Anschluss.',true],['Der Druck über der Nadel steigt und drückt sie zurück nach unten.',false],['Die Spule wird zum Elektromagneten und zieht den Anker an.',true],['Das Kugelventil öffnet sich, der Druck über der Düsennadel sinkt.',true],['Nicht benötigter Kraftstoff fließt über den Rücklauf zum Tank.',false],['Die Drossel am Zulauf lässt nur wenig Kraftstoff nachfließen.',true],['Das Kugelventil schließt wieder.',false],['Die Düsennadel hebt sich, Kraftstoff spritzt in den Brennraum.',true]]},
 t15:{type:'open',min:100,checks:[['Vorteil Vergaser',/einfach|billig|günstig|ohne elektron|keine elektron|robust|preiswert/i],['Nachteil Vergaser',/ungenau|mehr verbrauch|verbraucht mehr|schadstoff|abgas|kaltstart/i],['Vorteil Einspritzung',/genau|steuergerät|sparsam|weniger verbrauch|weniger schadstoff|sauber|leistung/i],['Nachteil Einspritzung',/teuer|aufwendig|kompliziert|elektronik|reparatur/i]],
   muster:['Vergaser, Vorteil: Er ist einfach gebaut, billig und braucht keine Elektronik.','Vergaser, Nachteil: Er dosiert den Kraftstoff ungenau. Der Motor verbraucht mehr und stößt mehr Schadstoffe aus.','Einspritzung, Vorteil: Das Steuergerät dosiert sehr genau. Der Motor verbraucht weniger, und die Abgase sind sauberer.','Einspritzung, Nachteil: Sie ist aufwendiger und teurer und braucht Elektronik, Reparaturen sind schwieriger.']},
 t16:{type:'num',answer:100,unit:'A (Ampere)',why:'I = P : U = 1200 W : 12 V = 100 A. Ein so großer Strom braucht ein sehr dickes Kabel.'},
-t17:{type:'gap',text:'Je kleiner die Spannung ist, desto {0} muss der Strom für dieselbe Leistung sein. Große Ströme brauchen {1} Kabel. Ein zu dünnes Kabel wird {2}. Die verlorene Energie wird dabei in {3} umgewandelt.',gaps:[[['kleiner','größer'],1],[['dünne','dicke'],1],[['kalt','heiß','leichter'],1],[['Wärme','Licht','Bewegung'],0]]},
+t17:{type:'gap',text:'Am 12-V-Bordnetz braucht die Standheizung einen Strom von {0}. Gäbe es im Auto 230 V, wären es nur etwa {1}. Je {2} die Spannung, desto größer ist also der Strom für dieselbe Leistung. Fließt ein großer Strom durch ein zu dünnes Kabel, {3}. Deshalb hat die Leitung zur Standheizung einen {4} Querschnitt als die Leitung zur Innenraumlampe.',gaps:[[['5 A','50 A','7200 A'],1],[['0,26 A','26 A','2,6 A'],2],[['kleiner','größer'],0],[['leitet es besser','wird es heiß','sinkt der Strom auf null'],1],[['kleineren','gleichen','größeren'],2]],help:{tip:'Rechne mit I = P : U zweimal: einmal mit 12 V, einmal mit 230 V.',teil:'600 W : 12 V = 50 A.'}},
 t18:{type:'pair',left:['Batterie','Anlasser','Lichtmaschine','Regler','Zündspule','Zündkerze'],right:['erzeugt Strom, wenn der Motor läuft, und lädt die Batterie','zündet das Gemisch im Brennraum','speichert elektrische Energie für den Start','erzeugt die Hochspannung für den Funken','dreht beim Starten die Kurbelwelle','hält die Spannung im Bordnetz gleich'],ans:[2,4,0,5,3,1]},
 t19:{type:'order',items:['Der Schlüssel wird auf „Start“ gedreht oder der Startknopf gedrückt.','Ein großer Strom fließt von der Batterie zum Anlasser.','Der Magnetschalter schiebt das Ritzel in den Zahnkranz am Schwungrad.','Der Anlasser dreht die Kurbelwelle, die Zündkerzen zünden das Gemisch.','Der Motor läuft von selbst, das Ritzel wird zurückgezogen.','Die Lichtmaschine erzeugt Strom und lädt die Batterie wieder auf.'],start:[2,5,0,4,1,3]},
 t20:{type:'label',fig:'eauto',aria:'Elektroauto von oben mit nummerierten Bauteilen',marks:['bat12','akku','power','gear','motor','charge'],
