@@ -47,6 +47,23 @@ p{margin:.6em 0} a{color:var(--link)}
 button,select,input{font:inherit;color:inherit}
 :focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
 .hidden{display:none!important}
+.task .lesen{border-left:6px solid var(--accent);background:var(--paper);padding:10px 16px;border-radius:0 6px 6px 0;margin:6px 0 14px}
+.task .lesen p{margin:.45em 0}
+.task .lesen figure,.task .lesen .panels{margin:8px 0}
+.marktext{line-height:2.05;margin:.4em 0;word-spacing:.08em}
+.marktext .tapp{cursor:pointer;background:var(--paper);border-bottom:2px dashed var(--muted);border-radius:3px;padding:2px 3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.marktext .tapp:focus-visible{outline:3px solid var(--accent);outline-offset:1px}
+.marktext .tapp.on{background:var(--yellow-soft);border-bottom:2px solid var(--yellow)}
+.marktext .tapp.ok{background:var(--ok-bg);border-bottom:2px solid var(--ok)}
+.marktext .tapp.bad{background:var(--bad-bg);border-bottom:2px solid var(--bad)}
+.marktext.locked .tapp{cursor:default}
+textarea.opentext{display:block;width:100%;min-height:9em;font:inherit;line-height:1.45;padding:10px 12px;border:2px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink);box-sizing:border-box}
+textarea.opentext:focus{outline:3px solid var(--accent);outline-offset:1px}
+.denk{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:8px 14px;margin:0 0 10px}
+.denk ul{margin:.3em 0 0;padding-left:1.2em}
+details.muster{margin-top:12px}
+.mbtn .pic svg{width:120px;max-width:100%;height:auto;display:block}
+.testauftrag{font-weight:600;margin:0 0 14px}
 
 /* Layout */
 .app{display:grid;grid-template-columns:290px minmax(0,1fr);min-height:100vh}
@@ -451,6 +468,7 @@ function buildTask(t, nr) {
   ctx.finish = () => { if (!st.done) { st.done = true; st.assisted = false; save(); paintState(); } };
   card.append(...[
     h('div', { class: 'th' }, h('h3', null, `Aufgabe ${nr}`), h('span', { class: 't-title' }, t.title || ''), state),
+    t.lesen ? h('div', { class: 'info-box lesen', html: t.lesen }) : null,
     t.info ? h('details', { class: 'info' }, h('summary', null, 'Info zur Aufgabe'), h('div', { class: 'infobody', html: t.info })) : null,
     t.q ? h('p', { class: 'q', html: t.q }) : null,
     impl.el,
@@ -600,7 +618,7 @@ TYPES.match = (t) => {
   }
   paint();
   return {
-    el: h('div', null, h('p', { class: 'hintline' }, 'Tippe links eine Aussage an und dann rechts den passenden Begriff. Zum Lösen einer Verbindung tippe den Begriff rechts noch einmal an.'), h('div', { class: 'match' }, colL, colR)),
+    el: h('div', null, h('p', { class: 'hintline' }, t.how || 'Tippe links eine Aussage an und dann rechts den passenden Begriff. Zum Lösen einer Verbindung tippe den Begriff rechts noch einmal an.'), h('div', { class: 'match' }, colL, colR)),
     check() { let right = 0; marks = {}; L.forEach(l => { const ok = map.get(l.i) === l.i; marks[l.i] = ok ? 'ok' : 'bad'; if (ok) right++; }); paint(); return { ok: right === n, right, total: n, msg: map.size < n ? 'Es sind noch nicht alle Paare verbunden.' : null }; },
     reveal() { marks = {}; L.forEach(l => { map.set(l.i, l.i); marks[l.i] = 'ok'; }); selL = null; paint(); },
     lock() { locked = true; paint(); }, unlock() { locked = false; paint(); },
@@ -630,6 +648,59 @@ TYPES.sort = (t) => {
     lock() { locked = true; paint(); }, unlock() { locked = false; paint(); },
     reset() { items.forEach(it => place[it.i] = null); marks = {}; sel = null; locked = false; paint(); }
   };
+};
+
+// Im Text antippen (Sätze oder Satzteile auswählen)
+TYPES.mark = (t) => {
+  const items = []; let locked = false;
+  const p = h('p', { class: 'marktext' });
+  const clear = () => items.forEach(it => it.b.classList.remove('ok', 'bad'));
+  const paint = () => { items.forEach(it => { it.b.classList.toggle('on', it.on); it.b.setAttribute('aria-pressed', it.on ? 'true' : 'false'); }); p.classList.toggle('locked', locked); };
+  t.parts.forEach(pt => {
+    if (typeof pt === 'string') { p.append(h('span', { html: pt })); return; }
+    const b = h('span', { class: 'tapp', role: 'button', tabindex: '0', 'aria-pressed': 'false', html: pt[0] });
+    const it = { b, ok: !!pt[1], on: false };
+    const tog = () => { if (locked) return; it.on = !it.on; clear(); paint(); };
+    b.addEventListener('click', tog);
+    b.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); tog(); } });
+    items.push(it); p.append(b);
+  });
+  return {
+    el: h('div', null, h('p', { class: 'hintline' }, 'Tippe die passenden Sätze an. Noch einmal antippen hebt die Auswahl auf.'), p),
+    check() {
+      clear(); let right = 0;
+      items.forEach(it => { if (it.on === it.ok) right++; if (it.on) it.b.classList.add(it.ok ? 'ok' : 'bad'); });
+      const ok = right === items.length;
+      return { ok, right, total: items.length, msg: ok ? null : (items.some(it => it.on) ? `${right} von ${items.length} Sätzen richtig eingeordnet. Rot: falsch angetippt. Vielleicht fehlt auch noch ein Satz.` : 'Tippe zuerst mindestens einen Satz an.') };
+    },
+    reveal() { items.forEach(it => { it.on = it.ok; }); clear(); items.forEach(it => { if (it.ok) it.b.classList.add('ok'); }); paint(); },
+    lock() { locked = true; paint(); }, unlock() { locked = false; paint(); },
+    reset() { items.forEach(it => { it.on = false; }); clear(); locked = false; paint(); }
+  };
+};
+
+// Offene Schreibaufgabe mit „Denk an“ und Musterlösung (ohne automatische Bewertung)
+TYPES.open = (t, ctx) => {
+  const st = tst(t.id);
+  const ta = h('textarea', { class: 'opentext', rows: '7', 'aria-label': 'Deine Antwort', placeholder: 'Schreib hier deine Antwort in ganzen Sätzen.' });
+  ta.value = st.text || '';
+  const cnt = h('p', { class: 'hintline' });
+  const fb2 = h('div', { class: 'fb', 'aria-live': 'polite' });
+  const muster = h('details', { class: 'info muster' + (st.done ? '' : ' hidden') }, h('summary', null, 'Musterlösung'), h('div', { class: 'infobody', html: t.muster }));
+  const upd = () => { const n = ta.value.trim().length; cnt.textContent = n < t.min ? `${n} Zeichen – schreib mindestens ${t.min}.` : `${n} Zeichen`; };
+  ta.addEventListener('input', () => { st.text = ta.value; save(); upd(); });
+  const bDone = h('button', { class: 'btn', type: 'button' }, 'Fertig');
+  bDone.onclick = () => {
+    const v = ta.value.trim();
+    if (v.length < t.min) { fb2.innerHTML = `<span class="msg bad">Deine Antwort ist noch zu kurz. Schreib mindestens ${t.min} Zeichen, also zwei bis drei ganze Sätze.</span>`; return; }
+    st.text = v; save();
+    const miss = (t.checks || []).filter(c => !new RegExp(c[1], 'i').test(v)).map(c => c[0]);
+    ctx.finish(); muster.classList.remove('hidden');
+    fb2.innerHTML = miss.length ? `<span class="msg warn">Gespeichert. Prüfe noch einmal, ob du an Folgendes gedacht hast: ${miss.join(', ')}. Vergleiche dann mit der Musterlösung.</span>` : '<span class="msg good">Gespeichert. Vergleiche deine Antwort mit der Musterlösung.</span>';
+  };
+  upd();
+  const think = t.denk ? h('div', { class: 'denk' }, h('b', null, 'Denk an:'), h('ul', null, t.denk.map(d => h('li', { html: d })))) : null;
+  return { auto: true, el: h('div', null, think, ta, cnt, h('div', { class: 'btnrow' }, bDone), fb2, muster), restoreDone() { muster.classList.remove('hidden'); } };
 };
 
 // Bild beschriften
@@ -816,18 +887,18 @@ G.FDM = svg(320, 196, `<circle cx="282" cy="42" r="24" fill="#e8eef4" stroke="${
 
 G.support = svg(320, 170, `<rect x="30" y="140" width="260" height="8" fill="${C.ink}"/><path d="M60 140V50H250V80H110V140Z" fill="${C.yel}" stroke="${C.ink}" stroke-width="1.5"/>
   ${Array.from({ length: 13 }, (_, i) => `<line x1="${118 + i * 10}" y1="82" x2="${118 + i * 10}" y2="140" stroke="${C.grey}" stroke-width="3"/>`).join('')}
-  ${T(250, 40, 'Überhang', 'end')}${T(180, 164, 'Stützstruktur (wird abgebrochen)', 'middle', 600, 12)}`, 'Überhang mit Stützstruktur');
+  ${T(250, 36, 'Überhang', 'end', 700, 17)}`, 'Modell mit Überhang, darunter grau gezeichnete senkrechte Linien');
 
 G.path = svg(360, 220, `<rect x="20" y="14" width="8" height="190" fill="${C.bed}"/><rect x="332" y="14" width="8" height="190" fill="${C.bed}"/><rect x="20" y="14" width="320" height="8" fill="${C.bed}"/><rect x="28" y="120" width="304" height="8" fill="${C.bed}"/>
   <circle cx="110" cy="48" r="22" fill="#e8eef4" stroke="${C.ink}" stroke-width="2"/><circle cx="110" cy="48" r="6" fill="${C.ink}"/>
   <path d="M88 48H46V72" fill="none" stroke="${C.blue}" stroke-width="3"/><rect x="28" y="72" width="36" height="24" rx="2" fill="${C.ink}"/>
   <path d="M64 84Q150 84 207 100" fill="none" stroke="#b9cfe0" stroke-width="7"/><path d="M64 84Q150 84 207 100" fill="none" stroke="${C.blue}" stroke-width="2"/>
   <rect x="194" y="100" width="26" height="30" fill="#6b7c8c"/><path d="M198 130H216L207 144Z" fill="${C.ink}"/><rect x="120" y="182" width="190" height="8" fill="${C.ink}"/><rect x="180" y="170" width="54" height="12" fill="${C.yel}" stroke="${C.ink}"/>
-  ${T(140, 52, 'Filamentspule')}${T(46, 112, 'Extruder', 'middle')}${T(126, 111, 'Bowden-Schlauch', 'middle')}${T(230, 112, 'Hotend')}${T(230, 154, 'Düse')}${LD(228, 150, 212, 140)}${T(215, 208, 'Druckbett', 'middle')}`, 'Weg des Filaments im Ender 3 V2');
+  `, 'Weg des Filaments im Ender 3 V2, Stationen ohne Namen');
 
 G.axes = svg(200, 170, `<defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10Z" fill="${C.blue}"/></marker></defs>
   <g stroke="${C.blue}" stroke-width="3" marker-end="url(#ah)"><line x1="60" y1="130" x2="160" y2="130"/><line x1="60" y1="130" x2="60" y2="30"/><line x1="60" y1="130" x2="112" y2="86"/></g>
-  <circle cx="60" cy="130" r="4" fill="${C.ink}"/>${T(168, 135, 'X', 'start', 700, 18)}${T(55, 26, 'Z', 'end', 700, 18)}${T(118, 82, 'Y', 'start', 700, 18)}${T(60, 156, 'Nullpunkt', 'middle', 600, 12)}`, 'Achsen X, Y und Z');
+  <circle cx="60" cy="130" r="4" fill="${C.ink}"/>${T(168, 135, 'X', 'start', 700, 18)}${T(55, 26, 'Z', 'end', 700, 18)}${T(118, 82, 'Y', 'start', 700, 18)}${T(60, 158, 'Nullpunkt', 'middle', 600, 14)}`, 'Achsen X, Y und Z');
 
 G.bowden = svg(220, 160, `<rect x="16" y="12" width="8" height="140" fill="${C.bed}"/><rect x="24" y="36" width="30" height="24" rx="2" fill="${C.ink}"/><path d="M54 46C110 20 140 36 140 82" fill="none" stroke="${C.blue}" stroke-width="3"/>
   <rect x="128" y="82" width="24" height="26" fill="#6b7c8c"/><path d="M131 108H149L140 120Z" fill="${C.ink}"/>${T(24, 78, 'Extruder')}${T(148, 50, 'Schlauch')}${T(156, 100, 'Hotend')}`, 'Bowden-Extruder');
@@ -915,34 +986,58 @@ const MODULES = [
         <div class="vcard me">${G.FDM}<h3>FDM <span class="tag">Ender 3 V2</span></h3><p><b>Fused Deposition Modeling.</b> Filament wird in einer Heizdüse geschmolzen und Schnur für Schnur abgelegt.</p></div>
       </div>`,
     tasks: [
-      { id: 'v1', type: 'table', title: 'Steckbrief', q: 'Vervollständige den Steckbrief der vier Verfahren.', corner: 'Verfahren',
-        info: `<p><b>Stereolithografie (SLA):</b> In einem Becken liegt flüssiger Kunststoff (Harz). Knapp unter der Oberfläche sitzt eine Bauplattform. Ein Laser fährt die Form der ersten Schicht ab und härtet das Harz genau dort aus. Dann senkt sich die Plattform ein Stück, frisches Harz fließt darüber und der Laser härtet die nächste Schicht. Statt Harz geht auch Wachs oder flüssige Keramik.</p>
+      { id: 'v1', type: 'sort', title: 'Steckbrief', q: 'Ordne jedes Merkmal dem Verfahren zu, zu dem es gehört.',
+        lesen: `<p><b>Stereolithografie (SLA):</b> In einem Becken liegt flüssiger Kunststoff (Harz). Knapp unter der Oberfläche sitzt eine Bauplattform. Ein Laser fährt die Form der ersten Schicht ab und härtet das Harz genau dort aus. Dann senkt sich die Plattform ein Stück, frisches Harz fließt darüber und der Laser härtet die nächste Schicht. Statt Harz geht auch Wachs oder flüssige Keramik.</p>
           <p><b>Selektives Lasersintern (SLS):</b> Eine Rolle verteilt eine dünne Schicht Pulver aus Kunststoff, Metall oder Quarzsand. Ein Laser schmilzt das Pulver nur an den Stellen, an denen das Modell entstehen soll. Danach kommt die nächste Pulverschicht.</p>
           <p><b>3D-Printing (3DP):</b> Auch hier wird Pulver verteilt, zum Beispiel Gips, Kunststoff oder Keramik. Ein Druckkopf – ähnlich wie beim Tintenstrahldrucker – spritzt ein flüssiges Bindemittel auf und verklebt das Pulver. Einen Laser oder eine Heizung braucht man dafür nicht.</p>
           <p><b>Fused Deposition Modeling (FDM):</b> Das Material ist ein dünner Kunststoffdraht (Filament) auf einer Rolle. Eine Heizdüse schmilzt ihn und legt ihn als feine Schnur auf die Bauplattform. Die Schnur kühlt ab und wird wieder fest.</p>`,
-        cols: [{ name: 'Form des Materials', opts: ['flüssig', 'pulverförmig', 'drahtförmig'] }, { name: 'Energiequelle', opts: ['Laser', 'Heizdüse', 'keine (Klebstoff)'] }, { name: 'Typisches Material', opts: ['Harz / Wachs', 'Metall- oder Kunststoffpulver', 'Gips / Keramik', 'Kunststoff-Filament'] }],
-        rows: [{ label: 'SLA', ans: ['flüssig', 'Laser', 'Harz / Wachs'] }, { label: 'SLS', ans: ['pulverförmig', 'Laser', 'Metall- oder Kunststoffpulver'] }, { label: '3D-Printing (3DP)', ans: ['pulverförmig', 'keine (Klebstoff)', 'Gips / Keramik'] }, { label: 'FDM', ans: ['drahtförmig', 'Heizdüse', 'Kunststoff-Filament'] }],
-        hint: 'Achte darauf, wie das Material vor dem Drucken aussieht: Flüssigkeit, Pulver oder Draht.', explain: 'Nur bei 3DP wird das Pulver verklebt statt geschmolzen oder ausgehärtet – deshalb braucht es dort keine Energiequelle wie einen Laser.' },
-      { id: 'v2', type: 'match', title: 'Wer macht was?', q: 'Ordne jede Beschreibung dem passenden Verfahren zu.',
-        info: `<p>Mit dieser Übersicht kannst du die Verfahren sicher auseinanderhalten:</p>${INFO_MATRIX}`,
-        pairs: [['Ein Laser härtet flüssiges Material Schicht für Schicht aus.', 'SLA'], ['Ein Laser schmilzt Pulver an genau den Stellen zusammen, wo die Schicht liegt.', 'SLS'], ['Ein Bindemittel verklebt Pulver Schicht für Schicht.', '3D-Printing (3DP)'], ['Eine Heizdüse schmilzt Draht und legt ihn als feine Schnur ab.', 'FDM']],
+        cats: ['SLA', 'SLS', '3D-Printing (3DP)', 'FDM'],
+        items: [{ text: 'Laser härtet Flüssigkeit aus', cat: 0 }, { text: 'Wachs oder flüssige Keramik', cat: 0 }, { text: 'Plattform senkt sich ins Becken', cat: 0 },
+          { text: 'Laser schmilzt Pulver', cat: 1 }, { text: 'Metallpulver oder Quarzsand', cat: 1 },
+          { text: 'Gipspulver', cat: 2 }, { text: 'Bindemittel aus einem Druckkopf', cat: 2 }, { text: 'ohne Laser und ohne Heizung', cat: 2 },
+          { text: 'Kunststoffdraht von der Rolle', cat: 3 }, { text: 'Heizdüse schmilzt das Material', cat: 3 }],
+        hint: 'Lies jeden Abschnitt mit zwei Fragen im Kopf: Wie sieht das Material vorher aus, und was verbindet die Schichten?', explain: 'Nur bei 3DP wird das Pulver verklebt statt geschmolzen oder ausgehärtet – deshalb braucht es dort keine Energiequelle wie einen Laser.' },
+      { id: 'v2', type: 'match', title: 'Verfahren erkennen', q: 'Ordne jede Beschreibung dem passenden Verfahren zu.',
+        info: `<p><b>SLA:</b> Das Modell wächst in einem Bad aus flüssigem Kunststoff. Wo der Laserstrahl auftrifft, wird die Flüssigkeit fest.</p>
+          <p><b>SLS:</b> Ein Laserstrahl erhitzt feines Pulver so stark, dass die Körner an diesen Stellen miteinander verschmelzen. Das übrige Pulver bleibt lose liegen.</p>
+          <p><b>3D-Printing (3DP):</b> Ein Druckkopf tropft Klebstoff auf eine Pulverschicht. Die Körner verkleben, ohne dass etwas erhitzt wird.</p>
+          <p><b>FDM:</b> Ein Kunststoffstrang wird in einer heißen Düse weich und Bahn für Bahn abgelegt. Beim Abkühlen wird er wieder fest.</p>`,
+        pairs: [['Lose Körner werden verbunden, ohne dass Wärme im Spiel ist.', '3D-Printing (3DP)'], ['Aus einer Flüssigkeit entsteht durch Licht ein fester Körper.', 'SLA'], ['Ein Lichtstrahl macht Körner so heiß, dass sie zusammenfließen.', 'SLS'], ['Ein erwärmter Strang wird wie mit einer Heißklebepistole aufgetragen.', 'FDM']],
         explain: 'Merkhilfe: SLA = flüssig + Laser, SLS = Pulver + Laser, 3DP = Pulver + Kleber, FDM = Draht + Heizdüse.' },
-      { id: 'v3', type: 'mc', title: 'Laser gesucht', q: 'Welche Verfahren nutzen einen Laser als Energiequelle?',
-        info: `<p>Ein Laser bündelt Licht so stark, dass er Material punktgenau aushärten oder schmelzen kann. Schau in der Übersicht, in welcher Zeile ein Laser vorkommt:</p>${INFO_MATRIX}`,
-        opts: ['SLA', 'SLS', '3D-Printing (3DP)', 'FDM'], ans: [0, 1], fixed: true, explain: 'SLA und SLS arbeiten mit Laser. 3DP klebt, FDM schmilzt mit einer Heizdüse.' },
-      { id: 'v4', type: 'order', title: 'Vom günstigsten zum teuersten', q: 'Ordne die Verfahren nach den Anschaffungskosten typischer Geräte – oben das günstigste.',
-        info: `<p>Richtwerte für die Anschaffung eines typischen Geräts (aus Unterrichtsmaterial, gerundet):</p>${hbars([['SLS', 150000, '150.000 €'], ['FDM', 2000, '2.000 €'], ['SLA', 80000, '80.000 €'], ['3DP', 45000, '45.000 €']], 150000)}<p class="hintline">Einfache FDM-Drucker wie der Ender 3 V2 sind heute sogar deutlich günstiger. Marktpreise ändern sich.</p>`,
-        items: ['FDM', '3D-Printing (3DP)', 'SLA', 'SLS'], explain: 'FDM ist mit Abstand am günstigsten, SLS am teuersten.' },
-      { id: 'v5', type: 'mc', title: 'Und der Ender 3 V2?', q: 'Der Ender 3 V2 zieht Kunststoffdraht von einer Rolle ein, schmilzt ihn in einer beheizten Düse und legt ihn Schnur für Schnur ab. Um welches Verfahren handelt es sich?',
-        info: `${fig(G.FDM, 'So arbeitet ein Drucker mit Filament: Draht von der Spule, Heizdüse, Schicht für Schicht auf dem Druckbett.')}<p>Vergleiche das Bild mit den vier Verfahren oben auf der Seite. Welches arbeitet mit Draht und Heizdüse?</p>`,
-        opts: ['SLA', 'SLS', '3D-Printing (3DP)', 'FDM'], ans: [3], fixed: true, explain: 'Der Ender 3 V2 ist ein FDM-Drucker (manchmal auch FFF genannt).' },
-      { id: 'v6', type: 'mc', title: 'Warum FDM in der Schule?', q: 'Warum eignet sich FDM besonders gut für Schulen und Heimwerker?',
-        info: `<p>Materialkosten je Kilogramm (Richtwerte):</p>${hbars([['SLA', 600, 'ca. 600 €'], ['SLS', 450, 'ca. 450 €'], ['3DP', 300, 'ca. 300 €'], ['FDM', 60, 'ca. 60 €']], 600)}
-          <p><b>Oberfläche:</b> SLA liefert die glatteste Oberfläche. FDM und 3DP liefern eine gute Oberfläche, bei SLS bleibt sie eher rau.</p><p><b>Aufbau:</b> Alle Verfahren arbeiten Schicht für Schicht und brauchen Strom – auch das Bindemittel bei 3DP wird von einem elektrischen Druckkopf aufgetragen.</p>`,
-        opts: ['Geräte und Material sind vergleichsweise günstig.', 'Es entsteht immer die feinste Oberfläche aller Verfahren.', 'Das Verfahren kommt ohne Strom aus.', 'Man druckt nicht in Schichten, sondern in einem Stück.'], ans: [0], explain: 'FDM-Drucker und Filament sind günstig und die Oberfläche ist für die meisten Zwecke gut. Die feinste Oberfläche liefert SLA.' },
-      { id: 'v7', type: 'mc', title: 'Überhänge', q: 'Ein Modell hat einen weit ausladenden Überhang. Was druckt der Drucker zusätzlich, damit das gelingt?',
-        info: `${fig(G.support, 'Gelb: Modell. Grau: zusätzliche Stützen unter dem Überhang.')}<p>Jede Schicht braucht etwas, worauf sie liegen kann. Ragt ein Teil frei in die Luft, würde das weiche Material nach unten hängen. Deshalb druckt man darunter dünne Stützen, die sich nach dem Druck leicht abbrechen lassen. Der Slicer berechnet selbst, wo sie nötig sind.</p>`,
-        opts: ['Eine Stützstruktur (Support), die später abgebrochen wird', 'Ein zweites, kleineres Modell', 'Eine Kühlrippe aus Metall', 'Nichts – Überhänge sind nie druckbar'], ans: [0], explain: 'Die Stützstruktur trägt die frei schwebenden Teile beim Drucken.' }
+      { id: 'v3', type: 'mark', title: 'Laser gesucht', q: 'Ermittle, welche Anlagen mit einem Laser arbeiten: Tippe die passenden Sätze an.',
+        info: `<p>Ein <b>Laser</b> bündelt Licht so stark, dass er Material punktgenau aushärten oder schmelzen kann. Der Bericht nennt die Verfahren nicht. Erkenne sie am <b>Material</b> und an der <b>Arbeitsweise</b>. Die Beschreibungen stehen bei Aufgabe 1.</p>`,
+        parts: ['Bei einem Besuch in einem Fertigungsbetrieb siehst du sechs Anlagen. ', ['Anlage A verteilt eine dünne Schicht Quarzsand und verschmilzt die Körner nur dort, wo später eine Gussform entsteht.', 1], ' ', ['Anlage B zieht Kunststoffdraht von einer Rolle und legt ihn als feine Schnur ab.', 0], ' ', ['In Anlage C senkt sich eine Plattform nach jeder Schicht tiefer in ein Becken mit flüssigem Harz.', 1], ' ', ['Anlage D tropft aus vielen feinen Düsen Bindemittel auf ein Bett aus Gipspulver.', 0], ' ', ['Anlage E verschmilzt Metallpulver Punkt für Punkt zu einem Ersatzteil.', 1], ' ', ['Anlage F verklebt Keramikpulver Schicht für Schicht zu einer Vase.', 0]],
+        hint: 'Überlege bei jedem Satz zuerst, welches Verfahren gemeint ist. Mit Laser arbeiten zwei der vier Verfahren.', explain: 'A und E sind SLS (Laser schmilzt Pulver), C ist SLA (Laser härtet Harz). B ist FDM (Heizdüse), D und F sind 3DP (Bindemittel).' },
+      { id: 'v4', type: 'order', title: 'Vom günstigsten zum teuersten', q: 'Ordne die Verfahren nach den Anschaffungskosten eines typischen Geräts – oben das günstigste.',
+        lesen: `<p>Warum kosten manche 3D-Drucker weniger als ein Fahrrad und andere mehr als ein Auto? Teuer sind vor allem drei Dinge: ein starker <b>Laser</b> mit Spiegeln, die ihn sehr genau lenken, eine geschlossene <b>Kammer</b>, in der feines Pulver sicher verarbeitet wird, und eine aufwendige <b>Nachbearbeitung</b>, bei der die Teile gereinigt oder nachgehärtet werden.</p>
+          <p>Eine Anlage für <b>3D-Printing</b> braucht keinen Laser. Sie muss aber Pulver gleichmäßig verteilen und das Bindemittel mit vielen feinen Düsen genau dosieren. Ein typisches Gerät kostet rund 45.000 €.</p>
+          <p>Bei der <b>Stereolithografie</b> lenkt ein Laser seinen Strahl durch ein Becken mit Harz. Das Harz ist teuer, und die fertigen Teile müssen gewaschen und unter UV-Licht nachgehärtet werden. Ein solches Gerät kostet fast doppelt so viel wie die 3DP-Anlage, rund 80.000 €.</p>
+          <p><b>FDM</b> kommt mit wenigen, einfachen Bauteilen aus: Motoren, Riemen, eine beheizte Düse und ein Druckbett. Ein Gerät für die Schule kostet um 2.000 €, einfache Bausätze wie der Ender 3 V2 deutlich weniger.</p>
+          <p>Am meisten kostet <b>SLS</b>. Hier arbeiten ein starker Laser und eine beheizte, geschlossene Pulverkammer zusammen. Für ein typisches Gerät rechnet man mit etwa 150.000 €.</p>
+          <p class="hintline">Richtwerte aus Unterrichtsmaterial, gerundet. Marktpreise ändern sich.</p>`,
+        items: ['FDM', '3D-Printing (3DP)', 'SLA', 'SLS'], hint: 'Suche im Text zu jedem Verfahren den Preis. Bei einem Verfahren steht er als Vergleich mit einem anderen.',
+        explain: `FDM ist mit Abstand am günstigsten, SLS am teuersten.${hbars([['FDM', 2000, '2.000 €'], ['3DP', 45000, '45.000 €'], ['SLA', 80000, '80.000 €'], ['SLS', 150000, '150.000 €']], 150000)}` },
+      { id: 'v5', type: 'gaps', title: 'Steckbrief Ender 3 V2', q: 'Nenne die fehlenden Angaben zum Ender 3 V2. Alles steht im Text.',
+        lesen: `<p>Im Technikraum steht ein Ender 3 V2. Bevor du ihn nutzt, liest du die Beschreibung des Herstellers, hier in eigenen Worten:</p>
+          <p>Gedruckt wird auf einer Glasplatte, die bis 100 °C warm werden kann. Darauf entsteht das Modell Bahn für Bahn: Ein Motor schiebt einen Kunststoffdraht durch einen Schlauch in den Druckkopf. Dort schmilzt eine Heizung den Draht, und eine Düse mit einer Öffnung von 0,4 mm legt ihn ab. Der Draht – Fachleute nennen ihn <b>Filament</b> – ist 1,75 mm dick und kommt von einer Rolle, die oben am Rahmen hängt.</p>
+          <p>Weil das Material geschmolzen und Schicht für Schicht abgelegt wird, gehört der Drucker zum Verfahren <b>Fused Deposition Modeling</b>, kurz FDM. Manche Hersteller schreiben stattdessen FFF (Fused Filament Fabrication), gemeint ist dasselbe. Die Düse wird bis 255 °C heiß. Das größte Modell darf 220 mm breit, 220 mm tief und 250 mm hoch sein.</p>`,
+        text: 'Verfahren (Abkürzung): {0} · Material: {1} mit {2} mm Durchmesser · Öffnung der Düse: {3} mm · größte Höhe eines Modells: {4} mm',
+        gaps: [{ ans: ['FDM', 'FFF'], size: 5 }, { ans: ['Filament', 'Kunststoffdraht', 'Kunststoff-Filament', 'Kunststofffilament'], size: 12 }, { ans: ['1,75', '1.75'], size: 5 }, { ans: ['0,4', '0.4', '0,40'], size: 4 }, { ans: ['250'], size: 4 }],
+        hint: 'Achte bei jeder Zahl im Text auf das Wort davor: Gehört sie zur Düse, zum Draht oder zum Bauraum?', explain: 'Der Ender 3 V2 ist ein FDM-Drucker (auch FFF genannt). Bauraum 220 × 220 × 250 mm, Düse 0,4 mm, Filament 1,75 mm.' },
+      { id: 'v6', type: 'open', title: 'FDM in der Schule', q: 'Begründe, warum in Schulen fast immer FDM-Drucker stehen und keine SLA-, SLS- oder 3DP-Anlagen.',
+        lesen: `<p>Materialkosten je Kilogramm (Richtwerte):</p>${hbars([['SLA', 600, 'ca. 600 €'], ['SLS', 450, 'ca. 450 €'], ['3DP', 300, 'ca. 300 €'], ['FDM', 60, 'ca. 60 €']], 600)}
+          <p><b>Oberfläche:</b> SLA liefert die glatteste Oberfläche. FDM und 3DP liefern eine gute Oberfläche, bei SLS bleibt sie eher rau. Bei FDM sieht man die einzelnen Schichten, wenn man genau hinschaut.</p>
+          <p><b>Arbeitsaufwand:</b> SLS und 3DP arbeiten mit offenem, sehr feinem Pulver, das man nicht einatmen soll. SLA-Teile müssen nach dem Druck gewaschen und nachgehärtet werden. Beim FDM nimmt man das fertige Teil einfach vom Bett. Was die Geräte kosten, steht in Aufgabe 4.</p>`,
+        denk: ['die Kosten für Gerät und Material', 'die Oberfläche: Wann reicht FDM, wann nicht?', 'mindestens einen Grund, der nichts mit Geld zu tun hat'],
+        min: 150, checks: [['Kosten', 'kost|günstig|billig|preis|euro|€|teuer'], ['Material', 'material|filament|kilo|kg|harz|pulver'], ['Oberfläche oder Genauigkeit', 'oberfl|glatt|rau|fein|genau|schicht'], ['einen Grund ohne Geld', 'einfach|pulver|einatm|wasch|nachhärt|sicher|bedien|aufwand']],
+        muster: '<p>FDM-Drucker sind am günstigsten: Ein Gerät kostet nur einen Bruchteil einer SLA-, SLS- oder 3DP-Anlage, und Filament kostet je Kilogramm nur etwa ein Fünftel bis ein Zehntel von Harz oder Pulver. Die Oberfläche ist nicht so glatt wie bei SLA, für Modelle, Halter und Ersatzteile im Unterricht reicht sie aber aus. Außerdem ist FDM einfach und sauber zu bedienen: Es gibt kein offenes Pulver und kein flüssiges Harz, und die Teile müssen nach dem Druck nicht gewaschen oder nachgehärtet werden.</p>' },
+      { id: 'v7', type: 'mc', title: 'Überhänge', q: 'Erkläre, wie ein weit ausladender Überhang trotzdem gelingt: Kreuze die passende Erklärung an.',
+        lesen: `${fig(G.support, 'Gelb: das Modell. Grau: Das druckt der Drucker zusätzlich.')}
+          <p>Ein 3D-Drucker baut jedes Modell von unten nach oben auf. Jede neue Bahn wird auf die Bahn darunter gelegt und verschmilzt mit ihr. Solange eine Wand nur leicht schräg steht, liegt jede Bahn noch zum Teil auf der vorherigen. Bis zu einer Neigung von etwa 45° klappt das ohne Hilfe.</p>
+          <p>Ragt ein Teil des Modells weiter heraus, spricht man von einem <b>Überhang</b>. Unter ihm ist nur Luft. Das weiche Material würde nach unten hängen oder abreißen. Damit das nicht passiert, berechnet der Slicer dünne Säulen oder Gitter, die vom Druckbett bis unter den Überhang reichen. Diese <b>Stützstruktur</b> (englisch Support) wird mitgedruckt und nach dem Druck abgebrochen.</p>
+          <p>Verwechsle sie nicht mit zwei anderen Einstellungen: Ein <b>Brim</b> ist ein flacher Rand um die erste Schicht, damit das Modell besser auf dem Bett haftet. Die <b>Füllung</b> (Infill) liegt im Inneren des Modells und macht es stabil. Beide tragen keinen Teil, der in die Luft ragt.</p>`,
+        opts: ['Dünne Stützen unter dem Überhang, die man danach abbricht', 'Ein flacher Rand rund um das Modell, der danach abgezogen wird', 'Eine dichtere Füllung im Inneren direkt unter dem Überhang', 'Eine dickere Außenwand, die den Überhang von der Seite hält'], ans: [0],
+        explain: 'Die Stützstruktur (Support) trägt den Überhang beim Drucken. Brim und Füllung helfen bei Haftung und Stabilität, tragen aber nichts, was in die Luft ragt.' }
     ]
   },
   {
@@ -956,7 +1051,7 @@ const MODULES = [
         <div class="fact"><b>bis 255 °C / 100 °C</b><span>Temperatur Düse / Druckbett</span></div>
       </div>`,
     tasks: [
-      { id: 'a1', type: 'label', title: 'Bauteile erkennen', q: 'Beschrifte den Ender 3 V2. Jede Nummer im Foto gehört zu genau einem Begriff.', img: IMG,
+      { id: 'a1', type: 'label', title: 'Bauteile erkennen', q: 'Benenne die Bauteile des Ender 3 V2: Jede Nummer im Foto gehört zu genau einem Begriff.', img: IMG,
         info: `<p>So findest du die Bauteile am Ender 3 V2:</p><ul class="il">
           <li><b>Display mit Drehknopf:</b> rechts neben dem Drucker. Hier bedienst du den Drucker.</li>
           <li><b>Hotend:</b> der Druckkopf auf der Querstange, verdeckt von einer schwarzen Lüfterabdeckung mit vielen Löchern.</li>
@@ -975,7 +1070,7 @@ const MODULES = [
           { x: 29, y: 79, name: 'Stellrad zum Nivellieren' }, { x: 84, y: 27, name: 'Riemenspanner' }, { x: 32, y: 90, name: 'SD-Karten-Steckplatz' }, { x: 66, y: 51, name: 'Aluminiumprofil (Rahmen)' }],
         extra: ['Spulenhalter', 'Heizpatrone'],
         hint: 'Das Filament läuft von oben links (Extruder) durch den weißen Schlauch zum Druckkopf. Unten am Druckbett sitzen vier Stellräder.' },
-      { id: 'a2', type: 'match', title: 'Aufgaben der Bauteile', q: 'Welches Bauteil übernimmt welche Aufgabe?',
+      { id: 'a2', type: 'match', title: 'Aufgaben der Bauteile', q: 'Ordne jeder Aufgabe das passende Bauteil zu.',
         info: `<ul class="il">
           <li><b>Extruder:</b> Ein Motor dreht ein geriffeltes Rad (Rändelrad). Es greift in das Filament und schiebt es nach vorne.</li>
           <li><b>Hotend:</b> Ein Heizblock mit Heizpatrone erhitzt das Filament, bis es flüssig ist.</li>
@@ -986,19 +1081,26 @@ const MODULES = [
           <li><b>Druckbett:</b> die beheizbare Platte, auf der das Modell entsteht.</li></ul>`,
         pairs: [['schiebt das Filament mit Motor und Rändelrad vor', 'Extruder'], ['schmilzt das Filament', 'Hotend'], ['drehen sich in kleinen Schritten, das Mainboard kennt die Position', 'Schrittmotoren'], ['meldet dem Mainboard den Nullpunkt', 'Endstop-Schalter'], ['steuert den gesamten Drucker', 'Mainboard'], ['stellt den Abstand zwischen Düse und Bett ein', 'Stellrad'], ['Bauplattform, auf der das Modell entsteht', 'Druckbett']],
         explain: 'Ohne Endstops wüsste der Drucker nicht, wo er sich befindet.' },
-      { id: 'a3', type: 'order', title: 'Der Weg des Filaments', q: 'Bringe die Stationen in die Reihenfolge, die das Filament durchläuft.',
-        info: `${fig(G.path, 'Folge der blauen Linie: Wo beginnt das Filament und wo kommt es heraus?')}<p>Das Filament ist auf einer Spule aufgewickelt. Der Extruder zieht es ab und schiebt es durch einen langen Schlauch bis zum Druckkopf. Dort wird es geschmolzen und durch eine winzige Öffnung auf das Druckbett gedrückt.</p>`,
+      { id: 'a3', type: 'order', title: 'Der Weg des Filaments', q: 'Ordne die Stationen in der Reihenfolge, die das Filament durchläuft.',
+        info: `${fig(G.path, 'Folge der blauen Linie vom Anfang bis zum Ende. Die Namen der Stationen findest du bei Aufgabe 1 und 2.')}<p>Das Filament ist auf einer Spule aufgewickelt. Der Extruder zieht es ab und schiebt es durch einen langen Schlauch bis zum Druckkopf. Dort wird es geschmolzen und durch eine winzige Öffnung auf das Druckbett gedrückt.</p>`,
         items: ['Filamentspule', 'Extruder (Vorschub)', 'Bowden-Schlauch', 'Hotend (Heizblock)', 'Düse', 'Druckbett'], explain: 'Beim Bowden-Prinzip sitzt der Extruder-Motor am Rahmen. Der Druckkopf bleibt dadurch leichter.' },
-      { id: 'a4', type: 'gaps', title: 'Achsen und Bewegung',
-        info: `<div class="split">${fig(G.axes)}<div><p>Ein 3D-Drucker bewegt sich in drei Richtungen:</p><ul class="il"><li><b>X:</b> links und rechts</li><li><b>Y:</b> vor und zurück</li><li><b>Z:</b> hoch und runter</li></ul>
-          <p>Beim Ender 3 V2 fährt der <b>Druckkopf</b> auf der Querstange nach links und rechts. Die <b>Querstange</b> selbst wird an den Säulen hoch- und runtergefahren. Das <b>Druckbett</b> fährt vor und zurück.</p></div></div>`,
-        text: 'Beim Ender 3 V2 bewegt sich der Druckkopf in {0}-Richtung (links/rechts). Die Traverse mit dem Druckkopf fährt in {1}-Richtung (hoch/runter). Das Druckbett bewegt sich in {2}-Richtung (vor/zurück).', gaps: [{ opts: ['X', 'Y', 'Z'], ans: 'X' }, { opts: ['X', 'Y', 'Z'], ans: 'Z' }, { opts: ['X', 'Y', 'Z'], ans: 'Y' }], explain: 'Zahnriemen bewegen Druckkopf (X) und Bett (Y), die Z-Achse fährt über eine Gewindespindel.' },
-      { id: 'a5', type: 'mc', title: 'Bowden-Extruder', q: 'Was bedeutet „Bowden-Extruder“?',
-        info: `${panels([[G.bowden, '<b>Bowden:</b> Der Extruder sitzt am Rahmen. Ein Schlauch führt das Filament zum Hotend. So ist es beim Ender 3 V2.'], [G.direct, '<b>Direktantrieb:</b> Der Extruder sitzt direkt auf dem Hotend und fährt mit.']])}<p>Vorteil von Bowden: Der Druckkopf ist leicht und kann schnell bewegt werden. Nachteil: Weiche Filamente lassen sich schlecht durch den langen Schlauch schieben.</p>`,
-        opts: ['Der Motor sitzt am Rahmen und schiebt das Filament durch einen Schlauch zum Hotend.', 'Der Extruder sitzt direkt auf dem Hotend am Druckkopf.', 'Das Filament wird mit Druckluft transportiert.', 'Das Hotend bekommt das Material als Pulver.'], ans: [0] },
-      { id: 'a6', type: 'mc', title: 'Wozu „Auto Home“?', q: 'Vor dem Druck fährt der Drucker die Endstops an („Auto Home“). Warum?',
+      { id: 'a4', type: 'gaps', title: 'Achsen und Bewegung', q: 'Ordne den Bauteilen des Ender 3 V2 die Achsen zu, in denen sie sich bewegen.',
+        lesen: `<div class="split">${fig(G.axes, 'Die drei Achsen eines 3D-Druckers')}<div>
+          <p>Jeder Punkt im Bauraum lässt sich mit drei Zahlen beschreiben. Die <b>X-Achse</b> verläuft von links nach rechts, die <b>Y-Achse</b> von vorn nach hinten und die <b>Z-Achse</b> nach oben. Das gilt immer aus Sicht einer Person, die vor dem Drucker steht.</p>
+          <p>Stell dich vor den Ender 3 V2. Die Glasplatte, auf der das Modell entsteht, gleitet auf einer Schiene auf dich zu und wieder von dir weg. Über ihr sitzt der Druckkopf auf einer waagerechten Stange, der <b>Querstange</b>. Ein Zahnriemen zieht ihn darauf von einer Seite zur anderen. Die Querstange selbst hängt an zwei senkrechten Säulen. Eine Gewindespindel schiebt sie dort langsam nach oben, jedes Mal ein kleines Stück, wenn eine Schicht fertig ist.</p></div></div>`,
+        text: 'Der Druckkopf fährt auf der Querstange in {0}-Richtung. Die Querstange mit dem Druckkopf fährt an den Säulen in {1}-Richtung. Das Druckbett bewegt sich in {2}-Richtung. Beginnt eine neue Schicht, fährt der Drucker ein kleines Stück in {3}-Richtung.',
+        gaps: [{ opts: ['X', 'Y', 'Z'], ans: 'X' }, { opts: ['X', 'Y', 'Z'], ans: 'Z' }, { opts: ['X', 'Y', 'Z'], ans: 'Y' }, { opts: ['X', 'Y', 'Z'], ans: 'Z' }],
+        hint: 'Stell dir vor, du stehst vor dem Drucker: Was bewegt sich links–rechts, was vor–zurück, was hoch–runter?', explain: 'Zahnriemen bewegen Druckkopf (X) und Bett (Y), die Z-Achse fährt über eine Gewindespindel.' },
+      { id: 'a5', type: 'mc', title: 'Bowden-Extruder', q: 'Erkläre den Begriff „Bowden-Extruder“: Kreuze die passende Erklärung an.',
+        lesen: `${panels([[G.bowden, 'Bauart A'], [G.direct, 'Bauart B']])}
+          <p>Der <b>Extruder</b> schiebt das Filament mit einem Motor und einem geriffelten Rad in Richtung Hotend. Wo dieser Motor sitzt, unterscheidet zwei Bauarten.</p>
+          <p>Beim <b>Direktantrieb</b> sitzt der Extruder direkt über dem Hotend und fährt bei jeder Bewegung mit. Der Weg bis zum Hotend ist kurz, auch weiches, gummiartiges Filament lässt sich so gut drucken. Dafür ist der Druckkopf schwer.</p>
+          <p>Der <b>Bowden-Extruder</b> ist nach dem Bowdenzug benannt, den du von der Fahrradbremse kennst: Ein Seil läuft in einer Hülle. Beim 3D-Drucker ist der Motor fest am Rahmen verschraubt. Er schiebt das Filament durch einen langen Kunststoffschlauch bis zum Hotend, so wie das Seil durch die Hülle läuft. Der Druckkopf bleibt leicht und kann schnell fahren. Weiches Filament knickt im langen Schlauch aber leicht ein. Der Ender 3 V2 hat einen Bowden-Extruder.</p>`,
+        opts: ['Der Motor sitzt am Rahmen und schiebt das Filament durch einen Schlauch zum Hotend.', 'Der Extruder sitzt direkt über dem Hotend und fährt bei jeder Bewegung des Kopfes mit.', 'Zwei Motoren schieben das Filament von beiden Seiten gleichzeitig in das Hotend hinein.', 'Der Schlauch kühlt das Filament auf dem Weg vom Extruder zum Hotend gleichmäßig ab.'], ans: [0],
+        explain: 'Beim Bowden-Extruder sitzt der Motor am Rahmen, ein Schlauch führt das Filament zum Hotend – wie das Seil in der Hülle eines Bowdenzugs.' },
+      { id: 'a6', type: 'mc', title: 'Auto Home', q: 'Begründe, warum der Drucker vor dem Druck die Endstops anfährt („Auto Home“): Kreuze die passende Begründung an.',
         info: `<p>Ein Schrittmotor merkt sich nur, wie viele Schritte er gefahren ist. Nach dem Einschalten weiß der Drucker also nicht, wo Druckkopf und Bett gerade stehen. Mit <b>Auto Home</b> fährt er jede Achse langsam bis zum Endstop-Schalter. Sobald der Schalter gedrückt wird, setzt das Mainboard diese Stelle als Nullpunkt. Ab jetzt kann es jede Position genau berechnen.</p>`,
-        opts: ['Damit das Mainboard den Nullpunkt kennt und alle Positionen daraus berechnen kann.', 'Damit das Filament vorgeheizt wird.', 'Damit das Druckbett gereinigt wird.', 'Damit die SD-Karte gelesen wird.'], ans: [0] }
+        opts: ['Damit das Mainboard den Nullpunkt kennt und jede Position daraus berechnet.', 'Damit Düse und Druckbett vor dem Druck gleichmäßig auf Temperatur kommen.', 'Damit der Drucker misst, ob das Druckbett an allen vier Ecken gleich hoch ist.', 'Damit die Motoren ihre Riemen spannen und das Spiel in den Achsen ausgleichen.'], ans: [0], explain: 'Ein Schrittmotor zählt nur Schritte. Erst am Endstop weiß das Mainboard, wo der Nullpunkt liegt.' }
     ]
   },
   {
@@ -1006,7 +1108,7 @@ const MODULES = [
     lead: 'Der Drucker versteht keine 3D-Zeichnung. Ein Slicer wie Cura zerlegt das Modell in Schichten und erzeugt daraus den Maschinencode.',
     intro: () => `${chain(['3D-Modell (.stl)', 'Slicer (Cura)', 'G-Code (.gcode)', 'SD-Karte', 'Ender 3 V2'])}${CURA_BOX('slicing')}`,
     tasks: [
-      { id: 's1', type: 'order', title: 'Der Weg zum G-Code', q: 'Bringe die Arbeitsschritte in Cura in die richtige Reihenfolge.',
+      { id: 's1', type: 'order', title: 'Der Weg zum G-Code', q: 'Ordne die Arbeitsschritte in Cura in der richtigen Reihenfolge.',
         info: `<p>Überlege bei jedem Schritt, was vorher schon da sein muss:</p><ul class="il">
           <li>Ohne geladenes Modell gibt es nichts zu bearbeiten.</li>
           <li>Cura muss wissen, <b>für welchen Drucker</b> es rechnet – der Bauraum und die Düse hängen davon ab.</li>
@@ -1014,22 +1116,22 @@ const MODULES = [
           <li>Beim <b>Slicen</b> berechnet Cura aus Modell und Parametern die Schichten. In der Schichtenansicht prüfst du das Ergebnis.</li>
           <li>Ganz zum Schluss wird der fertige G-Code auf die SD-Karte gespeichert.</li></ul>`,
         items: ['STL-Datei in Cura laden', 'Den Drucker (Ender 3 V2) und das Profil auswählen', 'Objekt bewegen, drehen oder skalieren – möglichst flach auf das Druckbett legen', 'Parameter einstellen (Schichtdicke, Wanddicke, Fülldichte, Geschwindigkeit)', 'Slicen und in der Schichtenansicht prüfen', 'G-Code auf die SD-Karte speichern'] },
-      { id: 's2', type: 'gaps', title: 'Fachbegriffe',
+      { id: 's2', type: 'gaps', title: 'Fachbegriffe', q: 'Ordne die Fachbegriffe den passenden Lücken zu.',
         info: `${chain(['3D-Modell (.stl)', 'Slicer (Cura)', 'G-Code (.gcode)', 'Drucker'])}<p><b>STL</b> ist das Dateiformat für die Form eines 3D-Modells. Ein <b>Slicer</b> („Schneider“) zerlegt das Modell in dünne Scheiben. Daraus entsteht der <b>G-Code</b>: eine lange Liste von Befehlen wie „fahre nach X 20, Y 35“ oder „heize auf 200 °C“, die nur der Drucker ausführt.</p>`,
         text: 'Ein 3D-Modell wird als {0}-Datei gespeichert. Der {1} zerlegt es in Schichten und erzeugt daraus den {2}, den nur der Drucker lesen kann.', gaps: [{ opts: ['STL', 'PDF', 'JPG'], ans: 'STL' }, { opts: ['Slicer', 'Extruder', 'Endstop'], ans: 'Slicer' }, { opts: ['G-Code', 'Quellcode', 'Barcode'], ans: 'G-Code' }] },
-      { id: 's3', type: 'num', title: 'Schichten zählen', q: 'Wie viele Schichten druckt der Drucker?',
+      { id: 's3', type: 'num', title: 'Schichten zählen', q: 'Berechne für beide Objekte die Zahl der Schichten.',
         info: `${fig(G.layers)}<p><b>Schichtdicke:</b> Eine kleine Schichtdicke (0,1 mm) ist sehr genau, dauert aber lange. Eine große Schichtdicke (0,3 mm) ist gröber, aber schneller. Üblich sind 0,1 bis 0,3 mm.</p><p><b>Anzahl der Schichten = Höhe ÷ Schichtdicke.</b> Beispiel: 20 mm ÷ 0,2 mm = 100 Schichten.</p>`,
         items: [{ q: 'Ein Objekt ist 30 mm hoch, die Schichtdicke beträgt 0,2 mm.', ans: 150, unit: 'Schichten' }, { q: 'Ein Objekt ist 45 mm hoch, die Schichtdicke beträgt 0,15 mm.', ans: 300, unit: 'Schichten' }], explain: 'Halbiert man die Schichtdicke, verdoppelt sich die Schichtzahl – und ungefähr die Druckzeit.' },
-      { id: 's4', type: 'mc', title: 'Passende Wanddicke', q: 'Die Düse des Ender 3 V2 hat 0,4 mm. Welche Wanddicke passt dazu ohne Lücken?',
-        info: `${panels([[G.wall08, 'Zwei Bahnen passen genau.'], [G.wall10, 'Eine halbe Bahn kann die Düse nicht drucken – es bleibt eine Lücke.']])}<p>Die Düse legt immer eine Bahn von etwa 0,4 mm Breite. Die Wand besteht aus mehreren solcher Bahnen nebeneinander. Die Wanddicke sollte deshalb immer ein <b>Vielfaches von 0,4 mm</b> sein: 0,4 – 0,8 – 1,2 – 1,6 mm …</p>`,
-        opts: ['0,6 mm', '0,8 mm', '1,0 mm', '1,3 mm'], ans: [1], fixed: true, explain: 'Nur Vielfache von 0,4 mm passen genau.' },
-      { id: 's5', type: 'num', title: 'Bahnen zählen',
+      { id: 's4', type: 'mc', title: 'Passende Wanddicke', q: 'Ermittle alle Wanddicken, die eine 0,4-mm-Düse ohne Lücke drucken kann.',
+        info: `${panels([[G.wall08, 'Zwei Bahnen passen genau.'], [G.wall10, 'Eine halbe Bahn kann die Düse nicht drucken – es bleibt eine Lücke.']])}<p>Die Düse legt immer eine Bahn von etwa 0,4 mm Breite. Eine Wand besteht aus mehreren solcher Bahnen nebeneinander. Halbe Bahnen gibt es nicht. Die Wanddicke sollte deshalb ein ganzzahliges <b>Vielfaches der Düsenbreite</b> sein.</p>`,
+        opts: ['1,0 mm', '1,2 mm', '1,4 mm', '1,6 mm'], ans: [1, 3], fixed: true, hint: 'Teile jede Wanddicke durch 0,4 mm. Es passt nur, wenn eine ganze Zahl herauskommt.', explain: '1,2 mm = 3 Bahnen, 1,6 mm = 4 Bahnen. Bei 1,0 mm und 1,4 mm bliebe eine halbe Bahn übrig.' },
+      { id: 's5', type: 'num', title: 'Bahnen zählen', q: 'Berechne die fehlenden Werte.',
         info: `<p><b>Anzahl der Bahnen = Wanddicke ÷ 0,4 mm</b> (Düsenbreite).</p><p><b>Wanddicke = Anzahl der Bahnen × 0,4 mm.</b></p><p>Beispiel: Eine Wand aus 2 Bahnen ist 2 × 0,4 mm = 0,8 mm dick.</p>`,
         items: [{ q: 'Wie viele Bahnen hat eine Wand mit 1,2 mm Dicke bei einer 0,4-mm-Düse?', ans: 3, unit: 'Bahnen' }, { q: 'Wie dick ist eine Wand aus 4 Bahnen?', ans: 1.6, unit: 'mm' }] },
-      { id: 's6', type: 'mc', title: 'Flach auf das Bett', q: 'Warum soll ein Objekt in Cura möglichst flach auf dem Druckbett liegen?',
+      { id: 's6', type: 'mc', title: 'Flach auf das Bett', q: 'Begründe, warum ein Objekt in Cura möglichst flach auf dem Druckbett liegen soll: Kreuze die passende Begründung an.',
         info: `${panels([[G.flat, '<b>Flach:</b> große Auflagefläche, keine Stützen nötig.'], [G.edge, '<b>Hochkant:</b> kleine Auflagefläche, der Überhang braucht Stützen (grau).']])}<p>Die erste Schicht muss gut auf dem Bett haften. Je größer die Auflagefläche, desto sicherer hält das Objekt. Außerdem entstehen weniger Überhänge – das spart Stützmaterial und Nacharbeit.</p>`,
-        opts: ['Große Auflagefläche, gute Haftung und weniger Stützmaterial', 'Damit es schneller abkühlt', 'Damit der Drucker weniger Strom braucht', 'Damit die Düse nicht heiß wird'], ans: [0] },
-      { id: 's7', type: 'lab', title: 'Slicer-Labor', q: 'Probiere die Parameter aus und erreiche alle drei Ziele. Die Anzeigen reagieren sofort.',
+        opts: ['Es haftet auf großer Fläche gut und braucht weniger Stützmaterial.', 'Das Bett muss dann nicht nivelliert werden, weil das Teil sicher hält.', 'Die Düse kann kühler drucken, weil sie pro Schicht weniger Material legt.', 'Das Teil wird dadurch in allen Richtungen gleich fest und biegt sich nicht.'], ans: [0], explain: 'Große Auflagefläche = gute Haftung. Weniger Überhänge = weniger Stützen und Nacharbeit.' },
+      { id: 's7', type: 'lab', title: 'Slicer-Labor', q: 'Erprobe im Slicer-Labor verschiedene Einstellungen, bis alle drei Ziele erreicht sind. Die Anzeigen reagieren sofort.',
         info: `<ul class="il"><li><b>Schichtdicke:</b> dünn = feine Oberfläche, aber viele Schichten und lange Druckzeit.</li><li><b>Wanddicke:</b> dicke Wände machen stabil. Nutze Vielfache von 0,4 mm.</li><li><b>Fülldichte:</b> mehr Füllung = steifer, aber mehr Zeit und Material.</li><li><b>Geschwindigkeit:</b> schneller spart Zeit, zu schnell verschlechtert die Qualität.</li></ul><p>Danach: Probiere dieselben Einstellungen mit einem echten Objekt in Cura aus (siehe Kasten oben).</p>` }
     ]
   },
@@ -1051,16 +1153,21 @@ const MODULES = [
         cats: ['2D-Füllmuster', '3D-Füllmuster', 'konzentrisch'],
         items: [{ text: 'Gitter', cat: 0 }, { text: 'Linien', cat: 0 }, { text: 'Dreiecke', cat: 0 }, { text: 'Zickzack', cat: 0 }, { text: 'Kubisch', cat: 1 }, { text: 'Octet', cat: 1 }, { text: 'Gyroid', cat: 1 }, { text: 'Viertelkubisch', cat: 1 }, { text: 'Konzentrisch', cat: 2 }],
         hint: 'Bei 3D-Mustern liegen die Linien nicht direkt übereinander, sondern versetzt.' },
-      { id: 'i3', type: 'table', title: 'Muster erkennen', q: 'Wie heißt das Füllmuster in der Draufsicht?', corner: 'Bild',
+      { id: 'i3', type: 'match', title: 'Muster erkennen', q: 'Ordne jeder Draufsicht den Namen des Füllmusters zu.', how: 'Tippe links ein Bild an und dann rechts den passenden Namen. Zum Lösen einer Verbindung tippe den Namen rechts noch einmal an.',
         info: `<ul class="il"><li><b>Gitter:</b> Linien in zwei Richtungen, die sich im rechten Winkel kreuzen – es entstehen Quadrate.</li><li><b>Linien:</b> nur parallele Linien in einer Richtung.</li><li><b>Dreiecke:</b> Linien in drei Richtungen – es entstehen Dreiecke.</li><li><b>Konzentrisch:</b> geschlossene Ringe ineinander, wie Jahresringe.</li></ul>`,
-        cols: [{ name: 'Name', opts: ['Gitter', 'Dreiecke', 'Konzentrisch', 'Linien'] }],
-        rows: [{ label: patSVG('Gitter'), pic: true, ans: ['Gitter'] }, { label: patSVG('Konzentrisch'), pic: true, ans: ['Konzentrisch'] }, { label: patSVG('Dreiecke'), pic: true, ans: ['Dreiecke'] }, { label: patSVG('Linien'), pic: true, ans: ['Linien'] }] },
-      { id: 'i4', type: 'mc', title: 'Aussage prüfen', q: 'Welche Aussage über Füllmuster stimmt?',
-        info: `<p>Bei <b>2D-Füllmustern</b> werden die Linien Schicht für Schicht genau übereinander gedruckt. Bei <b>3D-Füllmustern</b> liegen sie versetzt. 3D-Muster sind neuer und sollen in alle Richtungen gleich stabil sein. <b>Konzentrische Muster</b> machen einen Druck in X- und Y-Richtung elastisch, weil ihre Linien nicht miteinander verbunden sind. Jedes Muster braucht unterschiedlich viel Weg für die Düse – deshalb ändert sich auch die Druckzeit.</p>`,
-        opts: ['Konzentrische Muster machen das Objekt in X- und Y-Richtung elastisch.', '3D-Muster sind nur in Z-Richtung stabil.', 'Bei 2D-Mustern sind die Linien versetzt.', 'Das Füllmuster hat keinen Einfluss auf die Druckzeit.'], ans: [0] },
-      { id: 'i5', type: 'mc', title: 'Die volle Packung', q: 'Was passiert bei einer Fülldichte von 100 %?',
+        pairs: [[`<span class="pic">${patSVG('Dreiecke')}</span>`, 'Dreiecke'], [`<span class="pic">${patSVG('Gitter')}</span>`, 'Gitter'], [`<span class="pic">${patSVG('Konzentrisch')}</span>`, 'Konzentrisch'], [`<span class="pic">${patSVG('Linien')}</span>`, 'Linien']] },
+      { id: 'i4', type: 'gaps', title: 'Füllmuster im Vergleich', q: 'Ordne die passenden Begriffe den Lücken zu.',
+        lesen: `<p>Cura bietet mehr als ein Dutzend Füllmuster an. Sie lassen sich in drei Gruppen einteilen. Die Gruppen unterscheiden sich vor allem darin, wie die Linien von Schicht zu Schicht liegen.</p>
+          <p>Die ältesten Muster wie Gitter, Linien oder Dreiecke sind <b>2D-Füllmuster</b>. Der Drucker legt in jeder Schicht dasselbe Bild, die Linien stapeln sich also genau aufeinander. Das geht schnell. Belastbar ist die Füllung aber vor allem von oben nach unten, drückt man seitlich, gibt sie leichter nach.</p>
+          <p>Bei <b>3D-Füllmustern</b> wie Gyroid oder Kubisch verschiebt der Slicer die Linien mit jeder Schicht ein wenig. So entsteht im Inneren ein räumliches Gerüst. Es soll ein Teil von allen Seiten etwa gleich gut stützen, egal aus welcher Richtung die Kraft kommt.</p>
+          <p>Ganz anders arbeiten <b>konzentrische Muster</b>. Ihre Ringe folgen der Außenwand, sind aber nicht miteinander verbunden. Ein solches Teil lässt sich in X- und Y-Richtung zusammendrücken und federt zurück. Das ist gut für biegsame Teile und schlecht für stabile.</p>
+          <p>Jedes Muster verlangt von der Düse einen anderen Weg. Mit dem Muster ändert sich deshalb nicht nur die Festigkeit, sondern auch die <b>Druckzeit</b>.</p>`,
+        text: 'Ein Armband soll federn, wenn man es seitlich zusammendrückt. Dafür passt ein Muster aus {0}, weil sie nicht miteinander {1} sind. Ein Halter, der Kräfte aus allen Richtungen aushalten muss, bekommt eher ein {2}. Bei einem {3} liegen die Linien jeder Schicht genau übereinander. Wer das Muster wechselt, verändert auch die {4}.',
+        gaps: [{ opts: ['Ringen', 'Dreiecken', 'Quadraten'], ans: 'Ringen' }, { opts: ['verbunden', 'versetzt', 'gekreuzt'], ans: 'verbunden' }, { opts: ['3D-Füllmuster', '2D-Füllmuster', 'Linienmuster'], ans: '3D-Füllmuster' }, { opts: ['2D-Füllmuster', '3D-Füllmuster', 'Gyroid-Muster'], ans: '2D-Füllmuster' }, { opts: ['Druckzeit', 'Schichtdicke', 'Düsentemperatur'], ans: 'Druckzeit' }],
+        hint: 'Für das Armband: Welche Gruppe lässt sich seitlich zusammendrücken? Für den Halter: Welche Gruppe stützt aus allen Richtungen?', explain: 'Konzentrisch = elastisch in X und Y, 3D-Muster = in alle Richtungen ähnlich stabil, 2D-Muster = Linien übereinander.' },
+      { id: 'i5', type: 'mc', title: 'Die volle Packung', q: 'Erkläre, was bei einer Fülldichte von 100 % passiert: Kreuze die passende Erklärung an.',
         info: `${panels([[tile('grid', 20), '20 %: viel Luft im Inneren'], [tile('grid', 90), 'fast 100 %: das Innere ist nahezu voll']])}<p>Die Fülldichte gibt an, wie viel vom Inneren mit Material gefüllt wird. Bei 0 % ist das Objekt hohl, bei 100 % massiv. Mehr Füllung heißt mehr Material, mehr Gewicht und längere Druckzeit.</p>`,
-        opts: ['Das Objekt wird innen komplett gefüllt – sehr viel Material und Zeit', 'Der Drucker druckt doppelt so schnell', 'Der Slicer lässt die Füllung einfach weg', 'Das Objekt wird leichter'], ans: [0], explain: 'Volle Füllung ist selten nötig. Oft ist mehr Wanddicke die bessere Wahl.' }
+        opts: ['Das Innere wird massiv gefüllt, Material und Druckzeit steigen stark.', 'Das Objekt wird stabiler, die Druckzeit bleibt aber gleich.', 'Die Wände werden dicker, die Füllung im Inneren bleibt gleich.', 'Der Drucker füllt nur die oberste und die unterste Schicht.'], ans: [0], explain: 'Volle Füllung ist selten nötig. Oft ist mehr Wanddicke die bessere Wahl.' }
     ]
   },
   {
@@ -1068,27 +1175,36 @@ const MODULES = [
     lead: 'Eine perfekte erste Schicht entscheidet über den ganzen Druck. Beim Ender 3 V2 stellst du dafür den Abstand zwischen Düse und Druckbett mit vier Stellrädern ein.',
     intro: () => `<div class="merke"><b class="t">Vorsicht heiß</b>Beim Nivellieren sind Düse (ca. 200 °C) und Bett (ca. 60 °C) vorgeheizt. Düse nicht berühren und das Papier nur am Rand halten.</div>`,
     tasks: [
-      { id: 'b1', type: 'order', title: 'Nivellieren Schritt für Schritt', q: 'Bringe die Schritte der Papier-Methode in die richtige Reihenfolge.',
+      { id: 'b1', type: 'order', title: 'Nivellieren Schritt für Schritt', q: 'Ordne die Schritte der Papier-Methode in der richtigen Reihenfolge.',
         info: `${fig(G.paper)}<p><b>Warum vorheizen?</b> Metall dehnt sich bei Wärme aus. Stellt man kalt ein, stimmt der Abstand beim Drucken nicht mehr.</p>
           <p><b>Warum Auto Home?</b> Der Drucker muss seinen Nullpunkt kennen, damit die Düse auf der richtigen Höhe steht.</p>
           <p><b>Warum Motoren lösen?</b> Nur ohne Motorkraft kannst du Druckkopf und Bett von Hand über jede Ecke schieben.</p>
           <p><b>Die Papier-Methode:</b> Ein Blatt Papier wird zwischen Düse und Bett geschoben. Man dreht am Stellrad der Ecke, bis sich das Blatt mit leichtem Widerstand ziehen lässt. Danach folgen die anderen Ecken. Weil sich die Ecken gegenseitig beeinflussen, prüft man am Ende alles noch einmal. Ob es wirklich passt, zeigt erst eine gedruckte Testschicht.</p>`,
         items: ['Düse und Druckbett auf Drucktemperatur vorheizen (z. B. 200 °C / 60 °C)', '„Auto Home“ ausführen', 'Schrittmotoren lösen („Disable Steppers“), damit sich Druckkopf und Bett von Hand schieben lassen', 'Düse über eine Bettecke schieben', 'Papier unterlegen und das Stellrad drehen, bis das Blatt leicht bremst', 'Die anderen drei Ecken nacheinander genauso einstellen', 'Alle Ecken noch einmal kontrollieren', 'Eine Testschicht drucken und die Haftung beurteilen'] },
-      { id: 'b2', type: 'gaps', title: 'Lückentext',
+      { id: 'b2', type: 'gaps', title: 'Stellräder und Papier', q: 'Ordne die passenden Begriffe den Lücken zu.',
         info: `${panels([[G.knobCW, '<b>Im Uhrzeigersinn</b> (von oben gesehen): Das Bett kommt der Düse näher.'], [G.knobCCW, '<b>Gegen den Uhrzeigersinn:</b> Das Bett senkt sich, der Abstand wird größer.']])}<p>Das Papier soll <b>leicht bremsen</b>: Es klemmt nicht fest, flattert aber auch nicht frei. Die vier Ecken hängen zusammen: Verstellst du eine, ändern sich die Nachbarecken ein wenig mit.</p>`,
         text: 'Das Papier soll sich mit leichtem {0} ziehen lassen. Dreht man das Stellrad im {1}, wird das Bett angehoben. Weil sich beim Verstellen die Nachbarecken mitbewegen, kontrolliert man {2} vier Ecken mehrmals.', gaps: [{ opts: ['Widerstand', 'Spiel', 'Schwung'], ans: 'Widerstand' }, { opts: ['Uhrzeigersinn', 'Gegenuhrzeigersinn'], ans: 'Uhrzeigersinn' }, { opts: ['alle', 'nur zwei', 'keine'], ans: 'alle' }] },
-      { id: 'b3', type: 'mc', title: 'Erste Schicht: Fehlerbild 1', q: 'Die Düse kratzt über das Bett, die Linien sind flachgedrückt und es kommt kaum Filament heraus. Was ist wahrscheinlich?',
-        info: `${panels([[G.near, '<b>Zu nah:</b> Linien platt und dünn, die Düse schleift.'], [G.ok, '<b>Richtig:</b> Linien leicht angedrückt, sie berühren sich.'], [G.far, '<b>Zu weit weg:</b> runde Schnüre, die kaum haften.']])}`,
-        opts: ['Der Abstand zwischen Düse und Bett ist zu klein.', 'Der Abstand zwischen Düse und Bett ist zu groß.', 'Das Filament ist zu dünn.', 'Der Druck ist zu langsam.'], ans: [0], explain: 'Bett per Stellrad etwas absenken (gegen den Uhrzeigersinn).' },
-      { id: 'b4', type: 'mc', title: 'Erste Schicht: Fehlerbild 2', q: 'Die erste Schicht liegt als runde Schnur locker auf dem Bett und löst sich beim Berühren. Was hilft?',
-        info: `${panels([[G.near, '<b>Zu nah:</b> Linien platt und dünn.'], [G.ok, '<b>Richtig:</b> Linien leicht angedrückt.'], [G.far, '<b>Zu weit weg:</b> runde Schnüre, schlechte Haftung.']])}<p>Zur Erinnerung: Im Uhrzeigersinn gedreht, hebt sich das Bett, gegen den Uhrzeigersinn senkt es sich.</p>`,
-        opts: ['Bett näher an die Düse bringen (Stellrad im Uhrzeigersinn)', 'Bett weiter von der Düse entfernen', 'Bett auf 0 °C abkühlen', 'Die Wanddicke verdoppeln'], ans: [0] },
-      { id: 'b5', type: 'mc', title: 'Haftung verbessern', q: 'In Cura kann die Druckplattenhaftung auf „Brim“ gestellt werden. Was bewirkt das?',
-        info: `${fig(G.brim, 'Von oben: Mehrere Linien (blau) laufen als flacher Rand um die erste Schicht des Modells.')}<p>Ein <b>Brim</b> ist ein dünner Rand aus einer Schicht, der direkt am Modell hängt. Er vergrößert die Fläche, die am Bett klebt. Nach dem Druck zieht man ihn einfach ab. Die Breite stellst du in Cura ein, zum Beispiel 8 mm.</p>`,
-        opts: ['Ein flacher Rand um das Objekt vergrößert die Auflagefläche.', 'Der Drucker fährt die Achsen langsamer.', 'Es wird kein Filament mehr verbraucht.', 'Das Bett wird automatisch nivelliert.'], ans: [0] },
-      { id: 'b6', type: 'num', title: 'Typische Temperaturen', q: 'Für PLA sind am Ender 3 V2 diese Werte üblich. Trage sie ein.',
-        info: `<div class="tscroll"><table class="mt"><thead><tr><th>Material</th><th>Düse</th><th>Druckbett</th></tr></thead><tbody><tr><th>PLA</th><td>190–215 °C, oft 200 °C</td><td>50–65 °C, oft 60 °C</td></tr><tr><th>PETG</th><td>230–245 °C</td><td>70–80 °C</td></tr></tbody></table></div><p class="hintline">Richtwerte. Die genauen Werte stehen auf der Filamentrolle.</p>`,
-        items: [{ q: 'Düsentemperatur', min: 190, max: 215, show: 200, unit: '°C' }, { q: 'Betttemperatur', min: 50, max: 65, show: 60, unit: '°C' }] }
+      { id: 'b3', type: 'sort', title: 'Erste Schicht beurteilen', q: 'Ordne jede Beobachtung an der ersten Schicht dem passenden Abstand zwischen Düse und Bett zu.',
+        lesen: `<p>Die erste Schicht zeigt dir, ob das Bett richtig eingestellt ist. Entscheidend ist, wie stark die Düse das weiche Filament gegen die Glasplatte drückt.</p>
+          <p>Steht die Düse <b>zu tief</b>, bleibt kaum Platz. Das Filament wird breit und dünn gequetscht, an manchen Stellen scheint das Glas durch. Oft hört man die Düse über die Platte kratzen. Es kommt nur wenig Material heraus, weil die Öffnung fast verschlossen ist. Staut sich das Filament, klickt der Motor des Extruders.</p>
+          <p>Steht die Düse <b>zu hoch</b>, fällt das Filament aus der Luft auf das Bett. Es bleibt rund wie eine Schnur und wird nicht angedrückt. Zwischen den Bahnen entstehen Lücken, und die ganze Schicht lässt sich mit dem Fingernagel leicht abschieben.</p>
+          <p>Ist der Abstand <b>richtig</b>, wird jede Bahn leicht flachgedrückt. Sie ist etwas breiter als hoch, berührt die Nachbarbahn ohne Lücke und haftet so fest, dass sie sich nicht abschieben lässt.</p>`,
+        cats: ['Düse zu nah am Bett', 'Abstand richtig', 'Düse zu weit weg'],
+        items: [{ text: 'Das Glas scheint durch die Bahnen.', cat: 0 }, { text: 'Man hört ein Kratzen.', cat: 0 }, { text: 'Der Extruder-Motor klickt.', cat: 0 }, { text: 'Bahnen etwas breiter als hoch, ohne Lücke', cat: 1 }, { text: 'Die Schicht haftet fest.', cat: 1 }, { text: 'Bahnen rund wie eine Schnur', cat: 2 }, { text: 'Lücken zwischen den Bahnen', cat: 2 }, { text: 'Die Schicht lässt sich abschieben.', cat: 2 }],
+        hint: 'Frage dich bei jeder Beobachtung: Wird das Filament zu stark, richtig oder gar nicht angedrückt?', explain: 'Zu nah: gequetscht, kratzt, wenig Material. Zu weit: runde Schnüre, Lücken, schlechte Haftung.' },
+      { id: 'b4', type: 'match', title: 'Erste Schicht korrigieren', q: 'Ordne jedem Bild einer ersten Schicht die passende Maßnahme zu.', how: 'Tippe links ein Bild an und dann rechts die passende Maßnahme. Zum Lösen einer Verbindung tippe die Maßnahme rechts noch einmal an.',
+        info: `<p>Die Bilder zeigen die Düse und die erste Schicht von der Seite, jeweils an einer anderen Ecke des Betts. Wie die Stellräder das Bett bewegen, steht bei Aufgabe 2.</p>`,
+        pairs: [[`<span class="pic">${G.far}</span>`, 'Stellrad im Uhrzeigersinn drehen, das Bett kommt näher'], [`<span class="pic">${G.ok}</span>`, 'Nichts verstellen, so soll die erste Schicht aussehen'], [`<span class="pic">${G.near}</span>`, 'Stellrad gegen den Uhrzeigersinn drehen, das Bett senkt sich']],
+        hint: 'Erkenne zuerst bei jedem Bild, ob die Düse zu nah, zu weit weg oder richtig steht.', explain: 'Runde Schnüre: Abstand zu groß, Bett anheben. Platte, dünne Bahnen: Abstand zu klein, Bett absenken.' },
+      { id: 'b5', type: 'mc', title: 'Haftung verbessern', q: 'Erkläre, was die Einstellung „Brim“ bei der Druckplattenhaftung in Cura bewirkt: Kreuze die passende Erklärung an.',
+        info: `${fig(G.brim, 'Von oben: Mehrere Linien (blau) laufen als flacher Rand um die erste Schicht des Modells.')}<p>Ein <b>Brim</b> ist ein dünner Rand aus einer Schicht, der direkt am Modell hängt. Er vergrößert die Fläche, die am Bett klebt. Nach dem Druck zieht man ihn einfach ab. Die Breite stellst du in Cura ein, zum Beispiel 8 mm.</p><p>In derselben Liste findest du zwei andere Einstellungen: Ein <b>Skirt</b> ist eine einzelne Linie, die mit etwas Abstand um das Modell läuft. Sie berührt es nicht und dient nur dazu, dass das Filament gleichmäßig fließt, bevor das Modell beginnt. Ein <b>Raft</b> ist ein dickes Gitter aus mehreren Schichten, das unter dem ganzen Modell liegt.</p>`,
+        opts: ['Ein flacher Rand am Objekt vergrößert die Fläche, die am Bett haftet.', 'Eine einzelne Linie umfährt das Objekt mit Abstand, ohne es zu berühren.', 'Ein dickes Gitter aus mehreren Schichten liegt unter dem ganzen Objekt.', 'Die erste Schicht wird langsamer und etwas dicker auf das Bett gelegt.'], ans: [0], explain: 'Brim = Rand am Modell. Skirt = Linie mit Abstand, Raft = Gitter unter dem Modell.' },
+      { id: 'b6', type: 'num', title: 'Typische Temperaturen', q: 'Nenne die üblichen Temperaturen für PLA am Ender 3 V2.',
+        lesen: `<p>Jeder Kunststoff wird bei einer anderen Temperatur weich. <b>PETG</b> ist zäher und hält mehr Wärme aus als PLA. Damit es sauber fließt, muss die Düse zwischen 230 und 245 °C heiß sein, das Bett 70 bis 80 °C. Das in der Schule übliche <b>PLA</b> schmilzt schon bei geringerer Hitze: Die Düse arbeitet meist mit 200 °C, je nach Rolle zwischen 190 und 215 °C. Das Bett bleibt deutlich kühler als bei PETG. Üblich sind 60 °C, also etwa 50 bis 65 °C.</p>
+          <p>Warum wird das Bett überhaupt beheizt? Kunststoff zieht sich beim Abkühlen zusammen. Kühlt die erste Schicht auf dem kalten Glas zu schnell ab, ziehen sich die Ecken hoch und das Teil löst sich (Warping). Ein warmes Bett hält die unterste Schicht etwas weich, sodass sie fest haftet. Zu heiß darf es aber nicht sein, sonst bleibt die Schicht zu weich und verformt sich.</p>
+          <p class="hintline">Richtwerte. Die genauen Werte stehen auf der Filamentrolle.</p>`,
+        items: [{ q: 'Düsentemperatur', min: 190, max: 215, show: 200, unit: '°C' }, { q: 'Betttemperatur', min: 50, max: 65, show: 60, unit: '°C' }],
+        hint: 'Im Text stehen Werte für zwei Kunststoffe. Gefragt ist nur PLA.' }
     ]
   },
   {
@@ -1096,13 +1212,11 @@ const MODULES = [
     lead: 'Ein 3D-Drucker wird heiß und hat bewegliche Teile. Mit ein paar Regeln bleibt der Druck ungefährlich – und wenn etwas schiefgeht, kannst du die Ursache eingrenzen.',
     intro: () => `<div class="merke"><b class="t">Heiß und beweglich</b>Die Düse erreicht über 200 °C, das Bett etwa 60 °C. Die Achsen fahren mit Kraft. Greife nie in den Bauraum, solange der Drucker läuft.</div>`,
     tasks: [
-      { id: 'x1', type: 'mc', title: 'Sicher arbeiten', q: 'Welche Regeln gehören zum sicheren Umgang mit dem 3D-Drucker?',
-        info: `<ul class="il"><li><b>Hitze:</b> Düse und Heizblock werden über 200 °C heiß, das Bett etwa 60 °C. Auch nach dem Druck bleiben sie eine Weile heiß.</li>
-          <li><b>Bewegung:</b> Riemen, Motoren und Achsen können Finger einklemmen. Hände bleiben während des Drucks außerhalb des Bauraums.</li>
-          <li><b>Aufsicht:</b> Ein Drucker wird nicht unbeaufsichtigt betrieben – auch nicht über Nacht oder in der Pause.</li>
-          <li><b>Teile lösen:</b> Erst abkühlen lassen, dann mit einem Spachtel vorsichtig und vom Körper weg arbeiten.</li>
-          <li><b>Störungen:</b> Riecht es verbrannt oder läuft etwas schief, schaltest du aus und holst die Lehrkraft.</li></ul>`,
-        opts: ['Die heiße Düse und das heiße Druckbett nicht berühren.', 'Nicht in den Bauraum greifen, solange der Drucker druckt.', 'Fertige Teile erst nach dem Abkühlen und mit passendem Werkzeug lösen.', 'Den Drucker über Nacht allein arbeiten lassen.', 'Bei Störungen den Drucker ausschalten und die Lehrkraft rufen.'], ans: [0, 1, 2, 4] },
+      { id: 'x1', type: 'mc', title: 'Sicher arbeiten', q: 'Überprüfe die Aussagen zum sicheren Arbeiten: Kreuze alle an, die stimmen.',
+        lesen: `<p>Beim 3D-Druck gibt es zwei Gefahren: <b>Hitze</b> und <b>bewegte Teile</b>. Düse und Heizblock werden über 200 °C heiß und bleiben es noch eine Weile, nachdem der Druck fertig ist. Auch das Druckbett ist mit etwa 60 °C so warm, dass man sich bei längerem Kontakt verbrennen kann. Fertige Teile lässt man deshalb erst abkühlen und löst sie dann mit einem Spachtel, vom Körper weg.</p>
+          <p>Während des Drucks fahren Riemen und Achsen mit Kraft hin und her. Wer in den Bauraum greift, kann sich die Finger einklemmen oder die Düse berühren. Auch kleine Störungen, etwa ein Faden am Druckkopf, werden nicht im laufenden Betrieb behoben: Zuerst wird der Druck angehalten. Riecht es verbrannt oder läuft etwas schief, schaltest du den Drucker aus und holst die Lehrkraft. Ein Drucker läuft nie unbeaufsichtigt, auch nicht in der Pause.</p>`,
+        opts: ['Die Düse bleibt nach dem Druck noch eine Weile heiß.', 'Bei Brandgeruch schaltet man aus und holt die Lehrkraft.', 'Fertige Teile löst man nach dem Abkühlen mit einem Spachtel.', 'Das Druckbett wird nur etwa 60 °C warm, man kann es anfassen.', 'Kleine Störungen behebt man am besten im laufenden Druck.', 'In der Pause darf der Drucker kurz allein weiterlaufen.'], ans: [0, 1, 2],
+        explain: 'Auch 60 °C können bei längerem Kontakt verbrennen. Störungen erst nach dem Anhalten beheben, und nie unbeaufsichtigt drucken.' },
       { id: 'x2', type: 'match', title: 'Fehlerbilder', q: 'Ordne jedem Fehlerbild die wahrscheinlichste Ursache zu.',
         info: `${panels([[G.string, '<b>Stringing:</b> feine Fäden wie Spinnweben'], [G.warp, '<b>Warping:</b> Ecken biegen sich hoch'], [G.under, '<b>Unterextrusion:</b> dünne Bahnen, Lücken'], [G.shift, '<b>Layer Shift:</b> Schichten verrutscht']])}
           <ul class="il"><li>Fäden entstehen, wenn beim Überfahren noch flüssiges Material aus der Düse tropft – etwa weil die Düse zu heiß ist oder das Filament nicht weit genug zurückgezogen wird.</li>
@@ -1110,35 +1224,39 @@ const MODULES = [
           <li>Kommt zu wenig Material aus der Düse, weil sie teilweise verstopft ist oder das Filament hakt, bleiben Lücken.</li>
           <li>Rutscht ein Riemen oder stößt der Druckkopf an, verschieben sich alle folgenden Schichten.</li></ul>`,
         pairs: [['Feine Fäden zwischen getrennten Teilen (Stringing)', 'Düsentemperatur zu hoch oder Rückzug zu gering'], ['Die Ecken heben sich vom Bett ab (Warping)', 'Schlechte Haftung, z. B. Bett zu kalt oder kein Brim'], ['Lücken in den Wänden, dünne Bahnen (Unterextrusion)', 'Düse teilweise verstopft oder zu wenig Filamentfluss'], ['Schichten sind seitlich versetzt (Layer Shift)', 'Riemen locker oder Achse blockiert / zu schnell']] },
-      { id: 'x3', type: 'mc', title: 'Filamentwechsel', q: 'Du willst das Filament wechseln. Was tust du zuerst?',
-        info: `<p>So wechselst du das Filament am Ender 3 V2:</p><ul class="il"><li>Düse auf Drucktemperatur aufheizen, damit das Filament im Hotend weich wird.</li><li>Den blauen Hebel am Extruder drücken und das alte Filament langsam herausziehen.</li><li>Das neue Filament schräg abschneiden, einfädeln und durchschieben, bis es aus der Düse kommt.</li></ul><p>Zieht man bei kalter Düse, reißt das Filament ab oder die Düse verstopft.</p>`,
-        opts: ['Die Düse aufheizen, damit sich das Filament herausziehen lässt.', 'Das Filament bei kalter Düse mit Gewalt herausreißen.', 'Das Druckbett abbauen.', 'Die SD-Karte entfernen.'], ans: [0] }
+      { id: 'x3', type: 'order', title: 'Filamentwechsel', q: 'Ordne die Schritte eines Filamentwechsels in der richtigen Reihenfolge.',
+        lesen: `<p>Soll ein Modell eine andere Farbe bekommen, wird das Filament gewechselt. Dabei hilft es zu wissen, was im Drucker passiert.</p>
+          <p>Im Hotend steckt immer ein Stück Filament, das beim letzten Druck geschmolzen und dann erstarrt ist. Kalt sitzt es fest wie ein Pfropfen. Wer jetzt zieht, reißt das Filament ab, und der Rest verstopft die Düse. Herausziehen lässt es sich erst, wenn die Düse wieder auf <b>Drucktemperatur</b> ist.</p>
+          <p>Das geriffelte Rad im Extruder hält das Filament fest, solange der blaue <b>Hebel</b> nicht gedrückt ist. Ohne den Hebel lässt sich das Filament weder herausziehen noch einschieben.</p>
+          <p>Das neue Filament schneidet man <b>schräg</b> an, damit es leichter in den Schlauch rutscht. Man schiebt so lange nach, bis keine alte Farbe mehr aus der Düse kommt, sondern nur noch die neue. Bevor der nächste Druck startet, entfernt man den herausgequollenen Faden mit einer Pinzette. Vorsicht, die Düse ist dabei noch heiß.</p>`,
+        items: ['Die Düse auf die Drucktemperatur des alten Filaments aufheizen', 'Den Hebel drücken und das alte Filament langsam herausziehen', 'Das neue Filament schräg anschneiden und durch den Extruder in den Schlauch schieben', 'Nachschieben, bis nur noch die neue Farbe aus der Düse kommt', 'Den Faden an der Düse mit einer Pinzette entfernen und den Druck starten'],
+        hint: 'Überlege bei jedem Schritt: Was muss vorher passiert sein, damit er gelingt?', explain: 'Erst aufheizen, sonst reißt das Filament ab und die Düse verstopft.' }
     ]
   }
 ];
 
 /* ---------- Testfragen ---------- */
 const TEST_BANK = [
-  { id: 'q1', type: 'mc', q: 'Bei welchem Verfahren schmilzt ein Laser Pulver punktuell zusammen?', opts: ['SLA', 'SLS', '3D-Printing (3DP)', 'FDM'], ans: [1], fixed: true, explain: 'SLS = Selektives Lasersintern.' },
-  { id: 'q2', type: 'mc', q: 'Welche Energiequelle nutzt das FDM-Verfahren?', opts: ['Laser', 'Heizdüse', 'UV-Lampe', 'Klebstoff'], ans: [1], explain: 'Die Heizdüse (Hotend) schmilzt das Filament.' },
-  { id: 'q3', type: 'mc', q: 'Beim 3D-Printing (3DP) werden die Pulverschichten verbunden durch …', opts: ['einen Laser', 'ein Bindemittel', 'eine Heizdüse', 'Magnete'], ans: [1], explain: 'Ein Druckkopf trägt Bindemittel auf und verklebt das Pulver.' },
-  { id: 'q4', type: 'mc', q: 'Bei welchem Verfahren wird die Oberfläche am feinsten?', opts: ['SLA', 'SLS', 'FDM', 'Bei allen gleich'], ans: [0], fixed: true, explain: 'SLA liefert die glatteste Oberfläche.' },
-  { id: 'q5', type: 'mc', q: 'Wozu dient eine Stützstruktur (Support)?', opts: ['Sie trägt Überhänge beim Drucken und wird später entfernt.', 'Sie kühlt das Hotend.', 'Sie hält das Filament auf der Spule.', 'Sie ersetzt die Füllung.'], ans: [0], explain: 'Ohne Support würden frei schwebende Teile herunterhängen.' },
-  { id: 'q6', type: 'mc', q: 'Wie hoch darf ein Objekt beim Ender 3 V2 höchstens sein (Bauraum)?', opts: ['150 mm', '200 mm', '250 mm', '300 mm'], ans: [2], fixed: true, explain: 'Der Bauraum beträgt 220 × 220 × 250 mm.' },
-  { id: 'q7', type: 'mc', q: 'Was ist typisch für einen Bowden-Extruder?', opts: ['Ein Schlauch führt das Filament vom Extruder am Rahmen zum Hotend.', 'Der Extruder sitzt direkt auf dem Druckkopf.', 'Das Filament wird als Pulver zugeführt.', 'Es gibt keinen Motor.'], ans: [0], explain: 'Der Motor sitzt am Rahmen, der Druckkopf bleibt leicht.' },
-  { id: 'q8', type: 'mc', q: 'Welches Bauteil meldet dem Mainboard den Nullpunkt?', opts: ['Endstop-Schalter', 'Extruder', 'Display', 'Riemenspanner'], ans: [0], explain: 'Vom Nullpunkt aus werden alle Positionen berechnet.' },
-  { id: 'q9', type: 'mc', q: 'Was passiert im Hotend?', opts: ['Das Filament wird geschmolzen.', 'Das Filament wird gekühlt.', 'Der G-Code wird erzeugt.', 'Das Bett wird nivelliert.'], ans: [0], explain: 'Das Hotend erhitzt das Filament bis zum Schmelzen.' },
-  { id: 'q10', type: 'mc', q: 'Welche Reihenfolge beschreibt den Weg des Filaments richtig?', opts: ['Spule → Extruder → Schlauch → Hotend → Düse', 'Spule → Hotend → Extruder → Schlauch → Düse', 'Extruder → Spule → Düse → Hotend → Schlauch', 'Düse → Hotend → Schlauch → Extruder → Spule'], ans: [0], explain: 'Vorschub, Schlauch, Schmelzen, Ausgabe.' },
-  { id: 'q11', type: 'mc', q: 'Was erzeugt der Slicer aus der STL-Datei und deinen Einstellungen?', opts: ['Den G-Code', 'Ein neues 3D-Modell', 'Das Filament', 'Ein Foto'], ans: [0], fixed: true, explain: 'Der G-Code enthält alle Fahr- und Heizbefehle.' },
-  { id: 'q12', type: 'num', q: 'Ein Objekt ist 24 mm hoch, die Schichtdicke beträgt 0,2 mm. Wie viele Schichten druckt der Drucker?', ans: 120, tol: 0, unit: 'Schichten', explain: '24 ÷ 0,2 = 120.' },
-  { id: 'q13', type: 'num', q: 'Wie viele Bahnen hat eine 1,2 mm dicke Wand bei einer 0,4-mm-Düse?', ans: 3, tol: 0, unit: 'Bahnen', explain: '1,2 ÷ 0,4 = 3.' },
-  { id: 'q14', type: 'mc', q: 'Welche Änderungen verkürzen die Druckzeit?', opts: ['Dickere Schichten wählen', 'Die Fülldichte verringern', 'Die Geschwindigkeit deutlich verringern', 'Die Fülldichte auf 100 % erhöhen'], ans: [0, 1], explain: 'Weniger Schichten und weniger Füllung sparen Zeit.' },
-  { id: 'q15', type: 'num', q: 'Wie hoch ist die übliche Standard-Fülldichte?', ans: 20, tol: 0, unit: '%', explain: 'Standard sind 20 %.' },
-  { id: 'q16', type: 'mc', q: 'Konzentrische Füllmuster machen ein Objekt …', opts: ['in X- und Y-Richtung elastisch', 'in alle Richtungen besonders steif', 'leichter als ohne Füllung', 'schneller druckbar als jedes andere Muster'], ans: [0], explain: 'Die Linien sind nicht miteinander verbunden.' },
-  { id: 'q17', type: 'mc', q: 'Welches Füllmuster gehört zu den 2D-Füllmustern?', opts: ['Gitter', 'Gyroid', 'Octet', 'Kubisch'], ans: [0], explain: 'Gyroid, Octet und Kubisch sind 3D-Muster.' },
-  { id: 'q18', type: 'mc', q: 'Wie groß soll der Abstand zwischen Düse und Bett bei der Papier-Methode etwa sein?', opts: ['So dick wie ein Blatt Papier (ca. 0,1 mm)', 'Etwa 1 cm', 'Etwa 5 mm', 'Null – die Düse liegt fest auf'], ans: [0], fixed: true, explain: 'Das Papier lässt sich mit leichtem Widerstand ziehen.' },
-  { id: 'q19', type: 'mc', q: 'Du drehst ein Stellrad im Uhrzeigersinn. Was passiert?', opts: ['Das Bett wird angehoben, der Abstand zur Düse sinkt.', 'Das Bett wird abgesenkt.', 'Die Düse wird heißer.', 'Der Riemen wird gespannt.'], ans: [0], explain: 'Im Uhrzeigersinn: Bett höher.' },
-  { id: 'q20', type: 'mc', q: 'Welche Aussagen zur Sicherheit stimmen?', opts: ['Die Düse kann über 200 °C heiß sein.', 'Beim Druck darf man in den Bauraum greifen.', 'Fertige Teile löst man erst nach dem Abkühlen.', 'Bei Störungen schaltet man aus und informiert die Lehrkraft.'], ans: [0, 2, 3], explain: 'Nie in den laufenden Drucker greifen.' }
+  { id: 'q1', type: 'mc', q: 'Ein Laser schmilzt Pulver punktuell zusammen beim Verfahren …', opts: ['SLA', 'SLS', '3D-Printing (3DP)', 'FDM'], ans: [1], fixed: true, explain: 'SLS = Selektives Lasersintern.' },
+  { id: 'q2', type: 'mc', q: 'Als Energiequelle nutzt das FDM-Verfahren …', opts: ['einen Laser', 'eine Heizdüse', 'eine UV-Lampe', 'einen Klebstoff'], ans: [1], explain: 'Die Heizdüse (Hotend) schmilzt das Filament.' },
+  { id: 'q3', type: 'mc', q: 'Beim 3D-Printing (3DP) werden die Pulverschichten verbunden durch …', opts: ['einen Laser', 'ein Bindemittel', 'eine Heizdüse', 'UV-Licht'], ans: [1], explain: 'Ein Druckkopf trägt Bindemittel auf und verklebt das Pulver.' },
+  { id: 'q4', type: 'mc', q: 'Die feinste Oberfläche liefert das Verfahren …', opts: ['SLA', 'SLS', '3D-Printing (3DP)', 'FDM'], ans: [0], fixed: true, explain: 'SLA liefert die glatteste Oberfläche.' },
+  { id: 'q5', type: 'mc', q: 'Eine Stützstruktur (Support) …', opts: ['trägt Überhänge beim Drucken und wird danach entfernt.', 'vergrößert die Auflagefläche und verhindert hochgebogene Ecken.', 'füllt das Innere des Modells, damit es stabiler wird.', 'verdickt die Außenwand, damit die Oberfläche glatter wird.'], ans: [0], explain: 'Ohne Support würden frei schwebende Teile herunterhängen. Den Rand für die Haftung nennt man Brim.' },
+  { id: 'q6', type: 'mc', q: 'Die größte Höhe eines Objekts beträgt beim Ender 3 V2 …', opts: ['150 mm', '200 mm', '250 mm', '300 mm'], ans: [2], fixed: true, explain: 'Der Bauraum beträgt 220 × 220 × 250 mm.' },
+  { id: 'q7', type: 'mc', q: 'Typisch für einen Bowden-Extruder ist: …', opts: ['Ein Schlauch führt das Filament vom Extruder am Rahmen zum Hotend.', 'Der Extruder sitzt direkt auf dem Druckkopf und fährt mit ihm mit.', 'Zwei Motoren schieben das Filament von beiden Seiten zum Hotend.', 'Ein Schlauch kühlt das Filament auf dem Weg zum Druckkopf ab.'], ans: [0], explain: 'Der Motor sitzt am Rahmen, der Druckkopf bleibt leicht.' },
+  { id: 'q8', type: 'mc', q: 'Den Nullpunkt meldet dem Mainboard …', opts: ['der Endstop-Schalter', 'der Extruder', 'das Display', 'der Riemenspanner'], ans: [0], explain: 'Vom Nullpunkt aus werden alle Positionen berechnet.' },
+  { id: 'q9', type: 'mc', q: 'Im Hotend wird das Filament …', opts: ['geschmolzen.', 'vorgeschoben und gekühlt.', 'getrocknet und gespannt.', 'zu feinem Pulver gemahlen.'], ans: [0], explain: 'Das Hotend erhitzt das Filament bis zum Schmelzen. Vorgeschoben wird es vom Extruder.' },
+  { id: 'q10', type: 'mc', q: 'Den Weg des Filaments beschreibt richtig: …', opts: ['Spule → Extruder → Schlauch → Hotend → Düse', 'Spule → Hotend → Extruder → Schlauch → Düse', 'Extruder → Spule → Düse → Hotend → Schlauch', 'Spule → Schlauch → Extruder → Düse → Hotend'], ans: [0], explain: 'Vorschub, Schlauch, Schmelzen, Ausgabe.' },
+  { id: 'q11', type: 'mc', q: 'Aus der STL-Datei und deinen Einstellungen erzeugt der Slicer …', opts: ['den G-Code', 'eine neue STL-Datei', 'eine CAD-Zeichnung', 'ein Druckprofil'], ans: [0], explain: 'Der G-Code enthält alle Fahr- und Heizbefehle.' },
+  { id: 'q12', type: 'num', q: 'Ein Objekt ist 24 mm hoch, die Schichtdicke beträgt 0,2 mm. Berechne die Zahl der Schichten.', ans: 120, tol: 0, unit: 'Schichten', explain: '24 ÷ 0,2 = 120.' },
+  { id: 'q13', type: 'num', q: 'Berechne die Zahl der Bahnen einer 1,2 mm dicken Wand bei einer 0,4-mm-Düse.', ans: 3, tol: 0, unit: 'Bahnen', explain: '1,2 ÷ 0,4 = 3.' },
+  { id: 'q14', type: 'mc', q: 'Die Druckzeit verkürzt sich, wenn man …', opts: ['dickere Schichten wählt', 'die Fülldichte verringert', 'die Geschwindigkeit deutlich verringert', 'die Fülldichte auf 100 % erhöht'], ans: [0, 1], explain: 'Weniger Schichten und weniger Füllung sparen Zeit.' },
+  { id: 'q15', type: 'num', q: 'Nenne die übliche Standard-Fülldichte.', ans: 20, tol: 0, unit: '%', explain: 'Standard sind 20 %.' },
+  { id: 'q16', type: 'mc', q: 'Konzentrische Füllmuster machen ein Objekt …', opts: ['in X- und Y-Richtung elastisch', 'in alle Richtungen besonders steif', 'leichter als ganz ohne Füllung', 'schneller druckbar als jedes andere Muster'], ans: [0], explain: 'Die Linien sind nicht miteinander verbunden.' },
+  { id: 'q17', type: 'mc', q: 'Zu den 2D-Füllmustern gehört …', opts: ['Gitter', 'Gyroid', 'Octet', 'Kubisch'], ans: [0], explain: 'Gyroid, Octet und Kubisch sind 3D-Muster.' },
+  { id: 'q18', type: 'mc', q: 'Bei der Papier-Methode ist der Abstand zwischen Düse und Bett etwa …', opts: ['so dick wie ein Blatt Papier (ca. 0,1 mm)', 'so dick wie ein Stück Pappe (ca. 1 mm)', 'so breit wie die Düsenöffnung (0,4 mm)', 'null, die Düse liegt auf dem Bett auf'], ans: [0], explain: 'Das Papier lässt sich mit leichtem Widerstand ziehen.' },
+  { id: 'q19', type: 'mc', q: 'Drehst du ein Stellrad im Uhrzeigersinn, …', opts: ['wird das Bett angehoben, der Abstand zur Düse sinkt.', 'wird das Bett abgesenkt, der Abstand zur Düse wächst.', 'wird die Düse angehoben, der Abstand zum Bett wächst.', 'wird der Riemen gespannt, das Bett sitzt fester.'], ans: [0], explain: 'Im Uhrzeigersinn: Bett höher.' },
+  { id: 'q20', type: 'mc', q: 'Zur Sicherheit am 3D-Drucker stimmt: …', opts: ['Düse und Heizblock können über 200 °C heiß werden.', 'Bei Störungen schaltet man aus und informiert die Lehrkraft.', 'Das Druckbett wird nur 60 °C warm, man kann es anfassen.', 'Kleine Störungen behebt man am besten im laufenden Druck.'], ans: [0, 1], explain: 'Auch das Bett kann verbrennen. Störungen erst nach dem Anhalten beheben.' }
 ];
 
 /* ---------- Fortschritt ---------- */
@@ -1260,7 +1378,7 @@ function finishRun() {
 }
 function verdict(p) { return p >= 90 ? 'Ausgezeichnet – das sitzt.' : p >= 75 ? 'Sehr gut – nur noch Kleinigkeiten.' : p >= 60 ? 'Solide – schau dir die Fehler an und übe die passenden Module.' : p >= 40 ? 'Noch unsicher – wiederhole die Module zu den falschen Fragen.' : 'Geh die Module noch einmal in Ruhe durch und versuche den Test danach erneut.'; }
 function viewTest() {
-  const root = h('div', null, h('header', { class: 'pagehead' }, h('h1', null, 'Abschlusstest'), h('p', { class: 'lead' }, '20 Fragen zu allen Modulen. Die Auswertung bekommst du erst am Ende – dann siehst du zu jeder Frage die richtige Antwort.')));
+  const root = h('div', null, h('header', { class: 'pagehead' }, h('h1', null, 'Abschlusstest'), h('p', { class: 'lead' }, '20 Fragen zu allen Modulen. Die Auswertung bekommst du erst am Ende – dann siehst du zu jeder Frage die richtige Antwort.')), h('p', { class: 'testauftrag' }, 'Überprüfe dein Wissen aus allen sechs Modulen: Ergänze jeden Satzanfang mit der passenden Antwort oder berechne das Ergebnis.'));
   const b = bestTest();
   if (!run) {
     root.append(h('div', { class: 'card' },
@@ -1388,7 +1506,8 @@ function buildReport() {
   const o = overall(); const b = bestTest(); const last = S.test.attempts[S.test.attempts.length - 1];
   const d = new Date(); const date = `${String(d.getDate()).padStart(2, '0')}.${String(d.getMonth() + 1).padStart(2, '0')}.${d.getFullYear()}`;
   const mods = MODULES.map((m, i) => { const s = modStats(m); return { titel: `${i + 1} ${m.title}`, geloest: s.done, gesamt: s.total, mitLoesungshilfe: s.assisted }; });
-  return { date, name: S.name || '', klasse: S.klasse || '', mods, o, b, last, attempts: S.test.attempts.length, code: makeCode() };
+  const opens = MODULES.flatMap(m => m.tasks.filter(t => t.type === 'open').map(t => ({ titel: t.title, auftrag: strip(t.q), text: ((S.tasks[t.id] && S.tasks[t.id].text) || '').trim() })));
+  return { date, name: S.name || '', klasse: S.klasse || '', mods, o, b, last, opens, attempts: S.test.attempts.length, code: makeCode() };
 }
 function reportLines(r) {
   const L = [];
@@ -1397,6 +1516,7 @@ function reportLines(r) {
   L.push('Module:');
   r.mods.forEach(m => L.push(`- ${m.titel}: ${m.geloest}/${m.gesamt} Aufgaben gelöst` + (m.mitLoesungshilfe ? ` (davon ${m.mitLoesungshilfe} mit Lösungshilfe)` : '')));
   L.push(`Gesamt: ${r.o.done}/${r.o.total} Aufgaben (${r.o.pct} %)`, '');
+  (r.opens || []).forEach(x => L.push(`Offene Aufgabe „${x.titel}“: ${x.auftrag}`, x.text || '(noch nicht bearbeitet)', ''));
   if (r.b) {
     L.push('Abschlusstest:', `- Bester Versuch: ${r.b.score}/${r.b.max} Punkte (${Math.round(100 * r.b.score / r.b.max)} %)`, `- Letzter Versuch: ${r.last.score}/${r.last.max} Punkte (${Math.round(100 * r.last.score / r.last.max)} %)`, `- Anzahl Versuche: ${r.attempts}`, '');
     const items = r.last.items || [];
@@ -1434,6 +1554,7 @@ function makePDF(r) {
   row('Modul', 'Gelöst', 'mit Lösungshilfe', true, true);
   r.mods.forEach(m => row(m.titel, `${m.geloest} / ${m.gesamt}`, String(m.mitLoesungshilfe)));
   row('Gesamt', `${r.o.done} / ${r.o.total}`, `${r.o.pct} %`, true, true); y += 4;
+  (r.opens || []).forEach(x => { line(`Offene Aufgabe: ${x.titel}`, 13, 'bold', [3, 85, 145]); y += 1; line(x.auftrag, 10, 'italic', [86, 104, 122]); y += 1; line(x.text || '(noch nicht bearbeitet)'); y += 4; });
   line('Abschlusstest', 13, 'bold', [3, 85, 145]); y += 1;
   if (r.b) {
     line(`Bester Versuch: ${r.b.score} von ${r.b.max} Punkten (${Math.round(100 * r.b.score / r.b.max)} %)   |   Letzter Versuch: ${r.last.score} von ${r.last.max}   |   Versuche: ${r.attempts}`); y += 2;
