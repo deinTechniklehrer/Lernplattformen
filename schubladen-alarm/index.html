@@ -888,11 +888,11 @@ path.lg-ledg,path.lg-ledo,path.lg-ledy{stroke:var(--lg-ink);stroke-width:3}
 <section class="station c-existenz" data-ch="2" hidden>
   <div class="info">
     <h3>So funktioniert die Schaltung</h3>
-    <p><b>R3</b> (1 kΩ), der <b>LDR</b> und <b>R1</b> (10 kΩ) liegen in Reihe zwischen Plus und Minus. Sie bilden einen <b>Spannungsteiler</b>: Die Spannung an R1 liegt auch an der <b>Basis</b> des Transistors.</p>
+    <p><b>R3</b> (1 kΩ), der <b>LDR</b> und <b>R1</b> (4,7 kΩ) liegen in Reihe zwischen Plus und Minus. Sie bilden einen <b>Spannungsteiler</b>: Die Spannung an R1 liegt auch an der <b>Basis</b> des Transistors.</p>
     <ul>
       <li><b>Schublade zu, dunkel:</b> Der LDR ist sehr groß (bis etwa 1 MΩ). R1 zieht die Basis auf <b>GND (Minus)</b>, sie bleibt <b>unter 0,7 V</b>. Der Transistor <b>sperrt</b>, der Summer ist still. Es fließt <b>praktisch kein Strom</b>, die Batterie hält lange.</li>
       <li><b>Schublade auf, Licht:</b> Der LDR wird klein. Jetzt fließt Strom über R3 und den LDR in die Basis, der Transistor <b>leitet</b>. Strom fließt von Plus durch den Summer zum Kollektor und über den Emitter zu Minus. Der Summer piept.</li>
-      <li>Der Alarm löst aus, sobald LDR und R3 zusammen weniger als etwa <b>54 kΩ</b> haben. Piept er auch bei geschlossener Schublade, nimmst du für R1 einen <b>kleineren Widerstand</b> (4,7 kΩ). Dann braucht er mehr Licht und ist <b>weniger empfindlich</b>.</li>
+      <li>Der Alarm löst aus, sobald LDR und R3 zusammen weniger als etwa <b>56 kΩ</b> haben (4,7 kΩ · 8,3 V : 0,7 V). Piept er auch bei geschlossener Schublade, nimmst du für R1 einen <b>kleineren Widerstand</b> (2,2 kΩ). Dann braucht er mehr Licht und ist <b>weniger empfindlich</b>.</li>
       <li><b>R3</b> schützt den Transistor: Leuchtet jemand mit der <b>Handy-Taschenlampe</b> direkt auf den LDR, wird dieser sehr klein. R3 begrenzt dann den Strom in die Basis.</li>
     </ul>
     <p>Probier es aus: Schieb den Regler zwischen dunkel und hell. Der rote Weg zeigt, wo der große Strom fließt.</p>
@@ -937,8 +937,8 @@ path.lg-ledg,path.lg-ledo,path.lg-ledy{stroke:var(--lg-ink);stroke-width:3}
     <p>In der <b>Stückliste</b> steht jedes Bauteil mit seiner Anzahl. So kannst du vor dem Löten alles bereitlegen und prüfen, ob etwas fehlt.</p>
     <ul>
       <li>Alle elektronischen Bauteile findest du im <b>Schaltplan</b> in Kapitel 2. Jedes Schaltzeichen ist ein Bauteil.</li>
-      <li>Die Batterie im Schaltplan besteht aus einem <b>Batteriehalter</b> für 3 Batterien der Größe <b>AA (Mignon)</b>. 3 × 1,5 V = 4,5 V. Auch die Batterien kommen in die Stückliste.</li>
-      <li>Für den Alarm nimmst du einen Batteriehalter <b>mit Schalter</b>, damit du ihn ausschalten kannst. Die <b>Streifenrasterplatine</b> hat 7 Bahnen mit je 11 Löchern.</li>
+      <li>Die Batterie im Schaltplan ist eine <b>9-V-Batterie</b> (Block). Du schließt sie über einen <b>Batterieclip</b> an. Batterie und Batterieclip kommen in die Stückliste.</li>
+      <li>Mit dem <b>Schalter S1</b> kannst du den Alarm ausschalten. Auch er ist ein Bauteil der Stückliste. Die <b>Streifenrasterplatine</b> hat 7 Bahnen mit je 11 Löchern.</li>
       <li>Die Werte der Widerstände liest du an den <b>Farbringen</b> ab: 1. Ring = erste Ziffer, 2. Ring = zweite Ziffer, 3. Ring = Anzahl der Nullen, 4. Ring (gold) = Toleranz.</li>
     </ul>
     <div data-lg="emptyboard"></div>
@@ -1029,18 +1029,18 @@ path.lg-ledg,path.lg-ledo,path.lg-ledy{stroke:var(--lg-ink);stroke-width:3}
 <section class="station c-entdecken" data-ch="6" hidden>
   <div class="info">
     <h3>Fehler finden</h3>
-    <p>Klappt etwas nicht, nimmst du zuerst die Batterien heraus. Dann schaust du mit der Lupe auf die Unterseite und vergleichst jedes Bauteil mit dem Bestückungsplan.</p>
+    <p>Klappt etwas nicht, ziehst du zuerst die Batterie ab. Dann schaust du mit der Lupe auf die Unterseite und vergleichst jedes Bauteil mit dem Bestückungsplan.</p>
     <div data-lg="bruecke"></div>
     <p class="cap">Eine <b>Lötbrücke</b>: Das Lot verbindet zwei Bahnen, die nicht verbunden sein dürfen. Du entfernst sie, indem du das Lot mit der Lötspitze wieder aufschmilzt und mit Entlötlitze aufsaugst.</p>
     <div class="lg-data"><table>
       <thead><tr><th>Was du siehst</th><th>Mögliche Ursache</th></tr></thead>
       <tbody>
-        <tr><td>Gar nichts passiert, auch bei hellem Licht nicht.</td><td>Batterien leer oder falsch eingelegt, Schalter aus oder ein Kabel des Batteriehalters ist nicht angelötet.</td></tr>
+        <tr><td>Gar nichts passiert, auch bei hellem Licht nicht.</td><td>Batterie leer, Batterieclip nicht richtig aufgesteckt, Schalter aus oder ein Kabel ist nicht angelötet.</td></tr>
         <tr><td>Der Summer bleibt still. Sein <b>Plus-Bein</b> steckt in Bahn 4.</td><td>Der Summer ist <b>verpolt</b> eingelötet.</td></tr>
         <tr><td>Der Summer bleibt still, auch bei Taschenlampenlicht, obwohl alle Bauteile richtig stecken.</td><td><b>Lötbrücke</b> zwischen Bahn 5 und Bahn 6: Die Basis liegt dann immer an GND.</td></tr>
         <tr><td>Der Summer piept <b>dauernd</b>, auch im Dunkeln.</td><td><b>Lötbrücke</b> zwischen Bahn 4 und Bahn 5: Kollektor und Basis sind verbunden.</td></tr>
         <tr><td>Der Summer piept nur <b>leise</b>, auch bei hellem Licht.</td><td>Der <b>Transistor ist verdreht</b>: Kollektor und Emitter sind vertauscht.</td></tr>
-        <tr><td>Der Alarm piept schon in der geschlossenen Schublade.</td><td>Es fällt etwas Licht hinein. <b>R1 ist zu groß</b> für deine Schublade, nimm 4,7 kΩ.</td></tr>
+        <tr><td>Der Alarm piept schon in der geschlossenen Schublade.</td><td>Es fällt etwas Licht hinein. <b>R1 ist zu groß</b> für deine Schublade, nimm 2,2 kΩ.</td></tr>
       </tbody></table></div>
   </div>
   <article class="task">
@@ -1389,7 +1389,7 @@ var LG = (function () {
     return '<path class="lg-sym ' + (cls || '') + '" d="M' + (x - 22) + ' ' + (y + 12) + 'H' + (x + 22) + 'V' + (y + 44) + 'H' + (x - 22) + 'Z"/><path class="lg-w" d="M' + x + ' ' + y + 'V' + (y + 12) + 'M' + x + ' ' + (y + 44) + 'V' + (y + 56) + '"/><path class="lg-w2" d="M' + (x + 30) + ' ' + (y + 18) + 'Q' + (x + 38) + ' ' + (y + 28) + ' ' + (x + 30) + ' ' + (y + 38) + 'M' + (x + 38) + ' ' + (y + 12) + 'Q' + (x + 50) + ' ' + (y + 28) + ' ' + (x + 38) + ' ' + (y + 44) + '"/>' +
       txt(x + 8, y + 2, '+', 'lg-tb') + txt(x - 32, y + 30, 'Summer', 'lg-tb', 'end') + txt(x - 32, y + 56, 'aktiv', 'lg-ts', 'end'); }
   function battery(x, y, u) { /* Pluspol oben bei y, Minuspol unten bei y+40 */
-    return '<path class="lg-p" d="M' + (x - 24) + ' ' + y + 'H' + (x + 24) + '"/><path class="lg-p3" d="M' + (x - 12) + ' ' + (y + 14) + 'H' + (x + 12) + '"/>' + txt(x + 32, y + 6, '+', 'lg-tb') + txt(x + 32, y + 36, u || '4,5 V', 'lg-ts'); }
+    return '<path class="lg-p" d="M' + (x - 24) + ' ' + y + 'H' + (x + 24) + '"/><path class="lg-p3" d="M' + (x - 12) + ' ' + (y + 14) + 'H' + (x + 12) + '"/>' + txt(x + 32, y + 6, '+', 'lg-tb') + txt(x + 32, y + 36, u || '9 V', 'lg-ts'); }
   function hres(x, y, w, lab, val, cls) { return '<rect class="lg-sym' + (cls ? ' ' + cls : '') + '" x="' + x + '" y="' + (y - 13) + '" width="' + w + '" height="26"/>' + txt(x + w / 2, y - 22, lab + ' ' + val, 'lg-tb', 'middle'); }
   /* st: {on: Anteil 0…1 (Transistor leitet), path: Stromwege hervorheben} */
   function planBody(v, st) {
@@ -1417,38 +1417,39 @@ var LG = (function () {
       b += '<path class="lg-wire" d="M70 50H430M70 360H430M70 50V290M70 330V360M220 50V80M220 160V180M220 180V200M220 280V360M220 200H340V290H390M430 50V70M430 130V150M430 190V240M430 340V360"/>';
       b += '<path class="lg-wire lg-cur' + hot + '" d="M430 50V70M430 130V150M430 190V240M430 340V360"/>';
       [[220, 50], [220, 360], [220, 200], [430, 50], [430, 360]].forEach(function (q) { b += '<circle class="lg-dot" cx="' + q[0] + '" cy="' + q[1] + '" r="5"/>'; });
-      b += battery(70, 296);
-      b += vres(220, 80, 80, 'R1', '47 kΩ');
+      b += battery(70, 296, '9 V');
+      b += vres(220, 80, 80, 'R1', '100 kΩ');
       b += ldrSym(220, 200, 80, 'LDR');
-      b += vres(430, 70, 60, 'R2', '100 Ω');
+      b += vres(430, 70, 60, 'R2', '330 Ω');
       b += ledSym(430, 150, 'lg-led' + (on > 0.04 ? ' lit' : ''), 'LED', 'Farb-\nwechsel', true);
       if (on > 0.04) b += '<circle class="lg-glow" cx="430" cy="166" r="34" fill-opacity="' + f(Math.min(0.85, on)) + '"/>';
       b += npn(430, 290);
       b += txt(40, 40, '+', 'lg-tb') + txt(40, 378, '−', 'lg-tb');
       return { vb: '0 0 596 390', body: b };
     }
-    b += '<path class="lg-wire" d="M70 50H430M70 400H430M70 50V200M70 240V400M220 50V70M220 120V140M220 210V240M220 240V250M220 330V400M220 240H340V330H390M430 50V150M430 206V280M430 380V400"/>';
+    b += '<path class="lg-wire" d="M70 50H110M172 50H430M70 400H430M70 50V200M70 240V400M220 50V70M220 120V140M220 210V240M220 240V250M220 330V400M220 240H340V330H390M430 50V150M430 206V280M430 380V400"/>';
     b += '<path class="lg-wire lg-cur' + hot + '" d="M430 50V150M430 206V280M430 380V400"/>';
     [[220, 50], [220, 400], [220, 240], [430, 50], [430, 400]].forEach(function (q) { b += '<circle class="lg-dot" cx="' + q[0] + '" cy="' + q[1] + '" r="5"/>'; });
-    b += battery(70, 206);
+    b += '<circle class="lg-dot" cx="110" cy="50" r="5"/><circle class="lg-dot" cx="172" cy="50" r="5"/><path class="lg-w" d="M110 50L170 46"/>' + txt(141, 30, 'S1', 'lg-tb', 'middle');
+    b += battery(70, 206, '9 V');
     b += vres(220, 70, 50, 'R3', '1 kΩ');
     b += ldrSym(220, 140, 70, 'LDR');
-    b += vres(220, 250, 80, 'R1', '10 kΩ');
+    b += vres(220, 250, 80, 'R1', '4,7 kΩ');
     b += summerSym(430, 150, 'lg-sum' + (on > 0.04 ? ' lit' : ''));
     if (on > 0.04) b += '<path class="lg-wave" stroke-opacity="' + f(Math.min(1, 0.3 + on)) + '" d="M496 136Q512 178 496 220M510 122Q534 178 510 234"/>';
     b += npn(430, 330);
     b += txt(40, 40, '+', 'lg-tb') + txt(40, 418, '−', 'lg-tb');
     return { vb: '0 0 600 430', body: b };
   }
-  function plan(v) { var g = planBody(v); return svg(g.vb, g.body, v === 'D' ? 'Schaltplan Dunkelschaltung der LED-Tischleuchte: Batterie 9 V und Schalter S1, R1 22 kΩ und Fotowiderstand als Spannungsteiler, R2 1,5 kΩ zur Basis von T1 BC547, drei LEDs grün, orange und gelb mit den Vorwiderständen R3 150 Ω, R4 220 Ω und R5 150 Ω parallel am Kollektor' : v === 'N' ? 'Schaltplan Nachtlicht: R1 47 kΩ und Fotowiderstand als Spannungsteiler an der Basis von T1 BC547, LED mit Farbwechsel und R2 100 Ω am Kollektor, Batterie 4,5 V' : 'Schaltplan Schubladen-Alarm: R3 1 kΩ, Fotowiderstand und R1 10 kΩ als Spannungsteiler an der Basis von T1 BC547, aktiver Summer am Kollektor, Batterie 4,5 V', 'lg-plan'); }
+  function plan(v) { var g = planBody(v); return svg(g.vb, g.body, v === 'D' ? 'Schaltplan Dunkelschaltung der LED-Tischleuchte: Batterie 9 V und Schalter S1, R1 22 kΩ und Fotowiderstand als Spannungsteiler, R2 1,5 kΩ zur Basis von T1 BC547, drei LEDs grün, orange und gelb mit den Vorwiderständen R3 150 Ω, R4 220 Ω und R5 150 Ω parallel am Kollektor' : v === 'N' ? 'Schaltplan Nachtlicht: R1 100 kΩ und Fotowiderstand als Spannungsteiler an der Basis von T1 BC547, LED mit Farbwechsel und R2 330 Ω am Kollektor, Batterie 9 V' : 'Schaltplan Schubladen-Alarm: Batterie 9 V mit Schalter S1, R3 1 kΩ, Fotowiderstand und R1 4,7 kΩ als Spannungsteiler an der Basis von T1 BC547, aktiver Summer am Kollektor', 'lg-plan'); }
 
   /* Berechnung: Helligkeit 0 (dunkel) … 100 (hell) → Widerstand des LDR 1 MΩ … 1 kΩ (logarithmisch) */
   function ldrOf(h) { return Math.pow(10, 6 - 3 * h / 100); }
   function calc(v, h) {
-    var R = ldrOf(h), U = 4.5, Vbe = 0.65, beta = 200, Ib, Vopen, Imax;
+    var R = ldrOf(h), U = 9, Vbe = 0.65, beta = 200, Ib, Vopen, Imax;
     if (v === 'D') { U = 9; var Vth = U * R / (22000 + R), Rth = 22000 * R / (22000 + R); Vopen = Vth; Ib = (Vth - Vbe) / (Rth + 1500); Imax = 0.1; }
-    else if (v === 'N') { Vopen = U * R / (47000 + R); Ib = (U - Vbe) / 47000 - Vbe / R; Imax = 0.014; }
-    else { Vopen = U * 10000 / (11000 + R); Ib = (U - Vbe) / (1000 + R) - Vbe / 10000; Imax = 0.025; }
+    else if (v === 'N') { Vopen = U * R / (100000 + R); Ib = (U - Vbe) / 100000 - Vbe / R; Imax = 0.017; }
+    else { Vopen = U * 4700 / (5700 + R); Ib = (U - Vbe) / (1000 + R) - Vbe / 4700; Imax = 0.025; }
     var Vb = Math.min(Vopen, Ib > 0 ? 0.68 : Vopen), Ic = Ib > 0 ? Math.min(beta * Ib, Imax) : 0;
     return { R: R, Vb: Vb, on: Ic / Imax, Ic: Ic };
   }
@@ -1496,9 +1497,9 @@ var LG = (function () {
     }
     /* Widerstand */
     b += '<g transform="translate(490 ' + y0 + ')">' + '<path class="lg-lead" d="M10 90H140"/>' + '<rect class="lg-rbody" x="38" y="72" width="74" height="36" rx="12"/>';
-    var bb = bands(v === 'N' ? 47000 : v === 'D' ? 22000 : 10000);
+    var bb = bands(v === 'N' ? 100000 : v === 'D' ? 22000 : 4700);
     [48, 62, 76, 100].forEach(function (x, i) { b += '<rect x="' + x + '" y="72" width="7" height="36" fill="' + bb[i] + '" class="lg-band"/>'; });
-    b += txt(75, 200, 'Widerstand', 'lg-tb', 'middle') + txt(75, 224, v === 'N' ? 'R1 47 kΩ' : v === 'D' ? 'R1 22 kΩ' : 'R1 10 kΩ', 'lg-ts', 'middle') + '</g>';
+    b += txt(75, 200, 'Widerstand', 'lg-tb', 'middle') + txt(75, 224, v === 'N' ? 'R1 100 kΩ' : v === 'D' ? 'R1 22 kΩ' : 'R1 4,7 kΩ', 'lg-ts', 'middle') + '</g>';
     return { vb: '0 0 650 270', body: b };
   }
   function parts(v) { /* je Bauteil ein eigenes Bild, damit die Schrift auch auf dem Smartphone groß genug bleibt (2 Spalten) */
@@ -1513,23 +1514,23 @@ var LG = (function () {
   function cx(c) { return X0 + (c - 0.5) * P; }
   function cy(r) { return Y0 + (r - 0.5) * P; }
   var LAY = {
-    N: { cols: 10, rows: 8, nets: { 1: '+4,5 V', 5: 'R2 – LED', 6: 'Kollektor', 7: 'Basis', 8: 'GND (−)' },
+    N: { cols: 10, rows: 8, nets: { 1: '+9 V', 5: 'R2 – LED', 6: 'Kollektor', 7: 'Basis', 8: 'GND (−)' },
       parts: [
-        { id: 'r2', k: 'res', c: 3, r: [1, 5], ohm: 100, lab: 'R2', t: 'R2 (100 Ω, braun-schwarz-braun) liegend in Loch 3: ein Bein in Bahn 1, das andere in Bahn 5. Beine auf der Unterseite leicht umbiegen, festlöten, Drahtenden abschneiden.' },
-        { id: 'r1', k: 'res', c: 8, r: [1, 7], ohm: 47000, lab: 'R1', t: 'R1 (47 kΩ, gelb-violett-orange) liegend in Loch 8: von Bahn 1 nach Bahn 7. Flache Bauteile zuerst, dann liegt die Platine beim Löten noch eben.' },
+        { id: 'r2', k: 'res', c: 3, r: [1, 5], ohm: 330, lab: 'R2', t: 'R2 (330 Ω, orange-orange-braun) liegend in Loch 3: ein Bein in Bahn 1, das andere in Bahn 5. Beine auf der Unterseite leicht umbiegen, festlöten, Drahtenden abschneiden.' },
+        { id: 'r1', k: 'res', c: 8, r: [1, 7], ohm: 100000, lab: 'R1', t: 'R1 (100 kΩ, braun-schwarz-gelb) liegend in Loch 8: von Bahn 1 nach Bahn 7. Flache Bauteile zuerst, dann liegt die Platine beim Löten noch eben.' },
         { id: 't1', k: 'tr', c: 6, r: [6, 7, 8], lab: 'T1', t: 'T1 (BC547) senkrecht in Loch 6: C in Bahn 6, B in Bahn 7, E in Bahn 8. Die flache Seite zeigt nach links. Zügig löten, damit der Transistor nicht zu heiß wird.' },
         { id: 'led', k: 'led', c: 4, r: [5, 6], lab: 'LED', t: 'LED mit Farbwechsel in Loch 4: das lange Bein (Anode, +) in Bahn 5, das kurze Bein (Kathode) in Bahn 6. Falsch herum leuchtet sie nicht.' },
         { id: 'ldr', k: 'ldr', c: 9, r: [7, 8], lab: 'LDR', t: 'LDR stehend in Loch 9: ein Bein in Bahn 7, das andere in Bahn 8. Seine Beine stehen etwas weiter auseinander als die Löcher, biege sie vorsichtig zusammen. Der LDR hat keine Richtung.' },
-        { id: 'bat', k: 'bat', c: 1, r: [1, 8], side: 'l', lab: 'Batterie', t: 'Batteriehalter: rotes Kabel (+) in Bahn 1, schwarzes Kabel (−) in Bahn 8, beide in Loch 1. Batterien erst nach der Sichtprüfung einlegen.' }
+        { id: 'bat', k: 'bat', c: 1, r: [1, 8], side: 'l', lab: 'Batterie', t: 'Batterieclip: rotes Kabel (+) in Bahn 1, schwarzes Kabel (−) in Bahn 8, beide in Loch 1. Die 9-V-Batterie schließt du erst nach der Sichtprüfung an.' }
       ] },
-    A: { cols: 11, rows: 7, nets: { 1: '+4,5 V', 4: 'Kollektor', 5: 'Basis', 6: 'GND (−)', 7: 'LDR – R3' },
+    A: { cols: 11, rows: 7, nets: { 1: '+9 V', 4: 'Kollektor', 5: 'Basis', 6: 'GND (−)', 7: 'LDR – R3' },
       parts: [
         { id: 'r3', k: 'res', c: 10, r: [1, 7], ohm: 1000, lab: 'R3', t: 'R3 (1 kΩ, braun-schwarz-rot) liegend in Loch 10: von Bahn 1 nach Bahn 7. Flache Bauteile zuerst, dann liegt die Platine beim Löten noch eben.' },
-        { id: 'r1', k: 'rst', c: 7, r: [5, 6], ohm: 10000, lab: 'R1', t: 'R1 (10 kΩ, braun-schwarz-orange) stehend in Loch 7: ein Bein in Bahn 5, das umgebogene Bein in Bahn 6.' },
+        { id: 'r1', k: 'rst', c: 7, r: [5, 6], ohm: 4700, lab: 'R1', t: 'R1 (4,7 kΩ, gelb-violett-rot) stehend in Loch 7: ein Bein in Bahn 5, das umgebogene Bein in Bahn 6.' },
         { id: 't1', k: 'tr', c: 6, r: [4, 5, 6], lab: 'T1', t: 'T1 (BC547) senkrecht in Loch 6: C in Bahn 4, B in Bahn 5, E in Bahn 6. Die flache Seite zeigt nach links. Zügig löten, damit der Transistor nicht zu heiß wird.' },
         { id: 'ldr', k: 'ldr', c: 8, r: [5, 7], lab: 'LDR', t: 'LDR stehend in Loch 8: ein Bein in Bahn 5, das andere in Bahn 7. Bahn 6 dazwischen bleibt frei. Die lichtempfindliche Seite zeigt nach oben.' },
         { id: 'sum', k: 'sum', c: 3, r: [1, 4], lab: 'Summer', t: 'Summer in Loch 3: das Bein mit + in Bahn 1, das andere in Bahn 4. Prüfe vorher den Abstand der Beine (meist 3 Löcher). Falsch herum bleibt er still. Das größte Bauteil kommt zuletzt.' },
-        { id: 'bat', k: 'bat', c: 11, r: [1, 6], side: 'r', lab: 'Batterie', t: 'Batteriehalter mit Schalter: rotes Kabel (+) in Bahn 1, schwarzes Kabel (−) in Bahn 6, beide in Loch 11. Batterien erst nach der Sichtprüfung einlegen.' }
+        { id: 'bat', k: 'bat', c: 11, r: [1, 6], side: 'r', lab: 'Batterie', t: 'Batterieclip mit Schalter S1: rotes Kabel (+) über den Schalter in Bahn 1, schwarzes Kabel (−) in Bahn 6, beide in Loch 11. Die 9-V-Batterie schließt du erst nach der Sichtprüfung an.' }
       ] },
     /* Dunkelschaltung (LED-Tischleuchte): Lage wie im Bestückungsplan der Unterrichtseinheit (23 Löcher × 12 Bahnen, Bauteilseite).
        Bereich ab Loch 19 (Kreuz) bleibt frei von Bauteilen, die Ecke B12/L23 trägt die Markierung (0-Punkt). Nach jeder Gruppe folgt eine Teststation (test). */
@@ -1719,7 +1720,7 @@ const CH=CFG_W.ch.map(c=>c[1]),CH_L=CFG_W.ch.map(c=>c[2]),LAST=CH.length-1;
 /* ---------- Aufgaben: gemeinsam ---------- */
 const T={
 e1:{type:'est',min:0,max:2000,step:10,start:20,unit:'kΩ',reveal:'Im Dunkeln hat ein üblicher LDR etwa 1 MΩ (1000 kΩ) und mehr, bei schwachem Licht etwa 8 bis 20 kΩ, bei Tageslicht nur rund 1 kΩ (typische Datenblattwerte eines 5-mm-LDR). Sein Widerstand ändert sich also um das Tausendfache.'},
-e2:{type:'est',min:0,max:4.5,step:0.1,start:2,unit:'V',reveal:'Etwa 0,6 bis 0,7 V. Darunter sperrt der Transistor, darüber leitet er. Diese kleine Spannung reicht, um mit dem Transistor eine LED oder einen Summer zu schalten.'},
+e2:{type:'est',min:0,max:9,step:0.1,start:2,unit:'V',reveal:'Etwa 0,6 bis 0,7 V. Darunter sperrt der Transistor, darüber leitet er. Diese kleine Spannung reicht, um mit dem Transistor eine LED oder einen Summer zu schalten.'},
 t1:{type:'label',fig:'bc',kc:'RS22-F2',aria:'Transistor BC547 von vorn, flache Seite zu dir, drei nummerierte Beine',marks:['c','b','e'],terms:[['Basis (B)','b'],['Emitter (E)','e'],['Kollektor (C)','c'],['Anode','x']],help:{tip:'Die flache Seite zeigt zu dir, die Beine nach unten. Lies in der Liste oben nach, in welcher Reihenfolge die Beine dann von links nach rechts liegen.',teil:'Das mittlere Bein ist die Basis.'}},
 t15:{type:'gfb',kc:'S11-S',ba:'Betriebsanweisungen KGS Gronau: Elektro-Lötstation (18.11.2026) und Elektroniklot (21.12.2021)',haz:[
  {t:'Verbrennung an heißen Betriebsmitteln: Lötspitze und flüssiges Lot',sz:'heiss',ok:true,m:[
@@ -1729,7 +1730,7 @@ t15:{type:'gfb',kc:'S11-S',ba:'Betriebsanweisungen KGS Gronau: Elektro-Lötstati
   ['griff','Den Lötkolben nur am Griff anfassen','p','Nur der Griff bleibt kühl. Die Spitze ist über 300 °C heiß.','Wo fasst du den Lötkolben an?'],
   ['papier','Ordnung am Arbeitsplatz halten, Papier und Stoff wegräumen','p','Auf einem aufgeräumten Platz stößt du nicht an die heiße Spitze, und nichts kann anbrennen.','Wie sieht dein Arbeitsplatz aus?'],
   ['finger','Mit dem Finger kurz prüfen, ob die Spitze schon heiß ist','f','Damit verbrennst du dich. Ob die Spitze heiß ist, siehst du daran, dass Lötdraht an der Spitze schmilzt.']]},
- {t:'Stromschlag durch die Batterien der Schaltung',sz:'elektro',ok:false,why:'Die Batterie deiner Schaltung hat höchstens 9 V. Diese Spannung ist für deinen Körper ungefährlich. Gefährlich ist die Netzspannung von 230 V an der Lötstation.'},
+ {t:'Stromschlag durch die Batterie der Schaltung',sz:'elektro',ok:false,why:'Die Batterie deiner Schaltung hat höchstens 9 V. Diese Spannung ist für deinen Körper ungefährlich. Gefährlich ist die Netzspannung von 230 V an der Lötstation.'},
  {t:'Gesundheitsschädliche Lot- und Flussmitteldämpfe einatmen',sz:'ghs08',ok:true,m:[
   ['gehoer','Gehörschutz tragen','f','Gehörschutz schützt die Ohren, nicht die Atemwege.'],
   ['lueften','Das Fenster auf Kipp stellen (lüften)','p','Frische Luft verdünnt die Dämpfe.','Wie kommen die Dämpfe aus dem Raum?'],
@@ -1764,19 +1765,19 @@ const TV=
 t2:{type:'seg',kc:'RS22-F2',cats:['stimmt','stimmt nicht'],items:[['Ein LDR hat im Dunkeln einen großen Widerstand.',0],['Beim LDR ist es egal, wie herum du ihn einlötest.',0],['Beim Summer ist die Richtung egal.',1],['Der Transistor ist in dieser Schaltung ein elektronischer Schalter.',0],['Ein kleiner Strom in die Basis steuert einen größeren Strom vom Kollektor zum Emitter.',0],['Ein aktiver Summer piept, sobald Gleichspannung anliegt.',0],['Im Hellen wird der Widerstand des LDR größer.',1]],help:{tip:'Lies noch einmal, wie sich der LDR im Hellen und im Dunkeln verhält und was beim Summer zu beachten ist.',teil:'Zwei Aussagen stimmen sicher: Der Transistor ist ein elektronischer Schalter, und beim LDR ist die Richtung egal.'}},
 t3:{type:'order',kc:'RS22-F3',items:['Die Schublade geht auf, Licht fällt auf den LDR.','Der Widerstand des LDR wird kleiner.','Die Spannung an der Basis steigt über etwa 0,7 V.','Über R3 und den LDR fließt ein kleiner Strom in die Basis.','Der Transistor leitet zwischen Kollektor und Emitter.','Strom fließt durch den Summer, er piept.'],start:[3,0,5,2,4,1]},
 t4:{type:'gap',kc:'RS22-F3',text:'Bei geschlossener Schublade ist der Widerstand des LDR sehr {0}. R1 zieht die Basis dann auf {1}, und der Transistor sperrt. R3 begrenzt den Strom in die Basis, wenn jemand mit der {2} direkt auf den LDR leuchtet. Piept der Alarm auch bei geschlossener Schublade, nimmst du für R1 einen {3} Widerstand. Im Ruhezustand fließt {4} Strom.',gaps:[[['groß','klein'],0],[['GND (Minus)','Plus'],0],[['Handy-Taschenlampe','Batterie'],0],[['kleineren','größeren'],0],[['praktisch kein','sehr viel'],0]]},
-t5:{type:'crit',need:6,kc:'RS16-A',opts:[['Der Summer piept, sobald Licht auf den LDR fällt.',true],['Der Alarm ist laut genug.',false],['Der Summer ist still, wenn der LDR abgedeckt ist.',true],['Mit dem Schalter am Batteriehalter kann ich den Alarm ausschalten.',true],['Die Schaltung ist gut gelötet.',false],['Die Schaltung läuft mit 4,5 V aus drei AA-Batterien.',true],['Alle Lötstellen glänzen, es gibt keine Lötbrücke.',true],['Der Alarm funktioniert irgendwie.',false],['Die Platine ist höchstens 7 Bahnen × 11 Löcher groß (etwa 30,5 × 20,3 mm).',true],['Kein Bauteil wackelt, wenn ich die Platine vorsichtig schüttle.',true],['Der Alarm gefällt allen in der Klasse.',false],['Die Platine mit Batteriehalter passt in meine Schublade.',true]],help:{tip:'Frag dich bei jeder Anforderung: Kann ich das mit Ja oder Nein beantworten oder messen? Wörter wie „laut genug“, „gut“ oder „irgendwie“ kann jede Person anders verstehen.',teil:'Vier Anforderungen sind nicht überprüfbar: „laut genug“, „gut gelötet“, „funktioniert irgendwie“ und „gefällt allen“. Aus den übrigen wählst du sechs.'}},
-t6:{type:'bom',kc:'RS16-M',rows:[['Widerstand 10 kΩ (braun-schwarz-orange)',1],['Widerstand 1 kΩ (braun-schwarz-rot)',1],['Widerstand 47 kΩ (gelb-violett-orange)',0],['Transistor BC547',1],['Fotowiderstand (LDR)',1],['Aktiver Summer 3–5 V',1],['LED',0],['Taster',0],['Elektrolytkondensator (Elko)',0],['Batteriehalter für 3 × AA mit Schalter',1],['Batterie AA (Mignon), 1,5 V',3],['Streifenrasterplatine 7 Bahnen × 11 Löcher (etwa 30,5 × 20,3 mm)',1]],why:'Im Schaltplan stehen R1 10 kΩ, R3 1 kΩ, der Transistor, der LDR und der Summer. Dazu kommen der Batteriehalter mit Schalter, drei AA-Batterien und die Platine. LED, Taster und Elko brauchst du nicht.',help:{tip:'Zähle im Schaltplan in Kapitel 2 jedes Schaltzeichen. Lies bei den Widerständen den Wert ab. Denk an die Batterien: 3 × 1,5 V = 4,5 V.',teil:'Von jedem Bauteil im Schaltplan brauchst du genau eins. Nur eine Zeile bekommt eine Zahl größer als 1.'}},
-t8:{type:'label',fig:'board',kc:'RS22-E4',aria:'Fertig bestückte Platine des Schubladen-Alarms mit nummerierten Bauteilen',marks:['r3','r1','t1','ldr','sum'],terms:[['Transistor BC547','t1'],['Summer','sum'],['R1 10 kΩ','r1'],['Fotowiderstand (LDR)','ldr'],['R3 1 kΩ','r3'],['LED','x']],help:{tip:'R3 liegt flach auf der Platine, R1 steht aufrecht. Der LDR hat oben eine Zickzack-Linie. Das größte Bauteil ist der Summer.',teil:'Nummer 1 liegt in Loch 10 zwischen Bahn 1 und Bahn 7. Das ist R3.'}},
-t9:{type:'order',kc:'RS16-P',items:['Bauteile nach der Stückliste bereitlegen und prüfen.','Den Bestückungsplan mit Folienstift auf die Platine übertragen.','Lötkolben in die Ablage legen und aufheizen lassen.','Das flache Bauteil zuerst einlöten: R3.','R1 stehend einlöten.','Den Transistor einlöten, flache Seite nach links.','Den LDR einlöten, Bahn 6 dazwischen bleibt frei.','Den Summer einlöten, Plus-Bein in Bahn 1.','Den Batteriehalter anlöten: Rot an Bahn 1, Schwarz an Bahn 6.','Sichtprüfung mit der Lupe: keine Lötbrücken, alle Lötstellen glänzen.','Batterien einlegen und mit Licht testen.'],start:[2,0,9,4,1,10,3,8,7,6,5]},
+t5:{type:'crit',need:6,kc:'RS16-A',opts:[['Der Summer piept, sobald Licht auf den LDR fällt.',true],['Der Alarm ist laut genug.',false],['Der Summer ist still, wenn der LDR abgedeckt ist.',true],['Mit dem Schalter S1 kann ich den Alarm ausschalten.',true],['Die Schaltung ist gut gelötet.',false],['Die Schaltung läuft mit einer 9-V-Batterie.',true],['Alle Lötstellen glänzen, es gibt keine Lötbrücke.',true],['Der Alarm funktioniert irgendwie.',false],['Die Platine ist höchstens 7 Bahnen × 11 Löcher groß (etwa 30,5 × 20,3 mm).',true],['Kein Bauteil wackelt, wenn ich die Platine vorsichtig schüttle.',true],['Der Alarm gefällt allen in der Klasse.',false],['Die Platine mit Batterie passt in meine Schublade.',true]],help:{tip:'Frag dich bei jeder Anforderung: Kann ich das mit Ja oder Nein beantworten oder messen? Wörter wie „laut genug“, „gut“ oder „irgendwie“ kann jede Person anders verstehen.',teil:'Vier Anforderungen sind nicht überprüfbar: „laut genug“, „gut gelötet“, „funktioniert irgendwie“ und „gefällt allen“. Aus den übrigen wählst du sechs.'}},
+t6:{type:'bom',kc:'RS16-M',rows:[['Widerstand 4,7 kΩ (gelb-violett-rot)',1],['Widerstand 1 kΩ (braun-schwarz-rot)',1],['Widerstand 10 kΩ (braun-schwarz-orange)',0],['Transistor BC547',1],['Fotowiderstand (LDR)',1],['Aktiver Summer für 9 V',1],['LED',0],['Taster',0],['Schalter',1],['Batterieclip für 9-V-Block',1],['9-V-Batterie (Block)',1],['Batteriehalter für 3 × AA',0],['Streifenrasterplatine 7 Bahnen × 11 Löcher (etwa 30,5 × 20,3 mm)',1]],why:'Im Schaltplan stehen R1 4,7 kΩ, R3 1 kΩ, der Transistor, der LDR, der Summer und der Schalter S1. Dazu kommen die 9-V-Batterie mit Batterieclip und die Platine. 10 kΩ, LED, Taster und einen Batteriehalter für AA-Batterien brauchst du nicht.',help:{tip:'Zähle im Schaltplan in Kapitel 2 jedes Schaltzeichen, auch den Schalter. Lies bei den Widerständen den Wert ab. Denk an die Stromversorgung: Die Schaltung läuft mit einer 9-V-Batterie.',teil:'Von jedem Bauteil, das du brauchst, nimmst du genau eins. Die 9-V-Batterie braucht einen Batterieclip.'}},
+t8:{type:'label',fig:'board',kc:'RS22-E4',aria:'Fertig bestückte Platine des Schubladen-Alarms mit nummerierten Bauteilen',marks:['r3','r1','t1','ldr','sum'],terms:[['Transistor BC547','t1'],['Summer','sum'],['R1 4,7 kΩ','r1'],['Fotowiderstand (LDR)','ldr'],['R3 1 kΩ','r3'],['LED','x']],help:{tip:'R3 liegt flach auf der Platine, R1 steht aufrecht. Der LDR hat oben eine Zickzack-Linie. Das größte Bauteil ist der Summer.',teil:'Nummer 1 liegt in Loch 10 zwischen Bahn 1 und Bahn 7. Das ist R3.'}},
+t9:{type:'order',kc:'RS16-P',items:['Bauteile nach der Stückliste bereitlegen und prüfen.','Den Bestückungsplan mit Folienstift auf die Platine übertragen.','Lötkolben in die Ablage legen und aufheizen lassen.','Das flache Bauteil zuerst einlöten: R3.','R1 stehend einlöten.','Den Transistor einlöten, flache Seite nach links.','Den LDR einlöten, Bahn 6 dazwischen bleibt frei.','Den Summer einlöten, Plus-Bein in Bahn 1.','Den Batterieclip mit Schalter anlöten: Rot über den Schalter an Bahn 1, Schwarz an Bahn 6.','Sichtprüfung mit der Lupe: keine Lötbrücken, alle Lötstellen glänzen.','Die 9-V-Batterie anschließen und mit Licht testen.'],start:[2,0,9,4,1,10,3,8,7,6,5]},
 t10:{type:'pair',kc:'RS16-U',left:['Der Summer bleibt still. Sein Plus-Bein steckt in Bahn 4.','Der Summer piept dauernd, auch im Dunkeln.','Der Summer bleibt still, auch bei Taschenlampenlicht, obwohl alle Bauteile richtig stecken.','Der Summer piept nur leise, auch bei hellem Licht.','Der Alarm piept schon in der geschlossenen Schublade.'],right:['Der Transistor ist verdreht eingelötet.','R1 ist zu groß für diese Schublade.','Der Summer ist verpolt.','Lötbrücke zwischen Bahn 4 und Bahn 5.','Lötbrücke zwischen Bahn 5 und Bahn 6.'],ans:[2,3,4,0,1]},
-t11:{type:'mark',kc:'RS22-E4',parts:[['Ella lötet zuerst R3 ein, weil er am flachsten ist.',false],['Den LDR steckt sie in Bahn 5 und Bahn 6.',true],['Das Plus-Bein des Summers steckt sie in Bahn 1.',false],['Sie hält den Lötkolben eine halbe Minute an das Bein des Transistors, damit es besser hält.',true],['Den Transistor steckt sie mit der flachen Seite nach links ein.',false],['Zwischendurch legt sie den heißen Lötkolben auf den Tisch.',true],['Die Batterien legt sie schon vor dem Löten ein, damit sie gleich testen kann.',true]],help:{tip:'Vergleiche Ellas Sätze mit dem Bestückungsplan und den Regeln zum sicheren Löten: Wo steckt der LDR? Wie lange erhitzt man eine Lötstelle? Wohin gehört der Lötkolben?',teil:'Ein Fehler steckt im Satz über den LDR: Er gehört in Bahn 5 und Bahn 7. Es sind noch drei weitere Fehler.'}},
-t12:{type:'open',kc:'RS16-U',min:100,checks:[['Summer verpolt',/summer|verpol|plus|richtung/i],['Transistor verdreht oder Lötbrücke Basis an GND',/transistor|verdreh|brücke|bahn 5|bahn 6|basis/i],['Vorgehen: Batterien raus, Lupe, nachlöten',/lupe|nachlöt|entlöt|prüf|vergleich|anschau|batterie/i]],help:{tip:'Schau in die Tabelle oben: Welche Fehler führen dazu, dass der Summer nie piept? Denk an die Richtung der Bauteile und an Lötbrücken an der Basis.',teil:'Satzanfang: „Vielleicht ist der Summer verpolt: Sein Plus-Bein steckt nicht in Bahn 1, sondern …“'},
-  muster:['Ursache 1: Der Summer ist verpolt eingelötet. Sein Plus-Bein muss in Bahn 1 stecken. Falsch herum bleibt ein aktiver Summer still.','Ursache 2: Eine Lötbrücke verbindet Bahn 5 (Basis) mit Bahn 6 (GND). Dann bleibt die Basis immer bei 0 V, und der Transistor sperrt. Auch ein verdreht eingelöteter Transistor kann die Ursache sein.','Nora nimmt die Batterien heraus und vergleicht jedes Bauteil mit dem Bestückungsplan. Mit der Lupe sucht sie auf der Unterseite nach Lötbrücken. Eine Brücke schmilzt sie auf und saugt das Lot mit Entlötlitze ab.']},
-t13:{type:'seg',kc:'RS22-F3',cats:['stimmt','stimmt nicht'],items:[['Fällt Licht auf den LDR, wird sein Widerstand kleiner.',0],['Der Transistor leitet, wenn an der Basis weniger als 0,3 V anliegen.',1],['R3 schützt den Transistor, wenn jemand mit der Taschenlampe auf den LDR leuchtet.',0],['Mit R1 = 4,7 kΩ statt 10 kΩ wird der Alarm empfindlicher.',1],['Flache Bauteile lötest du zuletzt ein.',1],['Eine gute Lötstelle glänzt und sieht aus wie ein kleiner Kegel.',0],['Bei geschlossener Schublade fließt praktisch kein Strom.',0]],help:{tip:'Die Antworten stehen in Kapitel 1 (Bauteile), Kapitel 2 (Schaltung) und Kapitel 5 (Löten).',teil:'Drei Aussagen stimmen nicht. Eine davon betrifft die Reihenfolge beim Löten.'}},
+t11:{type:'mark',kc:'RS22-E4',parts:[['Ella lötet zuerst R3 ein, weil er am flachsten ist.',false],['Den LDR steckt sie in Bahn 5 und Bahn 6.',true],['Das Plus-Bein des Summers steckt sie in Bahn 1.',false],['Sie hält den Lötkolben eine halbe Minute an das Bein des Transistors, damit es besser hält.',true],['Den Transistor steckt sie mit der flachen Seite nach links ein.',false],['Zwischendurch legt sie den heißen Lötkolben auf den Tisch.',true],['Die Batterie schließt sie schon vor dem Löten an, damit sie gleich testen kann.',true]],help:{tip:'Vergleiche Ellas Sätze mit dem Bestückungsplan und den Regeln zum sicheren Löten: Wo steckt der LDR? Wie lange erhitzt man eine Lötstelle? Wohin gehört der Lötkolben?',teil:'Ein Fehler steckt im Satz über den LDR: Er gehört in Bahn 5 und Bahn 7. Es sind noch drei weitere Fehler.'}},
+t12:{type:'open',kc:'RS16-U',min:100,checks:[['Summer verpolt',/summer|verpol|plus|richtung/i],['Transistor verdreht oder Lötbrücke Basis an GND',/transistor|verdreh|brücke|bahn 5|bahn 6|basis/i],['Vorgehen: Batterie ab, Lupe, nachlöten',/lupe|nachlöt|entlöt|prüf|vergleich|anschau|batterie/i]],help:{tip:'Schau in die Tabelle oben: Welche Fehler führen dazu, dass der Summer nie piept? Denk an die Richtung der Bauteile und an Lötbrücken an der Basis.',teil:'Satzanfang: „Vielleicht ist der Summer verpolt: Sein Plus-Bein steckt nicht in Bahn 1, sondern …“'},
+  muster:['Ursache 1: Der Summer ist verpolt eingelötet. Sein Plus-Bein muss in Bahn 1 stecken. Falsch herum bleibt ein aktiver Summer still.','Ursache 2: Eine Lötbrücke verbindet Bahn 5 (Basis) mit Bahn 6 (GND). Dann bleibt die Basis immer bei 0 V, und der Transistor sperrt. Auch ein verdreht eingelöteter Transistor kann die Ursache sein.','Nora zieht die Batterie ab und vergleicht jedes Bauteil mit dem Bestückungsplan. Mit der Lupe sucht sie auf der Unterseite nach Lötbrücken. Eine Brücke schmilzt sie auf und saugt das Lot mit Entlötlitze ab.']},
+t13:{type:'seg',kc:'RS22-F3',cats:['stimmt','stimmt nicht'],items:[['Fällt Licht auf den LDR, wird sein Widerstand kleiner.',0],['Der Transistor leitet, wenn an der Basis weniger als 0,3 V anliegen.',1],['R3 schützt den Transistor, wenn jemand mit der Taschenlampe auf den LDR leuchtet.',0],['Mit R1 = 2,2 kΩ statt 4,7 kΩ wird der Alarm empfindlicher.',1],['Flache Bauteile lötest du zuletzt ein.',1],['Eine gute Lötstelle glänzt und sieht aus wie ein kleiner Kegel.',0],['Bei geschlossener Schublade fließt praktisch kein Strom.',0]],help:{tip:'Die Antworten stehen in Kapitel 1 (Bauteile), Kapitel 2 (Schaltung) und Kapitel 5 (Löten).',teil:'Drei Aussagen stimmen nicht. Eine davon betrifft die Reihenfolge beim Löten.'}},
 t14:{type:'open',kc:'RS22-F3',min:120,checks:[['LDR wird bei Licht klein',/ldr|fotowid/i],['Basis über 0,7 V oder Strom in die Basis',/basis/i],['Transistor leitet und schaltet den Summer',/transistor.*(leit|schalt|an)|leit/i]],help:{tip:'Geh die Wirkungskette aus Kapitel 2 durch: Licht, LDR, Spannung an der Basis, Transistor, Summer.',teil:'Satzanfang: „Geht die Schublade auf, fällt Licht auf den LDR, und sein Widerstand wird klein. Dadurch …“'},
   muster:['Geht die Schublade auf, fällt Licht auf den LDR, und sein Widerstand wird klein.','Im Spannungsteiler aus R3, LDR und R1 liegt dann mehr Spannung an R1 und damit an der Basis. Steigt sie über etwa 0,7 V, fließt über R3 und den LDR ein kleiner Strom in die Basis.','Der Transistor leitet dann zwischen Kollektor und Emitter. Strom fließt von Plus durch den Summer zu Minus, und der Summer piept.','Ist die Schublade zu, ist der LDR sehr groß, R1 zieht die Basis auf GND, und der Transistor sperrt.']}
 };
-const BAU=['Alle Bauteile nach der Stückliste bereitgelegt.','Bestückungsplan mit Folienstift auf die Platine übertragen und mit dem Plan verglichen.','R3 (braun-schwarz-rot) liegt in Loch 10, R1 (braun-schwarz-orange) steht in Loch 7.','Der Transistor steht richtig: flache Seite nach links, C in Bahn 4.','Der LDR steckt in Loch 8 in Bahn 5 und Bahn 7, Bahn 6 bleibt frei.','Das Plus-Bein des Summers steckt in Bahn 1.','Batteriehalter: Rot an Bahn 1, Schwarz an Bahn 6, Schalter aus.','Alle Lötstellen glänzen und sehen aus wie kleine Kegel.','Zwischen den Bahnen hängt kein Lot (keine Lötbrücke).','Die Drahtenden sind kurz abgeschnitten.','Erst danach Batterien eingelegt und getestet.'];
+const BAU=['Alle Bauteile nach der Stückliste bereitgelegt.','Bestückungsplan mit Folienstift auf die Platine übertragen und mit dem Plan verglichen.','R3 (braun-schwarz-rot) liegt in Loch 10, R1 (gelb-violett-rot) steht in Loch 7.','Der Transistor steht richtig: flache Seite nach links, C in Bahn 4.','Der LDR steckt in Loch 8 in Bahn 5 und Bahn 7, Bahn 6 bleibt frei.','Das Plus-Bein des Summers steckt in Bahn 1.','Batterieclip mit Schalter: Rot über den Schalter an Bahn 1, Schwarz an Bahn 6, Schalter aus.','Alle Lötstellen glänzen und sehen aus wie kleine Kegel.','Zwischen den Bahnen hängt kein Lot (keine Lötbrücke).','Die Drahtenden sind kurz abgeschnitten.','Erst danach die 9-V-Batterie angeschlossen und getestet.'];
 Object.assign(T,TV);
 const KC={'RS16-A':'KC Technik RS 2010, S. 16 (Planen, Konstruieren und Herstellen): erstellen einen Anforderungskatalog','RS16-M':'KC Technik RS 2010, S. 16 (Planen, Konstruieren und Herstellen): erstellen Materiallisten','RS16-P':'KC Technik RS 2010, S. 16 (Planen, Konstruieren und Herstellen): planen einen Arbeitsablauf','RS16-U':'KC Technik RS 2010, S. 16 (Planen, Konstruieren und Herstellen): überprüfen die Teillösungen hinsichtlich der technischen Anforderungen','RS22-F2':'KC Technik RS 2010, S. 22: beschreiben die elektrischen Eigenschaften von Widerständen, Leuchtdioden, Sensoren und Transistoren','RS22-F3':'KC Technik RS 2010, S. 22: beschreiben das Zusammenwirken verschiedener elektronischer Bauteile in einer Schaltung','RS22-E4':'KC Technik RS 2010, S. 22: entwerfen und stellen elektronische Schaltungen her','PT21-F':'CV Profil Technik RS 2011, S. 21: benennen Schaltzeichen; beschreiben die Eigenschaften von Widerständen, Kondensatoren und Halbleitern','RS22-E3':'KC Technik RS 2010, S. 22: messen Spannungen und Stromstärken und berechnen aus den Messergebnissen weitere Eigenschaften','S11-S':'KC Technik RS 2010, S. 11 (Zur Sicherheit im Technikunterricht): Sicherheitsbewusstsein und Bereitschaft zur Verhütung von Gefahren und Unfällen; RiSU 2023 (Gefährdungsbeurteilung)'};
 

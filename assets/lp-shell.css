@@ -120,3 +120,11 @@ html.lps-open .lps-tab{display:none}
 .lps-modul main{margin:0 auto!important;padding-top:18px!important}
 @media (max-width:560px){.lps-modul .lps-mhead{gap:10px}.lps-modul .lps-mhead img{height:34px}.lps-modul .lps-mhead .lps-mt b{font-size:1.15rem;hyphens:manual}.lps-modul .lps-mhead .lps-mt small{display:none}.lps-modul .lps-mwrap{padding-top:14px}}
 @media (max-width:560px){body.lps-on main{hyphens:auto;-webkit-hyphens:auto}body.lps-on .station,body.lps-on .panel{overflow-wrap:anywhere}}
+
+/* Handy bis 560 px: keine Lasche am Rand und kein Abstand links (Grafiken behalten die volle Breite, Schrift ≥ 13 px); Fortschritt über den Knopf neben Hell/Dunkel */
+.lps-pbtn{display:none}
+@media (max-width:560px){body.lps-on{padding-left:0}.lps-tab{display:none!important}.lps-pbtn{display:inline-flex;align-items:center;gap:6px}.lps-pbtn .lps-mini{width:12px}}
+.lps-pbtn .lps-mini i{background:var(--lps-line)}.lps-pbtn .lps-mini i.on{background:var(--lps-panel)}.lps-pbtn .lps-mini i.top{background:var(--lps-layer-top)}
+/* Handy bis 560 px: Logo und Knöpfe in Zeile 1, Titel darunter über die volle Breite (sonst bricht der Titel neben dem Fortschrittsknopf in Silben) */
+@media (max-width:560px){.lps-lph .top .brand{flex-wrap:wrap;row-gap:10px}.lps-lph .top .brand>.lps-tools{order:1}.lps-lph .top .brand>div:not(.lps-tools){order:2;flex:1 1 100%}
+.lps-modul .lps-mhead{flex-wrap:wrap;row-gap:8px}.lps-modul .lps-mhead .lps-tools{order:1}.lps-modul .lps-mhead .lps-mt{order:2;flex:1 1 100%}}

@@ -16,7 +16,7 @@
   var SUN = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>';
   var MOON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>';
   var OK = '<svg class="lps-ok" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4 10-10"/></svg>';
-  var A = null, rowG, rowC, side, tab, back, sumBox, listBox, themeBtns = [], selGroup = null, timer = 0, lastSig = '';
+  var A = null, pbtn = null, rowG, rowC, side, tab, back, sumBox, listBox, themeBtns = [], selGroup = null, timer = 0, lastSig = '';
 
   function stats() {
     var ch = A.chapters() || [], cur = A.current(), done = 0, total = 0;
@@ -94,6 +94,7 @@
     listBox.replaceChildren.apply(listBox, items);
     tab.replaceChildren(layers(6, S.pct, 'lps-mini'), el('span', { class: 'lps-vt' }, ['Fortschritt ' + S.pct + ' %']));
     tab.setAttribute('aria-label', 'Fortschritt einblenden: ' + S.pct + ' Prozent, ' + (S.nav ? 'Kapitel ' + S.done + ' von ' + S.total : S.done + ' von ' + S.total + ' ' + (A.unit || 'Aufgaben')));
+    if (pbtn) { pbtn.replaceChildren(layers(5, S.pct, 'lps-mini'), el('span', null, [S.pct + ' %'])); pbtn.setAttribute('aria-label', tab.getAttribute('aria-label')); }
     themeBtns.forEach(function (b) { b.innerHTML = (isDark() ? SUN : MOON) + '<span class="lps-lbl">' + (isDark() ? 'Hell' : 'Dunkel') + '</span>'; b.setAttribute('aria-label', isDark() ? 'Helle Ansicht' : 'Dunkle Ansicht'); });
   }
   function schedule() { clearTimeout(timer); timer = setTimeout(function () { render(false); }, 250); }
@@ -119,7 +120,9 @@
       back = el('div', { class: 'lps-back', onclick: function () { setOpen(false); } });
       document.body.append(side, tab, back);
       (A.mountBar || function (b) { document.body.prepend(b); })(bar);
-      var tools = el('div', { class: 'lps-tools' }, [themeBtn()]);
+      /* Handy (bis 560 px): statt der Lasche am Rand ein Knopf „Fortschritt“ neben Hell/Dunkel, damit der Inhalt die volle Breite behält */
+      pbtn = el('button', { class: 'lps-btn lps-pbtn', type: 'button', 'aria-controls': 'lps-side', onclick: function () { setOpen(true, true); } });
+      var tools = el('div', { class: 'lps-tools' }, [pbtn, themeBtn()]);
       (A.mountTools || function (t) { bar.firstChild.prepend(t); })(tools);
       document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && isOpen() && !window.matchMedia('(min-width:1100px)').matches) setOpen(false, true); });
       ['hashchange', 'click', 'input', 'change', 'keyup'].forEach(function (ev) { window.addEventListener(ev, schedule, true); });
