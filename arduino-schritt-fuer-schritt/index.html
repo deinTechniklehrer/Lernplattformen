@@ -1,7 +1,11 @@
 <!doctype html><html><head><script>/* Lernplattformen auf GitHub Pages: Speichern ohne claude.ai */
 (function(){if(window.claude)return;var T={pdf:'application/pdf',txt:'text/plain;charset=utf-8',png:'image/png',jpg:'image/jpeg',jpeg:'image/jpeg',json:'application/json',csv:'text/csv;charset=utf-8',html:'text/html;charset=utf-8',docx:'application/vnd.openxmlformats-officedocument.wordprocessingml.document',xlsx:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',ino:'text/plain;charset=utf-8'};
 var dl={save:function(o){return new Promise(function(res,rej){try{var n=(o&&o.filename)||'datei',x=(n.split('.').pop()||'').toLowerCase(),d=o.data,b=d instanceof Blob?d:new Blob([d],{type:T[x]||'application/octet-stream'});var u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=n;a.rel='noopener';document.body.appendChild(a);a.click();setTimeout(function(){a.remove();URL.revokeObjectURL(u);},4000);res();}catch(e){rej({code:'failed',message:String(e)});}});}};
-window.claude={use:function(n){return Promise.resolve(n==='downloads'?dl:null);}};})();</script><meta property="og:type" content="website"><meta property="og:title" content="Arduino Schritt für Schritt"><meta property="og:description" content="Kleine Schaltungen in Tinkercad bauen und mit Blöcken programmieren. Jede Aufgabe ist in kleine Schritte geteilt, Tipps helfen beim Weiterkommen."><meta property="og:url" content="https://deintechniklehrer.github.io/Lernplattformen/arduino-schritt-fuer-schritt/"><meta property="og:image" content="https://deintechniklehrer.github.io/Lernplattformen/vorschau/Vorschau_Arduino_Schritt-fuer-Schritt.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="description" content="Kleine Schaltungen in Tinkercad bauen und mit Blöcken programmieren. Jede Aufgabe ist in kleine Schritte geteilt, Tipps helfen beim Weiterkommen."><script>try{var t=localStorage.getItem('lp-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><link rel="stylesheet" href="../assets/lp-shell.css"><script src="../assets/lp-shell.js"></script><style>/* Grafiken Arduino-Lernheft / Schritt für Schritt (arduino-grafik.js). Pilot Grafik-Standard 13.11.2026.
+window.claude={use:function(n){return Promise.resolve(n==='downloads'?dl:null);}};})();</script><meta property="og:type" content="website"><meta property="og:title" content="Arduino Schritt für Schritt"><meta property="og:description" content="Kleine Schaltungen in Tinkercad bauen und mit Blöcken programmieren. Jede Aufgabe ist in kleine Schritte geteilt, Tipps helfen beim Weiterkommen."><meta property="og:url" content="https://deintechniklehrer.github.io/Lernplattformen/arduino-schritt-fuer-schritt/"><meta property="og:image" content="https://deintechniklehrer.github.io/Lernplattformen/vorschau/Vorschau_Arduino_Schritt-fuer-Schritt.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="description" content="Kleine Schaltungen in Tinkercad bauen und mit Blöcken programmieren. Jede Aufgabe ist in kleine Schritte geteilt, Tipps helfen beim Weiterkommen."><script>try{var t=localStorage.getItem('lp-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}.auftrag{margin:0 0 10px;font-weight:600;line-height:1.45}
+.open-ta{width:100%;min-height:130px;box-sizing:border-box;padding:10px 12px;border:1px solid var(--line);border-radius:12px;background:var(--surface);color:inherit;font:inherit;font-size:16px}
+.open-chips{display:flex;flex-wrap:wrap;gap:6px;align-items:center}.open-chips .oc{font-size:13px;padding:3px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}.open-chips .oc.on{border-color:var(--accent);color:var(--accent);font-weight:600}
+.mus-box{border-left:4px solid var(--accent);padding:8px 12px;background:var(--accent-soft);border-radius:8px}.mus-box ul{margin:4px 0 0;padding-left:18px}
+</style><link rel="stylesheet" href="../assets/lp-shell.css"><script src="../assets/lp-shell.js"></script><style>/* Grafiken Arduino-Lernheft / Schritt für Schritt (arduino-grafik.js). Pilot Grafik-Standard 13.11.2026.
    Farben nur über Variablen, hell und dunkel. Kein color-mix() in fill/stroke. */
 :root{--ag-plus:#c8402e;--ag-minus:#2a6fb0;--ag-sig:#1f8a4c;--ag-in:#2a6fb0;--ag-pr:#0a7570;--ag-out:#d9481f;--ag-dist:#c23b3b;--ag-fb:#7046c2;
   --ag-in-soft:#e1ecf7;--ag-pr-soft:#d6ecea;--ag-out-soft:#fbe3da;--ag-fb-soft:#ece5f8;--ag-glow:#ffcc33;--ag-blk:#ffffff}
@@ -2274,6 +2278,24 @@ Widgets.quiz = (el, cfg, saved, done) => {
   if (saved && saved.state) { restore(saved.state); check(); }
 };
 
+/* ---------- Offene Schreibaufgabe mit „Denk an“ (seit 19.11.2026) ---------- */
+Widgets.open = (el, cfg, saved, done) => {
+  const st = saved && saved.state ? saved.state : { t: '' };
+  el.innerHTML = `<div class="ex"><textarea class="open-ta" aria-label="Deine Antwort" placeholder="Schreib hier deine Antwort in ganzen Sätzen."></textarea>
+  <div class="open-chips"><span class="hint">Denk an:</span>${cfg.checks.map((c, i) => `<span class="oc" data-c="${i}">${c[0]}</span>`).join('')}</div>
+  <div class="ex-foot"><button class="btn primary chk">Fertig</button><button class="btn mus" hidden>Mit Musterlösung vergleichen</button><span class="res"></span></div>
+  <div class="mus-box" hidden><b>Musterlösung zum Vergleich:</b><ul>${cfg.muster.map(m => `<li>${m}</li>`).join('')}</ul></div></div>`;
+  const ta = el.querySelector('textarea'); ta.value = st.t || '';
+  const upd = () => { const t = ta.value; el.querySelectorAll('.oc').forEach(c => c.classList.toggle('on', cfg.checks[+c.dataset.c][1].test(t))); const n = cfg.min - t.trim().length; el.querySelector('.res').innerHTML = n > 0 ? `<span class="hint">Noch ${n} Zeichen</span>` : ''; };
+  ta.oninput = upd;
+  const check = (quiet) => { const t = ta.value.trim(); if (t.length < cfg.min) { el.querySelector('.res').innerHTML = `<span class="hint">Schreib noch etwas mehr: mindestens ${cfg.min} Zeichen, du hast ${t.length}.</span>`; return; }
+    el.querySelector('.res').innerHTML = '<span class="score ok">Gespeichert</span> <span class="hint">Vergleiche deine Antwort jetzt mit der Musterlösung.</span>'; el.querySelector('.mus').hidden = false;
+    done({ score: 1, max: 1, state: { t: ta.value } }); };
+  el.querySelector('.chk').onclick = () => check();
+  el.querySelector('.mus').onclick = () => { el.querySelector('.mus-box').hidden = false; };
+  upd(); if (saved && saved.state && (saved.state.t || '').trim().length >= cfg.min) { el.querySelector('.res').innerHTML = '<span class="score ok">Gespeichert</span>'; el.querySelector('.mus').hidden = false; }
+};
+
 /* ---------- Sortieren in Kategorien (Tippen oder Ziehen) ---------- */
 Widgets.sort = (el, cfg, saved, done) => {
   const items = cfg.items.map((it, i) => ({ ...it, i }));
@@ -3722,11 +3744,11 @@ const BASIS = [
     { h: 'Das ist ein Arduino', html: `<p>Ein Arduino ist eine Platine. Auf der Platine sitzt ein Mikrocontroller.</p><p>An den Arduino kannst du Lampen, Motoren und Sensoren anschließen.</p>`, img: 'uno_tc', cap: 'Arduino Uno (so sieht er in Tinkercad aus)' },
     { h: 'Schau das Video', html: `<p>Das Video erklärt es noch einmal. Du kannst es auch überspringen.</p>${video('vid_mc', 'https://youtu.be/TntuIfVO84U', 'Video: Was ist ein Mikrocontroller?')}` }
   ]),
-  { k: 'ex', t: 'Richtig oder falsch?', w: { id: 'q', type: 'quiz', cfg: { questions: [
+  { k: 'ex', t: 'Sätze zum Mikrocontroller', a: 'Unterscheide richtige und falsche Sätze über den Mikrocontroller.', w: { id: 'q', type: 'quiz', cfg: { questions: [
     { type: 'tf', q: 'Ein Mikrocontroller ist ein kleiner Computer.', a: true },
     { type: 'tf', q: 'In einer Waschmaschine gibt es Mikrocontroller.', a: true },
     { type: 'tf', q: 'Ein Mikrocontroller ist stärker als ein PC.', a: false, why: 'Er ist viel schwächer – dafür klein und billig.' },
-    { type: 'mc', q: 'Was ist ein Arduino?', opts: ['ein Roboter', 'eine Platine mit Mikrocontroller', 'ein Handy'], correct: [1] }
+    { type: 'mc', q: 'Ein Arduino ist …', opts: ['ein Steckbrett für Bauteile.', 'eine Platine mit Mikrocontroller.', 'ein Sensor mit drei Beinen.'], correct: [1] }
   ] } } },
   ican(['Ich kann sagen, was ein Mikrocontroller ist.', 'Ich kann zwei Geräte mit Mikrocontroller nennen.'])
   ] },
@@ -3738,14 +3760,15 @@ const BASIS = [
     { h: 'Das Steckbrett', html: `<p>Auf das Steckbrett steckst du Bauteile und Kabel.</p><p>Die 5 Löcher <b>a bis e</b> mit <b>derselben Nummer</b> sind verbunden. Genauso die 5 Löcher <b>f bis j</b> mit derselben Nummer.</p><p>In der Mitte ist eine Rinne. Sie trennt die beiden Hälften.</p>`, img: 'steckbrett', tips: ['Fahre im Kapitel „Zwei LEDs abwechselnd“ mit der Maus über das Steckbrett. Dann siehst du, welche Löcher verbunden sind.'] },
     { h: 'Die Schienen', html: '<p>Am Rand sind die Schienen: <b>rot (+)</b> und <b>schwarz/blau (−)</b>. Alle Löcher einer Schiene sind verbunden.</p>' }
   ]),
-  { k: 'ex', t: 'Beschrifte den Arduino', w: { id: 'hs', type: 'hotspot', cfg: { img: 'arduino', alt: 'Arduino mit Markierungen', labels: [
+  { k: 'ex', t: 'Teile vom Arduino', a: 'Benenne die Teile vom Arduino: Tippe einen Begriff an und dann die passende Nummer.', w: { id: 'hs', type: 'hotspot', cfg: { img: 'arduino', alt: 'Arduino mit Markierungen', labels: [
     { t: 'USB-Anschluss', x: 10.7, y: 32.6 }, { t: 'Reset-Taster', x: 16.5, y: 9.8 }, { t: 'digitale Pins', x: 66, y: 4.5 }, { t: 'analoge Pins', x: 84.5, y: 94.5 }, { t: 'Mikrocontroller', x: 70, y: 70 } ] } } },
-  { k: 'ex', t: 'Verbunden oder nicht?', w: { id: 'bb', type: 'quiz', cfg: { questions: [
-    { type: 'tf', q: 'Die Löcher <b>13a</b> und <b>13e</b> sind verbunden.', a: true },
-    { type: 'tf', q: 'Die Löcher <b>13e</b> und <b>13f</b> sind verbunden.', a: false, why: 'Die Rinne in der Mitte trennt e und f.' },
-    { type: 'tf', q: 'Alle Löcher der −‑Schiene sind verbunden.', a: true }
+  { k: 'ex', t: 'Verbundene Löcher', a: 'Ordne jedes Lochpaar zu: verbunden oder nicht verbunden.', w: { id: 'bbv', type: 'sort', cfg: { buckets: ['verbunden', 'nicht verbunden'], items: [
+    { t: '13a und 13e', b: 0 },
+    { t: '13e und 13f', b: 1, why: 'Die Rinne in der Mitte trennt e und f.' },
+    { t: 'zwei Löcher der −‑Schiene', b: 0 },
+    { t: '5c und 5j', b: 1, why: 'Die Rinne in der Mitte trennt oben und unten.' }
   ] } } },
-  { k: 'ex', t: 'Steckbrett-Training', html: '<p>6 kurze Aufgaben. Klicke direkt in das Steckbrett.</p><p>Mit <b>„Neue Aufgaben“</b> kommen andere Löcher. Übe, bis alles grün ist.</p>', w: { id: 'bbt', type: 'bbtrain', cfg: { easy: true } } },
+  { k: 'ex', t: 'Steckbrett-Training', a: 'Wende die Regeln vom Steckbrett an.', html: '<p>6 kurze Aufgaben. Klicke direkt in das Steckbrett.</p><p>Mit <b>„Neue Aufgaben“</b> kommen andere Löcher. Übe, bis alles grün ist.</p>', w: { id: 'bbt', type: 'bbtrain', cfg: { easy: true } } },
   { k: 'task', t: 'In Tinkercad üben', tasks: [
     { id: 'bb1', html: 'Ziehe eine <b>Steckplatine</b> auf die Fläche. Fahre mit der Maus über die Löcher. Tinkercad zeigt dir, welche Löcher verbunden sind.' },
     { id: 'bb2', html: 'Stecke eine <b>LED</b> ein. Die zwei Beine müssen in <b>verschiedenen Reihen</b> stecken.' } ] },
@@ -3758,7 +3781,7 @@ const BASIS = [
     { h: 'Aktoren tun etwas', html: `<p>Ein <b>Aktor</b> macht etwas. Er bewegt, leuchtet oder piept.</p><p>Wie deine Hände oder dein Mund.</p>`, img: 'dcmotor', cap: 'Aktor: Motor (bewegt sich)' }
   ]),
   { k: 'info', html: merk('<b>Sensor</b> = misst (Eingabe). <b>Aktor</b> = macht etwas (Ausgabe).') },
-  { k: 'ex', t: 'Sortiere', w: { id: 'sort', type: 'sort', cfg: { buckets: ['Sensor (misst)', 'Aktor (macht etwas)'], items: [
+  { k: 'ex', t: 'Sensoren und Aktoren', a: 'Ordne jedes Bauteil zu: Sensor oder Aktor.', w: { id: 'sort', type: 'sort', cfg: { buckets: ['Sensor (misst)', 'Aktor (macht etwas)'], items: [
     { t: 'Lampe', b: 1 }, { t: 'Mikrofon', b: 0 }, { t: 'Lautsprecher', b: 1 }, { t: 'Temperatursensor', b: 0 }, { t: 'Motor', b: 1 }, { t: 'Taster', b: 0, why: 'Der Taster merkt, ob du drückst. Er misst also etwas.' } ] } } },
   ican(['Ich kann erklären: Ein Sensor misst, ein Aktor macht etwas.'])
   ] },
@@ -3770,7 +3793,7 @@ const BASIS = [
     { h: 'A wie Ausgabe', html: '<p>Ein <b>Aktor</b> macht etwas. Die Lampe geht an.</p>' }
   ]),
   { k: 'info', html: `<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:8px"><div class="merk"><b>Eingabe</b>Lichtsensor misst: dunkel</div><div class="merk"><b>Verarbeitung</b>Arduino: dunkel → Licht an</div><div class="merk"><b>Ausgabe</b>Lampe leuchtet</div></div>` },
-  { k: 'ex', t: 'Ordne zu', w: { id: 'evat', type: 'table', cfg: { cols: ['Gerät', 'Eingabe (Sensor)', 'Ausgabe (Aktor)'], opts: [['Temperatursensor', 'Abstandssensor'], ['Lüfter', 'Piepser']],
+  { k: 'ex', t: 'Eingabe und Ausgabe', a: 'Ordne jedem Gerät den Sensor und den Aktor zu.', w: { id: 'evat', type: 'table', cfg: { cols: ['Gerät', 'Eingabe (Sensor)', 'Ausgabe (Aktor)'], opts: [['Temperatursensor', 'Abstandssensor'], ['Lüfter', 'Piepser']],
     rows: [{ head: 'Lüfter im Laptop', cells: [{ a: 'Temperatursensor' }, { a: 'Lüfter' }] }, { head: 'Einparkhilfe', cells: [{ a: 'Abstandssensor' }, { a: 'Piepser' }] }] } } },
   ican(['Ich kann bei einem Gerät Eingabe, Verarbeitung und Ausgabe nennen.'])
   ] },
@@ -3782,7 +3805,7 @@ const BASIS = [
   ]),
   { k: 'info', html: AG.sr('einfach') },
   { k: 'info', html: merk('<b>Regeln</b> heißt: Das Gerät misst selbst nach und passt sich an. <b>Steuern</b> heißt: Es misst nicht nach.') },
-  { k: 'ex', t: 'Steuern oder Regeln?', w: { id: 'srs', type: 'sort', cfg: { buckets: ['Steuern', 'Regeln'], items: [
+  { k: 'ex', t: 'Steuern und Regeln', a: 'Ordne jedes Beispiel zu: Steuern oder Regeln.', w: { id: 'srs', type: 'sort', cfg: { buckets: ['Steuern', 'Regeln'], items: [
     { t: 'Toaster mit Zeit-Rad', b: 0 }, { t: 'Heizung mit Thermostat', b: 1 }, { t: 'Akkuschrauber', b: 0 }, { t: 'Handy-Display wird automatisch hell', b: 1 } ] } } },
   ican(['Ich kann sagen, ob ein Gerät steuert oder regelt.'])
   ] },
@@ -3822,9 +3845,9 @@ const BASIS = [
     { h: 'Schneller blinken', html: '<p>Ändere in <b>beiden</b> „warten“-Blöcken die <b>1</b> zu <b>0.5</b>. Starte neu. Die LED blinkt jetzt doppelt so schnell.</p>', tips: ['Klicke in das weiße Feld mit der 1 und tippe 0.5 – mit Punkt, nicht mit Komma.', '0.5 Sekunden sind 500 Millisekunden. Beides ist richtig.'] }
   ]),
   { k: 'sim', t: 'Probier es hier aus', html: '<p>Ändere die Zahlen in den weißen Feldern und drücke „Simulation starten“.</p>', sim: { id: 'b-blink', code: SIMPLE.blink, leds: [{ pin: 13, color: 'rot', label: 'LED an Pin 13' }], serial: false } },
-  { k: 'ex', t: 'Was stimmt?', w: { id: 'q', type: 'quiz', cfg: { questions: [
-    { type: 'mc', q: 'Was macht der Block „integrierte LED auf HOCH einstellen“?', opts: ['LED an', 'LED aus', 'warten'], correct: [0] },
-    { type: 'mc', q: 'Die LED soll länger leuchten. Was änderst du?', opts: ['die Zahl im „warten“-Block', 'die Farbe', 'nichts'], correct: [0] }
+  { k: 'ex', t: 'Die Blink-Blöcke', a: 'Beschreibe, was die Blöcke tun: Schreib das passende Wort in jede Lücke.', w: { id: 'qbl', type: 'quiz', cfg: { questions: [
+    { type: 'blank', q: '', text: 'Der Block „integrierte LED auf HOCH einstellen“ schaltet die LED *an|ein*.' },
+    { type: 'blank', q: '', text: 'Soll die LED länger leuchten, änderst du die Zahl im Block *warten|„warten“*.' }
   ] } } },
   { k: 'sub', t: 'Zeig dein Ergebnis', sub: { rule: 'blinkFast', desc: 'Die LED an Pin 13 blinkt schneller als 1 Sekunde.', rubric: ['Die LED blinkt', 'Sie blinkt schneller als vorher'], ref: 'tc_blinken' } },
   ican(['Ich kann eine Simulation starten.', 'Ich kann die Blink-Zeit ändern.'])
@@ -3837,9 +3860,9 @@ const BASIS = [
     { h: 'Der Widerstand', html: '<p>Der Arduino gibt 5 Volt. Das ist zu viel für die LED.</p><p>Ein <b>Widerstand</b> schützt die LED. Nimm <b>330 Ω</b> (sprich: Ohm).</p>', img: 'widerstand', cap: '330 Ω: orange – orange – braun' }
   ]),
   { k: 'info', html: merk('Langes Bein (+) zum Pin. Kurzes Bein (−) zu GND. Immer mit Widerstand!') },
-  { k: 'ex', t: 'Teste dich', w: { id: 'q', type: 'quiz', cfg: { questions: [
-    { type: 'mc', q: 'Welches Bein kommt zu GND (Minus)?', opts: ['das lange Bein', 'das kurze Bein'], correct: [1] },
-    { type: 'mc', q: 'Warum braucht die LED einen Widerstand?', opts: ['damit sie nicht kaputtgeht', 'damit sie blinkt', 'damit sie bunt wird'], correct: [0] },
+  { k: 'ex', t: 'LED und Widerstand', a: 'Ordne jedem Satzanfang die richtige Fortsetzung zu.', w: { id: 'q', type: 'quiz', cfg: { questions: [
+    { type: 'mc', q: 'Zu GND (Minus) kommt …', opts: ['das lange Bein.', 'das kurze Bein.'], correct: [1] },
+    { type: 'mc', q: 'Die LED braucht einen Widerstand, …', opts: ['damit sie nicht kaputtgeht.', 'damit sie heller leuchtet.', 'damit sie schneller angeht.'], correct: [0] },
     { type: 'tf', q: 'Steckt die LED falsch herum, leuchtet sie nicht.', a: true }
   ] } } },
   ican(['Ich erkenne Plus- und Minus-Bein der LED.', 'Ich weiß: Eine LED braucht einen Widerstand.'])
@@ -3856,7 +3879,7 @@ const BASIS = [
     { h: 'Umdrehen', html: '<p>Jetzt andersherum: <b>13 auf NIEDRIG</b>, <b>6 auf HOCH</b>, dann wieder <b>1 Sekunde warten</b>.</p>', block: 'digitalWrite(13, LOW);\ndigitalWrite(6, HIGH);\ndelay(1000);' },
     { h: 'Testen', html: '<p>Starte die Simulation. Blinken die LEDs abwechselnd? Super!</p>', tips: ['Nur Rot blinkt? Prüfe die Kabel an Pin 6 und die Blöcke für Anschluss 6.', 'Beide leuchten gleichzeitig? Dann steht bei beiden HOCH. Eine muss NIEDRIG sein.'] }
   ], 'Programmieren: Block für Block'),
-  { k: 'ex', t: 'Puzzle: Lege die Blöcke in die richtige Reihenfolge', w: { id: 'pz', type: 'parsons', cfg: {
+  { k: 'ex', t: 'Puzzle: die Blink-Blöcke', a: 'Ordne die Blöcke in der richtigen Reihenfolge.', w: { id: 'pz', type: 'parsons', cfg: {
     pre: 'void setup() {\n  pinMode(13, OUTPUT);\n  pinMode(6, OUTPUT);\n}',
     pieces: ['digitalWrite(13, HIGH);', 'digitalWrite(6, LOW);', 'delay(1000);', 'digitalWrite(13, LOW);', 'digitalWrite(6, HIGH);', 'delay(1000);'],
     check: (code) => checkAlternating(code),
@@ -3873,7 +3896,7 @@ const BASIS = [
     { h: 'Analog = viele Stufen', html: '<p>Wie ein <b>Dimmer</b>: ganz dunkel, etwas hell, sehr hell … Beim Arduino: alle Werte zwischen 0 V und 5 V.</p>' }
   ]),
   { k: 'info', html: AG.signal() },
-  { k: 'ex', t: 'Sortiere', w: { id: 'da', type: 'sort', cfg: { buckets: ['digital (an/aus)', 'analog (viele Stufen)'], items: [
+  { k: 'ex', t: 'Digital und analog', a: 'Ordne jedes Bauteil zu: digital oder analog.', w: { id: 'da', type: 'sort', cfg: { buckets: ['digital (an/aus)', 'analog (viele Stufen)'], items: [
     { t: 'Taster', b: 0 }, { t: 'Lichtschalter', b: 0 }, { t: 'Fotowiderstand (Licht)', b: 1 }, { t: 'Drehregler', b: 1 }, { t: 'Temperatursensor', b: 1 } ] } } },
   ican(['Ich kann den Unterschied zwischen digital und analog erklären.'])
   ] },
@@ -3898,9 +3921,10 @@ const BASIS = [
     { h: 'Der Block', html: '<p>In Tinkercad gibt es den Block <b>„RGB-LED an Anschlüssen … auf Farbe … einstellen“</b>. Klicke auf den Farbkreis und wähle eine Farbe.</p>', block: 'rgbLed(9, 5, 6, "#f5c400");' }
   ]),
   { k: 'sim', t: 'Probier es hier aus', html: '<p>Rot, dann Grün, dann Gelb. Ändere die Zahlen (0 bis 255).</p>', sim: { id: 'b-rgb', code: SIMPLE.rgb, rgb: { r: 9, g: 5, b: 6 }, serial: false } },
-  { k: 'ex', t: 'Farben-Quiz', w: { id: 'q', type: 'quiz', cfg: { questions: [
-    { type: 'mc', q: 'Rot + Grün ergibt …', opts: ['Gelb', 'Blau', 'Schwarz'], correct: [0] },
-    { type: 'mc', q: 'Welches Bein der RGB-LED kommt an GND?', opts: ['das längste', 'das kürzeste'], correct: [0] }
+  { k: 'ex', t: 'Die RGB-LED', a: 'Beschreibe die RGB-LED: Schreib das passende Wort in jede Lücke.', w: { id: 'qrgb', type: 'quiz', cfg: { questions: [
+    { type: 'blank', q: '', text: 'Für Gelb schaltest du Rot und *Grün* ein.' },
+    { type: 'blank', q: '', text: 'Leuchten Rot, Grün und Blau zusammen, siehst du *Weiß*.' },
+    { type: 'blank', q: '', text: 'An GND kommt das *längste|lange* Bein der RGB-LED.' }
   ] } } },
   ican(['Ich kann mit der RGB-LED eine Farbe einstellen.'])
   ] },
@@ -3951,10 +3975,13 @@ const BASIS = [
     { h: 'Testen', html: '<p>Starte die Simulation. Mach es dunkel: Die LED geht an. Mach es hell: Die LED geht aus.</p>', tips: ['Geht die LED nie an? Schau im Serien-Monitor nach deinen Licht-Werten und ändere die 300.'] }
   ]),
   { k: 'sim', t: 'Nachtlicht', html: '<p>Schiebe den Regler nach links (dunkel).</p>', sim: { id: 'b-if', code: SIMPLE.night, sensors: [{ pin: 'A0', label: 'Helligkeit', kind: 'ldr', value: 600 }], leds: [{ pin: 13, color: 'gelb', label: 'Nachtlicht (13)' }], serial: false } },
-  { k: 'ex', t: 'Was passiert?', w: { id: 'q', type: 'quiz', cfg: { questions: [
-    { type: 'mc', q: 'Licht ist 100. Die Bedingung heißt: Licht &lt; 300. Was macht die LED?', opts: ['an', 'aus'], correct: [0], why: '100 ist kleiner als 300. Also gilt „dann“.' },
-    { type: 'mc', q: 'Licht ist 800. Was macht die LED?', opts: ['an', 'aus'], correct: [1] }
+  { k: 'ex', t: 'Das Nachtlicht testen', a: 'Ermittle, ob die LED an oder aus ist: Schreib „an“ oder „aus“ in die Lücke.', w: { id: 'qif', type: 'quiz', cfg: { questions: [
+    { type: 'blank', q: '', text: 'Licht ist 100. Die Bedingung heißt: Licht &lt; 300. Dann ist die LED *an*.', why: '100 ist kleiner als 300. Also gilt „dann“.' },
+    { type: 'blank', q: '', text: 'Licht ist 800. Dann ist die LED *aus*.', why: '800 ist nicht kleiner als 300. Also gilt „sonst“.' }
   ] } } },
+  { k: 'ex', t: 'So funktioniert dein Nachtlicht', a: 'Erkläre in zwei oder drei Sätzen, wie dein Nachtlicht funktioniert.', w: { id: 'op1', type: 'open', cfg: { min: 80,
+    checks: [['Sensor misst Licht', /licht|hell|dunkel|sensor|fotowid/i], ['Grenze 300', /300|grenz|kleiner|größer/i], ['wenn – dann – sonst', /wenn|dann|sonst/i], ['LED an oder aus', /led|lampe/i]],
+    muster: ['Der Sensor misst, wie hell es ist. Das ist die Zahl Licht.', 'Wenn Licht kleiner als 300 ist, ist es dunkel. Dann geht die LED an.', 'Sonst ist es hell, und die LED geht aus.'] } } },
   { k: 'sub', t: 'Zeig dein Ergebnis', sub: { rule: 'ifelse', desc: 'Ein Nachtlicht: Bei Dunkelheit geht die LED an.', rubric: ['Es gibt einen wenn-dann-sonst-Block', 'Die LED reagiert auf das Licht'] } },
   ican(['Ich kann einen „wenn – dann – sonst“-Block benutzen.'])
   ] },
@@ -4122,16 +4149,16 @@ const BASIS = [
   ] }
 ];
 const BASIS_TEST = [
-  { type: 'mc', q: 'Was ist ein Mikrocontroller?', opts: ['ein kleiner Computer auf einem Chip', 'ein Kabel', 'ein Motor'], correct: [0] },
-  { type: 'mc', q: 'Welches Bauteil ist ein Sensor?', opts: ['Lampe', 'Fotowiderstand', 'Motor'], correct: [1] },
-  { type: 'mc', q: 'Welches Bein der LED kommt zu GND (Minus)?', opts: ['das lange Bein', 'das kurze Bein'], correct: [1] },
-  { type: 'mc', q: 'Wozu ist der Widerstand vor der LED?', opts: ['Er schützt die LED.', 'Er macht die LED bunt.', 'Er lässt die LED blinken.'], correct: [0] },
-  { type: 'mc', q: 'Was macht der Block „Anschluss 13 auf HOCH einstellen“?', opts: ['LED an Pin 13 an', 'LED an Pin 13 aus', 'warten'], correct: [0] },
-  { type: 'mc', q: `Was machen diese Blöcke?${progView({ code: 'void loop() {\n  digitalWrite(13, HIGH);\n  digitalWrite(6, LOW);\n  delay(1000);\n  digitalWrite(13, LOW);\n  digitalWrite(6, HIGH);\n  delay(1000);\n}', title: 'Programm' })}`, opts: ['Beide LEDs leuchten immer.', 'Die LEDs blinken abwechselnd.', 'Nichts.'], correct: [1] },
-  { type: 'mc', q: 'An welchem Pin kannst du eine LED dimmen?', opts: ['Pin ~3', 'Pin 7', 'Pin 13'], correct: [0] },
-  { type: 'mc', q: 'Was ist eine Variable?', opts: ['eine Kiste mit Namen für eine Zahl', 'ein Bauteil', 'ein Kabel'], correct: [0] },
-  { type: 'mc', q: 'Licht ist 100. Die Bedingung heißt: wenn Licht < 300, dann LED an. Was passiert?', opts: ['LED an', 'LED aus'], correct: [0] },
-  { type: 'mc', q: 'Wo siehst du die Zahlen, die der Arduino schickt?', opts: ['im Serien-Monitor', 'auf dem Steckbrett', 'im Widerstand'], correct: [0] }
+  { type: 'mc', q: 'Ein Mikrocontroller ist …', opts: ['ein kleiner Computer auf einem Chip.', 'ein kleiner Speicher für Bilder.', 'ein kleiner Motor mit Getriebe.'], correct: [0] },
+  { type: 'mc', q: 'Ein Sensor ist …', opts: ['die Lampe.', 'der Fotowiderstand.', 'der Motor.'], correct: [1] },
+  { type: 'mc', q: 'Zu GND (Minus) kommt …', opts: ['das lange Bein der LED.', 'das kurze Bein der LED.'], correct: [1] },
+  { type: 'mc', q: 'Der Widerstand vor der LED …', opts: ['schützt die LED.', 'macht die LED heller.', 'schaltet die LED ein.'], correct: [0] },
+  { type: 'mc', q: 'Der Block „Anschluss 13 auf HOCH einstellen“ …', opts: ['schaltet die LED an Pin 13 an.', 'schaltet die LED an Pin 13 aus.', 'wartet eine Sekunde lang.'], correct: [0] },
+  { type: 'mc', q: `Diese Blöcke sorgen dafür, dass …${progView({ code: 'void loop() {\n  digitalWrite(13, HIGH);\n  digitalWrite(6, LOW);\n  delay(1000);\n  digitalWrite(13, LOW);\n  digitalWrite(6, HIGH);\n  delay(1000);\n}', title: 'Programm' })}`, opts: ['beide LEDs immer leuchten.', 'die LEDs abwechselnd blinken.', 'beide LEDs zusammen blinken.'], correct: [1] },
+  { type: 'mc', q: 'Dimmen kannst du eine LED an …', opts: ['Pin ~3.', 'Pin 7.', 'Pin 13.'], correct: [0] },
+  { type: 'mc', q: 'Eine Variable ist …', opts: ['eine Kiste mit Namen für eine Zahl.', 'ein Block, der eine Pause macht.', 'ein Pin, an dem eine LED hängt.'], correct: [0] },
+  { type: 'mc', q: 'Licht ist 100. Die Bedingung heißt: wenn Licht < 300, dann LED an. Die LED ist dann …', opts: ['an.', 'aus.'], correct: [0] },
+  { type: 'mc', q: 'Die Zahlen, die der Arduino schickt, siehst du …', opts: ['im Serien-Monitor.', 'im Block „warten“.', 'an der LED von Pin 13.'], correct: [0] }
 ];
 CH.splice(0, CH.length, ...BASIS);
 MODULES.splice(0, MODULES.length, ...BASIS_MODULES);
@@ -4292,6 +4319,7 @@ function renderChapter(c) {
   c.sec.forEach((s, si) => {
     const [lbl, cls] = KIND[s.k];
     h += `<section class="card" id="s${si}">` + (s.t ? `<div class="sec-h"><span class="kind ${cls}">${lbl}</span><h2>${s.t}</h2></div>` : '');
+    if (s.a) h += `<p class="auftrag">${s.a}</p>`;
     if (s.html) h += s.html;
     if (s.tasks) h += `<ul class="tasks">${s.tasks.map(t => `<li class="task ${st.tasks[t.id] ? 'done' : ''}"><input type="checkbox" id="t-${c.id}-${t.id}" data-t="${t.id}" ${st.tasks[t.id] ? 'checked' : ''}><label for="t-${c.id}-${t.id}">${t.html}</label></li>`).join('')}</ul>`;
     if (s.w) h += `<div data-wmount="${si}"></div>`;
@@ -4438,7 +4466,7 @@ function renderTest() {
   const page = document.getElementById('page'); const T = App.S.test;
   const best = T.attempts.length ? Math.max(...T.attempts.map(a => Math.round(a.score / a.max * 100))) : null;
   page.innerHTML = `<div class="hero"><div class="eyebrow">Abschluss</div><h1>Abschlusstest</h1><div class="goal"><span class="gi">Info</span><span>${TEST.length} Fragen zu allen Grundlagen-Kapiteln. Beantworte alle Fragen und klicke dann auf „Überprüfen“. Dein Ergebnis wird gespeichert und erscheint im Lernnachweis.${best !== null ? ` Bisher bestes Ergebnis: <b>${best} %</b> (${T.attempts.length} Versuch${T.attempts.length > 1 ? 'e' : ''}).` : ''}</span></div></div>
-  <section class="card"><div id="testq"></div></section>
+  <section class="card"><p class="auftrag">Ordne jedem Satzanfang die passende Fortsetzung zu. Bei den Aussagen wählst du „Wahr“ oder „Falsch“.</p><div id="testq"></div></section>
   <div class="pager"><button class="btn" data-go="k-${CH[CH.length - 1].id}">← ${CH[CH.length - 1].title}</button><button class="btn primary" data-go="export">Lernnachweis &amp; Export →</button></div>`;
   const order = shuffle(TEST.map((_, i) => i));
   Widgets.quiz(page.querySelector('#testq'), { questions: order.map(i => TEST[i]) }, null, (r) => {
