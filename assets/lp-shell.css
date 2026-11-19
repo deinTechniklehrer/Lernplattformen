@@ -95,3 +95,27 @@ html.lps-open .lps-tab{display:none}
 .lps-ardu .main{max-width:1180px;margin:0 auto;width:100%}
 @media (max-width:900px){.lps-ardu .lps{top:53px}}
 @media (max-width:560px){.lps-ardu .savestate,.lps-ardu .brand-s{display:none}}
+
+/* Plattformen mit window.LPH (Werkstatt-Bauart: Unternehmen, Motorentechnik, Elektronik, Löten, …) */
+.lps-lph:not(.lps-ardu) .lps{background:transparent;border:0;margin:14px 0 16px;z-index:5}
+.lps-lph:not(.lps-ardu) .lps-in{padding:0;max-width:none}
+.lps-lph .top .brand{display:flex;align-items:center;gap:12px}
+.lps-lph .top .brand .lps-tools{margin-left:auto}
+.lps-lph .top,.lps-lph .top .brand,.lps-lph .top .brand>div{min-width:0}
+.lps-lph .top .brand h1{overflow-wrap:break-word;hyphens:auto;-webkit-hyphens:auto}
+/* schmale Bildschirme: schmale Lasche „Fortschritt“ und Platz dafür, damit sie keinen Text verdeckt */
+@media (max-width:1099.98px){body.lps-on{padding-left:22px}.lps-tab{padding:10px 3px;gap:6px;font-size:12px}.lps-tab .lps-mini{width:14px}}
+/* Modul-Bauart (Elektroinstallation, 3D-Druck, MakerSpace-Kompass): eigene Seitenleiste aus, Kopfzeile auf allen Breiten */
+.lps-modul .app{display:block!important}
+.lps-modul #side{display:none!important}
+.lps-modul .lps-mtop{position:sticky;top:0;z-index:30}
+.lps-modul .lps-mtop .topbar{display:block!important;position:static;background:var(--blue-d,#0b3a5c);color:#fff;padding:calc(8px + var(--safe-t,0px)) 150px 8px 12px}
+.lps-modul .lps-mtop .topbar .row{display:flex;align-items:center;gap:10px;min-width:0}
+.lps-modul .lps-mtop .topbar .row b{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lps-modul .lps-mtop .topbar .pct{margin-left:auto;flex:none}
+.lps-modul .lps-mtop .topbar .pills{display:none!important}
+.lps-modul .lps-mtop .lps-tools{position:absolute;right:12px;top:50%;transform:translateY(-50%)}
+.lps-modul .lps-mtop .lps-btn{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.35)}
+.lps-modul .lps{background:var(--bg,var(--lps-bg))}
+@media (max-width:560px){.lps-modul .lps-mtop .topbar{padding-right:62px}}
+@media (max-width:560px){body.lps-on main{hyphens:auto;-webkit-hyphens:auto}body.lps-on .station,body.lps-on .panel{overflow-wrap:anywhere}}

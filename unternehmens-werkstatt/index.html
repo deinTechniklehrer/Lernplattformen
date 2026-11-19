@@ -2,7 +2,7 @@
 <html lang="de"><head><script>/* Lernplattformen auf GitHub Pages: Speichern ohne claude.ai */
 (function(){if(window.claude)return;var T={pdf:'application/pdf',txt:'text/plain;charset=utf-8',png:'image/png',jpg:'image/jpeg',jpeg:'image/jpeg',json:'application/json',csv:'text/csv;charset=utf-8',html:'text/html;charset=utf-8',docx:'application/vnd.openxmlformats-officedocument.wordprocessingml.document',xlsx:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',ino:'text/plain;charset=utf-8'};
 var dl={save:function(o){return new Promise(function(res,rej){try{var n=(o&&o.filename)||'datei',x=(n.split('.').pop()||'').toLowerCase(),d=o.data,b=d instanceof Blob?d:new Blob([d],{type:T[x]||'application/octet-stream'});var u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=n;a.rel='noopener';document.body.appendChild(a);a.click();setTimeout(function(){a.remove();URL.revokeObjectURL(u);},4000);res();}catch(e){rej({code:'failed',message:String(e)});}});}};
-window.claude={use:function(n){return Promise.resolve(n==='downloads'?dl:null);}};})();</script><meta property="og:type" content="website"><meta property="og:title" content="Unternehmens-Werkstatt"><meta property="og:description" content="Was ist ein Unternehmen? Sachgüter und Dienstleistungen, private und öffentliche Unternehmen, Aufgaben und Ziele, Zielkonflikte – an einer ausgedachten Bäckerei, in kurzen Häppchen. Wirtschaft, Klasse 8. Ergebnis als PDF."><meta property="og:url" content="https://deintechniklehrer.github.io/Lernplattformen/unternehmens-werkstatt/"><meta property="og:image" content="https://deintechniklehrer.github.io/Lernplattformen/vorschau/Vorschau_Unternehmens-Werkstatt.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="description" content="Was ist ein Unternehmen? Sachgüter und Dienstleistungen, private und öffentliche Unternehmen, Aufgaben und Ziele, Zielkonflikte – an einer ausgedachten Bäckerei, in kurzen Häppchen. Wirtschaft, Klasse 8. Ergebnis als PDF."><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+window.claude={use:function(n){return Promise.resolve(n==='downloads'?dl:null);}};})();</script><meta property="og:type" content="website"><meta property="og:title" content="Unternehmens-Werkstatt"><meta property="og:description" content="Was ist ein Unternehmen? Sachgüter und Dienstleistungen, private und öffentliche Unternehmen, Aufgaben und Ziele, Zielkonflikte – an einer ausgedachten Bäckerei, in kurzen Häppchen. Wirtschaft, Klasse 8. Ergebnis als PDF."><meta property="og:url" content="https://deintechniklehrer.github.io/Lernplattformen/unternehmens-werkstatt/"><meta property="og:image" content="https://deintechniklehrer.github.io/Lernplattformen/vorschau/Vorschau_Unternehmens-Werkstatt.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="description" content="Was ist ein Unternehmen? Sachgüter und Dienstleistungen, private und öffentliche Unternehmen, Aufgaben und Ziele, Zielkonflikte – an einer ausgedachten Bäckerei, in kurzen Häppchen. Wirtschaft, Klasse 8. Ergebnis als PDF."><script>try{var t=localStorage.getItem('lp-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Unternehmens-Werkstatt</title>
 <link rel="stylesheet" href="../assets/fonts/fonts.css">
 <style>
@@ -450,7 +450,7 @@ a.btn{text-decoration:none}
 .sortw .sc[aria-pressed="true"]{outline:3px solid var(--c);outline-offset:2px}
 .sortw .sc.s-ok{border-color:var(--existenz);background:var(--existenz-soft)} .sortw .sc.s-bad{border-color:var(--bad);background:var(--bad-soft)}
 code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overflow:auto;padding:8px 10px;border-radius:10px;background:var(--surface-2)}
-</style></head><body>
+</style><link rel="stylesheet" href="../assets/lp-shell.css"><script src="../assets/lp-shell.js"></script></head><body>
 <div class="app">
   <header class="top">
     <div class="brand">
@@ -940,6 +940,8 @@ function paintNav(){const cur=chOf[S.st];nav.replaceChildren(...CH.map((c,ci)=>{
 
 function paintTeile(){}
 const CHI=[...new Set(chOf)];
+/* lp-shell (seit 19.11.2026): Kapitel und Fortschritt für den gemeinsamen Rahmen */
+window.LPH={chapters:()=>CHI.map(ci=>{const ids=TASK_IDS.filter(id=>chOf[home[id]]===ci);return {id:String(ci),label:String(CH[ci]),num:String(ci),done:ids.filter(isDone).length,total:ids.length};}),current:()=>String(chOf[S.st]),go:id=>go(chOf.indexOf(+id))};
 function chStart(ci){return chOf.indexOf(ci);}
 /* Ein Kapitel = eine Seite (seit 13.11.2026, Wunsch von Daniel): alle Abschnitte eines Kapitels stehen untereinander */
 function go(i,scroll=true){i=Math.max(0,Math.min(parts.length-1,i|0));const ci=chOf[i];S.st=chStart(ci);
@@ -994,4 +996,40 @@ $('#pdfBtn').onclick=()=>{const note=$('#pdfNote');note.hidden=false;
 go(S.st,false);
 })();
 </script>
-<style>.lp-legal{font:13px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif;text-align:center;padding:20px 16px calc(96px + env(safe-area-inset-bottom,0px));opacity:.8;clear:both}.lp-legal a{color:inherit;text-decoration:underline;text-underline-offset:2px}</style><div class="lp-legal">Privates Angebot von Daniel Beyrodt · <a href="../ueber-mich/">Über mich</a> · <a href="../impressum/">Impressum</a> · <a href="../datenschutz/">Datenschutz</a></div></body></html>
+<script>/* lp-shell-Adapter für Plattformen, die window.LPH bereitstellen (seit 19.11.2026):
+   LPH.chapters() → [{id, label, num, done, total, group?}], LPH.current() → id, LPH.go(id).
+   Optional: LPH.nav (Selektor der bisherigen Kapitelleiste, wird ausgeblendet), LPH.bar (Element/Selektor, hinter dem die neue Leiste steht),
+   LPH.tools (Selektor, in den der Hell/Dunkel-Knopf kommt), LPH.hide (Selektoren, die ausgeblendet werden, z. B. eigener Theme-Knopf),
+   LPH.cls (zusätzliche Körperklasse). */
+(function () {
+  var tries = 0;
+  function q(s) { return typeof s === 'string' ? document.querySelector(s) : s; }
+  /* Kapitel aus der bisherigen Kapitelleiste lesen (ältere Plattformen ohne eigenes LPH):
+     LPH_DOM = {nav, btn (Standard .st-btn), done (Klasse für erledigt, Standard 'done'), unit, tools, hide, cls} */
+  function fromDom(D) {
+    function btns() { return Array.prototype.slice.call(document.querySelectorAll(D.nav + ' ' + (D.btn || '.st-btn'))); }
+    function label(b) { var c = b.cloneNode(true); Array.prototype.forEach.call(c.querySelectorAll('.n,svg,.ok'), function (x) { x.remove(); }); return c.textContent.replace(/\s+/g, ' ').trim(); }
+    return { nav: D.nav, tools: D.tools, hide: D.hide, cls: D.cls, unit: D.unit || 'Stationen',
+      chapters: function () { return btns().map(function (b, i) { var n = b.querySelector('.n'); var t = D.counted === false ? 0 : 1; return { id: String(i), label: label(b), num: n ? n.textContent.trim() : String(i + 1), done: t && b.classList.contains(D.done || 'done') ? 1 : 0, total: t }; }); },
+      current: function () { var i = btns().findIndex(function (b) { return b.hasAttribute('aria-current'); }); return String(Math.max(0, i)); },
+      go: function (id) { var b = btns()[+id]; if (b) b.click(); } };
+  }
+  function start() {
+    if (!window.LPH && window.LPH_DOM && document.querySelector(window.LPH_DOM.nav)) window.LPH = fromDom(window.LPH_DOM);
+    var H = window.LPH;
+    if (!H || !window.LPShell) { if (++tries < 200) setTimeout(start, 50); return; }
+    var nav = H.nav === null ? null : q(H.nav || '#nav');
+    var css = (H.hide || []).concat(H.nav === null ? [] : [H.nav || '#nav']).filter(Boolean).map(function (s) { return 'body.lps-on ' + s; }).join(',');
+    if (css) { var st = document.createElement('style'); st.textContent = css + '{display:none!important}'; document.head.appendChild(st); }
+    LPShell.init({
+      bodyClass: 'lps-lph' + (H.cls ? ' ' + H.cls : ''), unit: H.unit,
+      chapters: function () { return H.chapters(); },
+      current: function () { return String(H.current()); },
+      go: function (id) { H.go(id); },
+      mountBar: function (b) { var a = q(H.bar) || nav; if (a) a.after(b); else document.body.prepend(b); },
+      mountTools: function (t) { var w = q(H.tools || '.top .brand'); if (!w) return document.querySelector('.lps-in').prepend(t); if (/spacer/.test(w.className)) w.after(t); else w.appendChild(t); }
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function () { setTimeout(start, 0); }); else setTimeout(start, 0);
+})();
+</script><style>.lp-legal{font:13px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif;text-align:center;padding:20px 16px calc(96px + env(safe-area-inset-bottom,0px));opacity:.8;clear:both}.lp-legal a{color:inherit;text-decoration:underline;text-underline-offset:2px}</style><div class="lp-legal">Privates Angebot von Daniel Beyrodt · <a href="../ueber-mich/">Über mich</a> · <a href="../impressum/">Impressum</a> · <a href="../datenschutz/">Datenschutz</a></div></body></html>

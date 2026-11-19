@@ -1,7 +1,7 @@
 <!doctype html><html><head><script>/* Lernplattformen auf GitHub Pages: Speichern ohne claude.ai */
 (function(){if(window.claude)return;var T={pdf:'application/pdf',txt:'text/plain;charset=utf-8',png:'image/png',jpg:'image/jpeg',jpeg:'image/jpeg',json:'application/json',csv:'text/csv;charset=utf-8',html:'text/html;charset=utf-8',docx:'application/vnd.openxmlformats-officedocument.wordprocessingml.document',xlsx:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',ino:'text/plain;charset=utf-8'};
 var dl={save:function(o){return new Promise(function(res,rej){try{var n=(o&&o.filename)||'datei',x=(n.split('.').pop()||'').toLowerCase(),d=o.data,b=d instanceof Blob?d:new Blob([d],{type:T[x]||'application/octet-stream'});var u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=n;a.rel='noopener';document.body.appendChild(a);a.click();setTimeout(function(){a.remove();URL.revokeObjectURL(u);},4000);res();}catch(e){rej({code:'failed',message:String(e)});}});}};
-window.claude={use:function(n){return Promise.resolve(n==='downloads'?dl:null);}};})();</script><meta property="og:type" content="website"><meta property="og:title" content="Einkommens-Werkstatt"><meta property="og:description" content="Woher kommt das Geld? Die vier Einkommensquellen kennenlernen, brutto und netto verstehen. Wirtschaft, Klasse 8."><meta property="og:url" content="https://deintechniklehrer.github.io/Lernplattformen/einkommens-werkstatt/"><meta property="og:image" content="https://deintechniklehrer.github.io/Lernplattformen/vorschau/Vorschau_Einkommens-Werkstatt.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="description" content="Woher kommt das Geld? Die vier Einkommensquellen kennenlernen, brutto und netto verstehen. Wirtschaft, Klasse 8."><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><style>
+window.claude={use:function(n){return Promise.resolve(n==='downloads'?dl:null);}};})();</script><meta property="og:type" content="website"><meta property="og:title" content="Einkommens-Werkstatt"><meta property="og:description" content="Woher kommt das Geld? Die vier Einkommensquellen kennenlernen, brutto und netto verstehen. Wirtschaft, Klasse 8."><meta property="og:url" content="https://deintechniklehrer.github.io/Lernplattformen/einkommens-werkstatt/"><meta property="og:image" content="https://deintechniklehrer.github.io/Lernplattformen/vorschau/Vorschau_Einkommens-Werkstatt.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="description" content="Woher kommt das Geld? Die vier Einkommensquellen kennenlernen, brutto und netto verstehen. Wirtschaft, Klasse 8."><script>try{var t=localStorage.getItem('lp-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><style>
 .graf{min-width:0;max-width:100%;overflow:hidden;margin:0;background:var(--surface,#fff);border:1px solid var(--line,#ddd);border-radius:14px;padding:14px 14px 10px}
 .graf figcaption b{display:block;font-size:1.05rem}
 .graf figcaption span{display:block;font-size:.85rem;color:var(--muted,#555);margin-top:2px}
@@ -22,7 +22,7 @@ window.claude={use:function(n){return Promise.resolve(n==='downloads'?dl:null);}
 .graf .chart .sv{font-size:13px;font-weight:700;fill:#fff}
 .graf .sub{font-size:.9rem;margin:12px 0 0}
 .graf .src{font-size:.78rem;color:var(--muted,#555);margin:8px 0 0}
-</style></head><body>
+</style><link rel="stylesheet" href="../assets/lp-shell.css"><script src="../assets/lp-shell.js"></script></head><body>
 <title>Einkommens-Werkstatt</title>
 <link rel="stylesheet" href="../assets/fonts/fonts.css">
 <style>
@@ -1132,4 +1132,41 @@ go(S.st||0,false); progress();
 })();
 </script>
 
-<style>.lp-legal{font:13px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif;text-align:center;padding:20px 16px calc(96px + env(safe-area-inset-bottom,0px));opacity:.8;clear:both}.lp-legal a{color:inherit;text-decoration:underline;text-underline-offset:2px}</style><div class="lp-legal">Privates Angebot von Daniel Beyrodt · <a href="../ueber-mich/">Über mich</a> · <a href="../impressum/">Impressum</a> · <a href="../datenschutz/">Datenschutz</a></div></body></html>
+<script>window.LPH_DOM={"nav": "#nav", "unit": "Stationen"};
+/* lp-shell-Adapter für Plattformen, die window.LPH bereitstellen (seit 19.11.2026):
+   LPH.chapters() → [{id, label, num, done, total, group?}], LPH.current() → id, LPH.go(id).
+   Optional: LPH.nav (Selektor der bisherigen Kapitelleiste, wird ausgeblendet), LPH.bar (Element/Selektor, hinter dem die neue Leiste steht),
+   LPH.tools (Selektor, in den der Hell/Dunkel-Knopf kommt), LPH.hide (Selektoren, die ausgeblendet werden, z. B. eigener Theme-Knopf),
+   LPH.cls (zusätzliche Körperklasse). */
+(function () {
+  var tries = 0;
+  function q(s) { return typeof s === 'string' ? document.querySelector(s) : s; }
+  /* Kapitel aus der bisherigen Kapitelleiste lesen (ältere Plattformen ohne eigenes LPH):
+     LPH_DOM = {nav, btn (Standard .st-btn), done (Klasse für erledigt, Standard 'done'), unit, tools, hide, cls} */
+  function fromDom(D) {
+    function btns() { return Array.prototype.slice.call(document.querySelectorAll(D.nav + ' ' + (D.btn || '.st-btn'))); }
+    function label(b) { var c = b.cloneNode(true); Array.prototype.forEach.call(c.querySelectorAll('.n,svg,.ok'), function (x) { x.remove(); }); return c.textContent.replace(/\s+/g, ' ').trim(); }
+    return { nav: D.nav, tools: D.tools, hide: D.hide, cls: D.cls, unit: D.unit || 'Stationen',
+      chapters: function () { return btns().map(function (b, i) { var n = b.querySelector('.n'); var t = D.counted === false ? 0 : 1; return { id: String(i), label: label(b), num: n ? n.textContent.trim() : String(i + 1), done: t && b.classList.contains(D.done || 'done') ? 1 : 0, total: t }; }); },
+      current: function () { var i = btns().findIndex(function (b) { return b.hasAttribute('aria-current'); }); return String(Math.max(0, i)); },
+      go: function (id) { var b = btns()[+id]; if (b) b.click(); } };
+  }
+  function start() {
+    if (!window.LPH && window.LPH_DOM && document.querySelector(window.LPH_DOM.nav)) window.LPH = fromDom(window.LPH_DOM);
+    var H = window.LPH;
+    if (!H || !window.LPShell) { if (++tries < 200) setTimeout(start, 50); return; }
+    var nav = H.nav === null ? null : q(H.nav || '#nav');
+    var css = (H.hide || []).concat(H.nav === null ? [] : [H.nav || '#nav']).filter(Boolean).map(function (s) { return 'body.lps-on ' + s; }).join(',');
+    if (css) { var st = document.createElement('style'); st.textContent = css + '{display:none!important}'; document.head.appendChild(st); }
+    LPShell.init({
+      bodyClass: 'lps-lph' + (H.cls ? ' ' + H.cls : ''), unit: H.unit,
+      chapters: function () { return H.chapters(); },
+      current: function () { return String(H.current()); },
+      go: function (id) { H.go(id); },
+      mountBar: function (b) { var a = q(H.bar) || nav; if (a) a.after(b); else document.body.prepend(b); },
+      mountTools: function (t) { var w = q(H.tools || '.top .brand'); if (!w) return document.querySelector('.lps-in').prepend(t); if (/spacer/.test(w.className)) w.after(t); else w.appendChild(t); }
+    });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function () { setTimeout(start, 0); }); else setTimeout(start, 0);
+})();
+</script><style>.lp-legal{font:13px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif;text-align:center;padding:20px 16px calc(96px + env(safe-area-inset-bottom,0px));opacity:.8;clear:both}.lp-legal a{color:inherit;text-decoration:underline;text-underline-offset:2px}</style><div class="lp-legal">Privates Angebot von Daniel Beyrodt · <a href="../ueber-mich/">Über mich</a> · <a href="../impressum/">Impressum</a> · <a href="../datenschutz/">Datenschutz</a></div></body></html>

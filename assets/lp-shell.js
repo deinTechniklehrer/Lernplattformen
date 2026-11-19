@@ -21,6 +21,7 @@
   function stats() {
     var ch = A.chapters() || [], cur = A.current(), done = 0, total = 0;
     ch.forEach(function (c) { done += c.done || 0; total += c.total || 0; });
+    if (!total && ch.length) { var ix = ch.findIndex(function (c) { return c.id === cur; }); return { ch: ch, cur: cur, done: ix + 1, total: ch.length, pct: Math.round(100 * (ix + 1) / ch.length), nav: true }; }
     return { ch: ch, cur: cur, done: done, total: total, pct: total ? Math.round(100 * done / total) : 0 };
   }
   function groupsOf(ch) { var g = []; ch.forEach(function (c) { if (c.group && g.indexOf(c.group) < 0) g.push(c.group); }); return g; }
@@ -44,7 +45,7 @@
     if (multi) rowG.replaceChildren.apply(rowG, groups.map(function (g, gi) {
       var cs = S.ch.filter(function (c) { return c.group === g; }), d = 0, t = 0; cs.forEach(function (c) { d += c.done || 0; t += c.total || 0; });
       return el('button', { class: 'lps-g ' + kcls(gi), type: 'button', 'aria-current': g === selGroup ? 'true' : null, 'aria-label': 'Teil ' + gi + ': ' + g + (t ? ', ' + d + ' von ' + t + ' erledigt' : ''), onclick: function () { selGroup = g; render(true); } },
-        [el('span', { class: 'lps-gk' }, ['Teil ' + gi]), el('span', { class: 'lps-gt' }, [g]), el('span', { class: 'lps-gc' }, [t ? d + ' von ' + t : ' '])]);
+        [/^Teil\b/.test(g) ? null : el('span', { class: 'lps-gk' }, ['Teil ' + gi]), el('span', { class: 'lps-gt' }, [g]), el('span', { class: 'lps-gc' }, [t ? d + ' von ' + t : ' '])]);
     }));
     // Kapitel
     var shown = multi ? S.ch.filter(function (c) { return c.group === selGroup; }) : S.ch, gi = multi ? groups.indexOf(selGroup) : 0;
@@ -57,7 +58,7 @@
     }));
     var cp = rowC.querySelector('[aria-current]'); if (cp) { var r = rowC.getBoundingClientRect(), b = cp.getBoundingClientRect(); if (b.left < r.left || b.right > r.right) rowC.scrollLeft += b.left - r.left - (r.width - b.width) / 2; }
     // Fortschritt links
-    sumBox.replaceChildren(layers(20, S.pct, 'lps-layers'), el('div', null, [el('div', { class: 'lps-pct' }, [S.pct + ' %']), el('small', null, [S.done + ' von ' + S.total + ' Aufgaben'])]));
+    sumBox.replaceChildren(layers(20, S.pct, 'lps-layers'), el('div', null, [el('div', { class: 'lps-pct' }, [S.pct + ' %']), el('small', null, [S.nav ? 'Kapitel ' + S.done + ' von ' + S.total : S.done + ' von ' + S.total + ' ' + (A.unit || 'Aufgaben')])]));
     var lastG = null, items = [];
     S.ch.forEach(function (c) {
       if (multi && c.group !== lastG) { items.push(el('div', { class: 'lps-lg' }, [c.group])); lastG = c.group; }
@@ -67,7 +68,7 @@
     });
     listBox.replaceChildren.apply(listBox, items);
     tab.replaceChildren(layers(6, S.pct, 'lps-mini'), el('span', { class: 'lps-vt' }, ['Fortschritt ' + S.pct + ' %']));
-    tab.setAttribute('aria-label', 'Fortschritt einblenden: ' + S.pct + ' Prozent, ' + S.done + ' von ' + S.total + ' Aufgaben');
+    tab.setAttribute('aria-label', 'Fortschritt einblenden: ' + S.pct + ' Prozent, ' + (S.nav ? 'Kapitel ' + S.done + ' von ' + S.total : S.done + ' von ' + S.total + ' ' + (A.unit || 'Aufgaben')));
     themeBtns.forEach(function (b) { b.innerHTML = (isDark() ? SUN : MOON) + '<span class="lps-lbl">' + (isDark() ? 'Hell' : 'Dunkel') + '</span>'; b.setAttribute('aria-label', isDark() ? 'Helle Ansicht' : 'Dunkle Ansicht'); });
   }
   function schedule() { clearTimeout(timer); timer = setTimeout(function () { render(false); }, 250); }
@@ -76,7 +77,10 @@
   window.LPShell = {
     init: function (adapter) {
       if (A) return; A = adapter;
-      if (A.bodyClass) document.body.classList.add(A.bodyClass);
+      if (A.bodyClass) A.bodyClass.split(' ').forEach(function (c) { if (c) document.body.classList.add(c); });
+      /* Hell/Dunkel: gemeinsamer Wert lp-theme gilt vor dem eigenen Wert der Plattform; hat die Plattform schon einen eigenen gesetzt, wird er übernommen */
+      var th = ls(TK), de = document.documentElement;
+      if (th === 'light' || th === 'dark') de.setAttribute('data-theme', th); else if (/^(light|dark)$/.test(de.getAttribute('data-theme') || '')) ls(TK, de.getAttribute('data-theme'));
       document.body.classList.add('lps-on');
       rowG = el('div', { class: 'lps-row', role: 'group', 'aria-label': 'Teile' });
       rowC = el('div', { class: 'lps-row', role: 'group', 'aria-label': 'Kapitel' });
