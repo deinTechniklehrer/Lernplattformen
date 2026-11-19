@@ -1525,29 +1525,42 @@ function init() {
 }
 document.addEventListener('DOMContentLoaded', init);
 </script>
-<script>/* lp-shell-Adapter: Modul-Bauart (Elektroinstallation, 3D-Druck, MakerSpace-Kompass): MODULES, navItems(), curKey(), modStats(), Router über #/…
-   Die eigene Seitenleiste (#side) wird ausgeblendet, die Kopfzeile (#top) bleibt auf allen Breiten stehen (ohne Kapitel-Pillen). */
+<script>/* lp-shell-Adapter: Modul-Bauart (Elektroinstallation, 3D-Druck): MODULES, navItems(), curKey(), modStats(), Router über #/…
+   Eigene Seitenleiste (#side) und Kopfzeile (#top) sind aus. Der Adapter baut einen Kopf wie bei den Werkstätten (Logo, Titel, Untertitel aus der Seitenleiste, Hell/Dunkel)
+   und setzt die Kapitelleiste darunter. Farbe der Fortschrittsspalte: --blue der Seite. */
 (function () {
   var tries = 0;
   function start() {
-    if (!window.LPShell || typeof navItems !== 'function' || !document.querySelector('#top') || !document.querySelector('#top').children.length) { if (++tries < 200) setTimeout(start, 50); return; }
-    var top = document.querySelector('#top'), wrap = document.createElement('div');
-    wrap.className = 'lps-mtop'; top.parentNode.insertBefore(wrap, top); wrap.appendChild(top);
+    var side = document.querySelector('#side');
+    if (!window.LPShell || typeof navItems !== 'function' || !side || !side.querySelector('.brand')) { if (++tries < 200) setTimeout(start, 50); return; }
+    var main = document.querySelector('main');
+    var b = side.querySelector('.brand b'), sm = side.querySelector('.brand small');
+    var wrap = document.createElement('div'); wrap.className = 'lps-mwrap';
+    var head = document.createElement('header'); head.className = 'lps-mhead';
+    var img = document.createElement('img'); img.alt = 'Logo: dein Technik Lehrer';
+    function logo() { var d = document.documentElement.getAttribute('data-theme') === 'dark' || (!document.documentElement.getAttribute('data-theme') && matchMedia('(prefers-color-scheme: dark)').matches); img.src = (d && typeof LOGO_D !== 'undefined') ? LOGO_D : (typeof LOGO_L !== 'undefined' ? LOGO_L : ''); }
+    logo(); new MutationObserver(logo).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    var t = document.createElement('div'); t.className = 'lps-mt';
+    var tb = document.createElement('b'); tb.textContent = b ? b.textContent : document.title;
+    var ts = document.createElement('small'); ts.textContent = sm ? sm.textContent : '';
+    t.appendChild(tb); t.appendChild(ts); head.appendChild(img); head.appendChild(t); wrap.appendChild(head);
+    main.parentNode.insertBefore(wrap, main);
+    var h1 = main.querySelector('h1,h2'); if (h1) document.documentElement.style.setProperty('--lps-mfont', getComputedStyle(h1).fontFamily);
     function mod(key) { return MODULES.filter(function (m) { return 'm:' + m.id === key; })[0]; }
     LPShell.init({
-      bodyClass: 'lps-modul',
+      bodyClass: 'lps-modul', color: '--blue',
       chapters: function () {
         var mi = 0;
         return navItems().map(function (it) {
           var m = mod(it.key), s = m ? modStats(m) : null;
           if (m) mi++;
-          return { id: it.key, href: it.href, label: it.label.replace(/^\d+\s+/, ''), num: m ? String(mi) : (it.key === 'start' ? '0' : it.key === 'test' ? 'T' : 'E'), done: s ? s.done : 0, total: s ? s.total : 0 };
+          return { id: it.key, label: it.label.replace(/^\d+\s+/, ''), num: m ? String(mi) : (it.key === 'start' ? '0' : it.key === 'test' ? 'T' : 'E'), done: s ? s.done : 0, total: s ? s.total : 0 };
         });
       },
       current: function () { return curKey(); },
       go: function (id) { var it = navItems().filter(function (x) { return x.key === id; })[0]; if (it) location.hash = it.href; },
-      mountBar: function (b) { wrap.after(b); },
-      mountTools: function (t) { wrap.appendChild(t); }
+      mountBar: function (bar) { wrap.appendChild(bar); },
+      mountTools: function (tools) { head.appendChild(tools); }
     });
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function () { setTimeout(start, 0); }); else setTimeout(start, 0);

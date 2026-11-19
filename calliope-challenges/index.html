@@ -1428,7 +1428,7 @@ document.addEventListener('click',e=>{
   const h=e.target.closest('button[data-how]');if(h){go('howto');const d=$('details[data-how="'+h.dataset.how+'"]',PAGES.howto);if(d){d.open=true;setTimeout(()=>d.scrollIntoView({block:'start'}),30);}return;}
 });
 /* lp-shell (seit 19.11.2026): Kapitel und Fortschritt für den gemeinsamen Rahmen (Seitenleiste wird ausgeblendet, wie Arduino) */
-window.LPH={nav:null,bar:'.topbar',tools:'.topbar .spacer',cls:'lps-ardu',chapters:()=>{const G0='Start',out=[{id:'start',label:'Start & Übersicht',group:G0,num:'0',done:0,total:0},
+window.LPH={nav:null,color:'--accent',bar:'.topbar',tools:'.topbar .spacer',cls:'lps-ardu',chapters:()=>{const G0='Start',out=[{id:'start',label:'Start & Übersicht',group:G0,num:'0',done:0,total:0},
   {id:'board',label:'Calliope kennenlernen',group:G0,num:'1',done:['p1','p2'].filter(isDone).length,total:2},{id:'howto',label:'How-to-Guide',group:G0,num:'2',done:isDone('h1')?1:0,total:1}];
   CH.forEach(c=>out.push({id:'c'+c.n,label:c.t,group:CHILI[c.lv].t,num:'#'+pad(c.n),done:c.tasks.filter(isDone).length+(S.run[c.n]?1:0),total:c.tasks.length+1}));
   out.push({id:'abgabe',label:'Abgabe (Ergebnis-PDF)',group:'Abschluss',num:'A',done:0,total:0});return out;},current:()=>S.pg||'start',go:id=>go(id)};
@@ -1501,7 +1501,7 @@ setMode(S.mode);refresh();go(S.pg,{keep:true});
   function fromDom(D) {
     function btns() { return Array.prototype.slice.call(document.querySelectorAll(D.nav + ' ' + (D.btn || '.st-btn'))); }
     function label(b) { var c = b.cloneNode(true); Array.prototype.forEach.call(c.querySelectorAll('.n,svg,.ok'), function (x) { x.remove(); }); return c.textContent.replace(/\s+/g, ' ').trim(); }
-    return { nav: D.nav, tools: D.tools, hide: D.hide, cls: D.cls, unit: D.unit || 'Stationen',
+    return { nav: D.nav, tools: D.tools, hide: D.hide, cls: D.cls, color: D.color, unit: D.unit || 'Stationen',
       chapters: function () { return btns().map(function (b, i) { var n = b.querySelector('.n'); var t = D.counted === false ? 0 : 1; return { id: String(i), label: label(b), num: n ? n.textContent.trim() : String(i + 1), done: t && b.classList.contains(D.done || 'done') ? 1 : 0, total: t }; }); },
       current: function () { var i = btns().findIndex(function (b) { return b.hasAttribute('aria-current'); }); return String(Math.max(0, i)); },
       go: function (id) { var b = btns()[+id]; if (b) b.click(); } };
@@ -1514,7 +1514,7 @@ setMode(S.mode);refresh();go(S.pg,{keep:true});
     var css = (H.hide || []).concat(H.nav === null ? [] : [H.nav || '#nav']).filter(Boolean).map(function (s) { return 'body.lps-on ' + s; }).join(',');
     if (css) { var st = document.createElement('style'); st.textContent = css + '{display:none!important}'; document.head.appendChild(st); }
     LPShell.init({
-      bodyClass: 'lps-lph' + (H.cls ? ' ' + H.cls : ''), unit: H.unit,
+      bodyClass: 'lps-lph' + (H.cls ? ' ' + H.cls : ''), unit: H.unit, color: H.color,
       chapters: function () { return H.chapters(); },
       current: function () { return String(H.current()); },
       go: function (id) { H.go(id); },

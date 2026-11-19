@@ -34,10 +34,35 @@
   }
   function layers(n, pct, cls) { var on = Math.round(pct / 100 * n), d = el('div', { class: cls, 'aria-hidden': 'true' }); for (var i = 0; i < n; i++) d.append(el('i', { class: i < on ? (i === on - 1 ? 'on top' : 'on') : null })); return d; }
 
+  /* Farbe der Fortschrittsspalte passt sich der Seite an (Wunsch Daniel, 19.11.2026): A.color (CSS-Variable, Farbe oder Funktion),
+     sonst die Farbe des sichtbaren Kapitelkopfs (.st-head, .chead), sonst --accent/--primary/--green/--blue; daraus ein dunkler Ton gleicher Farbe. */
+  var probe = null;
+  function rgbOf(c) { if (!c) return null; if (!probe) { probe = el('i', { 'aria-hidden': 'true' }); probe.style.display = 'none'; document.body.append(probe); } probe.style.color = ''; probe.style.color = c; if (!probe.style.color) return null; var m = getComputedStyle(probe).color.match(/[\d.]+/g); return m ? m.slice(0, 3).map(Number) : null; }
+  function satOf(r) { var mx = Math.max.apply(null, r), mn = Math.min.apply(null, r); return mx ? (mx - mn) / mx : 0; }
+  function pageColor() {
+    var de = document.documentElement, cs = getComputedStyle(de), c = null;
+    if (typeof A.color === 'function') c = A.color(); else if (A.color) c = A.color.indexOf('--') === 0 ? cs.getPropertyValue(A.color).trim() : A.color;
+    var r = rgbOf(c);
+    if (!r) { var cand = Array.prototype.slice.call(document.querySelectorAll('.st-head,.chead')).filter(function (e) { var b = e.getBoundingClientRect(); return e.offsetParent && b.bottom > 0 && b.top < innerHeight; });
+      for (var i = 0; i < cand.length && !r; i++) { var x = rgbOf(getComputedStyle(cand[i]).backgroundColor); if (x && satOf(x) > 0.3) r = x; } }
+    ['--accent', '--primary', '--green', '--blue'].forEach(function (v) { if (!r) { var x = rgbOf(cs.getPropertyValue(v).trim()); if (x && satOf(x) > 0.3) r = x; } });
+    return r;
+  }
+  function hsl(r) { var R = r[0] / 255, G = r[1] / 255, B = r[2] / 255, mx = Math.max(R, G, B), mn = Math.min(R, G, B), h = 0, s = 0, l = (mx + mn) / 2, d = mx - mn;
+    if (d) { s = d / (1 - Math.abs(2 * l - 1)); h = mx === R ? ((G - B) / d) % 6 : mx === G ? (B - R) / d + 2 : (R - G) / d + 4; h = (h * 60 + 360) % 360; } return [h, s, l]; }
+  function paint() {
+    var r = pageColor(), de = document.documentElement;
+    if (!r) { de.style.removeProperty('--lps-panel'); de.style.removeProperty('--lps-layer-on'); return; }
+    var x = hsl(r), s = Math.min(x[1], 0.7);
+    de.style.setProperty('--lps-panel', 'hsl(' + Math.round(x[0]) + ' ' + Math.round(s * 100) + '% ' + (isDark() ? 13 : 21) + '%)');
+    de.style.setProperty('--lps-layer-on', 'hsl(' + Math.round(x[0]) + ' ' + Math.round(Math.max(s, 0.45) * 100) + '% 62%)');
+  }
+
   function render(force) {
     var S = stats(), groups = groupsOf(S.ch), multi = groups.length > 1;
     var sig = JSON.stringify([S.cur, selGroup, S.ch.map(function (c) { return [c.id, c.done, c.total]; }), isDark()]);
     if (!force && sig === lastSig) return; lastSig = sig;
+    try { paint(); } catch (e) {}
     var curC = S.ch.filter(function (c) { return c.id === S.cur; })[0];
     if (multi && (!selGroup || groups.indexOf(selGroup) < 0 || force === 'nav')) selGroup = (curC && curC.group) || selGroup || groups[0];
     // Gruppen

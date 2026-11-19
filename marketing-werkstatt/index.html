@@ -1002,7 +1002,7 @@ go(S.st,false);
   function fromDom(D) {
     function btns() { return Array.prototype.slice.call(document.querySelectorAll(D.nav + ' ' + (D.btn || '.st-btn'))); }
     function label(b) { var c = b.cloneNode(true); Array.prototype.forEach.call(c.querySelectorAll('.n,svg,.ok'), function (x) { x.remove(); }); return c.textContent.replace(/\s+/g, ' ').trim(); }
-    return { nav: D.nav, tools: D.tools, hide: D.hide, cls: D.cls, unit: D.unit || 'Stationen',
+    return { nav: D.nav, tools: D.tools, hide: D.hide, cls: D.cls, color: D.color, unit: D.unit || 'Stationen',
       chapters: function () { return btns().map(function (b, i) { var n = b.querySelector('.n'); var t = D.counted === false ? 0 : 1; return { id: String(i), label: label(b), num: n ? n.textContent.trim() : String(i + 1), done: t && b.classList.contains(D.done || 'done') ? 1 : 0, total: t }; }); },
       current: function () { var i = btns().findIndex(function (b) { return b.hasAttribute('aria-current'); }); return String(Math.max(0, i)); },
       go: function (id) { var b = btns()[+id]; if (b) b.click(); } };
@@ -1015,7 +1015,7 @@ go(S.st,false);
     var css = (H.hide || []).concat(H.nav === null ? [] : [H.nav || '#nav']).filter(Boolean).map(function (s) { return 'body.lps-on ' + s; }).join(',');
     if (css) { var st = document.createElement('style'); st.textContent = css + '{display:none!important}'; document.head.appendChild(st); }
     LPShell.init({
-      bodyClass: 'lps-lph' + (H.cls ? ' ' + H.cls : ''), unit: H.unit,
+      bodyClass: 'lps-lph' + (H.cls ? ' ' + H.cls : ''), unit: H.unit, color: H.color,
       chapters: function () { return H.chapters(); },
       current: function () { return String(H.current()); },
       go: function (id) { H.go(id); },

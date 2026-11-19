@@ -105,17 +105,18 @@ html.lps-open .lps-tab{display:none}
 .lps-lph .top .brand h1{overflow-wrap:break-word;hyphens:auto;-webkit-hyphens:auto}
 /* schmale Bildschirme: schmale Lasche „Fortschritt“ und Platz dafür, damit sie keinen Text verdeckt */
 @media (max-width:1099.98px){body.lps-on{padding-left:22px}.lps-tab{padding:10px 3px;gap:6px;font-size:12px}.lps-tab .lps-mini{width:14px}}
-/* Modul-Bauart (Elektroinstallation, 3D-Druck, MakerSpace-Kompass): eigene Seitenleiste aus, Kopfzeile auf allen Breiten */
+/* Modul-Bauart (Elektroinstallation, 3D-Druck): eigene Seitenleiste und Kopfzeile aus, eigener Kopf wie bei den Werkstätten (Logo, Titel, Hell/Dunkel), darunter die Kapitelleiste */
 .lps-modul .app{display:block!important}
-.lps-modul #side{display:none!important}
-.lps-modul .lps-mtop{position:sticky;top:0;z-index:30}
-.lps-modul .lps-mtop .topbar{display:block!important;position:static;background:var(--blue-d,#0b3a5c);color:#fff;padding:calc(8px + var(--safe-t,0px)) 150px 8px 12px}
-.lps-modul .lps-mtop .topbar .row{display:flex;align-items:center;gap:10px;min-width:0}
-.lps-modul .lps-mtop .topbar .row b{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.lps-modul .lps-mtop .topbar .pct{margin-left:auto;flex:none}
-.lps-modul .lps-mtop .topbar .pills{display:none!important}
-.lps-modul .lps-mtop .lps-tools{position:absolute;right:12px;top:50%;transform:translateY(-50%)}
-.lps-modul .lps-mtop .lps-btn{background:rgba(255,255,255,.12);color:#fff;border-color:rgba(255,255,255,.35)}
-.lps-modul .lps{background:var(--bg,var(--lps-bg))}
-@media (max-width:560px){.lps-modul .lps-mtop .topbar{padding-right:62px}}
+.lps-modul #side,.lps-modul #top,.lps-modul .topbar{display:none!important}
+.lps-modul .lps-mwrap{max-width:1000px;margin:0 auto;padding:22px clamp(16px,4vw,56px) 0}
+.lps-modul .lps-mhead{display:flex;align-items:center;gap:14px;min-width:0}
+.lps-modul .lps-mhead img{height:52px;width:auto;flex:none}
+.lps-modul .lps-mhead .lps-mt{min-width:0;flex:1}
+.lps-modul .lps-mhead .lps-mt b{display:block;font:800 clamp(1.35rem,3.2vw,1.9rem)/1.1 var(--lps-mfont,inherit);color:var(--ink,var(--lps-ink));overflow-wrap:break-word;hyphens:auto}
+.lps-modul .lps-mhead .lps-mt small{display:block;margin-top:3px;color:var(--muted,#5a6a72);font-size:.92rem}
+.lps-modul .lps-mhead .lps-tools{margin-left:auto;flex:none}
+.lps-modul .lps-mwrap .lps{background:transparent;border:0;margin:14px 0 0;padding:0}
+.lps-modul .lps-mwrap .lps-in{padding:0;max-width:none}
+.lps-modul main{margin:0 auto!important;padding-top:18px!important}
+@media (max-width:560px){.lps-modul .lps-mhead{gap:10px}.lps-modul .lps-mhead img{height:34px}.lps-modul .lps-mhead .lps-mt b{font-size:1.15rem;hyphens:manual}.lps-modul .lps-mhead .lps-mt small{display:none}.lps-modul .lps-mwrap{padding-top:14px}}
 @media (max-width:560px){body.lps-on main{hyphens:auto;-webkit-hyphens:auto}body.lps-on .station,body.lps-on .panel{overflow-wrap:anywhere}}

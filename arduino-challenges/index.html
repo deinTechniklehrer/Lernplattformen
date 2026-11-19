@@ -4443,7 +4443,7 @@ if (document.readyState === 'loading') document.addEventListener('DOMContentLoad
     if (!top || typeof CH === 'undefined') return setTimeout(start, 50);
     var G0 = 'Start & Abgabe';
     LPShell.init({
-      bodyClass: 'lps-ardu',
+      bodyClass: 'lps-ardu', color: '--accent',
       chapters: function () {
         var out = [{ id: 'start', label: 'Start', group: G0, num: '0', done: 0, total: 0 }];
         CH.forEach(function (c) {
