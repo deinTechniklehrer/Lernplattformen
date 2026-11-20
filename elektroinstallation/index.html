@@ -43,6 +43,24 @@ p{margin:.6em 0} a{color:var(--link)}
 button,select,input{font:inherit;color:inherit}
 :focus-visible{outline:3px solid var(--yellow);outline-offset:2px}
 .hidden{display:none!important}
+.task .lesen{border-left:6px solid var(--accent);background:var(--paper);padding:10px 16px;border-radius:0 6px 6px 0;margin:6px 0 14px}
+.task .lesen p{margin:.45em 0}
+.task .lesen figure,.task .lesen .panels{margin:8px 0}
+.marktext{line-height:1.95;margin:.4em 0}
+.marktext .tapp{cursor:pointer;background:var(--paper);border-bottom:2px dashed var(--muted);border-radius:3px;padding:2px 3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.marktext .tapp:focus-visible{outline:3px solid var(--accent);outline-offset:1px}
+.marktext .tapp.on{background:var(--yellow-soft);border-bottom:2px solid var(--yellow)}
+.marktext .tapp.ok{background:var(--ok-bg);border-bottom:2px solid var(--ok)}
+.marktext .tapp.bad{background:var(--bad-bg);border-bottom:2px solid var(--bad)}
+.marktext.locked .tapp{cursor:default}
+textarea.opentext{display:block;width:100%;min-height:9em;font:inherit;line-height:1.45;padding:10px 12px;border:2px solid var(--line);border-radius:6px;background:var(--card);color:var(--ink);box-sizing:border-box}
+textarea.opentext:focus{outline:3px solid var(--accent);outline-offset:1px}
+.denk{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:8px 14px;margin:0 0 10px}
+.denk ul{margin:.3em 0 0;padding-left:1.2em}
+details.muster{margin-top:12px}
+.mbtn .pic svg{width:120px;max-width:100%;height:auto;display:block}
+.testauftrag{font-weight:600;margin:0 0 14px}
+.mbtn .pic svg.mini{margin:0}
 
 /* Layout */
 .app{display:grid;grid-template-columns:290px minmax(0,1fr);min-height:100vh}
@@ -479,6 +497,7 @@ function buildTask(t, nr) {
   ctx.finish = () => { if (!st.done) { st.done = true; st.assisted = false; save(); paintState(); } };
   card.append(...[
     h('div', { class: 'th' }, h('h3', null, `Aufgabe ${nr}`), h('span', { class: 't-title' }, t.title || ''), state),
+    t.lesen ? h('div', { class: 'info-box lesen', html: t.lesen }) : null,
     t.info ? h('details', { class: 'info' }, h('summary', null, 'Info zur Aufgabe'), h('div', { class: 'infobody', html: t.info })) : null,
     t.q ? h('p', { class: 'q', html: t.q }) : null,
     impl.el,
@@ -628,7 +647,7 @@ TYPES.match = (t) => {
   }
   paint();
   return {
-    el: h('div', null, h('p', { class: 'hintline' }, 'Tippe links eine Aussage an und dann rechts den passenden Begriff. Zum Lösen einer Verbindung tippe den Begriff rechts noch einmal an.'), h('div', { class: 'match' }, colL, colR)),
+    el: h('div', null, h('p', { class: 'hintline' }, t.how || 'Tippe links eine Aussage an und dann rechts den passenden Begriff. Zum Lösen einer Verbindung tippe den Begriff rechts noch einmal an.'), h('div', { class: 'match' }, colL, colR)),
     check() { let right = 0; marks = {}; L.forEach(l => { const ok = map.get(l.i) === l.i; marks[l.i] = ok ? 'ok' : 'bad'; if (ok) right++; }); paint(); return { ok: right === n, right, total: n, msg: map.size < n ? 'Es sind noch nicht alle Paare verbunden.' : null }; },
     reveal() { marks = {}; L.forEach(l => { map.set(l.i, l.i); marks[l.i] = 'ok'; }); selL = null; paint(); },
     lock() { locked = true; paint(); }, unlock() { locked = false; paint(); },
@@ -658,6 +677,59 @@ TYPES.sort = (t) => {
     lock() { locked = true; paint(); }, unlock() { locked = false; paint(); },
     reset() { items.forEach(it => place[it.i] = null); marks = {}; sel = null; locked = false; paint(); }
   };
+};
+
+// Im Text antippen (Sätze oder Satzteile auswählen)
+TYPES.mark = (t) => {
+  const items = []; let locked = false;
+  const p = h('p', { class: 'marktext' });
+  const clear = () => items.forEach(it => it.b.classList.remove('ok', 'bad'));
+  const paint = () => { items.forEach(it => { it.b.classList.toggle('on', it.on); it.b.setAttribute('aria-pressed', it.on ? 'true' : 'false'); }); p.classList.toggle('locked', locked); };
+  t.parts.forEach(pt => {
+    if (typeof pt === 'string') { p.append(h('span', { html: pt })); return; }
+    const b = h('span', { class: 'tapp', role: 'button', tabindex: '0', 'aria-pressed': 'false', html: pt[0] });
+    const it = { b, ok: !!pt[1], on: false };
+    const tog = () => { if (locked) return; it.on = !it.on; clear(); paint(); };
+    b.addEventListener('click', tog);
+    b.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); tog(); } });
+    items.push(it); p.append(b);
+  });
+  return {
+    el: h('div', null, h('p', { class: 'hintline' }, 'Tippe die passenden Sätze an. Noch einmal antippen hebt die Auswahl auf.'), p),
+    check() {
+      clear(); let right = 0;
+      items.forEach(it => { if (it.on === it.ok) right++; if (it.on) it.b.classList.add(it.ok ? 'ok' : 'bad'); });
+      const ok = right === items.length;
+      return { ok, right, total: items.length, msg: ok ? null : (items.some(it => it.on) ? `${right} von ${items.length} Sätzen richtig eingeordnet. Rot: falsch angetippt. Vielleicht fehlt auch noch ein Satz.` : 'Tippe zuerst mindestens einen Satz an.') };
+    },
+    reveal() { items.forEach(it => { it.on = it.ok; }); clear(); items.forEach(it => { if (it.ok) it.b.classList.add('ok'); }); paint(); },
+    lock() { locked = true; paint(); }, unlock() { locked = false; paint(); },
+    reset() { items.forEach(it => { it.on = false; }); clear(); locked = false; paint(); }
+  };
+};
+
+// Offene Schreibaufgabe mit „Denk an“ und Musterlösung (ohne automatische Bewertung)
+TYPES.open = (t, ctx) => {
+  const st = tst(t.id);
+  const ta = h('textarea', { class: 'opentext', rows: '7', 'aria-label': 'Deine Antwort', placeholder: 'Schreib hier deine Antwort in ganzen Sätzen.' });
+  ta.value = st.text || '';
+  const cnt = h('p', { class: 'hintline' });
+  const fb2 = h('div', { class: 'fb', 'aria-live': 'polite' });
+  const muster = h('details', { class: 'info muster' + (st.done ? '' : ' hidden') }, h('summary', null, 'Musterlösung'), h('div', { class: 'infobody', html: t.muster }));
+  const upd = () => { const n = ta.value.trim().length; cnt.textContent = n < t.min ? `${n} Zeichen – schreib mindestens ${t.min}.` : `${n} Zeichen`; };
+  ta.addEventListener('input', () => { st.text = ta.value; save(); upd(); });
+  const bDone = h('button', { class: 'btn', type: 'button' }, 'Fertig');
+  bDone.onclick = () => {
+    const v = ta.value.trim();
+    if (v.length < t.min) { fb2.innerHTML = `<span class="msg bad">Deine Antwort ist noch zu kurz. Schreib mindestens ${t.min} Zeichen, also zwei bis drei ganze Sätze.</span>`; return; }
+    st.text = v; save();
+    const miss = (t.checks || []).filter(c => !new RegExp(c[1], 'i').test(v)).map(c => c[0]);
+    ctx.finish(); muster.classList.remove('hidden');
+    fb2.innerHTML = miss.length ? `<span class="msg warn">Gespeichert. Prüfe noch einmal, ob du an Folgendes gedacht hast: ${miss.join(', ')}. Vergleiche dann mit der Musterlösung.</span>` : '<span class="msg good">Gespeichert. Vergleiche deine Antwort mit der Musterlösung.</span>';
+  };
+  upd();
+  const think = t.denk ? h('div', { class: 'denk' }, h('b', null, 'Denk an:'), h('ul', null, t.denk.map(d => h('li', { html: d })))) : null;
+  return { auto: true, el: h('div', null, think, ta, cnt, h('div', { class: 'btnrow' }, bDone), fb2, muster), restoreDone() { muster.classList.remove('hidden'); } };
 };
 
 // Bild beschriften
@@ -796,6 +868,48 @@ G.pe = svg(520, 260, `
   <defs><marker id="arR" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="${C.red}"/></marker></defs>
   ${T(498, 252, 'Fehlerstrom über PE zur Erde', 'end', 700, 11, C.red)}`,
   'Schema: L, N und PE laufen durchs Haus. Steckdose und Gerät mit Metallgehäuse sind mit dem Schutzleiter verbunden. Bei einem Isolationsfehler fließt Strom über den PE zur Erde.');
+
+
+// Runde 4 (20.11.2026): Grafiken ohne Lösungsschlüssel und neue Grafiken nach Check K7
+G.leiterN = G.leiter.replace(/<text[^>]*>(\+ rot|− schwarz|L braun|N blau|PE grün-gelb)<\/text>/g, '');
+(function () {
+  let p = ''; for (let i = 0; i <= 60; i++) { const x = 10 + i * 2; const y = 48 - 34 * Math.abs(Math.sin(i / 60 * Math.PI * 3)); p += (i ? 'L' : 'M') + x + ' ' + y.toFixed(1); }
+  G.miniPuls = `<svg class="mini" viewBox="0 0 140 60" aria-label="Diagramm C">${W_(10, 48, 132, 48, C.grey, 1)}<path d="${p}" fill="none" stroke="${C.green}" stroke-width="2.5"/></svg>`;
+  G.miniSaw2 = `<svg class="mini" viewBox="0 0 140 60" aria-label="Diagramm D">${W_(10, 48, 132, 48, C.grey, 1)}<path d="M10 48L50 12V48L90 12V48L130 12V48" fill="none" stroke="${C.blue}" stroke-width="2.5"/></svg>`;
+  G.miniDCn = G.miniDC.replace(/aria-label="[^"]*"/, 'aria-label="Diagramm A"');
+  G.miniACn = G.miniAC.replace(/aria-label="[^"]*"/, 'aria-label="Diagramm B"');
+})();
+G.fuseN = svg(320, 200, `
+  <rect x="100" y="14" width="120" height="96" rx="10" fill="#f8d7d7" fill-opacity=".55" stroke="${C.ink}" stroke-width="2.5"/>
+  <rect x="112" y="80" width="26" height="100" fill="${C.metal}" stroke="${C.ink}" stroke-width="2"/><rect x="182" y="80" width="26" height="100" fill="${C.metal}" stroke="${C.ink}" stroke-width="2"/>
+  <path d="M125 82V60H145L152 44L160 60L168 44L175 60H195V82" fill="none" stroke="${C.spark}" stroke-width="3"/>
+  ${[[60, 150, 112, 150, '1'], [70, 46, 146, 52, '2'], [262, 30, 220, 40, '3']].map(([x, y, x2, y2, n]) => `${W_(x, y, x2, y2, C.grey, 1.5)}<circle cx="${x}" cy="${y}" r="16" fill="${C.blue}"/>${T(x, y + 6, n, 'middle', 700, 18, '#fff')}`).join('')}`,
+  'Flachstecksicherung mit den Nummern 1, 2 und 3');
+G.typenschild = svg(320, 130, `<rect x="10" y="10" width="300" height="110" rx="10" fill="#e9edf1" stroke="${C.ink}" stroke-width="2"/>
+  ${T(160, 40, 'Kühlbox', 'middle', 700, 18)}${W_(24, 52, 296, 52, C.grey, 1.2)}
+  ${T(30, 82, 'Eingang', 'start', 600, 17)}${T(290, 82, '12 V DC', 'end', 700, 18)}
+  ${T(30, 108, 'Leistung', 'start', 600, 17)}${T(290, 108, '48 W', 'end', 700, 18)}`, 'Typenschild einer Kühlbox: Eingang 12 V Gleichspannung, Leistung 48 W, kein Stromwert angegeben');
+G.strom36 = svg(400, 145, `${T(10, 26, 'Gerät mit 36 W', 'start', 700, 18, C.blue)}
+  ${T(10, 74, 'an 12 V', 'start', 700, 18)}<rect x="100" y="54" width="230" height="28" rx="3" fill="${C.blue}"/>${T(340, 75, '3 A', 'start', 700, 18)}
+  ${T(10, 124, 'an 230 V', 'start', 700, 18)}<rect x="100" y="104" width="12" height="28" rx="3" fill="${C.L}"/>${T(122, 125, '0,16 A', 'start', 700, 18)}`,
+  'Balkendiagramm: Ein Gerät mit 36 Watt braucht an 12 Volt 3 Ampere, an 230 Volt nur 0,16 Ampere');
+G.verlust = svg(400, 160, `
+  <rect x="10" y="44" width="90" height="62" rx="5" fill="#26323c"/>${T(55, 82, '12 V', 'middle', 700, 18, '#fff')}
+  <rect x="300" y="44" width="90" height="62" rx="5" fill="#fff" stroke="${C.ink}" stroke-width="2"/>${T(345, 82, 'Gerät', 'middle', 600, 18)}
+  ${W_(100, 58, 300, 58, C.plus, 5)}${W_(100, 92, 300, 92, C.minus, 5)}
+  ${T(200, 40, '1 m Kabel, fk = 1 %', 'middle', 600, 18)}
+  ${T(55, 136, '12,00 V', 'middle', 700, 18, C.blue)}${T(345, 136, '11,88 V', 'middle', 700, 18, C.red)}
+  ${T(200, 124, '0,12 V gehen', 'middle', 600, 18, C.red)}${T(200, 148, 'als Wärme verloren', 'middle', 600, 18, C.red)}`,
+  'Batterie mit 12,00 V, ein 1 m langes Kabel mit 1 % Verlust, am Gerät kommen 11,88 V an');
+G.normq = svg(420, 116, (() => { let x = 8, o = ''; [0.5, 0.75, 1, 1.5, 2.5, 4, 6, 10].forEach(a => { const rr = 10.75 * Math.sqrt(a), w = Math.max(2 * rr, 40), cx = x + w / 2; o += `<circle cx="${cx.toFixed(1)}" cy="${(80 - rr).toFixed(1)}" r="${rr.toFixed(1)}" fill="#c98b4a" stroke="${C.ink}" stroke-width="1.5"/>${T(cx.toFixed(1), 108, String(a).replace('.', ','), 'middle', 700, 18)}`; x += w + 6; }); return o; })(),
+  'Normquerschnitte von 0,5 bis 10 Quadratmillimeter als Kreise, die Fläche entspricht dem Querschnitt');
+G.block = svg(400, 340, (() => {
+  const col = (x0, title, boxes, back) => { const cx = x0 + 90; let o = T(cx, 24, title, 'middle', 700, 18, C.blue);
+    boxes.forEach((b, i) => { const y = 40 + i * 56; o += `<rect x="${x0}" y="${y}" width="180" height="40" rx="6" fill="#f4f6f8" stroke="${C.ink}" stroke-width="2"/>${T(cx, y + 26, b, 'middle', 700, 17)}`;
+      if (i < boxes.length - 1) o += `${W_(cx, y + 40, cx, y + 50, C.ink, 2)}<path d="M${cx - 6} ${y + 48}L${cx + 6} ${y + 48}L${cx} ${y + 56}Z" fill="${C.ink}"/>`; });
+    o += T(cx, 40 + boxes.length * 56 + 6, back, 'middle', 600, 17, C.grey); return o; };
+  return col(10, 'Kfz (12 V DC)', ['Batterie 12 V', 'Sicherung', 'Schalter', 'Verbraucher'], 'zurück über Masse') + col(210, 'Haus (AC)', ['Trafo 12–25 V', 'RCD', 'LS', 'Wechselschaltung', 'Lampe'], 'zurück über N, mit PE'); })(),
+  'Blockbild: Kfz mit Batterie, Sicherung, Schalter und Verbraucher; Haus mit Trafo, Fehlerstrom-Schutzschalter, Leitungsschutzschalter, Wechselschaltung und Lampe');
 
 // Hutschienen-Geräte
 const DIN = (x, label, sub, on, extra = '') => `
@@ -1012,37 +1126,44 @@ const MODULES = [
     intro: () => `
       <div class="merke"><b class="t">Eigentlich geht es um die Spannung</b>Der Begriff Gleich- bzw. Wechselstrom ist irreführend. Maßgebend ist die <b>Spannung</b>: Das Spannungspotenzial entscheidet über die Stromrichtung.</div>
       ${fig(G.dcac, 'Die gelbe Linie läuft durch die Zeit: Die Gleichspannung bleibt immer gleich. Die Wechselspannung wechselt ständig zwischen Plus und Minus – in Deutschland 50-mal pro Sekunde (50 Hz).')}
-      <div class="tscroll"><table class="mt"><thead><tr><th>Stromkreisart</th><th>stromführender Leiter</th><th>rückführender Leiter</th></tr></thead><tbody>
-        <tr><th>Gleichstrom</th><td>+ (Plus, rot)</td><td>− (Minus, schwarz)</td></tr>
-        <tr><th>1-Phasen-Wechselstrom</th><td>L (Phase, braun)</td><td>N (Neutralleiter, blau)</td></tr></tbody></table></div>
-      ${fig(G.leiter, 'Beide Stromkreisarten haben einen stromführenden und einen rückführenden Leiter. Im Haus kommt der Schutzleiter PE dazu.')}
       <div class="merke"><b class="t">Der Schutzleiter PE</b>Im 1-Phasen-Wechselstromkreis gibt es eine weitere Leitung: den Schutzleiter (kurz PE, immer <b>grün-gelb</b>). Er wird an Metallgehäuse angeschlossen und leitet gefährliche Berührungsspannung zur Erde ab, wenn die Isolierung der Phase defekt ist.</div>
       ${fig(G.pe, 'Alle Steckdosen und Geräte mit Metallgehäuse sind mit dem Schutzleiter verbunden.')}`,
     tasks: [
       { id: 'k1', type: 'match', title: 'Farben der Leiter', q: 'Ordne jedem Leiter seine Farbe zu.',
-        info: fig(G.leiter, 'Leiterfarben bei Gleichstrom (links) und im Haus (rechts)'),
+        lesen: `${fig(G.leiterN, 'Querschnitte: links ein Kabel aus dem Auto, rechts ein Hauskabel')}
+          <p>Damit niemand Leiter verwechselt, sind ihre Farben genormt. In einem Hauskabel stecken meist drei Adern. Über die eine fließt der Strom zum Gerät hin. Sie heißt <b>Außenleiter</b> oder <b>Phase L</b> und hat eine braune Isolierung. Zurück zum Sicherungskasten fließt der Strom über den <b>Neutralleiter N</b>, dessen Isolierung blau ist.</p>
+          <p>Die dritte Ader ist grün und gelb gestreift. Das ist der <b>Schutzleiter PE</b>. Diese Farbe darf für keinen anderen Leiter verwendet werden, damit man ihn immer sofort erkennt.</p>
+          <p>Im Auto ist es einfacher. Vom Pluspol der Batterie führt eine <b>rote</b> Leitung zum Verbraucher. Zurück geht es über eine <b>schwarze</b> Leitung zum Minuspol, oft auch über die Karosserie, die mit dem Minuspol verbunden ist.</p>`,
         pairs: [['Phase L', 'braun'], ['Neutralleiter N', 'blau'], ['Schutzleiter PE', 'grün-gelb'], ['Plus (+) im Gleichstromkreis', 'rot'], ['Minus (−) im Gleichstromkreis', 'schwarz']],
-        explain: 'Die Farben sind genormt. Grün-gelb ist immer und ausschließlich der Schutzleiter.' },
-      { id: 'k2', type: 'table', title: 'Steckbrief Stromkreisarten', q: 'Vervollständige die Tabelle.', corner: 'Stromkreisart',
-        info: `<p>Gleichstrom liefern z. B. Autobatterie, Akku oder USB-Netzteil (an der USB-Buchse). Wechselstrom kommt aus der Steckdose.</p><div class="tscroll"><table class="mt"><thead><tr><th></th><th>hin</th><th>zurück</th></tr></thead><tbody><tr><th>Gleichstrom</th><td>+ (rot)</td><td>− (schwarz)</td></tr><tr><th>1-Phasen-Wechselstrom</th><td>L (braun)</td><td>N (blau)</td></tr></tbody></table></div>`,
+        hint: 'Lies im Text zuerst, welcher Leiter hin- und welcher zurückführt. Die Farbe steht jeweils im selben Satz.', explain: 'Die Farben sind genormt. Grün-gelb ist immer und ausschließlich der Schutzleiter.' },
+      { id: 'k2', type: 'table', title: 'Steckbrief Stromkreisarten', q: 'Ordne jeder Stromkreisart die beiden Leiter und eine typische Quelle zu.', corner: 'Stromkreisart',
+        lesen: `<p>Jeder Stromkreis braucht zwei Wege: einen zum Verbraucher hin und einen zurück zur Quelle. Den Leiter, über den der Strom hinfließt, nennt man <b>stromführend</b>, den anderen <b>rückführend</b>.</p>
+          <p>Eine Autobatterie, ein Akku oder eine Powerbank liefern <b>Gleichstrom</b>. Auch ein USB-Netzteil gibt an seiner Buchse Gleichstrom ab, obwohl es selbst in der Steckdose steckt. Im Gleichstromkreis führt der Plusleiter mit roter Isolierung hin, zurück geht es über den schwarzen Minusleiter.</p>
+          <p>Die Steckdose im Haus liefert <b>1-Phasen-Wechselstrom</b>. Hier fließt der Strom über die braune Phase L zum Gerät und über den blauen Neutralleiter N zurück. Dazu kommt ein dritter Leiter, der grün-gelbe Schutzleiter PE. Er gehört zu keinem der beiden Wege, denn im Normalfall fließt über ihn gar kein Strom. Nur bei einem Fehler leitet er Strom zur Erde ab.</p>`,
         cols: [{ name: 'stromführender Leiter', opts: ['+ (Plus, rot)', 'L (Phase, braun)', 'PE (grün-gelb)'] }, { name: 'rückführender Leiter', opts: ['− (Minus, schwarz)', 'N (Neutralleiter, blau)', 'PE (grün-gelb)'] }, { name: 'typische Quelle', opts: ['Autobatterie', 'Steckdose'] }],
         rows: [{ label: 'Gleichstrom', ans: ['+ (Plus, rot)', '− (Minus, schwarz)', 'Autobatterie'] }, { label: '1-Phasen-Wechselstrom', ans: ['L (Phase, braun)', 'N (Neutralleiter, blau)', 'Steckdose'] }],
         hint: 'Der Schutzleiter PE ist weder hin- noch rückführender Leiter. Er führt im Normalfall gar keinen Strom.', explain: 'Der Schutzleiter führt nur im Fehlerfall Strom – er gehört deshalb in keine der beiden Spalten.' },
-      { id: 'k3', type: 'mc', title: 'Welche Kurve?', q: 'Welches Diagramm zeigt den Verlauf einer <b>Wechselspannung</b>?', fixed: true,
-        info: fig(G.dcac, 'Vergleiche die Kurven: Wo wechselt die Spannung zwischen Plus und Minus?'),
-        opts: [G.miniDC + ' A', G.miniAC + ' B', G.miniRect + ' C', G.miniSaw + ' D'], ans: [1],
-        explain: 'Nur Kurve B wechselt gleichmäßig zwischen Plus und Minus. C schaltet nur ein und aus, bleibt aber immer im Plus.' },
-      { id: 'k4', type: 'sort', title: 'Gleich oder Wechsel?', q: 'Welche Quelle liefert Gleichstrom, welche Wechselstrom?',
+      { id: 'k3', type: 'match', title: 'Spannungsverläufe', q: 'Ordne jedem Diagramm den Namen des Spannungsverlaufs zu.', how: 'Tippe links ein Diagramm an und dann rechts den passenden Namen. Zum Lösen einer Verbindung tippe den Namen rechts noch einmal an.',
+        lesen: `<p>Wie sich eine Spannung mit der Zeit verändert, zeigt ein Diagramm. Nach rechts läuft die Zeit, nach oben steht die Spannung. Die graue waagerechte Linie ist 0 V.</p>
+          <p>Eine <b>Gleichspannung</b> bleibt immer gleich hoch. Ihr Verlauf ist eine waagerechte Linie oberhalb der Nulllinie, so wie bei einer Autobatterie.</p>
+          <p>Die <b>Wechselspannung</b> aus der Steckdose schwingt in weichen Bögen gleichmäßig auf und ab. Sie ist abwechselnd positiv und negativ: Die Kurve liegt mal über, mal unter der Nulllinie.</p>
+          <p>Wandelt ein Gleichrichter Wechselspannung um, entsteht zuerst eine <b>pulsierende Gleichspannung</b>. Alle Bögen zeigen nach oben. Die Spannung schwankt stark und fällt immer wieder auf null, wird aber nie negativ.</p>
+          <p>Eine <b>Sägezahnspannung</b> steigt gleichmäßig wie eine Rampe an und fällt dann schlagartig auf den Anfangswert zurück, immer wieder.</p>`,
+        pairs: [[`<span class="pic">${G.miniPuls}</span>`, 'pulsierende Gleichspannung'], [`<span class="pic">${G.miniACn}</span>`, 'Wechselspannung'], [`<span class="pic">${G.miniSaw2}</span>`, 'Sägezahnspannung'], [`<span class="pic">${G.miniDCn}</span>`, 'Gleichspannung']],
+        hint: 'Achte zuerst darauf, ob die Kurve unter die Nulllinie geht. Danach: weiche Bögen oder gerade Rampen?', explain: 'Nur die Wechselspannung wechselt zwischen Plus und Minus. Die pulsierende Gleichspannung schwankt, bleibt aber immer im Plus.' },
+      { id: 'k4', type: 'sort', title: 'Gleich oder Wechsel?', q: 'Ordne jede Quelle der Stromart zu, die sie liefert.',
         info: `<p><b>Gleichstrom</b> kommt aus Batterien und Akkus, aus Solarmodulen und aus Netzteilen, die den Wechselstrom der Steckdose umwandeln (z. B. am USB-Ausgang).</p><p><b>Wechselstrom</b> kommt aus der Steckdose. Auch Generatoren wie ein Fahrrad-Nabendynamo erzeugen Wechselspannung.</p>`,
         cats: ['Gleichstrom', 'Wechselstrom'],
         items: [{ text: 'Autobatterie', cat: 0 }, { text: 'USB-Ladegerät (Ausgang)', cat: 0 }, { text: 'Powerbank', cat: 0 }, { text: 'Solarmodul', cat: 0 }, { text: 'Akku-Bohrschrauber', cat: 0 }, { text: 'Steckdose', cat: 1 }, { text: 'Fahrrad-Nabendynamo', cat: 1 }],
         explain: 'Ein USB-Ladegerät wandelt die Wechselspannung aus der Steckdose in 5-V-Gleichspannung um.' },
-      { id: 'k5', type: 'mc', title: 'Wozu der Schutzleiter?', q: 'Welche Aufgabe hat der Schutzleiter PE?',
+      { id: 'k5', type: 'mc', title: 'Aufgabe des Schutzleiters', q: 'Nenne die Aufgabe des Schutzleiters PE: Kreuze die passende Antwort an.',
         info: fig(G.pe, 'Der Schutzleiter ist mit dem Metallgehäuse und mit der Erde verbunden.'),
-        opts: ['Er leitet bei einem Isolationsfehler die gefährliche Spannung am Metallgehäuse zur Erde ab.', 'Er führt den Strom vom Gerät zurück, wie der Neutralleiter.', 'Er liefert zusätzlichen Strom für Geräte mit hoher Leistung.', 'Er schaltet das Licht im Flur.'], ans: [0],
+        opts: ['Er leitet bei einem Isolationsfehler die Spannung am Metallgehäuse zur Erde ab.', 'Er führt den Strom vom Gerät zur Verteilung zurück, genau wie der Neutralleiter.', 'Er liefert Geräten mit hoher Leistung zusätzlichen Strom neben der Phase L.', 'Er schaltet die Steckdose ab, sobald zu viele Geräte gleichzeitig laufen.'], ans: [0],
         explain: 'Im Normalfall fließt über den PE kein Strom. Nur wenn die Phase das Gehäuse berührt, fließt der Fehlerstrom über den PE zur Erde – statt durch einen Menschen.' },
-      { id: 'k6', type: 'gaps', title: 'Lückentext', q: 'Vervollständige den Text.',
-        info: `<p>Wechselspannung ändert ständig ihre Richtung. In Deutschland geschieht das 50-mal pro Sekunde – man sagt: Die Frequenz beträgt 50 Hertz (Hz). Die Spannung an der Steckdose beträgt 230 V.</p>`,
+      { id: 'k6', type: 'gaps', title: 'Gleich- und Wechselspannung', q: 'Ordne die passenden Begriffe den Lücken zu.',
+        lesen: `<p>Bei <b>Gleichstrom</b> ändert sich die Richtung nie: Der Strom fließt außerhalb der Quelle immer vom Pluspol durch den Verbraucher zum Minuspol, solange der Stromkreis geschlossen ist.</p>
+          <p><b>Wechselspannung</b> dagegen kehrt ihre Richtung ständig um. In Deutschland geschieht das 50-mal in jeder Sekunde. Man sagt: Die Frequenz beträgt 50 Hertz (Hz). An einer gewöhnlichen Steckdose liegen 230 V an, im Auto sind es 12 V.</p>
+          <p>Bei allen Steckdosen und Geräten mit Metallgehäuse ist zusätzlich der <b>Schutzleiter PE</b> angeschlossen. Seine Isolierung ist grün und gelb gestreift, damit man ihn nie mit den anderen Leitern verwechselt.</p>`,
         text: 'Bei Gleichstrom fließt der Strom immer in {0} Richtung. Bei Wechselstrom ändert sich die Richtung ständig, in Deutschland mit einer Frequenz von {1} Hz. An der Steckdose liegen {2} V an. Der Schutzleiter hat immer die Farbe {3}.',
         gaps: [{ opts: ['eine', 'zwei', 'jede'], ans: 'eine' }, { opts: ['12', '50', '230', '16'], ans: '50' }, { opts: ['12', '50', '230', '400'], ans: '230' }, { opts: ['grün-gelb', 'blau', 'braun', 'schwarz'], ans: 'grün-gelb' }] }
     ]
@@ -1053,8 +1174,9 @@ const MODULES = [
     intro: () => `
       ${INFO_FORMEL_P}
       <p>Physikalisch betrachtet müssen <b>mehr Elektronen fließen</b> (Strom I), wenn die gleiche Leistung P bei <b>niedrigerer Spannung</b> U erreicht werden soll.</p>
+      ${fig(G.strom36, 'Gleiche Leistung, andere Spannung: Bei 12 V fließt rund 19-mal so viel Strom wie bei 230 V (36 W ÷ 12 V = 3 A, 36 W ÷ 230 V ≈ 0,16 A).')}
       <div class="card"><h3>Beispiel: Kühlbox am „Zigarettenanzünder“</h3><p>Der „Zigarettenanzünder“ im Auto ist im Grunde nichts anderes als eine 12-V-Steckdose. Eine Kühlbox hat die Leistung P = 48 W. Die Spannung kennen wir: U = 12 V.</p>
-      ${chain(['P = U · I', 'umstellen', 'I = P ÷ U'])}</div>
+      ${chain(['P = U · I', 'umstellen', 'I = P ÷ U'])}${fig(G.typenschild, 'So sieht das Typenschild der Kühlbox aus: Spannung und Leistung stehen drauf, die Stromstärke nicht.')}</div>
       <div class="merke"><b class="t">Typenschild</b>Auf der Rückseite eines Geräts steht immer die Eingangsspannung U. Stromstärke und Leistung stehen nicht immer beide drauf – mindestens aber eins von beiden. Die fehlende Größe kannst du berechnen.</div>`,
     tasks: [
       { id: 'l1', type: 'num', title: 'Kühlbox: 12 V oder 230 V', q: 'Berechne den Strom I durch das Kabel der Kühlbox (P = 48 W) – einmal am 12-V-Netz, einmal am 230-V-Netz.',
@@ -1065,15 +1187,16 @@ const MODULES = [
         info: INFO_FORMEL_P + '<p>Ist I gegeben, rechnest du <b>P = U · I</b>. Ist P gegeben, rechnest du <b>I = P ÷ U</b>.</p>',
         items: [{ q: 'a) I = 1,2 A → P =', ans: 14.4, tol: 0.01, unit: 'W' }, { q: 'b) P = 24 W → I =', ans: 2, tol: 0.01, unit: 'A' }, { q: 'c) P = 75 W → I =', ans: 6.25, tol: 0.01, unit: 'A' }, { q: 'd) I = 12 A → P =', ans: 144, tol: 0.01, unit: 'W' }],
         hint: 'Bei a) und d) multiplizierst du mit 12 V, bei b) und c) teilst du durch 12 V.' },
-      { id: 'l3', type: 'gaps', title: 'Formel umstellen', q: 'Stelle die Formel P = U · I um.',
+      { id: 'l3', type: 'gaps', title: 'Formel umstellen', q: 'Wende das Formeldreieck an: Stelle P = U · I nach I und nach U um.',
         info: `<p>Ein Dreieck hilft beim Umstellen: Oben steht P, unten U und I. Deckst du die gesuchte Größe ab, siehst du die Rechnung.</p>${svg(200, 120, `<path d="M100 10L190 110H10Z" fill="#fff3c9" stroke="${C.ink}" stroke-width="2"/>${W_(45, 70, 155, 70)}${W_(100, 70, 100, 110)}${T(100, 58, 'P', 'middle', 700, 20)}${T(70, 98, 'U', 'middle', 700, 20)}${T(130, 98, 'I', 'middle', 700, 20)}`, 'Formeldreieck mit P oben, U und I unten')}`,
         text: 'I = {0} ÷ {1} &nbsp;&nbsp;&nbsp; U = {2} ÷ {3}',
         gaps: [{ opts: ['P', 'U', 'I'], ans: 'P' }, { opts: ['P', 'U', 'I'], ans: 'U' }, { opts: ['P', 'U', 'I'], ans: 'P' }, { opts: ['P', 'U', 'I'], ans: 'I' }] },
-      { id: 'l4', type: 'mc', title: 'Warum mehr Strom bei 12 V?', q: 'Warum fließt bei 12 V ein viel größerer Strom als bei 230 V, wenn ein Gerät die gleiche Leistung hat?',
-        info: INFO_FORMEL_P + '<p>Leistung ist Spannung mal Strom. Wird die Spannung kleiner, muss der andere Faktor größer werden, damit das Produkt gleich bleibt.</p>',
-        opts: ['Weil bei gleicher Leistung und kleinerer Spannung mehr Elektronen fließen müssen.', 'Weil 12-V-Geräte immer mehr Leistung brauchen.', 'Weil Gleichstrom schneller fließt als Wechselstrom.', 'Weil die Autobatterie besonders stark ist.'], ans: [0],
-        explain: 'P = U · I: Halbe Spannung heißt doppelter Strom bei gleicher Leistung.' },
-      { id: 'l5', type: 'num', title: 'Wasserkocher im Camper?', q: 'Ein Wasserkocher hat 2000 W. Berechne den Strom an 230 V und an 12 V.',
+      { id: 'l4', type: 'gaps', title: 'Mehr Strom bei 12 V', q: 'Erkläre mit der Leistungsformel, warum bei 12 V ein viel größerer Strom fließt: Ordne die passenden Begriffe den Lücken zu.',
+        info: INFO_FORMEL_P + '<p>Leistung ist Spannung mal Strom. Wird die Spannung kleiner, muss der andere Faktor größer werden, damit das Produkt gleich bleibt. 230 V sind ungefähr 20-mal so viel wie 12 V.</p>',
+        text: 'Die Leistung ist das Produkt aus {0} und Stromstärke. Ein Gerät mit 48 W braucht diese Leistung, egal an welcher Spannung es hängt. Sinkt die Spannung von 230 V auf 12 V, also auf etwa ein {1}, muss die Stromstärke etwa {2} so groß werden. Dann müssen in jeder Sekunde viel mehr {3} durch das Kabel fließen.',
+        gaps: [{ opts: ['Spannung', 'Widerstand', 'Frequenz'], ans: 'Spannung' }, { opts: ['Zwanzigstel', 'Zehntel', 'Viertel'], ans: 'Zwanzigstel' }, { opts: ['20-mal', '10-mal', 'doppelt'], ans: '20-mal' }, { opts: ['Elektronen', 'Volt', 'Watt'], ans: 'Elektronen' }],
+        hint: 'Rechne 230 ÷ 12. Um diesen Faktor muss der Strom wachsen.', explain: 'P = U · I: Wird U rund 20-mal kleiner, muss I rund 20-mal größer werden.' },
+      { id: 'l5', type: 'num', title: 'Wasserkocher im Camper', q: 'Berechne den Strom eines Wasserkochers mit 2000 W an 230 V und an 12 V.',
         info: INFO_FORMEL_P + '<p class="hintline">Runde auf eine Stelle nach dem Komma.</p>',
         items: [{ q: 'I bei 230 V =', ans: 8.7, tol: 0.06, unit: 'A' }, { q: 'I bei 12 V =', ans: 166.7, tol: 0.1, unit: 'A' }],
         explain: 'Rund 167 A – dafür bräuchte man extrem dicke Kabel. Deshalb gibt es kaum 12-V-Wasserkocher mit 2000 W.' }
@@ -1085,6 +1208,8 @@ const MODULES = [
     intro: () => `
       ${INFO_FORMEL_A}
       <div class="merke"><b class="t">Der Verlustfaktor fk</b>Durch den hohen Strom erwärmt sich ein Kabel – es ist also ein elektrischer Widerstand. Je größer die Wärme, desto größer der Spannungsverlust. Ist ein 1 m langes Kabel so gewählt, dass fk = 1 %, kommen statt 12 V nur noch <b>11,88 V</b> an.</div>
+      ${fig(G.verlust, 'Am Gerät kommt weniger Spannung an als an der Batterie. Der Rest erwärmt das Kabel.')}
+      ${fig(G.normq, 'Normquerschnitte in mm² im Größenvergleich: Die Fläche der Kreise entspricht der Kupferfläche. Ein 10-mm²-Kabel hat 20-mal so viel Kupfer wie ein 0,5-mm²-Kabel.')}
       <p>Einfacher als die Formel sind Online-Rechner (z. B. auf camperstyle.net). Man sollte aber prüfen, ob ein Rechner richtige Werte liefert. Hier kannst du direkt mit dem eingebauten Leitungsrechner arbeiten:</p>`,
     widget: widgetRechner,
     tasks: [
@@ -1093,22 +1218,22 @@ const MODULES = [
         items: [{ q: 'a) fk = 2 %, L = 2 m, I = 2 A → A =', ans: 0.58, tol: 0.015, unit: 'mm²' }, { q: 'b) fk = 1 %, L = 2 m, I = 2 A → A =', ans: 1.17, tol: 0.015, unit: 'mm²' }, { q: 'c) fk = 4 %, L = 1 m, I = 6 A → A =', ans: 0.44, tol: 0.015, unit: 'mm²' }, { q: 'd) fk = 1 %, L = 6 m, I = 4 A → A =', ans: 7, tol: 0.015, unit: 'mm²' }],
         hint: 'Denke daran: 2 % = 0,02. Im Leitungsrechner stellst du einfach die Regler ein.',
         explain: 'Vergleiche a) und b): Halbierst du den erlaubten Verlust, verdoppelt sich der nötige Querschnitt.' },
-      { id: 'q2', type: 'table', title: 'Normquerschnitt wählen', q: 'Kabel gibt es nur in festen Größen. Wähle zu jedem errechneten Wert den passenden Normquerschnitt.', corner: 'errechnet',
+      { id: 'q2', type: 'table', title: 'Normquerschnitt wählen', q: 'Ermittle zu jedem errechneten Wert den passenden Normquerschnitt. Kabel gibt es nur in festen Größen.', corner: 'errechnet',
         info: INFO_NORM + '<p>Beispiel: Errechnet sind 1,8 mm² → 1,5 mm² wäre zu dünn → gewählt wird <b>2,5 mm²</b>.</p>',
         cols: [{ name: 'gewählter Normquerschnitt', opts: ['0,5 mm²', '0,75 mm²', '1 mm²', '1,5 mm²', '2,5 mm²', '4 mm²', '6 mm²', '10 mm²'] }],
         rows: [{ label: 'a) 0,58 mm²', ans: ['0,75 mm²'] }, { label: 'b) 1,17 mm²', ans: ['1,5 mm²'] }, { label: 'c) 0,44 mm²', ans: ['0,5 mm²'] }, { label: 'd) 7,00 mm²', ans: ['10 mm²'] }],
         hint: 'Immer aufrunden – nie abrunden. Ein zu dünnes Kabel wird zu warm.', explain: 'Abrunden wäre gefährlich: Das Kabel wäre dünner als berechnet.' },
-      { id: 'q3', type: 'sort', title: 'Dicker oder dünner?', q: 'Was passiert mit dem nötigen Querschnitt, wenn du jeweils nur eine Größe änderst?',
+      { id: 'q3', type: 'sort', title: 'Dicker oder dünner?', q: 'Ordne jede Änderung ihrer Wirkung auf den nötigen Querschnitt zu. Es ändert sich jeweils nur eine Größe.',
         info: INFO_FORMEL_A + '<p>Probiere es im Leitungsrechner aus: Verändere immer nur einen Regler und beobachte den Querschnitt.</p>',
         cats: ['Kabel muss dicker werden', 'dünneres Kabel reicht'],
         items: [{ text: 'Kabel wird länger', cat: 0 }, { text: 'Strom wird größer', cat: 0 }, { text: 'weniger Verlust erlaubt (kleineres fk)', cat: 0 }, { text: 'mehr Verlust erlaubt (größeres fk)', cat: 1 }, { text: '24 V statt 12 V', cat: 1 }, { text: 'Kabel wird kürzer', cat: 1 }],
         explain: 'I und L stehen im Zähler (größer → dicker), fk und U im Nenner (größer → dünner).' },
-      { id: 'q4', type: 'num', title: 'Was kommt an?', q: 'Wie viel Spannung kommt bei einem 12-V-System am Verbraucher an?',
+      { id: 'q4', type: 'num', title: 'Spannung am Verbraucher', q: 'Berechne die Spannung, die bei einem 12-V-System am Verbraucher ankommt.',
         info: '<p>Der Verlustfaktor gibt an, wie viel Prozent der Spannung im Kabel „verloren“ gehen. Bei fk = 1 % gehen 1 % von 12 V verloren: 0,12 V. Es kommen also 12 V − 0,12 V = 11,88 V an.</p>',
         items: [{ q: 'bei fk = 2 %:', ans: 11.76, tol: 0.005, unit: 'V' }, { q: 'bei fk = 5 %:', ans: 11.4, tol: 0.005, unit: 'V' }, { q: 'bei fk = 10 %:', ans: 10.8, tol: 0.005, unit: 'V' }] },
-      { id: 'q5', type: 'mc', title: '12 V oder 230 V?', q: 'Bei welchem System ist der richtige Kabelquerschnitt besonders wichtig?',
+      { id: 'q5', type: 'mc', title: '12 V oder 230 V?', q: 'Begründe, bei welchem System der richtige Kabelquerschnitt besonders wichtig ist: Kreuze die passende Begründung an.',
         info: INFO_FORMEL_A + INFO_FORMEL_P,
-        opts: ['Bei 12 V, weil für dieselbe Leistung viel größere Ströme fließen.', 'Bei 230 V, weil die Spannung höher ist.', 'Bei beiden ist er gleich wichtig.', 'Der Querschnitt muss immer 1,5 mm² betragen.'], ans: [0],
+        opts: ['Bei 12 V, weil für dieselbe Leistung viel größere Ströme fließen.', 'Bei 230 V, weil die höhere Spannung die Kabel stärker erwärmt.', 'Bei beiden gleich, weil der Querschnitt nur von der Länge abhängt.', 'Bei 230 V, weil Wechselstrom dickere Kabel braucht als Gleichstrom.'], ans: [0],
         explain: 'Großer Strom und kleine Spannung: Beides macht nach der Formel einen größeren Querschnitt nötig.' }
     ]
   },
@@ -1125,29 +1250,32 @@ const MODULES = [
       </div>`,
     widget: widgetKasten,
     tasks: [
-      { id: 'h1', type: 'table', title: 'Fallbeispiele', q: 'Welcher Schutzschalter löst in welchem Fall aus?', corner: 'Fallbeispiel',
+      { id: 'h1', type: 'sort', title: 'Fallbeispiele', q: 'Ordne jedem Fall den Schutzschalter zu, der auslöst.',
         info: `<p><b>RCD:</b> löst aus, wenn Strom einen falschen Weg nimmt – über ein Gehäuse, einen Menschen, Wasser oder die Erde. Dann kommt über N weniger zurück, als über L hinfließt.</p><p><b>LS:</b> löst aus, wenn insgesamt zu viel Strom durch die Leitung fließt – zum Beispiel, weil zu viele Geräte gleichzeitig laufen.</p><p>Probiere beides im Sicherungskasten-Simulator oben aus.</p>`,
-        cols: [{ name: 'Es löst aus …', opts: ['Fehlerstrom-Schutzschalter (RCD)', 'Leitungsschutzschalter (LS)'] }],
-        rows: [
-          { label: 'Helmut hat Waschmaschine, Trockner und Geschirrspüler in den Hauswirtschaftsraum gestellt. Als er alle drei gleichzeitig einschaltet, fliegt die Sicherung raus.', ans: ['Leitungsschutzschalter (LS)'] },
-          { label: 'In der Standbohrmaschine im Technikraum scheuert ein Kabel im Gehäuse an der Vorschub-Mechanik.', ans: ['Fehlerstrom-Schutzschalter (RCD)'] },
-          { label: 'Hannelore bohrt ein Loch in die Wand, um ein Regal aufzuhängen. Während der Bohrer tief in der Wand steckt, fliegt die Sicherung raus.', ans: ['Fehlerstrom-Schutzschalter (RCD)'] },
-          { label: 'Egal welche Steckdose Herbert wählt – auch in Räumen, in denen sonst nichts läuft: Wenn er den Staubsauger einschaltet, fliegt die Sicherung raus.', ans: ['Fehlerstrom-Schutzschalter (RCD)'] },
-          { label: 'Ein Wasserstrahl trifft eine Steckdose stark.', ans: ['Fehlerstrom-Schutzschalter (RCD)'] }],
+        cats: ['Fehlerstrom-Schutzschalter (RCD)', 'Leitungsschutzschalter (LS)'],
+        items: [{ text: 'Helmut schaltet Waschmaschine, Trockner und Geschirrspüler im selben Raum gleichzeitig ein.', cat: 1 },
+          { text: 'Im Bad laufen Heizlüfter, Föhn und Waschmaschine an einem Stromkreis.', cat: 1 },
+          { text: 'In einer Standbohrmaschine scheuert ein Kabel innen am Metallgehäuse.', cat: 0 },
+          { text: 'Während Hannelores Bohrer tief in der Wand steckt, fliegt die Sicherung raus.', cat: 0 },
+          { text: 'Herberts Staubsauger löst an jeder Steckdose aus, auch wenn sonst nichts läuft.', cat: 0 },
+          { text: 'Ein starker Wasserstrahl trifft eine Steckdose.', cat: 0 }],
         hint: 'Frage dich jeweils: Ist es zu viel Strom (Überlast) – oder nimmt der Strom einen falschen Weg zur Erde?',
-        explain: 'Nur bei Helmut ist es Überlast. Bei Herbert laufen keine anderen Geräte – also ist der Staubsauger selbst defekt. Trifft Hannelores Bohrer Phase und Neutralleiter gleichzeitig, kann auch der LS auslösen (Kurzschluss).' },
-      { id: 'h2', type: 'num', title: 'Löst der LS aus?', q: 'Diese Geräte laufen gleichzeitig an einem Stromkreis: Waschmaschine (2600 W), Haartrockner (1000 W), Wasserkocher (750 W). Berechne mit P = U · I.',
+        explain: 'Überlast gibt es nur bei Helmut und im Bad. Bei Herbert laufen keine anderen Geräte – also ist der Staubsauger selbst defekt. Trifft Hannelores Bohrer Phase und Neutralleiter gleichzeitig, kann auch der LS auslösen (Kurzschluss).' },
+      { id: 'h2', type: 'num', title: 'Überlast im Stromkreis', q: 'Berechne mit P = U · I, ob der 16-A-Leitungsschutzschalter auslöst. Gleichzeitig laufen an einem Stromkreis: Waschmaschine (2600 W), Haartrockner (1000 W), Wasserkocher (750 W).',
         info: INFO_FORMEL_P + '<p>Rechne zuerst alle Leistungen zusammen. Teile dann durch 230 V. Vergleiche mit den 16 A des Leitungsschutzschalters.</p><p class="hintline">Runde auf zwei Stellen nach dem Komma.</p>',
         items: [{ q: 'Gesamtleistung P =', ans: 4350, tol: 0, unit: 'W' }, { q: 'Strom I = P ÷ 230 V =', ans: 18.91, tol: 0.02, unit: 'A' }],
         explain: '18,91 A sind mehr als 16 A – der Leitungsschutzschalter löst aus.' },
-      { id: 'h3', type: 'mc', title: 'Auslösen vermeiden', q: 'Wie lässt sich vermeiden, dass der Leitungsschutzschalter auslöst?',
+      { id: 'h3', type: 'mc', title: 'Auslösen vermeiden', q: 'Nenne die Maßnahmen, mit denen sich ein Auslösen des Leitungsschutzschalters vermeiden lässt: Kreuze alle passenden an.',
         info: '<p>Der LS schützt die <b>Leitung</b> in der Wand vor Überhitzung. Eine Leitung für 16 A wird nicht dicker, wenn man eine größere Sicherung einsetzt. Mehrfachsteckdosen verteilen den Strom nicht auf andere Leitungen – alles fließt weiter durch dieselbe Leitung.</p>',
         opts: ['Die Geräte nacheinander statt gleichzeitig betreiben', 'Die Geräte an Steckdosen verschiedener Stromkreise anschließen', 'Eine größere Sicherung (z. B. 25 A) einsetzen', 'Alle Geräte an eine Mehrfachsteckdose anschließen', 'Den Leitungsschutzschalter überbrücken'], ans: [0, 1],
         explain: 'Eine größere Sicherung oder eine Überbrückung wären lebensgefährlich: Die Leitung könnte überhitzen und einen Brand auslösen.' },
-      { id: 'h4', type: 'match', title: 'Steckbrief', q: 'Ordne die Begriffe richtig zu.',
-        info: `<div class="tscroll"><table class="mt"><thead><tr><th></th><th>Fehlerstrom-Schutzschalter</th><th>Leitungsschutzschalter</th></tr></thead><tbody><tr><th>Kurz</th><td>RCD, früher FI</td><td>LS-Schalter, MCB, Sicherungsautomat</td></tr><tr><th>Englisch</th><td>RCCB</td><td>MCB</td></tr><tr><th>Gruppe</th><td>Fehlerstrom-Schutzeinrichtungen</td><td>Überstrom-Schutzeinrichtungen</td></tr></tbody></table></div>`,
-        pairs: [['früher „FI-Schalter“ genannt', 'Fehlerstrom-Schutzschalter'], ['auch „Sicherungsautomat“ genannt', 'Leitungsschutzschalter'], ['Residual Current operated Circuit-Breaker', 'RCCB'], ['Miniature Circuit Breaker', 'MCB'], ['Gruppe der Überstrom-Schutzeinrichtungen', 'OCP']] },
-      { id: 'h5', type: 'gaps', title: 'So arbeitet der RCD', q: 'Vervollständige den Text.',
+      { id: 'h4', type: 'match', title: 'Namen der Schutzschalter', q: 'Ordne die Begriffe richtig zu.',
+        lesen: `<p>Für die beiden Schutzschalter im Sicherungskasten gibt es viele Namen, und in Anleitungen und Katalogen kommen sie alle vor.</p>
+          <p>Der <b>Fehlerstrom-Schutzschalter</b> heißt in Fachtexten kurz RCD. Viele Menschen sagen noch FI-Schalter, weil das Gerät früher so hieß. In englischen Anleitungen steht oft RCCB, die Abkürzung für Residual Current operated Circuit-Breaker. RCD (Residual Current Device) ist zugleich der Name der ganzen Gruppe: der Fehlerstrom-Schutzeinrichtungen.</p>
+          <p>Der <b>Leitungsschutzschalter</b> wird im Alltag Sicherungsautomat oder LS-Schalter genannt. Auf Englisch heißt er Miniature Circuit Breaker, kurz MCB. Weil er abschaltet, sobald zu viel Strom fließt, gehört er zu den Überstrom-Schutzeinrichtungen. Für diese Gruppe benutzt man die englische Abkürzung OCP (Over Current Protection).</p>`,
+        pairs: [['früher „FI-Schalter“ genannt', 'Fehlerstrom-Schutzschalter'], ['auch „Sicherungsautomat“ genannt', 'Leitungsschutzschalter'], ['Residual Current operated Circuit-Breaker', 'RCCB'], ['Miniature Circuit Breaker', 'MCB'], ['Gruppe der Überstrom-Schutzeinrichtungen', 'OCP']],
+        hint: 'Suche im Text jede englische Langform und schau, welche Abkürzung direkt dabei steht.' },
+      { id: 'h5', type: 'gaps', title: 'So arbeitet der RCD', q: 'Ordne die passenden Begriffe den Lücken zu.',
         info: fig(G.pe, 'Bei einem Isolationsfehler fließt Strom über den PE zur Erde.'),
         text: 'Der RCD vergleicht den Strom in der {0} mit dem Strom im {1}. Fließt ein Teil über den {2} zur Erde, kommt weniger zurück. Der RCD erkennt diese {3} und trennt den Stromkreis.',
         gaps: [{ opts: ['Phase L', 'Erde', 'Steckdose'], ans: 'Phase L' }, { opts: ['Neutralleiter N', 'Schutzleiter PE', 'Gehäuse'], ans: 'Neutralleiter N' }, { opts: ['Schutzleiter PE', 'Neutralleiter N', 'Schalter'], ans: 'Schutzleiter PE' }, { opts: ['Differenz', 'Überlast', 'Spannung'], ans: 'Differenz' }] }
@@ -1164,26 +1292,32 @@ const MODULES = [
       ${fig(G.kurz, 'Scheuert ein stromführendes Kabel auf und berührt die Karosserie (Masse), gibt es einen Kurzschluss.')}
       <div class="merke"><b class="t">Richtig dimensionieren</b>Die Sicherung muss so groß sein, dass der Verbraucher betrieben werden kann – aber klein genug, dass sie beim Kurzschluss durchbrennt, <b>bevor</b> das Kabel schmilzt und Feuer fängt (Kabelbrand).</div>`,
     tasks: [
-      { id: 'f1', type: 'mc', title: 'Wie funktioniert sie?', q: 'Was passiert in einer Schmelzsicherung, wenn der Strom zu groß wird?',
-        info: fig(G.schmelz, ''), opts: ['Der Schmelzdraht erhitzt sich, schmilzt und unterbricht den Stromkreis.', 'Ein Magnet zieht einen Schalter auf.', 'Die Sicherung misst den Unterschied zwischen Hin- und Rückleitung.', 'Die Sicherung speichert den überschüssigen Strom.'], ans: [0],
+      { id: 'f1', type: 'mc', title: 'So arbeitet eine Schmelzsicherung', q: 'Beschreibe, was in einer Schmelzsicherung passiert, wenn der Strom zu groß wird: Kreuze die passende Beschreibung an.',
+        lesen: `${fig(G.fuseN, 'Eine Flachstecksicherung, von vorn gesehen')}
+          <p>Eine Flachstecksicherung besteht aus drei Teilen. Unten ragen zwei <b>Kontaktfahnen</b> aus Metall heraus (1). Mit ihnen steckt die Sicherung im Halter, und über sie fließt der Strom hinein und wieder hinaus. Dazwischen liegt ein dünnes, geknicktes Metallstück, der <b>Schmelzdraht</b> (2). Damit man ihn sehen kann, ist das <b>Gehäuse</b> aus durchscheinendem Kunststoff (3).</p>
+          <p>Jeder Strom erwärmt einen Leiter, und ein dünner Leiter wird besonders warm. Solange nur der Strom fließt, für den die Sicherung gebaut ist, bleibt der Schmelzdraht fest. Wird der Strom größer, zum Beispiel bei einem Kurzschluss, wird der Draht so heiß, dass er glüht und an seiner dünnsten Stelle schmilzt. Damit ist der Stromkreis unterbrochen, und kein Strom fließt mehr durch das Kabel.</p>
+          <p>Eine durchgebrannte Schmelzsicherung lässt sich nicht wieder einschalten. Sie wird gegen eine neue derselben Größe getauscht. Anders arbeitet der Leitungsschutzschalter im Haus: Er öffnet einen Schalter und lässt sich danach wieder einschalten.</p>`,
+        opts: ['Der Schmelzdraht erhitzt sich, schmilzt und unterbricht den Stromkreis.', 'Ein Elektromagnet zieht einen Kontakt auf und trennt so den Stromkreis.', 'Sie misst den Unterschied zwischen Hin- und Rückleitung und trennt dann.', 'Sie speichert den überschüssigen Strom, bis der Verbraucher ihn braucht.'], ans: [0],
         explain: 'Deshalb muss eine durchgebrannte Schmelzsicherung ersetzt werden – ein LS-Schalter lässt sich dagegen wieder einschalten.' },
-      { id: 'f2', type: 'match', title: 'Farbcode', q: 'Ordne jeder Farbe die Größe der Flachstecksicherung zu.',
-        info: INFO_ATO, pairs: [['beige', '5 A'], ['braun', '7,5 A'], ['rot', '10 A'], ['blau', '15 A'], ['gelb', '20 A'], ['grün', '30 A']],
-        explain: 'Die Farbe hilft beim schnellen Erkennen – die Zahl oben auf der Sicherung ist aber verbindlich.' },
-      { id: 'f3', type: 'mc', title: 'Kurzschluss im Auto', q: 'Wie entsteht im Kfz am häufigsten ein Kurzschluss?',
+      { id: 'f2', type: 'match', title: 'Sicherung auswählen', q: 'Ordne jedem Verbraucher die passende Flachstecksicherung zu.',
+        lesen: `<p>Damit man im Sicherungskasten des Autos schnell die richtige Sicherung findet, hat jede Größe eine eigene Farbe. Die kleinen Sicherungen bis 4 A sind schwarz, grau, violett und rosa. Rot steht für 10 A, Blau für 15 A. Die 7,5-A-Sicherung ist braun, die mit 5 A hell beige. Gelb ist eine 20-A-Sicherung, Grün eine mit 30 A. Die 25-A-Sicherung dazwischen ist weiß oder farblos.</p>
+          <p>Welche Sicherung passt? Sie muss etwas mehr aushalten als der Strom, den der Verbraucher braucht. Man wählt deshalb die <b>nächste Größe über der Stromstärke</b> des Verbrauchers. Eine möglichst kleine Sicherung hat den Vorteil, dass sie bei einem Fehler schnell durchbrennt.</p>`,
+        pairs: [['LED-Leiste mit 4,2 A', '5 A · beige'], ['Kühlbox mit 6,5 A', '7,5 A · braun'], ['Radio mit 8 A', '10 A · rot'], ['Lüfter mit 12 A', '15 A · blau'], ['12-V-Steckdose mit 18 A', '20 A · gelb'], ['Wechselrichter mit 27 A', '30 A · grün']],
+        hint: 'Bestimme zuerst die Größe: die nächste über dem Strom. Die Farbe dazu steht im ersten Absatz.', explain: 'Die Farbe hilft beim schnellen Erkennen – die Zahl oben auf der Sicherung ist aber verbindlich.' },
+      { id: 'f3', type: 'mc', title: 'Kurzschluss im Auto', q: 'Nenne die häufigste Ursache für einen Kurzschluss im Kfz: Kreuze sie an.',
         info: fig(G.kurz, 'Die Karosserie ist mit dem Minuspol verbunden (Masse).'),
-        opts: ['Ein stromführendes Kabel scheuert auf und berührt die Karosserie (Masse).', 'Zu viele Verbraucher sind gleichzeitig eingeschaltet.', 'Die Batterie ist leer.', 'Ein Kabel ist zu dick.'], ans: [0],
+        opts: ['Ein stromführendes Kabel scheuert auf und berührt die Karosserie (Masse).', 'Zu viele Verbraucher sind gleichzeitig an derselben Sicherung eingeschaltet.', 'Die Batterie ist fast leer, und die Spannung bricht beim Starten zusammen.', 'Ein zu dickes Kabel lässt mehr Strom durch, als der Verbraucher braucht.'], ans: [0],
         explain: 'Dann versucht der gesamte Strom der Batterie durch das Kabel zu fließen – es erhitzt sich und kann brennen.' },
-      { id: 'f4', type: 'num', title: 'Sicherung dimensionieren', q: 'Ein Verbraucher mit 6 A wird über ein 2 m langes Kabel mit 1,5 mm² an die Batterie (12 V) angeschlossen. Als Verlust sind höchstens 10 % erlaubt.',
+      { id: 'f4', type: 'num', title: 'Sicherung dimensionieren', q: 'Ermittle die kleinste und die größte passende Sicherung: Ein Verbraucher mit 6 A wird über ein 2 m langes Kabel mit 1,5 mm² an die Batterie (12 V) angeschlossen. Als Verlust sind höchstens 10 % erlaubt.',
         info: `${INFO_ATO}<p><b>Mindestgröße:</b> Die Sicherung muss <b>größer</b> sein als der Strom des Verbrauchers. Nimm die nächste ATO-Größe.</p><p><b>Maximale Größe:</b> Stelle die Formel nach I um:<br><b>I<sub>max</sub> = (A × fk × U) ÷ (0,0175 × L × 2)</b><br>Die Sicherung darf nicht größer sein als dieser Strom. Nimm die ATO-Größe darunter.</p><p class="hintline">Tipp: Du kannst auch im Leitungsrechner (Modul 3) den Strom so lange erhöhen, bis 1,5 mm² gerade noch reichen.</p>`,
         items: [{ q: 'Mindestgröße der Sicherung:', ans: 7.5, tol: 0, unit: 'A' }, { q: 'I<sub>max</sub> bei 10 % Verlust:', ans: 25.71, tol: 0.05, unit: 'A' }, { q: 'maximale Größe der Sicherung:', ans: 25, tol: 0, unit: 'A' }],
         hint: 'Mindestgröße: nächste ATO-Größe über 6 A. I_max = (1,5 × 0,1 × 12) ÷ (0,0175 × 2 × 2).',
         explain: 'Jede Sicherung zwischen 7,5 A und 25 A funktioniert. Sinnvoll ist eine kleine, z. B. 7,5 A oder 10 A – dann brennt sie bei Fehlern schnell durch.' },
-      { id: 'f5', type: 'mc', title: 'Wo einbauen?', q: 'An welcher Stelle ist es sinnvoll, die Sicherung einzubauen?',
+      { id: 'f5', type: 'mc', title: 'Einbauort der Sicherung', q: 'Begründe, wo die Sicherung eingebaut werden sollte: Kreuze die passende Begründung an.',
         info: fig(G.kurz, 'Überlege: Welcher Teil des Kabels ist geschützt, wenn die Sicherung am Gerät sitzt?'),
-        opts: ['Nahe an der Batterie – dann ist das ganze Kabel dahinter geschützt.', 'Nahe am Verbraucher – dann ist das Gerät besser geschützt.', 'Genau in der Mitte des Kabels.', 'Das ist egal.'], ans: [0],
+        opts: ['Nahe an der Batterie, dann ist das ganze Kabel dahinter geschützt.', 'Nahe am Verbraucher, dann ist das Gerät selbst am besten geschützt.', 'Genau in der Mitte des Kabels, dann sind beide Hälften gleich geschützt.', 'Hinter dem Schalter, dann ist die Sicherung nur im Betrieb belastet.'], ans: [0],
         explain: 'Scheuert das Kabel zwischen Batterie und Sicherung durch, hilft die Sicherung nicht. Darum gehört sie so nah wie möglich an die Batterie.' },
-      { id: 'f6', type: 'sort', title: 'Kfz oder Haus?', q: 'Wo werden diese Schutzeinrichtungen eingesetzt?',
+      { id: 'f6', type: 'sort', title: 'Kfz oder Haus?', q: 'Ordne jede Schutzeinrichtung ihrem Einsatzort zu.',
         info: '<p>Im Kfz (12 V Gleichstrom) werden Schmelzsicherungen verwendet: Flachstecksicherungen (ATO) und für große Ströme Streifensicherungen (ANL). Im Haushalt (230 V) sitzen Fehlerstrom-Schutzschalter und Leitungsschutzschalter im Sicherungskasten.</p>',
         cats: ['Kfz (12 V)', 'Haus (230 V)'],
         items: [{ text: 'Flachstecksicherung (ATO)', cat: 0 }, { text: 'Streifensicherung (ANL)', cat: 0 }, { text: 'Fehlerstrom-Schutzschalter (RCD)', cat: 1 }, { text: 'Leitungsschutzschalter (LS)', cat: 1 }] }
@@ -1203,27 +1337,31 @@ const MODULES = [
       ${fig(G.uepDC, 'Übersichtsplan eines Gleichstromkreises (Kfz)')}
       ${fig(G.uep, 'Übersichtsplan einer Hausinstallation. Der Schrägstrich mit der 3 bedeutet: Hier liegen drei Leiter (L, N, PE) in einem Kabel.')}`,
     tasks: [
-      { id: 'p1', type: 'mc', title: 'Der Unterschied', q: 'Was unterscheidet den Übersichtsplan vom Stromlaufplan?',
-        info: '<p><b>Stromlaufplan:</b> jede Leitung einzeln. <b>Übersichtsplan:</b> eine Linie pro Verbindung, Geräte räumlich angeordnet.</p>',
-        opts: ['Im Übersichtsplan wird jede Verbindung mit nur einer Linie gezeichnet.', 'Im Übersichtsplan werden L, N und PE einzeln gezeichnet.', 'Der Übersichtsplan zeigt nur die Sicherungen.', 'Es gibt keinen Unterschied.'], ans: [0] },
+      { id: 'p1', type: 'mc', title: 'Der Unterschied', q: 'Unterscheide Übersichtsplan und Stromlaufplan: Kreuze die Aussage an, die den Übersichtsplan richtig beschreibt.',
+        lesen: `<p>Elektrikerinnen und Elektriker arbeiten mit zwei Arten von Plänen. Der <b>Stromlaufplan</b> zeigt, wie eine Schaltung funktioniert. Jeder Leiter ist eine eigene Linie: in der Hausinstallation L, N und PE, im Kfz Plus- und Minusleitung. Wo die Bauteile im Raum liegen, spielt dabei keine Rolle. Man braucht ihn beim Anschließen und bei der Fehlersuche, wenn jeder einzelne Draht verfolgt werden muss.</p>
+          <p>Der <b>Übersichtsplan</b> zeigt dagegen den Grundriss. Die Geräte stehen dort, wo sie auch im Raum sitzen: die Lampe an der Decke, der Schalter neben der Tür. Alle Leiter einer Verbindung werden zu einer einzigen Linie zusammengefasst. Wie viele Leiter in dieser Verbindung liegen, zeigt ein kleiner Schrägstrich mit einer Zahl. So passt eine ganze Wohnung auf ein Blatt, und die Bauherrin sieht auf einen Blick, wo Steckdosen und Schalter hinkommen.</p>`,
+        opts: ['Im Übersichtsplan steht für jede Verbindung nur eine einzige Linie.', 'Im Übersichtsplan sind L, N und PE jeweils als eigene Linie gezeichnet.', 'Der Übersichtsplan zeigt nur die Sicherungen, nicht die Verbraucher.', 'Im Übersichtsplan liegen die Geräte nach Funktion, nicht wie im Raum.'], ans: [0],
+        explain: 'Einlinig und räumlich angeordnet: Das ist der Übersichtsplan. Jeder Leiter einzeln: Das ist der Stromlaufplan.' },
       { id: 'p2', type: 'match', title: 'Schaltzeichen', q: 'Ordne jedem Schaltzeichen seinen Namen zu.',
         info: `<p>Die Schaltzeichen findest du oben in den Plänen. Tipp: Die Lampe ist ein Kreis mit Kreuz. Die LED ist eine Diode (Dreieck mit Strich) mit zwei Pfeilen für das ausgestrahlte Licht.</p>`,
         pairs: [[sym('lampe', 'Kreis mit Kreuz'), 'Lampe'], [sym('dose', 'Kreis mit Punkt'), 'Abzweigdose'], [sym('schalter', 'kleiner Kreis mit schrägem Strich'), 'Schalter (Übersichtsplan)'], [sym('sicherung', 'Rechteck mit Linie'), 'Sicherung'], [sym('led', 'Dreieck mit Strich und zwei Pfeilen'), 'LED'], [sym('batterie', 'langer und kurzer dicker Strich'), 'Batterie'], [sym('ls', 'schräger Kontakt mit Pfeil'), 'LS-Schalter']] },
-      { id: 'p3', type: 'label', title: 'Stromlaufplan beschriften', q: 'Beschrifte den Stromlaufplan der Hausinstallation.', img: SLP_IMG, alt: 'Stromlaufplan mit nummerierten Markierungen',
+      { id: 'p3', type: 'label', title: 'Stromlaufplan beschriften', q: 'Benenne die markierten Teile im Stromlaufplan der Hausinstallation.', img: SLP_IMG, alt: 'Stromlaufplan mit nummerierten Markierungen',
         info: `<p><b>Kennbuchstaben:</b> F = Schutzeinrichtung (Sicherung), S = Schalter, H = Leuchte/Meldegerät. Die Zahlen davor und dahinter zählen die Bauteile.</p><p>Oben verläuft der Außenleiter L1, unten Neutralleiter N und – ganz unten – der Schutzleiter PE, an den das Lampengehäuse angeschlossen ist.</p>`,
         spots: [{ x: pctX(300), y: pctY(40), name: 'Außenleiter L1 (Phase)' }, { x: pctX(90), y: pctY(135), name: 'Sicherung 1F1' }, { x: pctX(90), y: pctY(218), name: 'Schalter 1S1' }, { x: pctX(90), y: pctY(300), name: 'Lampe 1H1' }, { x: pctX(300), y: pctY(340), name: 'Neutralleiter N' }, { x: pctX(300), y: pctY(385), name: 'Schutzleiter PE' }],
         extra: ['Batterie', 'Abzweigdose'] },
-      { id: 'p4', type: 'sort', title: 'Welcher Plan?', q: 'Welche Eigenschaft gehört zu welchem Plan?',
-        info: '<p>Stromlaufplan: alle Leitungen einzeln, oft mit Klemmenbezeichnungen (1, 2, 13, 14, X1 …). Übersichtsplan: eine Linie pro Verbindung, die Anzahl der Leiter steht am Schrägstrich, die Geräte liegen wie im Raum.</p>',
+      { id: 'p4', type: 'sort', title: 'Der passende Plan', q: 'Ordne jede Situation dem Plan zu, der dafür gebraucht wird.',
+        info: `<p>Was die beiden Pläne zeigen, steht bei Aufgabe 1. Zusätzlich gilt: Im Stromlaufplan stehen oft die Bezeichnungen der Klemmen (1, 2, 13, 14, X1 …), an die ein Leiter angeschlossen wird.</p>`,
         cats: ['Stromlaufplan', 'Übersichtsplan'],
-        items: [{ text: 'alle Leitungen einzeln gezeichnet', cat: 0 }, { text: 'L, N und PE getrennt', cat: 0 }, { text: 'Klemmen wie 13 und 14 beschriftet', cat: 0 }, { text: 'Verbindungen mit einer Linie', cat: 1 }, { text: 'Leiterzahl am Schrägstrich', cat: 1 }, { text: 'Geräte wie im Raum angeordnet', cat: 1 }] },
-      { id: 'p5', type: 'order', title: 'Den Stromkreis verfolgen', q: 'Verfolge den Strom im Gleichstromkreis (Kfz) vom Pluspol aus. In welcher Reihenfolge fließt er durch die Bauteile?',
+        items: [{ text: 'Ein Azubi will wissen, an welche Klemme der Neutralleiter kommt.', cat: 0 }, { text: 'Bei der Fehlersuche soll jeder einzelne Leiter verfolgt werden.', cat: 0 }, { text: 'Jemand will sehen, wie der Schutzleiter zum Lampengehäuse läuft.', cat: 0 },
+          { text: 'Die Elektrikerin will wissen, wie viele Adern im Rohr liegen.', cat: 1 }, { text: 'Der Bauherr will sehen, wo im Raum die Schalter sitzen.', cat: 1 }, { text: 'Für die Planung soll die ganze Wohnung auf ein Blatt passen.', cat: 1 }],
+        hint: 'Geht es um einzelne Leiter und Anschlüsse oder um den Überblick im Raum?', explain: 'Anschließen und Fehlersuche: Stromlaufplan. Überblick, Lage im Raum und Leiterzahl: Übersichtsplan.' },
+      { id: 'p5', type: 'order', title: 'Den Stromkreis verfolgen', q: 'Ordne die Bauteile in der Reihenfolge, in der der Strom sie im Gleichstromkreis (Kfz) vom Pluspol aus durchfließt.',
         info: fig(G.slpDC, 'Stromlaufplan im Gleichstromkreis'),
         items: ['Pluspol der Batterie', 'Sicherung', 'Schalter', 'LED', 'Minuspol der Batterie'],
         explain: 'Die Sicherung sitzt direkt hinter dem Pluspol – so schützt sie die ganze Leitung.' },
-      { id: 'p6', type: 'num', title: 'Leiter zählen', q: 'Wie viele Leiter …',
+      { id: 'p6', type: 'num', title: 'Leiter zählen', q: 'Ermittle die Zahl der Leiter.',
         info: fig(G.uep, 'Übersichtsplan mit Schrägstrichen') + '<p>Die Zahl am Schrägstrich gibt an, wie viele Leiter in der Verbindung liegen.</p>',
-        items: [{ q: '… liegen im Übersichtsplan zwischen Abzweigdose und Lampe?', ans: 3, tol: 0, unit: 'Leiter' }, { q: '… zeichnet man im Stromlaufplan eines Gleichstromkreises (Hin- und Rückleitung)?', ans: 2, tol: 0, unit: 'Leiter' }, { q: '… verlaufen im Stromlaufplan der Hausinstallation waagerecht (L1, N, PE)?', ans: 3, tol: 0, unit: 'Leiter' }] }
+        items: [{ q: 'im Übersichtsplan zwischen Abzweigdose und Lampe:', ans: 3, tol: 0, unit: 'Leiter' }, { q: 'im Stromlaufplan eines Gleichstromkreises (Hin- und Rückleitung):', ans: 2, tol: 0, unit: 'Leiter' }, { q: 'waagerecht im Stromlaufplan der Hausinstallation (L1, N, PE):', ans: 3, tol: 0, unit: 'Leiter' }] }
     ]
   },
   {
@@ -1238,6 +1376,7 @@ const MODULES = [
         <tr><th>Verbraucher</th><td>LED, 12-V-Steckdosen, USB-Ladegerät</td><td>Beleuchtung, Steckdose</td></tr>
         <tr><th>Schaltung</th><td>einzelne Absicherung der Verbraucher, einzeln schaltbar</td><td>Beleuchtung mit Wechselschaltung (Flurlichtschaltung)</td></tr>
         <tr><th>Verbindungen</th><td>Steckverbinder, Lötverbinder, Ringkabelschuhe, Klemmen mit Aderendhülsen, Federkraftklemmen</td><td>Abzweigdosen, Federkraftklemmen, Lüsterklemmen</td></tr></tbody></table></div>
+      ${fig(G.block, 'Die beiden Schaltungen als Blockbild: Der Strom fließt von oben nach unten durch die Bauteile und zurück zur Quelle.')}
       <div class="merke"><b class="t">Arbeitsauftrag Gruppenarbeit</b><ol class="steps"><li>Erstellt einen <b>Übersichtsplan</b> für eure Schaltung.</li><li>Nur Schaltung 1: Erstellt eine <b>Verbraucherliste</b>.</li><li>Nur Schaltung 2: Erstellt einen <b>Stromlaufplan</b>.</li></ol></div>
       <h3 style="margin-top:22px">Die Verbraucherliste</h3>
       <p>Im 12-V-System müssen alle Leitungen so gewählt werden, dass sie den Strom für den Verbraucher führen können, ohne durch Wärme hohe Spannungsverluste zu haben. Deshalb legt man eine Liste aller Verbraucher an: mit Leistung oder Stromaufnahme und Länge der Leitung. Damit wählt man dann Kabelquerschnitt und Sicherung aus.</p>
@@ -1249,51 +1388,53 @@ const MODULES = [
         <tr><th>Verlustfaktor fk</th><td>1 %</td><td>2 %</td><td>1 %</td></tr></tbody></table></div>
       <p class="hintline">Die Leistungen von USB-Ladegerät und LED-Leiste sind Beispielwerte. Für eure eigene Schaltung nehmt ihr die Werte vom Typenschild.</p>`,
     tasks: [
-      { id: 'v1', type: 'sort', title: 'Welche Schaltung?', q: 'Gehört das Bauteil oder die Aufgabe zu Schaltung 1 (Kfz) oder Schaltung 2 (Haus)?',
+      { id: 'v1', type: 'sort', title: 'Schaltung 1 oder 2', q: 'Ordne jedes Bauteil und jede Aufgabe der passenden Schaltung zu.',
         info: '<p>Schaue in die Tabelle oben auf der Seite.</p>',
         cats: ['Schaltung 1 – Kfz (12 V DC)', 'Schaltung 2 – Haus (AC)'],
         items: [{ text: 'Autobatterie', cat: 0 }, { text: '2 Leitungen: +12 V und Masse', cat: 0 }, { text: 'Flachstecksicherung (ATO)', cat: 0 }, { text: 'USB-Ladegerät', cat: 0 }, { text: 'Ringkabelschuh', cat: 0 }, { text: 'Verbraucherliste erstellen', cat: 0 },
           { text: '3 Leitungen: L, N, PE', cat: 1 }, { text: 'Fehlerstrom-Schutzeinrichtung', cat: 1 }, { text: 'Wechselschaltung (Flurlicht)', cat: 1 }, { text: 'Abzweigdose', cat: 1 }, { text: 'Lüsterklemme', cat: 1 }, { text: 'Stromlaufplan erstellen', cat: 1 }] },
-      { id: 'v2', type: 'num', title: 'Verbraucherliste: USB-Ladegerät', q: 'USB-Ladegerät: U = 12 V, P = 24 W, L = 1 m, fk = 1 %.',
+      { id: 'v2', type: 'num', title: 'Verbraucherliste: USB-Ladegerät', q: 'Berechne die fehlenden Werte der Verbraucherliste für das USB-Ladegerät: U = 12 V, P = 24 W, L = 1 m, fk = 1 %.',
         info: INFO_VL,
         items: [{ q: 'max. Strom I =', ans: 2, tol: 0.01, unit: 'A' }, { q: 'Kabelquerschnitt errechnet =', ans: 0.58, tol: 0.015, unit: 'mm²' }, { q: 'Kabelquerschnitt gewählt =', ans: 0.75, tol: 0, unit: 'mm²' }, { q: 'Sicherung gewählt =', ans: 3, tol: 0, unit: 'A' }],
         hint: 'I = 24 W ÷ 12 V. Die Sicherung muss größer sein als der Strom.' },
-      { id: 'v3', type: 'num', title: 'Verbraucherliste: 12-V-Steckdose', q: '12-V-Steckdose: U = 12 V, I = 20 A, L = 1 m, fk = 2 %.',
+      { id: 'v3', type: 'num', title: 'Verbraucherliste: 12-V-Steckdose', q: 'Berechne die fehlenden Werte der Verbraucherliste für die 12-V-Steckdose: U = 12 V, I = 20 A, L = 1 m, fk = 2 %.',
         info: INFO_VL,
         items: [{ q: 'Leistung P =', ans: 240, tol: 0.01, unit: 'W' }, { q: 'Kabelquerschnitt errechnet =', ans: 2.92, tol: 0.015, unit: 'mm²' }, { q: 'Kabelquerschnitt gewählt =', ans: 4, tol: 0, unit: 'mm²' }, { q: 'Sicherung gewählt =', ans: 25, tol: 0, unit: 'A' }],
         hint: 'P = 12 V × 20 A. Für den Querschnitt: fk = 2 % = 0,02.' },
-      { id: 'v4', type: 'num', title: 'Verbraucherliste: LED-Leiste', q: 'LED-Leiste: U = 12 V, P = 18 W, L = 1 m, fk = 1 %.',
+      { id: 'v4', type: 'num', title: 'Verbraucherliste: LED-Leiste', q: 'Berechne die fehlenden Werte der Verbraucherliste für die LED-Leiste: U = 12 V, P = 18 W, L = 1 m, fk = 1 %.',
         info: INFO_VL,
         items: [{ q: 'max. Strom I =', ans: 1.5, tol: 0.01, unit: 'A' }, { q: 'Kabelquerschnitt errechnet =', ans: 0.44, tol: 0.015, unit: 'mm²' }, { q: 'Kabelquerschnitt gewählt =', ans: 0.5, tol: 0, unit: 'mm²' }, { q: 'Sicherung gewählt =', ans: 2, tol: 0, unit: 'A' }] },
-      { id: 'v5', type: 'mc', title: 'Wozu das Ganze?', q: 'Warum legt man für eine 12-V-Installation eine Verbraucherliste an?',
-        info: '<p>Die Verbraucherliste sammelt für jedes Gerät Spannung, Strom bzw. Leistung und Leitungslänge. Daraus ergeben sich Kabelquerschnitt und Sicherung.</p>',
-        opts: ['Um für jeden Verbraucher den passenden Kabelquerschnitt und die passende Sicherung zu bestimmen.', 'Um den Preis der Geräte zu vergleichen.', 'Weil man sonst die Batterie nicht laden kann.', 'Um die Farben der Kabel festzulegen.'], ans: [0] }
+      { id: 'v5', type: 'open', title: 'Zweck der Verbraucherliste', q: 'Begründe, warum man vor dem Bau einer 12-V-Installation eine Verbraucherliste anlegt.',
+        lesen: `<p>Die Verbraucherliste sammelt für jedes Gerät Spannung, Strom oder Leistung und die Länge der Leitung. Was man daraus berechnet und was passiert, wenn ein Kabel oder eine Sicherung nicht passt, hast du in den Modulen 3 und 5 gelernt.</p>`,
+        denk: ['was du aus den Werten der Liste berechnest', 'was passiert, wenn ein Kabel zu dünn ist', 'was passiert, wenn die Sicherung zu groß oder zu klein ist'],
+        min: 150, checks: [['Kabelquerschnitt', 'querschnitt|kabeldicke|dick|mm'], ['Sicherung', 'sicherung'], ['Folge eines Fehlers', 'warm|heiß|heiss|brand|brenn|verlust|schmor|feuer|schmilz']],
+        muster: '<p>In einer 12-V-Anlage fließen große Ströme. Mit der Verbraucherliste berechnet man für jedes Gerät den Strom und daraus den nötigen Kabelquerschnitt und die passende Sicherung. Ist ein Kabel zu dünn, erwärmt es sich, es geht viel Spannung verloren, und im schlimmsten Fall kann es brennen. Ist die Sicherung zu groß, brennt sie bei einem Kurzschluss nicht rechtzeitig durch. Ist sie zu klein, fällt das Gerät ständig aus. Die Liste sorgt also dafür, dass jede Leitung sicher und passend ausgelegt ist.</p>' }
     ]
   }
 ];
 
 /* ---------- Testfragen ---------- */
 const TEST_BANK = [
-  { id: 't1', type: 'mc', q: 'Der Leitungsschutzschalter …', opts: ['soll das Gerät beschützen.', 'verhindert Stromschläge.', 'sichert die Leitung gegen Durchschmoren.', 'ist nur für die Schulleitung bestimmt.'], ans: [2], explain: 'Er schützt die Leitung vor Überlast.' },
+  { id: 't1', type: 'mc', q: 'Der Leitungsschutzschalter …', opts: ['schützt das angeschlossene Gerät vor Schäden.', 'verhindert Stromschläge bei einem Isolationsfehler.', 'sichert die Leitung gegen Überhitzen.', 'begrenzt die Spannung auf höchstens 230 V.'], ans: [2], explain: 'Er schützt die Leitung vor Überlast. Vor Stromschlägen schützt der RCD.' },
   { id: 't2', type: 'mc', q: 'Der Kabelquerschnitt …', opts: ['ist bei 230 V wichtiger als bei 12 V.', 'ist bei 12 V wichtiger als bei 230 V.', 'ist überall gleich wichtig.', 'muss immer 1,5 mm² betragen.'], ans: [1], explain: 'Bei 12 V fließen für dieselbe Leistung viel größere Ströme.' },
   { id: 't3', type: 'mc', q: '1-Phasen-Wechselstrom …', opts: ['gibt es nur in Kraftwerken.', 'wird zum Betreiben von Motoren benötigt.', 'kommt aus der Steckdose.', 'ist eigentlich gar kein Strom.'], ans: [2], explain: 'Die normale Steckdose liefert 1-Phasen-Wechselstrom mit 230 V.' },
-  { id: 't4', type: 'mc', q: 'Der Schutzleiter …', opts: ['überwacht alle Elektriker auf der Baustelle.', 'dient dem sicheren Besteigen von Strommasten.', 'führt den Strom vom Gerät zurück.', 'ist mit der Erde verbunden.'], ans: [3], explain: 'Er leitet Fehlerströme zur Erde ab.' },
+  { id: 't4', type: 'mc', q: 'Der Schutzleiter …', opts: ['liefert zusätzlichen Strom für große Geräte.', 'schaltet das Gerät bei Überlast ab.', 'führt den Strom vom Gerät zurück.', 'ist mit der Erde verbunden.'], ans: [3], explain: 'Er leitet Fehlerströme zur Erde ab.' },
   { id: 't5', type: 'mc', q: 'Der Fehlerstrom-Schutzschalter …', opts: ['schaltet den Strom ab, wenn Ströme über den Schutzleiter zur Erde fließen.', 'schützt vor dem falschen Anschließen von Steckdosen und Lampen.', 'kann im Notfall betätigt werden, wenn sich jemand an der Bohrmaschine verletzt hat.', 'knallt bei einem Kurzschluss durch.'], ans: [0], explain: 'Er erkennt, dass über N weniger zurückkommt als über L hinfließt.' },
   { id: 't6', type: 'mc', q: 'Beim 1-Phasen-Wechselstrom ist der stromführende Leiter …', opts: ['die Phase L (braun).', 'der Neutralleiter N (blau).', 'der Schutzleiter PE (grün-gelb).', 'die Masse (schwarz).'], ans: [0], explain: 'L führt hin, N führt zurück, PE schützt.' },
   { id: 't7', type: 'mc', q: 'Gleichstrom …', opts: ['fließt nur in eine Richtung.', 'ist besonders schnell verfügbarer Strom.', 'wird heutzutage kaum noch verwendet.', 'kommt aus der Steckdose.'], ans: [0], explain: 'Die Spannung ändert ihre Richtung nicht.' },
-  { id: 't8', type: 'mc', q: 'Was ändert sich beim Wechselstrom ständig?', opts: ['die Richtung (Plus und Minus wechseln)', 'die Farbe der Leiter', 'die Länge des Kabels', 'nichts'], ans: [0], explain: 'In Deutschland 50-mal pro Sekunde (50 Hz).' },
-  { id: 't9', type: 'mc', q: 'Welche Farbe hat der Neutralleiter N?', opts: ['blau', 'braun', 'grün-gelb', 'rot'], ans: [0], fixed: true, explain: 'N ist blau, L braun, PE grün-gelb.' },
-  { id: 't10', type: 'num', q: 'Ein 12-V-Gerät hat 60 W. Wie groß ist der Strom?', ans: 5, tol: 0.01, unit: 'A', explain: 'I = 60 W ÷ 12 V = 5 A.' },
-  { id: 't11', type: 'num', q: 'Ein 12-V-Gerät nimmt 3 A auf. Wie groß ist die Leistung?', ans: 36, tol: 0.01, unit: 'W', explain: 'P = 12 V × 3 A = 36 W.' },
+  { id: 't8', type: 'mc', q: 'Beim Wechselstrom ändert sich ständig …', opts: ['die Richtung des Stroms', 'der Widerstand der Leitung', 'die Leistung des Geräts', 'die Frequenz des Netzes'], ans: [0], explain: 'In Deutschland 50-mal pro Sekunde (50 Hz). Die Frequenz selbst bleibt gleich.' },
+  { id: 't9', type: 'mc', q: 'Der Neutralleiter N hat die Farbe …', opts: ['blau', 'braun', 'grün-gelb', 'schwarz'], ans: [0], fixed: true, explain: 'N ist blau, L braun, PE grün-gelb.' },
+  { id: 't10', type: 'num', q: 'Ein 12-V-Gerät hat 60 W. Berechne den Strom.', ans: 5, tol: 0.01, unit: 'A', explain: 'I = 60 W ÷ 12 V = 5 A.' },
+  { id: 't11', type: 'num', q: 'Ein 12-V-Gerät nimmt 3 A auf. Berechne die Leistung.', ans: 36, tol: 0.01, unit: 'W', explain: 'P = 12 V × 3 A = 36 W.' },
   { id: 't12', type: 'mc', q: 'Ein Gerät mit gleicher Leistung wird an 12 V statt an 230 V betrieben. Dann …', opts: ['fließt ein viel größerer Strom.', 'fließt ein viel kleinerer Strom.', 'bleibt der Strom gleich.', 'fließt kein Strom.'], ans: [0], explain: 'I = P ÷ U – kleinere Spannung, größerer Strom.' },
   { id: 't13', type: 'mc', q: 'Die Leitung wird doppelt so lang, alles andere bleibt gleich. Der nötige Kabelquerschnitt …', opts: ['verdoppelt sich.', 'halbiert sich.', 'bleibt gleich.', 'vervierfacht sich.'], ans: [0], explain: 'L steht im Zähler der Formel.' },
-  { id: 't14', type: 'num', q: 'Bei 12 V und einem Verlustfaktor von 1 %: Wie viel Spannung kommt am Verbraucher an?', ans: 11.88, tol: 0.005, unit: 'V', explain: '1 % von 12 V sind 0,12 V.' },
-  { id: 't15', type: 'mc', q: 'Errechnet ist ein Querschnitt von 1,8 mm². Welches Kabel wählst du?', opts: ['1,5 mm²', '2,5 mm²', '1 mm²', '0,75 mm²'], ans: [1], explain: 'Immer der nächstgrößere Normquerschnitt.' },
-  { id: 't16', type: 'mc', q: 'Für welchen Strom sind Stromkreise im Haushalt meist ausgelegt?', opts: ['6 A', '10 A', '16 A', '63 A'], ans: [2], fixed: true, explain: 'Typisch ist ein LS-Schalter mit 16 A.' },
-  { id: 't17', type: 'num', q: 'Wasserkocher (2000 W), Toaster (1000 W) und Haartrockner (1000 W) laufen an einem 230-V-Stromkreis. Wie groß ist der Strom? (zwei Stellen nach dem Komma)', ans: 17.39, tol: 0.02, unit: 'A', explain: '4000 W ÷ 230 V = 17,39 A – der 16-A-LS löst aus.' },
-  { id: 't18', type: 'mc', q: 'Welche Farbe hat eine 10-A-Flachstecksicherung?', opts: ['rot', 'blau', 'gelb', 'grün'], ans: [0], explain: '10 A rot, 15 A blau, 20 A gelb, 30 A grün.' },
-  { id: 't19', type: 'mc', q: 'Wo baut man im Kfz die Sicherung am besten ein?', opts: ['nahe an der Batterie', 'nahe am Verbraucher', 'in der Mitte des Kabels', 'hinter dem Schalter'], ans: [0], explain: 'So ist das ganze Kabel dahinter geschützt.' },
-  { id: 't20', type: 'mc', q: 'Was ist typisch für einen Übersichtsplan?', opts: ['Jede Verbindung wird mit einer Linie gezeichnet, die Leiterzahl steht am Schrägstrich.', 'L, N und PE werden einzeln gezeichnet.', 'Es werden nur Sicherungen gezeichnet.', 'Er enthält keine Schaltzeichen.'], ans: [0], explain: 'Einlinige Darstellung, räumlich angeordnet.' }
+  { id: 't14', type: 'num', q: 'Bei 12 V ist ein Verlustfaktor von 1 % erlaubt. Berechne die Spannung, die am Verbraucher ankommt.', ans: 11.88, tol: 0.005, unit: 'V', explain: '1 % von 12 V sind 0,12 V.' },
+  { id: 't15', type: 'mc', q: 'Errechnet ist ein Querschnitt von 1,8 mm². Du wählst das Kabel mit …', opts: ['1,5 mm²', '2,5 mm²', '1 mm²', '4 mm²'], ans: [1], explain: 'Immer der nächstgrößere Normquerschnitt.' },
+  { id: 't16', type: 'mc', q: 'Stromkreise im Haushalt sind meist ausgelegt für …', opts: ['6 A', '10 A', '16 A', '63 A'], ans: [2], fixed: true, explain: 'Typisch ist ein LS-Schalter mit 16 A.' },
+  { id: 't17', type: 'num', q: 'Wasserkocher (2000 W), Toaster (1000 W) und Haartrockner (1000 W) laufen an einem 230-V-Stromkreis. Berechne den Strom (zwei Stellen nach dem Komma).', ans: 17.39, tol: 0.02, unit: 'A', explain: '4000 W ÷ 230 V = 17,39 A – der 16-A-LS löst aus.' },
+  { id: 't18', type: 'mc', q: 'Eine 10-A-Flachstecksicherung ist …', opts: ['rot', 'blau', 'gelb', 'grün'], ans: [0], explain: '10 A rot, 15 A blau, 20 A gelb, 30 A grün.' },
+  { id: 't19', type: 'mc', q: 'Im Kfz baut man die Sicherung am besten ein …', opts: ['nahe an der Batterie', 'nahe am Verbraucher', 'in der Mitte des Kabels', 'hinter dem Schalter'], ans: [0], explain: 'So ist das ganze Kabel dahinter geschützt.' },
+  { id: 't20', type: 'mc', q: 'Typisch für einen Übersichtsplan ist: …', opts: ['Jede Verbindung ist eine Linie, die Leiterzahl steht am Schrägstrich.', 'L, N und PE sind einzeln gezeichnet, jede Klemme ist beschriftet.', 'Er zeigt nur die Sicherungen und lässt die Verbraucher weg.', 'Die Geräte sind nach ihrer Funktion geordnet, nicht wie im Raum.'], ans: [0], explain: 'Einlinige Darstellung, räumlich angeordnet.' }
 ];
 
 /* ---------- Fortschritt ---------- */
@@ -1366,7 +1507,7 @@ function viewStart() {
     h('div', { class: 'card' }, h('h3', null, 'So funktioniert die Plattform'),
       h('p', null, h('b', null, 'Prüfen: '), 'Bei jeder Aufgabe zeigt dir „Prüfen“ sofort, was richtig ist (grün) und was nicht (rot). Du darfst so oft probieren, wie du willst.'),
       h('p', null, h('b', null, 'Lösung: '), 'Nach zwei Fehlversuchen kannst du dir die Lösung anzeigen lassen. Das wird im Ergebnisblatt als „mit Lösungshilfe“ vermerkt.'),
-      h('p', null, h('b', null, 'Info: '), 'Jede Aufgabe hat einen Infokasten mit Text und Grafiken. Öffne ihn, wenn du etwas nachlesen willst.'), h('p', null, h('b', null, 'Test & Export: '), 'Am Ende wartet ein Test mit 20 Fragen. Danach speicherst du dein Ergebnisblatt als PDF oder Text.'), h('p', null, h('b', null, 'Weitermachen: '), 'Unter „Export & Code“ bekommst du einen Fortsetzungscode. Damit machst du auf einem anderen Gerät weiter.')),
+      h('p', null, h('b', null, 'Info: '), 'Längere Infotexte stehen direkt über der Aufgabe. Kurze Hinweise und Grafiken findest du im Kasten „Info zur Aufgabe“ zum Aufklappen.'), h('p', null, h('b', null, 'Test & Export: '), 'Am Ende wartet ein Test mit 20 Fragen. Danach speicherst du dein Ergebnisblatt als PDF oder Text.'), h('p', null, h('b', null, 'Weitermachen: '), 'Unter „Export & Code“ bekommst du einen Fortsetzungscode. Damit machst du auf einem anderen Gerät weiter.')),
     h('h2', { style: 'margin:30px 0 10px' }, 'Deine Module'),
     h('div', { class: 'vgrid' }, MODULES.map((m, i) => { const s = modStats(m); return h('a', { class: 'vcard', href: '#/m/' + m.id, style: 'text-decoration:none;color:inherit' }, h('h3', null, `${i + 1}  ${m.title}`), h('p', null, `${s.done} von ${s.total} Aufgaben gelöst`)); })),
     h('details', { class: 'tch' }, h('summary', null, 'Hinweise für Lehrkräfte'),
@@ -1416,7 +1557,7 @@ function finishRun() {
 }
 function verdict(p) { return p >= 85 ? 'Pro! Du kennst dich mit Elektroinstallation aus.' : p >= 60 ? 'Wackelkandidat – schau dir die Fehler an und wiederhole die passenden Module.' : 'Finger weg vom Strom! Geh die Module noch einmal in Ruhe durch und versuche den Test danach erneut.'; }
 function viewTest() {
-  const root = h('div', null, h('header', { class: 'pagehead' }, h('h1', null, 'Abschlusstest'), h('p', { class: 'lead' }, '20 Fragen zu allen Modulen – darunter das Quiz aus dem Unterricht. Die Auswertung bekommst du erst am Ende.')));
+  const root = h('div', null, h('header', { class: 'pagehead' }, h('h1', null, 'Abschlusstest'), h('p', { class: 'lead' }, '20 Fragen zu allen Modulen – darunter das Quiz aus dem Unterricht. Die Auswertung bekommst du erst am Ende.')), h('p', { class: 'testauftrag' }, 'Überprüfe dein Wissen aus allen sieben Modulen: Ergänze jeden Satzanfang mit der passenden Antwort oder berechne das Ergebnis.'));
   const b = bestTest();
   if (!run) {
     root.append(h('div', { class: 'card' },
@@ -1541,7 +1682,8 @@ function buildReport() {
   const o = overall(); const b = bestTest(); const last = S.test.attempts[S.test.attempts.length - 1];
   const d = new Date(); const date = `${String(d.getDate()).padStart(2, '0')}.${String(d.getMonth() + 1).padStart(2, '0')}.${d.getFullYear()}`;
   const mods = MODULES.map((m, i) => { const s = modStats(m); return { titel: `${i + 1} ${m.title}`, geloest: s.done, gesamt: s.total, mitLoesungshilfe: s.assisted }; });
-  return { date, name: S.name || '', klasse: S.klasse || '', mods, o, b, last, attempts: S.test.attempts.length, code: makeCode() };
+  const opens = MODULES.flatMap(m => m.tasks.filter(t => t.type === 'open').map(t => ({ titel: t.title, auftrag: strip(t.q), text: ((S.tasks[t.id] && S.tasks[t.id].text) || '').trim() })));
+  return { date, name: S.name || '', klasse: S.klasse || '', mods, o, b, last, opens, attempts: S.test.attempts.length, code: makeCode() };
 }
 function reportLines(r) {
   const L = [];
@@ -1550,6 +1692,7 @@ function reportLines(r) {
   L.push('Module:');
   r.mods.forEach(m => L.push(`- ${m.titel}: ${m.geloest}/${m.gesamt} Aufgaben gelöst` + (m.mitLoesungshilfe ? ` (davon ${m.mitLoesungshilfe} mit Lösungshilfe)` : '')));
   L.push(`Gesamt: ${r.o.done}/${r.o.total} Aufgaben (${r.o.pct} %)`, '');
+  (r.opens || []).forEach(x => L.push(`Offene Aufgabe „${x.titel}“: ${x.auftrag}`, x.text || '(noch nicht bearbeitet)', ''));
   if (r.b) {
     L.push('Abschlusstest:', `- Bester Versuch: ${r.b.score}/${r.b.max} Punkte (${Math.round(100 * r.b.score / r.b.max)} %)`, `- Letzter Versuch: ${r.last.score}/${r.last.max} Punkte (${Math.round(100 * r.last.score / r.last.max)} %)`, `- Anzahl Versuche: ${r.attempts}`, '');
     const items = r.last.items || [];
@@ -1587,6 +1730,7 @@ function makePDF(r) {
   row('Modul', 'Gelöst', 'mit Lösungshilfe', true, true);
   r.mods.forEach(m => row(m.titel, `${m.geloest} / ${m.gesamt}`, String(m.mitLoesungshilfe)));
   row('Gesamt', `${r.o.done} / ${r.o.total}`, `${r.o.pct} %`, true, true); y += 4;
+  (r.opens || []).forEach(x => { line(`Offene Aufgabe: ${x.titel}`, 13, 'bold', [3, 85, 145]); y += 1; line(x.auftrag, 10, 'italic', [86, 104, 122]); y += 1; line(x.text || '(noch nicht bearbeitet)'); y += 4; });
   line('Abschlusstest', 13, 'bold', [3, 85, 145]); y += 1;
   if (r.b) {
     line(`Bester Versuch: ${r.b.score} von ${r.b.max} Punkten (${Math.round(100 * r.b.score / r.b.max)} %)   |   Letzter Versuch: ${r.last.score} von ${r.last.max}   |   Versuche: ${r.attempts}`); y += 2;
