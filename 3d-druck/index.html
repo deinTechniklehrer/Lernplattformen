@@ -1675,7 +1675,7 @@ document.addEventListener('DOMContentLoaded', init);
         return navItems().map(function (it) {
           var m = mod(it.key), s = m ? modStats(m) : null;
           if (m) mi++;
-          return { id: it.key, label: it.label.replace(/^\d+\s+/, ''), num: m ? String(mi) : (it.key === 'start' ? '0' : it.key === 'test' ? 'T' : 'E'), done: s ? s.done : 0, total: s ? s.total : 0 };
+          return { id: it.key, label: it.label.replace(/^\d+\s+/, ''), num: m ? String(mi) : (it.key === 'start' ? '0' : it.key === 'test' ? 'T' : 'E'), done: s ? s.done : 0, total: s ? s.total : 0, lock: !!it.lock, passed: !!it.passed };
         });
       },
       current: function () { return curKey(); },

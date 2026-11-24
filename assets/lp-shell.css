@@ -128,3 +128,10 @@ html.lps-open .lps-tab{display:none}
 /* Handy bis 560 px: Logo und Knöpfe in Zeile 1, Titel darunter über die volle Breite (sonst bricht der Titel neben dem Fortschrittsknopf in Silben) */
 @media (max-width:560px){.lps-lph .top .brand{flex-wrap:wrap;row-gap:10px}.lps-lph .top .brand>.lps-tools{order:1}.lps-lph .top .brand>div:not(.lps-tools){order:2;flex:1 1 100%}
 .lps-modul .lps-mhead{flex-wrap:wrap;row-gap:8px}.lps-modul .lps-mhead .lps-tools{order:1}.lps-modul .lps-mhead .lps-mt{order:2;flex:1 1 100%}}
+
+.lps-lk{display:block;width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round}
+.lps-lk rect{fill:currentColor;fill-opacity:.18}
+.lps-st.lps-locked{color:var(--lps-muted);border-style:dashed}
+.lps-st.lps-locked .lps-n{opacity:.6}
+.lps-st.lps-locked[aria-current]{color:var(--lps-on);border-style:solid}
+.lps-li .lps-cnt .lps-lk{display:inline-block;width:13px;height:13px;vertical-align:-2px}

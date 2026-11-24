@@ -5,7 +5,8 @@
    - Hell/Dunkel für alle Plattformen gemeinsam (localStorage 'lp-theme', data-theme auf <html>).
    Jede Plattform meldet sich mit einem Adapter an:
      LPShell.init({chapters, current, go, mountBar, mountTools, bodyClass})
-     chapters() → [{id, label, group, num, done, total}]  (total 0 = ohne Aufgaben, z. B. Start oder Abgabe; num optional)
+     chapters() → [{id, label, group, num, done, total, lock, passed}]  (total 0 = ohne Aufgaben, z. B. Start oder Abgabe; num optional;
+     lock: Kapitel gesperrt (Schloss), passed: Kapitel abgeschlossen (Haken), beide optional)
    LPShell.refresh() zeichnet neu (sonst automatisch nach Klicks, Eingaben und Seitenwechseln). */
 (function () {
   'use strict';
@@ -16,6 +17,7 @@
   var SUN = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>';
   var MOON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"/></svg>';
   var OK = '<svg class="lps-ok" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4 10-10"/></svg>';
+  var LOCK = '<svg class="lps-lk" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></svg>';
   var A = null, pbtn = null, rowG, rowC, side, tab, back, sumBox, listBox, themeBtns = [], selGroup = null, timer = 0, lastSig = '';
 
   function stats() {
@@ -60,7 +62,7 @@
 
   function render(force) {
     var S = stats(), groups = groupsOf(S.ch), multi = groups.length > 1;
-    var sig = JSON.stringify([S.cur, selGroup, S.ch.map(function (c) { return [c.id, c.done, c.total]; }), isDark()]);
+    var sig = JSON.stringify([S.cur, selGroup, S.ch.map(function (c) { return [c.id, c.done, c.total, !!c.lock, !!c.passed]; }), isDark()]);
     if (!force && sig === lastSig) return; lastSig = sig;
     try { paint(); } catch (e) {}
     var curC = S.ch.filter(function (c) { return c.id === S.cur; })[0];
@@ -76,9 +78,10 @@
     var shown = multi ? S.ch.filter(function (c) { return c.group === selGroup; }) : S.ch, gi = multi ? groups.indexOf(selGroup) : 0;
     rowC.replaceChildren.apply(rowC, shown.map(function (c, i) {
       var num = c.num != null ? c.num : (multi ? gi + '.' + (i + 1) : String(i)), state = null;
-      if (c.total && c.done >= c.total) state = el('span', { html: OK });
+      if (c.lock) state = el('span', { html: LOCK });
+      else if (c.passed || (c.total && c.done >= c.total)) state = el('span', { html: OK });
       else if (c.total && c.done > 0) state = el('span', { class: 'lps-part' }, [c.done + '/' + c.total]);
-      return el('button', { class: 'lps-st ' + kcls(multi ? gi : i), type: 'button', 'aria-current': c.id === S.cur ? 'step' : null, 'aria-label': c.label + (c.total ? ', ' + c.done + ' von ' + c.total + ' erledigt' : ''), onclick: function () { A.go(c.id); setTimeout(function () { render('nav'); }, 80); } },
+      return el('button', { class: 'lps-st ' + kcls(multi ? gi : i) + (c.lock ? ' lps-locked' : ''), type: 'button', 'aria-current': c.id === S.cur ? 'step' : null, 'aria-label': c.label + (c.lock ? ', gesperrt' : c.passed ? ', geschafft' : '') + (c.total ? ', ' + c.done + ' von ' + c.total + ' erledigt' : ''), onclick: function () { A.go(c.id); setTimeout(function () { render('nav'); }, 80); } },
         [el('span', { class: 'lps-n' }, [num]), c.label, state]);
     }));
     var cp = rowC.querySelector('[aria-current]'); if (cp) { var r = rowC.getBoundingClientRect(), b = cp.getBoundingClientRect(); if (b.left < r.left || b.right > r.right) rowC.scrollLeft += b.left - r.left - (r.width - b.width) / 2; }
@@ -87,9 +90,9 @@
     var lastG = null, items = [];
     S.ch.forEach(function (c) {
       if (multi && c.group !== lastG) { items.push(el('div', { class: 'lps-lg' }, [c.group])); lastG = c.group; }
-      items.push(el('button', { class: 'lps-li' + (c.total && c.done >= c.total ? ' lps-done' : ''), type: 'button', 'aria-current': c.id === S.cur ? 'page' : null,
+      items.push(el('button', { class: 'lps-li' + (c.passed || (c.total && c.done >= c.total) ? ' lps-done' : '') + (c.lock ? ' lps-locked' : ''), type: 'button', 'aria-current': c.id === S.cur ? 'page' : null,
         onclick: function () { A.go(c.id); if (!window.matchMedia('(min-width:1100px)').matches) setOpen(false); setTimeout(function () { render('nav'); }, 80); } },
-        [el('span', null, [c.label]), el('span', { class: 'lps-cnt' }, [c.total ? c.done + '/' + c.total : '–']), c.total ? el('span', { class: 'lps-b' }, [el('i', { style: 'width:' + Math.round(100 * c.done / c.total) + '%' })]) : null]));
+        [el('span', null, [c.label]), c.lock ? el('span', { class: 'lps-cnt', html: LOCK + ' gesperrt' }) : el('span', { class: 'lps-cnt' }, [c.total ? c.done + '/' + c.total : '–']), c.total ? el('span', { class: 'lps-b' }, [el('i', { style: 'width:' + Math.round(100 * c.done / c.total) + '%' })]) : null]));
     });
     listBox.replaceChildren.apply(listBox, items);
     tab.replaceChildren(layers(6, S.pct, 'lps-mini'), el('span', { class: 'lps-vt' }, ['Fortschritt ' + S.pct + ' %']));
