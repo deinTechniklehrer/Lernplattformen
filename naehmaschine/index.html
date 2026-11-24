@@ -816,10 +816,10 @@ var NG = (function () {
     b += '<path class="ng-otl" d="' + ot + '"/>';
     if (k === 3) b += '<path class="ng-utl" d="M150 112V102"/><circle class="ng-knot" cx="150" cy="102" r="3.5"/>';
     if (k === 4) b += '<path class="ng-otl" d="M150 92H128V102"/><path class="ng-utl" d="M150 112H128V102"/><circle class="ng-knot" cx="128" cy="102" r="3.5"/>';
-    if (k === 3) b += '<path class="ng-arr" d="M266 64V28m-7 9 7-9 7 9"/>' + T(256, 50, 'Fadenhebel zieht', 'ng-small ng-e');
-    if (k === 4) b += '<path class="ng-arr" d="M300 124H232m9-7-9 7 9 7"/>' + T(220, 140, 'Transporteur schiebt', 'ng-small ng-e');
+    if (k === 3) b += '<path class="ng-arr" d="M336 64V28m-7 9 7-9 7 9"/>' + T(324, 50, 'Fadenhebel zieht', 'ng-small ng-e');
+    if (k === 4) b += '<path class="ng-arr" d="M340 128H250m9-7-9 7 9 7"/>' + T(250, 154, 'Transporteur', 'ng-small') + T(250, 173, 'schiebt', 'ng-small');
     if (k === 2) b += T(244, 128, 'Schlinge', 'ng-small');
-    if (k === 1) b += T(176, 150, 'Schlinge', 'ng-small');
+    if (k === 1) b += T(128, 152, 'Schlinge', 'ng-small ng-e');
     if (k === 0) b += '<path class="ng-arr" d="M110 30V70m-7-9 7 9 7-9"/>' + T(46, 40, 'Nadel', 'ng-small');
     return { vb: '0 0 360 250', body: b };
   }
