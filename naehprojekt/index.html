@@ -681,6 +681,17 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
 .anim-steps .btn[aria-pressed="true"]{outline:3px solid var(--n-acc,var(--accent,#e07b00));outline-offset:1px}
 .anim-out{margin:0;font-size:16px;max-width:70ch;min-height:3em}
 @media (max-width:440px){.anim{padding:10px}}
+
+/* Balkendiagramm in der Auflösung einer Schätzfrage (25.11.2026) */
+.hw-bars{margin:12px 0 0;display:grid;gap:8px}
+.hw-bt{font-weight:700}
+.hw-bl{display:grid;gap:8px}
+.hw-br{display:grid;grid-template-columns:minmax(0,12.5em) minmax(0,1fr) 3.4em;gap:8px;align-items:center;font-size:15px}
+.hw-bb{height:16px;border-radius:8px;background:rgba(128,128,128,.2);overflow:hidden}
+.hw-bb i{display:block;height:100%;background:var(--c,#2e6e26);border-radius:8px;min-width:4px}
+.hw-bv{font-weight:700;text-align:right;white-space:nowrap}
+.hw-bq{font-size:13px;color:var(--muted);margin:0}
+@media (max-width:520px){.hw-br{grid-template-columns:minmax(0,1fr) 3.4em}.hw-bn{grid-column:1/-1}}
 /* Nähprojekt Utensilo: Grafikfarben (hell/dunkel) und eigene Bausteine, Stand 25.11.2026 */
 :root{--n-line:#22303a;--n-papier:#fffdf6;--n-aussen:#4a4fa8;--n-aussenl:#b9bce6;--n-futter:#f0b93a;--n-futterl:#f8e3ad;--n-naht:#c8402e;--n-weg:#e4e7e8;--n-stoff:#3f8f6b;--n-stoffl:#cfe6da;--n-acc:#b05a00}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--n-line:#e3eaee;--n-papier:#2a3032;--n-aussen:#7f85e6;--n-aussenl:#4a4d78;--n-futter:#e0a92a;--n-futterl:#6b5a2a;--n-naht:#ff8a75;--n-weg:#1d2325;--n-stoff:#5fc097;--n-stoffl:#33574a;--n-acc:#ffb45e}}
@@ -763,6 +774,35 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
 .tlogo.pikto{background:transparent}
 @media (max-width:620px){.lab-fig .mk{transform-box:fill-box;transform-origin:center;transform:scale(1.4)}.mli th,.mli td{display:block;border:0;padding:4px 0}.mli tr{display:block;padding:8px 0;border-bottom:1px solid var(--line)}.mli thead{display:none}}
 @media (max-width:440px){.np-rl{grid-template-columns:minmax(0,1fr) 4.6em}.np-rl span{grid-column:1/-1}.np-rech{padding:10px}}
+
+/* Werkzeuge mit Nummern (25.11.2026) */
+.np-fig.werk{max-width:520px;margin:10px 0}
+.np-kachel{fill:var(--n-papier);stroke:var(--line)}
+.np-metall{fill:#b9c2c8;stroke:var(--n-line);stroke-width:2;stroke-linejoin:round}
+.np-griffA{fill:var(--n-aussen);stroke:var(--n-line);stroke-width:2;stroke-linejoin:round}
+.np-griffB{fill:var(--n-futter);stroke:var(--n-line);stroke-width:2;stroke-linejoin:round}
+.np-niet{fill:var(--n-line)}
+.np-kreide{fill:var(--n-stoffl);stroke:var(--n-line);stroke-width:2;stroke-linejoin:round}
+.np-kreideS{fill:none;stroke:var(--n-stoff);stroke-width:5;stroke-linecap:round;stroke-dasharray:1 9}
+.np-nadelS{fill:none;stroke:var(--n-line);stroke-width:2.6;stroke-linecap:round}
+.np-kopfA{fill:var(--n-naht);stroke:var(--n-line);stroke-width:1.6}.np-kopfB{fill:var(--n-futter);stroke:var(--n-line);stroke-width:1.6}
+.np-gabel{fill:none;stroke:var(--n-line);stroke-width:3.4;stroke-linecap:round;stroke-linejoin:round}
+.np-eisen{fill:var(--n-aussenl);stroke:var(--n-line);stroke-width:2;stroke-linejoin:round}
+/* Karten in Felder sortieren (25.11.2026) */
+.srt{display:grid;gap:10px}
+.srt-pool{display:flex;flex-wrap:wrap;gap:8px;min-height:56px;padding:10px;border:1.5px dashed var(--line);border-radius:12px}
+.srt-pool.leer::before{content:"Vorrat leer";color:var(--muted);font-size:14px;align-self:center}
+.srt-bins{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+@media (max-width:640px){.srt-bins{grid-template-columns:1fr}}
+.srt-bin{border:1.5px solid var(--line);border-radius:12px;background:var(--surface);padding:8px;min-height:96px;display:grid;gap:8px;align-content:start}
+.srt.arm .srt-bin{border-color:var(--c);border-style:dashed;cursor:pointer}
+.srt-h{font:inherit;font-weight:800;text-align:left;border:0;background:none;color:var(--ink);padding:4px 2px;min-height:36px;cursor:pointer}
+.srt-in{display:flex;flex-wrap:wrap;gap:8px}
+.srt-card{font:inherit;font-size:15px;font-weight:600;text-align:left;padding:8px 12px;border:1.5px solid var(--line);border-radius:10px;background:var(--bg,var(--surface));color:var(--ink);cursor:pointer;min-height:42px}
+.srt-card[aria-pressed="true"]{outline:3px solid var(--c);outline-offset:1px}
+.srt-card.s-ok{border-color:#1f8a4c;border-width:2.5px}.srt-card.s-bad{border-color:#c23b2e;border-width:2.5px}
+.np-ringO{fill:none;stroke:var(--n-line);stroke-width:12;stroke-linecap:round}
+.np-ring{fill:none;stroke-width:8;stroke-linecap:round}.np-ring.a{stroke:var(--n-aussen)}.np-ring.b{stroke:var(--n-futter)}
 .szl{list-style:none;padding:0;margin:8px 0;display:grid;gap:10px}.szl li{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center}.szi{display:inline-flex;gap:6px;min-width:44px}.szl .szi{flex-direction:column;width:44px}.szi svg,.szi .gfb-ico{width:44px;height:44px;flex:none}
 </style>
 <script>/* Sicherheitszeichen aus dem Tech-Board (Repo Unterrichtsboard, tech-board/index.html, TB_RULES/TB_HAZ).
@@ -809,6 +849,7 @@ function hwKey(u, ks) { if (u <= ks[0][0]) return ks[0][1]; for (var i = 0; i < 
 
 /* Nähprojekt Utensilo: eigene Grafiken und Werkzeuge (NP), Stand 25.11.2026. Alles selbst gezeichnet, CC BY-NC-SA 4.0.
    muster(o) Schnittmuster in T-Form mit Maßlinien (Maße in cm, 10 Einheiten = 1 cm), POS für die Beschriftungsaufgabe.
+   Schriftgröße der Maßzahlen als style, nicht als Attribut: Die Klasse np-t würde ein Attribut überstimmen (Lernplattform-Check 25.11.2026, Punkt 3).
    stoff() Stoffstück von oben (Webkante, Kett- und Schussfaden, rechte und linke Seite), POSS dazu.
    utensilo() fertiges Utensilo. rechner(box, pm, onChange) „Mein Utensilo“: Maße wählen, Muster und fertige Größe ansehen.
    naehAnim(box) Arbeitsablauf als flüssige Animation in sechs Szenen (hwAnim).
@@ -816,7 +857,7 @@ function hwKey(u, ks) { if (u <= ks[0][0]) return ks[0][1]; for (var i = 0; i < 
 var NP = (function () {
   var K = 10, NZ = 1;
   function svg(vb, body, aria, cls) { return '<svg class="np ' + (cls || '') + '" viewBox="' + vb + '" role="img" aria-label="' + (aria || '') + '">' + body + '</svg>'; }
-  function T(x, y, s, c, fs, rot) { return '<text class="np-t' + (c ? ' ' + c : '') + '" x="' + x + '" y="' + y + '"' + (fs ? ' font-size="' + fs + '"' : '') + (rot ? ' transform="rotate(' + rot + ' ' + x + ' ' + y + ')"' : '') + '>' + s + '</text>'; }
+  function T(x, y, s, c, fs, rot) { return '<text class="np-t' + (c ? ' ' + c : '') + '" x="' + x + '" y="' + y + '"' + (fs ? ' style="font-size:' + fs + 'px"' : '') + (rot ? ' transform="rotate(' + rot + ' ' + x + ' ' + y + ')"' : '') + '>' + s + '</text>'; }
   function cm(n) { return Number(n).toLocaleString('de-DE', { maximumFractionDigits: 1 }) + ' cm'; }
   function pts(a) { return a.map(function (p) { return p[0].toFixed(1) + ',' + p[1].toFixed(1); }).join(' '); }
   /* Umriss des T-Teils: Körper B × H, unten links und rechts fehlt ein Eckquadrat q × q, dazwischen hängt die Lasche. */
@@ -838,6 +879,32 @@ var NP = (function () {
     var P = [[B * K * 0.5, 0], [B * K, H * K * 0.42], [q * K * 0.5, H * K], [q * K, (H + q * 0.5) * K], [B * K * 0.5, (H + q) * K]];
     g.body += P.map(function (p, i) { return '<g class="np-mk"><circle cx="' + p[0] + '" cy="' + p[1] + '" r="' + r + '"/><text x="' + p[0] + '" y="' + (p[1] + fs * 0.36) + '" font-size="' + fs + '">' + (i + 1) + '</text></g>'; }).join('');
     return g; }
+  /* ---------- Sechs Werkzeuge mit Nummern statt Namen (25.11.2026, Lernplattform-Check Punkt 4) ---------- */
+  function werkzeug() {
+    var b = '', i, cx, cy, W = 160, H = 150;
+    function nr(n, x, y) { return '<g class="np-mk"><circle cx="' + (x + 24) + '" cy="' + (y + 24) + '" r="16"/><text x="' + (x + 24) + '" y="' + (y + 31.5) + '" font-size="21">' + n + '</text></g>'; }
+    for (i = 0; i < 6; i++) { cx = (i % 3) * W; cy = Math.floor(i / 3) * H; b += '<rect class="np-kachel" x="' + (cx + 4) + '" y="' + (cy + 4) + '" width="' + (W - 8) + '" height="' + (H - 8) + '" rx="10"/>'; }
+    function ring(x, y, rx, ry, c) { return '<ellipse class="np-ringO" cx="' + x + '" cy="' + y + '" rx="' + rx + '" ry="' + ry + '"/><ellipse class="np-ring ' + c + '" cx="' + x + '" cy="' + y + '" rx="' + rx + '" ry="' + ry + '"/>'; }
+    function arm(d, c) { return '<path class="np-ringO" d="' + d + '"/><path class="np-ring ' + c + '" d="' + d + '"/>'; }
+    /* 1 Stoffschere: lange Klingen, abgewinkelte Griffe, ein kleines und ein großes Auge */
+    b += '<g transform="translate(6 8)">' + arm('M74 76L50 60', 'a') + arm('M74 76L58 96', 'a') + ring(40, 52, 12, 11, 'a') + ring(42, 110, 21, 15, 'a')
+      + '<path class="np-metall" d="M68 70L142 62L144 69L74 84Z"/><path class="np-metall" d="M68 82L142 94L144 87L74 70Z"/><circle class="np-niet" cx="78" cy="76" r="3.5"/></g>';
+    /* 2 Papierschere: kurz, zwei gleiche runde Augen */
+    b += '<g transform="translate(160 0)">' + arm('M84 78L62 64', 'b') + arm('M84 78L62 92', 'b') + ring(50, 56, 13, 12, 'b') + ring(50, 100, 13, 12, 'b')
+      + '<path class="np-metall" d="M80 73L126 64L128 70L84 84Z"/><path class="np-metall" d="M80 83L126 92L128 86L84 72Z"/><circle class="np-niet" cx="87" cy="78" r="3"/></g>';
+    /* 3 Schneiderkreide: flaches Dreieck, daneben ein Kreidestrich */
+    b += '<g transform="translate(320 0)"><path class="np-kreide" d="M52 96L92 40Q96 36 100 41L122 92Q124 100 116 100L58 102Q50 102 52 96Z"/><path class="np-kreideS" d="M30 122C56 114 92 126 132 116"/></g>';
+    /* 4 Stecknadeln */
+    b += '<g transform="translate(0 150)"><path class="np-nadelS" d="M44 104L104 44M62 116L122 56M34 80L88 34"/><circle class="np-kopfA" cx="107" cy="41" r="7"/><circle class="np-kopfB" cx="125" cy="53" r="7"/><circle class="np-kopfA" cx="91" cy="31" r="7"/></g>';
+    /* 5 Nahttrenner: Griff, Schaft, Gabel mit langer Spitze und Kugel auf der kurzen */
+    b += '<g transform="translate(160 150)"><path class="np-griffA" d="M26 108Q20 114 26 120Q32 126 38 120L78 80L66 68Z"/><path class="np-metall" d="M70 72L92 50L98 56L76 78Z"/>'
+      + '<path class="np-gabel" d="M94 54L134 18M94 54C106 60 118 50 118 38"/><circle class="np-kopfA" cx="118" cy="35" r="5.5"/></g>';
+    /* 6 Bügeleisen von der Seite */
+    b += '<g transform="translate(320 150)"><path class="np-metall" d="M22 104H138L136 112H26Z"/><path class="np-eisen" d="M22 104C26 84 44 70 70 66H118Q138 66 138 86V104Z"/>'
+      + '<path class="np-griffB" d="M62 66C60 46 70 36 86 36H118Q130 36 130 48V66H116V52Q116 50 114 50H88Q78 50 78 66Z"/><circle class="np-niet" cx="52" cy="90" r="3"/><circle class="np-niet" cx="64" cy="90" r="3"/><circle class="np-niet" cx="76" cy="90" r="3"/></g>';
+    for (i = 0; i < 6; i++) b += nr(i + 1, (i % 3) * W, Math.floor(i / 3) * H);
+    return { vb: '0 0 480 300', body: b };
+  }
   var POS = { koerper: [78, 72], lasche: [148.5, 272], ecke: [50, 270], naht: [287, 150], fadenlauf: [148.5, 120], kante: [215, 0] };
   /* ---------- Stoffstück von oben ---------- */
   function stoff() {
@@ -930,7 +997,7 @@ var NP = (function () {
       text: function (v) { return TXT[Math.min(5, Math.floor(Math.min(5.999, v)))]; },
       phase: function (v) { return Math.min(5, Math.floor(Math.min(5.999, v))); } });
   }
-  return { svg: svg, muster: muster, kantenFig: kantenFig, POS: POS, stoff: stoff, POSS: POSS, utensilo: utensilo, rechner: rechner, masse: masse, naehAnim: naehAnim, cm: cm, scene: scene };
+  return { svg: svg, werkzeug: werkzeug, muster: muster, kantenFig: kantenFig, POS: POS, stoff: stoff, POSS: POSS, utensilo: utensilo, rechner: rechner, masse: masse, naehAnim: naehAnim, cm: cm, scene: scene };
 })();
 </script><link rel="stylesheet" href="../assets/lp-shell.css"><script src="../assets/lp-shell.js"></script></head><body><div role="note" style="margin:0;padding:12px 16px;background:#fff3cd;color:#5c4400;border-bottom:2px solid #e0b400;font:600 15px/1.4 system-ui,-apple-system,Segoe UI,sans-serif;text-align:center;position:relative;z-index:100">Hinweis: Diese Lernplattform ist noch in der Prüfung und für den Unterricht noch nicht empfohlen.</div>
 <div class="app">
@@ -998,7 +1065,7 @@ var NP = (function () {
   </div>
   <article class="task">
     <header><span class="num"></span><h3>Stoffe sortieren</h3><button class="op" data-op="zuordnen" type="button">zuordnen</button></header>
-    <p class="q">Ordne jeden Stoff zu: Außenstoff, Futter oder ungeeignet.</p>
+    <p class="q">Ordne jeden Stoff einem Feld zu: Tippe erst die Karte an und dann das Feld Außenstoff, Futter oder ungeeignet.</p>
     <div class="w" data-t="t1"></div>
   </article>
   <div class="info">
@@ -1092,7 +1159,8 @@ var NP = (function () {
     <h3>Was du brauchst</h3>
     <p>Zum Material gehören die beiden Stoffe und das <b>Nähgarn</b>. Nimm einen Allesnäher in einer Farbe, die zum Außenstoff passt, denn die Naht an der oberen Kante sieht man später.</p>
     <p>In die Maschine gehört eine Nadel, die zum Stoff passt. Für Jeansstoff und Segeltuch nimmst du eine <b>Jeansnadel</b>, so steht es in der Betriebsanweisung. Eine dünne Nadel verbiegt sich an dickem Stoff und kann brechen. Genäht wird alles mit dem <b>Geradstich</b>, die Stichlänge steht auf 2,5. Viel kürzere Stiche lassen sich kaum wieder auftrennen. Der Zickzackstich ist zum Versäubern von Kanten da, nicht zum Zusammennähen.</p>
-    <p>Beim Werkzeug gilt eine feste Regel: Die <b>Stoffschere</b> schneidet nur Stoff. Papier macht sie stumpf, dafür gibt es die Papierschere. Mit <b>Schneiderkreide</b> zeichnest du auf den Stoff, sie lässt sich wieder ausbürsten. <b>Stecknadeln</b> halten zwei Lagen zusammen, bis die Naht sitzt. Geht eine Naht daneben, öffnest du sie mit dem <b>Nahttrenner</b>. Das <b>Bügeleisen</b> drückt Nahtzugaben flach und glättet die Kanten.</p>
+    <p>Beim Werkzeug gilt eine feste Regel: Die <b>Stoffschere</b> (Bild 1) schneidet nur Stoff. Papier macht sie stumpf, dafür gibt es die <b>Papierschere</b> (2). Mit <b>Schneiderkreide</b> (3) zeichnest du auf den Stoff, sie lässt sich wieder ausbürsten. <b>Stecknadeln</b> (4) halten zwei Lagen zusammen, bis die Naht sitzt. Geht eine Naht daneben, öffnest du sie mit dem <b>Nahttrenner</b> (5). Das <b>Bügeleisen</b> (6) drückt Nahtzugaben flach und glättet die Kanten.</p>
+    <figure class="np-fig werk" data-npwerk data-aria="Sechs Werkzeuge mit Nummern. 1: große Schere mit langen Klingen und abgewinkelten Griffen. 2: kleine Schere mit zwei gleichen runden Griffen. 3: flaches dreieckiges Stück Kreide neben einer gezeichneten Linie. 4: drei Nadeln mit runden Köpfen. 5: Griff mit einer kleinen Gabel aus Metall, an einer Spitze sitzt eine Kugel. 6: Bügeleisen von der Seite."><figcaption>Die sechs Werkzeuge. Welche Nummer zu welchem Werkzeug gehört, steht im Text darüber.</figcaption></figure>
     <p>Im Futter bleibt ein Stück Naht offen, damit du das Utensilo am Ende wenden kannst. Diese <b>Wendeöffnung</b> ist etwa 8 cm lang: so breit wie eine Hand. Durch eine kleinere Öffnung bekommst du den dicken Außenstoff nicht hindurch.</p>
   </div>
   <article class="task">
@@ -1606,7 +1674,7 @@ const BEW_L=['erfüllt','teilweise erfüllt','nicht erfüllt'];
 const T={
 e1:{type:'est',min:0,max:600,step:10,start:80,unit:'cm',reveal:'Rund 300 cm, also etwa 3 Meter. Seiten, Boden und Ecken nähst du zweimal: einmal am Außenstoff und einmal am Futter. Dazu kommt die obere Kante, die du erst zusammennähst und dann absteppst. (Aus den Maßen des Musters berechnet.)'},
 e2:{type:'est',min:0,max:30,step:1,start:4,unit:'Zuschnitte',reveal:'12 Zuschnitte: 4 nebeneinander und 3 Reihen. Ein Zuschnitt ist 29,7 cm breit und 32 cm lang. Für ein Utensilo brauchst du 4 Zuschnitte, 2 außen und 2 für das Futter. (Aus den Maßen des Musters berechnet.)'},
-t1:{type:'seg',kc:'AWT23',cats:['Außenstoff','Futter','ungeeignet'],items:[['Bein einer alten Jeans',0],['gewebtes Bettlaken aus Baumwolle',1],['T-Shirt-Stoff, der sich weit dehnen lässt',2],['Segeltuch von einer alten Markise',0],['dünnes Baumwollhemd',1],['grob gestrickter Wollpullover',2],['fester Möbelstoff',0],['glatter Satin, der beim Stecken wegrutscht',2]],
+t1:{type:'sort',kc:'AWT23',cats:['Außenstoff','Futter','ungeeignet'],items:[['Bein einer alten Jeans',0],['gewebtes Bettlaken aus Baumwolle',1],['T-Shirt-Stoff, der sich weit dehnen lässt',2],['Segeltuch von einer alten Markise',0],['dünnes Baumwollhemd',1],['grob gestrickter Wollpullover',2],['fester Möbelstoff',0],['glatter Satin, der beim Stecken wegrutscht',2]],
   help:{tip:'Stell dir zwei Fragen: Dehnt sich der Stoff oder rutscht er? Dann ist er ungeeignet. Ist er fest und dick oder dünn und gewebt?',teil:'Die Jeans ist fest und gibt dem Utensilo Stand: Außenstoff. Das Bettlaken ist dünn und gewebt: Futter. Der T-Shirt-Stoff dehnt sich: ungeeignet.'}},
 t2:{type:'label',fig:'stoff',kc:'TG12',aria:'Stoffstück von oben mit sechs nummerierten Stellen. Eine Ecke ist umgeklappt.',marks:['webkante','kette','schuss','rechts','links','schnitt'],
   terms:[['Schnittkante','schnitt'],['linke Stoffseite','links'],['Webkante','webkante'],['Stoffbruch','x'],['Schussfaden','schuss'],['rechte Stoffseite','rechts'],['Kettfaden (Fadenlauf)','kette']]},
@@ -1672,7 +1740,8 @@ t16:{type:'quiz',kc:'AWT22',qs:[
   {q:'Die beiden Bodenecken sind verschieden breit geworden. Beim nächsten Mal …',o:['nähst du die Ecken freihändig, ohne sie vorher festzustecken','steckst du Seitennaht und Bodennaht genau aufeinander'],a:1,why:'Nur wenn beide Nähte genau aufeinander liegen, werden die Ecken gleich.'},
   {q:'Außenbeutel und Futter sind an der oberen Kante verschieden weit. Du …',o:['prüfst, ob beide Teile mit 1 cm Nahtzugabe genäht sind','ziehst den kürzeren Stoff beim Nähen kräftig in die Länge'],a:0,why:'Meist ist eine Seitennaht zu breit oder zu schmal geworden. Gezogener Stoff wirft später Falten.'},
   {q:'Der Unterfaden ist mitten in der Naht zu Ende. Du …',o:['nähst bis zum Ende weiter und besserst es später aus','spulst neu auf und setzt kurz vor der Lücke wieder an'],a:1,why:'Ohne Unterfaden entsteht kein Stich. Die neue Naht überlappt die alte ein Stück und wird verriegelt.'}]},
-t17:{type:'bewert',kc:'AWT23',from:'t5'},
+t17:{type:'bewert',kc:'AWT23',from:'t5',
+  help:{tip:'Erfüllt ist eine Anforderung erst, wenn du es belegen kannst. Dafür gibt es drei Wege: nachmessen, ausprobieren oder genau hinsehen. Trag ein, was du gemessen oder gesehen hast.',teil:'Beispiel „Alle Nähte sind am Anfang und am Ende verriegelt“: Sieh dir jedes Nahtende an. Sind alle verriegelt, ist die Anforderung erfüllt. Fehlt die Verriegelung an einer Stelle, ist sie teilweise erfüllt.'}},
 t18:{type:'open',kc:'AWT23',min:140,checks:[['Anforderung genannt',/anforderung|steht|naht|ecke|kante|rand|boden|verriegel|wendeöffnung|stoff/i],['erfüllt oder nicht',/erfüllt|geschafft|gelungen|geklappt|nicht|gut|schlecht/i],['Messwert oder Beobachtung',/\d|gemessen|gerade|schief|gleich|unterschied/i],['Verbesserung',/nächste|besser|verbesser|anders|würde|genauer/i]],
   muster:['Mein Utensilo steht von allein und alle Nähte sind verriegelt. Diese Anforderungen sind erfüllt.','Die Naht an der oberen Kante weicht an einer Stelle 5 mm ab, erlaubt waren 3 mm. Diese Anforderung ist nur teilweise erfüllt.','Die beiden Bodenecken sind 1 cm verschieden breit, weil die Seitennaht nicht genau auf der Bodennaht lag.','Beim nächsten Mal stecke ich die Ecken mit zwei Stecknadeln fest und nähe an der Kante langsamer.']}
 };
@@ -1754,6 +1823,27 @@ function wListe(id,t,w,art){
     if(all)showFb(fb,'ok','Die Materialliste stimmt!',null);else showFb(fb,ok>=t.rows.length*0.7?'mid':'err',ok+' von '+t.rows.length+' Zeilen richtig','Die rot markierten Zeilen stimmen noch nicht. Lies bei „Muster und Zuschnitt“ und bei „Was du brauchst“ nach.');
     report(id,all,art,fb);});
 }
+/* Karten in Felder sortieren (seit 25.11.2026, Lernplattform-Check Punkt 6): Karte antippen, dann das Feld. Zustand wie bei seg: Feldnummer je Karte, -1 = noch im Vorrat. */
+function wSort(id,t,w,art){
+  let v=S.a[id];if(!Array.isArray(v)||v.length!==t.items.length||v.some(x=>!Number.isInteger(x)||x<-1||x>=t.cats.length))v=S.a[id]=t.items.map(()=>-1);
+  let armed=-1;
+  const pool=el('div',{class:'srt-pool',role:'group','aria-label':'Noch nicht sortiert'});
+  const note=el('p',{class:'hint','aria-live':'polite'});
+  const cards=t.items.map((it,i)=>{const b=el('button',{type:'button',class:'srt-card','aria-pressed':'false'},it[0]);b.onclick=e=>{e.stopPropagation();armed=armed===i?-1:i;draw();};return b;});
+  const bins=t.cats.map((c,ci)=>{const inner=el('div',{class:'srt-in'});const h=el('button',{type:'button',class:'srt-h'},c);
+    const bin=el('div',{class:'srt-bin'},h,inner);bin.onclick=()=>{if(armed<0)return;v[armed]=ci;cards[armed].classList.remove('s-ok','s-bad');armed=-1;save();draw();};return {bin,inner,h};});
+  pool.onclick=()=>{if(armed<0||v[armed]<0)return;v[armed]=-1;cards[armed].classList.remove('s-ok','s-bad');armed=-1;save();draw();};
+  function draw(){cards.forEach((b,i)=>{const home=v[i]<0?pool:bins[v[i]].inner;if(b.parentNode!==home)home.append(b);b.setAttribute('aria-pressed',String(i===armed));});
+    w.classList.toggle('arm',armed>=0);const rest=v.filter(x=>x<0).length;pool.classList.toggle('leer',!rest);
+    bins.forEach((x,ci)=>x.h.setAttribute('aria-label',armed>=0?'„'+t.items[armed][0]+'“ in das Feld '+t.cats[ci]+' legen':'Feld '+t.cats[ci]));
+    note.textContent=armed>=0?'Tippe jetzt das Feld an, in das die Karte gehört.':rest?'Noch '+rest+(rest===1?' Karte':' Karten')+' im Vorrat.':'Alle Karten liegen in einem Feld. Eine Karte verschiebst du, indem du sie antippst und dann ein anderes Feld.';}
+  w.className='srt';w.append(pool,note,el('div',{class:'srt-bins'},...bins.map(x=>x.bin)));draw();
+  mkCheck(id,art,fb=>{if(v.some(x=>x<0)){showFb(fb,'mid','Noch nicht fertig','Leg zuerst alle Karten in ein Feld.');return;}
+    let ok=0;t.items.forEach((it,i)=>{const g=v[i]===it[1];cards[i].classList.toggle('s-ok',g);cards[i].classList.toggle('s-bad',!g);if(g)ok++;});const all=ok===t.items.length;
+    if(all)showFb(fb,'ok','Alles richtig sortiert!',ok+' von '+t.items.length+' Karten liegen im richtigen Feld.');
+    else showFb(fb,ok>=t.items.length*0.6?'mid':'err',ok+' von '+t.items.length+' Karten richtig','Die rot umrandeten Karten liegen noch im falschen Feld. Lies die Information oben noch einmal und leg sie um.');
+    report(id,all,art,fb);});
+}
 function wBewert(id,t,w,art){
   let a=S.a[id];if(!a||typeof a!=='object'||Array.isArray(a))a=S.a[id]={r:{},n:{}};a.r=a.r&&typeof a.r==='object'?a.r:{};a.n=a.n&&typeof a.n==='object'?a.n:{};
   const box=el('div',{class:'bew'});w.append(box);
@@ -1771,10 +1861,11 @@ function wBewert(id,t,w,art){
     const c=[0,0,0];ks.forEach(kv=>c[a.r[kv[0]]]++);
     showFb(fb,'ok','Bewertung fertig.',c[0]+' erfüllt, '+c[1]+' teilweise erfüllt, '+c[2]+' nicht erfüllt. Die Bewertung steht in deiner Planungsmappe.');report(id,true,art,fb);});
 }
-function platformWidgets(){return {katalog:wKatalog,liste:wListe,bewert:wBewert,nzg:wNzg};}
+function platformWidgets(){return {katalog:wKatalog,liste:wListe,bewert:wBewert,nzg:wNzg,sort:wSort};}
 function platformInit(){
   S.pm=S.pm&&typeof S.pm==='object'?S.pm:{};
   $$('[data-np]').forEach(b=>{const g=NP[b.dataset.np]();b.insertAdjacentHTML('afterbegin',NP.svg(g.vb,g.body,b.dataset.aria||''));});
+  $$('[data-npwerk]').forEach(b=>{const g=NP.werkzeug();b.insertAdjacentHTML('afterbegin',NP.svg(g.vb,g.body,b.dataset.aria||''));});
   $$('[data-nprech]').forEach(b=>NP.rechner(b,S.pm,v=>{S.pm=v;save();}));
   $$('[data-npanim]').forEach(b=>NP.naehAnim(b));
   $$('.szi').forEach(e=>{const k=(e.dataset.sz||'').split(' ').filter(Boolean);e.innerHTML=k.map(x=>gfbIcon(x)).join('');});
@@ -1828,9 +1919,12 @@ function de2(n){return Number(n).toLocaleString('de-DE',{minimumFractionDigits:2
 function numIn(s){s=String(s||'').trim().replace(/\s|€|ct|cent|kwh|cm|mm|jahre?|stiche?/gi,'').replace(/\.(?=\d{3}(\D|$))/g,'').replace(',','.');const n=parseFloat(s);return isNaN(n)?NaN:n;}
 /*@@B@@*/
 /* ---------- Schätzfrage ---------- */
+/* Balkendiagramm in der Auflösung einer Schätzfrage (seit 25.11.2026): t.bars = {title, unit, rows:[[Name, Wert]…], src}. Als HTML, damit die Schrift mit der Seite mitwächst. */
+function barFig(b){const mx=Math.max(...b.rows.map(r=>r[1]));
+  return el('figure',{class:'hw-bars'},el('figcaption',{class:'hw-bt'},b.title),el('div',{class:'hw-bl'},...b.rows.map(r=>el('div',{class:'hw-br'},el('span',{class:'hw-bn'},r[0]),el('span',{class:'hw-bb','aria-hidden':'true'},el('i',{style:'width:'+(r[1]/mx*100).toFixed(1)+'%'})),el('span',{class:'hw-bv'},de(r[1])+' '+b.unit)))),el('p',{class:'hw-bq'},b.src));}
 function wEst(id,t,w,art){
   const val=el('span',{class:'val'});const r=el('input',{type:'range',min:t.min,max:t.max,step:t.step,'aria-label':'Schätzung in '+t.unit});r.value=S.a[id]!=null?S.a[id]:t.start;
-  const rev=el('div',{class:'reveal',hidden:S.a[id]==null},el('b',{},'Zum Vergleich: '),t.reveal);
+  const rev=el('div',{class:'reveal',hidden:S.a[id]==null},el('b',{},'Zum Vergleich: '),t.reveal,t.bars?barFig(t.bars):null);
   const b=el('button',{class:'btn accent',type:'button'},S.a[id]!=null?'Schätzung ändern':'Schätzung festlegen');
   const upd=()=>{val.textContent=Number(r.value).toLocaleString('de-DE')+' '+t.unit;};
   r.oninput=upd;b.onclick=()=>{S.a[id]=+r.value;rev.hidden=false;b.textContent='Schätzung ändern';save();paint();};

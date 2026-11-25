@@ -681,6 +681,17 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
 .anim-steps .btn[aria-pressed="true"]{outline:3px solid var(--n-acc,var(--accent,#e07b00));outline-offset:1px}
 .anim-out{margin:0;font-size:16px;max-width:70ch;min-height:3em}
 @media (max-width:440px){.anim{padding:10px}}
+
+/* Balkendiagramm in der Auflösung einer Schätzfrage (25.11.2026) */
+.hw-bars{margin:12px 0 0;display:grid;gap:8px}
+.hw-bt{font-weight:700}
+.hw-bl{display:grid;gap:8px}
+.hw-br{display:grid;grid-template-columns:minmax(0,12.5em) minmax(0,1fr) 3.4em;gap:8px;align-items:center;font-size:15px}
+.hw-bb{height:16px;border-radius:8px;background:rgba(128,128,128,.2);overflow:hidden}
+.hw-bb i{display:block;height:100%;background:var(--c,#2e6e26);border-radius:8px;min-width:4px}
+.hw-bv{font-weight:700;text-align:right;white-space:nowrap}
+.hw-bq{font-size:13px;color:var(--muted);margin:0}
+@media (max-width:520px){.hw-br{grid-template-columns:minmax(0,1fr) 3.4em}.hw-bn{grid-column:1/-1}}
 /* Nähmaschine: Grafikfarben (hell/dunkel) und eigene Bausteine, Stand 24.11.2026 */
 :root{--n-line:#22303a;--n-m:#f4f1ea;--n-m2:#d9d4c8;--n-plate:#aab4bb;--n-ot:#c8402e;--n-ut:#1f63a8;--n-stoff:#ecdcae;--n-stoff2:#f6eccd;--n-desk:#c9b48f;--n-bgr:#fbfaf6;--n-acc:#e07b00}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--n-line:#e3eaee;--n-m:#2a3430;--n-m2:#3a4641;--n-plate:#7d8a91;--n-ot:#ff7a66;--n-ut:#7fb6ff;--n-stoff:#6b5d3a;--n-stoff2:#4f4630;--n-desk:#5b4b33;--n-bgr:#1b2420;--n-acc:#ffb347}}
@@ -777,6 +788,15 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
 .ng-pt{fill:var(--n-line);stroke:var(--n-bgr);stroke-width:2}
 .ng-fig.ecke{max-width:480px;margin:10px 0 0}
 .ng-fig figcaption{font-size:14px;color:var(--muted);padding:6px 4px 0}
+
+/* Zeichnungen „Nähen wie die Profis“ (25.11.2026) */
+.ng-profi{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin:10px 0 0}
+.ng-profi .ng-fig{max-width:none;margin:0}
+.ng-da{stroke-dasharray:9 7}
+.ng-zug{fill:var(--n-acc);opacity:.28}
+.ng-lay1{fill:none;stroke:var(--n-line);stroke-width:13;stroke-linejoin:round}
+.ng-lay2{fill:none;stroke:var(--n-stoff);stroke-width:9;stroke-linejoin:round}
+.ng-ld{fill:none;stroke:var(--n-line);stroke-width:1.8}
 .szl{list-style:none;padding:0;margin:8px 0;display:grid;gap:10px}.szl li{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center}.szi{display:inline-flex;gap:6px;min-width:44px}.szl .szi{flex-direction:column;width:44px}.szi svg,.szi .gfb-ico{width:44px;height:44px;flex:none}
 </style>
 <script>/* Sicherheitszeichen aus dem Tech-Board (Repo Unterrichtsboard, tech-board/index.html, TB_RULES/TB_HAZ).
@@ -1046,6 +1066,33 @@ var NG = (function () {
     b += '<path class="ng-pf" d="M372 104A58 58 0 0 1 400 132M388 134l13 0 0-13" />';
     return { vb: '0 0 480 200', body: b };
   }
+  /* ---------- Nähen wie die Profis: Verriegeln, Nahtzugabe, Wäschesaum (25.11.2026, Lernplattform-Check Punkt 2) ---------- */
+  function profi(kind) {
+    var b = '<rect class="ng-bgr" x="0" y="0" width="260" height="170" rx="8"/>', x;
+    if (kind === 'riegel') {
+      b += '<rect class="ng-stoff2" x="12" y="56" width="236" height="100" rx="4"/>';
+      b += '<path class="ng-stitch ng-da" d="M30 106H230"/>';
+      b += '<path class="ng-stitch ng-da" d="M30 98H66M30 114H66M194 98H230M194 114H230"/>';
+      b += '<path class="ng-pf" d="M66 84H32M41 76l-10 8 10 8M32 130H66M57 122l10 8-10 8"/>';
+      b += '<path class="ng-pf" d="M228 84H194M203 76l-10 8 10 8M194 130H228M219 122l10 8-10 8"/>';
+      b += T(22, 40, 'Anfang') + T(238, 40, 'Ende', 'ng-e');
+    }
+    if (kind === 'zugabe') {
+      b += '<rect class="ng-stoff2" x="12" y="46" width="236" height="112" rx="2"/>';
+      b += '<rect class="ng-zug" x="12" y="46" width="236" height="44"/>';
+      b += '<path class="ng-stitch ng-da" d="M22 90H238"/>';
+      b += '<path class="ng-scale" d="M40 48V88M33 48h14M33 88h14"/>';
+      b += T(56, 75, '1 bis 1,5 cm') + T(22, 34, 'Schnittkante') + T(22, 122, 'Naht');
+    }
+    if (kind === 'saum') {
+      var d = 'M14 62H206Q232 62 232 86T206 110H122Q104 110 104 98T122 86H178';
+      b += '<path class="ng-lay1" d="' + d + '"/><path class="ng-lay2" d="' + d + '"/>';
+      b += '<path class="ng-stitch" d="M118 50H134V122H150"/>';
+      b += '<path class="ng-ld" d="M178 92V140"/><circle class="ng-pt" cx="178" cy="86" r="5"/>';
+      b += T(126, 36, 'Steppnaht', 'ng-c') + T(248, 158, 'Schnittkante innen', 'ng-e');
+    }
+    return { vb: '0 0 260 170', body: b };
+  }
   /* ---------- Stichbilder im Schnitt ---------- */
   function fehler(kind) {
     var b = '<rect class="ng-bgr" x="0" y="0" width="240" height="134" rx="8"/><rect class="ng-stoff" x="10" y="50" width="220" height="20"/>';
@@ -1071,7 +1118,7 @@ var NG = (function () {
     b += T(16, 40, 'Oberfaden', 'ng-small ng-otx') + T(16, 134, 'Unterfaden', 'ng-small ng-utx');
     return { vb: '0 0 300 140', body: b, zone: dv < -1.25 ? 'unten' : dv > 1.25 ? 'oben' : Math.abs(dv) <= 0.75 ? 'ok' : 'fast' };
   }
-  return { svg: svg, machine: machine, POS: POS, faden: faden, fadenAnim: fadenAnim, FADEN_HOT: FADEN_HOT, FADEN_VB: FADEN_VB, FADEN_ST: FADEN_ST, stich: stich, stichAt: stichAt, stichPlayer: stichPlayer, unterfadenAt: unterfadenAt, unterfadenAnim: unterfadenAnim, ecke: ecke, naht: naht, fehler: fehler, spannung: spannung };
+  return { svg: svg, machine: machine, POS: POS, faden: faden, fadenAnim: fadenAnim, FADEN_HOT: FADEN_HOT, FADEN_VB: FADEN_VB, FADEN_ST: FADEN_ST, stich: stich, stichAt: stichAt, stichPlayer: stichPlayer, unterfadenAt: unterfadenAt, unterfadenAnim: unterfadenAnim, ecke: ecke, profi: profi, naht: naht, fehler: fehler, spannung: spannung };
 })();
 </script><link rel="stylesheet" href="../assets/lp-shell.css"><script src="../assets/lp-shell.js"></script></head><body><div role="note" style="margin:0;padding:12px 16px;background:#fff3cd;color:#5c4400;border-bottom:2px solid #e0b400;font:600 15px/1.4 system-ui,-apple-system,Segoe UI,sans-serif;text-align:center;position:relative;z-index:100">Hinweis: Diese Lernplattform ist noch in der Prüfung und für den Unterricht noch nicht empfohlen.</div>
 <div class="app">
@@ -1165,7 +1212,7 @@ var NG = (function () {
   <div class="info">
     <h3>Zwei Fäden, ein Stich</h3>
     <p>Mit der Hand nähst du mit einem Faden. Die Nähmaschine braucht zwei: den <b>Oberfaden</b> von der Garnrolle und den <b>Unterfaden</b> von der Spule. Die beiden Fäden verschlingen sich in der Mitte des Stoffes. Diesen Stich nennt man <b>Doppelsteppstich</b>. Er sieht oben und unten gleich aus.</p>
-    <p>Bei jeder Umdrehung des Handrads passiert dasselbe: Die Nadel nimmt den Oberfaden mit nach unten durch den Stoff. Geht sie ein kleines Stück wieder hoch, bleibt der Oberfaden unter dem Stoff als <b>Schlinge</b> zurück. Die Spitze des <b>Greifers</b> fängt die Schlinge und führt sie einmal um die Spulenkapsel herum, dabei legt sich die Schlinge um den Unterfaden. Dann zieht der <b>Fadenhebel</b> den Oberfaden nach oben, und die Verschlingung rutscht in den Stoff. Zum Schluss schiebt der <b>Transporteur</b> den Stoff um eine Stichlänge weiter.</p>
+    <p>Bei jeder Umdrehung des Handrads passiert dasselbe: Die Nadel nimmt den Oberfaden mit nach unten durch den Stoff. Geht sie ein kleines Stück wieder hoch, bleibt der Oberfaden unter dem Stoff als <b>Schlinge</b> zurück. Die Spitze des <b>Greifers</b> fängt die Schlinge, solange die Nadel noch unter dem Stoff ist, und führt sie einmal um die Spulenkapsel herum, dabei legt sich die Schlinge um den Unterfaden. Dann zieht der <b>Fadenhebel</b> den Oberfaden nach oben, und die Verschlingung rutscht in den Stoff. Zum Schluss schiebt der <b>Transporteur</b> den Stoff um eine Stichlänge weiter.</p>
     <p>Schau dir die Bewegung an: Tippe auf „Abspielen“ oder schieb den Regler. Oberfaden rot, Unterfaden blau.</p>
   </div>
   <div data-stich></div>
@@ -1243,7 +1290,7 @@ var NG = (function () {
   </div>
   <article class="task">
     <header><span class="num"></span><h3>Gefährdungsbeurteilung Nähmaschine</h3><button class="op" data-op="erstellen" type="button">erstellen</button></header>
-    <p class="q">Erstelle eine Gefährdungsbeurteilung für deinen Platz an der Nähmaschine. Nenne zuerst die Gefährdungen und wähle dann die Schutzmaßnahmen.</p>
+    <p class="q">Erstelle eine Gefährdungsbeurteilung für deinen Platz an der Nähmaschine.</p>
     <div class="w" data-t="t7"></div>
   </article>
   <article class="task">
@@ -1271,6 +1318,11 @@ var NG = (function () {
       <li><b>Rundung:</b> Näh langsam und führ den Stoff mit beiden Händen in einem Bogen, damit der Abstand zur Kante gleich bleibt.</li>
       <li><b>Wäschesaum:</b> Die Kante wird zweimal umgeschlagen, so liegt die Schnittkante innen und kann nicht ausfransen. Dann steppst du den Saum knapp an der Kante mit dem Geradstich ab.</li>
     </ul>
+    <div class="ng-profi">
+      <figure class="ng-fig" data-ngprofi="riegel" data-aria="Naht von oben. Am Anfang und am Ende liegen kurze Stiche doppelt, Pfeile zeigen zurück und wieder vor."><figcaption>Verriegeln: Am Anfang und am Ende liegen die Stiche mehrfach übereinander.</figcaption></figure>
+      <figure class="ng-fig" data-ngprofi="zugabe" data-aria="Stoff von oben. Zwischen der Schnittkante und der Naht liegt ein Streifen, die Nahtzugabe. Ein Maß zeigt 1 bis 1,5 cm."><figcaption>Nahtzugabe: der Streifen zwischen Schnittkante und Naht.</figcaption></figure>
+      <figure class="ng-fig" data-ngprofi="saum" data-aria="Schnitt durch einen Wäschesaum. Der Stoff ist zweimal umgeschlagen, die Schnittkante liegt innen. Die Steppnaht geht durch alle drei Lagen."><figcaption>Wäschesaum im Schnitt: Die Steppnaht hält alle drei Lagen.</figcaption></figure>
+    </div>
     <figure class="ng-fig ecke" data-ngecke data-aria="Zwei Zeichnungen zur Ecke. Links von der Seite: Die Nadel steckt im Stoff, der Nähfuß ist angehoben. Rechts von oben: Die Naht endet an der Ecke, die Nadel steckt als Punkt im Stoff, ein Pfeil zeigt, wie der Stoff um die Nadel gedreht wird."><figcaption>An der Ecke: Die Nadel steckt im Stoff und hält ihn fest. Der Nähfuß ist oben, jetzt lässt sich der Stoff drehen.</figcaption></figure>
   </div>
   <article class="task">
@@ -1906,6 +1958,7 @@ function platformInit(){
   $$('[data-fadenanim]').forEach(b=>NG.fadenAnim(b));
   $$('[data-unterfaden]').forEach(b=>NG.unterfadenAnim(b));
   $$('[data-stich]').forEach(b=>NG.stichPlayer(b));
+  $$('[data-ngprofi]').forEach(b=>{const g=NG.profi(b.dataset.ngprofi);b.insertAdjacentHTML('afterbegin',NG.svg(g.vb,g.body,b.dataset.aria||''));});
   $$('[data-ngecke]').forEach(b=>{const g=NG.ecke();b.insertAdjacentHTML('afterbegin',NG.svg(g.vb,g.body,b.dataset.aria||''));});
   $$('[data-naht]').forEach(b=>{const fig=el('div',{class:'ng-fig'});const l=el('input',{type:'range',min:'1',max:'5',step:'0.5',id:'nl'});const wd=el('input',{type:'range',min:'0',max:'6',step:'0.5',id:'nw'});l.value='2.5';wd.value='0';
     const ol=el('span',{class:'ng-out'}),ow=el('span',{class:'ng-out'}),info=el('p',{class:'hint','aria-live':'polite'});
@@ -1950,9 +2003,12 @@ function de2(n){return Number(n).toLocaleString('de-DE',{minimumFractionDigits:2
 function numIn(s){s=String(s||'').trim().replace(/\s|€|ct|cent|kwh|cm|mm|jahre?|stiche?/gi,'').replace(/\.(?=\d{3}(\D|$))/g,'').replace(',','.');const n=parseFloat(s);return isNaN(n)?NaN:n;}
 /*@@B@@*/
 /* ---------- Schätzfrage ---------- */
+/* Balkendiagramm in der Auflösung einer Schätzfrage (seit 25.11.2026): t.bars = {title, unit, rows:[[Name, Wert]…], src}. Als HTML, damit die Schrift mit der Seite mitwächst. */
+function barFig(b){const mx=Math.max(...b.rows.map(r=>r[1]));
+  return el('figure',{class:'hw-bars'},el('figcaption',{class:'hw-bt'},b.title),el('div',{class:'hw-bl'},...b.rows.map(r=>el('div',{class:'hw-br'},el('span',{class:'hw-bn'},r[0]),el('span',{class:'hw-bb','aria-hidden':'true'},el('i',{style:'width:'+(r[1]/mx*100).toFixed(1)+'%'})),el('span',{class:'hw-bv'},de(r[1])+' '+b.unit)))),el('p',{class:'hw-bq'},b.src));}
 function wEst(id,t,w,art){
   const val=el('span',{class:'val'});const r=el('input',{type:'range',min:t.min,max:t.max,step:t.step,'aria-label':'Schätzung in '+t.unit});r.value=S.a[id]!=null?S.a[id]:t.start;
-  const rev=el('div',{class:'reveal',hidden:S.a[id]==null},el('b',{},'Zum Vergleich: '),t.reveal);
+  const rev=el('div',{class:'reveal',hidden:S.a[id]==null},el('b',{},'Zum Vergleich: '),t.reveal,t.bars?barFig(t.bars):null);
   const b=el('button',{class:'btn accent',type:'button'},S.a[id]!=null?'Schätzung ändern':'Schätzung festlegen');
   const upd=()=>{val.textContent=Number(r.value).toLocaleString('de-DE')+' '+t.unit;};
   r.oninput=upd;b.onclick=()=>{S.a[id]=+r.value;rev.hidden=false;b.textContent='Schätzung ändern';save();paint();};

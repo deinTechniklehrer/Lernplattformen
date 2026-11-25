@@ -681,6 +681,17 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
 .anim-steps .btn[aria-pressed="true"]{outline:3px solid var(--n-acc,var(--accent,#e07b00));outline-offset:1px}
 .anim-out{margin:0;font-size:16px;max-width:70ch;min-height:3em}
 @media (max-width:440px){.anim{padding:10px}}
+
+/* Balkendiagramm in der Auflösung einer Schätzfrage (25.11.2026) */
+.hw-bars{margin:12px 0 0;display:grid;gap:8px}
+.hw-bt{font-weight:700}
+.hw-bl{display:grid;gap:8px}
+.hw-br{display:grid;grid-template-columns:minmax(0,12.5em) minmax(0,1fr) 3.4em;gap:8px;align-items:center;font-size:15px}
+.hw-bb{height:16px;border-radius:8px;background:rgba(128,128,128,.2);overflow:hidden}
+.hw-bb i{display:block;height:100%;background:var(--c,#2e6e26);border-radius:8px;min-width:4px}
+.hw-bv{font-weight:700;text-align:right;white-space:nowrap}
+.hw-bq{font-size:13px;color:var(--muted);margin:0}
+@media (max-width:520px){.hw-br{grid-template-columns:minmax(0,1fr) 3.4em}.hw-bn{grid-column:1/-1}}
 /* Haushalts-Check: Grafikfarben (hell/dunkel), Haushalts-Cockpit, Stand 24.11.2026 */
 :root{--h-line:#22303a;--h-plate:#e7ebee;--h-lab:#fff;--h-acc:#3d8f2f;--h-a:#1f63a8;--h-b:#d9480f;--h-grid:#d3dbe0}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--h-line:#e3eaee;--h-plate:#2b3439;--h-lab:#f4f6f7;--h-acc:#79c96b;--h-a:#7fb6ff;--h-b:#ff9a66;--h-grid:#3a464c}}
@@ -1224,7 +1235,7 @@ var HR = (function () {
   </article>
   <article class="task">
     <header><span class="num"></span><h3>Gefährdungsbeurteilung Reinigen</h3><button class="op" data-op="erstellen" type="button">erstellen</button></header>
-    <p class="q">Erstelle eine Gefährdungsbeurteilung für das Reinigen in der Lehrküche. Nenne zuerst die Gefährdungen und wähle dann die Schutzmaßnahmen.</p>
+    <p class="q">Erstelle eine Gefährdungsbeurteilung für das Reinigen in der Lehrküche.</p>
     <div class="w" data-t="t17"></div>
   </article>
 </section>
@@ -1694,7 +1705,8 @@ t8:{type:'num',kc:'AWT25',unit:'€',answer:SOL.t8,tol:0.1,why:'208 Waschgänge:
   help:{tip:'Stell im Cockpit Programm A auf Baumwolle 60 °C, Programm B auf Baumwolle 30 °C und 4 Waschgänge je Woche. Lies die Ersparnis im Jahr ab.',teil:'Viermal in der Woche sind 4 · 52 = 208 Waschgänge im Jahr.'}},
 t9:{type:'gap',kc:'HW16',text:'Den meisten Strom braucht die Waschmaschine zum {0} des Wassers. Je {1} die Temperatur, desto mehr Strom. Mit 40 statt 60 °C spart man etwa {2} der Energie. Gegen Keime in der Maschine wäscht man etwa {3} mit 60 °C. Eco 40-60 spart Strom, weil es {4} wäscht.',
   gaps:[[['Aufheizen','Schleudern','Pumpen'],0],[['höher','niedriger'],0],[['35 bis 40 Prozent','5 Prozent','90 Prozent'],0],[['einmal im Monat','jeden Tag','nie'],0],[['länger und weniger heiß','kürzer und heißer','ganz ohne Wasser'],0]]},
-t10:{type:'seg',kc:'HW16',cats:['stimmt','stimmt nicht'],items:[['Das Kurzprogramm braucht am wenigsten Strom.',1],['Eine voll beladene Trommel spart Strom und Wasser.',0],['Mehr Waschmittel macht die Wäsche sauberer.',1],['Einmal im Monat sollte die Maschine mit 60 °C laufen.',0],['Weiße Wäsche wird nur bei 60 °C sauber.',1],['Das Programm Eco 40-60 dauert lange und braucht trotzdem wenig Strom.',0]]},
+t10:{type:'seg',kc:'HW16',cats:['stimmt','stimmt nicht'],items:[['Das Kurzprogramm braucht am wenigsten Strom.',1],['Eine voll beladene Trommel spart Strom und Wasser.',0],['Mehr Waschmittel macht die Wäsche sauberer.',1],['Einmal im Monat sollte die Maschine mit 60 °C laufen.',0],['Weiße Wäsche wird nur bei 60 °C sauber.',1],['Das Programm Eco 40-60 dauert lange und braucht trotzdem wenig Strom.',0]],
+  help:{tip:'Zu jeder Aussage steht in der Information „Sparsam waschen“ ein Satz. Such ihn und vergleiche: Sagt Ben dasselbe oder das Gegenteil?',teil:'Zwei Aussagen als Beispiel: In der Information steht, dass Kurzprogramme Zeit sparen, aber keine Energie. Die erste Aussage stimmt also nicht. Die Aussage zur vollen Trommel stimmt. Die übrigen vier prüfst du selbst.'}},
 t11:{type:'num',kc:'AWT25',unit:'€',answer:SOL.t11,tol:0.05,why:'(3,4 kWh − 0,85 kWh) · 160 = 408 kWh im Jahr. 408 kWh · 0,373 €/kWh = '+de2(SOL.t11)+' €.',
   help:{tip:'Rechne zuerst den Unterschied je Trockengang aus, dann mal 160 und mal 0,373 € je kWh.',teil:'Unterschied je Trockengang: 3,4 kWh − 0,85 kWh = 2,55 kWh.'}},
 t12:{type:'quiz',kc:'HW16',qs:[
@@ -1760,7 +1772,7 @@ function platformInit(){
 /* Gemeinsamer Kern der Häppchen-Plattformen Nähmaschine und Haushalts-Check (seit 24.11.2026).
    Abgeleitet aus Elektronik-Grundlagen (Schülerfassung). Die Plattform liefert vor diesem Kern:
    CFG_W {key,title,fach,ch:[[nr,kurz,lang]…],rate:[…]}, T (Aufgaben), KC, OPS, FIGLIB {svg,FIG,POS,tile(key)},
-   Aufgabentypen des Kerns: est, figsel, drill, draw (Zeichenfelder). Optional platformWidgets() → {typ: funktion}, platformInit(), platformSum(li), platformPdf(api).
+   Aufgabentypen des Kerns: est, figsel, drill, draw (Zeichenfelder). Optional platformWidgets() → {typ: funktion}, platformInit(), platformSum(li), platformPdf(ci, api), platformPdfTask(id, t, api) nach jeder geprüften Aufgabe, platformPdfAfter(ci, api) nach jedem Kapitel; CFG_W.pdfTitle als Titel der PDF.
    Zwischen Teil A und Teil B setzt make_*.py haeppchen-widgets.js, gfb-icons.js, gfb.js und die eigenen Bausteine ein. */
 /*@@A@@*/
 const KEY=CFG_W.key;
@@ -1786,9 +1798,12 @@ function de2(n){return Number(n).toLocaleString('de-DE',{minimumFractionDigits:2
 function numIn(s){s=String(s||'').trim().replace(/\s|€|ct|cent|kwh|cm|mm|jahre?|stiche?/gi,'').replace(/\.(?=\d{3}(\D|$))/g,'').replace(',','.');const n=parseFloat(s);return isNaN(n)?NaN:n;}
 /*@@B@@*/
 /* ---------- Schätzfrage ---------- */
+/* Balkendiagramm in der Auflösung einer Schätzfrage (seit 25.11.2026): t.bars = {title, unit, rows:[[Name, Wert]…], src}. Als HTML, damit die Schrift mit der Seite mitwächst. */
+function barFig(b){const mx=Math.max(...b.rows.map(r=>r[1]));
+  return el('figure',{class:'hw-bars'},el('figcaption',{class:'hw-bt'},b.title),el('div',{class:'hw-bl'},...b.rows.map(r=>el('div',{class:'hw-br'},el('span',{class:'hw-bn'},r[0]),el('span',{class:'hw-bb','aria-hidden':'true'},el('i',{style:'width:'+(r[1]/mx*100).toFixed(1)+'%'})),el('span',{class:'hw-bv'},de(r[1])+' '+b.unit)))),el('p',{class:'hw-bq'},b.src));}
 function wEst(id,t,w,art){
   const val=el('span',{class:'val'});const r=el('input',{type:'range',min:t.min,max:t.max,step:t.step,'aria-label':'Schätzung in '+t.unit});r.value=S.a[id]!=null?S.a[id]:t.start;
-  const rev=el('div',{class:'reveal',hidden:S.a[id]==null},el('b',{},'Zum Vergleich: '),t.reveal);
+  const rev=el('div',{class:'reveal',hidden:S.a[id]==null},el('b',{},'Zum Vergleich: '),t.reveal,t.bars?barFig(t.bars):null);
   const b=el('button',{class:'btn accent',type:'button'},S.a[id]!=null?'Schätzung ändern':'Schätzung festlegen');
   const upd=()=>{val.textContent=Number(r.value).toLocaleString('de-DE')+' '+t.unit;};
   r.oninput=upd;b.onclick=()=>{S.a[id]=+r.value;rev.hidden=false;b.textContent='Schätzung ändern';save();paint();};
@@ -1868,6 +1883,8 @@ function addHelp(id,t,art){if(!t.help)return;const tb=el('div',{class:'hbox',hid
   const fb=$('.fb',art);art.insertBefore(el('div',{class:'help2'},el('div',{class:'row'},b1,b2),tb,pb),fb);}
 if(typeof platformInit==='function')platformInit();
 const WMAP=Object.assign({seg:wSeg,quiz:wQuiz,multi:wMulti,order:wOrder,open:wOpen,gap:wGap,pair:wPair,mark:wMark,num:wNum,label:wLabel,grid:wGrid,est:wEst,figsel:wFigsel,drill:wDrill,gfb:wGfb,draw:wDraw},typeof platformWidgets==='function'?platformWidgets():{});
+/* Wurde eine Aufgabe auf den Typ mark umgebaut, passt ein alter gespeicherter Stand nicht mehr: verwerfen statt falsch anzeigen. */
+$$('.w[data-t]').forEach(w=>{const id=w.dataset.t,t=T[id],v=S.a[id];if(t.type==='mark'&&v!=null&&!(Array.isArray(v)&&v.length===t.parts.length&&v.every(x=>typeof x==='boolean'))){delete S.a[id];if(S.ok)delete S.ok[id];}});
 $$('.w[data-t]').forEach(w=>{const id=w.dataset.t,t=T[id],art=w.closest('.task');WMAP[t.type](id,t,w,art);addHelp(id,t,art);});
 
 /* Selbsteinschätzung */
@@ -1922,11 +1939,12 @@ $('#pdfBtn').onclick=()=>{const note=$('#pdfNote');note.hidden=false;
   const need=h=>{if(y+h>280){d.addPage();y=22;}};
   const txt=(s,o={})=>{d.setFont('helvetica',o.b?'bold':'normal');d.setFontSize(o.size||10.5);const c=o.col||[20,35,47];d.setTextColor(c[0],c[1],c[2]);d.splitTextToSize(clean(s),W-(o.ind||0)).forEach(l=>{need(5.5);d.text(l,M+(o.ind||0),y);y+=(o.lh||5.2);});};
   const H2=s=>{need(14);y+=2;txt(s,{b:1,size:13,col:COL,lh:6.5});};
-  txt(CFG_W.title+' – mein Ergebnis',{b:1,size:17,col:COL,lh:8});
+  txt(CFG_W.pdfTitle||(CFG_W.title+' – mein Ergebnis'),{b:1,size:17,col:COL,lh:8});
+  const PA={txt,H2,need,d,M,get y(){return y;},set y(v){y=v;}};
   txt(CFG_W.fach+' · '+(S.name?'Name: '+S.name+' · ':'')+'Stand: '+new Date().toLocaleDateString('de-DE'));y+=4;
   const done=TASK_IDS.filter(isDone).length;txt('Bearbeitet: '+done+' von '+TASK_IDS.length+' Aufgaben',{b:1});y+=3;
   CH.slice(0,LAST).forEach((c,ci)=>{const ids=TASK_IDS.filter(id=>chOf[home[id]]===ci);
-    if(typeof platformPdf==='function'&&platformPdf(ci,{txt,H2,need,d,M,get y(){return y;},set y(v){y=v;}}))return;
+    if(typeof platformPdf==='function'&&platformPdf(ci,PA))return;
     if(!ids.length)return;H2('Kapitel '+CFG_W.ch[ci][0]+': '+c);
     ids.forEach(id=>{const t=T[id];const l=label[id].replace(/^Kapitel \d+ · /,'');
       if(t.type==='open'){txt(l,{b:1});const a=(S.a[id]||'').trim();txt(a||'(noch keine Antwort)',{ind:4,col:a?[20,35,47]:[120,130,135]});if(S.muster[id])txt('Mit Musterlösung verglichen.',{ind:4,size:9,col:[86,103,107]});y+=1.5;}
@@ -1939,7 +1957,9 @@ $('#pdfBtn').onclick=()=>{const note=$('#pdfNote');note.hidden=false;
         y+=bw+7.5+th;if(a.k||t.denkOffen){const c=(a.c||[]).filter(Boolean).length;txt('Selbstkontrolle: '+c+' von '+t.denk.length+' Punkten abgehakt.',{size:9,col:[86,103,107]});}y+=1.5;}
       else if(t.type==='est'){txt(l+': meine Schätzung '+(S.a[id]!=null?de(S.a[id])+' '+t.unit:'–'),{ind:0});}
       else{const ok=!!S.ok[id];d.setFont('helvetica','bold');d.setFontSize(10.5);d.setTextColor(ok?31:194,ok?138:59,ok?76:46);need(5.5);d.text(ok?'gelöst':'offen',M,y);txt(l+(S.help[id]===2?' (mit Teillösung)':S.help[id]?' (mit Tipp)':''),{ind:16});
-        if(t.type==='gfb'){const sm=gfbSummary(t,S.a[id]);if(sm)sm.forEach(r=>{txt(r.t+(r.r?': '+r.r:''),{ind:16,size:9.5,b:1});if(r.sel.length)txt('Maßnahmen: '+r.sel.join('; '),{ind:20,size:9});});}}});});
+        if(t.type==='gfb'){const sm=gfbSummary(t,S.a[id]);if(sm)sm.forEach(r=>{txt(r.t+(r.r?': '+r.r:''),{ind:16,size:9.5,b:1});if(r.sel.length)txt('Maßnahmen: '+r.sel.join('; '),{ind:20,size:9});});}
+        if(typeof platformPdfTask==='function')platformPdfTask(id,t,PA);}});
+    if(typeof platformPdfAfter==='function')platformPdfAfter(ci,PA);});
   need(20);y+=4;txt('Selbsteinschätzung',{b:1,size:13,col:COL,lh:6.5});
   RATE.forEach((r,i)=>{const v=S.rate[i];need(6);d.setFont('helvetica','bold');d.setFontSize(10);d.setTextColor(20,35,47);d.text(clean(v==null?'–':RATE_L[v]),M,y);txt(r,{ind:26,size:10});});
   y+=4;txt('In dieser PDF steckt dein Arbeitsstand. Über „PDF laden“ in der Lernplattform machst du damit weiter.',{size:9,col:[86,103,107]});

@@ -681,6 +681,17 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
 .anim-steps .btn[aria-pressed="true"]{outline:3px solid var(--n-acc,var(--accent,#e07b00));outline-offset:1px}
 .anim-out{margin:0;font-size:16px;max-width:70ch;min-height:3em}
 @media (max-width:440px){.anim{padding:10px}}
+
+/* Balkendiagramm in der Auflösung einer Schätzfrage (25.11.2026) */
+.hw-bars{margin:12px 0 0;display:grid;gap:8px}
+.hw-bt{font-weight:700}
+.hw-bl{display:grid;gap:8px}
+.hw-br{display:grid;grid-template-columns:minmax(0,12.5em) minmax(0,1fr) 3.4em;gap:8px;align-items:center;font-size:15px}
+.hw-bb{height:16px;border-radius:8px;background:rgba(128,128,128,.2);overflow:hidden}
+.hw-bb i{display:block;height:100%;background:var(--c,#2e6e26);border-radius:8px;min-width:4px}
+.hw-bv{font-weight:700;text-align:right;white-space:nowrap}
+.hw-bq{font-size:13px;color:var(--muted);margin:0}
+@media (max-width:520px){.hw-br{grid-template-columns:minmax(0,1fr) 3.4em}.hw-bn{grid-column:1/-1}}
 /* Lebensmittel retten: Grafikfarben (hell/dunkel) und eigene Bausteine, Stand 25.11.2026 */
 :root{--l-line:#22303a;--l-body:#eef1f2;--l-cold:#1f6fb5;--l-fach:#ffffff;--l-bar:#c8402e}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--l-line:#e3eaee;--l-body:#2a3234;--l-cold:#5aa9ee;--l-fach:#1b2224;--l-bar:#ff7a66}}
@@ -714,6 +725,22 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
 @media (prefers-reduced-motion:reduce){.lr-bar i{transition:none}}
 @media (max-width:440px){.mi-row>span{flex:0 0 auto}.lr-th span{font-size:13px}}
 @media (max-width:620px){.lab-fig .mk{transform-box:fill-box;transform-origin:center;transform:scale(1.45)}}
+
+/* Schimmel im Schnitt (25.11.2026) */
+:root{--l-brot:#ecd3a0;--l-kruste:#9c6a34;--l-kaese:#f2d066;--l-sch:#5d8a78;--l-bgr:#fbfaf6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--l-brot:#7a6742;--l-kruste:#c79a5c;--l-kaese:#9a8232;--l-sch:#9fd0bb;--l-bgr:#1b2224}}
+:root[data-theme="dark"]{--l-brot:#7a6742;--l-kruste:#c79a5c;--l-kaese:#9a8232;--l-sch:#9fd0bb;--l-bgr:#1b2224}
+.lrg-two{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin:10px 0}
+.lrg-fig{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:8px;margin:0}
+.lrg-fig figcaption{font-size:14px;color:var(--muted);padding:6px 4px 0}
+.lrg-e{text-anchor:end}
+.lrg-bgr{fill:var(--l-bgr);stroke:var(--line)}
+.lrg-brot{fill:var(--l-brot);stroke:var(--l-kruste);stroke-width:5;stroke-linejoin:round}
+.lrg-pore{fill:var(--l-kruste);opacity:.3}
+.lrg-kaese{fill:var(--l-kaese);stroke:var(--l-line);stroke-width:2;stroke-linejoin:round}
+.lrg-sch{fill:var(--l-sch);stroke:var(--l-line);stroke-width:1.2}
+.lrg-faden{fill:none;stroke:var(--l-sch);stroke-width:2.6;stroke-linecap:round;stroke-dasharray:2 6}
+.lrg-ld{fill:none;stroke:var(--l-line);stroke-width:1.6}
 .szl{list-style:none;padding:0;margin:8px 0;display:grid;gap:10px}.szl li{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center}.szi{display:inline-flex;gap:6px;min-width:44px}.szl .szi{flex-direction:column;width:44px}.szi svg,.szi .gfb-ico{width:44px;height:44px;flex:none}
 </style>
 <script>/* Sicherheitszeichen aus dem Tech-Board (Repo Unterrichtsboard, tech-board/index.html, TB_RULES/TB_HAZ).
@@ -811,7 +838,25 @@ var LRG = (function () {
     function upd() { var r = gericht(st.basis, st.gemuese, st.extra); out.innerHTML = '<h4>' + r[0] + '</h4><ol>' + r[1].map(function (s) { return '<li>' + s + '</li>'; }).join('') + '</ol><p class="hint">Reste erhitzt du immer durch und durch. Was schimmelt oder schlecht riecht, kommt nicht in den Topf.</p>'; }
     wrap.appendChild(out); box.appendChild(wrap); upd();
   }
-  return { svg: svg, kuehl: kuehl, POS: POS, rechner: rechner, baukasten: baukasten };
+  /* ---------- Schimmel im Schnitt: weiches Brot und Hartkäse (25.11.2026, Lernplattform-Check Punkt 14). Ohne Handlungswörter am Bild. ---------- */
+  function schimmel(kind) {
+    var b = '<rect class="lrg-bgr" x="0" y="0" width="260" height="200" rx="8"/>', i, fl = '';
+    function fleck(x, y, w) { var s = '<ellipse class="lrg-sch" cx="' + x + '" cy="' + y + '" rx="' + w + '" ry="7"/>'; [-0.7, -0.25, 0.3, 0.75].forEach(function (k, n) { s += '<circle class="lrg-sch" cx="' + (x + k * w) + '" cy="' + (y - 5 - (n % 2) * 3) + '" r="' + (5 + (n % 2) * 2) + '"/>'; }); return s; }
+    if (kind === 'brot') {
+      b += '<path class="lrg-brot" d="M36 92Q36 62 70 62H190Q224 62 224 92V168Q224 178 214 178H46Q36 178 36 168Z"/>';
+      [[62, 104], [88, 150], [200, 112], [180, 158], [58, 160], [206, 150]].forEach(function (p) { b += '<circle class="lrg-pore" cx="' + p[0] + '" cy="' + p[1] + '" r="4"/>'; });
+      b += '<path class="lrg-faden" d="M118 70C112 92 96 104 84 128M124 70C122 100 126 124 116 156M132 70C140 96 158 108 168 140M112 72C96 84 78 88 60 96M140 72C160 82 178 86 196 98M124 112C108 122 98 138 96 160M134 100C146 120 148 140 150 164"/>';
+      b += fleck(126, 62, 22);
+      b += T(14, 30, 'Schimmel') + '<path class="lrg-ld" d="M72 36L108 54"/>' + T(246, 30, 'Fäden', 'lrg-e') + '<path class="lrg-ld" d="M214 38L172 118"/>';
+    } else {
+      b += '<path class="lrg-kaese" d="M32 96L228 66V178H32Z"/>';
+      b += '<path class="lrg-faden" d="M120 86V96M128 84V95M136 83V92M112 87V94"/>';
+      b += '<g transform="rotate(-8.7 126 82)">' + fleck(126, 80, 20) + '</g>';
+      b += T(14, 30, 'Schimmel') + '<path class="lrg-ld" d="M72 36L112 68"/>' + T(246, 30, 'Fäden', 'lrg-e') + '<path class="lrg-ld" d="M214 38L138 90"/>';
+    }
+    return { vb: '0 0 260 200', body: b };
+  }
+  return { svg: svg, kuehl: kuehl, schimmel: schimmel, POS: POS, rechner: rechner, baukasten: baukasten };
 })();
 </script><link rel="stylesheet" href="../assets/lp-shell.css"><script src="../assets/lp-shell.js"></script></head><body><div role="note" style="margin:0;padding:12px 16px;background:#fff3cd;color:#5c4400;border-bottom:2px solid #e0b400;font:600 15px/1.4 system-ui,-apple-system,Segoe UI,sans-serif;text-align:center;position:relative;z-index:100">Hinweis: Diese Lernplattform ist noch in der Prüfung und für den Unterricht noch nicht empfohlen.</div>
 <div class="app">
@@ -938,6 +983,10 @@ var LRG = (function () {
   <div class="info">
     <h3>Schimmel</h3>
     <p>Schimmel ist ein Pilz. Was du siehst, ist nur ein kleiner Teil: Seine Fäden und seine Gifte ziehen <b>unsichtbar</b> durch das Lebensmittel, umso leichter, je weicher es ist und je mehr Wasser es enthält. Brot, Obst, Gemüse, Konfitüre, Joghurt, Frischkäse und weicher Käse kommen deshalb bei Schimmel <b>ganz in den Müll</b>. Wegschneiden reicht nicht.</p>
+    <div class="lrg-two">
+      <figure class="lrg-fig" data-lrsch="brot" data-aria="Schnitt durch eine Scheibe Brot. Oben sitzt ein Schimmelfleck. Von ihm ziehen gepunktete Fäden weit ins Innere, bis fast an den unteren Rand."><figcaption>Brot im Schnitt: Die Fäden ziehen weit ins Innere.</figcaption></figure>
+      <figure class="lrg-fig" data-lrsch="kaese" data-aria="Schnitt durch ein Stück Hartkäse. Oben sitzt ein Schimmelfleck. Darunter sind nur wenige kurze Fäden, sie bleiben dicht unter der Oberfläche."><figcaption>Hartkäse im Schnitt: Die Fäden bleiben dicht unter der Oberfläche.</figcaption></figure>
+    </div>
     <p>Die Ausnahme ist <b>Hartkäse am Stück</b>, zum Beispiel Parmesan. Er ist so fest und trocken, dass du eine kleine Schimmelstelle <b>großzügig wegschneiden</b> kannst.</p>
     <p>Manchmal gehört der Schimmel dazu. Der weiße Belag auf Camembert und die blauen Adern mancher Käsesorten sind <b>Kulturschimmel</b>. Er wird bei der Herstellung mit Absicht zugesetzt und ist unbedenklich.</p>
   </div>
@@ -1405,7 +1454,9 @@ function gfbSummary(t, v) {
 }
 
 /* Lebensmittel retten: Kapitel, Aufgaben, eigene Bausteine. Hauswirtschaft Jg. 7–8. Stand 25.11.2026.
-   Quellen: Umweltbundesamt, „Lebensmittelabfälle“ (Stand 27.10.2025): 2023 10,9 Mio. t, 58 % in privaten Haushalten, 129 kg je Einwohner;
+   Quellen: Umweltbundesamt, „Lebensmittelabfälle“ (Stand 27.10.2025): 2023 10,9 Mio. t, rund 58 % in privaten Haushalten, 16 % Restaurants, Gemeinschaftsverpflegung und Catering, etwa 17 % Verarbeitung,
+   rund 7 % Handel, ungefähr 2 % Landwirtschaft (Text der Seite; die Grafik dort nennt 6 % und ca. 1,6 %), 129 kg je Einwohner. 6,3 Mio. t in Haushalten nennt die Seite für 2022,
+   für 2023 selbst gerechnet (58 % von 10,9 Mio. t);
    BMEL, Flyer zum Mindesthaltbarkeits- und Verbrauchsdatum; RiSU 2023, II-6.2; Flyer „Lebensmittel richtig lagern“ (MLR Baden-Württemberg, 2025);
    LGL Bayern, „Schimmelbefall bei Lebensmitteln: Was ist zu tun?“. Preise im Rechner und in den Aufgaben sind erfundene Beispielpreise. */
 const CFG_W={key:'lebensmittel-retten-v1',title:'Lebensmittel retten',fach:'Hauswirtschaft',pdfCol:[46,110,38],
@@ -1417,7 +1468,8 @@ function genWeg(){const w=rnd(WEG),n=rnd([2,3,4,5,6]),p=rnd(w[2]),wk=n*p,a=Math.
   return {html:'Bei Familie Yilmaz landen jede Woche <b>'+n+' '+w[0]+'</b> im Müll. '+w[1].charAt(0).toUpperCase()+w[1].slice(1)+' kostet <b>'+de2(p)+' €</b>. Gesucht: die Kosten in einem Jahr mit 52 Wochen.',ans:a,unit:'€',tol:0.011,
     sol:n+' · '+de2(p)+' € = '+de2(wk)+' € in einer Woche; '+de2(wk)+' € · 52 = '+de2(a)+' €.'};}
 const T={
-e1:{type:'est',min:0,max:100,step:1,start:20,unit:'%',reveal:'Etwa 58 %. Von 10,9 Millionen Tonnen Lebensmittelabfällen im Jahr 2023 fielen 6,3 Millionen Tonnen in privaten Haushalten an. Der Rest verteilt sich auf Verarbeitung, Gastronomie, Handel und Landwirtschaft (Umweltbundesamt, Stand 27.10.2025).'},
+e1:{type:'est',min:0,max:100,step:1,start:20,unit:'%',reveal:'Etwa 58 %. Im Jahr 2023 wurden in Deutschland 10,9 Millionen Tonnen Lebensmittel weggeworfen, mehr als die Hälfte davon in privaten Haushalten. Das sind rund 6,3 Millionen Tonnen (selbst gerechnet). Wie sich der Rest verteilt, zeigt das Diagramm.',
+  bars:{title:'Wo die Lebensmittelabfälle 2023 entstanden',unit:'%',rows:[['Private Haushalte',58],['Verarbeitung von Lebensmitteln',17],['Restaurants, Kantinen, Catering',16],['Handel',7],['Landwirtschaft',2]],src:'Quelle: Umweltbundesamt, „Lebensmittelabfälle“, Stand 27.10.2025. Gerundete Werte aus dem Text der Seite.'}},
 e2:{type:'est',min:0,max:300,step:1,start:40,unit:'kg',reveal:'Etwa 129 kg je Einwohner, alle Bereiche zusammen. Mehr als die Hälfte davon, rund 75 kg, fällt in den Haushalten an (Umweltbundesamt, Stand 27.10.2025; Anteil der Haushalte selbst gerechnet).'},
 t1:{type:'gap',kc:'AWT27',text:'Auf den meisten Lebensmitteln steht „mindestens haltbar bis“. Bis zu diesem Tag verspricht der Hersteller, dass {0}. Danach ist das Lebensmittel {1}. Auf Hackfleisch und frischem Geflügel steht „zu verbrauchen bis“. Nach diesem Tag {2}. Beide Daten gelten nur, wenn die Packung {3} und richtig gelagert wurde.',
   gaps:[[['Geschmack und Aussehen stimmen','es noch verkauft werden darf','die Packung nicht aufgeht'],0],[['oft noch gut','sofort giftig','immer verdorben'],0],[['isst du es nicht mehr','prüfst du es mit der Nase','frierst du es noch ein'],0],[['ungeöffnet ist','im Regal vorn stand','besonders teuer war'],0]]},
@@ -1459,6 +1511,7 @@ const OPS=OPS1;
 function platformInit(){
   $$('[data-rechner]').forEach(b=>LRG.rechner(b));
   $$('[data-baukasten]').forEach(b=>LRG.baukasten(b));
+  $$('[data-lrsch]').forEach(b=>{const g=LRG.schimmel(b.dataset.lrsch);b.insertAdjacentHTML('afterbegin',LRG.svg(g.vb,g.body,b.dataset.aria||''));});
 }
 
 /* Gemeinsamer Kern der Häppchen-Plattformen Nähmaschine und Haushalts-Check (seit 24.11.2026).
@@ -1490,9 +1543,12 @@ function de2(n){return Number(n).toLocaleString('de-DE',{minimumFractionDigits:2
 function numIn(s){s=String(s||'').trim().replace(/\s|€|ct|cent|kwh|cm|mm|jahre?|stiche?/gi,'').replace(/\.(?=\d{3}(\D|$))/g,'').replace(',','.');const n=parseFloat(s);return isNaN(n)?NaN:n;}
 /*@@B@@*/
 /* ---------- Schätzfrage ---------- */
+/* Balkendiagramm in der Auflösung einer Schätzfrage (seit 25.11.2026): t.bars = {title, unit, rows:[[Name, Wert]…], src}. Als HTML, damit die Schrift mit der Seite mitwächst. */
+function barFig(b){const mx=Math.max(...b.rows.map(r=>r[1]));
+  return el('figure',{class:'hw-bars'},el('figcaption',{class:'hw-bt'},b.title),el('div',{class:'hw-bl'},...b.rows.map(r=>el('div',{class:'hw-br'},el('span',{class:'hw-bn'},r[0]),el('span',{class:'hw-bb','aria-hidden':'true'},el('i',{style:'width:'+(r[1]/mx*100).toFixed(1)+'%'})),el('span',{class:'hw-bv'},de(r[1])+' '+b.unit)))),el('p',{class:'hw-bq'},b.src));}
 function wEst(id,t,w,art){
   const val=el('span',{class:'val'});const r=el('input',{type:'range',min:t.min,max:t.max,step:t.step,'aria-label':'Schätzung in '+t.unit});r.value=S.a[id]!=null?S.a[id]:t.start;
-  const rev=el('div',{class:'reveal',hidden:S.a[id]==null},el('b',{},'Zum Vergleich: '),t.reveal);
+  const rev=el('div',{class:'reveal',hidden:S.a[id]==null},el('b',{},'Zum Vergleich: '),t.reveal,t.bars?barFig(t.bars):null);
   const b=el('button',{class:'btn accent',type:'button'},S.a[id]!=null?'Schätzung ändern':'Schätzung festlegen');
   const upd=()=>{val.textContent=Number(r.value).toLocaleString('de-DE')+' '+t.unit;};
   r.oninput=upd;b.onclick=()=>{S.a[id]=+r.value;rev.hidden=false;b.textContent='Schätzung ändern';save();paint();};
