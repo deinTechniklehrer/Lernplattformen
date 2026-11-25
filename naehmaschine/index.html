@@ -767,6 +767,16 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
 @media (max-width:620px){.lab-fig,.ng-fig.wide{overflow-x:auto;-webkit-overflow-scrolling:touch}.lab-fig svg,.ng-fig.wide svg{min-width:500px;max-height:none}.lab-fig::after,.ng-fig.wide::after{content:"Bild seitlich verschieben";display:block;font-size:13px;color:var(--muted);position:sticky;left:0}}
 @media (max-width:440px){.mi-row>span{flex:0 0 auto}}
 @media (max-width:620px){.tapseq .ng-fig.wide svg{min-width:400px}}
+
+/* Zeichnung „Ecke nähen“ (25.11.2026) */
+.ng-el{fill:none;stroke:var(--n-line);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.ng-nd{fill:none;stroke:var(--n-line);stroke-width:3.4;stroke-linecap:round}
+.ng-fuss{fill:var(--n-plate);stroke:var(--n-line);stroke-width:2;stroke-linejoin:round}
+.ng-pf{fill:none;stroke:var(--n-acc);stroke-width:4;stroke-linecap:round;stroke-linejoin:round}
+.ng-plan{fill:none;stroke:var(--n-line);stroke-width:2;stroke-dasharray:3 7;stroke-linecap:round;opacity:.6}
+.ng-pt{fill:var(--n-line);stroke:var(--n-bgr);stroke-width:2}
+.ng-fig.ecke{max-width:480px;margin:10px 0 0}
+.ng-fig figcaption{font-size:14px;color:var(--muted);padding:6px 4px 0}
 .szl{list-style:none;padding:0;margin:8px 0;display:grid;gap:10px}.szl li{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center}.szi{display:inline-flex;gap:6px;min-width:44px}.szl .szi{flex-direction:column;width:44px}.szi svg,.szi .gfb-ico{width:44px;height:44px;flex:none}
 </style>
 <script>/* Sicherheitszeichen aus dem Tech-Board (Repo Unterrichtsboard, tech-board/index.html, TB_RULES/TB_HAZ).
@@ -1020,6 +1030,22 @@ var NG = (function () {
     b += '<path class="ng-scale" d="M20 108H80M20 103v10M80 103v10"/>' + T(50, 100, '1 cm', 'ng-c ng-small');
     return { vb: '0 0 360 120', body: b, n: n };
   }
+  /* ---------- Ecke nähen: Nadel im Stoff, Nähfuß oben, Stoff drehen (ohne Beschriftung, seit 25.11.2026) ---------- */
+  function ecke() {
+    var b = '<rect class="ng-bgr" x="0" y="0" width="480" height="200" rx="8"/>';
+    // links: Seitenansicht
+    b += '<path class="ng-el" d="M18 150H212"/><rect class="ng-stoff" x="30" y="138" width="170" height="12"/>';
+    b += '<rect class="ng-m2" x="98" y="20" width="24" height="46" rx="4"/><path class="ng-nd" d="M110 66V152"/><path class="ng-el" d="M107 144l3 9 3-9"/>';
+    b += '<path class="ng-fuss" d="M134 28V104H88v10h70v-10h-12V28z"/>';
+    b += '<path class="ng-pf" d="M178 122V86M168 98l10-13 10 13"/>';
+    // rechts: von oben
+    b += '<path class="ng-el" d="M240 20V180" opacity=".35"/>';
+    b += '<rect class="ng-stoff2" x="268" y="26" width="190" height="150" rx="4"/>';
+    b += '<path class="ng-stitch" d="M290 60H414"/><path class="ng-plan" d="M420 68V158"/>';
+    b += '<circle class="ng-pt" cx="420" cy="60" r="7"/>';
+    b += '<path class="ng-pf" d="M372 104A58 58 0 0 1 400 132M388 134l13 0 0-13" />';
+    return { vb: '0 0 480 200', body: b };
+  }
   /* ---------- Stichbilder im Schnitt ---------- */
   function fehler(kind) {
     var b = '<rect class="ng-bgr" x="0" y="0" width="240" height="134" rx="8"/><rect class="ng-stoff" x="10" y="50" width="220" height="20"/>';
@@ -1045,7 +1071,7 @@ var NG = (function () {
     b += T(16, 40, 'Oberfaden', 'ng-small ng-otx') + T(16, 134, 'Unterfaden', 'ng-small ng-utx');
     return { vb: '0 0 300 140', body: b, zone: dv < -1.25 ? 'unten' : dv > 1.25 ? 'oben' : Math.abs(dv) <= 0.75 ? 'ok' : 'fast' };
   }
-  return { svg: svg, machine: machine, POS: POS, faden: faden, fadenAnim: fadenAnim, FADEN_HOT: FADEN_HOT, FADEN_VB: FADEN_VB, FADEN_ST: FADEN_ST, stich: stich, stichAt: stichAt, stichPlayer: stichPlayer, unterfadenAt: unterfadenAt, unterfadenAnim: unterfadenAnim, naht: naht, fehler: fehler, spannung: spannung };
+  return { svg: svg, machine: machine, POS: POS, faden: faden, fadenAnim: fadenAnim, FADEN_HOT: FADEN_HOT, FADEN_VB: FADEN_VB, FADEN_ST: FADEN_ST, stich: stich, stichAt: stichAt, stichPlayer: stichPlayer, unterfadenAt: unterfadenAt, unterfadenAnim: unterfadenAnim, ecke: ecke, naht: naht, fehler: fehler, spannung: spannung };
 })();
 </script><link rel="stylesheet" href="../assets/lp-shell.css"><script src="../assets/lp-shell.js"></script></head><body><div role="note" style="margin:0;padding:12px 16px;background:#fff3cd;color:#5c4400;border-bottom:2px solid #e0b400;font:600 15px/1.4 system-ui,-apple-system,Segoe UI,sans-serif;text-align:center;position:relative;z-index:100">Hinweis: Diese Lernplattform ist noch in der Prüfung und für den Unterricht noch nicht empfohlen.</div>
 <div class="app">
@@ -1144,8 +1170,8 @@ var NG = (function () {
   </div>
   <div data-stich></div>
   <article class="task">
-    <header><span class="num"></span><h3>Ein Stich in fünf Schritten</h3><button class="op" data-op="ordnen" type="button">ordnen</button></header>
-    <p class="q">Ordne die Schritte, in denen ein Stich entsteht. Verschiebe sie mit den Pfeilen.</p>
+    <header><span class="num"></span><h3>Fehler in der Erklärung</h3><button class="op" data-op="herausarbeiten" type="button">herausarbeiten</button></header>
+    <p class="q">Lina erklärt, wie ein Stich entsteht. Arbeite heraus, welche Sätze nicht stimmen. Tippe diese Sätze an.</p>
     <div class="w" data-t="t3"></div>
   </article>
   <article class="task">
@@ -1245,6 +1271,7 @@ var NG = (function () {
       <li><b>Rundung:</b> Näh langsam und führ den Stoff mit beiden Händen in einem Bogen, damit der Abstand zur Kante gleich bleibt.</li>
       <li><b>Wäschesaum:</b> Die Kante wird zweimal umgeschlagen, so liegt die Schnittkante innen und kann nicht ausfransen. Dann steppst du den Saum knapp an der Kante mit dem Geradstich ab.</li>
     </ul>
+    <figure class="ng-fig ecke" data-ngecke data-aria="Zwei Zeichnungen zur Ecke. Links von der Seite: Die Nadel steckt im Stoff, der Nähfuß ist angehoben. Rechts von oben: Die Naht endet an der Ecke, die Nadel steckt als Punkt im Stoff, ein Pfeil zeigt, wie der Stoff um die Nadel gedreht wird."><figcaption>An der Ecke: Die Nadel steckt im Stoff und hält ihn fest. Der Nähfuß ist oben, jetzt lässt sich der Stoff drehen.</figcaption></figure>
   </div>
   <article class="task">
     <header><span class="num"></span><h3>Der passende Stich</h3><button class="op" data-op="zuordnen" type="button">zuordnen</button></header>
@@ -1253,7 +1280,7 @@ var NG = (function () {
   </article>
   <article class="task">
     <header><span class="num"></span><h3>Um die Ecke nähen</h3><button class="op" data-op="ordnen" type="button">ordnen</button></header>
-    <p class="q">Ordne die Schritte, mit denen du eine Ecke nähst.</p>
+    <p class="q">Ordne die Schritte, mit denen du eine Ecke nähst. Die Zeichnung im Infotext zeigt den wichtigsten Moment.</p>
     <div class="w" data-t="t10"></div>
   </article>
 </section>
@@ -1763,8 +1790,8 @@ e2:{type:'est',min:0,max:60,step:1,start:36,unit:'Monate',reveal:'Nach 12 Monate
 t1:{type:'label',fig:'maschine',kc:'TG12',aria:'Nähmaschine von vorn mit nummerierten Teilen',marks:['garnrolle','spannung','fadenhebel','nadel','naehfuss','handrad'],
   terms:[['Nähfuß','naehfuss'],['Fadenhebel','fadenhebel'],['Handrad','handrad'],['Nahttrenner','x'],['Garnrollenhalter','garnrolle'],['Nadel','nadel'],['Fadenspannung','spannung']]},
 t2:{type:'pair',kc:'AWT22-NM',left:['Fadenspannung','Fadenhebel','Transporteur','Nähfuß','Handrad'],right:['schiebt den Stoff Stich für Stich weiter','bewegt die Nadel langsam von Hand','bremst den Oberfaden zwischen zwei Scheiben','drückt den Stoff nach unten','zieht nach jedem Stich den Oberfaden fest'],ans:[2,4,0,3,1]},
-t3:{type:'order',kc:'AWT22-NM',items:['Die Nadel sticht durch den Stoff und nimmt den Oberfaden mit nach unten.','Beim Hochgehen der Nadel bildet der Oberfaden unter dem Stoff eine Schlinge.','Die Greiferspitze fängt die Schlinge und führt sie um die Spulenkapsel.','Der Fadenhebel zieht den Oberfaden nach oben, beide Fäden verschlingen sich im Stoff.','Der Transporteur schiebt den Stoff um eine Stichlänge weiter.'],start:[2,4,0,3,1],
-  help:{tip:'Fang bei der Nadel an. Was muss da sein, bevor der Greifer etwas fangen kann? Der Transporteur kommt erst, wenn der Stich fertig ist.',teil:'Die ersten zwei Schritte: 1. Die Nadel sticht durch den Stoff. 2. Unter dem Stoff bildet sich eine Schlinge.'}},
+t3:{type:'mark',kc:'AWT22-NM',parts:[['Die Nadel sticht durch den Stoff und nimmt den Oberfaden mit nach unten.',false],['Geht die Nadel ein Stück hoch, bleibt unter dem Stoff eine Schlinge aus Unterfaden zurück.',true],['Die Spitze des Greifers fängt diese Schlinge, solange die Nadel noch unter dem Stoff ist.',false],['Der Greifer führt die Schlinge einmal um die Spulenkapsel herum, dabei legt sie sich um den Unterfaden.',false],['Der Transporteur schiebt den Stoff schon weiter, während die Nadel noch im Stoff steckt.',true],['Dann drückt der Fadenhebel den Oberfaden nach unten, bis die Verschlingung im Stoff sitzt.',true],['Am Ende liegt die Verschlingung in der Mitte des Stoffes, oben und unten sieht der Stich gleich aus.',false],['Bei der nächsten Umdrehung des Handrads beginnt alles von vorn.',false]],
+  help:{tip:'Spiel die Animation langsam ab und prüf bei jedem Satz drei Dinge: Stimmt das Teil? Stimmt die Richtung? Stimmt der Zeitpunkt?',teil:'Ein Fehler: Die Schlinge unter dem Stoff bildet der Oberfaden, nicht der Unterfaden. Zwei weitere Sätze stimmen auch nicht.'}},
 t4:{type:'gap',kc:'AWT22-NM',text:'Die Nähmaschine näht einen {0}. Dafür braucht sie den {1} von der Garnrolle und den {2} von der Spule. Die beiden Fäden verschlingen sich {3}. Fest zieht den Stich der {4}.',
   gaps:[[['Doppelsteppstich','Kettenstich','Vorstich'],0],[['Oberfaden','Unterfaden'],0],[['Unterfaden','Oberfaden'],0],[['in der Mitte des Stoffes','auf der Oberseite','unter dem Stoff'],0],[['Fadenhebel','Transporteur','Nähfuß'],0]]},
 t5:{type:'tapseq',kc:'TG12',seq:['garnrolle','fuehrung','spannung','hebel','nadelfuehrung','oehr'],
@@ -1799,7 +1826,7 @@ t7:{type:'gfb',kc:'RISU',ort:'an deinem Platz an der Nähmaschine',ortK:'an dies
 t8:{type:'mark',kc:'RISU',parts:[['Emre bindet seine langen Haare zusammen, bevor er sich an die Maschine setzt.',false],['Beim Einfädeln lässt Jule den Fuß auf dem Pedal.',true],['Die Nadel ist abgebrochen. Emre setzt eine neue ein, ohne die Maschine auszuschalten.',true],['Die Teile der alten Nadel sammelt er mit einer Zange auf.',false],['Jule näht den Saum ihrer Jeans mit der dünnen Nadel, die gerade in der Maschine steckt.',true],['Ihre Finger bleiben beim Nähen links und rechts neben dem Nähfuß.',false],['Nach der Stunde schaltet Jule die Maschine aus, der Stecker bleibt in der Steckdose.',true]],
   help:{tip:'Nimm dir die Regeln im Kasten einzeln vor und such zu jeder den passenden Satz. Hält sich die Person an die Regel oder nicht?',teil:'Zwei Verstöße: Jule lässt beim Einfädeln den Fuß auf dem Pedal. Emre wechselt die Nadel bei eingeschalteter Maschine. Zwei weitere findest du selbst.'}},
 t9:{type:'seg',kc:'AWT22-NT',cats:['Geradstich','Zickzackstich'],items:[['zwei Stoffteile zu einer Tasche zusammennähen',0],['eine Schnittkante versäubern, damit sie nicht ausfranst',1],['einen umgeschlagenen Wäschesaum absteppen',0],['einen dehnbaren Stoff nähen, der mitdehnen soll',1],['am Anfang und Ende der Naht verriegeln',0],['den Rand eines Stoffrests umnähen, der sonst ausfranst',1]]},
-t10:{type:'order',kc:'AWT22-NT',items:['Bis zum Eckpunkt nähen.','Die Nadel im Stoff stecken lassen.','Den Nähfuß anheben.','Den Stoff um die Nadel drehen.','Den Nähfuß wieder senken.','Weiternähen.'],start:[3,0,5,2,4,1]},
+t10:{type:'order',kc:'AWT22-NT',items:['Bis zur Ecke nähen und anhalten.','Mit dem Handrad die Nadel in den Stoff senken.','Den Nähfuß mit dem Hebel anheben.','Den Stoff um die Nadel drehen, bis die neue Nahtlinie vor dir liegt.','Den Nähfuß wieder senken.','In die neue Richtung weiternähen.'],start:[3,0,5,2,4,1]},
 t11:{type:'num',kc:'TG12',unit:'cm',answer:43,tol:0,why:'40 cm + 2 · 1,5 cm = 43 cm.',help:{tip:'An wie vielen Seiten wird genäht? An jeder dieser Seiten kommt die Nahtzugabe einmal dazu.',teil:'Links und rechts je 1,5 cm, das sind zusammen 3 cm zusätzlich.'}},
 t12:{type:'drill',kc:'TG12',need:3,gen:genStiche,wrong:'Noch nicht richtig. Rechne die Nahtlänge zuerst in Millimeter um und teile dann durch die Stichlänge.',
   help:{tip:'Rechne cm in mm um: mal 10. Dann teilst du durch die Stichlänge.',teil:'Beispiel: 6 cm Naht, Stichlänge 3 mm: 6 cm = 60 mm, 60 mm : 3 mm = 20 Stiche.'}},
@@ -1879,6 +1906,7 @@ function platformInit(){
   $$('[data-fadenanim]').forEach(b=>NG.fadenAnim(b));
   $$('[data-unterfaden]').forEach(b=>NG.unterfadenAnim(b));
   $$('[data-stich]').forEach(b=>NG.stichPlayer(b));
+  $$('[data-ngecke]').forEach(b=>{const g=NG.ecke();b.insertAdjacentHTML('afterbegin',NG.svg(g.vb,g.body,b.dataset.aria||''));});
   $$('[data-naht]').forEach(b=>{const fig=el('div',{class:'ng-fig'});const l=el('input',{type:'range',min:'1',max:'5',step:'0.5',id:'nl'});const wd=el('input',{type:'range',min:'0',max:'6',step:'0.5',id:'nw'});l.value='2.5';wd.value='0';
     const ol=el('span',{class:'ng-out'}),ow=el('span',{class:'ng-out'}),info=el('p',{class:'hint','aria-live':'polite'});
     const upd=()=>{const L=+l.value,W=+wd.value,g=NG.naht(L,W);fig.innerHTML=NG.svg(g.vb,g.body,(W?'Zickzackstich':'Geradstich')+', Stichlänge '+de(L,1)+' mm');ol.textContent=de(L,1)+' mm';ow.textContent=W?de(W,1)+' mm':'0 (Geradstich)';info.textContent=(W?'Zickzackstich':'Geradstich')+': Auf 10 cm Naht macht die Maschine '+de(100/L,1)+' Stiche.';};
@@ -2004,6 +2032,8 @@ function addHelp(id,t,art){if(!t.help)return;const tb=el('div',{class:'hbox',hid
   const fb=$('.fb',art);art.insertBefore(el('div',{class:'help2'},el('div',{class:'row'},b1,b2),tb,pb),fb);}
 if(typeof platformInit==='function')platformInit();
 const WMAP=Object.assign({seg:wSeg,quiz:wQuiz,multi:wMulti,order:wOrder,open:wOpen,gap:wGap,pair:wPair,mark:wMark,num:wNum,label:wLabel,grid:wGrid,est:wEst,figsel:wFigsel,drill:wDrill,gfb:wGfb,draw:wDraw},typeof platformWidgets==='function'?platformWidgets():{});
+/* Wurde eine Aufgabe auf den Typ mark umgebaut, passt ein alter gespeicherter Stand nicht mehr: verwerfen statt falsch anzeigen. */
+$$('.w[data-t]').forEach(w=>{const id=w.dataset.t,t=T[id],v=S.a[id];if(t.type==='mark'&&v!=null&&!(Array.isArray(v)&&v.length===t.parts.length&&v.every(x=>typeof x==='boolean'))){delete S.a[id];if(S.ok)delete S.ok[id];}});
 $$('.w[data-t]').forEach(w=>{const id=w.dataset.t,t=T[id],art=w.closest('.task');WMAP[t.type](id,t,w,art);addHelp(id,t,art);});
 
 /* Selbsteinschätzung */

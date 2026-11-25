@@ -729,6 +729,16 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
 .np-sum span{display:grid;gap:2px;font-size:14px;color:var(--muted);border:1px solid var(--line);border-radius:10px;padding:8px 10px}
 .np-sum b{font-size:19px;color:var(--ink)}
 .np-warn{margin:8px 0 0;padding:8px 12px;border-left:4px solid var(--n-naht);background:var(--surface-2,rgba(128,128,128,.14));border-radius:6px}
+/* Nahtzugaben und fertige Maße */
+.np-mk circle{fill:var(--n-acc);stroke:var(--n-papier);stroke-width:2.5}.np-mk text{fill:#fff;font-family:var(--body);font-weight:700;text-anchor:middle}
+:root[data-theme="dark"] .np-mk text{fill:#1b1b1b}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .np-mk text{fill:#1b1b1b}}
+.nzg .np-fig{max-width:440px}
+.nzg-h{margin:6px 0 0;font-weight:700}
+.nzg-in{display:flex;align-items:center;gap:8px}
+.nzg-in input{width:7em;min-height:44px;font:inherit;font-size:16px;padding:6px 10px;border-radius:8px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink)}
+.nzg-in input.s-ok{border-color:#1f8a4c}.nzg-in input.s-bad{border-color:#c23b2e}
+@media (max-width:620px){.np-mk{transform-box:fill-box;transform-origin:center;transform:scale(1.25)}}
 /* Anforderungskatalog, Materialliste, Bewertung */
 .kat,.bew,.mli{display:grid;gap:12px}
 .kat fieldset,.bew fieldset{border:1px solid var(--line);border-radius:12px;padding:10px 14px;background:var(--surface);margin:0;display:grid;gap:4px}
@@ -823,6 +833,11 @@ var NP = (function () {
     b += '<path class="np-pfeil" d="M' + ax + ' ' + a1 + 'V' + a2 + 'M' + (ax - 9) + ' ' + (a1 + 13) + 'L' + ax + ' ' + a1 + 'l9 13M' + (ax - 9) + ' ' + (a2 - 13) + 'L' + ax + ' ' + a2 + 'l9 -13"/>';
     if (dim) { b += dimH(0, w, -24, cm(B), fs) + dimV(0, H * K, -24, cm(H), fs) + dimH(0, q * K, h + 22, cm(q), fs, true) + dimH(q * K, (B - q) * K, h + 22, cm(B - 2 * q), fs, true) + dimV(H * K, h, w + 24, cm(q), fs, true); }
     return { vb: (-ml) + ' ' + (-mt) + ' ' + vw + ' ' + vh, body: b }; }
+  /* Muster mit Maßen und fünf nummerierten Kanten für die Aufgabe „Nahtzugaben und fertige Maße“ */
+  function kantenFig(B, H, q) { var g = muster({ B: B, H: H, q: q }), r = 15, fs = 19;
+    var P = [[B * K * 0.5, 0], [B * K, H * K * 0.42], [q * K * 0.5, H * K], [q * K, (H + q * 0.5) * K], [B * K * 0.5, (H + q) * K]];
+    g.body += P.map(function (p, i) { return '<g class="np-mk"><circle cx="' + p[0] + '" cy="' + p[1] + '" r="' + r + '"/><text x="' + p[0] + '" y="' + (p[1] + fs * 0.36) + '" font-size="' + fs + '">' + (i + 1) + '</text></g>'; }).join('');
+    return g; }
   var POS = { koerper: [78, 72], lasche: [148.5, 272], ecke: [50, 270], naht: [287, 150], fadenlauf: [148.5, 120], kante: [215, 0] };
   /* ---------- Stoffstück von oben ---------- */
   function stoff() {
@@ -915,7 +930,7 @@ var NP = (function () {
       text: function (v) { return TXT[Math.min(5, Math.floor(Math.min(5.999, v)))]; },
       phase: function (v) { return Math.min(5, Math.floor(Math.min(5.999, v))); } });
   }
-  return { svg: svg, muster: muster, POS: POS, stoff: stoff, POSS: POSS, utensilo: utensilo, rechner: rechner, masse: masse, naehAnim: naehAnim, cm: cm, scene: scene };
+  return { svg: svg, muster: muster, kantenFig: kantenFig, POS: POS, stoff: stoff, POSS: POSS, utensilo: utensilo, rechner: rechner, masse: masse, naehAnim: naehAnim, cm: cm, scene: scene };
 })();
 </script><link rel="stylesheet" href="../assets/lp-shell.css"><script src="../assets/lp-shell.js"></script></head><body><div role="note" style="margin:0;padding:12px 16px;background:#fff3cd;color:#5c4400;border-bottom:2px solid #e0b400;font:600 15px/1.4 system-ui,-apple-system,Segoe UI,sans-serif;text-align:center;position:relative;z-index:100">Hinweis: Diese Lernplattform ist noch in der Prüfung und für den Unterricht noch nicht empfohlen.</div>
 <div class="app">
@@ -1040,6 +1055,7 @@ var NP = (function () {
   </article>
   <div class="info">
     <h3>Vom Muster zur fertigen Größe</h3>
+    <p>Jede Kante des Musters wird zu einer Naht. Die langen Kanten links und rechts werden zu den <b>Seitennähten</b>, die untere Kante der Lasche zur <b>Bodennaht</b>. Ein Eckquadrat hat zwei Kanten: die Seite der Lasche und das Stück Körperkante daneben. Diese beiden legst du aufeinander und nähst sie zusammen, das ergibt eine <b>Ecknaht</b>. An der oberen Kante werden am Schluss Außenstoff und Futter verbunden.</p>
     <p>Jede Naht kostet Stoff. Deshalb ist das fertige Utensilo kleiner als das Muster. Drei Regeln reichen:</p>
     <ul>
       <li>Die <b>Breite des Bodens</b> ist die Breite der Lasche, verringert um zwei Nahtzugaben. Links und rechts an der Lasche sitzt je eine Ecknaht.</li>
@@ -1049,8 +1065,8 @@ var NP = (function () {
     <p>Den Rand schlägst du am Ende nach außen um. Das Utensilo wird dadurch niedriger, aber stabiler.</p>
   </div>
   <article class="task">
-    <header><span class="num"></span><h3>Höhe des Utensilos</h3><button class="op" data-op="ermitteln" type="button">ermitteln</button></header>
-    <p class="q">Der Körper des A3-Musters ist 22 cm hoch, die Nahtzugabe beträgt 1 cm. Ermittle die Höhe des fertigen Utensilos ohne Umschlag in cm.</p>
+    <header><span class="num"></span><h3>Nahtzugaben und fertige Maße</h3><button class="op" data-op="ermitteln" type="button">ermitteln</button></header>
+    <p class="q">Ermittle die fertigen Maße für das Muster im Bild. Gib zuerst für jede nummerierte Kante an, welche Naht dort entsteht, und trag dann die drei Maße ein.</p>
     <div class="w" data-t="t7"></div>
   </article>
   <article class="task">
@@ -1060,7 +1076,7 @@ var NP = (function () {
   </article>
   <div class="info">
     <h3>Dein eigenes Maß</h3>
-    <p>Das A3-Muster ergibt ein hohes, schmales Utensilo. Mit dem Rechner probierst du andere Größen aus. Was du hier einstellst, steht später in deiner Planungsmappe. Für die Aufgaben auf dieser Seite gilt weiter das A3-Muster.</p>
+    <p>Das A3-Muster ergibt ein hohes, schmales Utensilo. Mit dem Rechner probierst du andere Größen aus. Was du hier einstellst, steht später in deiner Planungsmappe. Die Aufgaben auf dieser Seite rechnen mit den Maßen, die in der Aufgabe stehen.</p>
   </div>
   <div data-nprech></div>
   <article class="task">
@@ -1605,7 +1621,11 @@ t5:{type:'katalog',kc:'AWT23',need:5,groups:['Funktion','Verarbeitung','Gestaltu
   help:{tip:'Du brauchst mindestens fünf Anforderungen: eine zur Funktion und zwei zur Verarbeitung müssen dabei sein. Schreib oben auf, wofür dein Utensilo gedacht ist.',teil:'Ein möglicher Anfang: „Das leere Utensilo steht von allein.“ und „Alle Nähte sind am Anfang und am Ende verriegelt.“ Drei weitere wählst du selbst.'}},
 t6:{type:'label',fig:'muster',kc:'TG12',aria:'Schnittmuster in T-Form ohne Beschriftung mit sechs nummerierten Stellen.',marks:['koerper','lasche','ecke','naht','fadenlauf','kante'],
   terms:[['Nahtlinie','naht'],['Lasche, wird zum Boden','lasche'],['obere Kante, wird zur Öffnung','kante'],['Wendeöffnung','x'],['Körper, wird zur Wand','koerper'],['Fadenlauf','fadenlauf'],['Eckquadrat, wird weggeschnitten','ecke']]},
-t7:{type:'num',kc:'TG12',unit:'cm',answer:20,tol:0.01,why:'22 cm − 2 · 1 cm = 20 cm. Oben geht 1 cm für die Naht an der Kante ab, unten 1 cm für die Ecknaht.',help:{tip:'An wie vielen Stellen kostet eine Naht Höhe? Zieh für jede dieser Stellen einmal die Nahtzugabe ab.',teil:'Oben 1 cm und unten 1 cm, das sind zusammen 2 cm. Die ziehst du von 22 cm ab.'}},
+t7:{type:'nzg',kc:'TG12',B:24,H:16,q:7,nz:1.5,opts:['Seitennaht','Ecknaht','Bodennaht','Naht, die Außenstoff und Futter verbindet','keine Naht'],
+  kanten:[['Kante 1',3],['Kante 2',0],['Kante 3',1],['Kante 4',1],['Kante 5',2]],
+  masse:[['Höhe ohne Umschlag',13],['Breite des Bodens',7],['Tiefe des Bodens',14]],
+  why:'Höhe: 16 cm − 2 · 1,5 cm = 13 cm. Breite des Bodens: Lasche 10 cm − 2 · 1,5 cm = 7 cm. Tiefe des Bodens: 2 · 7 cm = 14 cm.',
+  help:{tip:'Überleg bei jedem Maß, an wie vielen Kanten eine Naht Stoff wegnimmt. Die Kanten 3 und 4 werden aufeinandergelegt und zusammen genäht.',teil:'Kante 2 wird zur Seitennaht, Kante 5 zur Bodennaht. Die Höhe: 16 cm − 2 · 1,5 cm = 13 cm.'}},
 t8:{type:'drill',kc:'TG12',need:3,gen:genMass,wrong:'Noch nicht richtig. Breite und Höhe werden durch zwei Nahtzugaben kleiner. Die Tiefe des Bodens ist immer doppelt so groß wie das Eckquadrat.',
   help:{tip:'Lies in der Info „Vom Muster zur fertigen Größe“ nach, welche der drei Regeln zur Frage passt.',teil:'Beispiel: Lasche 10 cm, Nahtzugabe 1 cm. Der Boden wird 10 cm − 2 · 1 cm = 8 cm breit.'}},
 t9:{type:'num',kc:'AWT23',unit:'Zuschnitte',answer:8,tol:0,why:'In der Breite: 130 cm : 29,7 cm = 4,4, also 4 Zuschnitte. In der Länge: 70 cm : 32 cm = 2,2, also 2 Reihen. 4 · 2 = 8 Zuschnitte. Das reicht für zwei Utensilos.',help:{tip:'Rechne zuerst, wie viele Zuschnitte nebeneinander passen, dann, wie viele Reihen übereinander. Angefangene Zuschnitte zählen nicht.',teil:'Nebeneinander passen 4 Zuschnitte: 4 · 29,7 cm = 118,8 cm. Jetzt fehlen noch die Reihen.'}},
@@ -1702,6 +1722,28 @@ function wKatalog(id,t,w,art){
     if(miss.length){showFb(fb,'mid','Noch nicht fertig',null,miss);return;}
     showFb(fb,'ok','Dein Anforderungskatalog steht.','Mit diesen Anforderungen bewertest du in Kapitel 7 dein fertiges Utensilo. Sie stehen auch in deiner Planungsmappe.');report(id,true,art,fb);});
 }
+function wNzg(id,t,w,art){
+  let a=S.a[id];if(!a||typeof a!=='object'||Array.isArray(a)||!Array.isArray(a.k)||a.k.length!==t.kanten.length||!Array.isArray(a.m)||a.m.length!==t.masse.length){a=S.a[id]={k:t.kanten.map(()=>-1),m:t.masse.map(()=>'')};delete S.ok[id];}
+  const g=NP.kantenFig(t.B,t.H,t.q);
+  const fig=el('figure',{class:'np-fig'});fig.innerHTML=NP.svg(g.vb,g.body,'Schnittmuster in T-Form mit Maßen: Körper '+NP.cm(t.B)+' breit und '+NP.cm(t.H)+' hoch, Eckquadrate '+NP.cm(t.q)+', Lasche '+NP.cm(t.B-2*t.q)+' breit. Fünf Kanten sind nummeriert: 1 oben, 2 rechts außen, 3 unten am Körper neben der Lasche, 4 an der Seite der Lasche, 5 unten an der Lasche.')+'<figcaption>Dieses Muster hat andere Maße als die A3-Vorlage. Die Nahtzugabe beträgt hier '+de(t.nz)+' cm.</figcaption>';
+  const sels=t.kanten.map((r,ri)=>{const s=el('select',{'aria-label':r[0]+': Naht'},el('option',{value:'-1'},'… wählen'),...t.opts.map((o,oi)=>el('option',{value:String(oi)},o)));s.value=String(a.k[ri]);
+    s.onchange=()=>{a.k[ri]=+s.value;s.classList.remove('s-ok','s-bad');save();};return s;});
+  const ins=t.masse.map((r,ri)=>{const inp=el('input',{type:'text',inputmode:'decimal',autocomplete:'off','aria-label':r[0]+' in Zentimetern'});inp.value=a.m[ri]||'';
+    inp.oninput=()=>{a.m[ri]=inp.value.slice(0,8);inp.classList.remove('s-ok','s-bad');save();};return inp;});
+  w.className='mli nzg';
+  w.append(fig,el('p',{class:'nzg-h'},'1. An welcher Kante entsteht welche Naht?'),
+    el('table',{},el('tbody',{},...t.kanten.map((r,ri)=>el('tr',{},el('th',{scope:'row'},r[0]),el('td',{},sels[ri]))))),
+    el('p',{class:'nzg-h'},'2. Die fertigen Maße'),
+    el('table',{},el('tbody',{},...t.masse.map((r,ri)=>el('tr',{},el('th',{scope:'row'},r[0]),el('td',{},el('span',{class:'nzg-in'},ins[ri],' cm')))))));
+  const num=x=>{const n=parseFloat(String(x).replace(',','.'));return isFinite(n)?n:NaN;};
+  mkCheck(id,art,fb=>{if(a.k.some(x=>x<0)||a.m.some(x=>!String(x).trim())){showFb(fb,'mid','Noch nicht fertig','Wähle zu jeder Kante eine Naht und trag alle drei Maße ein.');return;}
+    let ko=0,mo=0;t.kanten.forEach((r,ri)=>{const ok=a.k[ri]===r[1];sels[ri].classList.toggle('s-ok',ok);sels[ri].classList.toggle('s-bad',!ok);if(ok)ko++;});
+    t.masse.forEach((r,ri)=>{const ok=Math.abs(num(a.m[ri])-r[1])<=0.011;ins[ri].classList.toggle('s-ok',ok);ins[ri].classList.toggle('s-bad',!ok);if(ok)mo++;});
+    const all=ko===t.kanten.length&&mo===t.masse.length;
+    if(all)showFb(fb,'ok','Alles richtig!',t.why);
+    else showFb(fb,ko+mo>=6?'mid':'err',ko+' von '+t.kanten.length+' Kanten und '+mo+' von '+t.masse.length+' Maßen richtig',ko<t.kanten.length?'Sieh dir die rot markierten Kanten noch einmal an: Welche Kanten werden zusammengenäht?':'Die Kanten stimmen. Rechne die rot markierten Maße noch einmal mit der Nahtzugabe von '+de(t.nz)+' cm.');
+    report(id,all,art,fb);});
+}
 function wListe(id,t,w,art){
   let v=S.a[id];if(!Array.isArray(v)||v.length!==t.rows.length)v=S.a[id]=t.rows.map(()=>-1);
   const sels=t.rows.map((r,ri)=>{const s=el('select',{'aria-label':r[0]},el('option',{value:'-1'},'… wählen'),...r[1].map((o,oi)=>el('option',{value:String(oi)},o)));s.value=String(v[ri]);
@@ -1729,7 +1771,7 @@ function wBewert(id,t,w,art){
     const c=[0,0,0];ks.forEach(kv=>c[a.r[kv[0]]]++);
     showFb(fb,'ok','Bewertung fertig.',c[0]+' erfüllt, '+c[1]+' teilweise erfüllt, '+c[2]+' nicht erfüllt. Die Bewertung steht in deiner Planungsmappe.');report(id,true,art,fb);});
 }
-function platformWidgets(){return {katalog:wKatalog,liste:wListe,bewert:wBewert};}
+function platformWidgets(){return {katalog:wKatalog,liste:wListe,bewert:wBewert,nzg:wNzg};}
 function platformInit(){
   S.pm=S.pm&&typeof S.pm==='object'?S.pm:{};
   $$('[data-np]').forEach(b=>{const g=NP[b.dataset.np]();b.insertAdjacentHTML('afterbegin',NP.svg(g.vb,g.body,b.dataset.aria||''));});
@@ -1746,6 +1788,7 @@ function platformSum(li){const c=lzCount(),p=pmNow(),m=NP.masse(p.B,p.H,p.q);
   li.push(el('li',{},el('span',{},'Nähen (Laufzettel)'),el('b',{},c[0]+' geschafft, '+c[1]+' abgenommen')));}
 function platformPdfTask(id,t,P){
   if(t.type==='katalog'){const a=S.a[id]||{};P.txt('Gedacht für: '+((a.z||'').trim()||'–'),{ind:16,size:9.5});reqList().forEach((kv,i)=>P.txt((i+1)+'. '+kv[1],{ind:16,size:9.5}));}
+  else if(t.type==='nzg'){const a=S.a[id]||{k:[],m:[]};P.txt(t.kanten.map((r,ri)=>r[0]+': '+(a.k&&a.k[ri]>=0?t.opts[a.k[ri]]:'–')).join(' · '),{ind:16,size:9.5});P.txt(t.masse.map((r,ri)=>r[0]+': '+((a.m&&String(a.m[ri]||'').trim())||'–')+' cm').join(' · '),{ind:16,size:9.5});}
   else if(t.type==='liste'){const v=S.a[id]||[];t.rows.forEach((r,ri)=>P.txt(r[0]+': '+(v[ri]>=0?r[1][v[ri]]:'–'),{ind:16,size:9.5}));}
   else if(t.type==='bewert'){const a=S.a[id]||{r:{},n:{}};reqList().forEach((kv,i)=>{const r=(a.r||{})[kv[0]],n=((a.n||{})[kv[0]]||'').trim();P.txt((i+1)+'. '+kv[1],{ind:16,size:9.5,b:1});P.txt((r==null?'noch nicht bewertet':BEW_L[r])+(n?' · '+n:''),{ind:20,size:9.5});});}
 }
@@ -1867,6 +1910,8 @@ function addHelp(id,t,art){if(!t.help)return;const tb=el('div',{class:'hbox',hid
   const fb=$('.fb',art);art.insertBefore(el('div',{class:'help2'},el('div',{class:'row'},b1,b2),tb,pb),fb);}
 if(typeof platformInit==='function')platformInit();
 const WMAP=Object.assign({seg:wSeg,quiz:wQuiz,multi:wMulti,order:wOrder,open:wOpen,gap:wGap,pair:wPair,mark:wMark,num:wNum,label:wLabel,grid:wGrid,est:wEst,figsel:wFigsel,drill:wDrill,gfb:wGfb,draw:wDraw},typeof platformWidgets==='function'?platformWidgets():{});
+/* Wurde eine Aufgabe auf den Typ mark umgebaut, passt ein alter gespeicherter Stand nicht mehr: verwerfen statt falsch anzeigen. */
+$$('.w[data-t]').forEach(w=>{const id=w.dataset.t,t=T[id],v=S.a[id];if(t.type==='mark'&&v!=null&&!(Array.isArray(v)&&v.length===t.parts.length&&v.every(x=>typeof x==='boolean'))){delete S.a[id];if(S.ok)delete S.ok[id];}});
 $$('.w[data-t]').forEach(w=>{const id=w.dataset.t,t=T[id],art=w.closest('.task');WMAP[t.type](id,t,w,art);addHelp(id,t,art);});
 
 /* Selbsteinschätzung */
