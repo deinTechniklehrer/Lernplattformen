@@ -686,12 +686,26 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
 .hw-bars{margin:12px 0 0;display:grid;gap:8px}
 .hw-bt{font-weight:700}
 .hw-bl{display:grid;gap:8px}
-.hw-br{display:grid;grid-template-columns:minmax(0,12.5em) minmax(0,1fr) 3.4em;gap:8px;align-items:center;font-size:15px}
+.hw-br{display:grid;grid-template-columns:minmax(0,12.5em) minmax(0,1fr) var(--bv,3.4em);gap:8px;align-items:center;font-size:15px}
 .hw-bb{height:16px;border-radius:8px;background:rgba(128,128,128,.2);overflow:hidden}
 .hw-bb i{display:block;height:100%;background:var(--c,#2e6e26);border-radius:8px;min-width:4px}
 .hw-bv{font-weight:700;text-align:right;white-space:nowrap}
 .hw-bq{font-size:13px;color:var(--muted);margin:0}
-@media (max-width:520px){.hw-br{grid-template-columns:minmax(0,1fr) 3.4em}.hw-bn{grid-column:1/-1}}
+@media (max-width:520px){.hw-br{grid-template-columns:minmax(0,1fr) var(--bv,3.4em)}.hw-bn{grid-column:1/-1}}
+
+/* Karten in Felder sortieren (25.11.2026) */
+.srt{display:grid;gap:10px}
+.srt-pool{display:flex;flex-wrap:wrap;gap:8px;min-height:56px;padding:10px;border:1.5px dashed var(--line);border-radius:12px}
+.srt-pool.leer::before{content:"Vorrat leer";color:var(--muted);font-size:14px;align-self:center}
+.srt-bins{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+@media (max-width:640px){.srt-bins{grid-template-columns:1fr}}
+.srt-bin{border:1.5px solid var(--line);border-radius:12px;background:var(--surface);padding:8px;min-height:96px;display:grid;gap:8px;align-content:start}
+.srt.arm .srt-bin{border-color:var(--c);border-style:dashed;cursor:pointer}
+.srt-h{font:inherit;font-weight:800;text-align:left;border:0;background:none;color:var(--ink);padding:4px 2px;min-height:36px;cursor:pointer}
+.srt-in{display:flex;flex-wrap:wrap;gap:8px}
+.srt-card{font:inherit;font-size:15px;font-weight:600;text-align:left;padding:8px 12px;border:1.5px solid var(--line);border-radius:10px;background:var(--bg,var(--surface));color:var(--ink);cursor:pointer;min-height:42px}
+.srt-card[aria-pressed="true"]{outline:3px solid var(--c);outline-offset:1px}
+.srt-card.s-ok{border-color:#1f8a4c;border-width:2.5px}.srt-card.s-bad{border-color:#c23b2e;border-width:2.5px}
 /* Nähprojekt Utensilo: Grafikfarben (hell/dunkel) und eigene Bausteine, Stand 25.11.2026 */
 :root{--n-line:#22303a;--n-papier:#fffdf6;--n-aussen:#4a4fa8;--n-aussenl:#b9bce6;--n-futter:#f0b93a;--n-futterl:#f8e3ad;--n-naht:#c8402e;--n-weg:#e4e7e8;--n-stoff:#3f8f6b;--n-stoffl:#cfe6da;--n-acc:#b05a00}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--n-line:#e3eaee;--n-papier:#2a3032;--n-aussen:#7f85e6;--n-aussenl:#4a4d78;--n-futter:#e0a92a;--n-futterl:#6b5a2a;--n-naht:#ff8a75;--n-weg:#1d2325;--n-stoff:#5fc097;--n-stoffl:#33574a;--n-acc:#ffb45e}}
@@ -788,19 +802,6 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
 .np-kopfA{fill:var(--n-naht);stroke:var(--n-line);stroke-width:1.6}.np-kopfB{fill:var(--n-futter);stroke:var(--n-line);stroke-width:1.6}
 .np-gabel{fill:none;stroke:var(--n-line);stroke-width:3.4;stroke-linecap:round;stroke-linejoin:round}
 .np-eisen{fill:var(--n-aussenl);stroke:var(--n-line);stroke-width:2;stroke-linejoin:round}
-/* Karten in Felder sortieren (25.11.2026) */
-.srt{display:grid;gap:10px}
-.srt-pool{display:flex;flex-wrap:wrap;gap:8px;min-height:56px;padding:10px;border:1.5px dashed var(--line);border-radius:12px}
-.srt-pool.leer::before{content:"Vorrat leer";color:var(--muted);font-size:14px;align-self:center}
-.srt-bins{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-@media (max-width:640px){.srt-bins{grid-template-columns:1fr}}
-.srt-bin{border:1.5px solid var(--line);border-radius:12px;background:var(--surface);padding:8px;min-height:96px;display:grid;gap:8px;align-content:start}
-.srt.arm .srt-bin{border-color:var(--c);border-style:dashed;cursor:pointer}
-.srt-h{font:inherit;font-weight:800;text-align:left;border:0;background:none;color:var(--ink);padding:4px 2px;min-height:36px;cursor:pointer}
-.srt-in{display:flex;flex-wrap:wrap;gap:8px}
-.srt-card{font:inherit;font-size:15px;font-weight:600;text-align:left;padding:8px 12px;border:1.5px solid var(--line);border-radius:10px;background:var(--bg,var(--surface));color:var(--ink);cursor:pointer;min-height:42px}
-.srt-card[aria-pressed="true"]{outline:3px solid var(--c);outline-offset:1px}
-.srt-card.s-ok{border-color:#1f8a4c;border-width:2.5px}.srt-card.s-bad{border-color:#c23b2e;border-width:2.5px}
 .np-ringO{fill:none;stroke:var(--n-line);stroke-width:12;stroke-linecap:round}
 .np-ring{fill:none;stroke-width:8;stroke-linecap:round}.np-ring.a{stroke:var(--n-aussen)}.np-ring.b{stroke:var(--n-futter)}
 .szl{list-style:none;padding:0;margin:8px 0;display:grid;gap:10px}.szl li{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center}.szi{display:inline-flex;gap:6px;min-width:44px}.szl .szi{flex-direction:column;width:44px}.szi svg,.szi .gfb-ico{width:44px;height:44px;flex:none}
@@ -1658,6 +1659,9 @@ function gfbSummary(t, v) {
     return { t: h.t, sel: sel.map(function (i) { return h.m[i].t; }), r: sel.length ? GFB_R[gfbRate(h, sel).r] : '' }; });
 }
 
+/* Operatoren aus dem KC AWT IGS 2024, Anhang A1 (S. 45/46), Beschreibungen leicht gekürzt. Gemeinsam für neue Plattformen aus make_hw.py (seit 25.11.2026). */
+const OPS_AWT={'benennen':'(be)nennen: Fakten, Daten, Begriffe, Regeln ohne Erläuterung aufzählen.','beschreiben':'Strukturiert und fachsprachlich angemessen Materialien vorstellen und/oder Sachverhalte darlegen.','darstellen':'Sachverhalte detailliert und fachsprachlich angemessen aufzeigen.','zusammenstellen':'Begriffe, Elemente nach vorgegebenen oder selbst festgelegten Gesichtspunkten sammeln.','recherchieren':'Etwas ermitteln, erkunden, untersuchen, erforschen.','untersuchen':'analysieren/untersuchen: Materialien oder Sachverhalte beschreiben, kriterienorientiert erschließen und strukturiert darstellen.','zuordnen':'Begründet für ein Objekt eine Gruppe, eine Position oder ein Material zuweisen oder einen Sachverhalt begründet in einen Zusammenhang stellen.','erklären':'Sachverhalte so darstellen, dass Bedingungen, Ursachen, Gesetzmäßigkeiten und/oder Funktionszusammenhänge verständlich werden.','erläutern':'Sachverhalte erklären und in ihren Beziehungen an Beispielen verdeutlichen.','ermitteln':'Einen Zusammenhang oder eine Lösung finden und das Ergebnis formulieren.','erstellen':'Einen Text oder einen Plan ausarbeiten.','herausarbeiten':'Materialien auf bestimmte, nicht unbedingt genannte Sachverhalte hin untersuchen und Zusammenhänge herstellen.','ordnen':'Etwas kriteriengeleitet in eine bestimmte Systematik oder Reihenfolge bringen.','unterscheiden':'Etwas im Hinblick auf seine besonderen Merkmale erkennen und von Alternativen abgrenzen.','vergleichen':'Gemeinsamkeiten, Ähnlichkeiten und Unterschiede von Sachverhalten kriterienorientiert darlegen.','beurteilen':'Den Stellenwert von Sachverhalten in einem Zusammenhang bestimmen, um kriterienorientiert zu einem begründeten Sachurteil zu gelangen.','bewerten':'Einen Gegenstand an erkennbaren Wertkategorien oder an bekannten Beurteilungskriterien messen.','Stellung nehmen':'Beurteilung mit eigenen Wertmaßstäben, die zu einem begründeten eigenen Werturteil führt.','überprüfen':'Inhalte oder Aussagen auf ihre sachliche Richtigkeit bzw. innere Logik hin untersuchen.','messen':'Physikalische Größen mit geeigneten Methoden quantifizieren (fachpraktischer Operator).','schätzen':'Kein Operator aus dem Kerncurriculum. Hier gibt es kein Richtig oder Falsch: Die Frage zeigt dir, was du schon weißt.'};
+
 /* Nähprojekt Utensilo: Kapitel, Aufgaben, eigene Bausteine (Anforderungskatalog, Materialliste, Bewertung, Laufzettel). Textil Jg. 6–8. Stand 25.11.2026.
    Grundlage: KC AWT IGS 2024, 6-1 (S. 22/23), KC Textiles Gestalten RS 2012, Themenbereich 2 (S. 12), RiSU 2023, II-6.4,
    Betriebsanweisungen Nähmaschinen, Dampfbügeleisen, Scheren und Rollschneider (Vorlagen Daniel Beyrodt 2026).
@@ -1823,27 +1827,6 @@ function wListe(id,t,w,art){
     if(all)showFb(fb,'ok','Die Materialliste stimmt!',null);else showFb(fb,ok>=t.rows.length*0.7?'mid':'err',ok+' von '+t.rows.length+' Zeilen richtig','Die rot markierten Zeilen stimmen noch nicht. Lies bei „Muster und Zuschnitt“ und bei „Was du brauchst“ nach.');
     report(id,all,art,fb);});
 }
-/* Karten in Felder sortieren (seit 25.11.2026, Lernplattform-Check Punkt 6): Karte antippen, dann das Feld. Zustand wie bei seg: Feldnummer je Karte, -1 = noch im Vorrat. */
-function wSort(id,t,w,art){
-  let v=S.a[id];if(!Array.isArray(v)||v.length!==t.items.length||v.some(x=>!Number.isInteger(x)||x<-1||x>=t.cats.length))v=S.a[id]=t.items.map(()=>-1);
-  let armed=-1;
-  const pool=el('div',{class:'srt-pool',role:'group','aria-label':'Noch nicht sortiert'});
-  const note=el('p',{class:'hint','aria-live':'polite'});
-  const cards=t.items.map((it,i)=>{const b=el('button',{type:'button',class:'srt-card','aria-pressed':'false'},it[0]);b.onclick=e=>{e.stopPropagation();armed=armed===i?-1:i;draw();};return b;});
-  const bins=t.cats.map((c,ci)=>{const inner=el('div',{class:'srt-in'});const h=el('button',{type:'button',class:'srt-h'},c);
-    const bin=el('div',{class:'srt-bin'},h,inner);bin.onclick=()=>{if(armed<0)return;v[armed]=ci;cards[armed].classList.remove('s-ok','s-bad');armed=-1;save();draw();};return {bin,inner,h};});
-  pool.onclick=()=>{if(armed<0||v[armed]<0)return;v[armed]=-1;cards[armed].classList.remove('s-ok','s-bad');armed=-1;save();draw();};
-  function draw(){cards.forEach((b,i)=>{const home=v[i]<0?pool:bins[v[i]].inner;if(b.parentNode!==home)home.append(b);b.setAttribute('aria-pressed',String(i===armed));});
-    w.classList.toggle('arm',armed>=0);const rest=v.filter(x=>x<0).length;pool.classList.toggle('leer',!rest);
-    bins.forEach((x,ci)=>x.h.setAttribute('aria-label',armed>=0?'„'+t.items[armed][0]+'“ in das Feld '+t.cats[ci]+' legen':'Feld '+t.cats[ci]));
-    note.textContent=armed>=0?'Tippe jetzt das Feld an, in das die Karte gehört.':rest?'Noch '+rest+(rest===1?' Karte':' Karten')+' im Vorrat.':'Alle Karten liegen in einem Feld. Eine Karte verschiebst du, indem du sie antippst und dann ein anderes Feld.';}
-  w.className='srt';w.append(pool,note,el('div',{class:'srt-bins'},...bins.map(x=>x.bin)));draw();
-  mkCheck(id,art,fb=>{if(v.some(x=>x<0)){showFb(fb,'mid','Noch nicht fertig','Leg zuerst alle Karten in ein Feld.');return;}
-    let ok=0;t.items.forEach((it,i)=>{const g=v[i]===it[1];cards[i].classList.toggle('s-ok',g);cards[i].classList.toggle('s-bad',!g);if(g)ok++;});const all=ok===t.items.length;
-    if(all)showFb(fb,'ok','Alles richtig sortiert!',ok+' von '+t.items.length+' Karten liegen im richtigen Feld.');
-    else showFb(fb,ok>=t.items.length*0.6?'mid':'err',ok+' von '+t.items.length+' Karten richtig','Die rot umrandeten Karten liegen noch im falschen Feld. Lies die Information oben noch einmal und leg sie um.');
-    report(id,all,art,fb);});
-}
 function wBewert(id,t,w,art){
   let a=S.a[id];if(!a||typeof a!=='object'||Array.isArray(a))a=S.a[id]={r:{},n:{}};a.r=a.r&&typeof a.r==='object'?a.r:{};a.n=a.n&&typeof a.n==='object'?a.n:{};
   const box=el('div',{class:'bew'});w.append(box);
@@ -1861,7 +1844,7 @@ function wBewert(id,t,w,art){
     const c=[0,0,0];ks.forEach(kv=>c[a.r[kv[0]]]++);
     showFb(fb,'ok','Bewertung fertig.',c[0]+' erfüllt, '+c[1]+' teilweise erfüllt, '+c[2]+' nicht erfüllt. Die Bewertung steht in deiner Planungsmappe.');report(id,true,art,fb);});
 }
-function platformWidgets(){return {katalog:wKatalog,liste:wListe,bewert:wBewert,nzg:wNzg,sort:wSort};}
+function platformWidgets(){return {katalog:wKatalog,liste:wListe,bewert:wBewert,nzg:wNzg};}
 function platformInit(){
   S.pm=S.pm&&typeof S.pm==='object'?S.pm:{};
   $$('[data-np]').forEach(b=>{const g=NP[b.dataset.np]();b.insertAdjacentHTML('afterbegin',NP.svg(g.vb,g.body,b.dataset.aria||''));});
@@ -1922,6 +1905,27 @@ function numIn(s){s=String(s||'').trim().replace(/\s|€|ct|cent|kwh|cm|mm|jahre
 /* Balkendiagramm in der Auflösung einer Schätzfrage (seit 25.11.2026): t.bars = {title, unit, rows:[[Name, Wert]…], src}. Als HTML, damit die Schrift mit der Seite mitwächst. */
 function barFig(b){const mx=Math.max(...b.rows.map(r=>r[1]));
   return el('figure',{class:'hw-bars'},el('figcaption',{class:'hw-bt'},b.title),el('div',{class:'hw-bl'},...b.rows.map(r=>el('div',{class:'hw-br'},el('span',{class:'hw-bn'},r[0]),el('span',{class:'hw-bb','aria-hidden':'true'},el('i',{style:'width:'+(r[1]/mx*100).toFixed(1)+'%'})),el('span',{class:'hw-bv'},de(r[1])+' '+b.unit)))),el('p',{class:'hw-bq'},b.src));}
+/* Karten in Felder sortieren (seit 25.11.2026, Lernplattform-Check Punkt 6): Karte antippen, dann das Feld. Zustand wie bei seg: Feldnummer je Karte, -1 = noch im Vorrat. */
+function wSort(id,t,w,art){
+  let v=S.a[id];if(!Array.isArray(v)||v.length!==t.items.length||v.some(x=>!Number.isInteger(x)||x<-1||x>=t.cats.length))v=S.a[id]=t.items.map(()=>-1);
+  let armed=-1;
+  const pool=el('div',{class:'srt-pool',role:'group','aria-label':'Noch nicht sortiert'});
+  const note=el('p',{class:'hint','aria-live':'polite'});
+  const cards=t.items.map((it,i)=>{const b=el('button',{type:'button',class:'srt-card','aria-pressed':'false'},it[0]);b.onclick=e=>{e.stopPropagation();armed=armed===i?-1:i;draw();};return b;});
+  const bins=t.cats.map((c,ci)=>{const inner=el('div',{class:'srt-in'});const h=el('button',{type:'button',class:'srt-h'},c);
+    const bin=el('div',{class:'srt-bin'},h,inner);bin.onclick=()=>{if(armed<0)return;v[armed]=ci;cards[armed].classList.remove('s-ok','s-bad');armed=-1;save();draw();};return {bin,inner,h};});
+  pool.onclick=()=>{if(armed<0||v[armed]<0)return;v[armed]=-1;cards[armed].classList.remove('s-ok','s-bad');armed=-1;save();draw();};
+  function draw(){cards.forEach((b,i)=>{const home=v[i]<0?pool:bins[v[i]].inner;if(b.parentNode!==home)home.append(b);b.setAttribute('aria-pressed',String(i===armed));});
+    w.classList.toggle('arm',armed>=0);const rest=v.filter(x=>x<0).length;pool.classList.toggle('leer',!rest);
+    bins.forEach((x,ci)=>x.h.setAttribute('aria-label',armed>=0?'„'+t.items[armed][0]+'“ in das Feld '+t.cats[ci]+' legen':'Feld '+t.cats[ci]));
+    note.textContent=armed>=0?'Tippe jetzt das Feld an, in das die Karte gehört.':rest?'Noch '+rest+(rest===1?' Karte':' Karten')+' im Vorrat.':'Alle Karten liegen in einem Feld. Eine Karte verschiebst du, indem du sie antippst und dann ein anderes Feld.';}
+  w.className='srt';w.append(pool,note,el('div',{class:'srt-bins'},...bins.map(x=>x.bin)));draw();
+  mkCheck(id,art,fb=>{if(v.some(x=>x<0)){showFb(fb,'mid','Noch nicht fertig','Leg zuerst alle Karten in ein Feld.');return;}
+    let ok=0;t.items.forEach((it,i)=>{const g=v[i]===it[1];cards[i].classList.toggle('s-ok',g);cards[i].classList.toggle('s-bad',!g);if(g)ok++;});const all=ok===t.items.length;
+    if(all)showFb(fb,'ok','Alles richtig sortiert!',ok+' von '+t.items.length+' Karten liegen im richtigen Feld.');
+    else showFb(fb,ok>=t.items.length*0.6?'mid':'err',ok+' von '+t.items.length+' Karten richtig','Die rot umrandeten Karten liegen noch im falschen Feld. Lies die Information oben noch einmal und leg sie um.');
+    report(id,all,art,fb);});
+}
 function wEst(id,t,w,art){
   const val=el('span',{class:'val'});const r=el('input',{type:'range',min:t.min,max:t.max,step:t.step,'aria-label':'Schätzung in '+t.unit});r.value=S.a[id]!=null?S.a[id]:t.start;
   const rev=el('div',{class:'reveal',hidden:S.a[id]==null},el('b',{},'Zum Vergleich: '),t.reveal,t.bars?barFig(t.bars):null);
@@ -1967,7 +1971,7 @@ function wDraw(id,t,w,art){
     if(t.text){const ta=el('textarea',{'aria-label':'Bedeutung: '+name,placeholder:t.ph||'Bedeutung in Worten',maxlength:120});ta.value=a.t[i]||'';ta.oninput=()=>{a.t[i]=ta.value;save();upd();paint();};f.append(ta);}
     grid.append(f);paintC();});
   cmp.onclick=()=>{a.k=1;chk.hidden=false;save();upd();paint();};
-  w.className='draw';w.append(grid,note,t.denkOffen?null:el('div',{class:'row'},cmp),chk);upd();
+  w.className='draw';w.append(...[grid,note,t.denkOffen?null:el('div',{class:'row'},cmp),chk].filter(Boolean));upd();
 }
 function wFigsel(id,t,w,art){
   let v=S.a[id];if(!Array.isArray(v)||v.length!==t.figs.length)v=S.a[id]=t.figs.map(()=>-1);
@@ -2003,7 +2007,7 @@ function addHelp(id,t,art){if(!t.help)return;const tb=el('div',{class:'hbox',hid
   b2.onclick=()=>{S.help[id]=2;pb.hidden=false;save();if(window.LP&&LP.assist)LP.assist(id);};
   const fb=$('.fb',art);art.insertBefore(el('div',{class:'help2'},el('div',{class:'row'},b1,b2),tb,pb),fb);}
 if(typeof platformInit==='function')platformInit();
-const WMAP=Object.assign({seg:wSeg,quiz:wQuiz,multi:wMulti,order:wOrder,open:wOpen,gap:wGap,pair:wPair,mark:wMark,num:wNum,label:wLabel,grid:wGrid,est:wEst,figsel:wFigsel,drill:wDrill,gfb:wGfb,draw:wDraw},typeof platformWidgets==='function'?platformWidgets():{});
+const WMAP=Object.assign({seg:wSeg,quiz:wQuiz,multi:wMulti,order:wOrder,open:wOpen,gap:wGap,pair:wPair,mark:wMark,num:wNum,label:wLabel,grid:wGrid,est:wEst,figsel:wFigsel,drill:wDrill,gfb:wGfb,draw:wDraw,sort:wSort},typeof platformWidgets==='function'?platformWidgets():{});
 /* Wurde eine Aufgabe auf den Typ mark umgebaut, passt ein alter gespeicherter Stand nicht mehr: verwerfen statt falsch anzeigen. */
 $$('.w[data-t]').forEach(w=>{const id=w.dataset.t,t=T[id],v=S.a[id];if(t.type==='mark'&&v!=null&&!(Array.isArray(v)&&v.length===t.parts.length&&v.every(x=>typeof x==='boolean'))){delete S.a[id];if(S.ok)delete S.ok[id];}});
 $$('.w[data-t]').forEach(w=>{const id=w.dataset.t,t=T[id],art=w.closest('.task');WMAP[t.type](id,t,w,art);addHelp(id,t,art);});
