@@ -14,7 +14,12 @@
   var FK = 'lp-feedback:' + SLUG, F;
   try { F = JSON.parse(localStorage.getItem(FK) || '{}') || {}; } catch (e) { F = {}; }
   F.v = F.v || {}; F.s = F.s || {}; F.o = F.o || {};
-  var FOPT = [['s', 'zu schwer'], ['l', 'zu leicht'], ['u', 'unverständlich'], ['h', 'Hilfe hat nicht geholfen'], ['f', 'Fehler in der Aufgabe']];
+  /* Daumen (g hoch, m mittel, n runter) schließen sich gegenseitig aus, u/h/f lassen sich dazu wählen; Wert = Codes hintereinander, z. B. 'nuh' */
+  var FTH = [['g', 'Daumen hoch', 0], ['m', 'Daumen mittel', -90], ['n', 'Daumen runter', 180]];
+  var FFL = [['u', 'unverständlich'], ['h', 'Hilfe hat nicht geholfen'], ['f', 'Fehler in der Aufgabe']];
+  var FORD = 'gmnuhf';
+  Object.keys(F.v).forEach(function (k) { var c = String(F.v[k]).replace(/[^gmnuhf]/g, ''); if (c) F.v[k] = c; else delete F.v[k]; });
+  function thumb(rot) { return '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" style="transform:rotate(' + rot + 'deg)"><path fill="currentColor" d="M2 10h4v11H2zM8 21h9.2a2 2 0 0 0 2-1.6l1.6-7.5A2 2 0 0 0 18.8 9.5H14l.8-4a2.2 2.2 0 0 0-4.1-1.5L8 9.6z"/></svg>'; }
   function saveF() { try { localStorage.setItem(FK, JSON.stringify(F)); } catch (e) { } }
   var lastCheck = 0;
   function saveE() { try { localStorage.setItem(EK, JSON.stringify(E)); } catch (e) { } }
@@ -133,15 +138,23 @@
     var t = c.closest('article.task, .task, .card') || c;
     var old = [].filter.call(t.querySelectorAll('.lp-fbrow'), function (n) { return n.dataset.k === key; })[0];
     if (old) return;
-    var row = mk('div', 'lp-fbrow'); row.dataset.k = key; row.setAttribute('role', 'group'); row.setAttribute('aria-label', 'Rückmeldung zu dieser Aufgabe, freiwillig');
+    var row = mk('div', 'lp-fbrow'); row.dataset.k = key; row.setAttribute('role', 'group'); row.setAttribute('aria-label', 'Rückmeldung zu dieser Aufgabe, freiwillig, mehrere Antworten möglich');
     row.appendChild(mk('span', 'lp-fbl', 'Rückmeldung (freiwillig):'));
-    var bs = FOPT.map(function (o) {
-      var b = mk('button', 'lp-fbb'); b.type = 'button'; b.textContent = o[1];
-      b.onclick = function () { if (F.v[key] === o[0]) delete F.v[key]; else F.v[key] = o[0]; saveF(); upd(); };
-      row.appendChild(b); return b;
+    var cur = function () { return String(F.v[key] || ''); };
+    var put = function (c) { c = FORD.split('').filter(function (x) { return c.indexOf(x) >= 0; }).join(''); if (c) F.v[key] = c; else delete F.v[key]; saveF(); upd(); };
+    var bs = [];
+    FTH.forEach(function (o) {
+      var b = mk('button', 'lp-fbb lp-th', thumb(o[2])); b.type = 'button'; b.setAttribute('aria-label', o[1]); b.title = o[1]; b.dataset.c = o[0];
+      b.onclick = function () { var c = cur(); var had = c.indexOf(o[0]) >= 0; c = c.replace(/[gmn]/g, ''); put(had ? c : c + o[0]); };
+      row.appendChild(b); bs.push(b);
+    });
+    FFL.forEach(function (o) {
+      var b = mk('button', 'lp-fbb'); b.type = 'button'; b.textContent = o[1]; b.dataset.c = o[0];
+      b.onclick = function () { var c = cur(); put(c.indexOf(o[0]) >= 0 ? c.replace(o[0], '') : c + o[0]); };
+      row.appendChild(b); bs.push(b);
     });
     var note = mk('span', 'lp-fbn'); row.appendChild(note);
-    function upd() { bs.forEach(function (b, i) { b.setAttribute('aria-pressed', String(F.v[key] === FOPT[i][0])); }); note.textContent = F.v[key] ? 'Danke! Bleibt auf deinem Gerät.' : ''; }
+    function upd() { var c = cur(); bs.forEach(function (b) { b.setAttribute('aria-pressed', String(c.indexOf(b.dataset.c) >= 0)); }); note.textContent = c ? 'Danke! Bleibt auf deinem Gerät.' : ''; }
     upd(); t.appendChild(row);
   }
   function unsent() { return Object.keys(F.v).filter(function (k) { return F.s[k] !== F.v[k]; }); }
