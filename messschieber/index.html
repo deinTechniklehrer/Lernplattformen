@@ -730,6 +730,14 @@ code.cd{display:block;word-break:break-all;font-size:12px;max-height:90px;overfl
 .ms-wisch{font-size:13px;color:var(--muted);margin:4px 0 0}
 .drill .dq .ms-scroll{margin:0 0 10px}
 .lab .msg .mk text{font-size:17px}
+.msg-ring{fill:var(--ms-hl);stroke:var(--ms-ink);stroke-width:1}.msg-nut{stroke:var(--ms-ink);stroke-width:2;opacity:.55}
+.msg-loch{fill:var(--surface);stroke:var(--ms-ink);stroke-width:1.4}.msg-gew{fill:none;stroke:var(--ms-ink);stroke-width:2;stroke-linejoin:round}
+.msg-mass{fill:none;stroke:var(--ms-hl);stroke-width:2}
+.msg-mk circle{fill:var(--ms-hl);stroke:var(--ms-ink);stroke-width:1.2}.msg-mk text{font-family:var(--body);font-weight:800;font-size:22px;text-anchor:middle;fill:#fff}
+.ms-fig[data-msx],.ms-fig[data-msfig]{max-width:none}
+.ms-fig-s{max-width:360px}
+@media (min-width:820px){.ms-wisch{display:none}}
+.ms-fig-m{max-width:480px}
 .szl{list-style:none;padding:0;margin:8px 0;display:grid;gap:10px}.szl li{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center}.szi{display:inline-flex;gap:6px;min-width:44px}.szl .szi{flex-direction:column;width:44px}.szi svg,.szi .gfb-ico{width:44px;height:44px;flex:none}
 </style>
 <script>/* Sicherheitszeichen aus dem Tech-Board (Repo Unterrichtsboard, tech-board/index.html, TB_RULES/TB_HAZ).
@@ -780,7 +788,7 @@ function hwKey(u, ks) { if (u <= ks[0][0]) return ks[0][1]; for (var i = 0; i < 
 var MSG = (function () {
   function svg(vb, body, aria, cls) { return '<svg class="msg ' + (cls || '') + '" viewBox="' + vb + '" role="img" aria-label="' + (aria || '') + '">' + body + '</svg>'; }
   function r1(n) { return Math.round(n * 10) / 10; }
-  function skala(v, n, o) { o = o || {}; var ppm = n === 10 ? 12.5 : 22, L = n === 10 ? 9 : 19, h = Math.round(v * 100), k = n === 10 ? Math.round((h % 100) / 10) : Math.round((h % 100) / 5);
+  function skala(v, n, o) { o = o || {}; var ppm = n === 10 ? 12.5 : 21, L = n === 10 ? 9 : 19, h = Math.round(v * 100), k = n === 10 ? Math.round((h % 100) / 10) : Math.round((h % 100) / 5);
     var start = Math.floor(v / 10) * 10 - 1, end = v + L + 1.5, W = Math.ceil((end - start) * ppm) + 12, H = 150, b = '', m, i, len, xx;
     function x(mm) { return r1(6 + (mm - start) * ppm); }
     b += '<rect class="msg-schiene" x="0" y="12" width="' + W + '" height="60"/>';
@@ -816,7 +824,35 @@ var MSG = (function () {
     if (art === 'gerade') t = '<rect class="msg-teil" x="26" y="84" width="' + o + '" height="40"/>';
     if (art === 'schraeg') { o = 47; t = '<rect class="msg-teil" x="29.5" y="84" width="40" height="40" transform="rotate(14 49.5 104)"/>'; }
     return { vb: '0 0 240 120', body: '<g transform="translate(8 22) scale(0.62)">' + cal(o, t) + '</g>' }; }
-  return { svg: svg, skala: skala, skalaSvg: skalaSvg, skalaBild: skalaBild, ganz: ganz, mini: mini, POS: POS };
+  /* Gewindewerkzeuge mit Nummern (ohne Namen an den Gewindebohrern) und Schnitt durch Kernloch und Gewinde, Stand 26.11.2026 */
+  function mk(x, y, n) { return '<g class="msg-mk"><circle cx="' + x + '" cy="' + y + '" r="17"/><text x="' + x + '" y="' + (y + 8) + '">' + n + '</text></g>'; }
+  function tap(x, rings, n) {
+    var b = '<rect class="msg-schieber" x="' + (x - 7) + '" y="40" width="14" height="14"/><rect class="msg-schiene" x="' + (x - 5) + '" y="54" width="10" height="96"/>';
+    for (var i = 0; i < rings; i++) b += '<rect class="msg-ring" x="' + (x - 6.5) + '" y="' + (64 + i * 9) + '" width="13" height="4"/>';
+    b += '<path class="msg-schiene" d="M' + (x - 8) + ' 150H' + (x + 8) + 'V222L' + x + ' 236L' + (x - 8) + ' 222Z"/>';
+    for (var y = 158; y < 222; y += 7) b += '<path class="msg-s2" d="M' + (x - 8) + ' ' + y + 'L' + (x + 8) + ' ' + (y + 4) + '"/>';
+    b += '<path class="msg-nut" d="M' + x + ' 152V230"/>';
+    return b + mk(x, 20, n);
+  }
+  function gewindeWerkzeug() {
+    var b = tap(30, 1, 1) + tap(80, 2, 2) + tap(130, 0, 3);
+    b += '<rect class="msg-schieber" x="175" y="130" width="150" height="16" rx="8"/><circle class="msg-schiene" cx="250" cy="138" r="34"/><circle class="msg-teil" cx="250" cy="138" r="13"/>';
+    for (var k = 0; k < 4; k++) { var w = k * Math.PI / 2 + Math.PI / 4; b += '<circle class="msg-loch" cx="' + r1(250 + 22 * Math.cos(w)) + '" cy="' + r1(138 + 22 * Math.sin(w)) + '" r="6"/>'; }
+    b += mk(250, 86, 4);
+    b += '<rect class="msg-schiene" x="374" y="54" width="12" height="120"/><path class="msg-schieber" d="M360 174H400L380 214Z"/><path class="msg-s2" d="M370 182L380 206M390 182L380 206"/>' + mk(380, 20, 5);
+    return { vb: '0 0 410 250', body: b };
+  }
+  function kernloch() {
+    var b = '<rect class="msg-schiene" x="20" y="40" width="80" height="170"/><rect class="msg-schiene" x="200" y="40" width="80" height="170"/>';
+    var zl = 'M100 40', zr = 'M200 40';
+    for (var y = 40; y < 210; y += 14) { zl += 'L100 ' + y + 'L112 ' + (y + 7); zr += 'L200 ' + y + 'L188 ' + (y + 7); }
+    b += '<path class="msg-gew" d="' + zl + 'L100 210"/><path class="msg-gew" d="' + zr + 'L200 210"/>';
+    b += '<path class="msg-mass" d="M100 232H200M100 226V238M200 226V238"/><text class="msg-t msg-c" x="150" y="256">d = Nenndurchmesser</text>';
+    b += '<path class="msg-mass" d="M112 24H188M112 18V30M188 18V30"/><text class="msg-t msg-c" x="150" y="14">Kernloch ≈ 0,8 · d</text>';
+    b += '<path class="msg-ld" d="M112 30V60M188 30V60"/>';
+    return { vb: '0 0 300 264', body: b };
+  }
+  return { svg: svg, gewindeWerkzeug: gewindeWerkzeug, kernloch: kernloch, skala: skala, skalaSvg: skalaSvg, skalaBild: skalaBild, ganz: ganz, mini: mini, POS: POS };
 })();
 </script><link rel="stylesheet" href="../assets/lp-shell.css"><script src="../assets/lp-shell.js"></script></head><body><div role="note" style="margin:0;padding:12px 16px;background:#fff3cd;color:#5c4400;border-bottom:2px solid #e0b400;font:600 15px/1.4 system-ui,-apple-system,Segoe UI,sans-serif;text-align:center;position:relative;z-index:100">Hinweis: Diese Lernplattform ist noch in der Prüfung und für den Unterricht noch nicht empfohlen.</div>
 <div class="app">
@@ -1011,10 +1047,23 @@ var MSG = (function () {
     <h3>Bohren in Metall</h3>
     <p>Am Fotohalter bohrst du an der Tischbohrmaschine. Der Ablauf ist immer gleich: Zuerst kommt der Sicherheits-Check. Dann spannst du das Werkstück fest in den <b>Maschinenschraubstock</b>, spannst den Bohrer ein und prüfst, ob er rund läuft. Erst jetzt schaltest du ein und kontrollierst die Drehzahl. Auf die Bohrstelle kommt <b>Bohröl</b>, es kühlt und schmiert. Den Bohrer senkst du mit dem Vorschubhebel in Stufen ab und kühlst zwischendurch nach. Zum Schluss fährst du den Bohrer heraus und schaltest die Maschine aus.</p>
     <p>Vor dem Bohren steht die <b>Gefährdungsbeurteilung</b>: Was kann an dieser Maschine passieren, und was schützt davor?</p>
+    <div class="tipbox"><h4>Sicher bohren an der Tischbohrmaschine</h4>
+      <p>Nach der Betriebsanweisung Tischbohrmaschinen (Stand 14.12.2018). Du bohrst erst, wenn deine Lehrkraft dich <b>eingewiesen</b> hat.</p>
+      <ul class="szl">
+      <li><span class="szi" data-sz="haare ms_schmuck"></span><span>Spindel und Bohrer drehen sich schnell und erfassen alles, was herunterhängt. <b>Lange Haare</b> sind zusammengebunden, <b>Ketten, Armbänder und Schals</b> legst du ab, die <b>Kleidung liegt eng an</b>, weite Ärmel sind geschlossen.</span></li>
+      <li><span class="szi" data-sz="hand ms_handschuh"></span><span><b>Keine Handschuhe</b> an der Bohrmaschine: Der Bohrer erfasst den Stoff und zieht die Hand mit.</span></li>
+      <li><span class="szi" data-sz="brille"></span><span>Späne und Bruchstücke fliegen weg. Trag die <b>Schutzbrille</b>. Wer nicht bohrt, hält Abstand.</span></li>
+      <li><span class="szi" data-sz="spitz ms_pinsel"></span><span>Metallspäne sind scharf. Entferne sie nur mit dem <b>Pinsel</b>, nie mit der Hand und nie durch Pusten.</span></li>
+      <li><span class="szi" data-sz="ms_schraubstock"></span><span>Das Werkstück sitzt fest im <b>Maschinenschraubstock</b>, nie in der Hand: Hakt der Bohrer ein, reißt er es herum. Prüf vor dem Einschalten, ob der Bohrer fest sitzt und <b>rund läuft</b>.</span></li>
+      <li><span class="szi" data-sz="ms_aus"></span><span>Zum <b>Messen, Umspannen und Reinigen</b> schaltest du die Maschine aus und wartest, bis die Spindel steht.</span></li>
+      <li><span class="szi" data-sz="ms_oel haende"></span><span>Bohröl kann die Haut reizen. Gib es sparsam auf die Bohrstelle und <b>wasch dir nach der Arbeit die Hände</b>.</span></li>
+      </ul></div>
     <h3>Ein Gewinde schneiden</h3>
     <p>Ein <b>Innengewinde</b> entsteht in einer Bohrung, dem <b>Kernloch</b>. Es muss kleiner sein als das Gewinde. Die Faustregel: <b>Nenndurchmesser × 0,8</b>. Beide Seiten der Bohrung entgratest du mit dem <b>Senker</b>.</p>
     <p>Geschnitten wird mit einem Satz aus drei Gewindebohrern, nacheinander: Der <b>Vorschneider</b> hat einen Ring am Schaft, der <b>Mittelschneider</b> zwei Ringe, der <b>Fertigschneider</b> keinen Ring. Du setzt den Gewindebohrer <b>rechtwinklig</b> an (mit dem Anschlagwinkel prüfen) und drehst ihn im Uhrzeigersinn ein. Nach ein bis zwei Umdrehungen drehst du ein Stück zurück, damit der Span bricht. <b>Schneidöl</b> sorgt für ein sauberes Gewinde.</p>
     <p>Ein <b>Außengewinde</b> auf einem Rundstab schneidest du mit dem <b>Schneideisen</b>, das im Schneideisenhalter sitzt.</p>
+    <figure class="ms-fig ms-fig-m" data-msgw="gewindeWerkzeug" data-aria="Fünf Werkzeuge mit Nummern: 1 bis 3 sind Gewindebohrer mit vierkantigem Schaft und Gewinde, sie unterscheiden sich durch die Zahl der Ringe am Schaft. 4 ist ein rundes Werkzeug mit Löchern in einem Halter mit zwei Griffen. 5 ist ein Stab mit kegelförmiger Spitze."><figcaption>Werkzeuge zum Gewindeschneiden: 1 bis 3 der Gewindebohrer-Satz, achte auf die Ringe am Schaft. 4 und 5 findest du im Text oben.</figcaption></figure>
+    <figure class="ms-fig ms-fig-s" data-msgw="kernloch" data-aria="Schnitt durch eine Bohrung mit Innengewinde: In beiden Wänden sind Gewindegänge. Zwischen den Spitzen der Gänge liegt das Kernloch, etwa 0,8 mal d. Bis zum Grund der Gänge reicht der Nenndurchmesser d."><figcaption>Schnitt: Das Kernloch ist kleiner als das Gewinde. Der Gewindebohrer schneidet die Gänge bis zum Nenndurchmesser d.</figcaption></figure>
   </div>
   <article class="task">
     <header><span class="num"></span><h3>Bohren Schritt für Schritt</h3><button class="op" data-op="ordnen" type="button">ordnen</button></header>
@@ -1573,6 +1622,8 @@ function wMstell(id,t,w,art){
 }
 function platformWidgets(){return {mstell:wMstell};}
 function platformInit(){
+  $$('.szi').forEach(e=>{const k=(e.dataset.sz||'').split(' ').filter(Boolean);e.innerHTML=k.map(x=>gfbIcon(x)).join('');});
+  $$('[data-msgw]').forEach(b=>{const g=MSG[b.dataset.msgw]();b.insertAdjacentHTML('afterbegin',MSG.svg(g.vb,g.body,b.dataset.aria||''));});
   $$('[data-msg]').forEach(b=>{const g=MSG.mini(b.dataset.msg);b.insertAdjacentHTML('afterbegin',MSG.svg(g.vb,g.body,b.dataset.aria||''));});
   $$('[data-msx]').forEach(b=>{const box=el('div',{});b.prepend(box);const a=b.dataset.msx.split(',');msUI(box,+a[0],+a[1],null,true);});
   $$('[data-msfig]').forEach(b=>{const a=b.dataset.msfig.split(',');b.insertAdjacentHTML('afterbegin',MSG.skalaSvg(+a[0],+a[1],{},b.dataset.aria));});
