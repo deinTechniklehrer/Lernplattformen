@@ -1,7 +1,45 @@
 <!doctype html><html><head><script>/* Lernplattformen auf GitHub Pages: Speichern ohne claude.ai */
 (function(){if(window.claude)return;var T={pdf:'application/pdf',txt:'text/plain;charset=utf-8',png:'image/png',jpg:'image/jpeg',jpeg:'image/jpeg',json:'application/json',csv:'text/csv;charset=utf-8',html:'text/html;charset=utf-8',docx:'application/vnd.openxmlformats-officedocument.wordprocessingml.document',xlsx:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',ino:'text/plain;charset=utf-8'};
 var dl={save:function(o){return new Promise(function(res,rej){try{var n=(o&&o.filename)||'datei',x=(n.split('.').pop()||'').toLowerCase(),d=o.data,b=d instanceof Blob?d:new Blob([d],{type:T[x]||'application/octet-stream'});var u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=n;a.rel='noopener';document.body.appendChild(a);a.click();setTimeout(function(){a.remove();URL.revokeObjectURL(u);},4000);res();}catch(e){rej({code:'failed',message:String(e)});}});}};
-window.claude={use:function(n){return Promise.resolve(n==='downloads'?dl:null);}};})();</script><meta property="og:type" content="website"><meta property="og:title" content="MakerSpace-Kompass"><meta property="og:description" content="Making an der Schule: Erfahrungen aus der Praxis, neun Handlungsfelder aus der Forschung und Werkzeuge wie Zonenplaner und Nutzungskonzept-Check für die eigene Schule."><meta property="og:url" content="https://deintechniklehrer.github.io/Lernplattformen/makerspace-kompass/"><meta property="og:image" content="https://deintechniklehrer.github.io/Lernplattformen/vorschau/Vorschau_MakerSpace-Kompass.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="description" content="Making an der Schule: Erfahrungen aus der Praxis, neun Handlungsfelder aus der Forschung und Werkzeuge wie Zonenplaner und Nutzungskonzept-Check für die eigene Schule."><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><link rel="stylesheet" href="../assets/lp-support.css"><script>window.LP_CFG={"keys": ["makerspace-kompass-v1"], "pdfSection": false, "uploadTitle": "Mit gespeicherter PDF weitermachen", "uploadText": "Lade dein Ergebnis-PDF hoch, das du hier gespeichert hast. Darin steckt dein ganzer Stand.", "anchors": [{"sel": "#codein", "closest": ".card", "mode": "append"}], "slug": "makerspace-kompass"};</script><script src="../assets/lp-support.js"></script></head><body>
+window.claude={use:function(n){return Promise.resolve(n==='downloads'?dl:null);}};})();</script><meta property="og:type" content="website"><meta property="og:title" content="MakerSpace-Kompass"><meta property="og:description" content="Making an der Schule: Erfahrungen aus der Praxis, neun Handlungsfelder aus der Forschung und Werkzeuge wie Zonenplaner und Nutzungskonzept-Check für die eigene Schule."><meta property="og:url" content="https://deintechniklehrer.github.io/Lernplattformen/makerspace-kompass/"><meta property="og:image" content="https://deintechniklehrer.github.io/Lernplattformen/vorschau/Vorschau_MakerSpace-Kompass.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="description" content="Making an der Schule: Erfahrungen aus der Praxis, neun Handlungsfelder aus der Forschung und Werkzeuge wie Zonenplaner und Nutzungskonzept-Check für die eigene Schule."><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}
+/* Werkstatt D: Beteiligungs-Check (DL-Tagung 2026, Stand 26.11.2026) */
+.bt-leg{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin:10px 0 6px}
+.bt-zones{display:grid;grid-template-columns:1fr 2fr 2fr;gap:6px;font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.03em}
+.bt-zones span{border-bottom:3px solid;padding-bottom:2px}.bt-zones .z-r{color:var(--amp-r);border-color:var(--amp-r)}.bt-zones .z-y{color:var(--miss);border-color:var(--amp-y)}.bt-zones .z-g{color:var(--ok);border-color:var(--amp-g)}
+.bt-leg div{border-radius:6px;padding:6px 8px;font-size:.84rem;line-height:1.25;border-left:6px solid}
+.bt-leg b{display:block;font-size:.95rem}
+.bt-leg .z-r,.bt-cnt .z-r{background:var(--bad-bg);border-color:var(--amp-r)}.bt-leg .z-y,.bt-cnt .z-y{background:var(--miss-bg);border-color:var(--amp-y)}.bt-leg .z-g,.bt-cnt .z-g{background:var(--ok-bg);border-color:var(--amp-g)}
+@media(max-width:700px){.bt-leg{grid-template-columns:minmax(0,1fr)}.bt-zones{display:none}}
+.bt-row{border:1px solid var(--line);border-radius:6px;padding:10px 12px;margin:8px 0;background:var(--card)}
+.bt-row.big{border-color:var(--bad);box-shadow:inset 5px 0 0 var(--bad)}
+.bt-name{display:flex;gap:10px;align-items:center;margin-bottom:6px;font-size:1.02rem}
+.bt-nr{flex:none;width:26px;height:26px;border-radius:50%;background:var(--paper);border:1px solid var(--line);display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:.85rem}
+.bt-own{flex:1;min-width:0;min-height:40px;border:2px solid var(--line);border-radius:4px;padding:6px 10px;background:var(--card);color:var(--ink);font:inherit}
+.bt-pick{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:5px 0}
+.bt-pl{width:6.6em;font-size:.9rem;color:var(--muted);font-weight:700}
+.bt-s{min-width:44px;min-height:40px;border-radius:8px;border:2px solid var(--line);background:var(--card);color:var(--ink);font:700 1rem/1 var(--f-body,inherit);cursor:pointer}
+.bt-s.z-r{border-color:color-mix(in srgb,var(--amp-r) 45%,var(--line))}.bt-s.z-y{border-color:color-mix(in srgb,var(--amp-y) 55%,var(--line))}.bt-s.z-g{border-color:color-mix(in srgb,var(--amp-g) 45%,var(--line))}
+.bt-s.z-r[aria-pressed="true"]{background:var(--amp-r);border-color:var(--amp-r);color:#fff}.bt-s.z-y[aria-pressed="true"]{background:var(--amp-y);border-color:var(--amp-y);color:#2a2000}.bt-s.z-g[aria-pressed="true"]{background:var(--amp-g);border-color:var(--amp-g);color:#fff}
+.bt-s:disabled{opacity:.4;cursor:default}
+.bt-foot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;margin-top:6px;font-size:.92rem}
+.bt-b{display:inline-flex;gap:8px;align-items:center;min-height:36px;cursor:pointer}.bt-b input{width:20px;height:20px}
+.bt-gap{font-weight:700}.bt-row.big .bt-gap{color:var(--bad)}
+.bt-sum{margin:18px 0 6px;padding:14px;border-radius:6px;background:var(--paper);border:1px solid var(--line)}
+.bt-sum h3{margin:0 0 6px}
+.bt-cnt{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:8px 0}
+.bt-cnt div{border-radius:6px;padding:8px 6px;text-align:center;font-size:.88rem;border-top:5px solid}
+.bt-cnt b{display:block;font-family:var(--f-head);font-size:1.8rem;line-height:1.1}
+.bt-cnt small{display:block;font-size:.8rem;color:var(--muted)}
+.bt-types{font-size:.88rem;color:var(--muted);margin:4px 0 8px}
+.bt-q{margin:14px 0 4px;font-weight:700}
+.bt-gr{display:flex;flex-wrap:wrap;gap:6px}
+.bt-gr button{min-height:40px;padding:4px 14px;border-radius:999px;border:2px solid var(--line);background:var(--card);color:var(--ink);font-weight:700;cursor:pointer}
+.bt-gr button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.bt-in{width:100%;min-height:40px;border:2px solid var(--line);border-radius:4px;padding:6px 10px;background:var(--card);color:var(--ink);font:inherit;margin-top:6px}
+textarea.bt-in{min-height:96px;resize:vertical}
+.bt-src{font-size:.85rem;color:var(--muted);margin-top:12px}
+@media(max-width:520px){.bt-pick{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}.bt-pl{grid-column:1/-1;width:auto}.bt-s{min-width:0}.bt-cnt div{font-size:.8rem}}
+</style><link rel="stylesheet" href="../assets/lp-support.css"><script>window.LP_CFG={"keys": ["makerspace-kompass-v1"], "pdfSection": false, "uploadTitle": "Mit gespeicherter PDF weitermachen", "uploadText": "Lade dein Ergebnis-PDF hoch, das du hier gespeichert hast. Darin steckt dein ganzer Stand.", "anchors": [{"sel": "#codein", "closest": ".card", "mode": "append"}], "slug": "makerspace-kompass"};</script><script src="../assets/lp-support.js"></script></head><body>
 <title>MakerSpace-Kompass</title>
 <link rel="stylesheet" href="../assets/fonts/fonts.css">
 <script defer src="../assets/jspdf.umd.min.js"></script>
@@ -1139,6 +1177,90 @@ function widgetNK() {
     sum, areas);
 }
 
+/* ---------- Werkstatt D: Beteiligungs-Check (DL-Tagung 2026, Stand 26.11.2026) ---------- */
+const BT_ROWS = ['Raum gestalten (Zonen, Möbel)', 'Regeln im Raum festlegen', 'Anschaffungen & Budget', 'Öffnungszeiten & Buchung', 'Projektthemen auswählen', 'Ergebnisse zeigen (Ausstellung, Café)', 'Sicherheit & Maschinen', ''];
+const BT_ST = [['keine', 'entscheiden Erwachsene'], ['informiert', 'wird bekannt gegeben'], ['gefragt', 'Meinung wird eingeholt'], ['entscheiden mit', 'stimmen gemeinsam ab'], ['entscheiden selbst', 'Schüler:innen bestimmen']];
+const BT_ZONE = v => v === 0 ? 'r' : v <= 2 ? 'y' : 'g';
+const BT_GR = ['Klassenrat', 'SV', 'Raum-Team', 'anderes'];
+const BT_SRC = 'Stufen vereinfacht nach Hart (1992) und Straßburger & Rieger (2014).';
+function btState() { const b = S.bt = S.bt || {}; if (!Array.isArray(b.r) || b.r.length !== BT_ROWS.length) b.r = BT_ROWS.map(() => ({})); return b; }
+function btName(b, i) { return i === BT_ROWS.length - 1 ? (b.own ? 'eigene: ' + b.own : 'eigene Entscheidung') : BT_ROWS[i]; }
+function btGap(r) { return (r.b || r.x == null || r.o == null) ? null : r.o - r.x; }
+function btUsed(b) { return !!(b && b.r && (b.r.some(r => r.x != null || r.o != null || r.b) || b.own || b.gr || b.who || b.step)); }
+function btGremium(b) { return b.gr ? (b.gr === 'anderes' ? (b.grText ? 'anderes: ' + b.grText : 'anderes') : b.gr) : ''; }
+function btSummary() {
+  const b = btState(); const c = { r: 0, y: 0, g: 0, B: 0 }; let set = 0;
+  b.r.forEach(r => { if (r.b) { c.r++; c.B++; set++; } else if (r.x != null) { c[BT_ZONE(r.x)]++; set++; } });
+  let typ = '', tie = false;
+  if (set) { const m = Math.max(c.r, c.y, c.g); const t = [c.r === m && 'Erwachsenen-Raum', c.y === m && 'Zuhör-Raum', c.g === m && 'Mitbestimmungs-Raum'].filter(Boolean); typ = t.join(' / '); tie = t.length > 1; }
+  let max = 0, big = [];
+  b.r.forEach((r, i) => { const g = btGap(r); if (g != null && g > 0) { if (g > max) { max = g; big = [i]; } else if (g === max) big.push(i); } });
+  return { c, set, typ, tie, max, big };
+}
+function widgetBT() {
+  const b = btState(); const rowCards = []; const sum = h('div', { 'aria-live': 'polite' });
+  function paintSum() {
+    const s = btSummary();
+    rowCards.forEach((c, i) => c.classList.toggle('big', s.big.includes(i)));
+    sum.replaceChildren(
+      h('div', { class: 'bt-cnt' },
+        h('div', { class: 'z-r' }, h('b', null, String(s.c.r)), 'keine Beteiligung (0)', h('small', null, `davon bewusst (B): ${s.c.B}`)),
+        h('div', { class: 'z-y' }, h('b', null, String(s.c.y)), 'Vorstufen (1–2)'),
+        h('div', { class: 'z-g' }, h('b', null, String(s.c.g)), 'echte Beteiligung (3–4)')),
+      h('p', { class: 'bt-types' }, 'Die meisten X liegen bei … 0: Erwachsenen-Raum · 1–2: Zuhör-Raum · 3–4: Mitbestimmungs-Raum'),
+      s.set ? h('div', { class: 'note good' }, h('b', null, 'Euer Projektraum ist heute ein '), s.typ + (s.tie ? ' (Gleichstand)' : '') + '.')
+        : h('p', { class: 'hintline' }, 'Setzt in den Zeilen ein X für heute. Dann erscheint hier der Raum-Typ.'),
+      s.big.length ? h('div', { class: 'note bad' }, h('b', null, 'Größte Lücke' + (s.big.length > 1 ? 'n' : '') + ` (${s.max} ${s.max === 1 ? 'Stufe' : 'Stufen'}): `), s.big.map(i => `${btName(b, i)}, von Stufe ${b.r[i].x} auf Stufe ${b.r[i].o}`).join('; '))
+        : h('p', { class: 'hintline' }, 'Die größte Lücke erscheint, sobald in einer Zeile X und O gesetzt sind und O höher liegt. Zeilen mit B zählen nicht.'));
+  }
+  const rows = b.r.map((r, i) => {
+    const last = i === BT_ROWS.length - 1;
+    let name;
+    if (last) { name = h('input', { type: 'text', class: 'bt-own', placeholder: 'eigene Entscheidung', 'aria-label': 'Eigene Entscheidung', autocomplete: 'off' }); name.value = b.own || ''; name.addEventListener('input', () => { b.own = name.value; save(); paintSum(); }); }
+    else name = h('b', null, BT_ROWS[i]);
+    const label = () => btName(b, i);
+    const pick = (k, lbl) => {
+      const btns = BT_ST.map((st, v) => h('button', { type: 'button', class: 'bt-s z-' + BT_ZONE(v), 'aria-label': `${lbl}: Stufe ${v}, ${st[0]}`, title: `${v} ${st[0]}: ${st[1]}`, onclick: () => { if (r.b) return; if (r[k] === v) delete r[k]; else r[k] = v; save(); paintRow(); paintSum(); } }, String(v)));
+      return { el: h('div', { class: 'bt-pick', role: 'group', 'aria-label': lbl }, h('span', { class: 'bt-pl' }, lbl), btns), btns };
+    };
+    const X = pick('x', 'heute (X)'), O = pick('o', 'Ziel (O)');
+    const bIn = h('input', { type: 'checkbox', id: 'bt-b-' + i }); bIn.checked = !!r.b;
+    bIn.addEventListener('change', () => { if (bIn.checked) { r.b = true; r.x = 0; r.o = 0; } else delete r.b; save(); paintRow(); paintSum(); });
+    const gap = h('span', { class: 'bt-gap' });
+    function paintRow() {
+      [['x', X], ['o', O]].forEach(([k, P]) => P.btns.forEach((bt, v) => { bt.setAttribute('aria-pressed', String(r[k] === v)); bt.disabled = !!r.b; }));
+      const g = btGap(r);
+      gap.textContent = r.b ? 'B: zählt nicht als Lücke' : g == null ? 'Lücke: –' : g > 0 ? `Lücke: ${g} ${g === 1 ? 'Stufe' : 'Stufen'}` : g === 0 ? 'Lücke: 0' : `Ziel liegt ${-g} ${g === -1 ? 'Stufe' : 'Stufen'} unter heute`;
+    }
+    const card = h('div', { class: 'bt-row' }, h('div', { class: 'bt-name' }, h('span', { class: 'bt-nr' }, String(i + 1)), name), X.el, O.el,
+      h('div', { class: 'bt-foot' }, h('label', { class: 'bt-b', for: 'bt-b-' + i }, bIn, 'bewusst keine Beteiligung (B)'), gap));
+    paintRow(); rowCards.push(card); return card;
+  });
+  const grBtns = BT_GR.map(g => h('button', { type: 'button', 'aria-pressed': String(b.gr === g), onclick: () => { b.gr = b.gr === g ? '' : g; save(); grBtns.forEach((x, j) => x.setAttribute('aria-pressed', String(b.gr === BT_GR[j]))); grText.hidden = b.gr !== 'anderes'; } }, g));
+  const grText = h('input', { type: 'text', class: 'bt-in', placeholder: 'anderes Gremium', 'aria-label': 'Anderes Gremium', autocomplete: 'off' }); grText.value = b.grText || ''; grText.hidden = b.gr !== 'anderes';
+  grText.addEventListener('input', () => { b.grText = grText.value; save(); });
+  const who = h('input', { type: 'text', class: 'bt-in', id: 'bt-who', autocomplete: 'off' }); who.value = b.who || ''; who.addEventListener('input', () => { b.who = who.value; save(); });
+  const step = h('textarea', { class: 'bt-in', id: 'bt-step' }); step.value = b.step || ''; step.addEventListener('input', () => { b.step = step.value; save(); });
+  paintSum();
+  return h('section', { class: 'werk', id: 'werk' },
+    h('span', { class: 'wtag' }, 'Werkstatt D'), h('h2', null, 'Beteiligungs-Check – wie demokratisch ist unser Projektraum?'),
+    h('p', { class: 'lead' }, 'Schätzt für jede Entscheidung ein, wie stark Schüler:innen heute beteiligt sind (X) und wie es werden soll (O). Keine Beteiligung, bewusst so, zum Beispiel bei der Sicherheit? Dann B einschalten. Die Lücke sind die Stufen von X bis O. Die Auswertung unten rechnet mit.'),
+    h('div', { class: 'bt-zones', 'aria-hidden': 'true' }, h('span', { class: 'z-r' }, 'keine Beteiligung'), h('span', { class: 'z-y' }, 'Vorstufen'), h('span', { class: 'z-g' }, 'echte Beteiligung')),
+    h('div', { class: 'bt-leg' }, BT_ST.map((st, v) => h('div', { class: 'z-' + BT_ZONE(v) }, h('b', null, `${v} ${st[0]}`), st[1]))),
+    rows,
+    h('div', { class: 'bt-sum' }, h('h3', null, 'Auswertung'), sum,
+      h('p', { class: 'bt-q' }, 'Über welches Gremium geht ihr die größte Lücke an?'), h('div', { class: 'bt-gr', role: 'group', 'aria-label': 'Gremium' }, grBtns), grText,
+      h('label', { class: 'bt-q', for: 'bt-who', style: 'display:block' }, 'Wer stößt es an?'), who,
+      h('label', { class: 'bt-q', for: 'bt-step', style: 'display:block' }, 'Unser erster Schritt'), step),
+    h('p', { class: 'bt-src' }, BT_SRC + ' Hart, R. A. (1992): Children’s Participation. From Tokenism to Citizenship. UNICEF Innocenti Essays 4. Straßburger, G. & Rieger, J. (Hrsg.) (2014): Partizipation kompakt. Beltz Juventa.'));
+}
+function viewBeteiligung() {
+  return h('div', null,
+    h('header', { class: 'pagehead' }, h('h1', null, 'Werkstatt D: Beteiligungs-Check'), h('p', { class: 'lead' }, 'Auftrag D aus dem Workshop, digital. Alle Eingaben landen im Export.')),
+    widgetBT(),
+    h('div', { class: 'modnav' }, h('a', { class: 'btn ghost', href: '#/werkstatt' }, '‹ Werkstatt'), h('a', { class: 'btn', href: '#/export' }, 'Export & Code ›')));
+}
+
 /* ---------- Selbstcheck ---------- */
 const LVL = ['noch nicht begonnen', 'erste Ideen', 'in Arbeit', 'etabliert'];
 const REC = {
@@ -1440,7 +1562,7 @@ function viewStart() {
     h('div', { class: 'facts' },
       h('div', { class: 'fact' }, h('b', null, '9 Handlungsfelder'), h('span', null, 'nach Maurer & Ingold (2021)')),
       h('div', { class: 'fact' }, h('b', null, '1 Projektraum'), h('span', null, 'für alle Klassen und Gruppen – mitgestaltet von Schüler*innen')),
-      h('div', { class: 'fact' }, h('b', null, '3 Werkstatt-Tools'), h('span', null, 'Zonenplaner, Projekt-Canvas, Nutzungskonzept-Check')),
+      h('div', { class: 'fact' }, h('b', null, '4 Werkstatt-Tools'), h('span', null, 'Zonenplaner, Projekt-Canvas, Nutzungskonzept-Check, Beteiligungs-Check')),
       h('div', { class: 'fact' }, h('b', null, `${TEST_BANK.length} Testfragen`), h('span', null, 'mit Auswertung am Ende'))),
     h('div', { class: 'card' }, h('h3', null, 'Dein Name auf dem Ergebnisblatt'),
       h('p', { style: 'margin-top:4px' }, 'Optional. Name und Schule erscheinen auf dem Export und bleiben nur in diesem Browser gespeichert.'),
@@ -1448,7 +1570,7 @@ function viewStart() {
     h('div', { class: 'card' }, h('h3', null, 'So funktioniert die Plattform'),
       h('p', null, h('b', null, 'Schätzfragen: '), 'Jedes Modul startet mit Schätzfragen. Sie aktivieren dein Vorwissen; die Auflösung liefert den Input zum Thema.'),
       h('p', null, h('b', null, 'Fälle aus der Praxis: '), 'Danach entscheidest du in typischen Situationen aus Schule und Schulleitung. „Prüfen“ zeigt sofort, was passt; nach zwei Fehlversuchen kannst du dir die Lösung anzeigen lassen.'),
-      h('p', null, h('b', null, 'Werkstatt: '), 'Zonenplaner, Projekt-Canvas und Nutzungskonzept-Check für deine eigene Schule. Unter „Werkstatt“ gibt es außerdem Druckvorlagen als PDF.'),
+      h('p', null, h('b', null, 'Werkstatt: '), 'Die Aufträge A bis D für deine eigene Schule: Zonenplaner, Projekt-Canvas, Nutzungskonzept-Check und Beteiligungs-Check. Unter „Werkstatt“ gibt es außerdem Druckvorlagen als PDF.'),
       h('p', null, h('b', null, 'Material & FAQ: '), 'Präsentation zum Download, Druckvorlagen, Ergebnisse aus dem Workshop, Antworten auf häufige Fragen und die Nachlese zum Parkplatz.'),
       h('p', null, h('b', null, 'Netzwerk: '), 'Die TaskCard „Netzwerk Techniklehrkräfte“ sammelt Materialien und Fortbildungen: ', h('a', { href: NETZ_URL, target: '_blank', rel: 'noopener' }, 'bit.ly/techniklehrer'), '.'),
       h('p', null, h('b', null, 'Export: '), 'Werkstatt-Ergebnisse als Word-Datei zum Weiterbearbeiten oder als PDF. Mit Sicherungsdatei oder Bearbeitungscode machst du später – auch auf einem anderen Gerät – weiter.')),
@@ -1490,14 +1612,15 @@ function viewWerkstatt() {
     ['A', 'Zonenplaner', 'Einen Projektraum für alle oder die Technik-Werkstatt in Zonen planen – mit Beispiel aus der Raumvision von Schüler*innen.', '#/m/raum/w'],
     ['B', 'Projekt-Canvas', 'Ein BNE- oder Beteiligungsprojekt mit Low floor, High ceiling und Wide walls skizzieren.', '#/m/projekt/w'],
     ['C', 'Nutzungskonzept-Check', 'Mit der Ampel die erste organisatorische Baustelle finden. Für Schulleitungen.', '#/m/orga/w'],
+    ['D', 'Beteiligungs-Check', 'Wie demokratisch ist unser Projektraum? Für acht Entscheidungen heute und Ziel einschätzen, Raum-Typ und größte Lücke finden.', '#/werkstatt/d'],
     ['+', 'Selbstcheck Schule', 'Neun Regler, drei nächste Schritte.', '#/m/check/w']];
   return h('div', null,
     h('header', { class: 'pagehead' }, h('h1', null, 'Werkstatt'), h('p', { class: 'lead' }, 'Die Arbeitsaufträge aus dem Workshop – digital oder als Druckvorlage. Alle Eingaben landen im Export.')),
     h('div', { class: 'vgrid' }, cards.map(([k, t, d, href]) => h('a', { class: 'vcard', href, style: 'text-decoration:none;color:inherit' }, h('span', { class: 'tag' }, k === '+' ? 'Extra' : 'Auftrag ' + k), h('h3', { style: 'margin-top:6px' }, t), h('p', null, d)))),
     h('div', { class: 'card' }, h('h3', null, 'Druckvorlagen für den Workshop'),
-      h('p', null, 'Ein PDF im Querformat (A4, auf A3 vergrößerbar): Grundriss-Raster, Zonenkarten zum Ausschneiden, Projekt-Canvas und Nutzungskonzept-Check.'),
+      h('p', null, 'Ein PDF im Querformat (A4, auf A3 vergrößerbar): Grundriss-Raster, Zonenkarten zum Ausschneiden, Projekt-Canvas und Nutzungskonzept-Check. Die Vorlage für Auftrag D (Beteiligungs-Check) gibt es als eigenes PDF.'),
       !dlReady ? h('p', { class: 'hintline' }, 'Speicherfunktion wird geladen …') : null,
-      (canPdf && canSave) ? h('div', { class: 'btnrow' }, h('button', { class: 'btn yellow', type: 'button', onclick: async () => { const blob = makeTemplatesPDF(); if (!blob) return toast('PDF konnte nicht erstellt werden.'); await saveFile('MakerSpace-Kompass_Druckvorlagen.pdf', blob); } }, 'Druckvorlagen als PDF speichern'))
+      (canPdf && canSave) ? h('div', { class: 'btnrow' }, h('button', { class: 'btn yellow', type: 'button', onclick: async () => { const blob = makeTemplatesPDF(); if (!blob) return toast('PDF konnte nicht erstellt werden.'); await saveFile('MakerSpace-Kompass_Druckvorlagen.pdf', blob); } }, 'Druckvorlagen A–C als PDF speichern'), h('button', { class: 'btn', type: 'button', onclick: () => dlPublished('06_Auftrag-D_Beteiligungs-Check_A4-quer.pdf') }, 'Vorlage D als PDF speichern'))
         : (dlReady ? h('div', { class: 'note' }, 'In dieser Ansicht können keine Dateien gespeichert werden. Öffne die Plattform im Browser, um die Vorlagen zu speichern.') : null)));
 }
 
@@ -1512,8 +1635,10 @@ const DOKU = [
 // Link zur PowerPoint-Datei (z. B. OneDrive-Freigabe). Leer = Hinweis statt Link.
 const PPTX_URL = '';
 const DOWNLOADS = [
-  { f: 'Workshop_Potenzial_MakerSpace.pdf', t: 'Präsentation (PDF)', d: 'Alle Folien des Workshops zum Nachlesen.', k: 'PDF · 30 Folien', main: true },
-  { f: 'Moderationsmaterial_Galerie-Parkplatz.pdf', t: 'Moderationsmaterial', d: 'Galerie-Poster, Parkplatz-Plakat, Fragekarten, Abstimmungskarten, Feedback-Zielscheibe, QR-Aufsteller – für eine eigene Fortbildung.', k: 'PDF · A3/A4' }
+  { f: 'Potenzial-MakerSpace_DL-Tagung_2026.pdf', t: 'Potenzial MakerSpace – Jahrestagung der didaktischen Leitungen 2026', d: 'Alle Folien der Fassung für die Jahrestagung (30.11./01.12.2026), mit Demokratie im Kleinen, Klassenrat und Beteiligungs-Check.', k: 'PDF · 27 Seiten', main: true },
+  { f: '06_Auftrag-D_Beteiligungs-Check_A4-quer.pdf', t: 'Vorlage Auftrag D: Beteiligungs-Check', d: 'Die Papiervorlage aus dem Workshop zum Ausdrucken – wie demokratisch ist unser Projektraum?', k: 'PDF · A4 quer' },
+  { f: 'Workshop_Potenzial_MakerSpace.pdf', t: 'Präsentation Gesamtschultag Braunschweig 2026', d: 'Die erste Fassung des Workshops vom 06.10.2026 zum Nachlesen.', k: 'PDF · 30 Folien' },
+  { f: 'Moderationsmaterial_Galerie-Parkplatz.pdf', t: 'Moderationsmaterial Gesamtschultag', d: 'Parkplatz-Plakat, Fragekarten, Abstimmungskarten, Feedback-Zielscheibe, QR-Aufsteller und Galerie-Poster aus der Braunschweiger Fassung – für eine eigene Fortbildung.', k: 'PDF · A3/A4' }
 ];
 async function dlPublished(f) {
   try {
@@ -1566,7 +1691,7 @@ function viewMaterial() {
       : h('div', { class: 'card nl-empty' }, h('h3', null, 'Hier erscheinen die Antworten aus dem Workshop'),
           h('p', null, 'Fragen, die im Workshop offen geblieben sind („Antwort folgt“), werden innerhalb einer Woche beantwortet und hier ergänzt. Schau einfach wieder vorbei – dein Lernstand bleibt erhalten.')),
     h('details', { class: 'tch' }, h('summary', null, 'Lieber digital sammeln?'),
-      h('p', null, 'Für eine eigene Fortbildung lässt sich der Parkplatz auch als Online-Pinnwand anlegen, z. B. als TaskCard mit den Spalten „Neue Fragen“, „Heute geklärt“ und „Antwort folgt“. Teile den Link per QR-Code. Im kurzen Galerie-Rundgang sind Karten und Klebepunkte meist schneller.')));
+      h('p', null, 'Für eine eigene Fortbildung lässt sich der Parkplatz auch als Online-Pinnwand anlegen, z. B. als TaskCard mit den Spalten „Neue Fragen“, „Heute geklärt“ und „Antwort folgt“. Teile den Link per QR-Code. Im Workshop selbst sind Karten am Parkplatz meist schneller.')));
 }
 
 /* ---------- Abschlusstest ---------- */
@@ -1671,8 +1796,8 @@ function readCode(raw) {
   return out;
 }
 /* ---------- Sichern & Weitermachen: vollständiger Stand als Code oder .json ---------- */
-const STATE_KEYS = ['name', 'klasse', 'tasks', 'test', 'est', 'zone', 'canvas', 'nk', 'nkNotes', 'self'];
-const WERK_KEYS = ['est', 'zone', 'canvas', 'nk', 'nkNotes', 'self'];
+const STATE_KEYS = ['name', 'klasse', 'tasks', 'test', 'est', 'zone', 'canvas', 'nk', 'nkNotes', 'self', 'bt'];
+const WERK_KEYS = ['est', 'zone', 'canvas', 'nk', 'nkNotes', 'self', 'bt'];
 const APP_ID = 'makerspace-kompass';
 function fullState() { const o = {}; STATE_KEYS.forEach(k => { if (S[k] !== undefined) o[k] = JSON.parse(JSON.stringify(S[k])); }); return o; }
 function compactForCode(st) {
@@ -1716,9 +1841,9 @@ function readStateFile(text) {
   if (!o || o.app !== APP_ID || !o.state || typeof o.state !== 'object') throw new Error('Diese Datei gehört nicht zum MakerSpace-Kompass.');
   return o.state;
 }
-function hasWerk(d) { return !!((d.canvas && Object.values(d.canvas).some(v => String(v || '').trim())) || (d.nk && Object.keys(d.nk).length) || (d.self && Object.keys(d.self).length) || (d.zone && d.zone.cells && !d.zone.example)); }
+function hasWerk(d) { return !!(btUsed(d.bt) || (d.canvas && Object.values(d.canvas).some(v => String(v || '').trim())) || (d.nk && Object.keys(d.nk).length) || (d.self && Object.keys(d.self).length) || (d.zone && d.zone.cells && !d.zone.example)); }
 function describeState(d) {
-  const w = []; if (d.zone && d.zone.cells) w.push(d.zone.example ? 'Zonenplan (Beispiel)' : 'Zonenplan'); if (d.canvas && Object.values(d.canvas).some(v => String(v || '').trim())) w.push('Projekt-Canvas'); if (d.nk && Object.keys(d.nk).length) w.push('Nutzungskonzept-Check'); if (d.self && Object.keys(d.self).length) w.push('Selbstcheck');
+  const w = []; if (d.zone && d.zone.cells) w.push(d.zone.example ? 'Zonenplan (Beispiel)' : 'Zonenplan'); if (d.canvas && Object.values(d.canvas).some(v => String(v || '').trim())) w.push('Projekt-Canvas'); if (d.nk && Object.keys(d.nk).length) w.push('Nutzungskonzept-Check'); if (btUsed(d.bt)) w.push('Beteiligungs-Check'); if (d.self && Object.keys(d.self).length) w.push('Selbstcheck');
   return `${d.name || '(ohne Namen)'} – ${Object.values(d.tasks || {}).filter(x => x && x.done).length} gelöste Aufgaben, ${(d.test && d.test.attempts || []).length} Testversuch(e), ` + (d._partial ? 'alter Code ohne Werkstatt-Eingaben' : (w.length ? 'Werkstatt: ' + w.join(', ') : 'keine Werkstatt-Eingaben'));
 }
 function applyState(d) {
@@ -1774,6 +1899,19 @@ function werkLines() {
     L.push('WERKSTATT C – NUTZUNGSKONZEPT-CHECK');
     NK.forEach((ar, ai) => { L.push(ar.a + ':'); ar.qs.forEach((q, qi) => L.push(`  [${AMP[nk[`${ai}_${qi}`]] || 'nicht bewertet'}] ${q}`)); if ((S.nkNotes || {})[ai]) L.push('  Notiz: ' + S.nkNotes[ai]); });
     const s = nkSummary(); if (s.firstRed) L.push('Erste Baustelle: ' + s.firstRed); L.push('');
+  }
+  const bt = S.bt;
+  if (btUsed(bt)) {
+    const s = btSummary();
+    L.push('WERKSTATT D – BETEILIGUNGS-CHECK', 'Stufen: 0 keine, 1 informiert, 2 gefragt, 3 entscheiden mit, 4 entscheiden selbst. X = heute, O = Ziel, B = bewusst keine Beteiligung.');
+    bt.r.forEach((r, i) => { if (i === BT_ROWS.length - 1 && !bt.own && r.x == null && r.o == null && !r.b) return; const g = btGap(r); L.push(`  ${btName(bt, i)}: heute ${r.x != null ? r.x : '–'}, Ziel ${r.o != null ? r.o : '–'}${r.b ? ', B' : ''}${g != null && g > 0 ? ', Lücke ' + g : ''}`); });
+    L.push(`X gezählt: keine Beteiligung ${s.c.r} (davon bewusst ${s.c.B}), Vorstufen ${s.c.y}, echte Beteiligung ${s.c.g}`);
+    if (s.typ) L.push('Raum-Typ: ' + s.typ + (s.tie ? ' (Gleichstand)' : ''));
+    if (s.big.length) L.push('Größte Lücke: ' + s.big.map(i => `${btName(bt, i)}, von Stufe ${bt.r[i].x} auf Stufe ${bt.r[i].o}`).join('; '));
+    if (bt.gr) L.push('Gremium: ' + btGremium(bt));
+    if (bt.who) L.push('Wer stößt es an? ' + bt.who);
+    if (bt.step) L.push('Unser erster Schritt: ' + bt.step.replace(/\n/g, ' / '));
+    L.push(BT_SRC, '');
   }
   const sf = S.self || {};
   if (Object.keys(sf).length) { L.push('SELBSTCHECK SCHULE'); HF.forEach(x => L.push(`  HF ${x.n} ${x.t}: ${LVL[sf[x.n] || 0]}`)); L.push(''); }
@@ -1853,8 +1991,8 @@ function makePDF(r) {
     if (z.note) line('Sofort angehen: ' + z.note, 9.5, 'italic');
     y += 4;
   }
-  const rest = r.werk.slice(r.werk.findIndex(s => s.startsWith('WERKSTATT B')) >= 0 ? r.werk.findIndex(s => s.startsWith('WERKSTATT B')) : r.werk.findIndex(s => s.startsWith('WERKSTATT C')) >= 0 ? r.werk.findIndex(s => s.startsWith('WERKSTATT C')) : r.werk.findIndex(s => s.startsWith('SELBSTCHECK')) >= 0 ? r.werk.findIndex(s => s.startsWith('SELBSTCHECK')) : r.werk.length);
-  rest.forEach(s => { if (/^(WERKSTATT|SELBSTCHECK)/.test(s)) { y += 2; line(s.charAt(0) + s.slice(1).toLowerCase().replace('werkstatt b – projekt-canvas', 'Werkstatt B – Projekt-Canvas').replace('werkstatt c – nutzungskonzept-check', 'Werkstatt C – Nutzungskonzept-Check').replace('elbstcheck schule', 'elbstcheck Schule'), 13, 'bold', [3, 85, 145]); } else if (s) line(s, 9.5); });
+  const rest = (() => { const k = r.werk.findIndex(s => /^(WERKSTATT [BCD]|SELBSTCHECK)/.test(s)); return k >= 0 ? r.werk.slice(k) : []; })();
+  rest.forEach(s => { if (/^(WERKSTATT|SELBSTCHECK)/.test(s)) { y += 2; line(({ 'WERKSTATT B – PROJEKT-CANVAS': 'Werkstatt B – Projekt-Canvas', 'WERKSTATT C – NUTZUNGSKONZEPT-CHECK': 'Werkstatt C – Nutzungskonzept-Check', 'WERKSTATT D – BETEILIGUNGS-CHECK': 'Werkstatt D – Beteiligungs-Check', 'SELBSTCHECK SCHULE': 'Selbstcheck Schule' })[s] || s, 13, 'bold', [3, 85, 145]); } else if (s) line(s, 9.5); });
   y += 4; line('Selbstkontrolle und Test', 13, 'bold', [3, 85, 145]);
   r.mods.forEach(m => line(`${m.titel}: ${m.geloest}/${m.gesamt} gelöst` + (m.mitLoesungshilfe ? ` (${m.mitLoesungshilfe} mit Lösungshilfe)` : ''), 9.5));
   line(r.b ? `Abschlusstest – bester Versuch: ${r.b.score} von ${r.b.max} Punkten, Versuche: ${r.attempts}` : 'Abschlusstest: noch nicht bearbeitet.', 9.5, 'bold');
@@ -1952,7 +2090,7 @@ function viewExport() {
     h('div', { class: 'card' }, h('div', { class: 'btnrow', style: 'margin:0;align-items:flex-end' },
       h('div', { class: 'field' }, h('label', { for: 'ex-name' }, 'Name'), nameIn), h('div', { class: 'field' }, h('label', { for: 'ex-kl' }, 'Schule'), klIn))),
     h('div', { class: 'card' }, h('h3', null, 'Ergebnisse zum Weiterarbeiten'),
-      h('p', null, 'Zonenplan, Projekt-Canvas, Nutzungskonzept-Check, Selbstcheck und eine Tabelle für nächste Schritte. Die ', h('b', null, 'Word-Datei'), ' kannst du mit Fachgruppe oder Schulleitung weiterbearbeiten, das ', h('b', null, 'PDF'), ' eignet sich zum Weitergeben.'),
+      h('p', null, 'Zonenplan, Projekt-Canvas, Nutzungskonzept-Check, Beteiligungs-Check, Selbstcheck und eine Tabelle für nächste Schritte. Die ', h('b', null, 'Word-Datei'), ' kannst du mit Fachgruppe oder Schulleitung weiterbearbeiten, das ', h('b', null, 'PDF'), ' eignet sich zum Weitergeben.'),
       !dlReady ? h('p', { class: 'hintline' }, 'Speicherfunktion wird geladen …') : null,
       h('div', { class: 'btnrow' },
         canSave ? h('button', { class: 'btn yellow', type: 'button', onclick: async () => { let blob; try { blob = makeDocx(buildReport()); } catch (e) { return toast('Word-Datei konnte nicht erstellt werden.'); } await saveFile(`MakerSpace-Kompass_${safe}.docx`, blob); } }, 'Word-Datei (.docx)') : null,
@@ -1976,6 +2114,7 @@ function viewExport() {
 function parseHash() {
   const p = (location.hash || '#/start').replace(/^#\/?/, '').split('/');
   if (p[0] === 'm' && p[1]) return { name: 'm', id: p[1], w: p[2] === 'w' };
+  if (p[0] === 'werkstatt' && p[1] === 'd') return { name: 'werkstatt', sub: 'd' };
   if (['test', 'export', 'werkstatt', 'material'].includes(p[0])) return { name: p[0] };
   return { name: 'start' };
 }
@@ -1985,7 +2124,7 @@ function render() {
   if (route.name === 'm') v = viewModule(route.id);
   else if (route.name === 'test') v = viewTest();
   else if (route.name === 'export') v = viewExport();
-  else if (route.name === 'werkstatt') v = viewWerkstatt();
+  else if (route.name === 'werkstatt') v = route.sub === 'd' ? viewBeteiligung() : viewWerkstatt();
   else if (route.name === 'material') v = viewMaterial();
   else v = viewStart();
   $('#main').replaceChildren(v, h('footer', { class: 'foot', html: 'MakerSpace-Kompass – Daniel Beyrodt (dein Technik Lehrer). Lizenz: <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a>. Fotos: Projekte der KGS Gronau (Leine). Inhalte u. a. nach Maurer & Ingold (2021).' }));
@@ -2090,6 +2229,18 @@ function makeDocx(r) {
     B.push(wP([{ t: 'Notiz: ', b: true }, notes[ai] || '']));
   });
   const s = nkSummary(); if (s.firstRed) B.push(wP([{ t: 'Erste Baustelle: ', b: true, color: 'D24A3C' }, s.firstRed]));
+  // Werkstatt D
+  B.push(wP('Werkstatt D: Beteiligungs-Check', { style: 'berschrift1' }));
+  { const bt = btState(); const s = btSummary(); const ZF = { r: 'FCE8E5', y: 'FFF3D6', g: 'E2F4E8' };
+    const cell = v => v == null ? '' : { t: `${v} ${BT_ST[v][0]}`, fill: ZF[BT_ZONE(v)], align: 'center' };
+    B.push(wP('Stufen: 0 keine · 1 informiert · 2 gefragt · 3 entscheiden mit · 4 entscheiden selbst. X = heute, O = Ziel, B = bewusst keine Beteiligung (zählt nicht als Lücke).', { style: 'Hinweis' }));
+    B.push(wTable([['Entscheidung', 'heute (X)', 'Ziel (O)', 'B', 'Lücke']].concat(bt.r.map((r, i) => { const g = btGap(r); return [{ t: btName(bt, i), b: s.big.includes(i) }, cell(r.x), cell(r.o), r.b ? { t: 'B', b: true, align: 'center' } : '', { t: g != null && g > 0 ? String(g) : '', b: s.big.includes(i), align: 'center' }]; })), [3500, 2000, 2000, 500, TW - 8000], { header: true }));
+    B.push(wP([{ t: 'X gezählt: ', b: true }, `keine Beteiligung ${s.c.r} (davon bewusst ${s.c.B}) · Vorstufen ${s.c.y} · echte Beteiligung ${s.c.g}`]));
+    B.push(wP([{ t: 'Raum-Typ: ', b: true }, s.typ ? s.typ + (s.tie ? ' (Gleichstand)' : '') : '']));
+    B.push(wP([{ t: 'Größte Lücke: ', b: true }, s.big.length ? s.big.map(i => `${btName(bt, i)}, von Stufe ${bt.r[i].x} auf Stufe ${bt.r[i].o}`).join('; ') : '']));
+    B.push(wP([{ t: 'Gremium: ', b: true }, btGremium(bt), { t: '     Wer stößt es an? ', b: true }, bt.who || '']));
+    B.push(wP([{ t: 'Unser erster Schritt: ', b: true }, bt.step || '']));
+    B.push(wP(BT_SRC, { style: 'Hinweis' })); }
   // Selbstcheck
   B.push(wP('Selbstcheck Schule: 9 Handlungsfelder', { style: 'berschrift1' }));
   const sf = S.self || {};
