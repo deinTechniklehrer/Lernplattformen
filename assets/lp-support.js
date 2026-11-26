@@ -10,6 +10,12 @@
   try { E = JSON.parse(localStorage.getItem(EK) || '{}') || {}; } catch (e) { E = {}; }
   E.t = E.t || {};
   var SNAP = {};
+  /* Rückmeldung je Aufgabe (seit 26.11.2026): nur lokal und im Arbeitsstand der PDF, Senden an Tally nur freiwillig per Link */
+  var FK = 'lp-feedback:' + SLUG, F;
+  try { F = JSON.parse(localStorage.getItem(FK) || '{}') || {}; } catch (e) { F = {}; }
+  F.v = F.v || {}; F.s = F.s || {}; F.o = F.o || {};
+  var FOPT = [['s', 'zu schwer'], ['l', 'zu leicht'], ['u', 'unverständlich'], ['h', 'Hilfe hat nicht geholfen'], ['f', 'Fehler in der Aufgabe']];
+  function saveF() { try { localStorage.setItem(FK, JSON.stringify(F)); } catch (e) { } }
   var lastCheck = 0;
   function saveE() { try { localStorage.setItem(EK, JSON.stringify(E)); } catch (e) { } }
 
@@ -28,11 +34,12 @@
 
   function snap(c) {
     if (!c) return '';
-    var v = [].map.call(c.querySelectorAll('input,select,textarea'), function (i) { return (i.type === 'checkbox' || i.type === 'radio') ? (i.checked ? '1' : '0') : i.value; }).join('|');
-    var st = [].map.call(c.querySelectorAll('[aria-pressed],[aria-checked],[aria-selected]'), function (n) { return (n.getAttribute('aria-pressed') || '') + (n.getAttribute('aria-checked') || '') + (n.getAttribute('aria-selected') || ''); }).join('');
-    var on = [].map.call(c.querySelectorAll('.on,.sel,.selected,.picked,.active,.chosen'), function (n) { return n.textContent.length; }).join(',');
+    var q = function (sel) { return [].filter.call(c.querySelectorAll(sel), function (n) { return !n.closest('.lp-fbrow'); }); };
+    var v = q('input,select,textarea').map( function (i) { return (i.type === 'checkbox' || i.type === 'radio') ? (i.checked ? '1' : '0') : i.value; }).join('|');
+    var st = q('[aria-pressed],[aria-checked],[aria-selected]').map( function (n) { return (n.getAttribute('aria-pressed') || '') + (n.getAttribute('aria-checked') || '') + (n.getAttribute('aria-selected') || ''); }).join('');
+    var on = q('.on,.sel,.selected,.picked,.active,.chosen').map( function (n) { return n.textContent.length; }).join(',');
     var cl = c.cloneNode(true);
-    [].forEach.call(cl.querySelectorAll('.fb,.lp-hint,.res,.msg,[aria-live],.state,.why'), function (n) { n.remove(); });
+    [].forEach.call(cl.querySelectorAll('.fb,.lp-hint,.res,.msg,[aria-live],.state,.why,.lp-fbrow'), function (n) { n.remove(); });
     return v + '#' + st + '#' + on + '#' + txt(cl.textContent).slice(0, 6000);
   }
 
@@ -121,8 +128,43 @@
   }
 
   /* ---------- Ergebnisse melden ---------- */
+  function fbRow(key, c) {
+    if (C.feedback === false || !c || !c.closest) return;
+    var t = c.closest('article.task, .task, .card') || c;
+    var old = [].filter.call(t.querySelectorAll('.lp-fbrow'), function (n) { return n.dataset.k === key; })[0];
+    if (old) return;
+    var row = mk('div', 'lp-fbrow'); row.dataset.k = key; row.setAttribute('role', 'group'); row.setAttribute('aria-label', 'Rückmeldung zu dieser Aufgabe, freiwillig');
+    row.appendChild(mk('span', 'lp-fbl', 'Rückmeldung (freiwillig):'));
+    var bs = FOPT.map(function (o) {
+      var b = mk('button', 'lp-fbb'); b.type = 'button'; b.textContent = o[1];
+      b.onclick = function () { if (F.v[key] === o[0]) delete F.v[key]; else F.v[key] = o[0]; saveF(); upd(); };
+      row.appendChild(b); return b;
+    });
+    var note = mk('span', 'lp-fbn'); row.appendChild(note);
+    function upd() { bs.forEach(function (b, i) { b.setAttribute('aria-pressed', String(F.v[key] === FOPT[i][0])); }); note.textContent = F.v[key] ? 'Danke! Bleibt auf deinem Gerät.' : ''; }
+    upd(); t.appendChild(row);
+  }
+  function unsent() { return Object.keys(F.v).filter(function (k) { return F.s[k] !== F.v[k]; }); }
+  function askSend() {
+    if (!C.tally || document.querySelector('.lp-ask')) return;
+    var u = unsent(); if (!u.some(function (k) { return F.o[k] !== F.v[k]; })) return;
+    var list = '', used = [];
+    u.forEach(function (k) { var e = k + ':' + F.v[k]; if ((list + ',' + e).length > 1500) return; list += (list ? ',' : '') + e; used.push(k); });
+    var url = C.tally + (C.tally.indexOf('?') < 0 ? '?' : '&') + 'plattform=' + encodeURIComponent(SLUG) + '&feedback=' + encodeURIComponent(list);
+    var box = mk('div', 'lp-ask'); box.setAttribute('role', 'dialog'); box.setAttribute('aria-modal', 'true'); box.setAttribute('aria-labelledby', 'lp-ask-h');
+    box.innerHTML = '<div class="lp-askin"><p id="lp-ask-h"><b>Feedback senden?</b> Damit hilfst du sehr, die Lernplattform zu verbessern!</p>' +
+      '<p class="lp-askm">Gesendet werden nur der Name der Lernplattform und ' + (used.length === 1 ? 'deine Rückmeldung' : 'deine ' + used.length + ' Rückmeldungen') + ' zu den Aufgaben, kein Name und keine Klasse. Das Formular öffnet sich beim Dienst Tally in einem neuen Tab.</p>' +
+      '<div class="lp-askb"><a class="lp-ok" target="_blank" rel="noopener noreferrer">Senden</a><button type="button" class="lp-no">Nein, danke</button></div></div>';
+    var a = box.querySelector('a'); a.href = url;
+    var close = function () { box.remove(); };
+    a.onclick = function () { used.forEach(function (k) { F.s[k] = F.v[k]; }); u.forEach(function (k) { F.o[k] = F.v[k]; }); saveF(); setTimeout(close, 50); };
+    box.querySelector('.lp-no').onclick = function () { u.forEach(function (k) { F.o[k] = F.v[k]; }); saveF(); close(); };
+    box.addEventListener('keydown', function (ev) { if (ev.key === 'Escape') box.querySelector('.lp-no').click(); });
+    document.body.appendChild(box); a.focus();
+  }
   function result(key, ok, label, c, at) {
     if (!key) return;
+    try { fbRow(key, c); } catch (e) { }
     var r = E.t[key] || (E.t[key] = { f: 0, ok: false, l: label || key });
     if (label) r.l = txt(label);
     if (r.ok) { if (ok) clearHint(c, key); return; }
@@ -155,7 +197,7 @@
     return L;
   }
   function stateCode() {
-    var ls = {}; (C.keys || []).concat([EK]).forEach(function (k) { try { var v = localStorage.getItem(k); if (v != null) ls[k] = v; } catch (e) { } });
+    var ls = {}; (C.keys || []).concat([EK, FK]).forEach(function (k) { try { var v = localStorage.getItem(k); if (v != null) ls[k] = v; } catch (e) { } });
     return 'LPS0.' + b64u(JSON.stringify({ s: SLUG, d: new Date().toISOString(), ls: ls }));
   }
   function htmlSummary() {
@@ -167,6 +209,7 @@
       h += '<div style="display:flex;align-items:center;gap:12px;margin:8px 0"><div style="flex:0 0 260px;height:16px;border-radius:9px;background:#e4e8ea;overflow:hidden"><div style="height:100%;width:' + p + '%;background:' + col + '"></div></div><b>' + p + ' %</b> <span>(' + zoneTxt(p) + ')</span></div>';
       h += s.length ? '<p><b>Hier hat es gehakt:</b></p><ul>' + s.map(function (r) { return '<li>' + esc(r.l) + ' (' + stuckTxt(r) + ')</li>'; }).join('') + '</ul>' : '<p>Keine Aufgabe mit mehreren Fehlversuchen.</p>';
     }
+    if (C.keys && C.keys.length) setTimeout(askSend, 700);
     if (C.keys && C.keys.length) h += '<script type="application/json" id="lp-state">' + stateCode() + '<\/script><p style="font-size:12px;color:#56676b">In dieser Datei steckt dein Arbeitsstand. Du kannst sie in der Lernplattform wieder hochladen und weiterarbeiten.</p>';
     return h;
   }
@@ -206,7 +249,7 @@
           var w = d.internal.pageSize.getWidth(), h = d.internal.pageSize.getHeight(), k = d.internal.scaleFactor, mm = function (v) { return v * k * 25.4 / 72; };
           if (Math.min(mm(w), mm(h)) >= 190 && Math.max(mm(w), mm(h)) >= 270) {
             if (C.pdfSection !== false) addSection(d);
-            if (C.keys && C.keys.length) d.setProperties({ keywords: stateCode() });
+            if (C.keys && C.keys.length) { d.setProperties({ keywords: stateCode() }); setTimeout(askSend, 700); }
           }
         } catch (e) { }
       };
@@ -268,5 +311,5 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
   window.addEventListener('load', wrapPdf);
 
-  window.LP = { result: result, assist: assist, fb: fb, textLines: textLines, htmlSummary: htmlSummary, energy: energy, stuck: stuck, stateCode: stateCode, _codeFrom: codeFrom };
+  window.LP = { result: result, assist: assist, fb: fb, textLines: textLines, htmlSummary: htmlSummary, energy: energy, stuck: stuck, stateCode: stateCode, _codeFrom: codeFrom, _askSend: askSend, _unsent: unsent };
 })();
