@@ -790,6 +790,19 @@ rect.rtg-link,rect.rtg-link2{fill:var(--rt-link2);stroke:var(--rt-out);stroke-wi
 @media (prefers-reduced-motion:reduce){.rt-gauge .bar i{transition:none}}
 @media (max-width:420px){.rt-row{grid-template-columns:2.2em 40px minmax(0,1fr) 40px 4em;gap:4px}.rt-row button{min-height:42px}}
 @media (max-width:620px){.rtg-jl{font-size:28px}.rtg-axt{font-size:30px}.rt-sim{padding:6px}.lab-fig .mk{transform-box:fill-box;transform-origin:center;transform:scale(1.5)}}
+
+/* Regelkreis (seit 27.11.2026) */
+.rtg-rk{fill:var(--rt-floor);stroke:var(--rt-out);stroke-width:2}
+.rtg-rkl{fill:none;stroke:var(--rt-ink);stroke-width:2.6;stroke-linecap:round}.rtg-rkh{fill:var(--rt-ink)}
+.rtg-rkl.fb{stroke:var(--rt-hl);stroke-width:3.2}.rtg-rkh.fb{fill:var(--rt-hl)}
+.rtg-rkl.no{stroke:var(--muted);stroke-dasharray:7 6}.rtg-x{stroke:var(--rt-hl);stroke-width:3.4;stroke-linecap:round;fill:none}
+.rtg-sep{stroke:var(--line);stroke-width:1.5}
+/* Zuordnen je Zeile: eine Spalte, damit die Knopfreihe immer in die Karte passt (Check 27.11.2026) */
+.mi,.mi.w2{grid-template-columns:minmax(0,1fr)}
+.mi-row .seg{max-width:100%}.mi-row .seg button{white-space:normal}
+@media (max-width:440px){.mi-row>span{flex:0 0 auto}}
+.rt-play{display:flex;gap:8px;align-items:center;margin:6px 0 2px}
+.rt-simfig{margin:12px 0}.rt-simfig>figcaption{font-size:14px;color:var(--muted);padding:6px 2px 0;max-width:640px}
 .szl{list-style:none;padding:0;margin:8px 0;display:grid;gap:10px}.szl li{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center}.szi{display:inline-flex;gap:6px;min-width:44px}.szl .szi{flex-direction:column;width:44px}.szi svg,.szi .gfb-ico{width:44px;height:44px;flex:none}
 </style>
 <script>/* Sicherheitszeichen aus dem Tech-Board (Repo Unterrichtsboard, tech-board/index.html, TB_RULES/TB_HAZ).
@@ -1078,10 +1091,29 @@ var RTG = (function () {
     if (st.contact > 0) b += '<circle class="rtg-hitc" cx="' + r1(cx - 10) + '" cy="' + r1(py - 40) + '" r="' + r1(14 + 10 * st.contact) + '"/>';
     return { vb: '0 0 420 330', body: b }; }
 
+  /* ---------- Regelkreis und Steuerkette (Kapitel 5) ---------- */
+  function regelkreis() { var b = '';
+    function box(x, y, w, l1, l2) { return '<rect class="rtg-rk" x="' + x + '" y="' + y + '" width="' + w + '" height="52" rx="8"/>' + (l2 ? '<text class="rtg-t rtg-c" x="' + (x + w / 2) + '" y="' + (y + 22) + '">' + l1 + '</text><text class="rtg-t rtg-c" x="' + (x + w / 2) + '" y="' + (y + 43) + '">' + l2 + '</text>' : '<text class="rtg-t rtg-c" x="' + (x + w / 2) + '" y="' + (y + 32) + '">' + l1 + '</text>'); }
+    function ar(x1, y1, x2, y2, cls) { var dx = x2 - x1, dy = y2 - y1, l = Math.sqrt(dx * dx + dy * dy), ux = dx / l, uy = dy / l, bx = x2 - ux * 11, by = y2 - uy * 11;
+      return '<path class="rtg-rkl' + (cls || '') + '" d="M' + x1 + ' ' + y1 + 'L' + r1(bx) + ' ' + r1(by) + '"/><path class="rtg-rkh' + (cls || '') + '" d="M' + x2 + ' ' + y2 + 'L' + r1(bx - uy * 6) + ' ' + r1(by + ux * 6) + 'L' + r1(bx + uy * 6) + ' ' + r1(by - ux * 6) + 'z"/>'; }
+    b += '<text class="rtg-t rtg-mid" x="2" y="24">Regelung: mit Rückmeldung</text>';
+    b += box(2, 44, 72, 'Sollwert', 'z. B. 40°') + ar(74, 70, 94, 70);
+    b += '<circle class="rtg-rk" cx="110" cy="70" r="16"/><path class="rtg-rkl" d="M102 70h16M110 62v16"/><text class="rtg-t" x="90" y="104">−</text>';
+    b += ar(126, 70, 146, 70) + box(146, 44, 98, 'Motor mit', 'Getriebe') + ar(244, 70, 262, 70) + box(262, 44, 76, 'Gelenk');
+    b += ar(300, 96, 300, 130) + box(228, 130, 110, 'Positions-', 'sensor');
+    b += '<path class="rtg-rkl fb" d="M228 156H110V98"/><path class="rtg-rkh fb" d="M110 87l-6 12h12z"/>';
+    b += '<text class="rtg-t" x="120" y="124">Vergleich</text><text class="rtg-t" x="128" y="180">Istwert</text>';
+    b += '<path class="rtg-sep" d="M2 204H338"/>';
+    b += '<text class="rtg-t rtg-mid" x="2" y="234">Steuerung: ohne Rückmeldung</text>';
+    b += box(2, 250, 114, 'Programm:', '250 Schritte') + ar(116, 276, 134, 276) + box(134, 250, 124, 'Schrittmotor') + ar(258, 276, 270, 276) + box(270, 250, 68, 'Gelenk');
+    b += '<path class="rtg-rkl no" d="M304 302v14H40"/><path class="rtg-x" d="M165 306l14 20M179 306l-14 20"/>';
+    b += '<text class="rtg-t" x="2" y="350">Der Motor zählt nur Schritte.</text><text class="rtg-t" x="2" y="372">Keine Rückmeldung: Rutscht er</text><text class="rtg-t" x="2" y="394">durch, merkt das niemand.</text>';
+    return { vb: '0 0 340 402', body: b }; }
+
   function cover() { var r = robot4([20, 35, 30, 0], { c: cam(-35, 22, 1.05, 140, 330), cube: { x: 230, y: 70, z: 0, s: 34 }, grip: 0 }); return { vb: r.vb, body: r.body }; }
 
   return { svg: svg, cam: cam, P: P, fk4: fk4, ik4: ik4, inLim: inLim, A4: A4, robot4: robot4, fk6: fk6, robot6: robot6, BAU: BAU, workspace: workspace,
-    gelenkarten: gelenkarten, starr: starr, kette: kette, greifer: greifer, gelenkInnen: gelenkInnen, tele: tele, cobotTop: cobotTop, cover: cover, esc: esc };
+    gelenkarten: gelenkarten, starr: starr, kette: kette, greifer: greifer, gelenkInnen: gelenkInnen, tele: tele, regelkreis: regelkreis, cobotTop: cobotTop, cover: cover, esc: esc };
 })();
 </script><link rel="stylesheet" href="../assets/lp-shell.css"><script src="../assets/lp-shell.js"></script></head><body>
 <div class="app">
@@ -1147,15 +1179,15 @@ var RTG = (function () {
     <h3>Eingabe, Verarbeitung, Ausgabe</h3>
     <p>Jeder Roboter arbeitet nach dem <b>EVA-Prinzip</b>. Sensoren liefern die Eingabe. Die Steuerung, ein Computer mit dem Programm, verarbeitet sie. Die Aktoren führen die Bewegung aus.</p>
     <div class="rt-eva">
-      <div class="e"><h4>Eingabe: Sensoren</h4><p>Kamera, Positionssensoren in den Gelenken, Drehmomentsensoren, Lichtschranke, Not-Halt-Taster</p></div>
-      <div class="v"><h4>Verarbeitung: Steuerung</h4><p>Steuerrechner mit dem Programm: rechnet Bewegungen aus, vergleicht Soll- und Istwerte</p></div>
-      <div class="a"><h4>Ausgabe: Aktoren</h4><p>Motoren in den Gelenken, Greifer, Warnleuchte</p></div>
+      <div class="e"><h4>Eingabe: Sensoren</h4><p>Sensoren messen oder erkennen etwas und melden es der Steuerung. Beispiele: Kamera, Positionssensoren in den Gelenken, Drehmomentsensoren, Lichtschranke, Not-Halt-Taster</p></div>
+      <div class="v"><h4>Verarbeitung: Steuerung</h4><p>Die Steuerung rechnet, wertet aus und entscheidet. Sie bewegt selbst nichts. Beispiel: Steuerrechner mit dem Programm, rechnet Bewegungen aus, vergleicht Soll- und Istwerte</p></div>
+      <div class="a"><h4>Ausgabe: Aktoren</h4><p>Aktoren setzen den Befehl der Steuerung um: Sie bewegen, schalten oder geben ein Signal. Beispiele: Motoren in den Gelenken, Greifer, Warnleuchte</p></div>
     </div>
     <p class="rt-back">Die Positionssensoren melden ständig zurück, wie weit sich jedes Gelenk gedreht hat. So merkt die Steuerung, ob der Arm wirklich dort ist, wo er sein soll.</p>
   </div>
   <article class="task">
     <header><span class="num"></span><h3>Sensor, Steuerung oder Aktor?</h3><button class="op" data-op="zuordnen" type="button">zuordnen</button></header>
-    <p class="q">Ordne jedes Bauteil dem passenden Teil des EVA-Prinzips zu.</p>
+    <p class="q">Ordne jeden Vorgang dem Teil des Roboters zu, der ihn ausführt. Die Beispiele stehen nicht in den Kästen oben: Entscheide nach der Aufgabe des Teils.</p>
     <div class="w" data-t="t1"></div>
   </article>
   <article class="task">
@@ -1182,7 +1214,7 @@ var RTG = (function () {
   <div class="info">
     <h3>Probier es aus: sechs Gelenke</h3>
     <p>Dieser Knickarmroboter hat sechs Drehgelenke. Beweg einen Regler nach dem anderen und beobachte, welcher Teil des Arms sich bewegt.</p>
-    <div data-rtsim="six"></div>
+    <figure class="rt-simfig"><div data-rtsim="six"></div><figcaption>Knickarmroboter mit sechs Drehgelenken. Jeder Regler dreht genau ein Gelenk, alle Glieder dahinter bewegen sich mit.</figcaption></figure>
   </div>
   <article class="task">
     <header><span class="num"></span><h3>Freiheitsgrade zählen</h3><button class="op" data-op="ermitteln" type="button">ermitteln</button></header>
@@ -1224,10 +1256,10 @@ var RTG = (function () {
     <h3>Der Arbeitsraum</h3>
     <p>Alle Punkte, die die Greiferspitze erreichen kann, bilden den <b>Arbeitsraum</b>. Er hängt von den Längen der Armteile ab und davon, wie weit sich jedes Gelenk drehen lässt. Jedes Gelenk hat einen <b>Anschlag</b>, an dem es aufhört. Beim Tischroboter ist der Oberarm 150 mm lang und der Unterarm 160 mm. Vom Ende des Unterarms ragt der Greiferhalter noch 50 mm nach außen. Am weitesten reicht der Roboter, wenn diese drei Teile in einer Linie liegen.</p>
     <p>Beweg die Regler: Die grüne Fläche zeigt alle Punkte, die die Greiferspitze erreicht. In der Draufsicht siehst du, dass hinter dem Roboter ein Stück fehlt.</p>
-    <div data-rtsim="ws"></div>
+    <figure class="rt-simfig"><div data-rtsim="ws"></div><figcaption>Arbeitsraum des Tischroboters von der Seite und von oben. Grün sind alle Punkte, die die Greiferspitze mit den eingestellten Gelenkgrenzen erreicht.</figcaption></figure>
   </div>
   <article class="task">
-    <header><span class="num"></span><h3>Welche Bauform ist das?</h3><button class="op" data-op="zuordnen" type="button">zuordnen</button></header>
+    <header><span class="num"></span><h3>Vier Bauformen erkennen</h3><button class="op" data-op="zuordnen" type="button">zuordnen</button></header>
     <p class="q">Ordne jedem Roboter seine Bauform zu.</p>
     <div class="w" data-t="t6"></div>
   </article>
@@ -1250,14 +1282,14 @@ var RTG = (function () {
     <p>Im <b>Joint-Modus</b> (Gelenkmodus, englisch joint = Gelenk) bewegt jede Taste genau ein Gelenk. J1 dreht den ganzen Arm um den Sockel, J2 neigt den Oberarm, J3 den Unterarm und J4 dreht den Greifer. Die Stellung wird in Grad angegeben, das sind die <b>Gelenkkoordinaten</b>. Neigst du nur den Oberarm, ändern sich Abstand und Höhe des Greifers gleichzeitig: Die Spitze fährt einen Bogen.</p>
     <p>Im <b>Koordinaten-Modus</b> denkst du in <b>X, Y und Z</b>. Der Nullpunkt liegt in der Mitte des Sockels auf der Tischplatte. X zeigt nach vorn, Y nach links und Z nach oben. R ist die Drehung des Greifers. Drückst du X+, fährt der Greifer geradeaus nach vorn. Dafür berechnet die Steuerung, wie sich alle Gelenke gleichzeitig drehen müssen. Diese Rechnung vom Ziel zurück zu den Gelenkwinkeln heißt <b>Rückwärtsrechnung</b> (inverse Kinematik). Punkte außerhalb des Arbeitsraums kann der Roboter auch im Koordinaten-Modus nicht erreichen.</p>
     <p>Beide Angaben beschreiben dieselbe Stellung. Probier es aus: Schalte um und beobachte die Anzeige.</p>
-    <div data-rtsim="jog"></div>
+    <figure class="rt-simfig"><div data-rtsim="jog"></div><figcaption>Der Tischroboter zum Steuern: im Joint-Modus mit J1 bis J4, im Koordinaten-Modus mit X, Y, Z und R. Die Anzeige nennt beide Angaben für dieselbe Stellung.</figcaption></figure>
   </div>
   <div class="info">
     <h3>Bewegungen im Programm</h3>
     <p>In einem Programm gibt man dem Roboter Zielpunkte vor. Wie er dorthin fährt, legt die Bewegungsart fest.</p>
     <p>Bei der <b>Joint-Bewegung</b> (auch PTP, Punkt zu Punkt) drehen alle Gelenke gleichzeitig von ihrem Start- zu ihrem Zielwinkel. Die Steuerung muss dafür wenig rechnen, und die Bewegung ist schnell. Die Greiferspitze fährt aber einen Bogen, und wo genau er verläuft, ist schwer vorherzusehen. Steht etwas im Weg, kann der Roboter dagegen stoßen.</p>
     <p>Bei der <b>Linearbewegung</b> fährt die Greiferspitze auf einer geraden Linie. Für jeden Zwischenpunkt berechnet die Steuerung neue Gelenkwinkel. Das braucht man, wenn der Weg selbst wichtig ist: beim Kleben einer Naht, beim Einsetzen eines Stifts in eine Bohrung oder beim geraden Absenken über einem Teil.</p>
-    <div data-rtsim="ptp"></div>
+    <figure class="rt-simfig"><div data-rtsim="ptp"></div><figcaption>Gleicher Start A, gleiches Ziel B: Bei der Joint-Bewegung fährt die Greiferspitze einen Bogen, bei der Linearbewegung eine gerade Linie.</figcaption></figure>
     <p>Programme entstehen oft durch <b>Teach-in</b>: Man fährt jede Position einmal von Hand an und speichert sie. Ein Programm zum Umsetzen eines Würfels („Pick and Place“) beginnt in der Grundstellung. Über freie Strecken fährt der Roboter mit Joint-Bewegungen. Über dem Würfel senkt er gerade ab, greift zu und hebt den Würfel gerade an, bevor er zur Ablage weiterfährt. Dort senkt er wieder gerade ab und öffnet den Greifer.</p>
   </div>
   <article class="task">
@@ -1292,6 +1324,7 @@ var RTG = (function () {
   <div class="info">
     <h3>Steuern oder regeln?</h3>
     <p>Das Programm gibt für jedes Gelenk einen <b>Sollwert</b> vor, zum Beispiel 40°. Der Positionssensor misst den <b>Istwert</b>. Die Steuerung vergleicht beide. Ist das Gelenk noch nicht am Ziel, dreht der Motor weiter, bis die Abweichung null ist. Weil der gemessene Wert zurückgemeldet wird, ist das eine <b>Regelung</b>, ein geschlossener Kreis. Ohne Rückmeldung spricht man von einer <b>Steuerung</b>: Ein Schrittmotor ohne Sensor zählt nur seine Schritte. Rutscht er durch, merkt das niemand.</p>
+    <figure class="rt-fig" data-rtfig="regelkreis" data-aria="Oben ein Regelkreis: Sollwert, Vergleich, Motor mit Getriebe, Gelenk, Positionssensor; der Istwert läuft zurück zum Vergleich. Unten eine Steuerkette: Programm mit 250 Schritten, Schrittmotor, Gelenk, ohne Rückweg."><figcaption>Oben die Regelung: Der Positionssensor meldet den Istwert zurück, die Steuerung vergleicht ihn mit dem Sollwert, bis beide gleich sind. Unten die Steuerung: Der Schrittmotor zählt nur Schritte, niemand prüft, ob das Gelenk angekommen ist.</figcaption></figure>
   </div>
   <div class="info">
     <h3>Greifer und Werkzeuge</h3>
@@ -1330,10 +1363,10 @@ var RTG = (function () {
     <p><b>Geschwindigkeit und Abstand überwachen:</b> Ein Laserscanner oder eine Kamera misst, wie weit der Mensch entfernt ist. Kommt er näher, wird der Roboter langsamer. Geht er weg, beschleunigt der Roboter wieder.</p>
     <p><b>Leistung und Kraft begrenzen:</b> Hier darf der Roboter den Menschen berühren. Drehmomentsensoren messen die Kraft, und der Roboter hält an, bevor sie gefährlich wird. Wie groß die Kraft höchstens sein darf, legt der Betrieb vorher in der Risikobeurteilung fest.</p>
     <p>Auch ein Cobot ist nicht von selbst sicher. Für jede Anwendung prüft der Betrieb in einer <b>Risikobeurteilung</b>, was passieren kann. Hält der Roboter ein Messer, einen Schweißdraht oder ein spitzes Bauteil, wird selbst ein leichter Arm gefährlich.</p>
-    <div data-rtsim="cobot"></div>
+    <figure class="rt-simfig"><div data-rtsim="cobot"></div><figcaption>Cobot-Arbeitsplatz von oben, davor eine Person. Je nach Schutzart hält der Roboter an, fährt langsamer oder darf die Hand mit begrenzter Kraft berühren. Beim Überwachen misst ein Laserscanner den Abstand: gelb das Warnfeld, rot das Schutzfeld.</figcaption></figure>
   </div>
   <article class="task">
-    <header><span class="num"></span><h3>Welche Art der Zusammenarbeit?</h3><button class="op" data-op="zuordnen" type="button">zuordnen</button></header>
+    <header><span class="num"></span><h3>Vier Arten der Zusammenarbeit</h3><button class="op" data-op="zuordnen" type="button">zuordnen</button></header>
     <p class="q">Ordne jedes Beispiel der passenden Art der Zusammenarbeit zu: Tippe erst eine Karte an und dann das passende Feld.</p>
     <div class="w" data-t="t16"></div>
   </article>
@@ -1362,11 +1395,12 @@ var RTG = (function () {
     <p>Die Leichtbauroboter des DLR wurden immer leichter: Der LBR II, im Jahr 2000 auf der Hannover Messe gezeigt, wog 18 kg und konnte 7 kg tragen. Der <b>LBR III</b> wurde drei Jahre später vorgestellt. Er wiegt 14 kg und trägt ebenso viel. Sein Vorgänger, der erste Leichtbauroboter <b>LBR I</b>, war 1995 fertig geworden.</p>
     <p>Begonnen hatte alles mit <b>ROTEX</b>: 1993 flog bei der Mission D2 ein Roboter im Space Shuttle mit. Er war das erste Robotersystem im All, das von der Erde aus ferngesteuert wurde.</p>
     <p>Der humanoide Roboter <b>Rollin’ Justin</b> fährt auf Rädern, hat zwei Arme mit je sieben Gelenken und zwei Hände mit vier Fingern. Zusammen hat er 51 Freiheitsgrade. Fast alle Gelenke haben Drehmomentsensoren. Er soll einmal im Haushalt helfen und Astronauten unterstützen. Zum ersten Mal zeigte er sich 2008 der Öffentlichkeit.</p>
+    <p><b>Vom All auf die Erde:</b> Vieles, was für Roboter im All entstanden ist, hilft heute auf der Erde. Der Medizinroboter MIRO des DLR wird von einer Konsole aus bedient. Wer operiert, sieht ein 3D-Bild aus dem Körper und fühlt über die Eingabegeräte einen Teil der Kräfte am Instrument, nach demselben Prinzip wie bei der Steuerung von ROKVISS. Teile dieser Technik hat ein Medizintechnik-Unternehmen übernommen. Aus dem DLR-Institut ging 2003 eine Firma hervor, die Drehmomentsensoren für Gelenke baut. Solche Sensoren stecken heute in Cobots: Stößt der Arm an, merkt er es und hält an. Den Leichtbauroboter selbst hat ein Industrieunternehmen zusammen mit dem DLR für den Einsatz in Fabriken weiterentwickelt. Rollin’ Justin dagegen ist noch ein Forschungsroboter.</p>
     <figure class="rt-fig" data-rtfig="tele" data-aria="Eine Bodenstation auf der Erde schickt Befehle zu einem Roboterarm an einer Raumstation. Der Arm schickt Bilder und gemessene Kräfte zurück."><figcaption>Telepräsenz: Befehle gehen von der Erde zum Arm, Bilder und Kräfte kommen zurück.</figcaption></figure>
   </div>
   <article class="task">
-    <header><span class="num"></span><h3>Eine kleine Geschichte der Weltraumroboter</h3><button class="op" data-op="ordnen" type="button">ordnen</button></header>
-    <p class="q">Ordne die Ereignisse zeitlich: das früheste oben.</p>
+    <header><span class="num"></span><h3>Aus dem All in den Alltag</h3><button class="op" data-op="zuordnen" type="button">zuordnen</button></header>
+    <p class="q">Ordne jeder Entwicklung aus der Weltraumrobotik zu, was daraus auf der Erde geworden ist oder werden soll. Eine Angabe auf der rechten Seite bleibt übrig.</p>
     <div class="w" data-t="t19"></div>
   </article>
 </section>
@@ -1784,7 +1818,7 @@ function gfbSummary(t, v) {
 const OPS_AWT={'benennen':'(be)nennen: Fakten, Daten, Begriffe, Regeln ohne Erläuterung aufzählen.','beschreiben':'Strukturiert und fachsprachlich angemessen Materialien vorstellen und/oder Sachverhalte darlegen.','darstellen':'Sachverhalte detailliert und fachsprachlich angemessen aufzeigen.','zusammenstellen':'Begriffe, Elemente nach vorgegebenen oder selbst festgelegten Gesichtspunkten sammeln.','recherchieren':'Etwas ermitteln, erkunden, untersuchen, erforschen.','untersuchen':'analysieren/untersuchen: Materialien oder Sachverhalte beschreiben, kriterienorientiert erschließen und strukturiert darstellen.','zuordnen':'Begründet für ein Objekt eine Gruppe, eine Position oder ein Material zuweisen oder einen Sachverhalt begründet in einen Zusammenhang stellen.','erklären':'Sachverhalte so darstellen, dass Bedingungen, Ursachen, Gesetzmäßigkeiten und/oder Funktionszusammenhänge verständlich werden.','erläutern':'Sachverhalte erklären und in ihren Beziehungen an Beispielen verdeutlichen.','ermitteln':'Einen Zusammenhang oder eine Lösung finden und das Ergebnis formulieren.','erstellen':'Einen Text oder einen Plan ausarbeiten.','herausarbeiten':'Materialien auf bestimmte, nicht unbedingt genannte Sachverhalte hin untersuchen und Zusammenhänge herstellen.','ordnen':'Etwas kriteriengeleitet in eine bestimmte Systematik oder Reihenfolge bringen.','unterscheiden':'Etwas im Hinblick auf seine besonderen Merkmale erkennen und von Alternativen abgrenzen.','vergleichen':'Gemeinsamkeiten, Ähnlichkeiten und Unterschiede von Sachverhalten kriterienorientiert darlegen.','beurteilen':'Den Stellenwert von Sachverhalten in einem Zusammenhang bestimmen, um kriterienorientiert zu einem begründeten Sachurteil zu gelangen.','bewerten':'Einen Gegenstand an erkennbaren Wertkategorien oder an bekannten Beurteilungskriterien messen.','Stellung nehmen':'Beurteilung mit eigenen Wertmaßstäben, die zu einem begründeten eigenen Werturteil führt.','überprüfen':'Inhalte oder Aussagen auf ihre sachliche Richtigkeit bzw. innere Logik hin untersuchen.','messen':'Physikalische Größen mit geeigneten Methoden quantifizieren (fachpraktischer Operator).','schätzen':'Kein Operator aus dem Kerncurriculum. Hier gibt es kein Richtig oder Falsch: Die Frage zeigt dir, was du schon weißt.'};
 
 /* Robotik-Theorie: Kapitel, Aufgaben, Simulationen. Technik Jg. 8–10. Stand 27.11.2026.
-   Rahmen: KC Technik RS 2010 (S. 15, 23, 25), Curriculare Vorgaben Profil Technik RS 2011 (S. 23 und 37, Beispiel Roboterarm), KC AWT IGS 2024 (6-2 S. 25, 8-2 S. 32/33).
+   Rahmen: KC Technik RS 2010 (S. 15, 23, 25), Curriculare Vorgaben Profil Technik RS 2011 (S. 23 und 38, Beispiel Roboterarm), KC AWT IGS 2024 (6-2 S. 24, 8-2 S. 32/33).
    Thema und Reihenfolge orientieren sich am DLR-Heft „Robotik – Sensible Helfer auf der Erde und im All“ (DLR und Klett MINT, 2018); alle Texte, Grafiken und Simulationen sind neu.
    Zahlen: IFR World Robotics 2025 (Roboterdichte), DLR-Institut für Robotik und Mechatronik (LBR, ROKVISS, Rollin' Justin), DGUV (Kollaborationsarten).
    Eigener Aufgabentyp: rtjog (Tischroboter im Joint- oder Koordinaten-Modus steuern, Würfel greifen oder ablegen). */
@@ -1803,7 +1837,7 @@ const RT_CUBE={x:240,y:-90,z:0,s:30},RT_PAD={x:170,y:150,s:56},RT_Q0=[0,20,25,0]
 const T={
 e1:{type:'est',min:0,max:1200,step:10,start:0,unit:'Roboter',reveal:'449 Industrieroboter kamen 2024 in Deutschland auf 10.000 Beschäftigte in der Industrie. Damit liegt Deutschland weltweit auf Platz 3, hinter Südkorea mit 1.220 und Singapur mit 818 (International Federation of Robotics, World Robotics 2025).'},
 e2:{type:'est',min:0,max:200,step:1,start:0,unit:'kg',reveal:'14 kg. So viel wiegt der Leichtbauroboter LBR III des Deutschen Zentrums für Luft- und Raumfahrt (DLR), vorgestellt 2003. Er kann auch 14 kg tragen, also so viel, wie er selbst wiegt.'},
-t1:{type:'seg',kc:'R1',cats:['Eingabe (Sensor)','Verarbeitung (Steuerung)','Ausgabe (Aktor)'],items:[['Kamera am Greifer',0],['Motor im Schultergelenk',2],['Programm im Steuerrechner',1],['Drehmomentsensor im Gelenk',0],['Sauggreifer',2],['Not-Halt-Taster',0],['Steuerrechner vergleicht Soll- und Istwinkel',1],['Warnleuchte am Sockel',2]]},
+t1:{type:'seg',kc:'R1',cats:['Sensor','Steuerung','Aktor'],items:[['Elektromagnet am Greifer schaltet ein',2],['Endschalter meldet: Gelenk am Anschlag',0],['Bildauswertung erkennt, wo das Teil liegt',1],['Hupe ertönt vor dem Start',2],['Ultraschallmodul misst den Abstand zur Wand',0],['Programm berechnet die Gelenkwinkel',1],['Ventil öffnet den Unterdruck am Sauggreifer',2],['Laserscanner erfasst einen Menschen',0]]},
 t2:{type:'gap',kc:'R1',text:'Ein Roboter ist eine Maschine mit beweglichen {0}, die von einem {1} gesteuert wird. Mit {2} erfasst er seine Umgebung und seine eigene Stellung. Ein ferngesteuerter Bagger ist kein Roboter, weil {3} jede Bewegung vorgibt. Eine Waschmaschine ist ein {4}: Sie arbeitet ein festes Programm ab, bewegt aber keine Gelenke im Raum.',
   gaps:[[['Rädern','Gelenken','Schaltern'],1],[['Programm','Joystick','Schalter'],0],[['Motoren','Getrieben','Sensoren'],2],[['der Motor','ein Mensch','das Programm'],1],[['Roboter','Sensor','Automat'],2]]},
 t3:{type:'drill',kc:'R2',need:3,gen:()=>genKette(),wrong:'Zähl jedes Drehgelenk (Kreis mit Punkt) und jedes Schubgelenk (Rechteck) einzeln. Feste Knicke ohne Gelenk zählen nicht.',
@@ -1834,7 +1868,7 @@ t16:{type:'sort',kc:'R5',cats:['Sicherheitsbewerteter Halt','Handführung','Gesc
 t17:{type:'mark',kc:'R5',parts:[['Ein Cobot arbeitet ohne Schutzzaun mit Menschen im selben Raum.',false],['Cobots sind so sicher, dass man für sie keine Risikobeurteilung braucht.',true],['Mit Sensoren in den Gelenken bemerkt ein Cobot, wenn er gegen etwas stößt.',false],['Hält ein Cobot ein Messer, ist das ungefährlich, weil sein Arm leicht ist.',true],['Viele Cobots sind leicht gebaut und haben abgerundete Formen.',false],['Bei der Abstandsüberwachung fährt der Roboter schneller, wenn jemand näher kommt.',true]],
   help:{tip:'Drei Sätze sind falsch. Lies den Abschnitt über die Risikobeurteilung und die vier Arten der Zusammenarbeit noch einmal.',teil:'Auch ein leichter Arm wird gefährlich, wenn er ein spitzes oder scharfes Werkzeug hält.'}},
 t18:{type:'multi',kc:'R5',opts:[['geringes Gewicht des Arms',true],['möglichst hohe Geschwindigkeit',false],['Drehmomentsensoren in den Gelenken',true],['ein Schutzzaun um den Arbeitsplatz',false],['abgerundete Formen ohne Quetschkanten',true],['möglichst große Kraft',false],['begrenzte Kraft bei einer Berührung',true]]},
-t19:{type:'order',kc:'R6',items:['Ein Roboter im Raumschiff wird zum ersten Mal von der Erde aus gesteuert (ROTEX).','Der erste Leichtbauroboter des DLR ist fertig (LBR I).','Der Leichtbauroboter LBR III wird vorgestellt.','Der Roboterarm ROKVISS wird außen an der Raumstation ISS befestigt.','Der humanoide Roboter Rollin’ Justin zeigt sich zum ersten Mal der Öffentlichkeit.'],start:[3,0,4,2,1]},
+t19:{type:'pair',kc:'R6',left:['Drehmomentsensoren in jedem Gelenk der Leichtbauroboter','Telepräsenz mit Kraftrückkopplung wie bei ROKVISS','ein Arm, der so viel trägt, wie er selbst wiegt','Rollin’ Justin mit zwei Armen und zwei Händen'],right:['ein Navigationsgerät, das per Satellit den Weg findet','ein Roboterarm, den ein Industrieunternehmen für Fabriken weiterentwickelt hat','Operationsroboter: Die Chirurgin steuert an einer Konsole und spürt die Kräfte','ein Helfer, der einmal im Haushalt mit anpacken soll','Cobots, die eine Berührung spüren und den Arm anhalten'],ans:[4,2,1,3]},
 t20:{type:'open',kc:'R5',min:160,checks:[['Vorteil für Beschäftigte',/entlast|schwer|ergonom|rücken|monoton|langweil|gesund|helfen|hilft|unterstütz|anstrengend/i],['Nachteil oder Risiko',/arbeitspl|job|ersetz|weniger|verlier|kündig|unfall|gefahr|verletz|überwach/i],['Bezug zum Cobot',/cobot|kraft|sensor|abstand|handführ|montage|teach|zaun/i],['eigene Meinung',/ich finde|meiner meinung|ich meine|ich denke|meines erachtens|insgesamt|deshalb|deswegen/i]],
   muster:['Ich finde, Cobots können für die Beschäftigten eine Hilfe sein.','Sie übernehmen schwere oder eintönige Arbeiten, zum Beispiel das Heben von Bauteilen, und schonen damit den Rücken.','Weil sie ohne Schutzzaun arbeiten und ihre Kraft begrenzt ist, können Mensch und Roboter direkt nebeneinander montieren.','Ein Risiko ist, dass Betriebe Arbeitsplätze einsparen, wenn ein Cobot eine ganze Tätigkeit übernimmt.','Außerdem muss der Betrieb jede Anwendung prüfen, denn mit einem scharfen Werkzeug wird auch ein Cobot gefährlich.','Insgesamt halte ich Cobots für eine Hilfe, wenn die Beschäftigten neue Aufgaben bekommen, zum Beispiel das Einrichten und Überwachen der Roboter.']},
 t21:{type:'quiz',fmt:'Quiz (Auswahl)',kc:'R2',qs:[
@@ -1844,9 +1878,9 @@ t21:{type:'quiz',fmt:'Quiz (Auswahl)',kc:'R2',qs:[
 t22:{type:'rtjog',kc:'R3',modes:['joint','coord'],goal:'place',
   help:{tip:'Im Koordinaten-Modus kannst du den Greifer gerade über den Würfel und gerade nach unten fahren. Greif den Würfel, heb ihn an und fahr über das gestrichelte Feld.',teil:'Der Würfel liegt bei X = 240, Y = −90. Das Ablagefeld liegt bei X = 170, Y = 150. Setz den Würfel ab, indem du den Greifer über dem Feld öffnest.'}}
 };
-const KC={'R1':'KC Technik RS 2010, S. 23 (Steuern und Regeln): „beschreiben, dass Informationen nach dem EVA-Prinzip verarbeitet werden“, „erklären das Zusammenwirken von Sensoren und Aktoren“ · KC AWT IGS 2024, 6-2, S. 25: „erklären Elemente und Strukturen von Steuerungsabläufen“',
-  'R2':'KC Technik RS 2010, S. 15: „benennen und beschreiben Funktionsteile von Maschinen und Werkzeugen“ · Curriculare Vorgaben Profil Technik RS 2011, S. 37: Computereinsatz in automatisierten Prozessen, Beispiel Roboterarm',
-  'R3':'KC Technik RS 2010, S. 25 (Die Computer automatisieren technische Prozesse): „untersuchen, wie Computer Signale erfassen, verarbeiten und als Folge ein Signal ausgeben“, „entwickeln Programme zur Steuerung/Regelung“ · Profil Technik RS 2011, S. 37: Roboterarm, Programmierung',
+const KC={'R1':'KC Technik RS 2010, S. 23 (Steuern und Regeln): „beschreiben, dass Informationen nach dem EVA-Prinzip verarbeitet werden“, „erklären das Zusammenwirken von Sensoren und Aktoren“ · KC AWT IGS 2024, 6-2, S. 24: „erklären Elemente und Strukturen von Steuerungsabläufen“',
+  'R2':'KC Technik RS 2010, S. 15: „benennen und beschreiben Funktionsteile von Maschinen und Werkzeugen“ · Curriculare Vorgaben Profil Technik RS 2011, S. 38: Computereinsatz in automatisierten Prozessen, Beispiel Roboterarm',
+  'R3':'KC Technik RS 2010, S. 25 (Die Computer automatisieren technische Prozesse): „untersuchen, wie Computer Signale erfassen, verarbeiten und als Folge ein Signal ausgeben“, „entwickeln Programme zur Steuerung/Regelung“ · Profil Technik RS 2011, S. 38: Roboterarm, Programmierung',
   'R4':'KC Technik RS 2010, S. 23: „benennen Sensoren“, „erklären Steuerungsprozesse und Regelungsprozesse“ · Profil Technik RS 2011, S. 22: „erklären das Zusammenwirken von Sensoren, Prozessoren und Aktoren“',
   'R5':'KC Technik RS 2010, S. 25 (fakultativ): „nehmen Stellung zu den Auswirkungen der computergesteuerten Automatisierung in vielen Produktionsprozessen“ · KC AWT IGS 2024, 8-2, S. 32/33: Auswirkungen der Digitalisierung auf Unternehmen und Beschäftigte',
   'R6':'KC Technik RS 2010, S. 25: „beurteilen die Auswirkungen computergesteuerter Prozesse in der Alltagswelt“'};
@@ -1961,9 +1995,12 @@ function rtWs(box){let mode='side';const q=[30,35,20,0];const wrap=el('div',{cla
 function rtBau(){const figs=$$('[data-rtbau]');if(!figs.length)return;const items=figs.map(f=>{const box=el('div',{});f.prepend(box);const it={f:f,box:box,u:+(f.dataset.u||0),k:f.dataset.rtbau};
     if(RT_RM){const s=el('input',{type:'range',min:'0',max:'1',step:'0.01',value:'0','aria-label':'Bewegung zeigen'});s.oninput=()=>{it.u=+s.value;draw1(it);};f.append(s);}return it;});
   function draw1(it){const g=RTG.BAU[it.k](it.u);it.box.innerHTML=RTG.svg(g.vb,g.body,it.f.dataset.aria||'');}
-  items.forEach(draw1);if(RT_RM)return;let last=0;
-  function tick(ts){const dt=last?Math.min(0.1,(ts-last)/1000):0;last=ts;items.forEach(it=>{if(it.f.offsetParent===null)return;const r=it.f.getBoundingClientRect();if(r.bottom<0||r.top>innerHeight)return;it.u=(it.u+dt/7)%1;draw1(it);});requestAnimationFrame(tick);}
-  requestAnimationFrame(tick);}
+  items.forEach(draw1);if(RT_RM)return;
+  /* Kein Autoplay (Grafik-Standard): ein Knopf je Gruppe startet und hält alle Bauformen an. */
+  $$('.rt-bau').forEach(grp=>{const mine=items.filter(it=>grp.contains(it.f));let play=false,last=0,raf=0;
+    const b=el('button',{type:'button',class:'btn','aria-pressed':'false'},'▶ Abspielen');grp.before(el('div',{class:'rt-play'},b));
+    function tick(ts){const dt=last?Math.min(0.1,(ts-last)/1000):0;last=ts;mine.forEach(it=>{it.u=(it.u+dt/7)%1;draw1(it);});if(play)raf=requestAnimationFrame(tick);}
+    b.onclick=()=>{play=!play;b.setAttribute('aria-pressed',String(play));b.textContent=play?'❚❚ Anhalten':'▶ Abspielen';if(play){last=0;raf=requestAnimationFrame(tick);}else cancelAnimationFrame(raf);};});}
 
 /* ---------- Cobot-Arbeitsplatz ---------- */
 function rtCobot(box){let mode='abstand',pd=230,ph=0,phDir=1,contact=0,stopT=0,armA=90;
@@ -1975,7 +2012,8 @@ function rtCobot(box){let mode='abstand',pd=230,ph=0,phDir=1,contact=0,stopT=0,a
   pdR.oninput=()=>{pd=+pdR.value;draw();};
   const sp=el('div',{class:'rt-gauge'},el('span',{},'Geschwindigkeit des Roboters'),el('div',{class:'bar'},el('i',{})));const fo=el('div',{class:'rt-gauge'},el('span',{},'Kraft bei einer Berührung'),el('div',{class:'bar'},el('i',{}),el('em',{style:'left:70%'})),el('span',{class:'hint'},'Strich: Grenzwert aus der Risikobeurteilung'));
   const arm=RT_RM?el('input',{type:'range',min:'20',max:'160',step:'1',value:'90','aria-label':'Armstellung'}):null;
-  const side=el('div',{},modes,el('label',{class:'rt-tools'},'Abstand der Person',pdR,pdO),stateP,sp,fo,info);if(arm){side.append(el('label',{class:'rt-tools'},'Armstellung',arm));arm.oninput=()=>{armA=+arm.value;logic(0);draw();};}
+  const playB=RT_RM?null:el('button',{type:'button',class:'btn','aria-pressed':'false'},'▶ Roboter starten');let run=false;
+  const side=el('div',{},modes,el('label',{class:'rt-tools'},'Abstand der Person',pdR,pdO),stateP,sp,fo,info);if(playB){side.prepend(el('div',{class:'rt-play'},playB));playB.onclick=()=>{run=!run;playB.setAttribute('aria-pressed',String(run));playB.textContent=run?'❚❚ Anhalten':'▶ Roboter starten';if(run){last=0;requestAnimationFrame(tick);}};}if(arm){side.append(el('label',{class:'rt-tools'},'Armstellung',arm));arm.oninput=()=>{armA=+arm.value;logic(0);draw();};}
   wrap.append(view,side);box.append(wrap);
   function speed(){if(mode==='zaun')return pd<160?0:1;if(mode==='abstand')return pd<120?0:pd<200?0.3:1;return contact>0||stopT>0?0:0.35;}
   function logic(dt){if(mode==='kraft'){const reach=pd*0.65-40<=118;const hit=reach&&Math.abs(armA-90)<6&&stopT<=0;
@@ -1989,8 +2027,8 @@ function rtCobot(box){let mode='abstand',pd=230,ph=0,phDir=1,contact=0,stopT=0,a
     if(stateP.textContent!==s){stateP.textContent=s;}stateP.className='rt-state '+c;
     info.textContent=mode==='zaun'?'Der Zaun trennt Mensch und Roboter. Schieb die Person nah heran: Sie öffnet die Tür.':mode==='abstand'?'Ein Laserscanner misst den Abstand. Gelb: Warnfeld, rot: Schutzfeld.':'Die Person greift mit der Hand in den Weg des Arms. Drehmomentsensoren in den Gelenken messen die Kraft.';}
   let last=0;function tick(ts){const dt=last?Math.min(0.1,(ts-last)/1000):0;last=ts;
-    if(wrap.offsetParent!==null){const v=speed();ph+=dt*v*1.6*phDir;if(!(mode==='kraft'&&stopT>0))armA=90+70*Math.sin(ph);logic(dt);draw();}requestAnimationFrame(tick);}
-  draw();if(!RT_RM)requestAnimationFrame(tick);}
+    if(wrap.offsetParent!==null){const v=speed();ph+=dt*v*1.6*phDir;if(!(mode==='kraft'&&stopT>0))armA=90+70*Math.sin(ph);logic(dt);draw();}if(run)requestAnimationFrame(tick);}
+  draw();}
 
 function platformInit(){
   $$('[data-rtfig]').forEach(b=>{const k=b.dataset.rtfig,g=RTG[k]();b.insertAdjacentHTML('afterbegin',RTG.svg(g.vb,g.body,b.dataset.aria||''));});
@@ -2133,8 +2171,8 @@ function addHelp(id,t,art){if(!t.help)return;const tb=el('div',{class:'hbox',hid
   const fb=$('.fb',art);art.insertBefore(el('div',{class:'help2'},el('div',{class:'row'},b1,b2),tb,pb),fb);}
 if(typeof platformInit==='function')platformInit();
 const WMAP=Object.assign({seg:wSeg,quiz:wQuiz,multi:wMulti,order:wOrder,open:wOpen,gap:wGap,pair:wPair,mark:wMark,num:wNum,label:wLabel,grid:wGrid,est:wEst,figsel:wFigsel,drill:wDrill,gfb:wGfb,draw:wDraw,sort:wSort},typeof platformWidgets==='function'?platformWidgets():{});
-/* Wurde eine Aufgabe auf den Typ mark umgebaut, passt ein alter gespeicherter Stand nicht mehr: verwerfen statt falsch anzeigen. */
-$$('.w[data-t]').forEach(w=>{const id=w.dataset.t,t=T[id],v=S.a[id];if(t.type==='mark'&&v!=null&&!(Array.isArray(v)&&v.length===t.parts.length&&v.every(x=>typeof x==='boolean'))){delete S.a[id];if(S.ok)delete S.ok[id];}});
+/* Wurde eine Aufgabe auf den Typ mark oder pair umgebaut, passt ein alter gespeicherter Stand nicht mehr: verwerfen statt falsch anzeigen. */
+$$('.w[data-t]').forEach(w=>{const id=w.dataset.t,t=T[id],v=S.a[id];if(t.type==='pair'&&v!=null&&!(Array.isArray(v)&&v.length===t.left.length&&v.every(x=>Number.isInteger(x)&&x>=-1&&x<t.right.length))){delete S.a[id];if(S.ok)delete S.ok[id];}if(t.type==='mark'&&v!=null&&!(Array.isArray(v)&&v.length===t.parts.length&&v.every(x=>typeof x==='boolean'))){delete S.a[id];if(S.ok)delete S.ok[id];}});
 $$('.w[data-t]').forEach(w=>{const id=w.dataset.t,t=T[id],art=w.closest('.task');WMAP[t.type](id,t,w,art);addHelp(id,t,art);});
 
 /* Selbsteinschätzung */
