@@ -378,16 +378,16 @@ a.btn{text-decoration:none}
 
 /* ---------- Badge-System, Fortbildung ---------- */
 :root{
-  --g-werk:#9A5B00;--g-druck:#1F64A6;--g-laser:#B0362F;--g-textil:#9B3474;--g-cad:#0F716F;--g-steuer:#2B7431;--g-motor:#5546A6;--g-ki:#8A3A8F;--g-sammel:#7A5C00;--g-probe:#4A5A8C;
+  --g-werk:#9A5B00;--g-print:#1F64A6;--g-design:#B0362F;--g-tech:#0F716F;--g-motor:#5546A6;--g-ki:#8A3A8F;--g-sammel:#7A5C00;--g-probe:#4A5A8C;
   --lk:#1D568E;--lk-soft:#E2ECF7;--sus:#1F7A5C;--sus-soft:#E1F0E9;
   --ok:#1F7A4C;--ok-soft:#E1F1E8;--warn:#8A5A00;--warn-soft:#FBEFD5;--mono:"JetBrains Mono",ui-monospace,monospace;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --g-werk:#F0A64A;--g-druck:#79B1EA;--g-laser:#F08A7E;--g-textil:#E792C6;--g-cad:#55C6C3;--g-steuer:#77C47B;--g-motor:#ADA2F2;--g-ki:#DDA0E0;--g-sammel:#E7C65A;--g-probe:#A9B6E6;
+  --g-werk:#F0A64A;--g-print:#79B1EA;--g-design:#F08A7E;--g-tech:#55C6C3;--g-motor:#ADA2F2;--g-ki:#DDA0E0;--g-sammel:#E7C65A;--g-probe:#A9B6E6;
   --lk:#9CC4EE;--lk-soft:#1A2937;--sus:#7FD3B0;--sus-soft:#1A3128;
   --ok:#6CCB97;--ok-soft:#173326;--warn:#F0C065;--warn-soft:#3A2D13;}}
 :root[data-theme="dark"]{
-  --g-werk:#F0A64A;--g-druck:#79B1EA;--g-laser:#F08A7E;--g-textil:#E792C6;--g-cad:#55C6C3;--g-steuer:#77C47B;--g-motor:#ADA2F2;--g-ki:#DDA0E0;--g-sammel:#E7C65A;--g-probe:#A9B6E6;
+  --g-werk:#F0A64A;--g-print:#79B1EA;--g-design:#F08A7E;--g-tech:#55C6C3;--g-motor:#ADA2F2;--g-ki:#DDA0E0;--g-sammel:#E7C65A;--g-probe:#A9B6E6;
   --lk:#9CC4EE;--lk-soft:#1A2937;--sus:#7FD3B0;--sus-soft:#1A3128;
   --ok:#6CCB97;--ok-soft:#173326;--warn:#F0C065;--warn-soft:#3A2D13;}
 .brand .tlogo{height:46px;width:auto;flex:none;background:#fff;border-radius:10px;padding:4px 6px}
@@ -450,7 +450,7 @@ figure{margin:0;display:grid;gap:8px;min-width:0}
 .bd.got .medal::after{content:"✓";position:absolute;right:-4px;bottom:-4px;width:22px;height:22px;border-radius:50%;background:var(--ok);color:#fff;font-size:13px;display:grid;place-items:center;font-family:var(--body);box-shadow:0 0 0 2px var(--surface)}
 .bd.got .s{color:var(--ink)}
 .bd.sammel .medal{border-radius:16px}
-.g-werk{--gc:var(--g-werk)}.g-druck{--gc:var(--g-druck)}.g-laser{--gc:var(--g-laser)}.g-textil{--gc:var(--g-textil)}.g-cad{--gc:var(--g-cad)}.g-steuer{--gc:var(--g-steuer)}.g-motor{--gc:var(--g-motor)}.g-sammel{--gc:var(--g-sammel)}.g-ki{--gc:var(--g-ki)}.g-probe{--gc:var(--g-probe)}
+.g-werk{--gc:var(--g-werk)}.g-print{--gc:var(--g-print)}.g-design{--gc:var(--g-design)}.g-tech{--gc:var(--g-tech)}.g-motor{--gc:var(--g-motor)}.g-sammel{--gc:var(--g-sammel)}.g-ki{--gc:var(--g-ki)}.g-probe{--gc:var(--g-probe)}
 .access{border:2px solid var(--ok);border-radius:16px;padding:12px;display:grid;gap:10px;background:var(--surface);margin:0 0 12px}
 .access h3,.access h4{margin:0;font-family:var(--display);font-size:20px;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px}
 .access h3 span,.access h4 span{font-family:var(--body);font-size:14px;font-weight:600;color:var(--muted)}
@@ -613,10 +613,12 @@ td.c{text-align:center;font-weight:700}
     <p>Ein <b>Access</b> zeigt eine Erlaubnis, zum Beispiel für die Arbeit im MakerSpace. Es erscheint von selbst, sobald alle nötigen Badges im Pass stehen, und steht im Pass deutlich abgesetzt ganz oben, mit dem Satz, was die Schüler:in damit darf. Es braucht keinen eigenen Code und keinen eigenen Eintrag in die Liste.</p>
     <figure>
       <div class="eq" id="eqMS" role="img" aria-label="MakerSpace Access MS ergibt sich aus Lötstation LT, Bohrmaschine Holz BH und Bohrmaschine Metall BM."></div>
-      <div class="eq" id="eqRL" role="img" aria-label="Robotiklabor Access RL ergibt sich aus Lasercutter Stufe 2 L2 und 3D-Druck warten D2."></div>
-      <figcaption class="cap">Die beiden Access der Technik-Badges.</figcaption>
+      <div class="eq" id="eqPF" role="img" aria-label="Print Fab Access PF ergibt sich aus 3D-Druck warten D2."></div>
+      <div class="eq" id="eqDH" role="img" aria-label="Design Hub Access DH ergibt sich aus Lasercutter Stufe 2 L2, Plotter PL und Transferpresse TP."></div>
+      <div class="eq" id="eqTL" role="img" aria-label="Tech Lab Access TL ergibt sich aus Dobot DO."></div>
+      <figcaption class="cap">Die vier Access der Technik-Badges, je Raum einer.</figcaption>
     </figure>
-    <p>Im Robotiklabor arbeiten alle Schüler:innen. RL regelt nur, wer dort ohne Nachfragen selbstständig an Lasercutter und 3D-Drucker arbeitet. <b>Zusatz:</b> Wer zum Robotiklabor Access auch PL (Plotter) und TP (Transferpresse) hat, darf dort genauso Plotter und Transferpresse nutzen. Der Zusatz steht im Pass im Kasten des Robotiklabor Access.</p>
+    <p>Die Access folgen den Räumen des Fachraumsystems: Werkstatt mit MakerSpace, Print Fab, Design Hub und Tech Lab. In Print Fab, Design Hub und Tech Lab arbeiten alle Schüler:innen. Der Access regelt nur, wer dort ohne Nachfragen selbstständig an den Geräten arbeitet. Den MakerSpace nutzen Schüler:innen mit MakerSpace Access, wenn eine Lehrkraft in der Werkstatt nebenan ist.</p>
     <p>Die fertige Seite für Schüler:innen findest du unter <a href="../technik-badges/" target="_blank" rel="noopener">Technik-Badges</a>.</p>
   </div>
   <div class="navrow"><span></span><button class="btn accent" type="button" data-go="2">Weiter: Selbst ausprobieren</button></div>
@@ -719,7 +721,7 @@ td.c{text-align:center;font-weight:700}
       <li><b>QR-Codes:</b> Das Codeblatt mit den Codes für das laufende Schuljahr findest du unten unter <a href="#download">Zum Herunterladen</a>, geschützt mit dem Passwort für Lehrkräfte. Den QR-Code können die Schüler:innen in der Seite scannen oder mit der Kamera-App: Dann öffnet sich die Seite und trägt das Badge ein. Unter dem QR-Code steht der Code zum Eintippen, falls die Kamera streikt.</li>
       <li><b>Badges aus Lernplattformen:</b> AR gibt es für das Arduino-Lernheft oder Arduino Schritt für Schritt, wenn alle Kapitel vollständig sind. CA gibt es, wenn alle elf Calliope-Challenges geschafft sind. MT gibt es, wenn alle Aufgaben der Motorentechnik erledigt sind (ohne Zusatzaufgaben). RT gibt es, wenn alle Aufgaben der Robotik-Theorie erledigt sind (ohne Schätzfragen). K1, K2 und K3 gibt es für die Level 1 bis 3 des AI Badge, sobald die Plattform das Level als erreicht vermerkt hat (Stationen und Prüfung des Levels). Die Fassung des AI Badge für Lehrkräfte zählt nicht.</li>
       <li><b>Name:</b> Passt der Name in der Ergebnis-PDF nicht zum Namen im Pass, zeigt die Seite einen Hinweis, trägt das Badge aber ein. Schau dann kurz drauf.</li>
-      <li><b>Aufbau:</b> D2 setzt D1 voraus, D3 setzt D2 voraus, L2 setzt L1 voraus, L3 setzt L2 voraus. Die Access erscheinen von selbst und stehen oben im Pass: <b>MS</b> MakerSpace Access mit LT, BH und BM, <b>RL</b> Robotiklabor Access (selbstständig ohne Nachfragen an Lasercutter und 3D-Drucker) mit L2 und D2. Als Zusatz zum Robotiklabor Access dürfen Schüler:innen, die auch PL und TP haben, dort genauso Plotter und Transferpresse nutzen.</li>
+      <li><b>Aufbau:</b> D2 setzt D1 voraus, D3 setzt D2 voraus, L2 setzt L1 voraus, L3 setzt L2 voraus. Die Access erscheinen von selbst und stehen oben im Pass, je Raum einer: <b>MS</b> MakerSpace Access mit LT, BH und BM, <b>PF</b> Print Fab Access (selbstständig ohne Nachfragen an den 3D-Druckern) mit D2, <b>DH</b> Design Hub Access (frei an Lasercutter, Plotter und Transferpresse) mit L2, PL und TP, <b>TL</b> Tech Lab Access (selbstständig mit dem Dobot) mit DO.</li>
     </ul>
   </div>
   <div class="card">
@@ -778,7 +780,7 @@ td.c{text-align:center;font-weight:700}
     <div class="dl">
       <div class="dli"><div><b>Liste für den Fachraum</b><p>Eine A4-Seite mit Kopf (Schuljahr, Seite), Legende der Kürzel mit Prüfung, Hinweis auf die Badges ohne Eintrag und Tabelle mit Datum, Name, Klasse, Kürzel und Unterschrift. Die Word-Datei kannst du für deine Schule anpassen.</p></div>
         <div class="row"><a class="btn soft" href="Liste_Badges_Fachraum.pdf" download>PDF zum Drucken</a><a class="btn soft" href="Liste_Badges_Fachraum.docx" download>Word-Datei</a></div></div>
-      <div class="dli"><div><b>Übersicht der Kürzel</b><p>Alle Badges mit Kürzel, Name, Inhalt und Nachweis, dazu die beiden Access mit Voraussetzungen und dem Satz, was sie erlauben.</p></div>
+      <div class="dli"><div><b>Übersicht der Kürzel</b><p>Alle Badges mit Kürzel, Name, Inhalt und Nachweis, dazu die vier Access mit Voraussetzungen und dem Satz, was sie erlauben.</p></div>
         <div class="row"><a class="btn soft" href="Technik-Badges_Kuerzel.pdf" download>PDF</a></div></div>
       <div class="dli"><div><b>QR-Codeblatt des laufenden Schuljahres</b><p>Ein QR-Code mit Code zum Eintippen je Badge mit Prüfung. Geschützt mit dem Passwort für Lehrkräfte. Nicht aushängen und nicht an Schüler:innen weitergeben.</p>
         <p>Die Codes gelten für alle Schulen, die dieses Badge-System nutzen. Verbindlich ist an jeder Schule nur die eigene Liste im Fachraum. Wer eigene Codes möchte, baut das System nach (Kapitel 4) und erzeugt sie selbst.</p></div>
@@ -890,17 +892,20 @@ const dStr=iso=>{const d=new Date(iso);return isNaN(d)?'':pad(d.getDate())+'.'+p
 const tStr=iso=>{const d=new Date(iso);return isNaN(d)?'':pad(d.getHours())+':'+pad(d.getMinutes());};
 
 /* ---------- Badges der Technik-Badges (Kapitel 1) ---------- */
-const GROUPS=[{id:'werk',t:'Werkstatt'},{id:'druck',t:'3D-Druck'},{id:'laser',t:'Lasercutter'},{id:'textil',t:'Textil'},{id:'cad',t:'3D-CAD'},{id:'steuer',t:'Steuern und Regeln'},{id:'motor',t:'Motorentechnik'},{id:'ki',t:'Künstliche Intelligenz'},{id:'sammel',t:'Access'}];
+const GROUPS=[{id:'werk',t:'Werkstatt'},{id:'print',t:'Print Fab'},{id:'design',t:'Design Hub'},{id:'tech',t:'Tech Lab'},{id:'motor',t:'Motorentechnik'},{id:'ki',t:'Künstliche Intelligenz'},{id:'sammel',t:'Access'}];
 const BADGES=[
   {k:'BU',t:'Bohrmaschine UMT',g:'werk',n:'p'},{k:'BH',t:'Bohrmaschine Holz',g:'werk',n:'p'},{k:'BM',t:'Bohrmaschine Metall',g:'werk',n:'p'},{k:'LT',t:'Lötstation',g:'werk',n:'p'},
-  {k:'D1',t:'3D-Druck bedienen',g:'druck',n:'p',i:'Druck vorbereiten, starten, entnehmen'},{k:'D2',t:'3D-Druck warten',g:'druck',n:'p',i:'baut auf D1 auf'},{k:'D3',t:'3D-Druck reparieren',g:'druck',n:'p',i:'baut auf D2 auf'},
-  {k:'L1',t:'Lasercutter Stufe 1',g:'laser',n:'p',i:'Gravieren. Vor dem Start nachfragen, die Lehrkraft prüft.'},{k:'L2',t:'Lasercutter Stufe 2',g:'laser',n:'p',i:'Gravieren ohne Prüfung durch die Lehrkraft, baut auf L1 auf'},{k:'L3',t:'Lasercutter Stufe 3',g:'laser',n:'p',i:'auch Schneiden, SVG-Dateien in Inkscape bearbeiten, baut auf L2 auf'},
-  {k:'TP',t:'Transferpresse',g:'textil',n:'p'},{k:'PL',t:'Plotter',g:'textil',n:'p'},
-  {k:'TC',t:'Tinkercad',g:'cad',n:'p'},{k:'SE',t:'Solid Edge',g:'cad',n:'p'},{k:'SM',t:'SpaceMouse',g:'cad',n:'p'},
-  {k:'RO',t:'Robotik',g:'steuer',n:'p'},{k:'RT',t:'Robotik Theorie',g:'steuer',n:'l'},{k:'AR',t:'Arduino',g:'steuer',n:'l'},{k:'CA',t:'Calliope',g:'steuer',n:'l'},
+  {k:'D1',t:'3D-Druck bedienen',g:'print',n:'p',i:'Druck vorbereiten, starten, entnehmen'},{k:'D2',t:'3D-Druck warten',g:'print',n:'p',i:'baut auf D1 auf'},{k:'D3',t:'3D-Druck reparieren',g:'print',n:'p',i:'baut auf D2 auf'},
+  {k:'L1',t:'Lasercutter Stufe 1',g:'design',n:'p',i:'Gravieren. Vor dem Start nachfragen, die Lehrkraft prüft.'},{k:'L2',t:'Lasercutter Stufe 2',g:'design',n:'p',i:'Gravieren ohne Prüfung durch die Lehrkraft, baut auf L1 auf'},{k:'L3',t:'Lasercutter Stufe 3',g:'design',n:'p',i:'auch Schneiden, SVG-Dateien in Inkscape bearbeiten, baut auf L2 auf'},
+  {k:'PL',t:'Plotter',g:'design',n:'p'},{k:'TP',t:'Transferpresse',g:'design',n:'p'},
+  {k:'TC',t:'Tinkercad',g:'tech',n:'p'},{k:'SE',t:'Solid Edge',g:'tech',n:'p'},{k:'SM',t:'SpaceMouse',g:'tech',n:'p'},
+  {k:'RO',t:'Robotik',g:'tech',n:'p'},{k:'RT',t:'Robotik Theorie',g:'tech',n:'l'},{k:'DO',t:'Dobot',g:'tech',n:'p'},{k:'AR',t:'Arduino',g:'tech',n:'l'},{k:'CA',t:'Calliope',g:'tech',n:'l'},
   {k:'MT',t:'Motorentechnik Theorie',g:'motor',n:'l'},{k:'MP',t:'Motorentechnik Praxis',g:'motor',n:'p'},
   {k:'K1',t:'AI Badge Level 1',g:'ki',n:'l',i:'Level 1 im AI Badge erreicht'},{k:'K2',t:'AI Badge Level 2',g:'ki',n:'l',i:'Level 2 im AI Badge erreicht'},{k:'K3',t:'AI Badge Level 3',g:'ki',n:'l',i:'Level 3 im AI Badge erreicht'},
-  {k:'MS',t:'MakerSpace Access',g:'sammel',n:'a',all:['LT','BH','BM'],i:'Access: LT, BH und BM',x:'Du darfst im MakerSpace an Lötstation und Bohrmaschinen arbeiten. Eine Lehrkraft ist immer im Raum.'},{k:'RL',t:'Robotiklabor Access',g:'sammel',n:'a',all:['L2','D2'],i:'Access: L2 und D2',x:'Du darfst im Robotiklabor ohne Nachfragen selbstständig an Lasercutter und 3D-Drucker arbeiten. Eine Lehrkraft ist immer im Raum.',plus:{all:['PL','TP'],x:'Hast du auch PL und TP, darfst du dort genauso den Plotter und die Transferpresse nutzen.'}}];
+  {k:'MS',t:'MakerSpace Access',g:'sammel',n:'a',all:['LT','BH','BM'],i:'Access: LT, BH und BM',x:'Du darfst im MakerSpace an Lötstation und Bohrmaschinen arbeiten, wenn eine Lehrkraft in der Werkstatt ist.'},
+  {k:'PF',t:'Print Fab Access',g:'sammel',n:'a',all:['D2'],i:'Access: D2',x:'Du darfst im Print Fab ohne Nachfragen selbstständig an den 3D-Druckern arbeiten. Eine Lehrkraft ist immer in der Nähe.'},
+  {k:'DH',t:'Design Hub Access',g:'sammel',n:'a',all:['L2','PL','TP'],i:'Access: L2, PL und TP',x:'Du darfst im Design Hub frei an Lasercutter, Plotter und Transferpresse arbeiten. Eine Lehrkraft ist immer in der Nähe.'},
+  {k:'TL',t:'Tech Lab Access',g:'sammel',n:'a',all:['DO'],i:'Access: DO',x:'Du darfst im Tech Lab selbstständig mit dem Dobot arbeiten. Eine Lehrkraft ist immer in der Nähe.'}];
 const BK={};BADGES.forEach(b=>BK[b.k]=b);
 const NW={p:'Prüfung',l:'Lernplattform',a:'Access'};
 const LOCK='<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg>';
@@ -912,7 +917,7 @@ function accHtml(list,dt,hv,nm,head){return '<div class="access">'+head+'<div cl
    +(b.plus?(()=>{const on=d&&b.plus.all.every(hv);return '<div class="plus'+(on?' on':'')+'"><div class="plus-top"><b>Zusatz '+esc(b.plus.all.map(k=>BK[k].t).join(' & '))+'</b><span>'+(on?'freigeschaltet':'noch gesperrt')+'</span></div><p>'+esc(b.plus.x)+'</p><div class="req">'+b.plus.all.map(k=>'<span class="'+(hv(k)?'ok':'')+'">'+k+(hv(k)?' ✓':'')+' '+esc(nm(k))+'</span>').join('')+'</div></div>';})():'')+'</div>';}).join('')+'</div></div>';}
 const EXAMPLE=['BH','BM','D1','L1','TC','AR','K1'];
 /* Symbole der Technik-Badges, selbst gezeichnet (CC BY-NC-SA 4.0), viewBox 0 0 48 48, Linien in currentColor.
-   Stand 18.11.2026. Eingebaut über den Platzhalter BICON in Technik-Badges und Fortbildung, PDF-Downloads über make_badges_fortbildung.py. */
+   Stand 27.11.2026 (DO, PF, DH, TL neu; RL entfernt). Eingebaut über den Platzhalter BICON in Technik-Badges und Fortbildung, PDF-Downloads über make_badges_fortbildung.py. */
 var BICON = (function () {
   function lv(n) { return '<circle cx="39" cy="39" r="8" fill="currentColor" stroke="none"/><text x="39" y="43.2" text-anchor="middle" font-size="12" font-weight="700" font-family="Arial,sans-serif" fill="var(--bi-bg,#fff)" stroke="none">' + n + '</text>'; }
   var drill = '<path d="M9 42h26M13 42V9"/><rect x="13" y="7" width="22" height="10" rx="2"/><path d="M35 11h6M27 17v5"/><rect x="24.5" y="22" width="5" height="5" rx="1"/><path d="M27 27v6"/>';
@@ -939,8 +944,11 @@ var BICON = (function () {
     MT: '<rect x="15" y="7" width="18" height="13" rx="2"/><path d="M15 11h18M15 14h18M24 20v11"/><circle cx="24" cy="36" r="6"/><circle cx="24" cy="36" r="1.5"/>',
     MP: '<rect x="8" y="9" width="14" height="10" rx="2"/><path d="M8 12h14M15 19v8"/><circle cx="15" cy="31" r="4.5"/><path d="M41 11a6 6 0 0 1-8 7L22 29a3 3 0 1 1-4-4l11-11a6 6 0 0 1 7-8l-4 4 1 3 3 1z"/>',
     K1: spark + lv(1), K2: spark + lv(2), K3: spark + lv(3),
+    DO: '<path d="M6 43h22"/><path d="M9 43v-5h16v5"/><rect x="12" y="30" width="10" height="8" rx="2"/><path d="M17 30l5-16" stroke-width="4"/><circle cx="22" cy="13" r="3.5"/><path d="M25 13h10" stroke-width="4"/><circle cx="38" cy="13" r="3"/><path d="M38 16v8"/><path d="M34.5 27.5h7l-1.5-3h-4z"/><rect x="35" y="36" width="6" height="6" rx="1"/>',
     MS: key('<path d="M10 9h10M15 9v6"/>'),
-    RL: key('<path d="M9 8l6 4 6-4"/>')
+    PF: key('<path d="M10 5h10v4H10zM13 9l2 3 2-3"/>'),
+    DH: key('<path d="M10 13l8-8 2.5 2.5-8 8H10z"/>'),
+    TL: key('<path d="M12 4h6M13.5 4v4L10 14.5h10L16.5 8V4"/>')
   };
 })();
 
@@ -950,7 +958,7 @@ function bdHtml(b,got,sub){return '<div class="bd'+(got?' got':'')+(b.n==='a'?' 
 $('#allBadges').innerHTML=accHtml(BADGES.filter(b=>b.n==='a'),k=>null,k=>EXAMPLE.indexOf(k)>=0,k=>BK[k].t,'<h4>Access <span>Was die Schüler:innen mit ihren Badges dürfen · Beispiel: BH und BM erworben</span></h4>')+GROUPS.filter(g=>g.id!=='sammel').map(g=>'<div class="grp g-'+g.id+'"><h4>'+esc(g.t)+'</h4><div class="badges">'+BADGES.filter(b=>b.g===g.id).map(b=>bdHtml(b,EXAMPLE.indexOf(b.k)>=0,EXAMPLE.indexOf(b.k)>=0?'Beispiel: erworben':NW[b.n])).join('')+'</div></div>').join('');
 $('#kTab').innerHTML=BADGES.map(b=>'<tr><td><b>'+b.k+'</b></td><td>'+esc(b.t)+'</td><td>'+esc(b.i||'')+'</td><td>'+NW[b.n]+'</td></tr>').join('');
 function eq(b){return bdHtml(b,false,'').replace('class="bd ','class="bd solid ')+'<span class="op" aria-hidden="true">=</span>'+b.all.map((k,i)=>(i?'<span class="op" aria-hidden="true">+</span>':'')+bdHtml(BK[k],false,'').replace('class="bd ','class="bd solid ')).join('');}
-$('#eqMS').innerHTML=eq(BK.MS);$('#eqRL').innerHTML=eq(BK.RL);
+['MS','PF','DH','TL'].forEach(k=>{$('#eq'+k).innerHTML=eq(BK[k]);});
 
 /* ---------- Kapitel ---------- */
 const CHN=['So nutzen wir es','Selbst ausprobieren','Organisation','Nachbauen'],CC=['c-kultur','c-existenz','c-luxus','c-sichern'];

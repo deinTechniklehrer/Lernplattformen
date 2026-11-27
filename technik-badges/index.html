@@ -378,14 +378,14 @@ a.btn{text-decoration:none}
 
 /* ---------- Technik-Badges ---------- */
 :root{
-  --g-werk:#9A5B00;--g-druck:#1F64A6;--g-laser:#B0362F;--g-textil:#9B3474;--g-cad:#0F716F;--g-steuer:#2B7431;--g-motor:#5546A6;--g-ki:#8A3A8F;--g-sammel:#7A5C00;
+  --g-werk:#9A5B00;--g-print:#1F64A6;--g-design:#B0362F;--g-tech:#0F716F;--g-motor:#5546A6;--g-ki:#8A3A8F;--g-sammel:#7A5C00;
   --ok:#1F7A4C;--ok-soft:#E1F1E8;--warn:#8A5A00;--warn-soft:#FBEFD5;--mono:"JetBrains Mono",ui-monospace,monospace;
 }
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --g-werk:#F0A64A;--g-druck:#79B1EA;--g-laser:#F08A7E;--g-textil:#E792C6;--g-cad:#55C6C3;--g-steuer:#77C47B;--g-motor:#ADA2F2;--g-ki:#DDA0E0;--g-sammel:#E7C65A;
+  --g-werk:#F0A64A;--g-print:#79B1EA;--g-design:#F08A7E;--g-tech:#55C6C3;--g-motor:#ADA2F2;--g-ki:#DDA0E0;--g-sammel:#E7C65A;
   --ok:#6CCB97;--ok-soft:#173326;--warn:#F0C065;--warn-soft:#3A2D13;}}
 :root[data-theme="dark"]{
-  --g-werk:#F0A64A;--g-druck:#79B1EA;--g-laser:#F08A7E;--g-textil:#E792C6;--g-cad:#55C6C3;--g-steuer:#77C47B;--g-motor:#ADA2F2;--g-ki:#DDA0E0;--g-sammel:#E7C65A;
+  --g-werk:#F0A64A;--g-print:#79B1EA;--g-design:#F08A7E;--g-tech:#55C6C3;--g-motor:#ADA2F2;--g-ki:#DDA0E0;--g-sammel:#E7C65A;
   --ok:#6CCB97;--ok-soft:#173326;--warn:#F0C065;--warn-soft:#3A2D13;}
 .brand .tlogo{height:46px;width:auto;flex:none;background:#fff;border-radius:10px;padding:4px 6px}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px;display:grid;gap:12px;min-width:0}
@@ -402,7 +402,7 @@ body.has-pass #sSo{order:5}body.has-pass #lk,body.has-pass .lic{order:6}
 .flow li b{font-family:var(--display);font-size:16px}
 .flow li span{font-size:14px;color:var(--muted)}
 .flow svg{width:44px;height:44px;fill:none;stroke:var(--ink);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-.flow svg .a{stroke:var(--g-steuer)}
+.flow svg .a{stroke:var(--g-tech)}
 .flow li:not(:last-child)::after{content:"";position:absolute;right:-9px;top:34px;width:8px;height:8px;border-top:2.5px solid var(--muted);border-right:2.5px solid var(--muted);transform:rotate(45deg);z-index:1}
 @media (max-width:640px){.flow{grid-template-columns:1fr 1fr}.flow li:nth-child(2)::after{display:none}}
 .cap{margin:0;font-size:14px;color:var(--muted)}
@@ -432,7 +432,7 @@ body.has-pass #sSo{order:5}body.has-pass #lk,body.has-pass .lic{order:6}
 /* Pass */
 .passhead{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;justify-content:space-between}
 .who{display:flex;gap:12px;align-items:center;min-width:0}
-.av{width:48px;height:48px;border-radius:14px;flex:none;display:grid;place-items:center;background:var(--g-steuer);color:var(--on-accent);font-family:var(--display);font-weight:800;font-size:22px}
+.av{width:48px;height:48px;border-radius:14px;flex:none;display:grid;place-items:center;background:var(--g-tech);color:var(--on-accent);font-family:var(--display);font-weight:800;font-size:22px}
 .who b{display:block;font-family:var(--display);font-size:21px;line-height:1.2;overflow-wrap:anywhere}
 .who div>span{font-size:14px;color:var(--muted)}
 .count{font-size:15px;color:var(--muted)}
@@ -472,7 +472,7 @@ body.has-pass #sSo{order:5}body.has-pass #lk,body.has-pass .lic{order:6}
 .acc .plus-top b{display:block;font-size:15px}.acc .plus-top span{font-size:14px;color:var(--muted)}.acc .plus.on .plus-top span{color:var(--ok);font-weight:700}
 .acc .plus p{margin:0;font-size:14px}
 
-.g-werk{--gc:var(--g-werk)}.g-druck{--gc:var(--g-druck)}.g-laser{--gc:var(--g-laser)}.g-textil{--gc:var(--g-textil)}.g-cad{--gc:var(--g-cad)}.g-steuer{--gc:var(--g-steuer)}.g-motor{--gc:var(--g-motor)}.g-sammel{--gc:var(--g-sammel)}.g-ki{--gc:var(--g-ki)}
+.g-werk{--gc:var(--g-werk)}.g-print{--gc:var(--g-print)}.g-design{--gc:var(--g-design)}.g-tech{--gc:var(--g-tech)}.g-motor{--gc:var(--g-motor)}.g-sammel{--gc:var(--g-sammel)}.g-ki{--gc:var(--g-ki)}
 /* Eintragen */
 .ways{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
 @media (max-width:760px){.ways{grid-template-columns:1fr}}
@@ -631,7 +631,7 @@ a{color:var(--kultur-ink)}
 'use strict';
 const KEY='technik-badges-v1', SLUG='technik-badges', SALT='deinTechniklehrer-badges|';
 /* Symbole der Technik-Badges, selbst gezeichnet (CC BY-NC-SA 4.0), viewBox 0 0 48 48, Linien in currentColor.
-   Stand 18.11.2026. Eingebaut über den Platzhalter BICON in Technik-Badges und Fortbildung, PDF-Downloads über make_badges_fortbildung.py. */
+   Stand 27.11.2026 (DO, PF, DH, TL neu; RL entfernt). Eingebaut über den Platzhalter BICON in Technik-Badges und Fortbildung, PDF-Downloads über make_badges_fortbildung.py. */
 var BICON = (function () {
   function lv(n) { return '<circle cx="39" cy="39" r="8" fill="currentColor" stroke="none"/><text x="39" y="43.2" text-anchor="middle" font-size="12" font-weight="700" font-family="Arial,sans-serif" fill="var(--bi-bg,#fff)" stroke="none">' + n + '</text>'; }
   var drill = '<path d="M9 42h26M13 42V9"/><rect x="13" y="7" width="22" height="10" rx="2"/><path d="M35 11h6M27 17v5"/><rect x="24.5" y="22" width="5" height="5" rx="1"/><path d="M27 27v6"/>';
@@ -658,28 +658,33 @@ var BICON = (function () {
     MT: '<rect x="15" y="7" width="18" height="13" rx="2"/><path d="M15 11h18M15 14h18M24 20v11"/><circle cx="24" cy="36" r="6"/><circle cx="24" cy="36" r="1.5"/>',
     MP: '<rect x="8" y="9" width="14" height="10" rx="2"/><path d="M8 12h14M15 19v8"/><circle cx="15" cy="31" r="4.5"/><path d="M41 11a6 6 0 0 1-8 7L22 29a3 3 0 1 1-4-4l11-11a6 6 0 0 1 7-8l-4 4 1 3 3 1z"/>',
     K1: spark + lv(1), K2: spark + lv(2), K3: spark + lv(3),
+    DO: '<path d="M6 43h22"/><path d="M9 43v-5h16v5"/><rect x="12" y="30" width="10" height="8" rx="2"/><path d="M17 30l5-16" stroke-width="4"/><circle cx="22" cy="13" r="3.5"/><path d="M25 13h10" stroke-width="4"/><circle cx="38" cy="13" r="3"/><path d="M38 16v8"/><path d="M34.5 27.5h7l-1.5-3h-4z"/><rect x="35" y="36" width="6" height="6" rx="1"/>',
     MS: key('<path d="M10 9h10M15 9v6"/>'),
-    RL: key('<path d="M9 8l6 4 6-4"/>')
+    PF: key('<path d="M10 5h10v4H10zM13 9l2 3 2-3"/>'),
+    DH: key('<path d="M10 13l8-8 2.5 2.5-8 8H10z"/>'),
+    TL: key('<path d="M12 4h6M13.5 4v4L10 14.5h10L16.5 8V4"/>')
   };
 })();
 
 const RULES={"arduino-lernheft":{"badge":"AR","kind":"ard","key":"arduino-lernheft-v1","title":"Arduino-Lernheft Tinkercad","ch":[{"id":"mc","t":"Was ist ein Mikrocontroller?","items":[{"kind":"ex","id":"q1b"}]},{"id":"uno","t":"Arduino Uno und Steckbrett","items":[{"kind":"ex","id":"hs"},{"kind":"ex","id":"bbv"},{"kind":"ex","id":"bbt"},{"kind":"task","id":"bb1"},{"kind":"task","id":"bb2"},{"kind":"task","id":"bb3"}]},{"id":"sa","t":"Sensoren und Aktoren","items":[{"kind":"ex","id":"mark"},{"kind":"ex","id":"sort"}]},{"id":"eva","t":"Das EVA-Prinzip","items":[{"kind":"ex","id":"evat"}]},{"id":"sr","t":"Steuern und Regeln","items":[{"kind":"ex","id":"srs"}]},{"id":"anschluss","t":"Den echten Arduino anschließen","items":[{"kind":"task","id":"esd"},{"kind":"task","id":"usb"},{"kind":"task","id":"gm"},{"kind":"task","id":"ide"},{"kind":"task","id":"board"},{"kind":"task","id":"port"}]},{"id":"tinkercad","t":"Erste Schritte mit Tinkercad","items":[{"kind":"task","id":"open"},{"kind":"task","id":"login"},{"kind":"task","id":"other"}]},{"id":"blinken","t":"Blinken: dein erstes Programm","items":[{"kind":"task","id":"b1"},{"kind":"task","id":"b2"},{"kind":"task","id":"b3"},{"kind":"ex","id":"bq2"},{"kind":"task","id":"t1"},{"kind":"task","id":"t2"},{"kind":"sub","id":"sub"}]},{"id":"led","t":"Die LED richtig anschließen","items":[{"kind":"ex","id":"lq"}]},{"id":"zweiled","t":"Zwei LEDs abwechselnd","items":[{"kind":"ex","id":"zq2"},{"kind":"ex","id":"cb"},{"kind":"ex","id":"pz"},{"kind":"task","id":"z1"},{"kind":"task","id":"z2"},{"kind":"task","id":"z3"},{"kind":"task","id":"z4"},{"kind":"sub","id":"sub"}]},{"id":"signale","t":"Digitale und analoge Signale","items":[{"kind":"ex","id":"da"}]},{"id":"pwm","t":"PWM: LED dimmen","items":[{"kind":"task","id":"p1"},{"kind":"sub","id":"sub"}]},{"id":"rgb","t":"Die RGB-LED","items":[{"kind":"task","id":"r1"},{"kind":"task","id":"r2"},{"kind":"sub","id":"sub"}]},{"id":"variablen","t":"Variablen","items":[{"kind":"ex","id":"vt"},{"kind":"sub","id":"sub"}]},{"id":"seriell","t":"Der serielle Monitor","items":[{"kind":"sub","id":"sub"}]},{"id":"sensoren","t":"Analoge Sensoren: der Fotowiderstand","items":[{"kind":"task","id":"s1"},{"kind":"task","id":"s2"},{"kind":"sub","id":"sub"}]},{"id":"if","t":"Bedingungen: wenn … dann … sonst","items":[{"kind":"sub","id":"sub"}]},{"id":"for","t":"Die for-Schleife","items":[{"kind":"ex","id":"endl"},{"kind":"sub","id":"sub"}]},{"id":"taster","t":"Digitale Sensoren: der Taster","items":[{"kind":"sub","id":"sub"}]},{"id":"neopixel","t":"Bibliotheken und Neopixel","items":[{"kind":"task","id":"n1"},{"kind":"task","id":"n2"},{"kind":"sub","id":"sub"}]},{"id":"servo","t":"Servomotoren","items":[{"kind":"sub","id":"sub"}]},{"id":"buzzer","t":"Töne mit dem Buzzer","items":[{"kind":"task","id":"bz1"},{"kind":"task","id":"bz2"},{"kind":"task","id":"bz3"}]},{"id":"co2","t":"CO₂-Ampel mit MQ-135","items":[{"kind":"task","id":"c1"},{"kind":"task","id":"c2"},{"kind":"task","id":"c3"}]},{"id":"fehler","t":"Fehlersuche","items":[{"kind":"task","id":"f1"},{"kind":"task","id":"f2"},{"kind":"task","id":"f3"},{"kind":"task","id":"f4"},{"kind":"task","id":"f5"},{"kind":"task","id":"f6"},{"kind":"ex","id":"fq"},{"kind":"task","id":"g1"},{"kind":"task","id":"g2"},{"kind":"task","id":"g3"},{"kind":"task","id":"g4"},{"kind":"ex","id":"op1"}]}]},"arduino-schritt-fuer-schritt":{"badge":"AR","kind":"ard","key":"arduino-lernheft-basis-v1","title":"Arduino Schritt für Schritt","ch":[{"id":"mc","t":"Was ist ein Mikrocontroller?","items":[{"kind":"ex","id":"st"},{"kind":"ex","id":"q"},{"kind":"task","id":"ic0"},{"kind":"task","id":"ic1"}]},{"id":"uno","t":"Arduino und Steckbrett","items":[{"kind":"ex","id":"st"},{"kind":"ex","id":"hs"},{"kind":"ex","id":"bbv"},{"kind":"ex","id":"bbt"},{"kind":"task","id":"bb1"},{"kind":"task","id":"bb2"},{"kind":"task","id":"ic0"},{"kind":"task","id":"ic1"},{"kind":"task","id":"ic2"}]},{"id":"sa","t":"Sensor oder Aktor?","items":[{"kind":"ex","id":"st"},{"kind":"ex","id":"sort"},{"kind":"task","id":"ic0"}]},{"id":"eva","t":"Eingabe – Verarbeitung – Ausgabe","items":[{"kind":"ex","id":"st"},{"kind":"ex","id":"evat"},{"kind":"task","id":"ic0"}]},{"id":"sr","t":"Steuern oder Regeln?","items":[{"kind":"ex","id":"st"},{"kind":"ex","id":"srs"},{"kind":"task","id":"ic0"}]},{"id":"anschluss","t":"Echten Arduino anschließen","items":[{"kind":"ex","id":"st"}]},{"id":"tinkercad","t":"Tinkercad starten","items":[{"kind":"ex","id":"st"},{"kind":"task","id":"ic0"},{"kind":"task","id":"ic1"}]},{"id":"blinken","t":"Eine LED blinkt","items":[{"kind":"ex","id":"st"},{"kind":"ex","id":"qbl"},{"kind":"sub","id":"sub"},{"kind":"task","id":"ic0"},{"kind":"task","id":"ic1"}]},{"id":"led","t":"LED richtig einstecken","items":[{"kind":"ex","id":"st"},{"kind":"ex","id":"q"},{"kind":"task","id":"ic0"},{"kind":"task","id":"ic1"}]},{"id":"zweiled","t":"Zwei LEDs abwechselnd","items":[{"kind":"ex","id":"cb"},{"kind":"ex","id":"st"},{"kind":"ex","id":"pz"},{"kind":"sub","id":"sub"},{"kind":"task","id":"ic0"},{"kind":"task","id":"ic1"}]},{"id":"signale","t":"Digital und analog","items":[{"kind":"ex","id":"st"},{"kind":"ex","id":"da"},{"kind":"task","id":"ic0"}]},{"id":"pwm","t":"LED dimmen","items":[{"kind":"ex","id":"st"},{"kind":"sub","id":"sub"},{"kind":"task","id":"ic0"},{"kind":"task","id":"ic1"}]},{"id":"rgb","t":"Farben mischen","items":[{"kind":"ex","id":"st"},{"kind":"ex","id":"qrgb"},{"kind":"task","id":"ic0"}]},{"id":"variablen","t":"Variablen","items":[{"kind":"ex","id":"st"},{"kind":"sub","id":"sub"},{"kind":"task","id":"ic0"},{"kind":"task","id":"ic1"}]},{"id":"seriell","t":"Der Serien-Monitor","items":[{"kind":"ex","id":"st"},{"kind":"sub","id":"sub"},{"kind":"task","id":"ic0"}]},{"id":"sensoren","t":"Licht messen","items":[{"kind":"ex","id":"st"},{"kind":"sub","id":"sub"},{"kind":"task","id":"ic0"}]},{"id":"if","t":"Wenn – dann – sonst","items":[{"kind":"ex","id":"st"},{"kind":"ex","id":"qif"},{"kind":"ex","id":"op1"},{"kind":"sub","id":"sub"},{"kind":"task","id":"ic0"}]},{"id":"for","t":"Wiederholen","items":[{"kind":"ex","id":"st"},{"kind":"sub","id":"sub"},{"kind":"task","id":"ic0"}]},{"id":"taster","t":"Der Taster","items":[{"kind":"ex","id":"st"},{"kind":"sub","id":"sub"},{"kind":"task","id":"ic0"}]},{"id":"servo","t":"Der Servo-Motor","items":[{"kind":"ex","id":"st"},{"kind":"sub","id":"sub"},{"kind":"task","id":"ic0"}]},{"id":"neopixel","t":"LED-Streifen (Profi)","items":[{"kind":"ex","id":"st"},{"kind":"task","id":"ic0"}]},{"id":"buzzer","t":"Töne und Sirene","items":[{"kind":"ex","id":"st"},{"kind":"task","id":"ic0"}]},{"id":"ultraschall","t":"Abstand messen","items":[{"kind":"ex","id":"st"},{"kind":"task","id":"ic0"},{"kind":"task","id":"ic1"}]},{"id":"motor","t":"Motor vor und zurück","items":[{"kind":"ex","id":"st"},{"kind":"task","id":"ic0"}]},{"id":"co2","t":"Luft-Ampel","items":[{"kind":"ex","id":"st"},{"kind":"task","id":"ic0"}]},{"id":"relais","t":"Das Relais","items":[{"kind":"ex","id":"st"},{"kind":"task","id":"ic0"}]},{"id":"tmp36","t":"Temperatur messen","items":[{"kind":"ex","id":"st"},{"kind":"task","id":"ic0"}]},{"id":"feuchte","t":"Ist die Erde nass?","items":[{"kind":"ex","id":"st"},{"kind":"task","id":"ic0"}]},{"id":"fehler","t":"Es klappt nicht?","items":[{"kind":"task","id":"f1"},{"kind":"task","id":"f2"},{"kind":"task","id":"f3"},{"kind":"task","id":"f4"},{"kind":"task","id":"f5"},{"kind":"task","id":"f6"},{"kind":"task","id":"f7"}]}]},"calliope-challenges":{"badge":"CA","kind":"cal","key":"calliope-challenges-v1","title":"Calliope-Challenges","ch":[{"n":1,"t":"Anzeigetafel „Hitzefrei“","tasks":["c1a","c1b"]},{"n":2,"t":"Ampel","tasks":["c2a","c2b"]},{"n":3,"t":"Raketenstart","tasks":["c3a","c3b"]},{"n":4,"t":"Raketenstart mit Sound","tasks":["c4a","c4b"]},{"n":5,"t":"Thermometer","tasks":["c5a","c5b"]},{"n":6,"t":"Lärmampel","tasks":["c6a","c6b"]},{"n":7,"t":"Schrankwächter","tasks":["c7a","c7b"]},{"n":8,"t":"Hitzefrei-Melder","tasks":["c8a","c8b"]},{"n":9,"t":"Würfel","tasks":["c9a","c9b"]},{"n":10,"t":"Schere, Stein, Papier","tasks":["c10a","c10b"]},{"n":11,"t":"Liegestützzähler","tasks":["c11a","c11b"]}],"open":{"c11b":60}},"motorentechnik":{"badge":"MT","kind":"mt","key":"motorentechnik-v1","title":"Motorentechnik","tasks":["t1","t2","t3","t4","t5","t6","t7","t8","t9","t10","t11","t12","t13","t14","t15","t16","t17","t18","t19","t20","t21","t22","t23","t24","t30","t31","t32","t33","t34","t35","t36","t37","t25","t26","t27","t28","t29"],"open":{"t15":100,"t24":220,"t33":140,"t28":110,"t29":140}},"robotik-theorie":{"badge":"RT","kind":"mt","key":"robotik-theorie-v1","title":"Robotik-Theorie","tasks":["t1","t2","t3","t4","t5","t6","t7","t8","t9","t10","t11","t12","t13","t14","t15","t16","t17","t18","t19","t20","t21","t22"],"open":{"t20":160}}};
-const HASHES={"2026/27":{"4290141d52da28e4383da611a77f30ee9480729ca3551e7149ec311183aec8f9":"BH","4c5624424c5b09c2a9f1f349a657fed3ad87cd9fa75fde8111dc0db13dc49a69":"BM","03e93b29b8fe5e76cef7902ccf318c89b018d150649029326afe304e3e239550":"BU","3851d80ff560db224efd6190ded1c3246ba2b910d1f443c970198e2bc9fc3fd0":"LT","ffae83f135328714a8a7f582bdf19e60213f4ed3a80954d42c45d5ab7198b17b":"D1","a1b0169822d6dfde715434d41729a65445f39736a159648f228594406168f494":"D2","66b608f728f02a4b7253cdf4c795b3962462ad4463c6b4e673f18ef384f95e9d":"D3","880f76249a2bb639c7fb5934def302be12e0be655b91617bbcfa4c4371752c41":"L1","e64ff0b88da4cc77903b6765cbcace9b9122a354fc33ab191ee2feaf1e7747c9":"L2","a158a42c0d5e56d3c56f4c34f176f24ca820d414718f9c7114cea3bd355a364d":"L3","8f54fdccc3376a6e3751036551a68497500d4f7d444b3ab17a993cb89bca3231":"TP","92ff22663a55846d5d4bc4e5d70cd818971154f0bce4038aaf5e8c1646fb0560":"PL","3b67d63fd8c7f905482f1ccec4ffee63d587daabf89f31a482c0098ccf117c71":"TC","f4a65bbad1ba1549ff19124c2ec6b9cd3876727288629d6207105879c94c0529":"SE","fe8601f8b77aaafa33d18e615d3883e90bda06afcdc25ad591477102f48151d5":"SM","e0ca7f942315925493760a3a2582837e10bebb27cfb423368a63e810df26ee9c":"RO","d035a99bc1bdf9296ca80d5993219f6ac9d263932af88790ce44637394700245":"MP"}};
+const HASHES={"2026/27":{"4290141d52da28e4383da611a77f30ee9480729ca3551e7149ec311183aec8f9":"BH","4c5624424c5b09c2a9f1f349a657fed3ad87cd9fa75fde8111dc0db13dc49a69":"BM","03e93b29b8fe5e76cef7902ccf318c89b018d150649029326afe304e3e239550":"BU","3851d80ff560db224efd6190ded1c3246ba2b910d1f443c970198e2bc9fc3fd0":"LT","ffae83f135328714a8a7f582bdf19e60213f4ed3a80954d42c45d5ab7198b17b":"D1","a1b0169822d6dfde715434d41729a65445f39736a159648f228594406168f494":"D2","66b608f728f02a4b7253cdf4c795b3962462ad4463c6b4e673f18ef384f95e9d":"D3","880f76249a2bb639c7fb5934def302be12e0be655b91617bbcfa4c4371752c41":"L1","e64ff0b88da4cc77903b6765cbcace9b9122a354fc33ab191ee2feaf1e7747c9":"L2","a158a42c0d5e56d3c56f4c34f176f24ca820d414718f9c7114cea3bd355a364d":"L3","8f54fdccc3376a6e3751036551a68497500d4f7d444b3ab17a993cb89bca3231":"TP","92ff22663a55846d5d4bc4e5d70cd818971154f0bce4038aaf5e8c1646fb0560":"PL","3b67d63fd8c7f905482f1ccec4ffee63d587daabf89f31a482c0098ccf117c71":"TC","f4a65bbad1ba1549ff19124c2ec6b9cd3876727288629d6207105879c94c0529":"SE","fe8601f8b77aaafa33d18e615d3883e90bda06afcdc25ad591477102f48151d5":"SM","e0ca7f942315925493760a3a2582837e10bebb27cfb423368a63e810df26ee9c":"RO","d035a99bc1bdf9296ca80d5993219f6ac9d263932af88790ce44637394700245":"MP","25a65c668212088daf55337027ffdf98593625e6c61e9452e51ff7b5608e3aaa":"DO"}};
 const GROUPS=[
-  {id:'werk',t:'Werkstatt'},{id:'druck',t:'3D-Druck'},{id:'laser',t:'Lasercutter'},{id:'textil',t:'Textil'},
-  {id:'cad',t:'3D-CAD'},{id:'steuer',t:'Steuern und Regeln'},{id:'motor',t:'Motorentechnik'},{id:'ki',t:'Künstliche Intelligenz'}];
+  {id:'werk',t:'Werkstatt'},{id:'print',t:'Print Fab'},{id:'design',t:'Design Hub'},{id:'tech',t:'Tech Lab'},
+  {id:'motor',t:'Motorentechnik'},{id:'ki',t:'Künstliche Intelligenz'}];
 // n: p = Prüfung mit QR-Code, l = Lernplattform, a = Access (erscheint automatisch, x = was es erlaubt)
 const BADGES=[
   {k:'BU',t:'Bohrmaschine UMT',g:'werk',n:'p'},{k:'BH',t:'Bohrmaschine Holz',g:'werk',n:'p'},{k:'BM',t:'Bohrmaschine Metall',g:'werk',n:'p'},{k:'LT',t:'Lötstation',g:'werk',n:'p'},
-  {k:'D1',t:'3D-Druck bedienen',g:'druck',n:'p',i:'Druck vorbereiten, starten, entnehmen'},{k:'D2',t:'3D-Druck warten',g:'druck',n:'p',i:'baut auf D1 auf',req:['D1']},{k:'D3',t:'3D-Druck reparieren',g:'druck',n:'p',i:'baut auf D2 auf',req:['D2']},
-  {k:'L1',t:'Lasercutter Stufe 1',g:'laser',n:'p',i:'Gravieren. Vor dem Start nachfragen, die Lehrkraft prüft.'},{k:'L2',t:'Lasercutter Stufe 2',g:'laser',n:'p',i:'Gravieren ohne Prüfung durch die Lehrkraft',req:['L1']},{k:'L3',t:'Lasercutter Stufe 3',g:'laser',n:'p',i:'auch Schneiden, SVG-Dateien in Inkscape bearbeiten',req:['L2']},
-  {k:'TP',t:'Transferpresse',g:'textil',n:'p'},{k:'PL',t:'Plotter',g:'textil',n:'p'},
-  {k:'TC',t:'Tinkercad',g:'cad',n:'p'},{k:'SE',t:'Solid Edge',g:'cad',n:'p'},{k:'SM',t:'SpaceMouse',g:'cad',n:'p'},
-  {k:'RO',t:'Robotik',g:'steuer',n:'p'},{k:'RT',t:'Robotik Theorie',g:'steuer',n:'l'},{k:'AR',t:'Arduino',g:'steuer',n:'l'},{k:'CA',t:'Calliope',g:'steuer',n:'l'},
+  {k:'D1',t:'3D-Druck bedienen',g:'print',n:'p',i:'Druck vorbereiten, starten, entnehmen'},{k:'D2',t:'3D-Druck warten',g:'print',n:'p',i:'baut auf D1 auf',req:['D1']},{k:'D3',t:'3D-Druck reparieren',g:'print',n:'p',i:'baut auf D2 auf',req:['D2']},
+  {k:'L1',t:'Lasercutter Stufe 1',g:'design',n:'p',i:'Gravieren. Vor dem Start nachfragen, die Lehrkraft prüft.'},{k:'L2',t:'Lasercutter Stufe 2',g:'design',n:'p',i:'Gravieren ohne Prüfung durch die Lehrkraft',req:['L1']},{k:'L3',t:'Lasercutter Stufe 3',g:'design',n:'p',i:'auch Schneiden, SVG-Dateien in Inkscape bearbeiten',req:['L2']},
+  {k:'PL',t:'Plotter',g:'design',n:'p'},{k:'TP',t:'Transferpresse',g:'design',n:'p'},
+  {k:'TC',t:'Tinkercad',g:'tech',n:'p'},{k:'SE',t:'Solid Edge',g:'tech',n:'p'},{k:'SM',t:'SpaceMouse',g:'tech',n:'p'},
+  {k:'RO',t:'Robotik',g:'tech',n:'p'},{k:'RT',t:'Robotik Theorie',g:'tech',n:'l'},{k:'DO',t:'Dobot',g:'tech',n:'p'},{k:'AR',t:'Arduino',g:'tech',n:'l'},{k:'CA',t:'Calliope',g:'tech',n:'l'},
   {k:'MT',t:'Motorentechnik Theorie',g:'motor',n:'l'},{k:'MP',t:'Motorentechnik Praxis',g:'motor',n:'p'},
   {k:'K1',t:'AI Badge Level 1',g:'ki',n:'l',i:'Lernplattform AI Badge'},{k:'K2',t:'AI Badge Level 2',g:'ki',n:'l',i:'Lernplattform AI Badge'},{k:'K3',t:'AI Badge Level 3',g:'ki',n:'l',i:'Lernplattform AI Badge'},
-  {k:'MS',t:'MakerSpace Access',g:'access',n:'a',all:['LT','BH','BM'],i:'LT, BH und BM',x:'Du darfst im MakerSpace an Lötstation und Bohrmaschinen arbeiten. Eine Lehrkraft ist immer im Raum.'},
-  {k:'RL',t:'Robotiklabor Access',g:'access',n:'a',all:['L2','D2'],i:'L2 und D2',x:'Du darfst im Robotiklabor ohne Nachfragen selbstständig an Lasercutter und 3D-Drucker arbeiten. Eine Lehrkraft ist immer im Raum.',plus:{all:['PL','TP'],x:'Hast du auch PL und TP, darfst du dort genauso den Plotter und die Transferpresse nutzen.'}}];
+  {k:'MS',t:'MakerSpace Access',g:'access',n:'a',all:['LT','BH','BM'],i:'LT, BH und BM',x:'Du darfst im MakerSpace an Lötstation und Bohrmaschinen arbeiten, wenn eine Lehrkraft in der Werkstatt ist.'},
+  {k:'PF',t:'Print Fab Access',g:'access',n:'a',all:['D2'],i:'D2',x:'Du darfst im Print Fab ohne Nachfragen selbstständig an den 3D-Druckern arbeiten. Eine Lehrkraft ist immer in der Nähe.'},
+  {k:'DH',t:'Design Hub Access',g:'access',n:'a',all:['L2','PL','TP'],i:'L2, PL und TP',x:'Du darfst im Design Hub frei an Lasercutter, Plotter und Transferpresse arbeiten. Eine Lehrkraft ist immer in der Nähe.'},
+  {k:'TL',t:'Tech Lab Access',g:'access',n:'a',all:['DO'],i:'DO',x:'Du darfst im Tech Lab selbstständig mit dem Dobot arbeiten. Eine Lehrkraft ist immer in der Nähe.'}];
 const ACC=BADGES.filter(b=>b.n==='a'),BDG=BADGES.filter(b=>b.n!=='a');
 const BK={};BADGES.forEach(b=>BK[b.k]=b);
 const NW={p:'Prüfung',l:'Lernplattform',a:'Access'};
@@ -928,7 +933,7 @@ function loadPass(o,where){
 $$('input[type=file][data-up]').forEach(i=>i.addEventListener('change',()=>onFile(i)));
 
 /* ---------- PDF ---------- */
-const HEX={werk:'#9A5B00',druck:'#1F64A6',laser:'#B0362F',textil:'#9B3474',cad:'#0F716F',steuer:'#2B7431',motor:'#5546A6',ki:'#8A3A8F'};
+const HEX={werk:'#9A5B00',print:'#1F64A6',design:'#B0362F',tech:'#0F716F',motor:'#5546A6',ki:'#8A3A8F'};
 const CP='€‚ƒ„…†‡ˆ‰Š‹ŒŽ‘’“”•–—˜™š›œžŸ';
 function clean(t){return String(t||'').replace(/→/g,'->').replace(/−/g,'-').split('').filter(ch=>{const c=ch.charCodeAt(0);return c===10||(c>=32&&c<=126)||(c>=160&&c<=255)||CP.indexOf(ch)>=0;}).join('');}
 function rgb(h){return [1,3,5].map(i=>parseInt(h.slice(i,i+2),16));}
@@ -948,19 +953,19 @@ function makePdf(){
   txt('Access – das darfst du mit deinen Badges',M,48,{b:1,size:11.5});
   const plusOn=b=>!!(b.plus&&got(b.k)&&b.plus.all.every(has));
   let ah=0;const al=ACC.map(b=>d.splitTextToSize(clean(b.x+(b.plus?' '+'Zusatz '+b.plus.all.map(k=>BK[k].t).join(' & ')+': '+(plusOn(b)?'freigeschaltet. ':'noch gesperrt (braucht '+b.plus.all.join(', ')+'). ')+b.plus.x.replace(/^Zusatz: /,''):'')),colW-8));al.forEach(l=>{ah=Math.max(ah,14+l.length*3.9);});
-  ACC.forEach((b,j)=>{const x0=M+j*(colW+8),y=51,dt=got(b.k);
+  ACC.forEach((b,j)=>{const x0=M+(j%2)*(colW+8),y=51+Math.floor(j/2)*(ah+4),dt=got(b.k);
     if(dt){d.setFillColor(225,241,232);d.setDrawColor(31,122,76);d.setLineWidth(.7);d.roundedRect(x0,y,colW,ah,3,3,'FD');d.setLineWidth(.2);}
     else{d.setDrawColor(170,180,175);d.setLineDashPattern([1.2,1],0);d.roundedRect(x0,y,colW,ah,3,3,'S');d.setLineDashPattern([],0);}
     txt(b.t,x0+4,y+6,{b:1,size:11,c:dt?[24,34,30]:[120,130,125]});
     txt(dt?'freigeschaltet am '+dStr(dt):'noch gesperrt · braucht '+b.all.join(', '),x0+4,y+10.5,{b:!!dt,size:8.6,c:dt?[31,122,76]:[120,130,125]});
     d.setFont('helvetica','normal');d.setFontSize(8.6);d.setTextColor(dt?24:120,dt?34:130,dt?30:125);al[j].forEach((l,li)=>d.text(l,x0+4,y+15+li*3.9));});
-  let y0=51+ah+9;
+  let y0=51+Math.ceil(ACC.length/2)*(ah+4)+5;
   // Raster: zwei Spalten mit Gruppen
   for(let gi=0;gi<GROUPS.length;gi+=2){
     let hRow=0;
     [0,1].forEach(j=>{const g=GROUPS[gi+j];if(!g)return;const x0=M+j*(colW+8),c=rgb(HEX[g.id]);
       d.setFillColor(c[0],c[1],c[2]);d.roundedRect(x0,y0-3.2,3.2,3.2,.8,.8,'F');txt(g.t,x0+5,y0,{b:1,size:10});
-      BADGES.filter(b=>b.g===g.id).forEach((b,i)=>{const cx=x0+r+1+i*21,cy=y0+5+r,dt=got(b.k);
+      const gb=BADGES.filter(b=>b.g===g.id),per=Math.max(1,Math.floor((colW-2*r-2)/21)+1);gb.forEach((b,i)=>{const cx=x0+r+1+(i%per)*21,cy=y0+5+r+Math.floor(i/per)*(2*r+13),dt=got(b.k);
         if(dt){d.setFillColor(c[0],c[1],c[2]);d.circle(cx,cy,r,'F');}
         else{d.setDrawColor(190,198,193);d.setLineDashPattern([1,1],0);d.circle(cx,cy,r,'S');d.setLineDashPattern([],0);}
         const ip=ICONP&&ICONP[b.k]&&ICONP[b.k][dt?'w':'g'];
@@ -970,12 +975,12 @@ function makePdf(){
         const tl=d.splitTextToSize(clean(b.t),20);tl.slice(0,2).forEach((l,li)=>d.text(l,cx,cy+r+3.2+li*2.6,{align:'center'}));
         txt(dt?dStr(dt):'offen',cx,cy+r+3.2+Math.min(2,tl.length)*2.6+.6,{size:6.6,b:!!dt,c:dt?[31,122,76]:[150,158,154],al:'center'});
       });
-      hRow=Math.max(hRow,5+2*r+13);
+      hRow=Math.max(hRow,5+Math.ceil(gb.length/per)*(2*r+13));
     });
     y0+=hRow+3;
   }
   // Tabelle
-  let y=y0+2;
+  let y=y0+2;if(y>248){foot();d.addPage();y=22;}
   txt('Eingetragene Badges',M,y,{b:1,size:12});y+=6;
   const cols=[M,M+14,M+70,M+94,M+110];
   const head=()=>{d.setFillColor(233,239,234);d.rect(M,y-4,W-2*M,6,'F');['Kürzel','Badge','Datum','Uhrzeit','Nachweis'].forEach((h,i)=>txt(h,cols[i]+1,y,{b:1,size:9}));y+=6;};
