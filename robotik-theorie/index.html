@@ -1105,7 +1105,7 @@ var RTG = (function () {
     b += '<text class="rtg-t" x="120" y="124">Vergleich</text><text class="rtg-t" x="128" y="180">Istwert</text>';
     b += '<path class="rtg-sep" d="M2 204H338"/>';
     b += '<text class="rtg-t rtg-mid" x="2" y="234">Steuerung: ohne Rückmeldung</text>';
-    b += box(2, 250, 114, 'Programm:', '250 Schritte') + ar(116, 276, 134, 276) + box(134, 250, 124, 'Schrittmotor') + ar(258, 276, 270, 276) + box(270, 250, 68, 'Gelenk');
+    b += box(2, 250, 114, 'Programm:', '120 Schritte') + ar(116, 276, 134, 276) + box(134, 250, 124, 'Schrittmotor') + ar(258, 276, 270, 276) + box(270, 250, 68, 'Gelenk');
     b += '<path class="rtg-rkl no" d="M304 302v14H40"/><path class="rtg-x" d="M165 306l14 20M179 306l-14 20"/>';
     b += '<text class="rtg-t" x="2" y="350">Der Motor zählt nur Schritte.</text><text class="rtg-t" x="2" y="372">Keine Rückmeldung: Rutscht er</text><text class="rtg-t" x="2" y="394">durch, merkt das niemand.</text>';
     return { vb: '0 0 340 402', body: b }; }
@@ -1324,7 +1324,7 @@ var RTG = (function () {
   <div class="info">
     <h3>Steuern oder regeln?</h3>
     <p>Das Programm gibt für jedes Gelenk einen <b>Sollwert</b> vor, zum Beispiel 40°. Der Positionssensor misst den <b>Istwert</b>. Die Steuerung vergleicht beide. Ist das Gelenk noch nicht am Ziel, dreht der Motor weiter, bis die Abweichung null ist. Weil der gemessene Wert zurückgemeldet wird, ist das eine <b>Regelung</b>, ein geschlossener Kreis. Ohne Rückmeldung spricht man von einer <b>Steuerung</b>: Ein Schrittmotor ohne Sensor zählt nur seine Schritte. Rutscht er durch, merkt das niemand.</p>
-    <figure class="rt-fig" data-rtfig="regelkreis" data-aria="Oben ein Regelkreis: Sollwert, Vergleich, Motor mit Getriebe, Gelenk, Positionssensor; der Istwert läuft zurück zum Vergleich. Unten eine Steuerkette: Programm mit 250 Schritten, Schrittmotor, Gelenk, ohne Rückweg."><figcaption>Oben die Regelung: Der Positionssensor meldet den Istwert zurück, die Steuerung vergleicht ihn mit dem Sollwert, bis beide gleich sind. Unten die Steuerung: Der Schrittmotor zählt nur Schritte, niemand prüft, ob das Gelenk angekommen ist.</figcaption></figure>
+    <figure class="rt-fig" data-rtfig="regelkreis" data-aria="Oben ein Regelkreis: Sollwert, Vergleich, Motor mit Getriebe, Gelenk, Positionssensor; der Istwert läuft zurück zum Vergleich. Unten eine Steuerkette: Programm mit 120 Schritten, Schrittmotor, Gelenk, ohne Rückweg."><figcaption>Oben die Regelung: Der Positionssensor meldet den Istwert zurück, die Steuerung vergleicht ihn mit dem Sollwert, bis beide gleich sind. Unten die Steuerung: Der Schrittmotor zählt nur Schritte, niemand prüft, ob das Gelenk angekommen ist.</figcaption></figure>
   </div>
   <div class="info">
     <h3>Greifer und Werkzeuge</h3>
