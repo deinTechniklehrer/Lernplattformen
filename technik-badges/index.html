@@ -514,6 +514,21 @@ tr:last-child td{border-bottom:0}
 a{color:var(--kultur-ink)}
 .danger{background:var(--bad);color:#fff}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+/* Level-Kacheln der Technik-Badges (badge-level.js) */
+.lvt{border:2px dashed var(--line);border-radius:14px;padding:10px 12px;display:grid;gap:8px;min-width:0;background:var(--surface)}
+.lvt.on{border:2px solid var(--lc)}
+.lvt-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 10px}
+.lvt-t{font-family:var(--display);font-weight:800;font-size:20px}
+.lvt-pill{font-family:var(--display);font-weight:800;font-size:19px;line-height:1.1;padding:5px 12px;border-radius:999px;border:2px dashed var(--line);color:var(--muted)}
+.lvt.on .lvt-pill{background:var(--lc);color:var(--li);border:2px solid var(--lc)}
+.lvt-kann{margin:0;font-size:15px}
+.lvt-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:6px}
+.lvt-next{margin:0;font-size:14px;color:var(--muted)}
+.lvt-next b{color:var(--ink)}
+.lvt-steps{display:flex;gap:4px}
+.lvt-steps span{flex:1;height:8px;border-radius:4px;background:var(--line)}
+.lvt-steps span.on{background:var(--sc)}
+
 </style>
 <script src="../assets/jspdf.umd.min.js"></script><link rel="stylesheet" href="../assets/lp-support.css"><script>window.LP_CFG={"keys": ["technik-badges-v1"], "pdfSection": false, "anchors": [], "slug": "technik-badges", "tally": "https://tally.so/r/7XxDk6"};</script><script src="../assets/lp-support.js"></script>
 <script src="../assets/jsqr.min.js" defer></script>
@@ -635,13 +650,14 @@ a{color:var(--kultur-ink)}
 'use strict';
 const KEY='technik-badges-v1', SLUG='technik-badges', SALT='deinTechniklehrer-badges|';
 /* Symbole der Technik-Badges, selbst gezeichnet (CC BY-NC-SA 4.0), viewBox 0 0 48 48, Linien in currentColor.
-   Stand 27.11.2026 (DO neu; Access MS, PF, DH, TL = Schlüssel + Raumpiktogramm der Türschilder; RL entfernt). Eingebaut über den Platzhalter BICON in Technik-Badges und Fortbildung, PDF-Downloads über make_badges_fortbildung.py. */
+   Stand 28.11.2026 (DO1–DO5 Dobot-Level statt DO; seit 27.11.2026 Access MS, PF, DH, TL = Schlüssel + Raumpiktogramm der Türschilder; RL entfernt). Eingebaut über den Platzhalter BICON in Technik-Badges und Fortbildung, PDF-Downloads über make_badges_fortbildung.py. */
 var BICON = (function () {
   function lv(n) { return '<circle cx="39" cy="39" r="8" fill="currentColor" stroke="none"/><text x="39" y="43.2" text-anchor="middle" font-size="12" font-weight="700" font-family="Arial,sans-serif" fill="var(--bi-bg,#fff)" stroke="none">' + n + '</text>'; }
   var drill = '<path d="M9 42h26M13 42V9"/><rect x="13" y="7" width="22" height="10" rx="2"/><path d="M35 11h6M27 17v5"/><rect x="24.5" y="22" width="5" height="5" rx="1"/><path d="M27 27v6"/>';
   var printer = '<rect x="7" y="5" width="34" height="37" rx="2"/><path d="M7 13h34"/><path d="M20 13v5l4 5 4-5v-5"/><path d="M11 37h26"/><path d="M18 37v-6h12v6M18 34h12"/>';
   var laser = '<rect x="14" y="5" width="20" height="10" rx="2"/><path d="M21 15h6l-3 5z"/><path d="M24 20v13" stroke-dasharray="3 2"/><path d="M7 37h34"/><path d="M24 33l-4-4M24 33l4-4M24 33h-6M24 33h6"/>';
   var spark = '<path d="M22 8c1 8 4 11 12 12-8 1-11 4-12 12-1-8-4-11-12-12 8-1 11-4 12-12z"/><path d="M36 6c.4 3 1.6 4.2 4.6 4.6-3 .4-4.2 1.6-4.6 4.6-.4-3-1.6-4.2-4.6-4.6 3-.4 4.2-1.6 4.6-4.6z"/>';
+  var dobot = '<path d="M4 43h22"/><path d="M7 43v-5h16v5"/><rect x="10" y="30" width="10" height="8" rx="2"/><path d="M15 30l5-16" stroke-width="4"/><circle cx="20" cy="13" r="3.5"/><path d="M23 13h10" stroke-width="4"/><circle cx="36" cy="13" r="3"/><path d="M36 16v7"/><path d="M32.5 26.5h7l-1.5-3h-4z"/>';
   var key = function (extra) { return '<circle cx="15" cy="24" r="8"/><circle cx="15" cy="24" r="2.5"/><path d="M23 24h18M35 24v6M40 24v4"/>' + (extra || ''); };
   return {
     BU: drill + '<path d="M17 39h20"/><rect x="23.5" y="34" width="7" height="5" rx="1"/>',
@@ -662,7 +678,7 @@ var BICON = (function () {
     MT: '<rect x="15" y="7" width="18" height="13" rx="2"/><path d="M15 11h18M15 14h18M24 20v11"/><circle cx="24" cy="36" r="6"/><circle cx="24" cy="36" r="1.5"/>',
     MP: '<rect x="8" y="9" width="14" height="10" rx="2"/><path d="M8 12h14M15 19v8"/><circle cx="15" cy="31" r="4.5"/><path d="M41 11a6 6 0 0 1-8 7L22 29a3 3 0 1 1-4-4l11-11a6 6 0 0 1 7-8l-4 4 1 3 3 1z"/>',
     K1: spark + lv(1), K2: spark + lv(2), K3: spark + lv(3),
-    DO: '<path d="M6 43h22"/><path d="M9 43v-5h16v5"/><rect x="12" y="30" width="10" height="8" rx="2"/><path d="M17 30l5-16" stroke-width="4"/><circle cx="22" cy="13" r="3.5"/><path d="M25 13h10" stroke-width="4"/><circle cx="38" cy="13" r="3"/><path d="M38 16v8"/><path d="M34.5 27.5h7l-1.5-3h-4z"/><rect x="35" y="36" width="6" height="6" rx="1"/>',
+    DO1: dobot + lv(1), DO2: dobot + lv(2), DO3: dobot + lv(3), DO4: dobot + lv(4), DO5: dobot + lv(5),
     MS: '<circle cx="12" cy="37" r="6.5"/><circle cx="12" cy="37" r="2"/><path d="M18.5 37H44M37.5 37v5M42.5 37v4"/><path d="M15 27L29 13"/><path d="M24.5 10.5l4-4 7 7-4 4z" fill="currentColor"/><path d="M33 27L21.5 15.5"/><path d="M21.5 15.5a5.5 5.5 0 0 1-6.6-7.4l3.3 3.3 2.6-.6.6-2.6-3.3-3.3a5.5 5.5 0 0 1 7.4 6.6"/>',
     PF: '<circle cx="12" cy="37" r="6.5"/><circle cx="12" cy="37" r="2"/><path d="M18.5 37H44M37.5 37v5M42.5 37v4"/><rect x="13" y="3" width="22" height="24" rx="3"/><path d="M13 8.5h22M22 8.5v3h4v-3M23 11.5l1 2 1-2M18.5 23.5h11M19.5 20.5h9M20.5 17.5h7"/>',
     DH: '<circle cx="12" cy="37" r="6.5"/><circle cx="12" cy="37" r="2"/><path d="M18.5 37H44M37.5 37v5M42.5 37v4"/><path d="M15.5 7.5h15M15.5 24.5h9M13.5 9.5v13M32.5 9.5v6"/><rect x="11.5" y="5.5" width="4" height="4" rx=".5"/><rect x="30.5" y="5.5" width="4" height="4" rx=".5"/><rect x="11.5" y="22.5" width="4" height="4" rx=".5"/><path d="M26 19l3-3 9 9-3 3h-3v-3z"/><path d="M28 21l7 7"/>',
@@ -670,8 +686,36 @@ var BICON = (function () {
   };
 })();
 
+/* Level-Kacheln der Technik-Badges (seit 28.11.2026). Eine Kachel je Reihe gestufter Badges: oben das erreichte Level
+   (Name und Farbe), darunter die erreichten Level-Badges; die Kachel wächst mit jedem Level.
+   Neue Reihe (z. B. Smart Home H1–H5, Arduino): Eintrag in LEVELS, Badges mit lv:'<id>' in BADGES, Symbole in BICON.
+   Dobot: Level, Farben, Checkpoints und „kann“-Sätze aus dem Dobot-Selbstlernkonzept 2.0
+   (OneDrive\RLSB\OER_Material\Technik\Dobot-Selbstlernkonzept-2.0\Quellen\challenges.json, Stand 11.2026). */
+var LEVELS = [
+  {id: 'dobot', t: 'Dobot', g: 'tech', quelle: 'Dobot-Selbstlernkonzept 2.0', st: [
+    {k: 'DO1', n: 'Beginner',   c: '#50ADE5', ink: '#0E2F44', cp: '#02', kann: 'Mit Teach and Playback Punkte speichern und Gegenstände mit dem Sauggreifer umsetzen.'},
+    {k: 'DO2', n: 'Basic',      c: '#40B93C', ink: '#0F3311', cp: '#04 oder #05', kann: 'Gegenstände drehen, die passende Bewegungsart wählen und genau nach Startposition montieren.'},
+    {k: 'DO3', n: 'Skilled',    c: '#C3CF17', ink: '#2E3200', cp: '#10 oder #12, mit Schleife und Variablen', kann: 'Mit Schleife, Variablen und Operatoren programmieren statt jeden Punkt einzeln zu speichern.'},
+    {k: 'DO4', n: 'Specialist', c: '#F04A24', ink: '#FFFFFF', cp: '#14', kann: 'Förderband und Sensoren anschließen, auslesen und im Programm darauf reagieren.'},
+    {k: 'DO5', n: 'Expert',     c: '#ED1C24', ink: '#FFFFFF', cp: '#15 oder #17', kann: 'Ganze Abläufe mit Sensoren, Förderband oder Rundumleuchte selbst planen und programmieren.'}]}
+];
+/* erreichtes Level: höchste Stufe im Pass (0 = noch keins) */
+function lvReached(L, has) { var n = 0; L.st.forEach(function (s, i) { if (has(s.k)) n = i + 1; }); return n; }
+/* Kachel als HTML. has(k): Badge vorhanden, sub(k): Text unter dem Badge, medal(k): Symbol, esc: Maskieren */
+function lvTileHtml(L, has, sub, medal, esc) {
+  var n = lvReached(L, has), cur = n ? L.st[n - 1] : null, nx = L.st[n] || null;
+  var got = L.st.filter(function (s) { return has(s.k); });
+  return '<div class="lvt' + (n ? ' on' : '') + '" style="--lc:' + (cur ? cur.c : 'transparent') + ';--li:' + (cur ? cur.ink : 'inherit') + '" role="group" aria-label="' + esc(L.t + ': ' + (cur ? 'Level ' + n + ' ' + cur.n : 'noch kein Level')) + '">'
+    + '<div class="lvt-head"><span class="lvt-t">' + esc(L.t) + '</span><span class="lvt-pill">' + (cur ? 'Level ' + n + ' · ' + esc(cur.n) : 'noch kein Level') + '</span></div>'
+    + (cur ? '<p class="lvt-kann">' + esc(cur.kann) + '</p>' : '')
+    + (got.length ? '<div class="lvt-row">' + got.map(function (s) { return '<div class="bd got g-' + L.g + '">' + medal(s.k) + '<span class="t">' + esc(s.n) + '</span><span class="s">' + esc(sub(s.k)) + '</span></div>'; }).join('') + '</div>' : '')
+    + '<p class="lvt-next">' + (nx ? (n ? 'Nächstes Level: ' : 'Erstes Level: ') + '<b>' + esc(nx.k + ' ' + nx.n) + '</b> · Checkpoint-Challenge ' + esc(nx.cp) : 'Höchstes Level erreicht.') + '</p>'
+    + '<div class="lvt-steps" aria-hidden="true">' + L.st.map(function (s, i) { return '<span class="' + (i < n ? 'on' : '') + '" style="--sc:' + s.c + '"></span>'; }).join('') + '</div>'
+    + '</div>';
+}
+
 const RULES={"arduino-lernheft":{"badge":"AR","kind":"ard","key":"arduino-lernheft-v1","title":"Arduino-Lernheft Tinkercad","ch":[{"id":"mc","t":"Was ist ein Mikrocontroller?","items":[{"kind":"ex","id":"q1b"}]},{"id":"uno","t":"Arduino Uno und Steckbrett","items":[{"kind":"ex","id":"hs"},{"kind":"ex","id":"bbv"},{"kind":"ex","id":"bbt"},{"kind":"task","id":"bb1"},{"kind":"task","id":"bb2"},{"kind":"task","id":"bb3"}]},{"id":"sa","t":"Sensoren und Aktoren","items":[{"kind":"ex","id":"mark"},{"kind":"ex","id":"sort"}]},{"id":"eva","t":"Das EVA-Prinzip","items":[{"kind":"ex","id":"evat"}]},{"id":"sr","t":"Steuern und Regeln","items":[{"kind":"ex","id":"srs"}]},{"id":"anschluss","t":"Den echten Arduino anschließen","items":[{"kind":"task","id":"esd"},{"kind":"task","id":"usb"},{"kind":"task","id":"gm"},{"kind":"task","id":"ide"},{"kind":"task","id":"board"},{"kind":"task","id":"port"}]},{"id":"tinkercad","t":"Erste Schritte mit Tinkercad","items":[{"kind":"task","id":"open"},{"kind":"task","id":"login"},{"kind":"task","id":"other"}]},{"id":"blinken","t":"Blinken: dein erstes Programm","items":[{"kind":"task","id":"b1"},{"kind":"task","id":"b2"},{"kind":"task","id":"b3"},{"kind":"ex","id":"bq2"},{"kind":"task","id":"t1"},{"kind":"task","id":"t2"},{"kind":"sub","id":"sub"}]},{"id":"led","t":"Die LED richtig anschließen","items":[{"kind":"ex","id":"lq"}]},{"id":"zweiled","t":"Zwei LEDs abwechselnd","items":[{"kind":"ex","id":"zq2"},{"kind":"ex","id":"cb"},{"kind":"ex","id":"pz"},{"kind":"task","id":"z1"},{"kind":"task","id":"z2"},{"kind":"task","id":"z3"},{"kind":"task","id":"z4"},{"kind":"sub","id":"sub"}]},{"id":"signale","t":"Digitale und analoge Signale","items":[{"kind":"ex","id":"da"}]},{"id":"pwm","t":"PWM: LED dimmen","items":[{"kind":"task","id":"p1"},{"kind":"sub","id":"sub"}]},{"id":"rgb","t":"Die RGB-LED","items":[{"kind":"task","id":"r1"},{"kind":"task","id":"r2"},{"kind":"sub","id":"sub"}]},{"id":"variablen","t":"Variablen","items":[{"kind":"ex","id":"vt"},{"kind":"sub","id":"sub"}]},{"id":"seriell","t":"Der serielle Monitor","items":[{"kind":"sub","id":"sub"}]},{"id":"sensoren","t":"Analoge Sensoren: der Fotowiderstand","items":[{"kind":"task","id":"s1"},{"kind":"task","id":"s2"},{"kind":"sub","id":"sub"}]},{"id":"if","t":"Bedingungen: wenn … dann … sonst","items":[{"kind":"sub","id":"sub"}]},{"id":"for","t":"Die for-Schleife","items":[{"kind":"ex","id":"endl"},{"kind":"sub","id":"sub"}]},{"id":"taster","t":"Digitale Sensoren: der Taster","items":[{"kind":"sub","id":"sub"}]},{"id":"neopixel","t":"Bibliotheken und Neopixel","items":[{"kind":"task","id":"n1"},{"kind":"task","id":"n2"},{"kind":"sub","id":"sub"}]},{"id":"servo","t":"Servomotoren","items":[{"kind":"sub","id":"sub"}]},{"id":"buzzer","t":"Töne mit dem Buzzer","items":[{"kind":"task","id":"bz1"},{"kind":"task","id":"bz2"},{"kind":"task","id":"bz3"}]},{"id":"co2","t":"CO₂-Ampel mit MQ-135","items":[{"kind":"task","id":"c1"},{"kind":"task","id":"c2"},{"kind":"task","id":"c3"}]},{"id":"fehler","t":"Fehlersuche","items":[{"kind":"task","id":"f1"},{"kind":"task","id":"f2"},{"kind":"task","id":"f3"},{"kind":"task","id":"f4"},{"kind":"task","id":"f5"},{"kind":"task","id":"f6"},{"kind":"ex","id":"fq"},{"kind":"task","id":"g1"},{"kind":"task","id":"g2"},{"kind":"task","id":"g3"},{"kind":"task","id":"g4"},{"kind":"ex","id":"op1"}]}]},"arduino-schritt-fuer-schritt":{"badge":"AR","kind":"ard","key":"arduino-lernheft-basis-v1","title":"Arduino Schritt für Schritt","ch":[{"id":"mc","t":"Was ist ein Mikrocontroller?","items":[{"kind":"ex","id":"st"},{"kind":"ex","id":"q"},{"kind":"task","id":"ic0"},{"kind":"task","id":"ic1"}]},{"id":"uno","t":"Arduino und Steckbrett","items":[{"kind":"ex","id":"st"},{"kind":"ex","id":"hs"},{"kind":"ex","id":"bbv"},{"kind":"ex","id":"bbt"},{"kind":"task","id":"bb1"},{"kind":"task","id":"bb2"},{"kind":"task","id":"ic0"},{"kind":"task","id":"ic1"},{"kind":"task","id":"ic2"}]},{"id":"sa","t":"Sensor oder Aktor?","items":[{"kind":"ex","id":"st"},{"kind":"ex","id":"sort"},{"kind":"task","id":"ic0"}]},{"id":"eva","t":"Eingabe – Verarbeitung – Ausgabe","items":[{"kind":"ex","id":"st"},{"kind":"ex","id":"evat"},{"kind":"task","id":"ic0"}]},{"id":"sr","t":"Steuern oder Regeln?","items":[{"kind":"ex","id":"st"},{"kind":"ex","id":"srs"},{"kind":"task","id":"ic0"}]},{"id":"anschluss","t":"Echten Arduino anschließen","items":[{"kind":"ex","id":"st"}]},{"id":"tinkercad","t":"Tinkercad starten","items":[{"kind":"ex","id":"st"},{"kind":"task","id":"ic0"},{"kind":"task","id":"ic1"}]},{"id":"blinken","t":"Eine LED blinkt","items":[{"kind":"ex","id":"st"},{"kind":"ex","id":"qbl"},{"kind":"sub","id":"sub"},{"kind":"task","id":"ic0"},{"kind":"task","id":"ic1"}]},{"id":"led","t":"LED richtig einstecken","items":[{"kind":"ex","id":"st"},{"kind":"ex","id":"q"},{"kind":"task","id":"ic0"},{"kind":"task","id":"ic1"}]},{"id":"zweiled","t":"Zwei LEDs abwechselnd","items":[{"kind":"ex","id":"cb"},{"kind":"ex","id":"st"},{"kind":"ex","id":"pz"},{"kind":"sub","id":"sub"},{"kind":"task","id":"ic0"},{"kind":"task","id":"ic1"}]},{"id":"signale","t":"Digital und analog","items":[{"kind":"ex","id":"st"},{"kind":"ex","id":"da"},{"kind":"task","id":"ic0"}]},{"id":"pwm","t":"LED dimmen","items":[{"kind":"ex","id":"st"},{"kind":"sub","id":"sub"},{"kind":"task","id":"ic0"},{"kind":"task","id":"ic1"}]},{"id":"rgb","t":"Farben mischen","items":[{"kind":"ex","id":"st"},{"kind":"ex","id":"qrgb"},{"kind":"task","id":"ic0"}]},{"id":"variablen","t":"Variablen","items":[{"kind":"ex","id":"st"},{"kind":"sub","id":"sub"},{"kind":"task","id":"ic0"},{"kind":"task","id":"ic1"}]},{"id":"seriell","t":"Der Serien-Monitor","items":[{"kind":"ex","id":"st"},{"kind":"sub","id":"sub"},{"kind":"task","id":"ic0"}]},{"id":"sensoren","t":"Licht messen","items":[{"kind":"ex","id":"st"},{"kind":"sub","id":"sub"},{"kind":"task","id":"ic0"}]},{"id":"if","t":"Wenn – dann – sonst","items":[{"kind":"ex","id":"st"},{"kind":"ex","id":"qif"},{"kind":"ex","id":"op1"},{"kind":"sub","id":"sub"},{"kind":"task","id":"ic0"}]},{"id":"for","t":"Wiederholen","items":[{"kind":"ex","id":"st"},{"kind":"sub","id":"sub"},{"kind":"task","id":"ic0"}]},{"id":"taster","t":"Der Taster","items":[{"kind":"ex","id":"st"},{"kind":"sub","id":"sub"},{"kind":"task","id":"ic0"}]},{"id":"servo","t":"Der Servo-Motor","items":[{"kind":"ex","id":"st"},{"kind":"sub","id":"sub"},{"kind":"task","id":"ic0"}]},{"id":"neopixel","t":"LED-Streifen (Profi)","items":[{"kind":"ex","id":"st"},{"kind":"task","id":"ic0"}]},{"id":"buzzer","t":"Töne und Sirene","items":[{"kind":"ex","id":"st"},{"kind":"task","id":"ic0"}]},{"id":"ultraschall","t":"Abstand messen","items":[{"kind":"ex","id":"st"},{"kind":"task","id":"ic0"},{"kind":"task","id":"ic1"}]},{"id":"motor","t":"Motor vor und zurück","items":[{"kind":"ex","id":"st"},{"kind":"task","id":"ic0"}]},{"id":"co2","t":"Luft-Ampel","items":[{"kind":"ex","id":"st"},{"kind":"task","id":"ic0"}]},{"id":"relais","t":"Das Relais","items":[{"kind":"ex","id":"st"},{"kind":"task","id":"ic0"}]},{"id":"tmp36","t":"Temperatur messen","items":[{"kind":"ex","id":"st"},{"kind":"task","id":"ic0"}]},{"id":"feuchte","t":"Ist die Erde nass?","items":[{"kind":"ex","id":"st"},{"kind":"task","id":"ic0"}]},{"id":"fehler","t":"Es klappt nicht?","items":[{"kind":"task","id":"f1"},{"kind":"task","id":"f2"},{"kind":"task","id":"f3"},{"kind":"task","id":"f4"},{"kind":"task","id":"f5"},{"kind":"task","id":"f6"},{"kind":"task","id":"f7"}]}]},"calliope-challenges":{"badge":"CA","kind":"cal","key":"calliope-challenges-v1","title":"Calliope-Challenges","ch":[{"n":1,"t":"Anzeigetafel „Hitzefrei“","tasks":["c1a","c1b"]},{"n":2,"t":"Ampel","tasks":["c2a","c2b"]},{"n":3,"t":"Raketenstart","tasks":["c3a","c3b"]},{"n":4,"t":"Raketenstart mit Sound","tasks":["c4a","c4b"]},{"n":5,"t":"Thermometer","tasks":["c5a","c5b"]},{"n":6,"t":"Lärmampel","tasks":["c6a","c6b"]},{"n":7,"t":"Schrankwächter","tasks":["c7a","c7b"]},{"n":8,"t":"Hitzefrei-Melder","tasks":["c8a","c8b"]},{"n":9,"t":"Würfel","tasks":["c9a","c9b"]},{"n":10,"t":"Schere, Stein, Papier","tasks":["c10a","c10b"]},{"n":11,"t":"Liegestützzähler","tasks":["c11a","c11b"]}],"open":{"c11b":60}},"motorentechnik":{"badge":"MT","kind":"mt","key":"motorentechnik-v1","title":"Motorentechnik","tasks":["t1","t2","t3","t4","t5","t6","t7","t8","t9","t10","t11","t12","t13","t14","t15","t16","t17","t18","t19","t20","t21","t22","t23","t24","t30","t31","t32","t33","t34","t35","t36","t37","t25","t26","t27","t28","t29"],"open":{"t15":100,"t24":220,"t33":140,"t28":110,"t29":140}},"robotik-theorie":{"badge":"RT","kind":"mt","key":"robotik-theorie-v1","title":"Robotik-Theorie","tasks":["t1","t2","t3","t4","t5","t6","t7","t8","t9","t10","t11","t12","t13","t14","t15","t16","t17","t18","t19","t20","t21","t22"],"open":{"t20":160}}};
-const HASHES={"2026/27":{"4290141d52da28e4383da611a77f30ee9480729ca3551e7149ec311183aec8f9":"BH","4c5624424c5b09c2a9f1f349a657fed3ad87cd9fa75fde8111dc0db13dc49a69":"BM","03e93b29b8fe5e76cef7902ccf318c89b018d150649029326afe304e3e239550":"BU","3851d80ff560db224efd6190ded1c3246ba2b910d1f443c970198e2bc9fc3fd0":"LT","ffae83f135328714a8a7f582bdf19e60213f4ed3a80954d42c45d5ab7198b17b":"D1","a1b0169822d6dfde715434d41729a65445f39736a159648f228594406168f494":"D2","66b608f728f02a4b7253cdf4c795b3962462ad4463c6b4e673f18ef384f95e9d":"D3","880f76249a2bb639c7fb5934def302be12e0be655b91617bbcfa4c4371752c41":"L1","e64ff0b88da4cc77903b6765cbcace9b9122a354fc33ab191ee2feaf1e7747c9":"L2","a158a42c0d5e56d3c56f4c34f176f24ca820d414718f9c7114cea3bd355a364d":"L3","8f54fdccc3376a6e3751036551a68497500d4f7d444b3ab17a993cb89bca3231":"TP","92ff22663a55846d5d4bc4e5d70cd818971154f0bce4038aaf5e8c1646fb0560":"PL","3b67d63fd8c7f905482f1ccec4ffee63d587daabf89f31a482c0098ccf117c71":"TC","f4a65bbad1ba1549ff19124c2ec6b9cd3876727288629d6207105879c94c0529":"SE","fe8601f8b77aaafa33d18e615d3883e90bda06afcdc25ad591477102f48151d5":"SM","e0ca7f942315925493760a3a2582837e10bebb27cfb423368a63e810df26ee9c":"RO","d035a99bc1bdf9296ca80d5993219f6ac9d263932af88790ce44637394700245":"MP","25a65c668212088daf55337027ffdf98593625e6c61e9452e51ff7b5608e3aaa":"DO"}};
+const HASHES={"2026/27":{"4290141d52da28e4383da611a77f30ee9480729ca3551e7149ec311183aec8f9":"BH","4c5624424c5b09c2a9f1f349a657fed3ad87cd9fa75fde8111dc0db13dc49a69":"BM","03e93b29b8fe5e76cef7902ccf318c89b018d150649029326afe304e3e239550":"BU","3851d80ff560db224efd6190ded1c3246ba2b910d1f443c970198e2bc9fc3fd0":"LT","ffae83f135328714a8a7f582bdf19e60213f4ed3a80954d42c45d5ab7198b17b":"D1","a1b0169822d6dfde715434d41729a65445f39736a159648f228594406168f494":"D2","66b608f728f02a4b7253cdf4c795b3962462ad4463c6b4e673f18ef384f95e9d":"D3","880f76249a2bb639c7fb5934def302be12e0be655b91617bbcfa4c4371752c41":"L1","e64ff0b88da4cc77903b6765cbcace9b9122a354fc33ab191ee2feaf1e7747c9":"L2","a158a42c0d5e56d3c56f4c34f176f24ca820d414718f9c7114cea3bd355a364d":"L3","8f54fdccc3376a6e3751036551a68497500d4f7d444b3ab17a993cb89bca3231":"TP","92ff22663a55846d5d4bc4e5d70cd818971154f0bce4038aaf5e8c1646fb0560":"PL","3b67d63fd8c7f905482f1ccec4ffee63d587daabf89f31a482c0098ccf117c71":"TC","f4a65bbad1ba1549ff19124c2ec6b9cd3876727288629d6207105879c94c0529":"SE","fe8601f8b77aaafa33d18e615d3883e90bda06afcdc25ad591477102f48151d5":"SM","e0ca7f942315925493760a3a2582837e10bebb27cfb423368a63e810df26ee9c":"RO","d035a99bc1bdf9296ca80d5993219f6ac9d263932af88790ce44637394700245":"MP","f5a061718f5035c39d7b93206550eeaccb0783f9fb311d3abe7b431e560ea0e3":"DO1","04a3f7e4358faf1704b19fba605635176179fdbd1345d4700e5b6471fc896469":"DO2","a8bad6cdb6de214cc0319cbfe00221d9a749bd26a4864309e6e29e79caf66f4f":"DO3","ab0a8f8eaa7b80953643e3973c64e1fffb5c16b009a7d1f58c68c67f09b7a46a":"DO4","3b5ca1c4fb339bef5a9b9e53027c0dc8ca60fa7c885a509523bd8c03ef777bd2":"DO5"}};
 const GROUPS=[
   {id:'werk',t:'Werkstatt'},{id:'print',t:'Print Fab'},{id:'design',t:'Design Hub'},{id:'tech',t:'Tech Lab'},
   {id:'motor',t:'Motorentechnik'},{id:'ki',t:'Künstliche Intelligenz'}];
@@ -682,13 +726,13 @@ const BADGES=[
   {k:'L1',t:'Lasercutter Stufe 1',g:'design',n:'p',i:'Gravieren. Vor dem Start nachfragen, die Lehrkraft prüft.'},{k:'L2',t:'Lasercutter Stufe 2',g:'design',n:'p',i:'Gravieren ohne Prüfung durch die Lehrkraft',req:['L1']},{k:'L3',t:'Lasercutter Stufe 3',g:'design',n:'p',i:'auch Schneiden, SVG-Dateien in Inkscape bearbeiten',req:['L2']},
   {k:'PL',t:'Plotter',g:'design',n:'p'},{k:'TP',t:'Transferpresse',g:'design',n:'p'},
   {k:'TC',t:'Tinkercad',g:'tech',n:'p'},{k:'SE',t:'Solid Edge',g:'tech',n:'p'},{k:'SM',t:'SpaceMouse',g:'tech',n:'p'},
-  {k:'RO',t:'Robotik',g:'tech',n:'p'},{k:'RT',t:'Robotik Theorie',g:'tech',n:'l'},{k:'DO',t:'Dobot',g:'tech',n:'p'},{k:'AR',t:'Arduino',g:'tech',n:'l'},{k:'CA',t:'Calliope',g:'tech',n:'l'},
+  {k:'RO',t:'Robotik',g:'tech',n:'p'},{k:'RT',t:'Robotik Theorie',g:'tech',n:'l'},{k:'DO1',t:'Dobot Beginner',g:'tech',n:'p',lv:'dobot',i:'Level 1 · Checkpoint-Challenge #02'},{k:'DO2',t:'Dobot Basic',g:'tech',n:'p',lv:'dobot',i:'Level 2 · Checkpoint-Challenge #04 oder #05',req:['DO1']},{k:'DO3',t:'Dobot Skilled',g:'tech',n:'p',lv:'dobot',i:'Level 3 · Checkpoint-Challenge #10 oder #12, Schleife und Variablen Pflicht',req:['DO2']},{k:'DO4',t:'Dobot Specialist',g:'tech',n:'p',lv:'dobot',i:'Level 4 · Checkpoint-Challenge #14',req:['DO3']},{k:'DO5',t:'Dobot Expert',g:'tech',n:'p',lv:'dobot',i:'Level 5 · Checkpoint-Challenge #15 oder #17',req:['DO4']},{k:'AR',t:'Arduino',g:'tech',n:'l'},{k:'CA',t:'Calliope',g:'tech',n:'l'},
   {k:'MT',t:'Motorentechnik Theorie',g:'motor',n:'l'},{k:'MP',t:'Motorentechnik Praxis',g:'motor',n:'p'},
   {k:'K1',t:'AI Badge Level 1',g:'ki',n:'l',i:'Lernplattform AI Badge'},{k:'K2',t:'AI Badge Level 2',g:'ki',n:'l',i:'Lernplattform AI Badge'},{k:'K3',t:'AI Badge Level 3',g:'ki',n:'l',i:'Lernplattform AI Badge'},
   {k:'MS',t:'MakerSpace Access',g:'access',n:'a',all:['LT','BH','BM'],i:'LT, BH und BM',x:'Du darfst im MakerSpace an Lötstation und Bohrmaschinen arbeiten, wenn eine Lehrkraft in der Werkstatt ist.'},
   {k:'PF',t:'Print Fab Access',g:'access',n:'a',all:['D2'],i:'D2',x:'Du darfst im Print Fab ohne Nachfragen selbstständig an den 3D-Druckern arbeiten. Eine Lehrkraft ist immer in der Nähe.'},
   {k:'DH',t:'Design Hub Access',g:'access',n:'a',all:['L2','PL','TP'],i:'L2, PL und TP',x:'Du darfst im Design Hub frei an Lasercutter, Plotter und Transferpresse arbeiten. Eine Lehrkraft ist immer in der Nähe.'},
-  {k:'TL',t:'Tech Lab Access',g:'access',n:'a',all:['DO'],i:'DO',x:'Du darfst im Tech Lab selbstständig mit dem Dobot arbeiten. Eine Lehrkraft ist immer in der Nähe.'}];
+  {k:'TL',t:'Tech Lab Access',g:'access',n:'a',all:['DO2'],i:'DO2',x:'Du darfst im Tech Lab selbstständig mit dem Dobot arbeiten. Eine Lehrkraft ist immer in der Nähe.'}];
 const ACC=BADGES.filter(b=>b.n==='a'),BDG=BADGES.filter(b=>b.n!=='a');
 const BK={};BADGES.forEach(b=>BK[b.k]=b);
 const NW={p:'Prüfung',l:'Lernplattform',a:'Access'};
@@ -703,7 +747,9 @@ function schoolYear(d){d=d||new Date();const y=d.getFullYear();return d.getMonth
 let P=null;
 try{P=JSON.parse(localStorage.getItem(KEY)||'null');}catch(e){P=null;}
 if(P&&typeof P!=='object')P=null;
-if(P){P.b=P.b||{};}
+/* Pässe vor dem 28.11.2026: Badge DO gab den Tech Lab Access und gilt jetzt als DO2 (Dobot Basic). */
+function migrate(p){if(p&&p.b&&p.b.DO){if(!p.b.DO2)p.b.DO2=Object.assign({},p.b.DO,{alt:'DO'});delete p.b.DO;}return p;}
+if(P){P.b=P.b||{};if(P.b.DO){migrate(P);try{localStorage.setItem(KEY,JSON.stringify(P));}catch(e){}}}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(P));return true;}catch(e){return false;}}
 function has(k){return !!(P&&P.b[k]);}
 function autoDate(b){if(!b.all.every(has))return null;return b.all.map(k=>P.b[k].d).sort().pop();}
@@ -730,12 +776,12 @@ function render(){
       +'<p>'+esc(b.x)+'</p><div class="req" aria-label="Dafür brauchst du">'+b.all.map(k=>'<span class="'+(has(k)?'ok':'')+'">'+k+(has(k)?' ✓':'')+' '+esc(BK[k].t)+'</span>').join('')+'</div>'
       +(b.plus?(()=>{const on=d&&b.plus.all.every(has);return '<div class="plus'+(on?' on':'')+'"><div class="plus-top"><b>Zusatz '+esc(b.plus.all.map(k=>BK[k].t).join(' & '))+'</b><span>'+(on?'freigeschaltet':'noch gesperrt')+'</span></div><p>'+esc(b.plus.x)+'</p><div class="req" aria-label="Dafür brauchst du zusätzlich">'+b.plus.all.map(k=>'<span class="'+(has(k)?'ok':'')+'">'+k+(has(k)?' ✓':'')+' '+esc(BK[k].t)+'</span>').join('')+'</div></div>';})():'')+'</div>';}).join('')+'</div>';
   $('#groups').innerHTML=GROUPS.map(g=>{
-    const bs=BADGES.filter(b=>b.g===g.id);
+    const bs=BADGES.filter(b=>b.g===g.id&&!b.lv),lvs=(typeof LEVELS!=='undefined'?LEVELS:[]).filter(L=>L.g===g.id);
     return '<div class="grp g-'+g.id+'"><h3>'+esc(g.t)+'</h3><div class="badges">'+bs.map(b=>{
       const d=got(b.k),e=P.b[b.k];
       let s=d?dStr(d)+(b.n==='a'?'':' · '+tStr(d)):(b.n==='a'?'mit '+b.i:b.req?'baut auf '+b.req.join(', ')+' auf':NW[b.n]);
       return '<div class="bd'+(d?' got':'')+'" role="img" aria-label="'+esc(b.k+' '+b.t+': '+(d?'erworben am '+dStr(d):'noch offen'))+'">'+medal(b)+'<span class="t">'+esc(b.t)+'</span><span class="s">'+esc(s)+'</span></div>';
-    }).join('')+'</div></div>';}).join('');
+    }).join('')+'</div>'+lvs.map(L=>lvTileHtml(L,has,k=>dStr(got(k))+' · '+tStr(got(k)),k=>medal(BK[k]),esc)).join('')+'</div>';}).join('');
 }
 
 
@@ -926,7 +972,7 @@ function kiFile(o,where){
 function loadPass(o,where){
   let np=null;try{np=JSON.parse((o.ls||{})[KEY]||'null');}catch(e){}
   if(!np||!np.name){say(where,'bad','<p>In dieser Pass-PDF steckt kein lesbarer Pass.</p>');return;}
-  np.b=np.b||{};
+  np.b=np.b||{};migrate(np);
   const n=BADGES.filter(b=>b.n!=='a'&&np.b[b.k]).length;
   const apply=()=>{P=np;if(!save()){say(where,'bad','<p>Speichern auf diesem Gerät ist nicht möglich (zum Beispiel im privaten Fenster).</p>');return;}render();say(where==='#msgNew'?'#msgTop':where,'ok','<p><b>Pass geladen:</b> '+esc(np.name)+', '+n+' Badges, gespeichert am '+dStr(o.d)+'.</p>');pendingCode();};
   if(!P){apply();return;}
@@ -941,7 +987,7 @@ const HEX={werk:'#9A5B00',print:'#1F64A6',design:'#B0362F',tech:'#0F716F',motor:
 const CP='€‚ƒ„…†‡ˆ‰Š‹ŒŽ‘’“”•–—˜™š›œžŸ';
 function clean(t){return String(t||'').replace(/→/g,'->').replace(/−/g,'-').split('').filter(ch=>{const c=ch.charCodeAt(0);return c===10||(c>=32&&c<=126)||(c>=160&&c<=255)||CP.indexOf(ch)>=0;}).join('');}
 function rgb(h){return [1,3,5].map(i=>parseInt(h.slice(i,i+2),16));}
-function viaTxt(e){if(!e)return '';if(e.via==='pdf'){const r=RULES[e.src];return 'Ergebnis-PDF '+(r?r.title:e.src==='ai-badge'?'AI Badge':'');}return e.via==='code'?'Prüfung (Code)':'Prüfung (QR-Code)';}
+function viaTxt(e){if(!e)return '';if(e.via==='pdf'){const r=RULES[e.src];return 'Ergebnis-PDF '+(r?r.title:e.src==='ai-badge'?'AI Badge':'');}if(e.alt)return 'Prüfung (bis 27.11.2026 Badge '+e.alt+')';return e.via==='code'?'Prüfung (Code)':'Prüfung (QR-Code)';}
 function makePdf(){
   if(!(window.jspdf&&window.jspdf.jsPDF)){say('#msgSave','bad','<p>Das PDF-Werkzeug konnte nicht geladen werden.</p>');return;}
   const d=new window.jspdf.jsPDF({unit:'mm',format:'a4'}),W=210,M=16,now=new Date();
@@ -965,11 +1011,14 @@ function makePdf(){
     d.setFont('helvetica','normal');d.setFontSize(8.6);d.setTextColor(dt?24:120,dt?34:130,dt?30:125);al[j].forEach((l,li)=>d.text(l,x0+4,y+15+li*3.9));});
   let y0=51+Math.ceil(ACC.length/2)*(ah+4)+5;
   // Raster: zwei Spalten mit Gruppen
+  const perG=Math.max(1,Math.floor((colW-2*r-2)/21)+1);
+  const gH=g=>g?5+Math.ceil(BADGES.filter(b=>b.g===g.id&&!b.lv).length/perG)*(2*r+13)+(typeof LEVELS!=='undefined'?LEVELS:[]).filter(L=>L.g===g.id).reduce((a,L)=>a+lvPdf(L,0,0,colW,true)+3,0):0;
   for(let gi=0;gi<GROUPS.length;gi+=2){
     let hRow=0;
+    if(y0+Math.max(gH(GROUPS[gi]),gH(GROUPS[gi+1]))>280){foot();d.addPage();y0=24;}
     [0,1].forEach(j=>{const g=GROUPS[gi+j];if(!g)return;const x0=M+j*(colW+8),c=rgb(HEX[g.id]);
       d.setFillColor(c[0],c[1],c[2]);d.roundedRect(x0,y0-3.2,3.2,3.2,.8,.8,'F');txt(g.t,x0+5,y0,{b:1,size:10});
-      const gb=BADGES.filter(b=>b.g===g.id),per=Math.max(1,Math.floor((colW-2*r-2)/21)+1);gb.forEach((b,i)=>{const cx=x0+r+1+(i%per)*21,cy=y0+5+r+Math.floor(i/per)*(2*r+13),dt=got(b.k);
+      const gb=BADGES.filter(b=>b.g===g.id&&!b.lv),per=Math.max(1,Math.floor((colW-2*r-2)/21)+1);gb.forEach((b,i)=>{const cx=x0+r+1+(i%per)*21,cy=y0+5+r+Math.floor(i/per)*(2*r+13),dt=got(b.k);
         if(dt){d.setFillColor(c[0],c[1],c[2]);d.circle(cx,cy,r,'F');}
         else{d.setDrawColor(190,198,193);d.setLineDashPattern([1,1],0);d.circle(cx,cy,r,'S');d.setLineDashPattern([],0);}
         const ip=ICONP&&ICONP[b.k]&&ICONP[b.k][dt?'w':'g'];
@@ -979,10 +1028,33 @@ function makePdf(){
         const tl=d.splitTextToSize(clean(b.t),20);tl.slice(0,2).forEach((l,li)=>d.text(l,cx,cy+r+3.2+li*2.6,{align:'center'}));
         txt(dt?dStr(dt):'offen',cx,cy+r+3.2+Math.min(2,tl.length)*2.6+.6,{size:6.6,b:!!dt,c:dt?[31,122,76]:[150,158,154],al:'center'});
       });
-      hRow=Math.max(hRow,5+Math.ceil(gb.length/per)*(2*r+13));
+      let hh=5+Math.ceil(gb.length/per)*(2*r+13);
+      (typeof LEVELS!=='undefined'?LEVELS:[]).filter(L=>L.g===g.id).forEach(L=>{hh+=lvPdf(L,x0,y0+hh,colW)+3;});
+      hRow=Math.max(hRow,hh);
     });
     y0+=hRow+3;
   }
+  // Level-Kachel (badge-level.js): Band mit erreichtem Level, erreichte Level-Badges, nächstes Level
+  function lvPdf(L,x,y,w,only){
+    const n=lvReached(L,has),cur=n?L.st[n-1]:null,nx=L.st[n]||null,gl=L.st.filter(s=>has(s.k));
+    d.setFont('helvetica','normal');d.setFontSize(7.6);
+    const nl=d.splitTextToSize(clean(nx?(n?'Nächstes Level: ':'Erstes Level: ')+nx.k+' '+nx.n+' · Checkpoint-Challenge '+nx.cp:'Höchstes Level erreicht.'),w-6);
+    const kl=cur?d.splitTextToSize(clean(cur.kann),w-6):[];
+    const h=10+kl.length*3.3+(gl.length?15:0)+4+nl.length*3.3+2;
+    if(only)return h;
+    if(cur){const c=rgb(cur.c),ik=rgb(cur.ink);d.setDrawColor(c[0],c[1],c[2]);d.setLineWidth(.6);d.roundedRect(x,y,w,h,2.5,2.5,'S');d.setLineWidth(.2);
+      d.setFillColor(c[0],c[1],c[2]);d.roundedRect(x,y,w,8,2.5,2.5,'F');d.rect(x,y+4,w,4,'F');
+      txt(L.t,x+3,y+5.6,{b:1,size:10,c:ik});txt('Level '+n+' · '+cur.n,x+w-3,y+5.6,{b:1,size:10,c:ik,al:'right'});}
+    else{d.setDrawColor(190,198,193);d.setLineDashPattern([1,1],0);d.roundedRect(x,y,w,h,2.5,2.5,'S');d.setLineDashPattern([],0);
+      txt(L.t,x+3,y+5.6,{b:1,size:10});txt('noch kein Level',x+w-3,y+5.6,{size:9,c:[120,130,125],al:'right'});}
+    let yy=y+12;
+    d.setFont('helvetica','normal');d.setFontSize(7.6);d.setTextColor(24,34,30);kl.forEach(l=>{d.text(l,x+3,yy);yy+=3.3;});
+    if(gl.length){const c=rgb(HEX[L.g]||'#555555');gl.forEach((st,i)=>{const cx=x+7+i*15.5,cy=yy+3;const s=L.st.indexOf(st),lc=rgb(st.c);
+        d.setFillColor(c[0],c[1],c[2]);d.circle(cx,cy,4.6,'F');txt(st.k,cx,cy+1.3,{b:1,size:6.6,c:[255,255,255],al:'center'});
+        txt(st.n,cx,cy+7.6,{size:5.8,al:'center'});txt(dStr(got(st.k)),cx,cy+10.2,{size:5.6,b:1,c:[31,122,76],al:'center'});});yy+=15;}
+    const sw=(w-6-4*1.2)/L.st.length;L.st.forEach((st,i)=>{const c=i<n?rgb(st.c):[222,229,224];d.setFillColor(c[0],c[1],c[2]);d.roundedRect(x+3+i*(sw+1.2),yy,sw,1.6,.8,.8,'F');});yy+=4.6;
+    d.setFont('helvetica','normal');d.setFontSize(7.6);d.setTextColor(86,100,93);nl.forEach(l=>{d.text(l,x+3,yy);yy+=3.3;});
+    return h;}
   // Tabelle
   let y=y0+2;if(y>248){foot();d.addPage();y=22;}
   txt('Eingetragene Badges',M,y,{b:1,size:12});y+=6;
