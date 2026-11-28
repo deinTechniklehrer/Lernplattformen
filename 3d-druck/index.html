@@ -3,10 +3,10 @@
 <head><script>/* Lernplattformen auf GitHub Pages: Speichern ohne claude.ai */
 (function(){if(window.claude)return;var T={pdf:'application/pdf',txt:'text/plain;charset=utf-8',png:'image/png',jpg:'image/jpeg',jpeg:'image/jpeg',json:'application/json',csv:'text/csv;charset=utf-8',html:'text/html;charset=utf-8',docx:'application/vnd.openxmlformats-officedocument.wordprocessingml.document',xlsx:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',ino:'text/plain;charset=utf-8'};
 var dl={save:function(o){return new Promise(function(res,rej){try{var n=(o&&o.filename)||'datei',x=(n.split('.').pop()||'').toLowerCase(),d=o.data,b=d instanceof Blob?d:new Blob([d],{type:T[x]||'application/octet-stream'});var u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=n;a.rel='noopener';document.body.appendChild(a);a.click();setTimeout(function(){a.remove();URL.revokeObjectURL(u);},4000);res();}catch(e){rej({code:'failed',message:String(e)});}});}};
-window.claude={use:function(n){return Promise.resolve(n==='downloads'?dl:null);}};})();</script><meta property="og:type" content="website"><meta property="og:title" content="3D-Druck"><meta property="og:description" content="Für Ender 3 V2, CR-10 S Pro, Bambu Lab A1 und Anycubic Kobra X: Druckverfahren, Aufbau, Slicing mit Cura, Füllung, erste Schicht und Sicherheit. Ergebnis als PDF."><meta property="og:url" content="https://deintechniklehrer.github.io/Lernplattformen/3d-druck/"><meta property="og:image" content="https://deintechniklehrer.github.io/Lernplattformen/vorschau/Vorschau_3D-Druck_Ender3V2.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="description" content="Für Ender 3 V2, CR-10 S Pro, Bambu Lab A1 und Anycubic Kobra X: Druckverfahren, Aufbau, Slicing mit Cura, Füllung, erste Schicht und Sicherheit. Ergebnis als PDF."><script>try{var t=localStorage.getItem('lp-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+window.claude={use:function(n){return Promise.resolve(n==='downloads'?dl:null);}};})();</script><meta property="og:type" content="website"><meta property="og:title" content="Print Fab: 3D-Druck"><meta property="og:description" content="Für Ender 3 V2, CR-10 S Pro, Bambu Lab A1 und Anycubic Kobra X: Druckverfahren, Aufbau, Slicing mit Cura, Füllung, erste Schicht und Sicherheit. Ergebnis als PDF."><meta property="og:url" content="https://deintechniklehrer.github.io/Lernplattformen/3d-druck/"><meta property="og:image" content="https://deintechniklehrer.github.io/Lernplattformen/vorschau/Vorschau_3D-Druck_Ender3V2.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="description" content="Für Ender 3 V2, CR-10 S Pro, Bambu Lab A1 und Anycubic Kobra X: Druckverfahren, Aufbau, Slicing mit Cura, Füllung, erste Schicht und Sicherheit. Ergebnis als PDF."><script>try{var t=localStorage.getItem('lp-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>3D-Druck – Lernplattform</title>
+<title>Print Fab: 3D-Druck – Lernplattform</title>
 <script defer src="../assets/jspdf.umd.min.js"></script>
 <link rel="stylesheet" href="../assets/fonts/fonts.css">
 <style>
@@ -381,6 +381,7 @@ textarea.codein:focus{border-color:var(--accent)}
 .prbtn.on{border-color:var(--blue,#035591);box-shadow:0 0 0 3px rgba(3,85,145,.18)}
 .prbtn:focus-visible{outline:3px solid var(--blue,#035591);outline-offset:2px}
 figure.photo{margin:0}figure.photo figcaption{font-size:.85rem;color:var(--muted);margin-top:4px;text-align:center}
+.h1mit{margin:.15rem 0 .4rem;font-weight:700;font-size:1.15rem;color:var(--ink)}
 </style>
 <link rel="stylesheet" href="../assets/lp-shell.css"><script src="../assets/lp-shell.js"></script><link rel="stylesheet" href="../assets/lp-support.css"><script>window.LP_CFG={"keys": ["ender3v2-lernplattform-v1"], "anchors": [{"sel": "#codein", "closest": ".card", "mode": "append"}], "slug": "3d-druck", "tally": "https://tally.so/r/7XxDk6"};</script><script src="../assets/lp-support.js"></script></head>
 <body>
@@ -1552,13 +1553,13 @@ function refreshChrome() {
   const nav = h('nav', { 'aria-label': 'Module' }, h('ul', null, navItems().map(it => h('li', null, h('a', { href: it.href, class: it.done ? 'done' : '', 'aria-current': curKey() === it.key ? 'page' : null }, it.label, it.cnt ? h('span', { class: 'cnt' }, it.cnt) : null)))));
   $('#side').replaceChildren(
     h('img', { class: 'slogo', src: LOGO_D, alt: 'Logo: dein Technik Lehrer' }),
-    h('div', { class: 'brand' }, h('div', null, h('b', null, '3D-Druck'), h('small', null, PR_ID ? 'mit dem ' + P.voll : 'Lernplattform Technik'))),
+    h('div', { class: 'brand' }, h('div', null, h('b', null, 'Print Fab: 3D-Druck'), h('small', null, PR_ID ? 'mit dem ' + P.voll : 'Lernplattform Technik'))),
     h('div', { class: 'progwrap' }, layers, h('div', null, h('div', { class: 'pnum' }, o.pct + ' %'), h('small', null, `${o.done} von ${o.total} Aufgaben`))),
     nav,
     h('div', { class: 'sidefoot' }, h('button', { class: 'themebtn', type: 'button', onclick: toggleTheme }, 'Hell / Dunkel'), h('p', null, 'Dein Fortschritt bleibt in diesem Browser gespeichert.'))
   );
   $('#top').replaceChildren(
-    h('div', { class: 'row' }, h('img', { class: 'tlogo', src: LOGO_D, alt: 'Logo: dein Technik Lehrer' }), h('b', null, PR_ID ? P.name : '3D-Druck'), h('span', { class: 'pct' }, o.pct + ' %')),
+    h('div', { class: 'row' }, h('img', { class: 'tlogo', src: LOGO_D, alt: 'Logo: dein Technik Lehrer' }), h('b', null, PR_ID ? P.name : 'Print Fab: 3D-Druck'), h('span', { class: 'pct' }, o.pct + ' %')),
     h('div', { class: 'pills' }, navItems().map(it => h('a', { href: it.href, 'aria-current': curKey() === it.key ? 'page' : null }, it.label.replace('  ', ' '))))
   );
   if (curPbar && curPbar.update) curPbar.update();
@@ -1583,7 +1584,8 @@ function viewStart() {
     h('div', { class: 'hero' },
       h('div', null,
         h('img', { class: 'hlogo lg-light', src: LOGO_L, alt: 'Logo: dein Technik Lehrer' }), h('img', { class: 'hlogo lg-dark', src: LOGO_D, alt: '' }),
-        h('h1', null, PR_ID ? `3D-Druck mit dem ${P.name}` : '3D-Druck'),
+        h('h1', null, 'Print Fab: 3D-Druck'),
+        PR_ID ? h('p', { class: 'h1mit' }, `mit dem ${P.voll}`) : null,
         h('p', { class: 'lead', style: 'font-size:1.15rem;color:var(--muted)' }, 'Verfahren, Aufbau, Slicing, Füllung und erste Schicht – mit Aufgaben, die dir sofort sagen, ob deine Antwort stimmt.'),
         PR_ID ? h('div', { class: 'btnrow' }, h('a', { class: 'btn yellow', href: '#/m/' + first.id }, o.done ? 'Weitermachen' : 'Mit Modul 1 beginnen'), h('a', { class: 'btn ghost', href: '#/test' }, 'Zum Abschlusstest')) : h('div', { class: 'btnrow' }, h('a', { class: 'btn yellow', href: '#prwahl' }, 'Drucker wählen'))),
       PR_ID ? h('figure', { class: 'photo' }, h('img', { src: PIMG, alt: `Zeichnung des 3D-Druckers ${P.voll} von vorn` }), h('figcaption', null, `${P.voll}, vereinfacht gezeichnet`)) : null),
@@ -1699,7 +1701,8 @@ function viewTest() {
 
 /* ---------- Fortsetzungscode ---------- */
 const B32 = '0123456789ABCDEFGHJKMNPQRSTVWXYZ';
-const CODE_PREFIX = 'E3V2';
+const CODE_PREFIX = 'PF3D';
+const CODE_PREFIX_ALT = ['E3V2'];  /* Codes vor dem 28.11.2026 */
 function taskOrder() { return MODULES.flatMap(m => m.tasks.map(t => t.id)); }
 function utf8Cut(s, max) { const enc = new TextEncoder(); let b = enc.encode(s || ''); while (b.length > max) { s = s.slice(0, -1); b = enc.encode(s); } return b; }
 function pushStr(out, s, max) { const b = utf8Cut(s, max); out.push(b.length); b.forEach(x => out.push(x)); }
@@ -1723,8 +1726,9 @@ function makeCode() {
 }
 function readCode(raw) {
   let s = String(raw || '').toUpperCase().replace(/O/g, '0').replace(/[IL]/g, '1').replace(/[^0-9A-Z]/g, '');
-  if (!s.startsWith(CODE_PREFIX)) throw new Error('Der Code muss mit „E3V2“ beginnen. Prüfe, ob du ihn vollständig eingefügt hast.');
-  s = s.slice(CODE_PREFIX.length);
+  const pre = [CODE_PREFIX].concat(CODE_PREFIX_ALT).find(x => s.startsWith(x));
+  if (!pre) throw new Error('Der Code muss mit „PF3D“ beginnen. Prüfe, ob du ihn vollständig eingefügt hast.');
+  s = s.slice(pre.length);
   let b; try { b = b32dec(s); } catch (e) { throw new Error('Der Code enthält ungültige Zeichen.'); }
   if (b.length < 6) throw new Error('Der Code ist zu kurz. Vermutlich fehlt ein Teil.');
   const body = b.slice(0, -2), ck = b.slice(-2), f = fletcher(body);
@@ -1752,7 +1756,7 @@ function applyCode(data) {
   Object.keys(TASKCACHE).forEach(k => delete TASKCACHE[k]); run = null;
 }
 function codeLoadCard() {
-  const ta = h('textarea', { class: 'codein', id: 'codein', placeholder: 'E3V2-…', autocomplete: 'off', spellcheck: 'false', 'aria-label': 'Fortsetzungscode' });
+  const ta = h('textarea', { class: 'codein', id: 'codein', placeholder: 'PF3D-…', autocomplete: 'off', spellcheck: 'false', 'aria-label': 'Fortsetzungscode' });
   const msg = h('div', { 'aria-live': 'polite' }); let pending = null;
   const has = overall().done > 0 || S.test.attempts.length > 0;
   const btn = h('button', { class: 'btn', type: 'button' }, 'Code laden');
@@ -1820,7 +1824,7 @@ function makePDF(r) {
   const line = (txt, size = 10.5, style = 'normal', color = [20, 35, 47]) => { doc.setFont('helvetica', style); doc.setFontSize(size); doc.setTextColor(...color); doc.splitTextToSize(txt, W - 2 * M).forEach(l => { need(size * 0.45); doc.text(l, M, y); y += size * 0.45; }); };
   doc.setFillColor(3, 85, 145); doc.rect(0, 0, W, 10, 'F'); doc.setFillColor(245, 183, 0); doc.rect(0, 10, W, 1.6, 'F');
   try { doc.addImage(LOGO_L, 'PNG', W - M - 50, 14, 50, 50 * 448 / 1568); } catch (e) { }
-  y = 36; line(`Ergebnisblatt – 3D-Druck mit dem ${P.voll}`, 17, 'bold', [3, 85, 145]); y += 3;
+  y = 36; line(`Ergebnisblatt – Print Fab: 3D-Druck mit dem ${P.voll}`, 17, 'bold', [3, 85, 145]); y += 3;
   line(`Name: ${r.name || '________________________'}     Klasse/Kurs: ${r.klasse || '__________'}     Datum: ${r.date}`, 11); y += 4;
   line('Module', 13, 'bold', [3, 85, 145]); y += 1;
   const col = [M, 130, 160];
@@ -1858,7 +1862,7 @@ function viewExport() {
   nameIn.addEventListener('input', () => { S.name = nameIn.value; save(); }); klIn.addEventListener('input', () => { S.klasse = klIn.value; save(); });
   nameIn.addEventListener('change', render); klIn.addEventListener('change', render);
   const sheet = h('div', { class: 'sheet' },
-    h('div', { class: 'shead' }, h('h2', null, `Ergebnisblatt – 3D-Druck mit dem ${P.voll}`), h('img', { src: LOGO_L, alt: 'Logo: dein Technik Lehrer' })),
+    h('div', { class: 'shead' }, h('h2', null, `Ergebnisblatt – Print Fab: 3D-Druck mit dem ${P.voll}`), h('img', { src: LOGO_L, alt: 'Logo: dein Technik Lehrer' })),
     h('div', { class: 'meta' }, h('div', null, h('b', null, 'Name: '), r.name || '________________'), h('div', null, h('b', null, 'Klasse/Kurs: '), r.klasse || '________'), h('div', null, h('b', null, 'Datum: '), r.date)),
     h('table', null, h('thead', null, h('tr', null, h('th', null, 'Modul'), h('th', null, 'Gelöst'), h('th', null, 'Mit Lösungshilfe'))),
       h('tbody', null, r.mods.map(m => h('tr', null, h('td', null, m.titel), h('td', null, `${m.geloest} / ${m.gesamt}`), h('td', null, String(m.mitLoesungshilfe)))), h('tr', null, h('th', null, 'Gesamt'), h('th', null, `${r.o.done} / ${r.o.total}`), h('th', null, r.o.pct + ' %')))),
@@ -1878,7 +1882,7 @@ function viewExport() {
     h('div', { class: 'card no-print' }, h('h3', null, 'Fortsetzungscode'),
       h('p', null, 'Der Code enthält deinen Namen, deine Klasse, alle gelösten Aufgaben und deine Testergebnisse (Punkte und welche Fragen richtig waren). Schreib ihn ab, kopiere oder speichere ihn. Auf der Startseite gibst du ihn unter „Mit Code weitermachen“ wieder ein.'),
       codeEl,
-      h('div', { class: 'btnrow' }, h('button', { class: 'btn', type: 'button', onclick: () => copyText(r.code, codeEl) }, 'Code kopieren'), canSave ? h('button', { class: 'btn ghost', type: 'button', onclick: () => saveFile(`Code_${P.datei}_${safe}.txt`, `Fortsetzungscode Lernplattform 3D-Druck (${P.voll})\n${r.name ? 'Name: ' + r.name + '\n' : ''}Datum: ${r.date}\n\n${r.code}\n`) }, 'Code als Datei speichern') : null),
+      h('div', { class: 'btnrow' }, h('button', { class: 'btn', type: 'button', onclick: () => copyText(r.code, codeEl) }, 'Code kopieren'), canSave ? h('button', { class: 'btn ghost', type: 'button', onclick: () => saveFile(`Code_${P.datei}_${safe}.txt`, `Fortsetzungscode Lernplattform Print Fab: 3D-Druck (${P.voll})\n${r.name ? 'Name: ' + r.name + '\n' : ''}Datum: ${r.date}\n\n${r.code}\n`) }, 'Code als Datei speichern') : null),
       h('p', { class: 'hintline' }, 'Der Code ändert sich, sobald du weitere Aufgaben löst. Hol dir am Ende der Stunde immer den neuesten.')),
     h('div', { class: 'card no-print' }, h('h3', null, 'Ergebnisblatt'),
       h('p', null, 'Speichere das Ergebnisblatt als PDF oder Textdatei und gib es deiner Lehrkraft. Der Fortsetzungscode steht mit darauf.'),
@@ -1909,7 +1913,7 @@ function render() {
   else if (route.name === 'test') v = viewTest();
   else if (route.name === 'export') v = viewExport();
   else v = viewStart();
-  $('#main').replaceChildren(v, h('footer', { class: 'foot no-print', html: 'Lernplattform „3D-Druck“ (Ender 3 V2, CR-10 S Pro, Bambu Lab A1, Anycubic Kobra X) – Daniel Beyrodt. Lizenz: <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a>. Zeichnungen der Drucker: eigene, vereinfachte Darstellung ohne Marken.' }));
+  $('#main').replaceChildren(v, h('footer', { class: 'foot no-print', html: 'Lernplattform „Print Fab: 3D-Druck“ (Ender 3 V2, CR-10 S Pro, Bambu Lab A1, Anycubic Kobra X) – Daniel Beyrodt. Lizenz: <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.de" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a>. Zeichnungen der Drucker: eigene, vereinfachte Darstellung ohne Marken.' }));
   refreshChrome();
 }
 window.addEventListener('hashchange', () => { render(); window.scrollTo(0, 0); });
