@@ -461,15 +461,35 @@ table.tg{border-collapse:collapse;width:100%;font-size:14px}
 .lv2{--lc:var(--orange);--lc-soft:var(--orange-soft);--lc-ink:var(--orange-ink)}
 .lv3{--lc:var(--indigo);--lc-soft:var(--indigo-soft);--lc-ink:var(--indigo-ink)}
 .levels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:18px 0 0}
-.lv-btn{font:inherit;text-align:left;display:grid;gap:1px;align-content:start;padding:10px 14px;border-radius:14px;border:2px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;min-width:0}
-.lv-btn .lv-n{font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--lc-ink)}
+.lv-btn{font:inherit;text-align:left;display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:12px;row-gap:1px;align-content:center;padding:10px 14px 10px 10px;border-radius:14px;border:2px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer;min-width:0}
+.lv-btn .lv-m{grid-row:1/span 4;align-self:center;width:76px}
+.lv-btn .lv-n{font-size:13px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--lc-ink)}
+.lv-btn .lv-x{display:none}
+@media (min-width:1080px){.lv-btn .lv-x{display:inline}}
 .lv-btn .lv-name{font-family:var(--display);font-weight:800;font-size:19px;line-height:1.2}
 .lv-btn .lv-sub{font-size:13px;color:var(--muted)}
 .lv-btn .lv-st{font-size:13px;font-weight:700;color:var(--lc-ink);margin-top:2px;font-variant-numeric:tabular-nums}
 .lv-btn.reached{border-color:var(--lc);background:var(--lc-soft)}
-.lv-btn[aria-current="true"]{background:var(--lc);border-color:var(--lc);color:var(--on-accent)}
-.lv-btn[aria-current="true"] .lv-n,.lv-btn[aria-current="true"] .lv-sub,.lv-btn[aria-current="true"] .lv-st{color:inherit;opacity:.92}
-@media (max-width:620px){.levels{gap:6px}.lv-btn{padding:8px 9px;border-radius:12px}.lv-btn .lv-sub{display:none}.lv-btn .lv-name{font-size:15px}.lv-btn .lv-n{font-size:11px;letter-spacing:.04em}.lv-btn .lv-x{display:none}.lv-btn .lv-st{font-size:12px}}
+.lv-btn[aria-current="true"]{background:var(--lc-soft);border-color:var(--lc);box-shadow:0 0 0 2px var(--lc),0 10px 22px -14px var(--lc)}
+.lv-btn.locked .medal{filter:saturate(.8) opacity(.8)}
+@media (max-width:620px){.levels{gap:6px}.lv-btn{grid-template-columns:minmax(0,1fr);align-content:start;padding:8px 8px 9px;border-radius:12px}.lv-btn .lv-m{grid-row:auto;width:62px;margin-bottom:4px}.lv-btn .lv-sub{display:none}.lv-btn .lv-name{font-size:15px}.lv-btn .lv-n{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}.lv-btn .lv-st{font-size:13px}}
+/* Level-Medaillen: Verlauf, Leuchten, Ziffer im KI-Symbol, drei Sterne (gefüllt je Level) */
+.lv-m{display:block;line-height:0}
+.medal{display:block;width:100%;height:auto;overflow:visible}
+.medal.m1{filter:drop-shadow(0 0 7px rgb(76 194 122 / .55))}
+.medal.m2{filter:drop-shadow(0 0 7px rgb(242 162 74 / .55))}
+.medal.m3{filter:drop-shadow(0 0 7px rgb(142 108 240 / .6))}
+.medal .sym{fill:none;stroke:#fff;stroke-width:3.6;stroke-linecap:round;stroke-linejoin:round}
+.medal .sym .spark{fill:#ffd75e;stroke:var(--md);stroke-width:2.2}
+.medal .sym .mesh{stroke-opacity:.32;stroke-width:2.4}
+.medal .sym .node{fill:#fff;stroke:var(--md);stroke-width:1.6}
+.medal text{font-family:var(--display);font-weight:800;font-size:32px;fill:#fff;paint-order:stroke;stroke:var(--md);stroke-opacity:.45;stroke-width:1.6px}
+.medal .stars .on{fill:#ffd75e}
+.medal .stars .off{fill:#fff;fill-opacity:.38}
+.ways .lvw{background:var(--lc-soft);grid-template-columns:minmax(0,1fr)}
+.ways .lvw b{color:var(--lc-ink)}
+.ways .lvw .lv-m{width:96px;margin-bottom:4px}
+@media (max-width:720px){.ways .lvw{grid-template-columns:auto minmax(0,1fr);column-gap:12px;align-items:start}.ways .lvw .lv-m{grid-row:1/span 2;width:72px;margin:0}}
 .lit.dd{background:rgb(255 255 255 / .14);font-weight:700}
 .lvlock{border-color:var(--orange)}
 .lvlock .i{color:var(--orange-ink)}
@@ -818,9 +838,9 @@ table.tg{border-collapse:collapse;width:100%;font-size:14px}
         <h3>So funktioniert das AI Badge</h3>
         <p>Das AI Badge hat drei Level. Ein Badge ist ein digitales Abzeichen, wie es Tech-Firmen und Online-Kurse für geschaffte Lernziele vergeben. In jedem Level geht es um alle Bereiche, nur jedes Mal ein Stück tiefer. Die Namen sind echte Berufsbezeichnungen aus der Tech-Welt und ergeben eine kleine Karriereleiter: Als Prompt Trainee steigst du ein und wirst ausgebildet. Ein Prompt Engineer schreibt beruflich Anweisungen für KI. Ein AI Architect plant ganze KI-Systeme.</p>
         <div class="ways">
-          <div><b>🟢 Level 1 · Prompt Trainee</b><span>Einsteiger:in. Die Grundlagen. Alles wird automatisch geprüft, du brauchst noch keinen KI-Zugang.</span></div>
-          <div><b>🟠 Level 2 · Prompt Engineer</b><span>Fortgeschritten. Du arbeitest mit fobizz und holst dir bei jeder Schreibaufgabe KI-Feedback.</span></div>
-          <div><b>🟣 Level 3 · AI Architect</b><span>Expert:in. Geld, Macht, Zukunft und dein eigener KI-Lerncoach. fobizz prüft streng, du überarbeitest, bis alles erfüllt ist.</span></div>
+          <div class="lvw lv1"><span class="lv-m" data-medal="1"></span><b>Level 1 · Prompt Trainee</b><span>Einsteiger:in. Die Grundlagen. Alles wird automatisch geprüft, du brauchst noch keinen KI-Zugang.</span></div>
+          <div class="lvw lv2"><span class="lv-m" data-medal="2"></span><b>Level 2 · Prompt Engineer</b><span>Fortgeschritten. Du arbeitest mit fobizz und holst dir bei jeder Schreibaufgabe KI-Feedback.</span></div>
+          <div class="lvw lv3"><span class="lv-m" data-medal="3"></span><b>Level 3 · AI Architect</b><span>Expert:in. Geld, Macht, Zukunft und dein eigener KI-Lerncoach. fobizz prüft streng, du überarbeitest, bis alles erfüllt ist.</span></div>
         </div>
         <div class="callout"><svg class="i" viewBox="0 0 24 24"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/></svg><p><b>Erst Level 1, dann die KI.</b> Hast du Level 1 geschafft, zeigst du dein Badge deiner Lehrkraft. Dann bekommst du deinen Zugang zu fobizz für Level 2.</p></div>
       </div>
@@ -2049,6 +2069,22 @@ function norm(s){return String(s||'').toLowerCase().replace(/ä/g,'ae').replace(
 /* ---------- Inhalte ---------- */
 const LV={1:{name:'Prompt Trainee',sub:'Einsteiger:in',how:'ohne KI-Zugang',pass:8},2:{name:'Prompt Engineer',sub:'Fortgeschritten',how:'mit fobizz-Feedback',pass:8},3:{name:'AI Architect',sub:'Expert:in',how:'strenges fobizz-Urteil',pass:9}};
 const TEACHER=false;
+/* ---------- Level-Medaillen (28.11.2026): Verlauf, Leuchten, Ziffer im KI-Symbol, drei Sterne ----------
+   Level 1 Sprechblase mit Funke (prompten), Level 2 Chip (wie KI gebaut ist), Level 3 Netz aus Bausteinen (eigenes KI-System).
+   Nur Anzeige auf der Seite. Badge-Bild (drawLic) und Sicherungscode bleiben unverändert. */
+const MEDC={1:['#4cc27a','#17803f'],2:['#f2a24a','#c2620f'],3:['#8e6cf0','#4b2d9b']};
+const MEDSYM={
+  1:'<path d="M36 24h26a9 9 0 0 1 9 9v15a9 9 0 0 1-9 9H46l-10 8.5V57a9 9 0 0 1-9-9V33a9 9 0 0 1 9-9Z"/><path class="spark" transform="translate(71 24)" d="M0-9.5C1.3-3.2 3.2-1.3 9.5 0 3.2 1.3 1.3 3.2 0 9.5-1.3 3.2-3.2 1.3-9.5 0-3.2-1.3-1.3-3.2 0-9.5Z"/>',
+  2:'<rect x="31" y="21" width="38" height="38" rx="7"/><path d="M40 21v-6M50 21v-6M60 21v-6M40 59v6M50 59v6M60 59v6M31 30h-6M31 40h-6M31 50h-6M69 30h6M69 40h6M69 50h6"/>',
+  3:'<path class="mesh" d="M50 17v48M29.2 29l41.6 24M70.8 29 29.2 53"/><path d="M50 17 70.8 29v24L50 65 29.2 53V29Z"/><g class="node"><circle cx="50" cy="17" r="4.4"/><circle cx="70.8" cy="29" r="4.4"/><circle cx="70.8" cy="53" r="4.4"/><circle cx="50" cy="65" r="4.4"/><circle cx="29.2" cy="53" r="4.4"/><circle cx="29.2" cy="29" r="4.4"/></g>'
+};
+let MEDN=0;
+function medalSvg(lv){
+  const c=MEDC[lv],id='mg'+(++MEDN),tx=lv===1?49:50,ty=lv===1?51.7:lv===2?51.2:52.2;
+  const st=[36,50,64].map((x,i)=>`<path class="${i<lv?'on':'off'}" transform="translate(${x} 79)" d="M0-6.4 1.6-2.2 6.1-2 2.6.8 3.8 5.2 0 2.7-3.8 5.2-2.6.8-6.1-2-1.6-2.2Z"/>`).join('');
+  return `<svg class="medal m${lv}" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><defs><radialGradient id="${id}" cx="32%" cy="22%" r="80%"><stop offset="0" stop-color="${c[0]}"/><stop offset="1" stop-color="${c[1]}"/></radialGradient></defs><circle cx="50" cy="50" r="49" fill="${c[0]}" opacity=".3"/><circle cx="50" cy="50" r="43" fill="url(#${id})"/><circle cx="50" cy="50" r="41.2" fill="none" stroke="#fff" stroke-opacity=".3" stroke-width="1.4"/><g class="sym" style="--md:${c[1]}">${MEDSYM[lv]}</g><text x="${tx}" y="${ty}" text-anchor="middle" style="--md:${c[1]}">${lv}</text><g class="stars">${st}</g></svg>`;
+}
+
 const MUSTER={};
 const DOM=[{k:'begegnen',label:'KI begegnen'},{k:'steuern',label:'KI steuern'},{k:'gestalten',label:'Mit KI gestalten'},{k:'mitgestalten',label:'KI mitgestalten'},{k:'folgen',label:'Folgen abwägen'},{k:'schein',label:'Prüfung'}];
 const STATIONS=[];[1,2,3].forEach(lv=>DOM.forEach((d,n)=>STATIONS.push({lv,n,k:d.k,label:d.label})));
@@ -3335,7 +3371,8 @@ function paintLevels(){
   $('#levels').replaceChildren(...[1,2,3].map(lv=>{
     const reached=levelReached(lv),locked=!TEACHER&&!levelReached(lv-1);
     const status=reached?'✓ geschafft':locked?`🔒 erst Level ${lv-1}`:`${levelPct(lv)} %`;
-    const b=el('button',{class:'lv-btn lv'+lv+(reached?' reached':''),type:'button','aria-current':lv===cur?'true':'false'},
+    const b=el('button',{class:'lv-btn lv'+lv+(reached?' reached':'')+(locked?' locked':''),type:'button','aria-current':lv===cur?'true':'false'},
+      el('span',{class:'lv-m',html:medalSvg(lv)}),
       el('span',{class:'lv-n'},'Level '+lv,el('span',{class:'lv-x'},' · '+LV[lv].sub)),el('span',{class:'lv-name'},LV[lv].name),el('span',{class:'lv-sub'},LV[lv].how),el('span',{class:'lv-st'},status));
     b.onclick=()=>{if(lv!==cur)go(firstOf(lv));};return b;}));
 }
@@ -3491,6 +3528,7 @@ if(S.chk.qm)doQM();if(S.chk.sy)doSY();if(S.chk.md)doMD();if(S.chk.jb)doJB();if(S
 if(TEACHER){let armed=false;$$('#solveBtn,#solveBtn2').forEach(btn=>btn.onclick=()=>{if(!S.solved){solveAll();return;}if(!armed){armed=true;btn.textContent='Wirklich alles leeren? Nochmal tippen';setTimeout(()=>{armed=false;paintSolveBtn();},4000);return;}try{localStorage.removeItem(KEY);}catch(e){}location.reload();});paintSolveBtn();}
 if(TEACHER&&S.solved&&!S.solvedRun)runSolved();
 [1,2,3].forEach(lv=>{if(S.chk['x'+lv]&&S.xt[lv]){const P=LV[lv].pass,E=EXAMS[lv];const b=S.xb[lv];showFb($('#fb-x'+lv),b>=P?'ok':'bad',b>=P?`Bestanden mit ${b} von ${E.length} Punkten.`:`Bisher ${b} von ${E.length}. Du brauchst ${P}.`,xLeftTxt(lv));}});
+$$('[data-medal]').forEach(n=>{n.innerHTML=medalSvg(+n.dataset.medal);});
 go(S.st||0,false);progress();
 })();
 </script>
