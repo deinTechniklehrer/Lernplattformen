@@ -4521,7 +4521,7 @@ ${window.LP?LP.htmlSummary():''}<h2>Kapitel</h2><table><thead><tr><th>Kapitel</t
 ${TEST.length ? '<h2>Abschlusstest</h2>' : ''}${!TEST.length ? '' : S.test.attempts.length ? `<table><tr><th>Datum</th><th>Punkte</th><th>%</th></tr>${S.test.attempts.map(a => `<tr><td>${new Date(a.at).toLocaleString('de-DE')}</td><td>${a.score}/${a.max}</td><td>${Math.round(a.score / a.max * 100)} %</td></tr>`).join('')}</table>` : '<p>Noch nicht bearbeitet.</p>'}
 ${CFG.reportExtra ? CFG.reportExtra() : ''}<h2>Abgaben</h2>${subs || '<p>Noch keine Abgaben.</p>'}
 <p class="m" style="display:flex;gap:10px;align-items:center;margin-top:28px;font-size:12px">${licenseHtml(CFG.workTitle)}</p>
-<style>.lp-legal{font:13px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif;text-align:center;padding:20px 16px calc(96px + env(safe-area-inset-bottom,0px));opacity:.8;clear:both}.lp-legal a{color:inherit;text-decoration:underline;text-underline-offset:2px}</style><div class="lp-legal">Privates Angebot von Daniel Beyrodt · <a href="../ueber-mich/">Über mich</a> · <a href="../impressum/">Impressum</a> · <a href="../datenschutz/">Datenschutz</a></div></body></html>`;
+<style>.lp-legal{font:13px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif;text-align:center;padding:20px 16px calc(96px + env(safe-area-inset-bottom,0px));opacity:.8;clear:both}.lp-legal a{color:inherit;text-decoration:underline;text-underline-offset:2px}</style><div class="lp-legal">Privates Angebot von Daniel Beyrodt · Erstellt mit Unterstützung von KI, geprüft von Daniel Beyrodt · <a href="../ueber-mich/">Über mich</a> · <a href="../impressum/">Impressum</a> · <a href="../datenschutz/">Datenschutz</a></div></body></html>`;
 }
 
 /* ---------- Start ---------- */

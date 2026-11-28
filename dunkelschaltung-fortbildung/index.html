@@ -436,6 +436,7 @@ a.btn{text-decoration:none}
 .lg-sumt{fill:#33383c;stroke:#000}
 .lg-sumh{fill:#0d0f10}
 .lg-sumtop{fill:#25292c;fill-opacity:.92;stroke:#000;stroke-width:1.5}
+.lg-under{stroke-dasharray:3 9;opacity:.75}
 .lg-red{fill:none;stroke:#d4281a;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
 .lg-blk{fill:none;stroke:#1d2226;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
 :root[data-theme="dark"] .lg-blk{stroke:#8a959c}
@@ -540,6 +541,56 @@ path.lg-ledg,path.lg-ledo,path.lg-ledy{stroke:var(--lg-ink);stroke-width:3}
 .lg-bl.s-ok .lg-blob{fill:#9fd8a8;stroke:#2f8a46}.lg-bl.s-bad .lg-blob{fill:#f3a9a0;stroke:#c0392b}.lg-bl.s-miss .lg-blsel{stroke:#d08a00;stroke-dasharray:3 3}
 .lg-bl:focus-visible .lg-blsel{stroke:var(--ink,#222);stroke-dasharray:none}
 .bridgew .note{font-size:15px;margin:6px 0 0}
+.lg-markz{stroke-dasharray:5 4}
+/* Arbeitsablauf in Bildern (loeten-ablauf.js) */
+[data-lg="ablauf"]{max-width:600px;margin:10px auto 0}
+.la-head{display:flex;flex-direction:column;gap:2px;margin-bottom:6px;min-height:4.2em}
+.la-head b{font-size:.9rem;color:var(--lg-muted)}
+.la-fig{border:1px solid var(--line,#d8d8d0);border-radius:12px;background:var(--lg-bg);overflow:hidden}
+.la-svg{display:block;width:100%;height:auto}
+.la-ctl{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;align-items:center}
+.la-ctl .btn{flex:1 1 auto;min-width:0}
+.la-ctl input[type=range]{flex:1 1 100%}
+.la-t,.la-tb{font-family:var(--body);font-size:22px;font-weight:700;fill:var(--lg-ink)}
+.la-ts{font-family:var(--body);font-size:20px;font-weight:700;fill:var(--lg-muted)}
+.la-tw{font-family:var(--body);font-size:22px;font-weight:700;fill:#fff}
+.la-cu{fill:var(--lg-cu)}
+.la-iron{fill:none;stroke:#6c7378;stroke-width:9;stroke-linecap:round}
+.la-grip{fill:none;stroke:#2a6fb0;stroke-width:16;stroke-linecap:round}
+.la-tip{fill:none;stroke:var(--lg-hot);stroke-width:5;stroke-linecap:round}
+.la-lot{fill:none;stroke:var(--lg-sol);stroke-width:4;stroke-linecap:round}
+.la-cut{fill:none;stroke:var(--lg-ink);stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+.la-paper{fill:var(--lg-bg);stroke:var(--lg-muted);stroke-width:2}
+.la-line{stroke:var(--lg-muted);stroke-width:3;stroke-linecap:round;opacity:.6}
+.la-tray{fill:none;stroke:var(--lg-muted);stroke-width:3;stroke-dasharray:8 6}
+.la-okc{fill:#1c7a44}.la-ok{fill:none;stroke:#fff;stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.la-pen{fill:#2a6fb0}.la-pent{fill:var(--lg-ink)}
+.la-mark{fill:none;stroke:#7b3fa0;stroke-width:3}
+.la-score{stroke:var(--lg-ink);stroke-width:3;stroke-dasharray:6 4}
+.la-knife{fill:#e0a400}.la-blade{fill:#9aa3a8}
+.la-wr{fill:none;stroke:#d4281a;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+.la-wb{fill:none;stroke:#1d2226;stroke-width:5;stroke-linecap:round;stroke-linejoin:round}
+.la-arr{fill:none;stroke:var(--lg-hot);stroke-width:4;stroke-linecap:round}
+.la-clip{fill:#1d2226;stroke:#5c656b;stroke-width:2}
+.la-glue{fill:#e9eef2;fill-opacity:.85;stroke:#9fb0bc;stroke-width:2}
+.la-gun{fill:#2a6fb0}.la-gunh{fill:#1f548a}.la-nozzle{fill:#6c7378}
+.la-shine{fill:var(--lg-sol);stroke:#fff;stroke-width:2}
+.la-lens{fill:#bfe3ff;fill-opacity:.25;stroke:var(--lg-ink);stroke-width:5}
+.la-lensh{stroke:#7a4b22;stroke-width:10;stroke-linecap:round}
+.la-bat{fill:#2a6fb0}
+.la-sun{fill:none;stroke:#e6a100;stroke-width:5;stroke-linecap:round}
+.la-hand{fill:#d7a27a;stroke:#9c6b48;stroke-width:2}
+.la-led{stroke:var(--lg-ink);stroke-width:2}
+.la-ledr{fill:#d4281a}.la-ledg{fill:#2ea043}.la-ledo{fill:#f08a24}.la-ledy{fill:#f2c500}
+.la-glow{stroke:none}
+.la-station{fill:#4a5a64}
+.la-lamp{fill:#7d878d;stroke:#fff;stroke-width:2}.la-lamp.on{fill:#2ea043}
+.la-iso{stroke:#2a6fb0;stroke-width:16;stroke-linecap:round}
+.la-strand{fill:none;stroke:#c8833a;stroke-width:2.2}
+.la-tin{fill:var(--lg-sol);fill-opacity:.9}
+:root[data-theme="dark"] .la-wb{stroke:#8a959c}:root[data-theme="dark"] .la-mark{stroke:#c99be6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .la-wb{stroke:#8a959c}:root:not([data-theme="light"]) .la-mark{stroke:#c99be6}}
+.la-svg .lg-sumtop{stroke:var(--lg-muted);stroke-width:2}
 
 /* ---------- Dunkelschaltung, Fortbildung ---------- */
 :root{--lk:#1D568E;--lk-soft:#E2ECF7;--warn:#8A5A00;--warn-soft:#FBEFD5}
@@ -913,7 +964,7 @@ var LG = (function () {
       b += '<g transform="translate(340 ' + y0 + ')"><path class="lg-rainbow" d="M20 40A30 30 0 0 1 80 40V100H20Z"/><rect class="lg-ledr" x="14" y="98" width="72" height="12" rx="2"/><path class="lg-lead" d="M36 110V180M64 110V160"/>' + txt(36, 204, '+', 'lg-tb', 'middle') + txt(64, 184, '−', 'lg-tb', 'middle') + txt(50, 224, 'LED mit Farbwechsel', 'lg-ts', 'middle') + '</g>';
     } else {
       /* aktiver Summer */
-      b += '<g transform="translate(340 ' + y0 + ')"><rect class="lg-sumb" x="6" y="30" width="88" height="66" rx="8"/><ellipse class="lg-sumt" cx="50" cy="30" rx="44" ry="14"/><circle class="lg-sumh" cx="50" cy="30" r="6"/>' + txt(26, 72, '+', 'lg-tw', 'middle') + '<path class="lg-lead" d="M32 96V180M68 96V164"/>' + txt(32, 204, '+', 'lg-tb', 'middle') + txt(68, 188, '−', 'lg-tb', 'middle') + txt(50, 224, 'aktiver Summer', 'lg-ts', 'middle') + '</g>';
+      b += '<g transform="translate(340 ' + y0 + ')"><rect class="lg-sumb" x="6" y="30" width="88" height="66" rx="8"/><ellipse class="lg-sumt" cx="50" cy="30" rx="44" ry="14"/><circle class="lg-sumh" cx="50" cy="30" r="6"/>' + txt(26, 72, '+', 'lg-tw', 'middle') + '<path class="lg-red" d="M36 96C36 132 18 146 18 182"/><path class="lg-blk" d="M64 96C64 132 82 146 82 182"/>' + txt(18, 206, '+', 'lg-tb', 'middle') + txt(82, 206, '−', 'lg-tb', 'middle') + txt(50, 224, 'Summer mit Kabeln', 'lg-ts', 'middle') + '</g>';
     }
     /* Widerstand */
     b += '<g transform="translate(490 ' + y0 + ')">' + '<path class="lg-lead" d="M10 90H140"/>' + '<rect class="lg-rbody" x="38" y="72" width="74" height="36" rx="12"/>';
@@ -924,7 +975,7 @@ var LG = (function () {
   }
   function parts(v) { /* je Bauteil ein eigenes Bild, damit die Schrift auch auf dem Smartphone groß genug bleibt (2 Spalten) */
     var g = partsFig(v).body.split('<g transform="translate(').slice(1), cxs = [50, 52, 50, 75],
-      al = v === 'D' ? ['Fotowiderstand (LDR)', 'Transistor BC547, Beine C, B, E von links, flache Seite zu dir', 'LED, langes Bein (Anode) an Plus', 'Widerstand mit Farbringen'] : v === 'N' ? ['Fotowiderstand (LDR)', 'Transistor BC547, Beine C, B, E von links, flache Seite zu dir', 'LED mit Farbwechsel, langes Bein an Plus', 'Widerstand mit Farbringen'] : ['Fotowiderstand (LDR)', 'Transistor BC547, Beine C, B, E von links, flache Seite zu dir', 'aktiver Summer, Plus-Bein markiert', 'Widerstand mit Farbringen'];
+      al = v === 'D' ? ['Fotowiderstand (LDR)', 'Transistor BC547, Beine C, B, E von links, flache Seite zu dir', 'LED, langes Bein (Anode) an Plus', 'Widerstand mit Farbringen'] : v === 'N' ? ['Fotowiderstand (LDR)', 'Transistor BC547, Beine C, B, E von links, flache Seite zu dir', 'LED mit Farbwechsel, langes Bein an Plus', 'Widerstand mit Farbringen'] : ['Fotowiderstand (LDR)', 'Transistor BC547, Beine C, B, E von links, flache Seite zu dir', 'aktiver Summer mit Kabeln, rotes Kabel an Plus', 'Widerstand mit Farbringen'];
     return '<div class="lg-partsgrid">' + g.map(function (q, i) { var body = q.slice(q.indexOf('>') + 1).replace(/<\/g>$/, ''); return svg((cxs[i] - 120) + ' 20 240 220', body, al[i], 'lg-part'); }).join('') + '</div>'; }
   function bcFig() { return { vb: '0 -40 200 290', body: '<path class="lg-to92" d="M44 100V52A56 56 0 0 1 156 52V100Z"/>' + txt(100, 84, 'BC547', 'lg-tw', 'middle') + '<path class="lg-lead" d="M64 100V230M100 100V230M136 100V230"/>' + txt(100, -14, 'flache Seite zu dir', 'lg-ts', 'middle') } }
   var BC_POS = { c: [64, 214], b: [100, 214], e: [136, 214] };
@@ -943,13 +994,13 @@ var LG = (function () {
         { id: 'ldr', k: 'ldr', c: 9, r: [7, 8], lab: 'LDR', t: 'LDR stehend in Loch 9: ein Bein in Bahn 7, das andere in Bahn 8. Seine Beine stehen etwas weiter auseinander als die Löcher, biege sie vorsichtig zusammen. Der LDR hat keine Richtung.' },
         { id: 'bat', k: 'bat', c: 1, r: [1, 8], side: 'l', lab: 'Batterie', t: 'Batterieclip: rotes Kabel (+) in Bahn 1, schwarzes Kabel (−) in Bahn 8, beide in Loch 1. Die 9-V-Batterie schließt du erst nach der Sichtprüfung an.' }
       ] },
-    A: { cols: 11, rows: 7, nets: { 1: '+9 V', 4: 'Kollektor', 5: 'Basis', 6: 'GND (−)', 7: 'LDR – R3' },
+    A: { cols: 11, rows: 7, left: 24, below: 96, nets: { 1: '+9 V', 4: 'Kollektor', 5: 'Basis', 6: 'GND (−)', 7: 'LDR – R3' },
       parts: [
         { id: 'r3', k: 'res', c: 10, r: [1, 7], ohm: 1000, lab: 'R3', t: 'R3 (1 kΩ, braun-schwarz-rot) liegend in Loch 10: von Bahn 1 nach Bahn 7. Flache Bauteile zuerst, dann liegt die Platine beim Löten noch eben.' },
         { id: 'r1', k: 'rst', c: 7, r: [5, 6], ohm: 4700, lab: 'R1', t: 'R1 (4,7 kΩ, gelb-violett-rot) hochkant (stehend) in Loch 7: Der Körper steht über Bahn 5, das untere Bein kommt in Bahn 5. Das obere Bein biegst du eng am Körper um und steckst es in Bahn 6.' },
         { id: 't1', k: 'tr', c: 6, r: [4, 5, 6], lab: 'T1', t: 'T1 (BC547) senkrecht in Loch 6: C in Bahn 4, B in Bahn 5, E in Bahn 6. Die flache Seite zeigt nach links. Zügig löten, damit der Transistor nicht zu heiß wird.' },
         { id: 'ldr', k: 'ldr', c: 8, r: [5, 7], lab: 'LDR', t: 'LDR stehend in Loch 8: ein Bein in Bahn 5, das andere in Bahn 7. Bahn 6 dazwischen bleibt frei. Die lichtempfindliche Seite zeigt nach oben.' },
-        { id: 'sum', k: 'sum', c: 3, r: [1, 4], lab: 'Summer', t: 'Summer in Loch 3: das Bein mit + in Bahn 1, das andere in Bahn 4. Prüfe vorher den Abstand der Beine (meist 3 Löcher). Falsch herum bleibt er still. Das größte Bauteil kommt zuletzt.' },
+        { id: 'sum', k: 'sumw', c: 3, r: [1, 4], lab: 'Summer', t: 'Summer mit Kabeln, zuerst die Zugentlastung: Fädle das rote Kabel von oben durch Loch 1 in Bahn 1, unten weiter zu Loch 2 und dort wieder nach oben. Das abisolierte Ende steckst du in Loch 3 und lötest es an. Das schwarze Kabel genauso in Bahn 4. Rot (+) kommt an Bahn 1, Schwarz an Bahn 4. Falsch herum bleibt der Summer still.' },
         { id: 'bat', k: 'bat', c: 11, r: [1, 6], side: 'r', lab: 'Batterie', t: 'Batterieclip mit Schalter S1: rotes Kabel (+) über den Schalter in Bahn 1, schwarzes Kabel (−) in Bahn 6, beide in Loch 11. Die 9-V-Batterie schließt du erst nach der Sichtprüfung an.' }
       ] },
     /* Dunkelschaltung (LED-Tischleuchte): Lage wie im Bestückungsplan der Unterrichtseinheit (23 Löcher × 12 Bahnen, Bauteilseite).
@@ -978,6 +1029,10 @@ var LG = (function () {
       s += '<path class="lg-ledtop" d="M' + (c - 13) + ' ' + (m + 1) + 'A13 13 0 1 1 ' + (c + 13) + ' ' + (m + 1) + 'V' + (m + 7) + 'H' + (c - 13) + 'Z"/><path class="lg-rb1" d="M' + c + ' ' + m + 'L' + c + ' ' + (m - 11) + 'A11 11 0 0 1 ' + (c + 9.5) + ' ' + (m + 5.5) + 'Z"/><path class="lg-rb2" d="M' + c + ' ' + m + 'L' + (c + 9.5) + ' ' + (m + 5.5) + 'H' + (c - 9.5) + 'Z"/><path class="lg-rb3" d="M' + c + ' ' + m + 'L' + (c - 9.5) + ' ' + (m + 5.5) + 'A11 11 0 0 1 ' + c + ' ' + (m - 11) + 'Z"/>' + lt(c + 16, cy(r[0]) + 2, '+', 'lg-tb') + lt(c - 20, m + 8, p.lab, 'lg-tb', 'end'); }
     else if (p.k === 'ldr') { var m2 = (cy(r[0]) + cy(r[r.length - 1])) / 2; if (r[r.length - 1] - r[0] > 1) s += '<path class="lg-lead" d="M' + c + ' ' + cy(r[0]) + 'V' + (m2 - 18) + 'M' + c + ' ' + (m2 + 18) + 'V' + cy(r[r.length - 1]) + '"/>'; s += '<circle class="lg-ldr" cx="' + c + '" cy="' + m2 + '" r="19"/><path class="lg-ldrz" d="M' + (c - 11) + ' ' + (m2 - 10) + 'H' + (c + 11) + 'V' + (m2 - 4) + 'H' + (c - 11) + 'V' + (m2 + 2) + 'H' + (c + 11) + 'V' + (m2 + 8) + 'H' + (c - 11) + '"/>' + lt(c + 24, m2 + 7, p.lab, 'lg-tb'); }
     else if (p.k === 'sum') { var m3 = (cy(r[0]) + cy(r[1])) / 2; s += '<circle class="lg-sumtop" cx="' + c + '" cy="' + m3 + '" r="92"/><circle class="lg-sumh" cx="' + c + '" cy="' + m3 + '" r="12"/>' + lt(c, cy(r[0]) + 30, '+', 'lg-tw', 'middle') + lt(c, m3 + 44, 'Summer', 'lg-tw', 'middle'); }
+    else if (p.k === 'sumw') { var y1w = cy(r[0]), y4w = cy(r[1]), x1w = cx(p.c - 2), x2w = cx(p.c - 1), sy = Y0 + LAY.A.rows * P + 72;
+      s += '<path class="lg-red" d="M0 ' + (sy - 26) + 'V' + (Y0 + 16) + 'Q0 ' + Y0 + ' 16 ' + Y0 + 'H' + (x1w - 16) + 'L' + x1w + ' ' + y1w + '"/><path class="lg-red lg-under" d="M' + x1w + ' ' + y1w + 'H' + x2w + '"/><path class="lg-red" d="M' + x2w + ' ' + y1w + 'Q' + ((x2w + c) / 2) + ' ' + (y1w - 18) + ' ' + c + ' ' + y1w + '"/>' +
+        '<path class="lg-blk" d="M16 ' + (sy - 22) + 'V' + (y4w - 4) + 'Q16 ' + (y4w - 20) + ' 32 ' + (y4w - 20) + 'H' + (x1w - 16) + 'L' + x1w + ' ' + y4w + '"/><path class="lg-blk lg-under" d="M' + x1w + ' ' + y4w + 'H' + x2w + '"/><path class="lg-blk" d="M' + x2w + ' ' + y4w + 'Q' + ((x2w + c) / 2) + ' ' + (y4w - 18) + ' ' + c + ' ' + y4w + '"/>' +
+        '<circle class="lg-sumtop" cx="8" cy="' + sy + '" r="28"/><circle class="lg-sumh" cx="8" cy="' + sy + '" r="7"/>' + lt(46, sy + 9, 'Summer', 'lg-tb'); }
     else if (p.k === 'bat') { var cc = cx(p.c), ya = cy(r[0]), yb = cy(r[1]);
       if (p.side === 'l') s += '<path class="lg-red" d="M' + cc + ' ' + ya + 'L' + (X0 - 20) + ' ' + (ya - 40) + 'H8"/><path class="lg-blk" d="M' + cc + ' ' + yb + 'L' + (X0 - 20) + ' ' + (yb + 36) + 'H8"/>' + txt(12, ya - 48, '+', 'lg-tb') + txt(12, yb + 30, '−', 'lg-tb');
       else { var ed = X0 + LAYW + 44; s += '<path class="lg-red" d="M' + cc + ' ' + ya + 'H' + ed + '"/><path class="lg-blk" d="M' + cc + ' ' + yb + 'H' + ed + '"/>' + txt(ed - 4, ya - 12, '+', 'lg-tb', 'end') + txt(ed - 4, yb - 12, '−', 'lg-tb', 'end'); } }
@@ -994,7 +1049,7 @@ var LG = (function () {
     var legs = p.k === 'bat' || p.k === 'batsw' || p.k === 'ldrw' ? [[p.c, r[0]], [p.c, r[1]]] : p.k === 'tr' ? r.map(function (q) { return [p.c, q]; }) : [[p.c, r[0]], [p.c, r[r.length - 1]]];
     var sol = legs.map(function (q) { return '<circle class="lg-sol" cx="' + cx(q[0]) + '" cy="' + cy(q[1]) + '" r="7"/>'; }).join('');
     if (hl) { var bx = bbox(p); s = '<rect class="lg-hl" x="' + bx[0] + '" y="' + bx[1] + '" width="' + bx[2] + '" height="' + bx[3] + '" rx="10"/>' + s; }
-    return p.k === 'sum' || p.k === 'led' || (p.k === 'ldr' && r[r.length - 1] - r[0] > 1) ? s + sol : sol + s;  /* Lötpunkte sichtbar, wo der Bauteilkörper sie sonst verdeckt */
+    return p.k === 'sum' || p.k === 'sumw' || p.k === 'led' || (p.k === 'ldr' && r[r.length - 1] - r[0] > 1) ? s + sol : sol + s;  /* Lötpunkte sichtbar, wo der Bauteilkörper sie sonst verdeckt */
   }
   /* Bestückungsplan übertragen: Folienstift-Markierung der Löcher und Name des Bauteils */
   function legsOf(p) { var r = p.r; return p.k === 'bat' || p.k === 'batsw' || p.k === 'ldrw' ? [[p.c, r[0]], [p.c, r[1]]] : p.k === 'tr' ? r.map(function (q) { return [p.c, q]; }) : [[p.c, r[0]], [p.c, r[r.length - 1]]]; }
@@ -1003,12 +1058,14 @@ var LG = (function () {
     var lab = p.k === 'bat' || p.k === 'batsw' ? '' : p.k === 'tr' ? 'T1' : p.k === 'ledc' ? '+' : (p.lab || '');
     if (p.k === 'bat' || p.k === 'batsw') m += txt(cx(p.c) + 15, cy(lg[0][1]) - 10, '+', 'lg-mkt') + txt(cx(p.c) + 15, cy(lg[1][1]) - 10, '−', 'lg-mkt');
     else if (lab) m += txt(cx(lg[0][0]) + 14, cy(lg[0][1]) - 12, lab, 'lg-mkt');
+    if (p.k === 'sumw') lg.forEach(function (q) { [1, 2].forEach(function (d) { m += '<circle class="lg-mark lg-markz" cx="' + cx(q[0] - d) + '" cy="' + cy(q[1]) + '" r="9"/>'; }); });
     return m;
   }
   var LAYW = 0, NOLAB = false;
   function bbox(p) {
     var c = cx(p.c), r = p.r, top = cy(r[0]), bot = cy(r[r.length - 1]);
     if (p.k === 'sum') return [c - 100, (top + bot) / 2 - 100, 200, 200];
+    if (p.k === 'sumw') return [-22, top - 34, c + 36, Y0 + LAY.A.rows * P + 112 - top];
     if (p.k === 'ldrw') return [X0 - 66, top - 22, c - X0 + 80, Y0 + LAY.D.rows * P + 90 - top];
     if (p.k === 'batsw') return [c - 14, Y0 - 70, X0 + LAY.D.cols * P + 220 - c, LAY.D.rows * P + 120];
     if (p.k === 'ledc') return [c - 26, top - 20, 52, bot - top + 40];
@@ -1029,7 +1086,7 @@ var LG = (function () {
     if (marks) L.parts.slice(n).forEach(function (p) { b += markSvg(p); });  /* Markierungen nur für noch nicht eingesetzte Bauteile */
     L.parts.slice(0, n).forEach(function (p, i) { b += partSvg(p, hlLast && i === n - 1); });
     if (L.labR) return { vb: '0 -30 ' + (X0 + W + 260) + ' ' + (Y0 + H + 150), body: b, vbBoard: '20 20 ' + (X0 + W + 50) + ' ' + (Y0 + H - 4) };
-    return { vb: '0 0 ' + (X0 + W + 56) + ' ' + (Y0 + H + 24), body: b };
+    return { vb: (-(L.left || 0)) + ' 0 ' + (X0 + W + 56 + (L.left || 0)) + ' ' + (Y0 + H + 24 + (L.below || 0)), body: b };
   }
   function board(v, n) { var g = boardBody(v, n == null ? 99 : n, false); return svg(g.vb, g.body, 'Streifenraster von der Bauteilseite', 'lg-board'); }
   /* Leere Platine mit Maßen: Rastermaß 2,54 mm, Zuschnitt in der nächsten Lochreihe → (Löcher + 1) × 2,54 mm */
@@ -1112,7 +1169,7 @@ var LG = (function () {
   }
   function boardFig(v, nolab) { NOLAB = !!nolab; var g = boardBody(v, 99, false); NOLAB = false; if (g.vbBoard) g.vb = g.vbBoard; return g; }
   var BOARD_POS = { N: { r2: [cx(3) - 26, cy(3)], r1: [cx(8) - 26, cy(4)], t1: [cx(6) + 30, cy(7)], led: [cx(4), cy(4) - 6], ldr: [cx(9), cy(6)] },
-    A: { r3: [cx(10) - 26, cy(4)], r1: [cx(7), cy(4) - 6], t1: [cx(6), cy(7)], ldr: [cx(8) + 34, cy(5) + 2], sum: [cx(3) + 60, cy(2)] },
+    A: { r3: [cx(10) - 26, cy(4)], r1: [cx(7), cy(4) - 6], t1: [cx(6), cy(7)], ldr: [cx(8) + 34, cy(5) + 2], sum: [8, Y0 + 7 * P + 72] },
     D: { r1: [cx(6) - 26, cy(4.5)], r2: [cx(7) + 26, cy(8.5)], t1: [cx(12) + 34, cy(11)], led1: [cx(2) + 30, cy(9.4)], r4: [cx(10) - 26, cy(5.5)] } };
   function steps(box, v) {
     var L = LAY[v], n = 0, N = L.parts.length + 2;  /* 0 Start, 1 Bestückungsplan übertragen, dann je ein Bauteil, zuletzt Sichtprüfung */
@@ -1207,4 +1264,4 @@ document.querySelectorAll('.szi[data-sz]').forEach(function (e) { e.innerHTML = 
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function () { setTimeout(start, 0); }); else setTimeout(start, 0);
 })();
-</script><style>.lp-legal{font:13px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif;text-align:center;padding:20px 16px calc(96px + env(safe-area-inset-bottom,0px));opacity:.8;clear:both}.lp-legal a{color:inherit;text-decoration:underline;text-underline-offset:2px}</style><div class="lp-legal">Privates Angebot von Daniel Beyrodt · <a href="../ueber-mich/">Über mich</a> · <a href="../impressum/">Impressum</a> · <a href="../datenschutz/">Datenschutz</a></div></body></html>
+</script><style>.lp-legal{font:13px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif;text-align:center;padding:20px 16px calc(96px + env(safe-area-inset-bottom,0px));opacity:.8;clear:both}.lp-legal a{color:inherit;text-decoration:underline;text-underline-offset:2px}</style><div class="lp-legal">Privates Angebot von Daniel Beyrodt · Erstellt mit Unterstützung von KI, geprüft von Daniel Beyrodt · <a href="../ueber-mich/">Über mich</a> · <a href="../impressum/">Impressum</a> · <a href="../datenschutz/">Datenschutz</a></div></body></html>
