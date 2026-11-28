@@ -2,7 +2,7 @@
 <html lang="de"><head><script>/* Lernplattformen auf GitHub Pages: Speichern ohne claude.ai */
 (function(){if(window.claude)return;var T={pdf:'application/pdf',txt:'text/plain;charset=utf-8',png:'image/png',jpg:'image/jpeg',jpeg:'image/jpeg',json:'application/json',csv:'text/csv;charset=utf-8',html:'text/html;charset=utf-8',docx:'application/vnd.openxmlformats-officedocument.wordprocessingml.document',xlsx:'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',ino:'text/plain;charset=utf-8'};
 var dl={save:function(o){return new Promise(function(res,rej){try{var n=(o&&o.filename)||'datei',x=(n.split('.').pop()||'').toLowerCase(),d=o.data,b=d instanceof Blob?d:new Blob([d],{type:T[x]||'application/octet-stream'});var u=URL.createObjectURL(b),a=document.createElement('a');a.href=u;a.download=n;a.rel='noopener';document.body.appendChild(a);a.click();setTimeout(function(){a.remove();URL.revokeObjectURL(u);},4000);res();}catch(e){rej({code:'failed',message:String(e)});}});}};
-window.claude={use:function(n){return Promise.resolve(n==='downloads'?dl:null);}};})();</script><meta property="og:type" content="website"><meta property="og:title" content="Robotik-Theorie"><meta property="og:description" content="Wie Roboter funktionieren: Gelenke und Freiheitsgrade, Bauformen und Arbeitsraum, Joint- und Koordinaten-Modus, Antriebe und Sensoren, Cobots und Roboter im All. Roboterarme selbst steuern, Würfel greifen und umsetzen. Badge RT. Technik, Jahrgang 8–10. Ergebnis als PDF."><meta property="og:url" content="https://deintechniklehrer.github.io/Lernplattformen/robotik-theorie/"><meta property="og:image" content="https://deintechniklehrer.github.io/Lernplattformen/vorschau/Vorschau_Robotik-Theorie.jpg?v=489292d8"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="description" content="Wie Roboter funktionieren: Gelenke und Freiheitsgrade, Bauformen und Arbeitsraum, Joint- und Koordinaten-Modus, Antriebe und Sensoren, Cobots und Roboter im All. Roboterarme selbst steuern, Würfel greifen und umsetzen. Badge RT. Technik, Jahrgang 8–10. Ergebnis als PDF."><script>try{var t=localStorage.getItem('lp-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+window.claude={use:function(n){return Promise.resolve(n==='downloads'?dl:null);}};})();</script><meta property="og:type" content="website"><meta property="og:title" content="Robotik-Theorie"><meta property="og:description" content="Wie Roboter funktionieren: Gelenke und Freiheitsgrade, Bauformen und Arbeitsraum, Joint- und Koordinaten-Modus, Antriebe und Sensoren, Cobots und Roboter im All. Roboterarme selbst steuern, Würfel greifen und umsetzen. Badge RT. Technik, Jahrgang 8–10. Ergebnis als PDF."><meta property="og:url" content="https://deintechniklehrer.github.io/Lernplattformen/robotik-theorie/"><meta property="og:image" content="https://deintechniklehrer.github.io/Lernplattformen/vorschau/Vorschau_Robotik-Theorie.jpg?v=6b05c86d"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image"><meta name="description" content="Wie Roboter funktionieren: Gelenke und Freiheitsgrade, Bauformen und Arbeitsraum, Joint- und Koordinaten-Modus, Antriebe und Sensoren, Cobots und Roboter im All. Roboterarme selbst steuern, Würfel greifen und umsetzen. Badge RT. Technik, Jahrgang 8–10. Ergebnis als PDF."><script>try{var t=localStorage.getItem('lp-theme');if(t)document.documentElement.setAttribute('data-theme',t)}catch(e){}</script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Robotik-Theorie</title>
 <link rel="stylesheet" href="../assets/fonts/fonts.css">
 <style>
@@ -824,6 +824,23 @@ rect.rtg-link,rect.rtg-link2{fill:var(--rt-link2);stroke:var(--rt-out);stroke-wi
 .rtg-cbase{fill:var(--rt-cobw);stroke:var(--rt-out);stroke-width:1.4}
 .rtg-cobot{stroke:var(--rt-cobw)}
 .rtg-link{stroke:var(--rt-cobw)}
+
+/* Gelenke gut erkennbar (Neufassung 28.11.2026 nachmittags): dunkles Gehäuse, heller Ring und Nabe, Beschriftung mit Linie */
+:root{--rt-jh:#34404a;--rt-jc:#4b5865;--rt-jr:#a9d6f5;--rt-jhub:#eef3f6;--rt-hlc:#ffb877}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--rt-jh:#4d5a66;--rt-jc:#6a7884;--rt-jr:#a9d6f5;--rt-jhub:#f2f6f8;--rt-hlc:#ffc28a}}
+:root[data-theme="dark"]{--rt-jh:#4d5a66;--rt-jc:#6a7884;--rt-jr:#a9d6f5;--rt-jhub:#f2f6f8;--rt-hlc:#ffc28a}
+.rtg-jh{fill:var(--rt-jh);stroke:var(--rt-out);stroke-width:1.8;stroke-linejoin:round}
+.rtg-jc{fill:var(--rt-jc);stroke:var(--rt-out);stroke-width:1.5;stroke-linejoin:round}
+.rtg-jr{fill:var(--rt-jr);stroke:var(--rt-out);stroke-width:1.2;stroke-linejoin:round}
+.rtg-jhub{fill:var(--rt-jhub);stroke:var(--rt-out);stroke-width:1.2}
+.rtg-jring{fill:var(--rt-jh);stroke:var(--rt-out);stroke-width:1.6}
+.rtg-jring+.rtg-top{fill:var(--rt-jc)}
+.rtg-jh.rtg-hl,.rtg-jring.rtg-hl{fill:var(--rt-hl)}
+.rtg-jc.rtg-hl,.rtg-jring.rtg-hl+.rtg-top{fill:var(--rt-hlc)}
+.rtg-jr.rtg-hl{fill:#fff}
+.rtg-halo{fill:none;stroke:var(--rt-hl);stroke-width:12;stroke-opacity:.45;stroke-linejoin:round}
+.rtg-jll{stroke:var(--rt-ink);stroke-width:2;fill:none;opacity:.7}
+.rtg-jll.rtg-jlh{stroke:var(--rt-hl);opacity:1}
 .szl{list-style:none;padding:0;margin:8px 0;display:grid;gap:10px}.szl li{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center}.szi{display:inline-flex;gap:6px;min-width:44px}.szl .szi{flex-direction:column;width:44px}.szi svg,.szi .gfb-ico{width:44px;height:44px;flex:none}
 </style>
 <script>/* Sicherheitszeichen aus dem Tech-Board (Repo Unterrichtsboard, tech-board/index.html, TB_RULES/TB_HAZ).
@@ -900,29 +917,51 @@ var RTG = (function () {
   function poly(pts) { return pts.map(function (p, i) { return (i ? 'L' : 'M') + p[0] + ' ' + p[1]; }).join('') + 'Z'; }
 
   /* Zeichenliste: Teile mit Tiefe, hinten zuerst */
-  function List() { this.a = []; }
+  function List() { this.a = []; this.seg = []; this.lab = []; this.blk = []; }
   List.prototype.push = function (d, html) { this.a.push([d, html]); };
-  List.prototype.out = function () { return this.a.sort(function (x, y) { return x[0] - y[0]; }).map(function (x) { return x[1]; }).join(''); };
-  function capsule(L, c, a, b, w, cls) { var A = P(c, a), B = P(c, b), d = (A[2] + B[2]) / 2, ww = r1(w * c.s);
+  /* Beschriftung J1… (seit 28.11.2026 nachmittags): Platz rund um das Gelenk, der am weitesten von Gliedern, Gelenken und
+     anderen Beschriftungen entfernt ist und im Bild bleibt; kurze Linie zum Gelenk. */
+  List.prototype.out = function (W, H) { var self = this, html = this.a.sort(function (x, y) { return x[0] - y[0]; }).map(function (x) { return x[1]; }).join(''), placed = [], t = '';
+    W = W || 480; H = H || 400;
+    function dseg(p, a, b) { var dx = b[0] - a[0], dy = b[1] - a[1], l2 = dx * dx + dy * dy, u = l2 ? Math.max(0, Math.min(1, ((p[0] - a[0]) * dx + (p[1] - a[1]) * dy) / l2)) : 0, x = a[0] + u * dx - p[0], y = a[1] + u * dy - p[1]; return Math.sqrt(x * x + y * y); }
+    this.lab.forEach(function (lb) { var best = null, bs = -1e9, k, R = 21;
+      for (k = 0; k < 16; k++) { var an = k / 16 * 2 * Math.PI + (lb.pref || 0), dd = lb.r + R + 12, q = [lb.A[0] + Math.cos(an) * dd, lb.A[1] + Math.sin(an) * dd], sc = 1e9;
+        self.seg.forEach(function (sg) { sc = Math.min(sc, dseg(q, sg[0], sg[1]) - sg[2] - R); });
+        self.blk.forEach(function (bl) { if (bl !== lb.blk) sc = Math.min(sc, Math.hypot(q[0] - bl[0], q[1] - bl[1]) - bl[2] - R); });
+        placed.forEach(function (pl) { sc = Math.min(sc, Math.hypot(q[0] - pl[0], q[1] - pl[1]) - 2 * R); });
+        var m = Math.min(q[0] - R, W - R - q[0], q[1] - R, H - R - q[1]); if (m < 0) sc += m * 4;
+        sc = Math.min(sc, 30) - k * 0.01 - (lb.pref != null ? Math.abs(Math.sin((an - lb.pref) / 2)) * 4 : 0);
+        if (sc > bs) { bs = sc; best = [q, an]; } }
+      var q = best[0], an = best[1], e = [lb.A[0] + Math.cos(an) * (lb.r + 2), lb.A[1] + Math.sin(an) * (lb.r + 2)], f = [q[0] - Math.cos(an) * (R - 2), q[1] - Math.sin(an) * (R - 2)];
+      placed.push(q);
+      t += '<path class="rtg-jll' + (lb.hl ? ' rtg-jlh' : '') + '" d="M' + r1(e[0]) + ' ' + r1(e[1]) + 'L' + r1(f[0]) + ' ' + r1(f[1]) + '"/><text class="rtg-jl rtg-jlc' + (lb.hl ? ' rtg-jlh' : '') + '" x="' + r1(q[0]) + '" y="' + r1(q[1]) + '" text-anchor="middle" dominant-baseline="central">' + lb.t + '</text>'; });
+    return html + t; };
+  function capsule(L, c, a, b, w, cls) { var A = P(c, a), B = P(c, b), d = (A[2] + B[2]) / 2, ww = r1(w * c.s); L.seg.push([A, B, ww / 2 + 1.5]);
     L.push(d, '<path class="rtg-out" stroke-width="' + r1(ww + 3) + '" d="M' + A[0] + ' ' + A[1] + 'L' + B[0] + ' ' + B[1] + '"/><path class="' + (cls || 'rtg-link') + '" stroke-width="' + ww + '" d="M' + A[0] + ' ' + A[1] + 'L' + B[0] + ' ' + B[1] + '"/>'); }
   function joint(L, c, p, r, hl, lab) { var A = P(c, p), rr = r1(r * c.s);
     L.push(A[2] + 0.5, '<circle class="rtg-joint' + (hl ? ' rtg-hl' : '') + '" cx="' + A[0] + '" cy="' + A[1] + '" r="' + rr + '"/>');
     if (lab) L.push(1e6, '<text class="rtg-jl' + (hl ? ' rtg-jlh' : '') + '" x="' + r1(A[0] - rr - 6) + '" y="' + r1(A[1] + 7) + '" text-anchor="end">' + lab + '</text>'); }
   function cylinder(L, c, cen, rad, h0, h1, cls, n) { n = n || 28; var bot = [], top = [], i, a;
     for (i = 0; i < n; i++) { a = i / n * 2 * Math.PI; bot.push(P(c, [cen[0] + rad * Math.cos(a), cen[1] + rad * Math.sin(a), h0])); top.push(P(c, [cen[0] + rad * Math.cos(a), cen[1] + rad * Math.sin(a), h1])); }
-    var hu = hull(bot.concat(top)), d = P(c, [cen[0], cen[1], (h0 + h1) / 2])[2];
+    var hu = hull(bot.concat(top)), d = P(c, [cen[0], cen[1], (h0 + h1) / 2])[2]; L.seg.push([P(c, [cen[0], cen[1], h0]), P(c, [cen[0], cen[1], h1]), r1(rad * c.s)]);
     L.push(d - 30, '<path class="' + (cls || 'rtg-base') + '" d="' + poly(hu) + '"/><path class="rtg-top" d="' + poly(top) + '"/>'); }
   /* Gelenkgehäuse als Trommel (seit 28.11.2026, Formensprache moderner Roboter): Achse ax, Radius rad, halbe Breite half.
      Die Stirnseite zum Betrachter bekommt einen Akzentring (hervorgehoben: rtg-hl). */
   function cross(a, b) { return [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]]; }
   function nrmz(a) { var l = len(a) || 1; return [a[0] / l, a[1] / l, a[2] / l]; }
-  function drum(L, c, cen, ax, rad, half, cls, hl, lab) { ax = nrmz(ax); var t = Math.abs(ax[2]) < 0.9 ? [0, 0, 1] : [1, 0, 0], u = nrmz(cross(ax, t)), v = cross(ax, u), n = 26, i, a, e1 = [], e2 = [], ri = [];
-    var c1 = add(cen, mul(ax, half)), c2 = add(cen, mul(ax, -half)), toV = ax[0] * c.F[0] + ax[1] * c.F[1] + ax[2] * c.F[2], front = toV >= 0 ? c1 : c2;
-    for (i = 0; i < n; i++) { a = i / n * 2 * Math.PI; var o = add(mul(u, Math.cos(a)), mul(v, Math.sin(a))); e1.push(P(c, add(c1, mul(o, rad)))); e2.push(P(c, add(c2, mul(o, rad)))); ri.push(P(c, add(front, mul(o, rad * 0.62)))); }
-    var fr = toV >= 0 ? e1 : e2, d = P(c, cen)[2], rr = r1(rad * c.s), A = P(c, front);
-    L.push(d + 0.4, '<path class="' + (cls || 'rtg-drum') + '" d="' + poly(hull(e1.concat(e2))) + '"/><path class="' + (cls || 'rtg-drum') + ' rtg-cap" d="' + poly(fr) + '"/>' +
-      (Math.abs(toV) > 0.18 ? '<path class="rtg-ring' + (hl ? ' rtg-hl' : '') + '" d="' + poly(ri) + '"/>' : '<path class="rtg-band' + (hl ? ' rtg-hl' : '') + '" d="' + poly(hull(ri.concat(e2.map(function (q, k) { return ri[k]; })))) + '"/>'));
-    if (lab) { var P0 = P(c, cen); L.push(1e6, '<text class="rtg-jl' + (hl ? ' rtg-jlh' : '') + '" x="' + r1(P0[0] - rr - 8) + '" y="' + r1(P0[1] + 7) + '" text-anchor="end">' + lab + '</text>'); } }
+  /* Gelenk (Neufassung 28.11.2026 nachmittags, Rückmeldung Daniel „Gelenke gut erkennbar“): dunkles Gehäuse als Zylinder
+     mit Achse ax, Radius rad, halber Breite half; auf der Stirnseite zum Betrachter heller Ring und Nabe. Gelenke liegen immer
+     über den angrenzenden Gliedern (Tiefe + 80). Hervorgehoben: Gehäuse orange mit Leuchtsaum. lab = Beschriftung (J1 …). */
+  function drum(L, c, cen, ax, rad, half, cls, hl, lab) { ax = nrmz(ax); var t = Math.abs(ax[2]) < 0.9 ? [0, 0, 1] : [1, 0, 0], u = nrmz(cross(ax, t)), v = cross(ax, u), n = 30, i, a, e1 = [], e2 = [], ri = [], hb = [];
+    var c1 = add(cen, mul(ax, half)), c2 = add(cen, mul(ax, -half)), toV = ax[0] * c.F[0] + ax[1] * c.F[1] + ax[2] * c.F[2], front = toV >= 0 ? c1 : c2, fo = add(front, mul(ax, toV >= 0 ? 0.5 : -0.5));
+    for (i = 0; i < n; i++) { a = i / n * 2 * Math.PI; var o = add(mul(u, Math.cos(a)), mul(v, Math.sin(a))); e1.push(P(c, add(c1, mul(o, rad)))); e2.push(P(c, add(c2, mul(o, rad)))); ri.push(P(c, add(fo, mul(o, rad * 0.7)))); hb.push(P(c, add(fo, mul(o, rad * 0.32)))); }
+    var fr = toV >= 0 ? e1 : e2, d = P(c, cen)[2], rr = r1(rad * c.s), A = P(c, cen), sh = poly(hull(e1.concat(e2))), face = Math.abs(toV) > 0.22;
+    L.push(d + 80, (hl ? '<path class="rtg-halo" d="' + sh + '"/>' : '') + '<path class="rtg-jh' + (hl ? ' rtg-hl' : '') + '" d="' + sh + '"/><path class="rtg-jc' + (hl ? ' rtg-hl' : '') + '" d="' + poly(fr) + '"/>' +
+      (face ? '<path class="rtg-jr' + (hl ? ' rtg-hl' : '') + '" d="' + poly(ri) + '"/><path class="rtg-jhub" d="' + poly(hb) + '"/>' : '<path class="rtg-jr' + (hl ? ' rtg-hl' : '') + '" d="' + poly(hull(ri.concat(hb))) + '"/>'));
+    var blk = [A[0], A[1], Math.max(rr, r1(half * c.s))]; L.blk.push(blk);
+    if (lab) L.lab.push({ A: A, r: blk[2], t: lab, hl: hl, blk: blk }); }
+  /* J1: Drehkranz zwischen Sockel und Turm, Beschriftung links davon */
+  function j1lab(L, c, rad, z, hl, lab) { if (!lab) return; var A = P(c, [0, 0, z]); L.lab.push({ A: [A[0], A[1]], r: r1(rad * c.s), t: lab, hl: hl, pref: Math.PI }); }
   function box(L, c, mn, mx, cls, dd) { var x = [mn[0], mx[0]], y = [mn[1], mx[1]], z = [mn[2], mx[2]], v = [], i, j, k;
     for (i = 0; i < 2; i++) for (j = 0; j < 2; j++) for (k = 0; k < 2; k++) v.push([x[i], y[j], z[k]]);
     var F = [[0, 1, 3, 2], [4, 5, 7, 6], [0, 1, 5, 4], [2, 3, 7, 6], [0, 2, 6, 4], [1, 3, 7, 5]], nrm = [[-1, 0, 0], [1, 0, 0], [0, -1, 0], [0, 1, 0], [0, 0, -1], [0, 0, 1]], out = '';
@@ -963,8 +1002,8 @@ var RTG = (function () {
     if (o.path && o.path.length > 1) b += '<path class="rtg-path" d="' + o.path.map(function (p, i) { var A = P(c, p); return (i ? 'L' : 'M') + A[0] + ' ' + A[1]; }).join('') + '"/>';
     var c1 = Math.cos(q[0] * D), s1 = Math.sin(q[0] * D), side = [-s1, c1, 0], J = o.jl ? ['J1', 'J2', 'J3', 'J4'] : [];
     cylinder(L, c, [0, 0], 64, 0, 26, 'rtg-base');
-    cylinder(L, c, [0, 0], 46, 26, 36, 'rtg-ringb' + (o.hl === 0 ? ' rtg-hl' : ''));
-    cylinder(L, c, [0, 0], 40, 36, A4.h0 - 18, 'rtg-turret');
+    cylinder(L, c, [0, 0], 50, 26, 38, 'rtg-jring' + (o.hl === 0 ? ' rtg-hl' : ''));
+    cylinder(L, c, [0, 0], 40, 38, A4.h0 - 18, 'rtg-turret');
     capsule(L, c, K.S, K.E, 24, 'rtg-link');
     capsule(L, c, K.E, K.W, 19, 'rtg-link');
     capsule(L, c, K.W, K.T, 14, 'rtg-link2');
@@ -972,13 +1011,13 @@ var RTG = (function () {
     var gr = gripR(q) * D, gd = [Math.cos(gr), Math.sin(gr), 0], gap = o.grip ? 9 : 20, f1 = add(K.P, mul(gd, gap)), f2 = add(K.P, mul(gd, -gap));
     capsule(L, c, add(f1, [0, 0, 16]), f1, 5, 'rtg-finger'); capsule(L, c, add(f2, [0, 0, 16]), f2, 5, 'rtg-finger');
     capsule(L, c, add(f1, [0, 0, 16]), add(f2, [0, 0, 16]), 6, 'rtg-tool');
-    if (J[0]) { var B0 = P(c, [0, 0, 30]); L.push(1e6, '<text class="rtg-jl' + (o.hl === 0 ? ' rtg-jlh' : '') + '" x="' + r1(B0[0] - 64 * c.s - 8) + '" y="' + r1(B0[1] + 7) + '" text-anchor="end">J1</text>'); }
-    drum(L, c, K.S, side, 21, 22, 'rtg-drum', o.hl === 1, J[1]);
-    drum(L, c, K.E, side, 17, 19, 'rtg-drum', o.hl === 2, J[2]);
-    drum(L, c, K.T, [0, 0, 1], 12, 9, 'rtg-drum', o.hl === 3, J[3]);
+    j1lab(L, c, 50, 32, o.hl === 0, J[0]);
+    drum(L, c, K.S, side, 23, 20, '', o.hl === 1, J[1]);
+    drum(L, c, K.E, side, 19, 17, '', o.hl === 2, J[2]);
+    drum(L, c, add(K.T, [0, 0, 2]), [0, 0, 1], 14, 8, '', o.hl === 3, J[3]);
     if (o.cube) { var cu = o.cube, s = cu.s / 2, cz = cu.held ? K.P[2] - cu.s + 4 : cu.z, cx = cu.held ? K.P[0] : cu.x, cy = cu.held ? K.P[1] : cu.y;
       box(L, c, [cx - s, cy - s, cz], [cx + s, cy + s, cz + cu.s], 'rtg-cube', cu.held ? -2 : 0); }
-    return { vb: '0 0 480 400', body: b + L.out() + (o.axes ? axes(c, 150, true) : ''), K: K, c: c }; }
+    return { vb: '0 0 480 400', body: b + L.out(480, 400) + (o.axes ? axes(c, 150, true) : ''), K: K, c: c }; }
 
   /* ---------- Knickarm mit 6 Achsen ---------- */
   var A6 = { h: 150, L1: 170, L2: 150, L3: 60 };
@@ -993,22 +1032,21 @@ var RTG = (function () {
     if (o.floor !== false) b += floor(c, o.fl || { x0: -150, x1: 380, y0: -260, y1: 260 });
     if (o.path && o.path.length > 1) b += '<path class="rtg-path" d="' + o.path.map(function (p, i) { var A = P(c, p); return (i ? 'L' : 'M') + A[0] + ' ' + A[1]; }).join('') + '"/>';
     var cb = !!o.cobot, side = mv(K.M2, [0, 1, 0]), J = o.jl ? ['J1', 'J2', 'J3', 'J4', 'J5', 'J6'] : [], lk = cb ? 'rtg-cobot' : 'rtg-ind', dr = cb ? 'rtg-drum' : 'rtg-indd';
-    if (cb) { cylinder(L, c, [0, 0], 54, 0, 22, 'rtg-cbase'); cylinder(L, c, [0, 0], 40, 22, 32, 'rtg-ringb' + (o.hl === 0 ? ' rtg-hl' : '')); cylinder(L, c, [0, 0], 36, 32, A6.h - 22, 'rtg-cbase'); }
-    else { cylinder(L, c, [0, 0], 74, 0, 30, 'rtg-base'); cylinder(L, c, [0, 0], 58, 30, 42, 'rtg-ringb' + (o.hl === 0 ? ' rtg-hl' : '')); cylinder(L, c, [0, 0], 52, 42, A6.h - 24, 'rtg-indt'); }
-    var dEW = nrmz(sub(K.W, K.E));
-    if (!cb) capsule(L, c, add(K.E, mul(dEW, -48)), add(K.E, mul(dEW, 10)), 32, 'rtg-ind2');
-    capsule(L, c, K.S, K.E, cb ? 22 : 30, lk);
-    capsule(L, c, K.E, K.W, cb ? 18 : 22, lk);
-    capsule(L, c, K.W, K.F, cb ? 14 : 15, cb ? 'rtg-cobot' : 'rtg-link2');
+    if (cb) { cylinder(L, c, [0, 0], 52, 0, 20, 'rtg-cbase'); cylinder(L, c, [0, 0], 44, 20, 34, 'rtg-jring' + (o.hl === 0 ? ' rtg-hl' : '')); cylinder(L, c, [0, 0], 34, 34, A6.h - 24, 'rtg-cbase'); }
+    else { cylinder(L, c, [0, 0], 72, 0, 28, 'rtg-base'); cylinder(L, c, [0, 0], 62, 28, 44, 'rtg-jring' + (o.hl === 0 ? ' rtg-hl' : '')); cylinder(L, c, [0, 0], 50, 44, A6.h - 26, 'rtg-indt'); }
+    var dEW = nrmz(sub(K.W, K.E)), J4p = add(K.E, mul(dEW, 52)), dWF = nrmz(sub(K.F, K.W)), J6p = add(K.F, mul(dWF, -9));
+    capsule(L, c, K.S, K.E, cb ? 20 : 26, lk);
+    capsule(L, c, K.E, K.W, cb ? 16 : 20, lk);
+    capsule(L, c, K.W, J6p, cb ? 13 : 14, cb ? 'rtg-cobot' : 'rtg-link2');
     var gx = mv(K.M5, [1, 0, 0]), gz = mv(K.M5, [0, 0, 1]), gap = o.grip ? 8 : 18, f1 = add(K.F, mul(gx, gap)), f2 = add(K.F, mul(gx, -gap));
     capsule(L, c, f1, add(f1, mul(gz, 24)), 5, 'rtg-finger'); capsule(L, c, f2, add(f2, mul(gz, 24)), 5, 'rtg-finger'); capsule(L, c, f1, f2, 7, 'rtg-tool');
-    if (J[0]) { var B0 = P(c, [0, 0, 34]); L.push(1e6, '<text class="rtg-jl' + (o.hl === 0 ? ' rtg-jlh' : '') + '" x="' + r1(B0[0] - (cb ? 54 : 74) * c.s - 8) + '" y="' + r1(B0[1] + 7) + '" text-anchor="end">J1</text>'); }
-    drum(L, c, K.S, side, cb ? 22 : 28, cb ? 22 : 30, dr, o.hl === 1, J[1]);
-    drum(L, c, K.E, side, cb ? 18 : 22, cb ? 19 : 24, dr, o.hl === 2, J[2]);
-    drum(L, c, add(K.E, mv(K.M2, [0, 0, 60])), mv(K.M2, [0, 0, 1]), cb ? 15 : 17, 7, dr, o.hl === 3, J[3]);
-    drum(L, c, K.W, side, cb ? 14 : 14, cb ? 15 : 15, dr, o.hl === 4, J[4]);
-    drum(L, c, add(K.F, mv(K.M4, [0, 0, -8])), mv(K.M4, [0, 0, 1]), 11, 6, cb ? 'rtg-drum' : 'rtg-drumg', o.hl === 5, J[5]);
-    return { vb: '0 0 480 400', body: b + L.out(), K: K, c: c }; }
+    j1lab(L, c, cb ? 44 : 62, cb ? 27 : 36, o.hl === 0, J[0]);
+    drum(L, c, K.S, side, cb ? 23 : 27, cb ? 21 : 24, dr, o.hl === 1, J[1]);
+    drum(L, c, K.E, side, cb ? 19 : 22, cb ? 18 : 20, dr, o.hl === 2, J[2]);
+    drum(L, c, J4p, dEW, cb ? 15 : 17, cb ? 9 : 11, dr, o.hl === 3, J[3]);
+    drum(L, c, K.W, side, cb ? 14 : 15, cb ? 13 : 14, dr, o.hl === 4, J[4]);
+    drum(L, c, J6p, dWF, cb ? 12 : 12, 5, dr, o.hl === 5, J[5]);
+    return { vb: '0 0 480 400', body: b + L.out(480, 400), K: K, c: c }; }
 
   /* ---------- Bauformen ---------- */
   function scara(u, o) { o = o || {}; var c = o.c || cam(-35, 26, 0.6, 110, 255), L = new List(), b = floor(c, { x0: -90, x1: 300, y0: -230, y1: 230 }), h = 170, a1 = (-40 + 70 * Math.sin(u * 2 * Math.PI)), a2 = 60 * Math.sin(u * 2 * Math.PI + 1.2), zz = 30 + 40 * (0.5 + 0.5 * Math.cos(u * 4 * Math.PI));
